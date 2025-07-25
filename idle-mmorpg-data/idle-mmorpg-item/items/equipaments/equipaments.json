@@ -1,0 +1,12 @@
+{
+    "categories": [
+        {
+            "category": "sword",
+            "path": "swords"
+        },
+        {
+            "category": "dagger",
+            "path": "daggers"
+        }
+    ]
+}

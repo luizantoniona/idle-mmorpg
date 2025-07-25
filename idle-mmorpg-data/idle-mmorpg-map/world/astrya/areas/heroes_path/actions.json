@@ -1,0 +1,30 @@
+{
+    "actions": [
+        {
+            "id": "rest",
+            "label": "Rest by the heroes camp.",
+            "requirements": [
+                {
+                    "type": "skill",
+                    "id": "resting",
+                    "level": 0
+                }
+            ]
+        },
+        {
+            "id": "mine",
+            "label": "Mine for copper ores.",
+            "requirements": [
+                {
+                    "type": "skill",
+                    "id": "mining",
+                    "level": 0
+                },
+                {
+                    "type": "item",
+                    "category": "pickaxe"
+                }
+            ]
+        }
+    ]
+}

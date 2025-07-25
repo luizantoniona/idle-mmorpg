@@ -1,0 +1,19 @@
+{
+    "actions": [
+        {
+            "id": "",
+            "label": "",
+            "requirements": [
+                {
+                    "type": "skill",
+                    "id": "mining",
+                    "level": 0
+                },
+                {
+                    "type": "item",
+                    "category": "pickaxe"
+                }
+            ]
+        }
+    ]
+}

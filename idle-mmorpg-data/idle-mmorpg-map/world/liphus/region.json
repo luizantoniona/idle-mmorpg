@@ -1,0 +1,8 @@
+{
+    "name": "Liphus",
+    "description": "Continent region.",
+    "locations": [
+        "liphus_port"
+    ],
+    "connections": []
+}

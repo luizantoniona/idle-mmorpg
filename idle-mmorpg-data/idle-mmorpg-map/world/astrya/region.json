@@ -1,0 +1,26 @@
+{
+    "name": "Astrya",
+    "description": "Small island where all heroes are born.",
+    "locations": [
+        "heroes_path",
+        "astrya_city",
+        "astrya_sewers"
+    ],
+    "connections": [
+        {
+            "origin": "heroes_path",
+            "destination": "astrya_city",
+            "direction": "right"
+        },
+        {
+            "origin": "astrya_city",
+            "destination": "heroes_path",
+            "direction": "left"
+        },
+        {
+            "origin": "astrya_city",
+            "destination": "astrya_sewers",
+            "direction": "down"
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": "heroes_path",
+    "name": "Heroes Path",
+    "description": "Where all heroes are born.",
+    "coordinates": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "npcs": []
+}

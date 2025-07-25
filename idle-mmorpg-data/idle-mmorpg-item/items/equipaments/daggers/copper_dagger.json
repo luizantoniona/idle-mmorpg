@@ -1,0 +1,15 @@
+{
+    "id": "copper_dagger",
+    "name": "Copper Dagger",
+    "description": "A basic dagger made of copper.",
+    "type": "equipment",
+    "category": "dagger",
+    "rarity": "common",
+    "attributes": {
+        "attack": 2,
+        "defense": 0,
+        "speed": 2
+    },
+    "value": 10,
+    "icon": ".png"
+}

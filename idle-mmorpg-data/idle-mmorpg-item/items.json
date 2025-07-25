@@ -1,0 +1,16 @@
+{
+    "types": [
+        {
+            "type": "consumables",
+            "path": "items/consumables/consumables.json"
+        },
+        {
+            "type": "equipaments",
+            "path": "items/equipaments/equipaments.json"
+        },
+        {
+            "type": "tools",
+            "path": "items/tools/tools.json"
+        }
+    ]
+}

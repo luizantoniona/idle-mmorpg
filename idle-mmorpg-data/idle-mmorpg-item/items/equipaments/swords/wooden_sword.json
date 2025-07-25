@@ -1,0 +1,15 @@
+{
+    "id": "wooden_sword",
+    "name": "Wooden Sword",
+    "description": "A basic sword made of wood, suitable for beginners.",
+    "type": "equipment",
+    "category": "sword",
+    "rarity": "common",
+    "attributes": {
+        "attack": 1,
+        "defense": 0,
+        "speed": 1
+    },
+    "value": 10,
+    "icon": ".png"
+}
