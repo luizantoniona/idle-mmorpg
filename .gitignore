@@ -1,0 +1,16 @@
+#idle-mmorpg-server
+#Folders
+idle-mmorpg-server/build/
+idle-mmorpg-server/.vs/
+
+#Files
+idle-mmorpg-server/*.txt.user
+
+#idle-mmorpg-client
+#Folders
+node_modules
+
+#Files
+package-lock.json
+
+#idle-mmorpg-data
