@@ -1,0 +1,36 @@
+:root {
+  font-family: sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --color-bg: #242424;
+  --color-text: #f0f0f0;
+  --color-panel: #2a2a2a;
+  --color-panel-shadow: rgba(0, 0, 0, 0.12);
+  --color-accent: #747bff;
+  --color-button: #8e51ff;
+
+  color-scheme: dark;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #ffffff;
+    --color-text: #000000;
+    --color-panel: #f1f1f1;
+    --color-panel-shadow: rgba(0, 0, 0, 0.08);
+    --color-accent: #4f51ff;
+    --color-button: #f9f9f9;
+
+    color-scheme: light;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+  }
+} */
