@@ -1,0 +1,17 @@
+#ifndef JSONHELPER_H
+#define JSONHELPER_H
+
+#include <string>
+
+#include <json/json.h>
+
+namespace Commons {
+
+class JsonHelper {
+public:
+    static Json::Value loadJsonFile( const std::string& path );
+};
+
+}
+
+#endif // JSONHELPER_H
