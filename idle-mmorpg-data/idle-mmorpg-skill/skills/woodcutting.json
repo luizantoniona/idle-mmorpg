@@ -1,0 +1,26 @@
+{
+    "id": "woodcutting",
+    "name": "Woodcutting",
+    "description": "Chop down trees to gather wood.",
+    "type": "gathering",
+    "milestones": [
+        {
+            "level": 5,
+            "bonuses": [
+                {
+                    "attribute": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 10,
+            "bonuses": [
+                {
+                    "attribute": "constitution",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}

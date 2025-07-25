@@ -1,0 +1,26 @@
+{
+    "id": "mining",
+    "name": "Mining",
+    "description": "Extract ores and minerals from the ground.",
+    "type": "gathering",
+    "milestones": [
+        {
+            "level": 5,
+            "bonuses": [
+                {
+                    "attribute": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 10,
+            "bonuses": [
+                {
+                    "attribute": "constitution",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}

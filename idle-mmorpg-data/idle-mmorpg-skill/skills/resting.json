@@ -1,0 +1,26 @@
+{
+    "id": "resting",
+    "name": "Resting",
+    "description": "Take a break to recover your health, stamina, and mana.",
+    "type": "recovery",
+    "milestones": [
+        {
+            "level": 5,
+            "bonuses": [
+                {
+                    "attribute": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 10,
+            "bonuses": [
+                {
+                    "attribute": "constitution",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}
