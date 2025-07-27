@@ -1,8 +1,9 @@
+import "./GamePage.css"
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { WsService } from "../../../services/WsService";
 import type { Character, CharacterAttributes, CharacterWallet } from "../../../models";
-import { AttributesPanel, ChatPanel, InventoryPanel, MapPanel, StatusPanel, WalletPanel } from "../../organisms/";
+import { AttributesPanel, ChatPanel, InventoryPanel, WorldPanel, StatusPanel, WalletPanel } from "../../organisms/";
 
 export function GamePage() {
     const location = useLocation();
@@ -38,6 +39,11 @@ export function GamePage() {
                     // Atualizar localização do personagem
                 }
                 break;
+            case "location_update_actions":
+                if (data.payload.actions) {
+                    // Atualizar ações permitidas pelo personagem
+                }
+                break;
             default:
                 console.warn("Unknow message type:", data.type);
         }
@@ -54,7 +60,10 @@ export function GamePage() {
     }, []);
 
     useEffect(() => {
-        if (!character?.idCharacter) return;
+        if (!character?.idCharacter) {
+
+            return;
+        }
 
         const wsService = new WsService();
         wsRef.current = wsService;
@@ -81,16 +90,13 @@ export function GamePage() {
             <div className="left-sidebar">
                 <StatusPanel />
                 <AttributesPanel attributes={attributes} />
-                <WalletPanel wallet={wallet} />
-                <InventoryPanel items={inventory} />
             </div>
             <div className="main-content">
-                <MapPanel />
+                <WorldPanel />
             </div>
             <div className="right-sidebar">
-                {/* <LocationPanel />
-                <TabsPanel />
-                <AbilitiesPanel /> */}
+                <InventoryPanel items={inventory} />
+                <WalletPanel wallet={wallet} />
             </div>
 
             <div className="chat-bar">

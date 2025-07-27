@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 interface InventoryItem {
-    id: number;
+    id: string;
     name: string;
     quantity: number;
 }
