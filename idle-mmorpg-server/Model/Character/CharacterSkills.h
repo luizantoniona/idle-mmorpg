@@ -2,7 +2,6 @@
 #define CHARACTERSKILLS_H
 
 #include <string>
-#include <unordered_map>
 
 #include "CharacterSkill.h"
 
@@ -12,12 +11,13 @@ class CharacterSkills {
 public:
     CharacterSkills();
 
-    std::unordered_map<std::string, CharacterSkill> skills() const;
-    void setSkills( const std::unordered_map<std::string, CharacterSkill>& skills );
-    void addSkill( const CharacterSkill& skill );
+    std::vector<CharacterSkill>& skills();
+
+    CharacterSkill* skill( const std::string& idSkill );
+    void addSkill( CharacterSkill skill );
 
 private:
-    std::unordered_map<std::string, CharacterSkill> _skills;
+    std::vector<CharacterSkill> _skills;
 };
 
 } // namespace Model

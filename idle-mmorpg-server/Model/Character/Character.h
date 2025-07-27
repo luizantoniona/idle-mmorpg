@@ -5,6 +5,7 @@
 
 #include <json/json.h>
 
+#include "CharacterAction.h"
 #include "CharacterAttributes.h"
 #include "CharacterCoordinates.h"
 #include "CharacterInventory.h"
@@ -28,6 +29,9 @@ public:
     std::string dsName() const;
     void setDsName( const std::string& dsName );
 
+    CharacterAction& action();
+    void setAction( const CharacterAction& action );
+
     CharacterAttributes& attributes();
     void setAttributes( const CharacterAttributes& attributes );
 
@@ -47,6 +51,7 @@ private:
     int _idCharacter;
     int _idUser;
     std::string _dsName;
+    CharacterAction _action;
     CharacterAttributes _attributes;
     CharacterCoordinates _coordinates;
     CharacterInventory _inventory;

@@ -31,4 +31,12 @@ void CharacterSkill::setExperience( int experience ) {
     _experience = experience;
 }
 
+Skill* CharacterSkill::skill() const {
+    return _skill;
 }
+
+void CharacterSkill::setSkill( Skill* skill ) {
+    _skill = skill;
+}
+
+} // namespace Model

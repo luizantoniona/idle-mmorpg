@@ -6,8 +6,13 @@ Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
     _dsName( "" ),
+    _action(),
     _attributes(),
-    _coordinates() {}
+    _coordinates(),
+    _inventory(),
+    _skills(),
+    _wallet() {
+}
 
 Json::Value Character::toJson() {
     Json::Value root;
@@ -41,6 +46,14 @@ std::string Character::dsName() const {
 
 void Character::setDsName( const std::string& dsName ) {
     _dsName = dsName;
+}
+
+CharacterAction& Character::action() {
+    return _action;
+}
+
+void Character::setAction( const CharacterAction& action ) {
+    _action = action;
 }
 
 CharacterAttributes& Character::attributes() {

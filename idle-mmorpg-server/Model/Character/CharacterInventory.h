@@ -1,9 +1,9 @@
 #ifndef CHARACTERINVENTORY_H
 #define CHARACTERINVENTORY_H
 
-#include <map>
+#include <vector>
 
-#include <Model/Item/Item.h>
+#include <Model/Character/CharacterItem.h>
 
 namespace Model {
 
@@ -11,18 +11,11 @@ class CharacterInventory {
 public:
     CharacterInventory();
 
-//    const std::map<int, int>& items() const;
-//    void addItem( const std::string& idItem, int amount );
-//    void clear();
+    std::vector<CharacterItem>& items();
+    void addItem( CharacterItem item );
 
-//    int amountOfItem( int idItem ) const;
-
-//    void setItemModel( const std::string& idItem, const ItemModel* model );
-//    const ItemModel* itemModel( int idItem ) const;
-
-//private:
-//    std::map<std::string, int> _itemAmount;
-//    std::map<std::string, const ItemModel*> _itemModel;
+private:
+    std::vector<CharacterItem> _items;
 };
 
 } // namespace Model
