@@ -7,20 +7,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB_RECURSE SOURCES
     Commons/*.cpp
+    Core/*.cpp
     Database/*.cpp
     Model/*.cpp
     Network/*.cpp
     Repository/*.cpp
-    System/*.cpp
 )
 
 file(GLOB_RECURSE HEADERS
     Commons/*.h
+    Core/*.h
     Database/*.h
     Model/*.h
     Network/*.h
     Repository/*.h
-    System/*.h
 )
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
