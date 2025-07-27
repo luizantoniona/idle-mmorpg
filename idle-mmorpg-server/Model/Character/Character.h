@@ -26,8 +26,8 @@ public:
     int idUser() const;
     void setIdUser( int idUser );
 
-    std::string dsName() const;
-    void setDsName( const std::string& dsName );
+    std::string name() const;
+    void setName( const std::string& name );
 
     CharacterAction& action();
     void setAction( const CharacterAction& action );
@@ -50,7 +50,7 @@ public:
 private:
     int _idCharacter;
     int _idUser;
-    std::string _dsName;
+    std::string _name;
     CharacterAction _action;
     CharacterAttributes _attributes;
     CharacterCoordinates _coordinates;

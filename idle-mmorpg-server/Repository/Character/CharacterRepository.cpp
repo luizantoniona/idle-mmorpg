@@ -61,7 +61,7 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
         auto character = std::make_unique<Model::Character>();
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
-        character->setDsName( query.getColumnText( 2 ) );
+        character->setName( query.getColumnText( 2 ) );
 
         auto attributes = CharacterAttributesRepository().findByCharacterId( character->idCharacter() );
         if ( attributes ) {
@@ -112,7 +112,7 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
         auto character = std::make_unique<Model::Character>();
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
-        character->setDsName( query.getColumnText( 2 ) );
+        character->setName( query.getColumnText( 2 ) );
 
         auto attributes = CharacterAttributesRepository().findByCharacterId( character->idCharacter() );
         if ( attributes ) {

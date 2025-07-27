@@ -20,7 +20,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
     _characters[sessionId] = character;
 
     std::cout << "LocationInstance::addCharacter"
-              << " [Character] " << character->dsName()
+              << " [Character] " << character->name()
               << " [Entering] " << _location->name()
               << " [SessionID] " << sessionId << std::endl;
 

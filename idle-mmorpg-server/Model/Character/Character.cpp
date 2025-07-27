@@ -5,7 +5,7 @@ namespace Model {
 Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
-    _dsName( "" ),
+    _name( "" ),
     _action(),
     _attributes(),
     _coordinates(),
@@ -19,7 +19,7 @@ Json::Value Character::toJson() {
 
     root[ "idUser" ] = idUser();
     root[ "idCharacter" ] = idCharacter();
-    root[ "dsName" ] = dsName();
+    root[ "name" ] = name();
 
     return root;
 }
@@ -40,12 +40,12 @@ void Character::setIdUser( int idUser ) {
     _idUser = idUser;
 }
 
-std::string Character::dsName() const {
-    return _dsName;
+std::string Character::name() const {
+    return _name;
 }
 
-void Character::setDsName( const std::string& dsName ) {
-    _dsName = dsName;
+void Character::setName( const std::string& name ) {
+    _name = name;
 }
 
 CharacterAction& Character::action() {
