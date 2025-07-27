@@ -4,7 +4,7 @@
 #include <Core/Message/MessageHelper.h>
 #include <Network/NetworkServer.h>
 
-namespace System::Message {
+namespace Core::Message {
 
 MessageSender::MessageSender() {}
 
@@ -29,4 +29,4 @@ void MessageSender::send( const std::string& sessionId, MessageType type, const 
     send( sessionId, serialized );
 }
 
-} // namespace System::Message
+} // namespace Core::Message

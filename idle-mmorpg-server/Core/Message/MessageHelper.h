@@ -5,9 +5,9 @@
 
 #include "MessageType.h"
 
-using System::Message::MessageType;
+using Core::Message::MessageType;
 
-namespace System::Message {
+namespace Core::Message {
 
 class MessageHelper {
 public:
@@ -15,6 +15,6 @@ public:
     static std::string typeToString( const MessageType type );
 };
 
-} // namespace System::Message
+} // namespace Core::Message
 
 #endif // MESSAGEHELPER_H

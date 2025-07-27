@@ -4,7 +4,7 @@
 #include <drogon/WebSocketController.h>
 #include <drogon/drogon.h>
 
-#include <System/Message/MessageReceiver.h>
+#include <Core/Message/MessageReceiver.h>
 
 namespace Network {
 
@@ -21,7 +21,7 @@ public:
     void handleConnectionClosed( const drogon::WebSocketConnectionPtr& connection ) override;
 
 private:
-    System::Message::MessageReceiver _receiver;
+    Core::Message::MessageReceiver _receiver;
 };
 
 } // namespace Network

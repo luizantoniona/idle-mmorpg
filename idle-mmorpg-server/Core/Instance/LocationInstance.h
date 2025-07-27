@@ -6,6 +6,7 @@
 #include <unordered_map>
 
 #include <Core/Message/MessageSender.h>
+#include <Core/System/ActionSystem.h>
 #include <Model/Character/Character.h>
 #include <Model/World/Location/Location.h>
 
@@ -22,9 +23,10 @@ public:
 
 private:
     mutable std::mutex _mutex;
-    System::Message::MessageSender _sender;
     Model::Location* _location;
     std::unordered_map<std::string, Model::Character*> _characters;
+    Core::Message::MessageSender _sender;
+    Core::System::ActionSystem _actionSystem;
 };
 
 } // namespace Core::Instance

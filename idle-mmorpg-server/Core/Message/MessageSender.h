@@ -7,7 +7,7 @@
 
 #include "MessageType.h"
 
-namespace System::Message {
+namespace Core::Message {
 
 class MessageSender {
 public:
@@ -17,6 +17,6 @@ public:
     void send( const std::string& sessionId, MessageType type, const Json::Value& payload );
 };
 
-} // namespace System
+} // namespace Core::Message
 
 #endif // MESSAGESENDER_H

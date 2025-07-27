@@ -21,13 +21,13 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
             Model::CharacterSkill* skill = character->skills().skill( id );
 
             if ( !skill ) {
-                auto characterSkill = std::make_unique<Model::CharacterSkill>();
-                characterSkill->setId( id );
-                characterSkill->setExperience( 0 );
-                characterSkill->setLevel( 0 );
-                characterSkill->setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( id ) );
+                Model::CharacterSkill characterSkill;
+                characterSkill.setId( id );
+                characterSkill.setExperience( 0 );
+                characterSkill.setLevel( 0 );
+                characterSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( id ) );
 
-                character->skills().addSkill( std::move( characterSkill ) );
+                character->skills().addSkill( characterSkill );
 
                 skill = character->skills().skill( id );
             }

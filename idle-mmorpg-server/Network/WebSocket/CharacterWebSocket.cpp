@@ -1,8 +1,8 @@
 #include "CharacterWebSocket.h"
 
 #include <Commons/Singleton.h>
+#include <Core/Manager/WorldManager.h>
 #include <Network/NetworkServer.h>
-#include <System/Manager/WorldManager.h>
 
 namespace Network {
 
@@ -64,7 +64,7 @@ void CharacterWebSocket::handleNewConnection( const drogon::HttpRequestPtr& requ
     server.bindConnectionToSession( sessionId, connection );
     connection->setContext( std::make_shared<std::string>( sessionId ) );
 
-    if ( !Commons::Singleton<System::Manager::WorldManager>::instance().addCharacter( sessionId, session->idUser(), idCharacter ) ) {
+    if ( !Commons::Singleton<Core::Manager::WorldManager>::instance().addCharacter( sessionId, session->idUser(), idCharacter ) ) {
         connection->send( R"({"error":"invalid_character"})" );
         connection->shutdown();
         return;
@@ -80,7 +80,7 @@ void CharacterWebSocket::handleConnectionClosed( const drogon::WebSocketConnecti
         return;
     }
 
-    Commons::Singleton<System::Manager::WorldManager>::instance().removeCharacter( *uuidPtr );
+    Commons::Singleton<Core::Manager::WorldManager>::instance().removeCharacter( *uuidPtr );
     Commons::Singleton<NetworkServer>::instance().unbindConnectionFromSession( *uuidPtr );
 }
 

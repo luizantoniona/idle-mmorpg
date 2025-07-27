@@ -28,11 +28,11 @@ public:
 
 private:
     mutable std::mutex _mutex;
-    System::Message::MessageSender _sender;
-    std::unordered_map<std::string, std::unique_ptr<Model::Character> > _characters;
     Model::World* _world;
-    std::unordered_map<std::string, std::unique_ptr<RegionInstance> > _regions;
+    std::unordered_map<std::string, std::unique_ptr<RegionInstance>> _regions;
+    std::unordered_map<std::string, std::unique_ptr<Model::Character> > _characters;
     std::unordered_map<std::string, RegionInstance*> _characterToRegion;
+    Core::Message::MessageSender _sender;
 };
 
 } // namespace Core::Instance

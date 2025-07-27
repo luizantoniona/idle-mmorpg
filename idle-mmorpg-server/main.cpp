@@ -1,10 +1,10 @@
 #include <drogon/drogon.h>
 
 #include <Commons/Singleton.h>
+#include <Core/Manager/ItemManager.h>
+#include <Core/Manager/SkillManager.h>
+#include <Core/Manager/WorldManager.h>
 #include <Database/Database.h>
-#include <System/Manager/ItemManager.h>
-#include <System/Manager/SkillManager.h>
-#include <System/Manager/WorldManager.h>
 
 namespace {
 // TODO See how to deploy
@@ -18,9 +18,9 @@ int main() {
     std::cout << "Starting Server" << std::endl;
 
     Commons::Singleton<Database::Database>::instance().initialize( DATABASE_PATH );
-    Commons::Singleton<System::Manager::ItemManager>::instance().initialize( ITEM_PATH );
-    Commons::Singleton<System::Manager::SkillManager>::instance().initialize( SKILL_PATH );
-    Commons::Singleton<System::Manager::WorldManager>::instance().initialize( MAP_PATH );
+    Commons::Singleton<Core::Manager::ItemManager>::instance().initialize( ITEM_PATH );
+    Commons::Singleton<Core::Manager::SkillManager>::instance().initialize( SKILL_PATH );
+    Commons::Singleton<Core::Manager::WorldManager>::instance().initialize( MAP_PATH );
 
     drogon::app()
     .addListener( "0.0.0.0", 8080 )

@@ -3,8 +3,9 @@
 #include <iostream>
 
 #include <Core/Message/MessageType.h>
+#include <Core/System/ActionSystem.h>
 
-using System::Message::MessageType;
+using Core::Message::MessageType;
 
 namespace Core::Instance {
 
@@ -28,8 +29,13 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
     _sender.send( sessionId, MessageType::LOCATION_UPDATE_POSITION, payloadLocation );
 
     Json::Value payloadLocationActions;
-    // for ()
-    // payloadLocationActions[ "actions" ] = _location->actions();
+    Json::Value availableActions;
+    for ( auto action : _location->actions() ) {
+        if ( _actionSystem.canPerformAction( character, action ) ) {
+            availableActions.append( action.toJson() );
+        }
+    }
+    payloadLocationActions[ "actions" ] = availableActions;
     _sender.send( sessionId, MessageType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
 
     return true;

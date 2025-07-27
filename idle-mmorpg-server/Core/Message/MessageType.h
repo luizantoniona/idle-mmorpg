@@ -1,7 +1,7 @@
 #ifndef MESSAGETYPE_H
 #define MESSAGETYPE_H
 
-namespace System::Message {
+namespace Core::Message {
 
 enum class MessageType {
     UNKNOWN,
@@ -19,6 +19,6 @@ enum class MessageType {
     LOCATION_UPDATE_POSITION, // SEND - RECEIVE
 };
 
-} // namespace System::Message
+} // namespace Core::Message
 
 #endif // MESSAGETYPE_H

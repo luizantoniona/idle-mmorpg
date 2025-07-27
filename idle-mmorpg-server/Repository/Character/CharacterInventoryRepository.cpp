@@ -1,8 +1,8 @@
 #include "CharacterInventoryRepository.h"
 
 #include <Commons/Singleton.h>
+#include <Core/Manager/ItemManager.h>
 #include <Database/Query.h>
-#include <System/Manager/ItemManager.h>
 
 namespace Repository {
 

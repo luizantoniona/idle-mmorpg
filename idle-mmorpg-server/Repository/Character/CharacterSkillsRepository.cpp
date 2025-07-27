@@ -1,5 +1,7 @@
 #include "CharacterSkillsRepository.h"
 
+#include <Commons/Singleton.h>
+#include <Core/Manager/SkillManager.h>
 #include <Database/Query.h>
 
 namespace Repository {
@@ -11,30 +13,24 @@ bool CharacterSkillsRepository::createSkills( int idCharacter ) {
     return true;
 }
 
-bool CharacterSkillsRepository::updateSkills( int idCharacter, const Model::CharacterSkills& skills ) {
-    const std::string deleteSql = R"SQL(
-        DELETE FROM character_skills WHERE id_character = ?
+bool CharacterSkillsRepository::updateSkills( int idCharacter, Model::CharacterSkills& characterSkills ) {
+    const std::string upsertSql = R"SQL(
+        INSERT INTO character_skills (id_character, id_skill, experience, level)
+        VALUES (?, ?, ?, ?)
+        ON CONFLICT(id_character, id_skill) DO UPDATE SET
+            experience = excluded.experience,
+            level = excluded.level
     )SQL";
 
-    Database::Query deleteQuery( _db, deleteSql );
-    deleteQuery.bindInt( 1, idCharacter );
+    for ( auto& skill : characterSkills.skills() ) {
 
-    if ( !deleteQuery.step() ) {
-        return false;
-    }
+        Database::Query upsertQuery( _db, upsertSql );
+        upsertQuery.bindInt( 1, idCharacter );
+        upsertQuery.bindText( 2, skill.id() );
+        upsertQuery.bindInt( 3, skill.experience() );
+        upsertQuery.bindInt( 4, skill.level() );
 
-    const std::string insertSql = R"SQL(
-        INSERT INTO character_skills (id_character, id_skill, experience, level) VALUES (?, ?, ?, ?)
-    )SQL";
-
-    for ( const auto& [ skillId, skill ] : skills.skills() ) {
-        Database::Query insertQuery( _db, insertSql );
-        insertQuery.bindInt( 1, idCharacter );
-        insertQuery.bindText( 2, skill.id() );
-        insertQuery.bindInt( 3, skill.experience() );
-        insertQuery.bindInt( 4, skill.level() );
-
-        if ( !insertQuery.step() ) {
+        if ( !upsertQuery.step() ) {
             return false;
         }
     }
@@ -61,6 +57,8 @@ std::unique_ptr<Model::CharacterSkills> CharacterSkillsRepository::findByCharact
         characterSkill.setId( skillId );
         characterSkill.setExperience( experience );
         characterSkill.setLevel( level );
+        characterSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId ) );
+
         skills->addSkill( characterSkill );
     }
 

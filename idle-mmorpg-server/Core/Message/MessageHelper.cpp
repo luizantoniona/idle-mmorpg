@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-namespace System::Message {
+namespace Core::Message {
 
 MessageType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageType> map = {
@@ -39,4 +39,4 @@ std::string MessageHelper::typeToString( const MessageType type ) {
     }
 }
 
-} // namespace System::Message
+} // namespace Core::Message

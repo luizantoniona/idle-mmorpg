@@ -13,7 +13,7 @@ public:
     CharacterSkillsRepository();
 
     bool createSkills( int idCharacter );
-    bool updateSkills( int idCharacter, const Model::CharacterSkills& skills );
+    bool updateSkills( int idCharacter, Model::CharacterSkills& characterSkills );
     std::unique_ptr<Model::CharacterSkills> findByCharacterId( int idCharacter );
 };
 
