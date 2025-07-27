@@ -3,35 +3,17 @@
 namespace Model {
 
 LocationActionRequirement::LocationActionRequirement() :
-    _type( RequirementType::Unknown ),
+    _type( "" ),
     _id( "" ),
     _level( 0 ),
-    _category( "" ) {}
-
-std::string LocationActionRequirement::typeToString( RequirementType type ) {
-    switch ( type ) {
-        case RequirementType::Skill:
-            return "skill";
-        case RequirementType::Item:
-            return "item";
-        default:
-            return "unknown";
-    }
+    _category( "" ) {
 }
 
-LocationActionRequirement::RequirementType LocationActionRequirement::typeFromString( const std::string& type ) {
-    if ( type == "skill" )
-        return RequirementType::Skill;
-    if ( type == "item" )
-        return RequirementType::Item;
-    return RequirementType::Unknown;
-}
-
-LocationActionRequirement::RequirementType LocationActionRequirement::type() const {
+std::string LocationActionRequirement::type() const {
     return _type;
 }
 
-void LocationActionRequirement::setType( RequirementType type ) {
+void LocationActionRequirement::setType( const std::string& type ) {
     _type = type;
 }
 

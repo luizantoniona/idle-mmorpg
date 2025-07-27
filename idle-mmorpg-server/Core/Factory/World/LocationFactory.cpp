@@ -4,6 +4,10 @@
 
 #include <Commons/JsonHelper.h>
 
+#include <Model/World/Location/LocationAction.h>
+#include <Model/World/Location/LocationActionExperience.h>
+#include <Model/World/Location/LocationActionRequirement.h>
+
 namespace Core::Factory {
 
 std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::string& locationName, const std::string& locationPath ) {
@@ -48,15 +52,20 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         action.setId( actionJson[ "id" ].asString() );
         action.setLabel( actionJson[ "label" ].asString() );
 
-        for ( const Json::Value& reqJson : actionJson[ "requirements" ] ) {
+        for ( const Json::Value& requirementJson : actionJson[ "requirements" ] ) {
             Model::LocationActionRequirement requirement;
-
-            // req.type = Core::Model::LocationActionRequirementModel::fromString( reqJson[ "type" ].asString() );
-            // req.id = reqJson.get( "id", "" ).asString();
-            // req.level = reqJson.get( "level", 0 ).asInt();
-            // req.category = reqJson.get( "category", "" ).asString(); // ← substituindo subtype por category
-
+            requirement.setId( requirementJson[ "id" ].asString() );
+            requirement.setType( requirementJson[ "type" ].asString() );
+            requirement.setCategory( requirementJson.get( "category", "" ).asString() );
+            requirement.setLevel( requirementJson.get( "level", 0 ).asInt() );
             action.addRequirement( requirement );
+        }
+
+        for ( const Json::Value& experienceJson : actionJson[ "experience" ] ) {
+            Model::LocationActionExperience experience;
+            experience.setIdSkill( experienceJson[ "skill" ].asString() );
+            experience.setAmount( experienceJson[ "amount" ].asInt() );
+            action.addExperience( experience );
         }
 
         location->addAction( action );

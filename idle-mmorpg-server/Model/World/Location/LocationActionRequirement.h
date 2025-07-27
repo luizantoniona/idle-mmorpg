@@ -7,19 +7,10 @@ namespace Model {
 
 class LocationActionRequirement {
 public:
-    enum class RequirementType {
-        Unknown,
-        Skill,
-        Item,
-    };
-
     LocationActionRequirement();
 
-    static RequirementType typeFromString( const std::string& type );
-    static std::string typeToString( RequirementType type );
-
-    RequirementType type() const;
-    void setType( RequirementType type );
+    std::string type() const;
+    void setType( const std::string& type );
 
     std::string id() const;
     void setId( const std::string& id );
@@ -31,7 +22,7 @@ public:
     void setCategory( const std::string& category );
 
 private:
-    RequirementType _type;
+    std::string _type;
     std::string _id;
 
     int _level;
