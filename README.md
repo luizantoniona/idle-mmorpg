@@ -13,9 +13,9 @@
 ## 📦 Repositories
 
 The organization is structured across several repositories:
-- [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/idle-mmorpg-data) – All game data. Items, world map, character skills and more.
-- [`idle-mmorpg-server`](https://github.com/luizantoniona/idle-mmorpg/idle-mmorpg-server) – C++ server.
-- [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/idle-mmorpg-client) – Web interface for players.
+- [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data) – All game data. Items, world map, character skills and more.
+- [`idle-mmorpg-server`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-server) – C++ server.
+- [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client) – Web interface for players.
 
 ## 👥 People
 
