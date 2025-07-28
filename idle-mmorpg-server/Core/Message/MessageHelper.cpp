@@ -4,35 +4,28 @@
 
 namespace Core::Message {
 
-MessageType MessageHelper::stringToType( const std::string& type ) {
-    static const std::unordered_map<std::string, MessageType> map = {
-        // Character RECEIVE related messages
-        { "character_update_action", MessageType::CHARACTER_UPDATE_ACTION },
-
-        // Location RECEIVE related messages
-        { "location_update_position", MessageType::LOCATION_UPDATE_POSITION },
+MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
+    static const std::unordered_map<std::string, MessageReceiverType> map = {
+        { "character_update_action", MessageReceiverType::CHARACTER_UPDATE_ACTION },
     };
 
     auto it = map.find( type );
-    return it != map.end() ? it->second : MessageType::UNKNOWN;
+    return it != map.end() ? it->second : MessageReceiverType::UNKNOWN;
 }
 
-std::string MessageHelper::typeToString( const MessageType type ) {
+std::string MessageHelper::typeToString( const MessageSenderType type ) {
     switch ( type ) {
-        // Character SEND related messages
-    case MessageType::CHARACTER_UPDATE_ATTRIBUTES:
+    case MessageSenderType::CHARACTER_UPDATE_ATTRIBUTES:
         return "character_update_attributes";
-    case MessageType::CHARACTER_UPDATE_STATUS:
+    case MessageSenderType::CHARACTER_UPDATE_STATUS:
         return "character_update_status";
-    case MessageType::CHARACTER_UPDATE_INVENTORY:
+    case MessageSenderType::CHARACTER_UPDATE_INVENTORY:
         return "character_update_inventory";
-    case MessageType::CHARACTER_UPDATE_WALLET:
+    case MessageSenderType::CHARACTER_UPDATE_WALLET:
         return "character_update_wallet";
-
-        // Location SEND related messages
-    case MessageType::LOCATION_UPDATE_POSITION:
+    case MessageSenderType::LOCATION_UPDATE_POSITION:
         return "location_update_position";
-    case MessageType::LOCATION_UPDATE_ACTIONS:
+    case MessageSenderType::LOCATION_UPDATE_ACTIONS:
         return "location_update_actions";
     default:
         return "unknown";

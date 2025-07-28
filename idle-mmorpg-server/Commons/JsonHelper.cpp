@@ -17,4 +17,18 @@ Json::Value Commons::JsonHelper::loadJsonFile( const std::string& path ) {
     return jsonData;
 }
 
+Json::Value JsonHelper::parseJsonString( const std::string& content ) {
+    Json::Value jsonData;
+    Json::CharReaderBuilder builder;
+    std::string errs;
+
+    std::istringstream s( content );
+    if ( !Json::parseFromStream( builder, s, &jsonData, &errs ) ) {
+        std::cerr << "JsonHelper::parseJsonString Error parsing JSON: " << errs << std::endl;
+        return Json::Value();
+    }
+
+    return jsonData;
 }
+
+} // namespace Commons

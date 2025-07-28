@@ -2,10 +2,8 @@
 
 #include <iostream>
 
-#include <Core/Message/MessageType.h>
+#include <Core/Message/MessageSenderType.h>
 #include <Core/System/ActionSystem.h>
-
-using Core::Message::MessageType;
 
 namespace Core::Instance {
 
@@ -26,7 +24,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
 
     Json::Value payloadLocation;
     payloadLocation[ "location" ] = _location->toJson();
-    _sender.send( sessionId, MessageType::LOCATION_UPDATE_POSITION, payloadLocation );
+    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_POSITION, payloadLocation );
 
     Json::Value payloadLocationActions;
     Json::Value availableActions;
@@ -36,7 +34,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
         }
     }
     payloadLocationActions[ "actions" ] = availableActions;
-    _sender.send( sessionId, MessageType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
+    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
 
     return true;
 }

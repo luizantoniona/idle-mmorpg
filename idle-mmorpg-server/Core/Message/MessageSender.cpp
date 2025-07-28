@@ -18,7 +18,7 @@ void MessageSender::send( const std::string& sessionId, const std::string& messa
     sessionOpt->connection()->send( message );
 }
 
-void MessageSender::send( const std::string& sessionId, MessageType type, const Json::Value& payload ) {
+void MessageSender::send( const std::string& sessionId, MessageSenderType type, const Json::Value& payload ) {
     Json::Value message;
     message[ "type" ] = MessageHelper::typeToString( type );
     message["payload"] = payload;

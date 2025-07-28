@@ -5,7 +5,7 @@
 
 #include <json/json.h>
 
-#include "MessageType.h"
+#include "MessageSenderType.h"
 
 namespace Core::Message {
 
@@ -14,7 +14,7 @@ public:
     MessageSender();
 
     void send( const std::string& sessionId, const std::string& message );
-    void send( const std::string& sessionId, MessageType type, const Json::Value& payload );
+    void send( const std::string& sessionId, MessageSenderType type, const Json::Value& payload );
 };
 
 } // namespace Core::Message

@@ -3,16 +3,15 @@
 
 #include <string>
 
-#include "MessageType.h"
-
-using Core::Message::MessageType;
+#include "MessageReceiverType.h"
+#include "MessageSenderType.h"
 
 namespace Core::Message {
 
 class MessageHelper {
 public:
-    static MessageType stringToType( const std::string& type );
-    static std::string typeToString( const MessageType type );
+    static MessageReceiverType stringToType( const std::string& type );
+    static std::string typeToString( const MessageSenderType type );
 };
 
 } // namespace Core::Message
