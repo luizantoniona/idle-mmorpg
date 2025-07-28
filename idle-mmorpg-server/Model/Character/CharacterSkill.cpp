@@ -5,7 +5,8 @@ namespace Model {
 CharacterSkill::CharacterSkill() :
     _id( "" ),
     _level( 0 ),
-    _experience( 0 ) {}
+    _experience( 0 ),
+    _skill( nullptr ) {}
 
 std::string CharacterSkill::id() const {
     return _id;

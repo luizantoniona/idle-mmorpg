@@ -2,8 +2,9 @@
 
 namespace Model {
 
-CharacterAction::CharacterAction() {
-}
+CharacterAction::CharacterAction() :
+    _idAction( "" ),
+    _duration( 0 ) {}
 
 std::string CharacterAction::idAction() const {
     return _idAction;
