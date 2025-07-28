@@ -2,7 +2,7 @@ import "./GamePage.css"
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { WsService } from "../../../services/WsService";
-import type { Character, CharacterAttributes, CharacterWallet } from "../../../models";
+import type { Character, CharacterAttributes, CharacterWallet, Map } from "../../../models";
 import { AttributesPanel, ChatPanel, InventoryPanel, WorldPanel, StatusPanel, WalletPanel } from "../../organisms/";
 
 export function GamePage() {
@@ -15,6 +15,8 @@ export function GamePage() {
     const [attributes, setAttributes] = useState<CharacterAttributes>(character.attributes);
     const [wallet, setWallet] = useState<CharacterWallet>(character.wallet);
     const [inventory, setInventory] = useState([]);
+
+    const [map, setMap] = useState<Map | null>(null);
 
     const handleMessage = useCallback((data: any) => {
         console.log("Mensagem recebida:", data);
@@ -36,12 +38,18 @@ export function GamePage() {
                 break;
             case "location_update_position":
                 if (data.payload.location) {
-                    // Atualizar localização do personagem
+                    setMap(data.payload.location);
                 }
                 break;
             case "location_update_actions":
-                if (data.payload.actions) {
-                    // Atualizar ações permitidas pelo personagem
+                if (Array.isArray(data.payload.actions)) {
+                    setMap((map) => {
+                        if (!map) return map;
+                        return {
+                            ...map,
+                            actions: data.payload.actions,
+                        };
+                    });
                 }
                 break;
             default:
@@ -88,11 +96,11 @@ export function GamePage() {
     return (
         <div className="game-grid">
             <div className="left-sidebar">
-                <StatusPanel />
+                <StatusPanel character={character} />
                 <AttributesPanel attributes={attributes} />
             </div>
             <div className="main-content">
-                <WorldPanel />
+                <WorldPanel map={map} ws={wsRef.current} />
             </div>
             <div className="right-sidebar">
                 <InventoryPanel items={inventory} />

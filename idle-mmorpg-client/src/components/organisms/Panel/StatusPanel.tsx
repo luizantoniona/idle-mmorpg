@@ -1,9 +1,14 @@
 import { PanelVertical } from "../../atoms";
+import type { Character } from "../../../models";
 
-export function StatusPanel() {
+interface Props {
+    character: Character | null;
+}
+
+export function StatusPanel({ character }: Props) {
     return (
         <PanelVertical>
-            <h2>Character Status</h2>
+            <h2>{character?.name}</h2>
         </PanelVertical>
     );
 }

@@ -8,12 +8,12 @@ interface CharacterCardProps {
 }
 
 export const CharacterCard: React.FC<CharacterCardProps> = ({ character, onClick }) => {
-    const { dsName, attributes } = character;
+    const { name, attributes } = character;
 
     return (
         <div className="character-card" onClick={onClick}>
             <div className="character-header">
-                <h3>{dsName}</h3>
+                <h3>{name}</h3>
             </div>
             {attributes ? (<div className="character-attributes">
                 <p><strong>STR</strong>: {attributes.strength}</p>

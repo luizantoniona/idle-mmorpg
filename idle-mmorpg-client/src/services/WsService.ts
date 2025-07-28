@@ -26,7 +26,7 @@ export class WsService {
         const wsUrl = `ws://${server.address}:${server.port}/ws/character?sid=${auth.sessionID}&character=${characterId}`;
 
         if (this.socket && this.currentUrl === wsUrl && this.socket.readyState === WebSocket.OPEN) {
-            console.warn("WebSocket já está conectado.");
+            console.warn("WebSocket already connected.");
             return;
         }
 
@@ -45,18 +45,18 @@ export class WsService {
                 const data = JSON.parse(event.data);
                 this.messageCallbacks.forEach((cb) => cb(data));
             } catch (err) {
-                console.error("Erro ao parsear mensagem WebSocket:", err);
+                console.error("Message parse error:", err);
             }
         };
 
         this.socket.onclose = (event) => {
-            console.warn("WebSocket fechado:", event);
+            console.warn("WebSocket closed:", event);
             this.socket = null;
             this.notifyStatus("disconnected");
         };
 
         this.socket.onerror = (event) => {
-            console.error("Erro WebSocket:", event);
+            console.error("Error WebSocket:", event);
             this.notifyStatus("error");
         };
     }

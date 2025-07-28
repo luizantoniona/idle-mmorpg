@@ -1,6 +1,6 @@
 .game-grid {
     display: grid;
-    grid-template-columns: 260px 1fr 300px;
+    grid-template-columns: 260px 2fr 300px;
     grid-template-areas:
         "left main right"
         "chat chat chat";
@@ -9,7 +9,6 @@
 
 .left-sidebar {
     grid-area: left;
-    padding: 16px;
     background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
@@ -20,14 +19,12 @@
 
 .main-content {
     grid-area: main;
-    padding: 16px;
     background-color: var(--color-bg);
     overflow-y: auto;
 }
 
 .right-sidebar {
     grid-area: right;
-    padding: 16px;
     background-color: var(--color-bg);
     overflow-y: auto;
     border-left: 1px solid var(--color-accent);
@@ -36,7 +33,6 @@
 .chat-bar {
     grid-area: chat;
     background-color: var(--color-bg);
-    padding: 12px;
     border-top: 1px solid var(--color-accent);
     overflow-y: auto;
 }

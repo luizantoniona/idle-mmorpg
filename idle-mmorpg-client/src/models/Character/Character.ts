@@ -4,7 +4,7 @@ import type { CharacterWallet } from "./CharacterWallet";
 export type Character = {
     idUser: number;
     idCharacter: number;
-    dsName: string;
+    name: string;
     attributes: CharacterAttributes;
     wallet: CharacterWallet;
 };

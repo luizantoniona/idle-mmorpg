@@ -19,7 +19,7 @@ export function InventoryPanel({ items = [] }: Props) {
 
     return (
         <div>
-            <h2>Inventário</h2>
+            <h2>Inventory</h2>
             <ul>
                 {inventory.map((item) => (
                     <li key={item.id}>

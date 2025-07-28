@@ -1,9 +1,12 @@
-import { PanelVertical } from "../../atoms";
+import { PanelHorizontal, PanelVertical } from "../../atoms";
 
 export function ChatPanel() {
     return (
         <PanelVertical>
-            <h2>Chat</h2>
+            <h6>Chat</h6>
+            <PanelHorizontal>
+                <h2>Chat</h2>
+            </PanelHorizontal>
         </PanelVertical>
     );
 }
