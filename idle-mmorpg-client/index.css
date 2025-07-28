@@ -19,18 +19,3 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* @media (prefers-color-scheme: light) {
-  :root {
-    --color-bg: #ffffff;
-    --color-text: #000000;
-    --color-panel: #f1f1f1;
-    --color-panel-shadow: rgba(0, 0, 0, 0.08);
-    --color-accent: #4f51ff;
-    --color-button: #f9f9f9;
-
-    color-scheme: light;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-  }
-} */
