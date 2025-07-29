@@ -13,6 +13,7 @@ public:
     bool canPerformAction( Model::Character* character, const Model::LocationAction& action );
 
     void startAction( Model::Character* character, const Model::LocationAction& action );
+    void endAction( Model::Character* character );
 
     // void tick( Model::Character* character, std::function<void( const Json::Value& )> onFinishedCallback );
 };

@@ -54,4 +54,10 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
 void ActionSystem::startAction( Model::Character* character, const Model::LocationAction& action ) {
 }
 
+void ActionSystem::endAction( Model::Character* character ) {
+    character->action().setIdAction( "idle" );
+    character->action().setDuration( 0 );
+    character->action().setCounter( 0 );
+}
+
 } // namespace Core::System
