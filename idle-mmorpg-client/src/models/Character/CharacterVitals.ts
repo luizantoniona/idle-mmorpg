@@ -8,6 +8,4 @@ export type CharacterVitals = {
     stamina: number;
     staminaMax: number;
     staminaRegen: number;
-    experience: number;
-    level: number;
 };
