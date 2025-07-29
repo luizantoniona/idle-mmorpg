@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "SkillMilestoneAttributeBonus.h"
+#include "SkillMilestoneBonus.h"
 
 namespace Model {
 
@@ -14,15 +14,15 @@ public:
     int level() const;
     void setLevel( int level );
 
-    std::vector<SkillMilestoneAttributeBonus> bonuses() const;
-    void setBonuses( const std::vector<SkillMilestoneAttributeBonus>& bonuses );
-    void addBonus( const SkillMilestoneAttributeBonus& bonus );
+    std::vector<SkillMilestoneBonus> bonuses() const;
+    void setBonuses( const std::vector<SkillMilestoneBonus>& bonuses );
+    void addBonus( const SkillMilestoneBonus& bonus );
 
 private:
     int _level;
-    std::vector<SkillMilestoneAttributeBonus> _bonuses;
+    std::vector<SkillMilestoneBonus> _bonuses;
 };
 
-}
+} // namespace Model
 
 #endif // SKILLMILESTONE_H

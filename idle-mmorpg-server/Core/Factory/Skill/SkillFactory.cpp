@@ -45,10 +45,12 @@ std::unique_ptr<Model::Skill> SkillFactory::createSkill( const std::string& skil
 
         const auto& bonusesJson = milestoneJson["bonuses"];
         for ( const auto& bonusJson : bonusesJson ) {
-            Model::SkillMilestoneAttributeBonus milestoneAttributeBonus;
-            milestoneAttributeBonus.setAttribute( bonusJson["attribute"].asString() );
-            milestoneAttributeBonus.setValue( bonusJson["value"].asInt() );
-            milestone.addBonus( milestoneAttributeBonus );
+            Model::SkillMilestoneBonus milestoneBonus;
+
+            milestoneBonus.setType( bonusJson[ "type" ].asString() );
+            milestoneBonus.setId( bonusJson[ "id" ].asString() );
+            milestoneBonus.setValue( bonusJson[ "value" ].asInt() );
+            milestone.addBonus( milestoneBonus );
         }
 
         skill->addMilestone( milestone );
