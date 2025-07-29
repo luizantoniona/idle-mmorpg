@@ -29,7 +29,7 @@ bool CharacterVitalsRepository::createVitals( int idCharacter ) {
     return query.step();
 }
 
-bool CharacterVitalsRepository::updateCharacterAttributes( int idCharacter, const Model::CharacterVitals& vitals ) {
+bool CharacterVitalsRepository::updateVitals( int idCharacter, const Model::CharacterVitals& vitals ) {
     const std::string sql = R"SQL(
         UPDATE character_vitals SET
             health = ?,

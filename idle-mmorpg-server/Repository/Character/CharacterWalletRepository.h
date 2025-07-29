@@ -13,8 +13,7 @@ public:
     explicit CharacterWalletRepository();
 
     bool createWallet( int idCharacter );
-
-    bool updateCharacterWallet( int idCharacter, const Model::CharacterWallet& inventory );
+    bool updateWallet( int idCharacter, const Model::CharacterWallet& wallet );
 
     std::unique_ptr<Model::CharacterWallet> findByCharacterId( int idCharacter );
 };

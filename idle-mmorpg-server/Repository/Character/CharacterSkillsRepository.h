@@ -14,6 +14,7 @@ public:
 
     bool createSkills( int idCharacter );
     bool updateSkills( int idCharacter, Model::CharacterSkills& characterSkills );
+
     std::unique_ptr<Model::CharacterSkills> findByCharacterId( int idCharacter );
 };
 

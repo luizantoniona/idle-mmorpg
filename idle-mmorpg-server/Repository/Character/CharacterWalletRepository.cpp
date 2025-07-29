@@ -21,7 +21,7 @@ bool CharacterWalletRepository::createWallet( int idCharacter ) {
     return query.step();
 }
 
-bool CharacterWalletRepository::updateCharacterWallet( int idCharacter, const Model::CharacterWallet& wallet ) {
+bool CharacterWalletRepository::updateWallet( int idCharacter, const Model::CharacterWallet& wallet ) {
     const std::string sql = R"SQL(
         UPDATE character_wallet SET
             copper = ?,

@@ -13,10 +13,9 @@ public:
     explicit CharacterInventoryRepository();
 
     bool createInventory( int idCharacter );
+    //    bool updateInventory( int idCharacter, const Model::CharacterInventoryModel& inventory );
 
-//    bool updateCharacterInventory( int idCharacter, const Model::CharacterInventoryModel& inventory );
-
-//    std::unique_ptr<Model::CharacterInventoryModel> findByCharacterId( int idCharacter );
+    //    std::unique_ptr<Model::CharacterInventoryModel> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

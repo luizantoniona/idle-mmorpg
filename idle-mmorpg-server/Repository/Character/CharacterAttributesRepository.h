@@ -13,8 +13,7 @@ public:
     explicit CharacterAttributesRepository();
 
     bool createAttributes( int idCharacter );
-
-    bool updateCharacterAttributes( int idCharacter, const Model::CharacterAttributes& attributes );
+    bool updateAttributes( int idCharacter, const Model::CharacterAttributes& attributes );
 
     std::unique_ptr<Model::CharacterAttributes> findByCharacterId( int idCharacter );
 };

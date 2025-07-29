@@ -25,7 +25,7 @@ bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
     return query.step();
 }
 
-bool CharacterCoordinateRepository::updateCharacterCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates ) {
+bool CharacterCoordinateRepository::updateCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates ) {
     const std::string sql = R"SQL(
         UPDATE character_coordinates SET
             x = ?,

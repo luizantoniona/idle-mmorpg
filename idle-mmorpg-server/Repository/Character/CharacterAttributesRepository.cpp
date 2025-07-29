@@ -25,7 +25,7 @@ bool CharacterAttributesRepository::createAttributes( int idCharacter ) {
     return query.step();
 }
 
-bool CharacterAttributesRepository::updateCharacterAttributes( int idCharacter, const Model::CharacterAttributes& attributes ) {
+bool CharacterAttributesRepository::updateAttributes( int idCharacter, const Model::CharacterAttributes& attributes ) {
     const std::string sql = R"SQL(
         UPDATE character_attributes SET
             strength = ?,

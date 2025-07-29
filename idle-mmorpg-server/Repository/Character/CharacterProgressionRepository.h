@@ -13,7 +13,6 @@ public:
     explicit CharacterProgressionRepository();
 
     bool createProgression( int idCharacter );
-
     bool updateProgression( int idCharacter, const Model::CharacterProgression& progression );
 
     std::unique_ptr<Model::CharacterProgression> findByCharacterId( int idCharacter );

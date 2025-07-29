@@ -33,15 +33,33 @@ bool CharacterRepository::createCharacter( const int idUser, const std::string& 
 
     int idCharacter = static_cast<int>( sqlite3_last_insert_rowid( _db ) );
 
-    CharacterAttributesRepository().createAttributes( idCharacter );
-    CharacterCoordinateRepository().createCoordinates( idCharacter );
-    CharacterInventoryRepository().createInventory( idCharacter );
-    CharacterProgressionRepository().createProgression( idCharacter );
-    CharacterSkillsRepository().createSkills( idCharacter );
-    CharacterVitalsRepository().createVitals( idCharacter );
-    CharacterWalletRepository().createWallet( idCharacter );
+    bool success = true;
 
-    return true;
+    success &= CharacterAttributesRepository().createAttributes( idCharacter );
+    success &= CharacterCoordinateRepository().createCoordinates( idCharacter );
+    success &= CharacterInventoryRepository().createInventory( idCharacter );
+    success &= CharacterProgressionRepository().createProgression( idCharacter );
+    success &= CharacterSkillsRepository().createSkills( idCharacter );
+    success &= CharacterVitalsRepository().createVitals( idCharacter );
+    success &= CharacterWalletRepository().createWallet( idCharacter );
+
+    return success;
+}
+
+bool CharacterRepository::updateCharacter( Model::Character character ) {
+    const int idCharacter = character.idCharacter();
+
+    bool success = true;
+
+    success &= CharacterAttributesRepository().updateAttributes( idCharacter, character.attributes() );
+    success &= CharacterCoordinateRepository().updateCoordinates( idCharacter, character.coordinates() );
+    // success &= CharacterInventoryRepository().updateCharacterInventory(idCharacter, character.inventory());
+    success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
+    success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
+    success &= CharacterVitalsRepository().updateVitals( idCharacter, character.vitals() );
+    success &= CharacterWalletRepository().updateWallet( idCharacter, character.wallet() );
+
+    return success;
 }
 
 std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllByIdUser( const int idUser ) {

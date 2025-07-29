@@ -13,8 +13,7 @@ public:
     explicit CharacterVitalsRepository();
 
     bool createVitals( int idCharacter );
-
-    bool updateCharacterAttributes( int idCharacter, const Model::CharacterVitals& vitals );
+    bool updateVitals( int idCharacter, const Model::CharacterVitals& vitals );
 
     std::unique_ptr<Model::CharacterVitals> findByCharacterId( int idCharacter );
 };

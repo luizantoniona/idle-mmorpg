@@ -13,8 +13,7 @@ public:
     explicit CharacterCoordinateRepository();
 
     bool createCoordinates( int idCharacter );
-
-    bool updateCharacterCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates );
+    bool updateCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates );
 
     std::unique_ptr<Model::CharacterCoordinates> findByCharacterId( int idCharacter );
 };
