@@ -1,5 +1,4 @@
 export type CharacterAttributes = {
-    idCharacter: number;
     strength: number;
     dexterity: number;
     constitution: number;

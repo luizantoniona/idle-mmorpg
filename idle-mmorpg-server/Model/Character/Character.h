@@ -9,7 +9,9 @@
 #include "CharacterAttributes.h"
 #include "CharacterCoordinates.h"
 #include "CharacterInventory.h"
+#include "CharacterProgression.h"
 #include "CharacterSkills.h"
+#include "CharacterVitals.h"
 #include "CharacterWallet.h"
 
 namespace Model {
@@ -41,8 +43,14 @@ public:
     CharacterInventory& inventory();
     void setInventory( const CharacterInventory& inventory );
 
+    CharacterProgression& progression();
+    void setProgression( const CharacterProgression& progression );
+
     CharacterSkills& skills();
     void setSkills( const CharacterSkills& skills );
+
+    CharacterVitals& vitals();
+    void setVitals( const CharacterVitals& vitals );
 
     CharacterWallet& wallet();
     void setWallet( const CharacterWallet& wallet );
@@ -55,7 +63,9 @@ private:
     CharacterAttributes _attributes;
     CharacterCoordinates _coordinates;
     CharacterInventory _inventory;
+    CharacterProgression _progression;
     CharacterSkills _skills;
+    CharacterVitals _vitals;
     CharacterWallet _wallet;
 };
 

@@ -5,7 +5,9 @@
 #include "CharacterAttributesRepository.h"
 #include "CharacterCoordinateRepository.h"
 #include "CharacterInventoryRepository.h"
+#include "CharacterProgressionRepository.h"
 #include "CharacterSkillsRepository.h"
+#include "CharacterVitalsRepository.h"
 #include "CharacterWalletRepository.h"
 
 namespace Repository {
@@ -31,13 +33,15 @@ bool CharacterRepository::createCharacter( const int idUser, const std::string& 
 
     int idCharacter = static_cast<int>( sqlite3_last_insert_rowid( _db ) );
 
-    const bool successAttributes = CharacterAttributesRepository().createAttributes( idCharacter );
-    const bool successCoordinates = CharacterCoordinateRepository().createCoordinates( idCharacter );
-    const bool succesWallet = CharacterWalletRepository().createWallet( idCharacter );
-    const bool succesSkill = CharacterSkillsRepository().createSkills( idCharacter );
-    const bool sucessInventory = CharacterInventoryRepository().createInventory( idCharacter );
+    CharacterAttributesRepository().createAttributes( idCharacter );
+    CharacterCoordinateRepository().createCoordinates( idCharacter );
+    CharacterInventoryRepository().createInventory( idCharacter );
+    CharacterProgressionRepository().createProgression( idCharacter );
+    CharacterSkillsRepository().createSkills( idCharacter );
+    CharacterVitalsRepository().createVitals( idCharacter );
+    CharacterWalletRepository().createWallet( idCharacter );
 
-    return successAttributes && successCoordinates && sucessInventory && succesWallet && succesSkill;
+    return true;
 }
 
 std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllByIdUser( const int idUser ) {
@@ -78,13 +82,23 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
 //            character->setInventory( *inventory );
 //        }
 
+        auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
+        if ( progression ) {
+            character->setProgression( *progression );
+        }
+
         auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
         if ( skills ) {
             character->setSkills( *skills );
         }
 
+        auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
+        if ( vitals ) {
+            character->setVitals( *vitals );
+        }
+
         auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
-        if ( coordinates ) {
+        if ( wallet ) {
             character->setWallet( *wallet );
         }
 
@@ -129,13 +143,23 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
 //            character->setInventory( *inventory );
 //        }
 
+        auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
+        if ( progression ) {
+            character->setProgression( *progression );
+        }
+
         auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
         if ( skills ) {
             character->setSkills( *skills );
         }
 
+        auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
+        if ( vitals ) {
+            character->setVitals( *vitals );
+        }
+
         auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
-        if ( coordinates ) {
+        if ( wallet ) {
             character->setWallet( *wallet );
         }
 

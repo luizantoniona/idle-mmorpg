@@ -10,7 +10,9 @@ Character::Character() :
     _attributes(),
     _coordinates(),
     _inventory(),
+    _progression(),
     _skills(),
+    _vitals(),
     _wallet() {
 }
 
@@ -80,12 +82,28 @@ void Character::setInventory( const CharacterInventory& inventory ) {
     _inventory = inventory;
 }
 
+CharacterProgression& Character::progression() {
+    return _progression;
+}
+
+void Character::setProgression( const CharacterProgression& progression ) {
+    _progression = progression;
+}
+
 CharacterSkills& Character::skills() {
     return _skills;
 }
 
 void Character::setSkills( const CharacterSkills& skills ) {
     _skills = skills;
+}
+
+CharacterVitals& Character::vitals() {
+    return _vitals;
+}
+
+void Character::setVitals( const CharacterVitals& vitals ) {
+    _vitals = vitals;
 }
 
 CharacterWallet& Character::wallet() {
