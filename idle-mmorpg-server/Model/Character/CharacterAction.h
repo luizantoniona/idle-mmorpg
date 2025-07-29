@@ -15,9 +15,13 @@ public:
     int duration() const;
     void setDuration( int duration );
 
+    int counter() const;
+    void setCounter( int counter );
+
 private:
     std::string _idAction;
     int _duration;
+    int _counter;
 };
 
 } // namespace Model

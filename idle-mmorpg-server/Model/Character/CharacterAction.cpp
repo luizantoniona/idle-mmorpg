@@ -3,8 +3,10 @@
 namespace Model {
 
 CharacterAction::CharacterAction() :
-    _idAction( "" ),
-    _duration( 0 ) {}
+    _idAction( "idle" ),
+    _duration( 0 ),
+    _counter( 0 ) {
+}
 
 std::string CharacterAction::idAction() const {
     return _idAction;
@@ -20,6 +22,14 @@ int CharacterAction::duration() const {
 
 void CharacterAction::setDuration( int duration ) {
     _duration = duration;
+}
+
+int CharacterAction::counter() const {
+    return _counter;
+}
+
+void CharacterAction::setCounter( int counter ) {
+    _counter = counter;
 }
 
 } // namespace Model
