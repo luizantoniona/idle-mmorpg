@@ -21,8 +21,6 @@ export function WorldPanel({ map, ws }: Props) {
         <PanelVertical>
             <h2>{map.name}</h2>
             <p>{map.description}</p>
-
-            <hr />
             <h3>Actions</h3>
 
             {map.actions?.length ? (
@@ -32,7 +30,7 @@ export function WorldPanel({ map, ws }: Props) {
                         text={action.label}
                         onClick={() => ws?.send({
                             type: "character_update_action",
-                            payload: { id: action.id },
+                            payload: { actionId: action.id },
                         })}
                     />
                 ))
