@@ -1,8 +1,8 @@
 import "./ServerForm.css";
 import React, { useState, useEffect } from "react";
-import { Button, InputField, PanelHorizontal, StatusCircle } from "../../atoms";
-import { useServer } from "../../../contexts/ServerContext";
-import { APIService } from "../../../services/APIService";
+import { Button, InputField, PanelHorizontal, StatusCircle } from "../../../components";
+import { useServer } from "../../../context/ServerContext";
+import { APIService } from "../../../service/APIService";
 
 export function ServerForm() {
     const { connect, server } = useServer();

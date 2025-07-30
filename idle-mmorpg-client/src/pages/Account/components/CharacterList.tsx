@@ -1,6 +1,6 @@
 import "./CharacterList.css";
 import React from "react";
-import { CharacterCard } from "../../molecules";
+import { CharacterCard } from "./CharacterCard";
 import type { Character } from "../../../models";
 
 interface CharacterListProps {

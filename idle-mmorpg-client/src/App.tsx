@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import { ServerProvider } from "./contexts/ServerContext";
-import { AccountPage, LoginPage, GamePage } from "./components/pages";
-import { useAuth } from "./contexts/AuthContext";
+import { useAuth, AuthProvider } from "./context/AuthContext";
+import { ServerProvider } from "./context/ServerContext";
+import { AccountPage, LoginPage, GamePage } from "./pages";
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isLoggedIn } = useAuth();

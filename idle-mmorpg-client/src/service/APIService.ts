@@ -1,5 +1,5 @@
-import { ServerManager } from "../managers/ServerManager";
-import { AuthManager } from "../managers/AuthManager";
+import { ServerManager } from "../manager/ServerManager";
+import { AuthManager } from "../manager/AuthManager";
 
 export class APIService {
     static authToken: string | null = null;

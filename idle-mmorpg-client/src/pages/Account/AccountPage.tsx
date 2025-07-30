@@ -1,11 +1,11 @@
 import "./AccountPage.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
-import { APIService } from "../../../services/APIService";
-import { Button, PanelVertical } from "../../atoms";
-import { CharacterList } from "../../organisms";
-import type { Character } from "../../../models";
+import { useAuth } from "../../context/AuthContext";
+import { APIService } from "../../service/APIService";
+import { Button, PanelVertical } from "../../components";
+import { CharacterList } from "./components/CharacterList";
+import type { Character } from "../../models";
 
 export function AccountPage() {
     const navigate = useNavigate();

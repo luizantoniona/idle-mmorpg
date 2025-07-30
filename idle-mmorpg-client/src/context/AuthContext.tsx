@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { APIService } from "../services/APIService";
-import { AuthManager } from "../managers/AuthManager";
-import type { AuthData } from "../managers/AuthManager";
+import { APIService } from "../service/APIService";
+import { AuthManager } from "../manager/AuthManager";
+import type { AuthData } from "../manager/AuthManager";
 
 interface AuthContextValue {
     auth: AuthData | null;

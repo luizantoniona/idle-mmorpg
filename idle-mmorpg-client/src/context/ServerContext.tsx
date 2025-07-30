@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
-import { ServerManager } from "../managers/ServerManager";
-import type { ServerData } from "../managers/ServerManager";
+import { ServerManager } from "../manager/ServerManager";
+import type { ServerData } from "../manager/ServerManager";
 
 interface ServerContextValue {
     server: ServerData | null;

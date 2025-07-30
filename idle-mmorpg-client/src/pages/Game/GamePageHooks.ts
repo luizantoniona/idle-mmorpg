@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { WsService } from "../../../services/WsService";
-import type { Character, Map } from "../../../models";
+import { WsService } from "../../service/WsService";
+import type { Character, Map } from "../../models";
 
 export function GamePageHooks(initialCharacter: Character) {
     const websocket = useRef<WsService | null>(null);

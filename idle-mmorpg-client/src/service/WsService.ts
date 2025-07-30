@@ -1,5 +1,5 @@
-import { ServerManager } from "../managers/ServerManager";
-import { AuthManager } from "../managers/AuthManager";
+import { ServerManager } from "../manager/ServerManager";
+import { AuthManager } from "../manager/AuthManager";
 
 type MessageCallback = (data: any) => void;
 type StatusCallback = (status: "connecting" | "connected" | "disconnected" | "error") => void;

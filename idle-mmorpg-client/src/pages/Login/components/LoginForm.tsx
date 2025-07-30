@@ -1,9 +1,9 @@
 import "./LoginForm.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, InputField, PanelVertical } from "../../atoms";
-import { useAuth } from "../../../contexts/AuthContext";
-import { APIService } from "../../../services/APIService";
+import { Button, InputField, PanelVertical } from "../../../components";
+import { useAuth } from "../../../context/AuthContext";
+import { APIService } from "../../../service/APIService";
 
 interface LoginResponse {
     userID: number;
