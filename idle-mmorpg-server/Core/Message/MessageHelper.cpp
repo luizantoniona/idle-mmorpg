@@ -15,6 +15,8 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
 
 std::string MessageHelper::typeToString( const MessageSenderType type ) {
     switch ( type ) {
+    case MessageSenderType::CHARACTER_UPDATE_ACTION:
+        return "character_update_action";
     case MessageSenderType::CHARACTER_UPDATE_ATTRIBUTES:
         return "character_update_attributes";
     case MessageSenderType::CHARACTER_UPDATE_STATUS:
@@ -23,6 +25,7 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
         return "character_update_inventory";
     case MessageSenderType::CHARACTER_UPDATE_WALLET:
         return "character_update_wallet";
+
     case MessageSenderType::LOCATION_UPDATE_POSITION:
         return "location_update_position";
     case MessageSenderType::LOCATION_UPDATE_ACTIONS:

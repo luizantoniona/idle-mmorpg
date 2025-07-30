@@ -34,6 +34,7 @@ void CharacterController::list( const drogon::HttpRequestPtr& request, std::func
             for ( const auto& character : characters ) {
                 Json::Value characterJson = character->toJson();
                 characterJson[ "attributes" ] = character->attributes().toJson();
+                characterJson[ "wallet" ] = character->wallet().toJson();
                 charactersJson.append( characterJson );
             }
 

@@ -5,7 +5,30 @@
 
 namespace Core::System {
 
-ActionSystem::ActionSystem() {
+ActionSystem::ActionSystem( Model::Location* location ) :
+    _location( location ),
+    _sender(),
+    _skillProgressionSystem() {
+}
+
+void ActionSystem::notifyCharacterActions( const std::string& sessionId, Model::Character* character ) {
+    Json::Value payloadLocationActions;
+    Json::Value availableActions;
+
+    for ( auto action : _location->actions() ) {
+        if ( canPerformAction( character, action ) ) {
+            availableActions.append( action.toJson() );
+        }
+    }
+
+    payloadLocationActions[ "actions" ] = availableActions;
+    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
+}
+
+void ActionSystem::notifyCharacterCurrentAction( const std::string& sessionId, Model::Character* character ) {
+    Json::Value payloadCurrentAction;
+    payloadCurrentAction[ "action" ] = character->action().toJson();
+    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE_ACTION, payloadCurrentAction );
 }
 
 bool Core::System::ActionSystem::canPerformAction( Model::Character* character, const Model::LocationAction& action ) {
@@ -18,20 +41,8 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
         const std::string& id = requirement.id();
 
         if ( type == "skill" ) {
+
             Model::CharacterSkill* skill = character->skills().skill( id );
-
-            if ( !skill ) {
-                Model::CharacterSkill characterSkill;
-                characterSkill.setId( id );
-                characterSkill.setExperience( 0 );
-                characterSkill.setLevel( 0 );
-                characterSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( id ) );
-
-                character->skills().addSkill( characterSkill );
-
-                skill = character->skills().skill( id );
-            }
-
             if ( !skill || skill->level() < requirement.level() ) {
                 return false;
             }
@@ -43,7 +54,6 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
             // }
 
         } else {
-            // Tipo de requisito desconhecido
             return false;
         }
     }
@@ -51,13 +61,76 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
     return true;
 }
 
-void ActionSystem::startAction( Model::Character* character, const Model::LocationAction& action ) {
+int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
+    int baseDuration = action.duration();
+    // TODO: Compute depending the action
+    return baseDuration;
 }
 
-void ActionSystem::endAction( Model::Character* character ) {
-    character->action().setIdAction( "idle" );
-    character->action().setDuration( 0 );
-    character->action().setCounter( 0 );
+void ActionSystem::changeAction( Model::Character* character, const Json::Value& payload ) {
+    if ( !character || !payload.isObject() || !payload.isMember( "actionId" ) ) {
+        return;
+    }
+
+    std::string actionId = payload[ "actionId" ].asString();
+
+    const auto& actions = _location->actions();
+    auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
+        return action.id() == actionId;
+    } );
+
+    if ( it == actions.end() ) {
+        return;
+    }
+
+    const Model::LocationAction& selectedAction = *it;
+
+    if ( !canPerformAction( character, selectedAction ) ) {
+        return;
+    }
+
+    Model::CharacterAction& action = character->action();
+    action.setIdAction( actionId );
+    action.setDuration( computeActionDuration( character, selectedAction ) );
+    action.setCounter( 0 );
+}
+
+void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {
+    if ( !character ) {
+        return;
+    }
+
+    Model::CharacterAction& characterAction = character->action();
+
+    if ( characterAction.idAction() == "idle" ) {
+        return;
+    }
+
+    if ( characterAction.counter() >= characterAction.duration() ) {
+
+        const auto& actions = _location->actions();
+        auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
+            return action.id() == characterAction.idAction();
+        } );
+
+        if ( it != actions.end() ) {
+            const Model::LocationAction& completedAction = *it;
+
+            for ( const auto& experienceEntry : completedAction.experience() ) {
+                std::string skillId = experienceEntry.idSkill();
+                int xpGranted = experienceEntry.amount();
+
+                _skillProgressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
+            }
+        }
+
+        characterAction.setCounter( 0 );
+
+    } else {
+        characterAction.setCounter( characterAction.counter() + 1 );
+    }
+
+    notifyCharacterCurrentAction( sessionId, character );
 }
 
 } // namespace Core::System

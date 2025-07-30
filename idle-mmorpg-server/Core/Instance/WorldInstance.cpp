@@ -2,6 +2,7 @@
 
 #include <Model/Character/CharacterCoordinates.h>
 #include <Model/World/Region.h>
+#include <Repository/Character/CharacterRepository.h>
 
 namespace Core::Instance {
 
@@ -46,18 +47,21 @@ void WorldInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
 
     auto itRegion = _characterToRegion.find( sessionId );
-    if ( itRegion == _characterToRegion.end() ) {
-        return;
+    if ( itRegion != _characterToRegion.end() ) {
+
+        RegionInstance* regionInstance = itRegion->second;
+        if ( regionInstance ) {
+            regionInstance->removeCharacter( sessionId );
+        }
+
+        _characterToRegion.erase( itRegion );
     }
 
-    RegionInstance* regionInstance = itRegion->second;
-    if ( regionInstance ) {
-        regionInstance->removeCharacter( sessionId );
+    auto itCharacter = _characters.find( sessionId );
+    if ( itCharacter != _characters.end() ) {
+        Repository::CharacterRepository().updateCharacter( *itCharacter->second );
+        _characters.erase( itCharacter );
     }
-
-    _characterToRegion.erase( sessionId );
-    _characters.erase( sessionId );
-
 }
 
 void WorldInstance::moveCharacter( const std::string& sessionId ) {

@@ -51,6 +51,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         Model::LocationAction action;
         action.setId( actionJson[ "id" ].asString() );
         action.setLabel( actionJson[ "label" ].asString() );
+        action.setDuration( actionJson[ "duration" ].asInt() );
 
         for ( const Json::Value& requirementJson : actionJson[ "requirements" ] ) {
             Model::LocationActionRequirement requirement;

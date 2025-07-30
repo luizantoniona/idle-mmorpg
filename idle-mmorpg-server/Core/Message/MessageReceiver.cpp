@@ -50,7 +50,7 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
     Json::Value payload = root[ "payload" ];
     switch ( type ) {
     case MessageReceiverType::CHARACTER_UPDATE_ACTION: {
-        // locationInstance->handleCharacterAction( sessionId, actionId );
+        locationInstance->handleCharacterMessage( sessionId, type, payload );
         break;
     }
     default:

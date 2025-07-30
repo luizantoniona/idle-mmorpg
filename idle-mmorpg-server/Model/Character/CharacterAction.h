@@ -3,11 +3,15 @@
 
 #include <string>
 
+#include <json/json.h>
+
 namespace Model {
 
 class CharacterAction {
 public:
     CharacterAction();
+
+    Json::Value toJson();
 
     std::string idAction() const;
     void setIdAction( const std::string& idAction );

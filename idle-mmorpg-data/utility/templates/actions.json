@@ -1,8 +1,33 @@
 {
     "actions": [
         {
-            "id": "",
-            "label": "",
+            "id": "rest",
+            "label": "Rest by the heroes camp.",
+            "duration": 20,
+            "experience": [
+                {
+                    "skill": "resting",
+                    "amount": 1
+                }
+            ],
+            "requirements": [
+                {
+                    "type": "skill",
+                    "id": "resting",
+                    "level": 0
+                }
+            ]
+        },
+        {
+            "id": "mine",
+            "label": "Mine for copper ores.",
+            "duration": 200,
+            "experience": [
+                {
+                    "skill": "mining",
+                    "amount": 1
+                }
+            ],
             "requirements": [
                 {
                     "type": "skill",

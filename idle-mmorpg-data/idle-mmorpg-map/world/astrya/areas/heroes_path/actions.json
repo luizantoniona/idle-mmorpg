@@ -10,13 +10,7 @@
                     "amount": 1
                 }
             ],
-            "requirements": [
-                {
-                    "type": "skill",
-                    "id": "resting",
-                    "level": 0
-                }
-            ]
+            "requirements": []
         },
         {
             "id": "mine",
@@ -29,11 +23,6 @@
                 }
             ],
             "requirements": [
-                {
-                    "type": "skill",
-                    "id": "mining",
-                    "level": 0
-                },
                 {
                     "type": "item",
                     "category": "pickaxe"

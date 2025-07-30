@@ -8,6 +8,16 @@ CharacterAction::CharacterAction() :
     _counter( 0 ) {
 }
 
+Json::Value CharacterAction::toJson() {
+    Json::Value root;
+
+    root[ "idAction" ] = idAction();
+    root[ "duration" ] = duration();
+    root[ "counter" ] = counter();
+
+    return root;
+}
+
 std::string CharacterAction::idAction() const {
     return _idAction;
 }
