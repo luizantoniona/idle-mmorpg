@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { GamePageHooks } from "./GamePageHooks";
-import type { Character } from "../../../models";
+import { CharacterAttributesPanel, CharacterEquipamentPanel, CharacterInventoryPanel, CharacterSkillsPanel, CharacterVitalsPanel, CharacterWalletPanel } from "./components";
+import { ChatPanel } from "./components/ChatPanel";
+import type { Character } from "../../models";
 
 export function GamePage() {
     const location = useLocation();
@@ -16,16 +18,18 @@ export function GamePage() {
     return (
         <div className="game-grid">
             <div className="left-sidebar">
-                {/* <CharacterAttributesPanel attributes={character.attributes} /> */}
+                <CharacterVitalsPanel></CharacterVitalsPanel>
+                <CharacterAttributesPanel></CharacterAttributesPanel>
+                <CharacterSkillsPanel></CharacterSkillsPanel>
             </div>
             <div className="main-content">
                 {/* <WorldPanel map={map} onActionSelect={...} /> */}
+                <ChatPanel></ChatPanel>
             </div>
             <div className="right-sidebar">
-                {/* <WalletPanel wallet={character.wallet} /> */}
-            </div>
-            <div className="chat-bar">
-                {/* <ChatPanel /> */}
+                <CharacterWalletPanel></CharacterWalletPanel>
+                <CharacterEquipamentPanel></CharacterEquipamentPanel>
+                <CharacterInventoryPanel></CharacterInventoryPanel>
             </div>
         </div>
     );

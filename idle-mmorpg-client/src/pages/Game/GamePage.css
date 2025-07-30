@@ -4,12 +4,12 @@
     grid-template-columns: 260px 2fr 300px;
     grid-template-areas:
         "left main right"
-        "chat chat chat";
+        "left main right";
 }
 
 .left-sidebar {
-    grid-area: left;
     background-color: var(--color-bg);
+    grid-area: left;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -18,21 +18,20 @@
 }
 
 .main-content {
-    grid-area: main;
     background-color: var(--color-bg);
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     overflow-y: auto;
 }
 
 .right-sidebar {
-    grid-area: right;
     background-color: var(--color-bg);
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     overflow-y: auto;
     border-left: 1px solid var(--color-accent);
-}
-
-.chat-bar {
-    grid-area: chat;
-    background-color: var(--color-bg);
-    border-top: 1px solid var(--color-accent);
-    overflow-y: auto;
 }

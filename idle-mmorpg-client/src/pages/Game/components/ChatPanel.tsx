@@ -1,4 +1,4 @@
-import { PanelHorizontal, PanelVertical } from "../../atoms";
+import { PanelHorizontal, PanelVertical } from "../../../components";
 
 export function ChatPanel() {
     return (

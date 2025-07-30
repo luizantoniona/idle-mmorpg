@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PanelVertical, Loading } from "../../atoms";
+import { PanelVertical, Loading } from "../../../components";
 import type { CharacterAttributes } from "../../../models";
 
 interface Props {
