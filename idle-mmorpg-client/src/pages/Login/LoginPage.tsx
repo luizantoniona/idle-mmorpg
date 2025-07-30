@@ -4,10 +4,14 @@ import { LoginForm, ServerForm } from "./components/";
 
 export function LoginPage() {
     return (
-        <div className="login-page">
-            <ServerForm />
-            <img src={logo} alt="Logo" />
-            <LoginForm />
+        <div className="login-grid">
+            <div className="login-top">
+                <ServerForm />
+            </div>
+            <div className="login-bottom">
+                <LoginForm />
+                <img src={logo} alt="Logo" />
+            </div>
         </div>
     );
 }

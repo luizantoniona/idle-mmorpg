@@ -1,8 +1,8 @@
 .account-page {
+    background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: var(--color-bg);
     gap: 32px;
 }

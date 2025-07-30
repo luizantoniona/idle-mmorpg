@@ -1,10 +1,10 @@
 .game-grid {
+    background-color: var(--color-bg);
     display: grid;
     grid-template-columns: 260px 2fr 300px;
     grid-template-areas:
         "left main right"
         "chat chat chat";
-    background-color: var(--color-bg);
 }
 
 .left-sidebar {
