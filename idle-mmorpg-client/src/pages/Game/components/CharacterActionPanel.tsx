@@ -1,4 +1,4 @@
-import { PanelVertical, Loading } from "../../atoms";
+import { PanelVertical, Loading } from "../../../components";
 import type { CharacterAction } from "../../../models";
 
 interface Props {

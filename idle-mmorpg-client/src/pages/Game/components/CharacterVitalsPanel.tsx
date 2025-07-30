@@ -1,4 +1,4 @@
-import { PanelVertical } from "../../atoms";
+import { PanelVertical } from "../../../components";
 import type { CharacterVitals } from "../../../models";
 
 interface Props {

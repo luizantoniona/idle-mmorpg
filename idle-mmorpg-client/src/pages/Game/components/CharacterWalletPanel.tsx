@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PanelVertical, Loading } from "../../atoms";
+import { PanelVertical, Loading } from "../../../components";
 import type { CharacterWallet } from "../../../models";
 
 interface Props {
