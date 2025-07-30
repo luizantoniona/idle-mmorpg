@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { PanelVertical, Loading } from "../../../components";
 import type { CharacterInventory } from "../../../models";
 
 interface Props {
@@ -8,7 +8,9 @@ interface Props {
 export function CharacterInventoryPanel({ inventory }: Props) {
     return (
         <div>
-            <h2>Inventory</h2>
+            <PanelVertical>
+                <h2>INVENTORY</h2>
+            </PanelVertical>
         </div>
     );
 }

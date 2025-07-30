@@ -1,3 +1,4 @@
+import "./GamePage.css"
 import { useLocation } from "react-router-dom";
 import { GamePageHooks } from "./GamePageHooks";
 import { CharacterAttributesPanel, CharacterEquipamentPanel, CharacterInventoryPanel, CharacterSkillsPanel, CharacterVitalsPanel, CharacterWalletPanel } from "./components";
@@ -8,22 +9,21 @@ export function GamePage() {
     const location = useLocation();
     const initialCharacter = location.state?.character as Character;
 
-    const {
-        character,
-        map,
-        connectionStatus,
-        sendMessage,
-    } = GamePageHooks(initialCharacter);
+    // const {
+    //     character,
+    //     map,
+    //     connectionStatus,
+    //     sendMessage,
+    // } = GamePageHooks(initialCharacter);
 
     return (
-        <div className="game-grid">
+        <div className="game-row">
             <div className="left-sidebar">
                 <CharacterVitalsPanel></CharacterVitalsPanel>
                 <CharacterAttributesPanel></CharacterAttributesPanel>
                 <CharacterSkillsPanel></CharacterSkillsPanel>
             </div>
             <div className="main-content">
-                {/* <WorldPanel map={map} onActionSelect={...} /> */}
                 <ChatPanel></ChatPanel>
             </div>
             <div className="right-sidebar">

@@ -1,15 +1,11 @@
-.game-grid {
+.game-row {
     background-color: var(--color-bg);
-    display: grid;
-    grid-template-columns: 260px 2fr 300px;
-    grid-template-areas:
-        "left main right"
-        "left main right";
+    display: flex;
+    flex-direction: row;
 }
 
 .left-sidebar {
     background-color: var(--color-bg);
-    grid-area: left;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -19,7 +15,6 @@
 
 .main-content {
     background-color: var(--color-bg);
-    grid-area: main;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -28,7 +23,6 @@
 
 .right-sidebar {
     background-color: var(--color-bg);
-    grid-area: right;
     display: flex;
     flex-direction: column;
     gap: 16px;
