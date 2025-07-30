@@ -15,6 +15,14 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _actionSystem( location ) {
 }
 
+void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Character* character ) {
+    Json::Value characterJson = character->toJson();
+    characterJson[ "attributes" ] = character->attributes().toJson();
+    characterJson[ "wallet" ] = character->wallet().toJson();
+
+    // TODO: Finish function
+}
+
 void LocationInstance::notifyCharacterLocation( const std::string& sessionId ) {
     Json::Value payloadLocation;
     payloadLocation[ "location" ] = _location->toJson();
