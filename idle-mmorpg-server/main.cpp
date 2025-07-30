@@ -8,7 +8,7 @@
 
 namespace {
 // TODO See how to deploy
-constexpr const char* DATABASE_PATH = "../../data/server_data";
+constexpr const char* DATABASE_PATH = "../../../database/server_data";
 constexpr const char* ITEM_PATH = "../../../idle-mmorpg-data/idle-mmorpg-item/";
 constexpr const char* SKILL_PATH = "../../../idle-mmorpg-data/idle-mmorpg-skill/";
 constexpr const char* MAP_PATH = "../../../idle-mmorpg-data/idle-mmorpg-map/";
