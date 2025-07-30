@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import type { CharacterWallet } from "../../../models";
 import { PanelVertical, Loading } from "../../atoms";
+import type { CharacterWallet } from "../../../models";
 
 interface Props {
     wallet?: CharacterWallet;
 }
 
-export function WalletPanel({ wallet }: Props) {
+export function CharacterWalletPanel({ wallet }: Props) {
     const [state, setState] = useState<CharacterWallet | null>(wallet || null);
 
     useEffect(() => {
@@ -25,15 +25,11 @@ export function WalletPanel({ wallet }: Props) {
     }
 
     return (
-        <div>
-            <PanelVertical>
-                <h2>Carteira</h2>
-            </PanelVertical>
-            <ul>
-                <li>Ouro: {state.gold}</li>
-                <li>Prata: {state.silver}</li>
-                <li>Cobre: {state.copper}</li>
-            </ul>
-        </div>
+        <PanelVertical>
+            <h2>Wallet</h2>
+            <li>Ouro: {state.gold}</li>
+            <li>Prata: {state.silver}</li>
+            <li>Cobre: {state.copper}</li>
+        </PanelVertical>
     );
 }

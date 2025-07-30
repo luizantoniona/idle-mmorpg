@@ -1,114 +1,31 @@
-import "./GamePage.css"
-import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
-import { WsService } from "../../../services/WsService";
-import type { Character, CharacterAttributes, CharacterWallet, Map } from "../../../models";
-import { AttributesPanel, ChatPanel, InventoryPanel, WorldPanel, StatusPanel, WalletPanel } from "../../organisms/";
+import { GamePageHooks } from "./GamePageHooks";
+import type { Character } from "../../../models";
 
 export function GamePage() {
     const location = useLocation();
-    const character: Character = location.state.character;
+    const initialCharacter = location.state?.character as Character;
 
-    const wsRef = useRef<WsService | null>(null);
-    const [connectionStatus, setConnectionStatus] = useState("Desconectado");
-
-    const [attributes, setAttributes] = useState<CharacterAttributes>(character.attributes);
-    const [wallet, setWallet] = useState<CharacterWallet>(character.wallet);
-    const [inventory, setInventory] = useState([]);
-
-    const [map, setMap] = useState<Map | null>(null);
-
-    const handleMessage = useCallback((data: any) => {
-        console.log("Mensagem recebida:", data);
-        switch (data.type) {
-            case "character_update_attributes":
-                if (data.payload.attributes) {
-                    setAttributes(data.payload.attributes);
-                }
-                break;
-            case "character_update_inventory":
-                if (Array.isArray(data.payload.items)) {
-                    setInventory(data.payload.items);
-                }
-                break;
-            case "character_update_wallet":
-                if (data.payload.wallet) {
-                    setWallet(data.payload.wallet);
-                }
-                break;
-            case "location_update_position":
-                if (data.payload.location) {
-                    setMap(data.payload.location);
-                }
-                break;
-            case "location_update_actions":
-                if (Array.isArray(data.payload.actions)) {
-                    setMap((map) => {
-                        if (!map) return map;
-                        return {
-                            ...map,
-                            actions: data.payload.actions,
-                        };
-                    });
-                }
-                break;
-            default:
-                console.warn("Unknow message type:", data.type);
-        }
-    }, []);
-
-    const handleStatus = useCallback((status: string) => {
-        const statusMap: Record<string, string> = {
-            connecting: "Conectando...",
-            connected: "Conectado",
-            disconnected: "Desconectado",
-            error: "Erro na conexão",
-        };
-        setConnectionStatus(statusMap[status] ?? "Desconhecido");
-    }, []);
-
-    useEffect(() => {
-        if (!character?.idCharacter) {
-
-            return;
-        }
-
-        const wsService = new WsService();
-        wsRef.current = wsService;
-
-        wsService.onMessage(handleMessage);
-        wsService.onStatusChange(handleStatus);
-
-        try {
-            wsService.connect(character.idCharacter);
-        } catch (err) {
-            console.error("Erro ao conectar WebSocket:", err);
-            setConnectionStatus("Erro ao conectar");
-        }
-
-        return () => {
-            console.log("Fechando WebSocket");
-            wsService.close();
-            wsRef.current = null;
-        };
-    }, [character.idCharacter, handleMessage, handleStatus]);
+    const {
+        character,
+        map,
+        connectionStatus,
+        sendMessage,
+    } = GamePageHooks(initialCharacter);
 
     return (
         <div className="game-grid">
             <div className="left-sidebar">
-                <StatusPanel character={character} />
-                <AttributesPanel attributes={attributes} />
+                {/* <CharacterAttributesPanel attributes={character.attributes} /> */}
             </div>
             <div className="main-content">
-                <WorldPanel map={map} ws={wsRef.current} />
+                {/* <WorldPanel map={map} onActionSelect={...} /> */}
             </div>
             <div className="right-sidebar">
-                <InventoryPanel items={inventory} />
-                <WalletPanel wallet={wallet} />
+                {/* <WalletPanel wallet={character.wallet} /> */}
             </div>
-
             <div className="chat-bar">
-                <ChatPanel />
+                {/* <ChatPanel /> */}
             </div>
         </div>
     );

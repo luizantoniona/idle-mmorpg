@@ -1,7 +1,8 @@
 export { CharacterList } from "../organisms/List/CharacterList";
-export { AttributesPanel } from "./Panel/AttributesPanel";
-export { ChatPanel } from "./Panel/ChatPanel";
-export { InventoryPanel } from "./Panel/InventoryPanel";
-export { WorldPanel } from "./Panel/WorldPanel";
-export { StatusPanel } from "./Panel/StatusPanel";
-export { WalletPanel } from "./Panel/WalletPanel";
+
+export { CharacterActionPanel } from "./Panel/CharacterActionPanel";
+export { CharacterAttributesPanel } from "./Panel/CharacterAttributesPanel";
+export { CharacterInventoryPanel } from "./Panel/CharacterInventoryPanel";
+export { CharacterSkillsPanel } from "./Panel/CharacterSkillsPanel";
+export { CharacterVitalsPanel } from "./Panel/CharacterVitalsPanel";
+export { CharacterWalletPanel } from "./Panel/CharacterWalletPanel";

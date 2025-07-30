@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import type { CharacterAttributes } from "../../../models";
 import { PanelVertical, Loading } from "../../atoms";
+import type { CharacterAttributes } from "../../../models";
 
 interface Props {
     attributes?: CharacterAttributes;
 }
 
-export function AttributesPanel({ attributes }: Props) {
+export function CharacterAttributesPanel({ attributes }: Props) {
     const [state, setState] = useState<CharacterAttributes | null>(attributes || null);
 
     useEffect(() => {

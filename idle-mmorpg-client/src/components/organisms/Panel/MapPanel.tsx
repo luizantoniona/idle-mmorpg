@@ -7,7 +7,7 @@ interface Props {
     ws: WsService | null;
 }
 
-export function WorldPanel({ map, ws }: Props) {
+export function MapPanel({ map, ws }: Props) {
     if (!map) {
         return (
             <PanelVertical>
