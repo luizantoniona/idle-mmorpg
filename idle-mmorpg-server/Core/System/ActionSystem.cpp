@@ -1,5 +1,7 @@
 #include "ActionSystem.h"
 
+#include <algorithm>
+
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 
@@ -8,8 +10,7 @@ namespace Core::System {
 ActionSystem::ActionSystem( Model::Location* location ) :
     _location( location ),
     _sender(),
-    _skillProgressionSystem() {
-}
+    _skillProgressionSystem() {}
 
 void ActionSystem::notifyCharacterActions( const std::string& sessionId, Model::Character* character ) {
     Json::Value payloadLocationActions;
@@ -76,8 +77,8 @@ void ActionSystem::changeAction( Model::Character* character, const Json::Value&
 
     const auto& actions = _location->actions();
     auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-        return action.id() == actionId;
-    } );
+            return action.id() == actionId;
+        } );
 
     if ( it == actions.end() ) {
         return;
@@ -110,8 +111,8 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
         const auto& actions = _location->actions();
         auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            return action.id() == characterAction.idAction();
-        } );
+                return action.id() == characterAction.idAction();
+            } );
 
         if ( it != actions.end() ) {
             const Model::LocationAction& completedAction = *it;

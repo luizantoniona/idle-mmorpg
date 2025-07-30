@@ -1,13 +1,14 @@
 #include "SkillProgressionSystem.h"
 
+#include <cmath>
+
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 
 namespace Core::System {
 
 SkillProgressionSystem::SkillProgressionSystem() :
-    _sender() {
-}
+    _sender() {}
 
 void SkillProgressionSystem::notifyCharacterSkills( const std::string& sessionId, Model::Character* character ) {
     if ( !character ) {
