@@ -8,7 +8,9 @@ idle-mmorpg-server/*.txt.user
 
 #idle-mmorpg-client
 #Folders
-node_modules
+idle-mmorpg-client/.angular
+idle-mmorpg-client/.vscode
+idle-mmorpg-client/node_modules
 
 #Files
 package-lock.json
