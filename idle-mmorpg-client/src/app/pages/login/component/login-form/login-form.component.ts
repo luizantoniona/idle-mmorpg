@@ -21,6 +21,7 @@ import { APIService } from '../../../../service/api.service';
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss']
 })
+
 export class LoginFormComponent {
     fb = inject(FormBuilder);
     authService = inject(AuthService);
@@ -48,6 +49,7 @@ export class LoginFormComponent {
 
             this.authService.login(loginResponse.userID, loginResponse.username, loginResponse.sessionID);
             this.router.navigate(['/account']);
+
         } catch (err: any) {
             console.error('Login failed:', err);
             this.error = err.message || 'Login failed.';
