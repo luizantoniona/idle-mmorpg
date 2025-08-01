@@ -1,0 +1,13 @@
+<div class="card" [class.hoverable]="isHoverable" [class.clickable]="clickable" (click)="handleClick()">
+    <ng-content></ng-content>
+
+    <div *ngIf="hoverInfo && isHoverable" class="hover-info">
+        <ng-container *ngIf="isTemplateRef(hoverInfo); else showText">
+            <ng-container *ngTemplateOutlet="hoverInfo"></ng-container>
+        </ng-container>
+
+        <ng-template #showText>
+            <div class="hover-info-text">{{ hoverInfo }}</div>
+        </ng-template>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-<div class="character-card" (click)="handleClick()">
+<app-card [onClick]="onClick">
     <div class="character-header">
         <h3>{{ character.name }}</h3>
     </div>
@@ -17,4 +17,4 @@
             <p>No attributes.</p>
         </div>
     </ng-template>
-</div>
+</app-card>

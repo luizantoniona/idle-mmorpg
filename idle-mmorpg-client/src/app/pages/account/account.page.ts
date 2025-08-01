@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
-import { PanelVerticalComponent } from '../../component/panel/panel-vertical.component'
 import { ButtonComponent } from '../../component/button/button.component';
+import { PanelHorizontalComponent } from '../../component/panel/panel-horizontal.component';
+import { PanelVerticalComponent } from '../../component/panel/panel-vertical.component'
 import { CharacterListComponent } from './component/character-list/character-list.component';
 
 import { APIService } from '../../service/api.service';
@@ -16,8 +17,8 @@ import type { Character } from '../../model';
     imports: [
         NgIf,
         CommonModule,
-        PanelVerticalComponent,
         ButtonComponent,
+        PanelVerticalComponent,
         CharacterListComponent,
     ],
     templateUrl: './account.page.html',

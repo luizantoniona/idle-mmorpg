@@ -1,13 +1,15 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
     <app-panel-horizontal>
+        <app-panel-horizontal><app-status-circle [status]="status" /></app-panel-horizontal>
         <h2>Server:</h2>
-        <app-status-circle [status]="status" />
 
         <app-input-field label="IP Address" type="text" formControlName="ip" placeholder="127.0.0.1" />
         <app-input-field label="Port" type="text" formControlName="port" placeholder="8080" />
 
         <app-button text="Connect" type="submit" [disabled]="form.invalid || status === 'loading'" />
 
-        <p *ngIf="error" style="color: red;">{{ error }}</p>
+        <app-panel-horizontal *ngIf="error">
+            <p style="color: red;">{{ error }}</p>
+        </app-panel-horizontal>
     </app-panel-horizontal>
 </form>
