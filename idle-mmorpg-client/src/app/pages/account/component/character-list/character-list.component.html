@@ -1,0 +1,6 @@
+<div class="character-list">
+    <div *ngFor="let character of characters">
+        <app-character-card [character]="character" (click)="selectCharacter(character)">
+        </app-character-card>
+    </div>
+</div>

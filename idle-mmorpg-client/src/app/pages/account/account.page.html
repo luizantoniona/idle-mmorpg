@@ -1,1 +1,16 @@
-<p>account works!</p>
+<div class="account-page">
+    <app-panel-vertical>
+        <h1>Account: {{ getUsername() }}</h1>
+        <p>Session ID: {{ getSessionId() }}</p>
+        <app-button text="Logout" (onClick)="logout()"></app-button>
+    </app-panel-vertical>
+
+    <app-panel-vertical>
+        <h2>Characters</h2>
+
+        <app-character-list [characters]="characters" (onSelect)="handleStartGame($event)"></app-character-list>
+
+        <p *ngIf="loading">Loading...</p>
+        <p *ngIf="error" style="color: red;">Error: {{ error }}</p>
+    </app-panel-vertical>
+</div>
