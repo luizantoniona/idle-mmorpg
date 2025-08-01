@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { StorageManager } from './storage.manager';
 
 export interface AuthData {
@@ -12,6 +13,7 @@ const STORAGE_KEY = 'auth';
 @Injectable({
     providedIn: 'root',
 })
+
 export class AuthManager {
     get(): AuthData | null {
         return StorageManager.get<AuthData>(STORAGE_KEY, sessionStorage);

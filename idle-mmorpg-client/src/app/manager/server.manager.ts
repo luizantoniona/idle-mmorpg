@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { StorageManager } from './storage.manager';
 
 export interface ServerData {
@@ -11,6 +12,7 @@ const STORAGE_KEY = 'server';
 @Injectable({
     providedIn: 'root',
 })
+
 export class ServerManager {
     get(): ServerData | null {
         return StorageManager.get<ServerData>(STORAGE_KEY);

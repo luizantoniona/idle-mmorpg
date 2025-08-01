@@ -1,27 +1,30 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
 import { ButtonComponent } from '../../../../component/button/button.component';
-import { StatusCircleComponent } from '../../../../component/status-circle/status-circle.component';
+import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
+import { PanelHorizontalComponent } from "../../../../component/panel/panel-horizontal.component";
+import { StatusCircleComponent } from '../status-circle/status-circle.component';
+
 import { APIService } from '../../../../service/api.service';
 import { ServerService } from '../../../../service/server.service';
-import { PanelHorizontalComponent } from "../../../../component/panel/panel-horizontal.component";
+
 
 @Component({
     selector: 'app-server-form',
     templateUrl: './server-form.component.html',
     styleUrls: ['./server-form.component.scss'],
-    standalone: true,
     imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ButtonComponent,
+        InputFieldComponent,
         PanelHorizontalComponent,
         StatusCircleComponent,
-        InputFieldComponent,
-        ButtonComponent,
-        ReactiveFormsModule,
-        CommonModule
     ]
 })
+
 export class ServerFormComponent implements OnInit {
     private fb = inject(FormBuilder);
     private apiService = inject(APIService);
