@@ -1,4 +1,4 @@
-import type { MapAction } from "./map-action";
+import type { MapAction } from "./map-action.model";
 
 export type Map = {
     id: string;

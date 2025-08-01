@@ -7,10 +7,10 @@ export type StatusType = 'online' | 'offline' | 'error' | 'loading' | 'unknown';
     selector: 'app-status-circle',
     templateUrl: './status-circle.component.html',
     styleUrls: ['./status-circle.component.scss'],
-    standalone: true,
     imports: [NgStyle]
 })
+
 export class StatusCircleComponent {
     @Input() status: StatusType = 'unknown';
-    @Input() size: number = 12;
+    @Input() size: number = 32;
 }
