@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <app-panel-vertical>
+        <h2>Login</h2>
+
+        <app-input-field label="Username" type="text" formControlName="username" placeholder="Enter your username" />
+
+        <app-input-field label="Password" type="password" formControlName="password"
+            placeholder="Enter your password" />
+
+        <app-button text="Login" type="submit" [disabled]="form.invalid" />
+
+        <p *ngIf="error" style="color: red">{{ error }}</p>
+    </app-panel-vertical>
+</form>

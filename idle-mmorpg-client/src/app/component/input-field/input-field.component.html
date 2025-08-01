@@ -1,0 +1,5 @@
+<div class="input-field">
+    <label [for]="name">{{ label }}</label>
+    <input [id]="name" [type]="type" [name]="name" [placeholder]="placeholder" [value]="value" [disabled]="isDisabled"
+        (input)="handleInput($event)" (blur)="markTouched()" />
+</div>
