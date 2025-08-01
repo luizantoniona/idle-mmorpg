@@ -23,10 +23,11 @@ import type { Character } from '../../model';
     templateUrl: './account.page.html',
     styleUrls: ['./account.page.scss'],
 })
+
 export class AccountPage implements OnInit {
     private router = inject(Router);
     private apiService = inject(APIService);
-    private auth = inject(AuthService);
+    private authService = inject(AuthService);
 
     characters: Character[] = [];
     loading = true;
@@ -49,16 +50,25 @@ export class AccountPage implements OnInit {
         }
     }
 
+    async logout(): Promise<void> {
+        try {
+            const logoutResponse = await this.apiService.postNoData<any>('/logout');
+
+            this.authService.logout();
+            this.router.navigate(['/']);
+
+        } catch (err: any) {
+            console.error('Logout failed:', err);
+            this.error = err.message || 'Logout failed.';
+        }
+    }
+
     getUsername(): string | null {
-        return this.auth.getUsername();
+        return this.authService.getUsername();
     }
 
     getSessionId(): string | null {
-        return this.auth.getSessionId();
-    }
-
-    logout(): void {
-        this.auth.logout();
+        return this.authService.getSessionId();
     }
 
     handleStartGame(character: Character): void {

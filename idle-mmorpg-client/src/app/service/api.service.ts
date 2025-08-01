@@ -64,6 +64,10 @@ export class APIService {
         return this.request<T>('POST', endpoint, data);
     }
 
+    postNoData<T>(endpoint: string): Promise<T> {
+        return this.request<T>('POST', endpoint);
+    }
+
     putData<T>(endpoint: string, data: any): Promise<T> {
         return this.request<T>('PUT', endpoint, data);
     }

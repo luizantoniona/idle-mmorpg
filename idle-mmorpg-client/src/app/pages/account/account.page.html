@@ -2,7 +2,7 @@
     <app-panel-vertical>
         <h1>Account: {{ getUsername() }}</h1>
         <p>Session ID: {{ getSessionId() }}</p>
-        <app-button text="Logout" (onClick)="logout()"></app-button>
+        <app-button text="Logout" (clickEvent)="logout()"></app-button>
     </app-panel-vertical>
 
     <app-panel-vertical>

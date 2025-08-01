@@ -56,7 +56,37 @@ void AuthController::login( const drogon::HttpRequestPtr& request, std::function
 }
 
 void AuthController::logout( const drogon::HttpRequestPtr& request, std::function<void( const drogon::HttpResponsePtr& )>&& callback ) const {
-    //TODO Implement logout
+    auto token = request->getHeader( "Authorization" );
+    const std::string prefix = "X-Session ";
+
+    Json::Value responseJson;
+
+    if ( token.rfind( prefix, 0 ) == 0 ) {
+        std::string sessionId = token.substr( prefix.length() );
+        std::optional<NetworkSession> session = Commons::Singleton<NetworkServer>::instance().getSession( sessionId );
+
+        if ( session && Commons::Singleton<NetworkServer>::instance().deleteSession( sessionId ) ) {
+
+            std::cout << "AuthController::logout" << " [UUID] " << sessionId << std::endl;
+
+            responseJson["message"] = "Logout successful";
+            auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+            response->setStatusCode( drogon::k200OK );
+            callback( response );
+            return;
+
+        } else {
+            responseJson["error"] = "Failed to destroy session";
+            auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+            response->setStatusCode( drogon::k500InternalServerError );
+            callback( response );
+            return;
+        }
+    }
+
+    auto resp = drogon::HttpResponse::newHttpResponse();
+    resp->setStatusCode( drogon::k401Unauthorized );
+    callback( resp );
 }
 
 void AuthController::sign( const drogon::HttpRequestPtr& request, std::function<void( const drogon::HttpResponsePtr& )>&& callback ) const {
