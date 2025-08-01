@@ -23,7 +23,6 @@ The project is structured:
 - [`idle-mmorpg-server`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-server) – C++ server.
 - [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client) – Web interface for players.
 
-
 # 🧱 Architecture Overview
 The project is composed of three main parts, working together to provide a scalable and interactive idle MMORPG experience:
 
@@ -32,12 +31,12 @@ TODO: Generate Graphic Workflow
 ### 🔁 Flow Summary
 - **Web Client**
   - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.
-  - Built with web tooling (Vite, React and Typescript).
+  - Built with web tooling (Angular and Typescript).
 
 - **C++ Server**
   - Central game logic and state management.
   - Manages user sessions, world state, entities, and events.
-  - Communicates with the client via WebSocket.
+  - Communicates with the client via API and WebSocket.
   - Loads static game data (items, maps, skills) at runtime from JSON files.
 
 - **Data Project**
@@ -86,10 +85,8 @@ npm install
 ```
 Start the development server:
 ```bash
-npm run dev
+ng serve
 ```
-
-The web client will connect to the backend using WebSocket. Make sure the server is running before opening the client.
 
 ## 🧾 Running the Data Tools (Python)
 1 - Navigate to the data folder:
