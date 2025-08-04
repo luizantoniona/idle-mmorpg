@@ -8,6 +8,16 @@ namespace Model {
 CharacterSkills::CharacterSkills() :
     _skills() {}
 
+Json::Value CharacterSkills::toJson() {
+    Json::Value root;
+
+    for ( auto& skill : _skills ) {
+        root.append( skill.toJson() );
+    }
+
+    return root;
+}
+
 std::vector<CharacterSkill>& CharacterSkills::skills() {
     return _skills;
 }

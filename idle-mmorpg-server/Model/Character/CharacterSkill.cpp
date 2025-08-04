@@ -8,6 +8,16 @@ CharacterSkill::CharacterSkill() :
     _experience( 0 ),
     _skill( nullptr ) {}
 
+Json::Value CharacterSkill::toJson() {
+    Json::Value root;
+    root[ "id" ] = id();
+    root[ "level" ] = level();
+    root[ "experience" ] = experience();
+    root["skill"] = skill()->toJson();
+
+    return root;
+}
+
 std::string CharacterSkill::id() const {
     return _id;
 }

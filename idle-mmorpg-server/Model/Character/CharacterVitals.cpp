@@ -14,7 +14,23 @@ CharacterVitals::CharacterVitals() :
     _stamina( 0.0 ),
     _maxStamina( 0.0 ),
     _baseStaminaRegen( 0.0 ),
-    _modifierStaminaRegen( 0.0 ) {
+    _modifierStaminaRegen( 0.0 ) {}
+
+Json::Value CharacterVitals::toJson() {
+    Json::Value root;
+    root[ "health" ] = health();
+    root[ "maxHealth" ] = maxHealth();
+    root[ "regenHealth" ] = baseHealthRegen() + modifierHealthRegen();
+
+    root[ "mana" ] = mana();
+    root[ "maxMana" ] = maxMana();
+    root[ "regenMana" ] = baseManaRegen() + modifierManaRegen();
+
+    root[ "stamina" ] = stamina();
+    root[ "maxStamina" ] = maxStamina();
+    root[ "regenStamina" ] = baseStaminaRegen() + modifierStaminaRegen();
+
+    return root;
 }
 
 double CharacterVitals::health() const {

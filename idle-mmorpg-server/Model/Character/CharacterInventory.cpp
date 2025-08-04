@@ -4,6 +4,14 @@ namespace Model {
 
 CharacterInventory::CharacterInventory() {}
 
+Json::Value CharacterInventory::toJson() {
+    Json::Value root;
+
+    //TODO: Implement inventary json when ready;
+
+    return root;
+}
+
 std::vector<CharacterItem>& CharacterInventory::items() {
     return _items;
 }

@@ -13,12 +13,10 @@ Character::Character() :
     _progression(),
     _skills(),
     _vitals(),
-    _wallet() {
-}
+    _wallet() {}
 
 Json::Value Character::toJson() {
     Json::Value root;
-
     root[ "idUser" ] = idUser();
     root[ "idCharacter" ] = idCharacter();
     root[ "name" ] = name();

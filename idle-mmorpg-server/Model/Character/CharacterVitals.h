@@ -1,11 +1,15 @@
 #ifndef CHARACTERVITALS_H
 #define CHARACTERVITALS_H
 
+#include <json/json.h>
+
 namespace Model {
 
 class CharacterVitals {
 public:
     CharacterVitals();
+
+    Json::Value toJson();
 
     double health() const;
     void setHealth( double health );

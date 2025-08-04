@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <json/json.h>
+
 #include "CharacterSkill.h"
 
 namespace Model {
@@ -10,6 +12,8 @@ namespace Model {
 class CharacterSkills {
 public:
     CharacterSkills();
+
+    Json::Value toJson();
 
     std::vector<CharacterSkill>& skills();
 

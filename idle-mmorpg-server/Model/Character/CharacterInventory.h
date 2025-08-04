@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <json/json.h>
+
 #include <Model/Character/CharacterItem.h>
 
 namespace Model {
@@ -10,6 +12,8 @@ namespace Model {
 class CharacterInventory {
 public:
     CharacterInventory();
+
+    Json::Value toJson();
 
     std::vector<CharacterItem>& items();
     void addItem( CharacterItem item );

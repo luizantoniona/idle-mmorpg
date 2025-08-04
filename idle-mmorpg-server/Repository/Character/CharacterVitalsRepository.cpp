@@ -5,8 +5,7 @@
 namespace Repository {
 
 CharacterVitalsRepository::CharacterVitalsRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterVitalsRepository::createVitals( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -21,7 +20,7 @@ bool CharacterVitalsRepository::createVitals( int idCharacter ) {
             stamina,
             max_stamina,
             base_stamina_regen
-        ) VALUES (?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        ) VALUES (?, 10.0, 10.0, 0.0, 10.0, 10.0, 0.0, 10.0, 10.0, 0.0)
     )SQL";
 
     Database::Query query( _db, sql );

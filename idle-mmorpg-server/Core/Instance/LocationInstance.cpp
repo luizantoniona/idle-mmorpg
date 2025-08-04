@@ -12,15 +12,18 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _location( location ),
     _characters( {} ),
     _sender(),
-    _actionSystem( location ) {
-}
+    _actionSystem( location ) {}
 
 void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Character* character ) {
     Json::Value characterJson = character->toJson();
     characterJson[ "attributes" ] = character->attributes().toJson();
+    characterJson["inventory"] = character->inventory().toJson();
+    characterJson["progression"] = character->progression().toJson();
+    characterJson["skills"] = character->skills().toJson();
+    characterJson["vitals"] = character->vitals().toJson();
     characterJson[ "wallet" ] = character->wallet().toJson();
 
-    // TODO: Finish function
+    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
 }
 
 void LocationInstance::notifyLocation( const std::string& sessionId ) {
@@ -47,6 +50,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
 
 void LocationInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
+    std::cout << "LocationInstance::removeCharacter" << " [SessionID] " << sessionId << std::endl;
     _characters.erase( sessionId );
 }
 
@@ -69,11 +73,11 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     Model::Character* character = it->second;
 
     switch ( type ) {
-    case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
-        _actionSystem.changeAction( character, payload );
-        break;
-    default:
-        break;
+        case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
+            _actionSystem.changeAction( character, payload );
+            break;
+        default:
+            break;
     }
 }
 

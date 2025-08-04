@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <json/json.h>
+
 #include "SkillMilestone.h"
 
 namespace Model {
@@ -11,6 +13,8 @@ namespace Model {
 class Skill {
 public:
     Skill();
+
+    Json::Value toJson();
 
     std::string id() const;
     void setId( const std::string& id );

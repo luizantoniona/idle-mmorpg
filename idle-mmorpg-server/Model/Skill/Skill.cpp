@@ -4,6 +4,18 @@ namespace Model {
 
 Skill::Skill() {}
 
+Json::Value Skill::toJson() {
+    Json::Value root;
+    root[ "id" ] = id();
+    root[ "name" ] = name();
+    root[ "description" ] = description();
+    root[ "type" ] = type();
+
+    //TODO: Send milestones?
+
+    return root;
+}
+
 std::string Skill::id() const {
     return _id;
 }

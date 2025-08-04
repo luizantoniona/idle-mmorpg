@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <json/json.h>
+
 #include <Model/Skill/Skill.h>
 
 namespace Model {
@@ -10,6 +12,8 @@ namespace Model {
 class CharacterSkill {
 public:
     CharacterSkill();
+
+    Json::Value toJson();
 
     std::string id() const;
     void setId( const std::string& id );
