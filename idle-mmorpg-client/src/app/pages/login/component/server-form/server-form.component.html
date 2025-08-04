@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
     <app-panel-horizontal>
-        <app-panel-horizontal><app-status-circle [status]="status" /></app-panel-horizontal>
+        <app-status-circle [status]="status" />
         <h2>Server:</h2>
 
         <app-input-field label="IP Address" type="text" formControlName="ip" placeholder="127.0.0.1" />

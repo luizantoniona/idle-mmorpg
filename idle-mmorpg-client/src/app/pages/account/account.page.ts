@@ -3,7 +3,6 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { ButtonComponent } from '../../component/button/button.component';
-import { PanelHorizontalComponent } from '../../component/panel/panel-horizontal.component';
 import { PanelVerticalComponent } from '../../component/panel/panel-vertical.component'
 import { CharacterListComponent } from './component/character-list/character-list.component';
 
@@ -73,6 +72,7 @@ export class AccountPage implements OnInit {
     }
 
     handleStartGame(character: Character): void {
+        localStorage.setItem('selectedCharacter', JSON.stringify(character));
         this.router.navigate(['/game'], { state: { character } });
     }
 }

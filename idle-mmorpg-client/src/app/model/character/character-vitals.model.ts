@@ -1,11 +1,11 @@
 export type CharacterVitals = {
     health: number;
-    healthMax: number;
-    healthRegen: number;
+    maxHealth: number;
+    regenHealth: number;
     mana: number;
-    manaMax: number;
-    manaRegen: number;
+    maxMana: number;
+    regenMana: number;
     stamina: number;
-    staminaMax: number;
-    staminaRegen: number;
+    maxStamina: number;
+    regenStamina: number;
 };
