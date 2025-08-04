@@ -18,7 +18,7 @@ public:
     explicit LocationInstance( Model::Location* location );
 
     void notifyCharacter( const std::string& sessionId, Model::Character* character );
-    void notifyCharacterLocation( const std::string& sessionId );
+    void notifyLocation( const std::string& sessionId );
 
     bool addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );

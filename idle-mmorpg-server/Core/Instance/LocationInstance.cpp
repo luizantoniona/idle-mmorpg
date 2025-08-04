@@ -23,7 +23,7 @@ void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Cha
     // TODO: Finish function
 }
 
-void LocationInstance::notifyCharacterLocation( const std::string& sessionId ) {
+void LocationInstance::notifyLocation( const std::string& sessionId ) {
     Json::Value payloadLocation;
     payloadLocation[ "location" ] = _location->toJson();
     _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_POSITION, payloadLocation );
@@ -38,7 +38,8 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
               << " [Entering] " << _location->name()
               << " [SessionID] " << sessionId << std::endl;
 
-    notifyCharacterLocation( sessionId );
+    notifyCharacter( sessionId, character );
+    notifyLocation( sessionId );
     _actionSystem.notifyCharacterActions( sessionId, character );
 
     return true;
