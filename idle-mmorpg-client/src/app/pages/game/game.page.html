@@ -1,1 +1,18 @@
-<p>game works!</p>
+<div class="game-layout">
+    <div class="left-panel">
+        <app-character-panel [character]="character!"></app-character-panel>
+        <app-character-attributes-panel [character]="character!"></app-character-attributes-panel>
+        <app-character-skills-panel [character]="character!"></app-character-skills-panel>
+    </div>
+
+    <div class="main-panel">
+        <app-world-panel></app-world-panel>
+        <app-chat-panel></app-chat-panel>
+    </div>
+
+    <div class="right-panel">
+        <app-character-wallet-panel [character]="character!"></app-character-wallet-panel>
+        <app-character-equipament-panel [character]="character!"></app-character-equipament-panel>
+        <app-character-inventory-panel [character]="character!"></app-character-inventory-panel>
+    </div>
+</div>
