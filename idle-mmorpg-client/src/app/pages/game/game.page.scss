@@ -1,0 +1,24 @@
+.game-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    gap: 12px;
+    padding: 12px;
+}
+
+.left-panel,
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.main-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
