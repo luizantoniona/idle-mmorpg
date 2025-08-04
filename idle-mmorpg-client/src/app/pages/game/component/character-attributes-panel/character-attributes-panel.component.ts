@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 
+import { CardComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
 
 import { Character } from '../../../../model';
@@ -9,6 +10,7 @@ import { Character } from '../../../../model';
     templateUrl: './character-attributes-panel.component.html',
     styleUrl: './character-attributes-panel.component.scss',
     imports: [
+        CardComponent,
         PanelVerticalComponent,
     ],
 })

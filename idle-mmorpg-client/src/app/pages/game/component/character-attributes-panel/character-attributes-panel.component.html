@@ -1,10 +1,12 @@
 <div class="character-attributes-panel">
     <app-panel-vertical>
-        <div class="STR">STR: {{ character.attributes.strength }}</div>
-        <div class="DEX">DEX: {{ character.attributes.dexterity }}</div>
-        <div class="CON">CON: {{ character.attributes.constitution }}</div>
-        <div class="INT">INT: {{ character.attributes.intelligence }}</div>
-        <div class="WIS">WIS: {{ character.attributes.wisdom }}</div>
-        <div class="CHA">CHA: {{ character.attributes.charisma }}</div>
+        <app-card [hoverInfo]="'Strength: raw muscle power'">STR: {{ character.attributes.strength }}</app-card>
+        <app-card [hoverInfo]="'Dexterity: agility and reflexes'">DEX: {{ character.attributes.dexterity }}</app-card>
+        <app-card [hoverInfo]="'Constitution: health and endurance'">CON: {{ character.attributes.constitution
+            }}</app-card>
+        <app-card [hoverInfo]="'Intelligence: memory and reasoning'">INT: {{ character.attributes.intelligence
+            }}</app-card>
+        <app-card [hoverInfo]="'Wisdom: insight and perception'">WIS: {{ character.attributes.wisdom }}</app-card>
+        <app-card [hoverInfo]="'Charisma: charm and influence'">CHA: {{ character.attributes.charisma }}</app-card>
     </app-panel-vertical>
 </div>
