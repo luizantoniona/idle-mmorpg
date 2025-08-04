@@ -1,5 +1,7 @@
 #include "CharacterProgression.h"
 
+#include <cmath>
+
 namespace Model {
 
 CharacterProgression::CharacterProgression() :
@@ -10,8 +12,7 @@ Json::Value CharacterProgression::toJson() {
     Json::Value root;
     root[ "level" ] = level();
     root[ "experience" ] = experience();
-
-    //TODO: Send missing experience to next level;
+    root[ "experienceNextLevel" ] = experienceForNextLevel( level() );
 
     return root;
 }
@@ -30,6 +31,12 @@ int CharacterProgression::experience() const {
 
 void CharacterProgression::setExperience( int experience ) {
     _experience = experience;
+}
+
+int CharacterProgression::experienceForNextLevel( int currentLevel ) {
+    const double baseXp = 100.0;
+    const double growthRate = 1.05;
+    return baseXp * std::pow( growthRate, currentLevel );
 }
 
 } // namespace Model

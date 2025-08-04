@@ -1,3 +1,4 @@
+export { BarComponent } from './bar/bar.component'
 export { ButtonComponent } from './button/button.component'
 export { CardComponent } from './card/card.component'
 export { InputFieldComponent } from './input-field/input-field.component'
