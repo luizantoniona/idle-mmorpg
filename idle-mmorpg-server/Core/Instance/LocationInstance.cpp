@@ -17,10 +17,10 @@ LocationInstance::LocationInstance( Model::Location* location ) :
 void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Character* character ) {
     Json::Value characterJson = character->toJson();
     characterJson[ "attributes" ] = character->attributes().toJson();
-    characterJson["inventory"] = character->inventory().toJson();
-    characterJson["progression"] = character->progression().toJson();
-    characterJson["skills"] = character->skills().toJson();
-    characterJson["vitals"] = character->vitals().toJson();
+    characterJson[ "inventory" ] = character->inventory().toJson();
+    characterJson[ "progression" ] = character->progression().toJson();
+    characterJson[ "skills" ] = character->skills().toJson();
+    characterJson[ "vitals" ] = character->vitals().toJson();
     characterJson[ "wallet" ] = character->wallet().toJson();
 
     _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
