@@ -1,0 +1,18 @@
+{
+    "categories": [
+        {
+            "category": "sword",
+            "path": "swords",
+            "items": [
+                "wooden_sword"
+            ]
+        },
+        {
+            "category": "dagger",
+            "path": "daggers",
+            "items": [
+                "copper_dagger"
+            ]
+        }
+    ]
+}

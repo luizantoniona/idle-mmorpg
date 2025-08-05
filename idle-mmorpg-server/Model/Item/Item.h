@@ -2,6 +2,9 @@
 #define ITEM_H
 
 #include <string>
+#include <vector>
+
+#include "ItemModifier.h"
 
 namespace Model {
 
@@ -33,6 +36,10 @@ public:
     int value() const;
     void setValue( int value );
 
+    std::vector<ItemModifier> modifiers() const;
+    void setModifiers( const std::vector<ItemModifier>& modifiers );
+    void addModifier( const ItemModifier& modifier );
+
 private:
     std::string _id;
     std::string _type;
@@ -42,8 +49,7 @@ private:
     std::string _rarity;
     std::string _icon;
     int _value;
-
-    // Create Item StatusModel
+    std::vector<ItemModifier> _modifiers;
 };
 
 } // namespace Model

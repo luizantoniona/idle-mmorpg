@@ -1,0 +1,11 @@
+{
+    "categories": [
+        {
+            "category": "pickaxe",
+            "path": "pickaxes",
+            "items": [
+                "wooden_pickaxe"
+            ]
+        }
+    ]
+}

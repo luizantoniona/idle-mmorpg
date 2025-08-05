@@ -4,13 +4,14 @@ namespace Model {
 
 Item::Item() :
     _id( "" ),
-    _value( 0 ),
     _type( "" ),
     _category( "" ),
     _name( "" ),
     _description( "" ),
     _rarity( "" ),
-    _icon( "" ) {}
+    _icon( "" ),
+    _value( 0 ),
+    _modifiers( {} ) {}
 
 std::string Item::id() const {
     return _id;
@@ -18,14 +19,6 @@ std::string Item::id() const {
 
 void Item::setId( const std::string& id ) {
     _id = id;
-}
-
-int Item::value() const {
-    return _value;
-}
-
-void Item::setValue( int value ) {
-    _value = value;
 }
 
 std::string Item::type() const {
@@ -74,6 +67,26 @@ std::string Item::icon() const {
 
 void Item::setIcon( const std::string& icon ) {
     _icon = icon;
+}
+
+int Item::value() const {
+    return _value;
+}
+
+void Item::setValue( int value ) {
+    _value = value;
+}
+
+std::vector<ItemModifier> Item::modifiers() const {
+    return _modifiers;
+}
+
+void Item::setModifiers( const std::vector<ItemModifier>& modifiers ) {
+    _modifiers = modifiers;
+}
+
+void Item::addModifier( const ItemModifier& modifier ) {
+    _modifiers.push_back( modifier );
 }
 
 } // namespace Model
