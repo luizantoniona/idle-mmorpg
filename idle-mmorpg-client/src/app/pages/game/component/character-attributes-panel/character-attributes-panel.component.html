@@ -1,12 +1,21 @@
-<div class="character-attributes-panel">
-    <app-panel-vertical>
-        <app-card [hoverInfo]="'Strength: raw muscle power'">STR: {{ character.attributes.strength }}</app-card>
-        <app-card [hoverInfo]="'Dexterity: agility and reflexes'">DEX: {{ character.attributes.dexterity }}</app-card>
-        <app-card [hoverInfo]="'Constitution: health and endurance'">CON: {{ character.attributes.constitution
-            }}</app-card>
-        <app-card [hoverInfo]="'Intelligence: memory and reasoning'">INT: {{ character.attributes.intelligence
-            }}</app-card>
-        <app-card [hoverInfo]="'Wisdom: insight and perception'">WIS: {{ character.attributes.wisdom }}</app-card>
-        <app-card [hoverInfo]="'Charisma: charm and influence'">CHA: {{ character.attributes.charisma }}</app-card>
-    </app-panel-vertical>
-</div>
+<app-panel-vertical>
+    <ng-container *ngIf="character.attributes; else loading">
+        <div class="attribute-grid">
+            <app-card [hoverInfo]="'Strength: raw muscle power'">STR: {{ character.attributes.strength }}</app-card>
+            <app-card [hoverInfo]="'Dexterity: agility and reflexes'">DEX: {{ character.attributes.dexterity
+                }}</app-card>
+
+            <app-card [hoverInfo]="'Constitution: health and endurance'">CON: {{ character.attributes.constitution
+                }}</app-card>
+            <app-card [hoverInfo]="'Intelligence: memory and reasoning'">INT: {{ character.attributes.intelligence
+                }}</app-card>
+
+            <app-card [hoverInfo]="'Wisdom: insight and perception'">WIS: {{ character.attributes.wisdom }}</app-card>
+            <app-card [hoverInfo]="'Charisma: charm and influence'">CHA: {{ character.attributes.charisma }}</app-card>
+        </div>
+    </ng-container>
+</app-panel-vertical>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

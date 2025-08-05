@@ -1,24 +1,26 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { BarComponent } from '../../../../component';
 import { CardComponent } from '../../../../component';
-import { LoadingComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
 
 import { Character } from '../../../../model';
+import { Location } from '../../../../model';
 
 @Component({
-    selector: 'app-character-attributes-panel',
-    templateUrl: './character-attributes-panel.component.html',
-    styleUrl: './character-attributes-panel.component.scss',
+    selector: 'app-location-panel',
+    templateUrl: './location-panel.component.html',
+    styleUrl: './location-panel.component.scss',
     imports: [
         CommonModule,
+        BarComponent,
         CardComponent,
-        LoadingComponent,
         PanelVerticalComponent,
     ],
 })
 
-export class CharacterAttributesPanel {
+export class LocationPanel {
     @Input() character!: Character;
+    @Input() location!: Location;
 }

@@ -1,0 +1,9 @@
+.attribute-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    app-card {
+        flex: 0 0 calc(50% - 6px);
+    }
+}

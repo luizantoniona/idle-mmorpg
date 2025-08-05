@@ -1,6 +1,6 @@
-<div class="character-panel">
-    <app-panel-vertical>
-        <h3>{{ character.name }}</h3>
+<app-panel-vertical>
+    <h3>{{ character.name }}</h3>
+    <ng-container *ngIf="character.progression; else loading">
 
         <app-bar label="XP" [value]="character.progression.experience" [max]="character.progression.experienceNextLevel"
             color="#fdd835" />
@@ -9,6 +9,9 @@
         <app-bar label="Mana" [value]="character.vitals.mana" [max]="character.vitals.maxMana" color="#1e88e5" />
         <app-bar label="Stamina" [value]="character.vitals.stamina" [max]="character.vitals.maxStamina"
             color="#4caf50" />
+    </ng-container>
+</app-panel-vertical>
 
-    </app-panel-vertical>
-</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
