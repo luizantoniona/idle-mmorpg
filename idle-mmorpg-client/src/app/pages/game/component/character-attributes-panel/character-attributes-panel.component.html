@@ -1,17 +1,12 @@
 <app-panel-vertical>
     <ng-container *ngIf="character.attributes; else loading">
         <div class="attribute-grid">
-            <app-card [hoverInfo]="'Strength: raw muscle power'">STR: {{ character.attributes.strength }}</app-card>
-            <app-card [hoverInfo]="'Dexterity: agility and reflexes'">DEX: {{ character.attributes.dexterity
-                }}</app-card>
-
-            <app-card [hoverInfo]="'Constitution: health and endurance'">CON: {{ character.attributes.constitution
-                }}</app-card>
-            <app-card [hoverInfo]="'Intelligence: memory and reasoning'">INT: {{ character.attributes.intelligence
-                }}</app-card>
-
-            <app-card [hoverInfo]="'Wisdom: insight and perception'">WIS: {{ character.attributes.wisdom }}</app-card>
-            <app-card [hoverInfo]="'Charisma: charm and influence'">CHA: {{ character.attributes.charisma }}</app-card>
+            <app-card><strong>STR</strong>: {{ character.attributes.strength }}</app-card>
+            <app-card><strong>DEX</strong>: {{ character.attributes.dexterity }}</app-card>
+            <app-card><strong>CON</strong>: {{ character.attributes.constitution }}</app-card>
+            <app-card><strong>INT</strong>: {{ character.attributes.intelligence }}</app-card>
+            <app-card><strong>WIS</strong>: {{ character.attributes.wisdom }}</app-card>
+            <app-card><strong>CHA</strong>: {{ character.attributes.charisma }}</app-card>
         </div>
     </ng-container>
 </app-panel-vertical>

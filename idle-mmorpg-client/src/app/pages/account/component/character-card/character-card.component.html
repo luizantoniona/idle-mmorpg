@@ -4,17 +4,17 @@
     </div>
 
     <div *ngIf="character.attributes; else noAttributes" class="character-attributes">
-        <p><strong>STR</strong>: {{ character.attributes.strength }}</p>
-        <p><strong>DEX</strong>: {{ character.attributes.dexterity }}</p>
-        <p><strong>CON</strong>: {{ character.attributes.constitution }}</p>
-        <p><strong>INT</strong>: {{ character.attributes.intelligence }}</p>
-        <p><strong>WIS</strong>: {{ character.attributes.wisdom }}</p>
-        <p><strong>CHA</strong>: {{ character.attributes.charisma }}</p>
+        <div><strong>STR</strong>: {{ character.attributes.strength }}</div>
+        <div><strong>DEX</strong>: {{ character.attributes.dexterity }}</div>
+        <div><strong>CON</strong>: {{ character.attributes.constitution }}</div>
+        <div><strong>INT</strong>: {{ character.attributes.intelligence }}</div>
+        <div><strong>WIS</strong>: {{ character.attributes.wisdom }}</div>
+        <div><strong>CHA</strong>: {{ character.attributes.charisma }}</div>
     </div>
 
     <ng-template #noAttributes>
         <div class="character-header">
-            <p>No attributes.</p>
+            No attributes.
         </div>
     </ng-template>
 </app-card>

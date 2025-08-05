@@ -1,5 +1,5 @@
-import { Component, Input, TemplateRef } from '@angular/core';
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-card',
@@ -7,27 +7,17 @@ import { CommonModule, NgTemplateOutlet } from '@angular/common';
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.scss'],
     imports: [
-        CommonModule,
-        NgTemplateOutlet
+        CommonModule
     ],
 })
 
 export class CardComponent {
     @Input() onClick?: () => void;
     @Input() clickable = false;
-    @Input() hoverInfo?: string | TemplateRef<any> | null;
 
     handleClick(): void {
         if (this.clickable && this.onClick) {
             this.onClick();
         }
-    }
-
-    get isHoverable(): boolean {
-        return this.clickable || !!this.hoverInfo;
-    }
-
-    isTemplateRef(value: any): value is TemplateRef<any> {
-        return value instanceof TemplateRef;
     }
 }

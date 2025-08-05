@@ -1,7 +1,7 @@
 <div class="account-page">
     <app-panel-vertical>
-        <h1>Account: {{ getUsername() }}</h1>
-        <p>Session ID: {{ getSessionId() }}</p>
+        <h2>Account: {{ getUsername() }}</h2>
+        Session ID: {{ getSessionId() }}
         <app-button text="Logout" (clickEvent)="logout()"></app-button>
     </app-panel-vertical>
 
