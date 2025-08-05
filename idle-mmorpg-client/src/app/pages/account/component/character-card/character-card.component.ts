@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { CardComponent } from '../../../../component';
 
@@ -10,7 +10,7 @@ import type { Character } from '../../../../model';
     templateUrl: './character-card.component.html',
     styleUrls: ['./character-card.component.scss'],
     imports: [
-        NgIf,
+        CommonModule,
         CardComponent,
     ]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { ButtonComponent } from '../../component/button/button.component';
@@ -14,7 +14,6 @@ import type { Character } from '../../model';
     selector: 'app-account-page',
     standalone: true,
     imports: [
-        NgIf,
         CommonModule,
         ButtonComponent,
         PanelVerticalComponent,

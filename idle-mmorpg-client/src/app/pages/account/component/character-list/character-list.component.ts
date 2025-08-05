@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { CharacterCardComponent } from '../character-card/character-card.component';
 import { PanelHorizontalComponent } from '../../../../component/panel/panel-horizontal.component';
@@ -10,7 +10,7 @@ import type { Character } from '../../../../model';
     selector: 'app-character-list',
     templateUrl: './character-list.component.html',
     imports: [
-        NgFor,
+        CommonModule,
         CharacterCardComponent,
         PanelHorizontalComponent
     ],

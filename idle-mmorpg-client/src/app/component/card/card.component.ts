@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'app-card',
@@ -7,7 +7,7 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.scss'],
     imports: [
-        NgIf,
+        CommonModule,
         NgTemplateOutlet
     ],
 })

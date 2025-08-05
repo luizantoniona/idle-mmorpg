@@ -7,7 +7,9 @@ export type StatusType = 'online' | 'offline' | 'error' | 'loading' | 'unknown';
     selector: 'app-status-circle',
     templateUrl: './status-circle.component.html',
     styleUrls: ['./status-circle.component.scss'],
-    imports: [NgStyle]
+    imports: [
+        NgStyle,
+    ]
 })
 
 export class StatusCircleComponent {
