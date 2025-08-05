@@ -1,34 +1,35 @@
-<app-panel-vertical class="location-panel">
-    <h2>{{ location.name }}</h2>
-    <p class="description">{{ location.description }}</p>
+<div class="location-column">
+    <app-panel-vertical>
+        <h3>{{ location.name }}</h3>
+        <p class="description">{{ location.description }}</p>
+    </app-panel-vertical>
 
-    <div class="section">
-        <h3>Available Actions</h3>
-        <ng-container *ngIf="location.actions.length; else noActions">
-            <ul class="action-list">
-                <li *ngFor="let action of location.actions">
-                    <app-card>
-                        {{ action.label }}
-                    </app-card>
-                </li>
-            </ul>
-        </ng-container>
-        <ng-template #noActions>
-            <p>No actions available.</p>
-        </ng-template>
-    </div>
+    <app-panel-vertical>
+        <div class="section">
+            <h3>Available Actions</h3>
+            <ng-container *ngIf="location?.actions?.length; else noActions">
+                <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
+                <app-button *ngFor="let action of location.actions" [text]="action.label"
+                    (clickEvent)="onActionClick(action.id)">
+                </app-button>
+            </ng-container>
+            <ng-template #noActions>
+                <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
+            </ng-template>
+        </div>
+    </app-panel-vertical>
 
-    <div class="section">
-        <h3>Connections</h3>
-        <ul class="connection-list">
-            <li *ngFor="let connection of location.connections">
-                <app-card>
-                    {{ connection.destination }}
-                </app-card>
-            </li>
-        </ul>
-    </div>
+    <app-panel-vertical>
+        <div class="section">
+            <h3>Connections</h3>
+            <app-button *ngFor="let connection of location.connections" [text]="connection.destination"
+                (clickEvent)="onConnectionClick(connection.destination)">
+            </app-button>
+        </div>
+    </app-panel-vertical>
 
-    <app-bar *ngIf="character.action?.idAction" label="Action" [value]="character.action.counter"
-        [max]="character.action.duration" color="#2196f3"></app-bar>
-</app-panel-vertical>
+    <app-panel-vertical>
+        <app-bar *ngIf="character.action?.idAction" label="Action" [value]="character.action.counter"
+            [max]="character.action.duration" color="#2196f3"></app-bar>
+    </app-panel-vertical>
+</div>

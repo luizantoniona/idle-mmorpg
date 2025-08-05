@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BarComponent } from '../../../../component';
-import { CardComponent } from '../../../../component';
+import { ButtonComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
 
 import { Character } from '../../../../model';
@@ -15,7 +15,7 @@ import { Location } from '../../../../model';
     imports: [
         CommonModule,
         BarComponent,
-        CardComponent,
+        ButtonComponent,
         PanelVerticalComponent,
     ],
 })
@@ -23,4 +23,14 @@ import { Location } from '../../../../model';
 export class LocationPanel {
     @Input() character!: Character;
     @Input() location!: Location;
+
+    onActionClick(actionId: string): void {
+        console.log('Action clicked:', actionId);
+        // TODO: emit to parent or dispatch to backend
+    }
+
+    onConnectionClick(connectionId: string): void {
+        console.log('Connection clicked:', connectionId);
+        // TODO: emit to parent or dispatch to backend
+    }
 }
