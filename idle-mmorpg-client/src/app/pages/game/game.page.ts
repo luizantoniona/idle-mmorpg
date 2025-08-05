@@ -2,17 +2,17 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { CharacterPanel } from './component/character-panel/character-panel.component';
-import { CharacterAttributesPanel } from './component/character-attributes-panel/character-attributes-panel.component';
-import { CharacterEquipamentPanel } from './component/character-equipament-panel/character-equipament-panel.component';
-import { CharacterInventoryPanel } from './component/character-inventory-panel/character-inventory-panel.component';
-import { CharacterSkillsPanel } from './component/character-skills-panel/character-skills-panel.component';
-import { CharacterWalletPanel } from './component/character-wallet-panel/character-wallet-panel.component';
-import { ChatPanel } from './component/chat-panel/chat-panel.component';
-import { WorldPanel } from './component/world-panel/world-panel.component';
-
+import { CharacterPanel } from './component';
+import { CharacterAttributesPanel } from './component';
+import { CharacterEquipamentPanel } from './component';
+import { CharacterInventoryPanel } from './component';
+import { CharacterSkillsPanel } from './component';
+import { CharacterWalletPanel } from './component';
+import { ChatPanel } from './component';
+import { LocationPanel } from './component';
 
 import { Character } from '../../model';
+import { Location } from '../../model';
 
 import { WebsocketService } from '../../service/websocket.service';
 
@@ -28,7 +28,7 @@ import { WebsocketService } from '../../service/websocket.service';
         CharacterSkillsPanel,
         CharacterWalletPanel,
         ChatPanel,
-        WorldPanel,
+        LocationPanel,
     ],
 })
 
@@ -37,7 +37,7 @@ export class GamePage implements OnInit, OnDestroy {
     private websocketService = inject(WebsocketService);
 
     character: Character | null = null;
-    // map: Map | null = null;
+    location: Location | null = null;
     connectionStatus = 'Desconectado';
 
     private subscriptions = new Subscription();
@@ -98,6 +98,15 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'character_update_action':
+                if (data.payload?.action) {
+                    this.character = {
+                        ...this.character!,
+                        action: data.payload.action,
+                    };
+                }
+                break;
+
             case 'character_update_attributes':
                 if (data.payload?.attributes) {
                     this.character = {
@@ -107,7 +116,22 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'character_update_equipament':
+                if (data.payload?.equipament) {
+                    this.character = {
+                        ...this.character!,
+                        equipament: data.payload.equipament,
+                    };
+                }
+                break;
+
             case 'character_update_inventory':
+                if (data.payload?.inventory) {
+                    this.character = {
+                        ...this.character!,
+                        inventory: data.payload.inventory,
+                    };
+                }
                 break;
 
             case 'character_update_progression':
@@ -146,31 +170,22 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'character_update_action':
-                if (data.payload?.action) {
-                    this.character = {
-                        ...this.character!,
-                        action: data.payload.action,
-                    };
+            case 'location_update_position':
+                if (data.payload?.location) {
+                    this.location = data.payload.location;
                 }
                 break;
 
-            // case 'location_update_position':
-            //     if (data.payload?.location) {
-            //         this.map = data.payload.location;
-            //     }
-            //     break;
-
-            // case 'location_update_actions':
-            //     if (Array.isArray(data.payload?.actions)) {
-            //         this.map = this.map
-            //             ? { ...this.map, actions: data.payload.actions }
-            //             : this.map;
-            //     }
-            //     break;
+            case 'location_update_actions':
+                if (Array.isArray(data.payload?.actions)) {
+                    this.location = this.location
+                        ? { ...this.location, actions: data.payload.actions }
+                        : this.location;
+                }
+                break;
 
             default:
-                console.warn('Mensagem desconhecida:', data.type);
+                console.warn('Unkown message:', data.type);
         }
     }
 
