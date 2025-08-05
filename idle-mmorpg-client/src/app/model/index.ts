@@ -1,6 +1,7 @@
 export type { Character } from "./character/character.model";
 export type { CharacterAction } from "./character/character-action.model";
 export type { CharacterAttributes } from "./character/character-attributes.model";
+export type { CharacterCombat } from "./character/character-combat.model";
 export type { CharacterEquipment } from "./character/character-equipment.model";
 export type { CharacterInventory } from "./character/character-inventory.model";
 export type { CharacterProgression } from "./character/character-progression.model";
@@ -10,3 +11,4 @@ export type { CharacterWallet } from "./character/character-wallet.model";
 export type { Location } from "./location/location.model";
 export type { LocationAction } from "./location/location-action.model";
 export type { LocationConnection } from "./location/location-connection.model";
+export type { Skill } from "./skill/skill.model";

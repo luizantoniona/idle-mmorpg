@@ -1,5 +1,7 @@
 #include "CharacterSkill.h"
 
+#include <Commons/LevelExperienceHelper.h>
+
 namespace Model {
 
 CharacterSkill::CharacterSkill() :
@@ -13,7 +15,8 @@ Json::Value CharacterSkill::toJson() {
     root[ "id" ] = id();
     root[ "level" ] = level();
     root[ "experience" ] = experience();
-    root["skill"] = skill()->toJson();
+    root[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( level() );
+    root[ "skill" ] = skill()->toJson();
 
     return root;
 }

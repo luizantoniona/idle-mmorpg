@@ -24,18 +24,7 @@ void ProgressionSystem::notifyCharacterSkills( const std::string& sessionId, Mod
     }
 
     Json::Value payload;
-    payload[ "skills" ] = Json::arrayValue;
-
-    for ( const auto& skill : character->skills().skills() ) {
-        Json::Value skillJson;
-        skillJson[ "id" ] = skill.id();
-        skillJson[ "level" ] = skill.level();
-        skillJson[ "experience" ] = skill.experience();
-        skillJson[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( skill.level() );
-
-        payload[ "skills" ].append( skillJson );
-    }
-
+    payload[ "skills" ] = character->skills().toJson();
     _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE_SKILLS, payload );
 }
 

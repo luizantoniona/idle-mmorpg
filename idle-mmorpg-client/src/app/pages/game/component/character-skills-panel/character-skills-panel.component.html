@@ -1,3 +1,10 @@
 <app-panel-vertical>
-    Skills
+    <div class="scrollable-panel">
+        <ng-container *ngFor="let characterSkill of character.skills">
+            <app-bar [label]="characterSkill.skill.name + ' (Nv ' + characterSkill.level + ')'"
+                [value]="characterSkill.experience" [max]="characterSkill.experienceNextLevel"
+                [color]="getSkillColor(characterSkill.id)">
+            </app-bar>
+        </ng-container>
+    </div>
 </app-panel-vertical>

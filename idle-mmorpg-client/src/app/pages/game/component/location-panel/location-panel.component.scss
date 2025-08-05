@@ -10,3 +10,13 @@
     gap: 8px;
     align-items: center;
 }
+
+.action-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.action-row app-panel-vertical {
+    width: 100%;
+}
