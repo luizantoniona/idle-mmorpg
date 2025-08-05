@@ -1,4 +1,4 @@
-#include "SkillProgressionSystem.h"
+#include "ProgressionSystem.h"
 
 #include <Commons/LevelExperienceHelper.h>
 #include <Commons/Singleton.h>
@@ -6,10 +6,19 @@
 
 namespace Core::System {
 
-SkillProgressionSystem::SkillProgressionSystem() :
+ProgressionSystem::ProgressionSystem() :
     _sender() {}
 
-void SkillProgressionSystem::notifyCharacterSkills( const std::string& sessionId, Model::Character* character ) {
+void ProgressionSystem::notifyCharacterProgression( const std::string& sessionId, Model::Character* character ) {
+    if ( !character ) {
+        return;
+    }
+    Json::Value payload;
+    payload[ "progression" ] = character->progression().toJson();
+    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE_PROGRESSION, payload );
+}
+
+void ProgressionSystem::notifyCharacterSkills( const std::string& sessionId, Model::Character* character ) {
     if ( !character ) {
         return;
     }
@@ -30,7 +39,7 @@ void SkillProgressionSystem::notifyCharacterSkills( const std::string& sessionId
     _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE_SKILLS, payload );
 }
 
-void SkillProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained ) {
+void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained ) {
     if ( !character ) {
         return;
     }

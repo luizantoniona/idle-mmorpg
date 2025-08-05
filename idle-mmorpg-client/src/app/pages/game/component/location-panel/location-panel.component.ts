@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BarComponent } from '../../../../component';
@@ -24,13 +24,14 @@ export class LocationPanel {
     @Input() character!: Character;
     @Input() location!: Location;
 
+    @Output() actionClick = new EventEmitter<string>();
+    @Output() connectionClick = new EventEmitter<string>();
+
     onActionClick(actionId: string): void {
-        console.log('Action clicked:', actionId);
-        // TODO: emit to parent or dispatch to backend
+        this.actionClick.emit(actionId);
     }
 
-    onConnectionClick(connectionId: string): void {
-        console.log('Connection clicked:', connectionId);
-        // TODO: emit to parent or dispatch to backend
+    onConnectionClick(destination: string): void {
+        this.connectionClick.emit(destination);
     }
 }

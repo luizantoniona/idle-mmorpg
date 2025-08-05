@@ -1,5 +1,5 @@
-#ifndef SKILLPROGRESSIONSYSTEM_H
-#define SKILLPROGRESSIONSYSTEM_H
+#ifndef PROGRESSIONSYSTEM_H
+#define PROGRESSIONSYSTEM_H
 
 #include <string>
 
@@ -8,10 +8,11 @@
 
 namespace Core::System {
 
-class SkillProgressionSystem {
+class ProgressionSystem {
 public:
-    SkillProgressionSystem();
+    ProgressionSystem();
 
+    void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
     void notifyCharacterSkills( const std::string& sessionId, Model::Character* character );
 
     void applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained );
@@ -22,4 +23,4 @@ private:
 
 } // namespace Core::System
 
-#endif // SKILLPROGRESSIONSYSTEM_H
+#endif // PROGRESSIONSYSTEM_H

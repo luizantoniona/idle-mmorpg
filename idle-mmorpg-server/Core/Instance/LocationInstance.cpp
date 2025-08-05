@@ -16,6 +16,7 @@ LocationInstance::LocationInstance( Model::Location* location ) :
 
 void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Character* character ) {
     Json::Value characterJson = character->toJson();
+    characterJson[ "action" ] = character->action().toJson();
     characterJson[ "attributes" ] = character->attributes().toJson();
     characterJson[ "inventory" ] = character->inventory().toJson();
     characterJson[ "progression" ] = character->progression().toJson();
@@ -74,7 +75,7 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
 
     switch ( type ) {
         case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
-            _actionSystem.changeAction( character, payload );
+            _actionSystem.changeAction( sessionId, character, payload );
             break;
         default:
             break;

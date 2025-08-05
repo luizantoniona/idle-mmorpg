@@ -29,7 +29,7 @@
     </app-panel-vertical>
 
     <app-panel-vertical>
-        <app-bar *ngIf="character.action?.idAction" label="Action" [value]="character.action.counter"
-            [max]="character.action.duration" color="#2196f3"></app-bar>
+        <app-bar *ngIf="character.action?.idAction" [label]="character.action.idAction"
+            [value]="character.action.counter" [max]="character.action.duration" color="#2196f3"></app-bar>
     </app-panel-vertical>
 </div>

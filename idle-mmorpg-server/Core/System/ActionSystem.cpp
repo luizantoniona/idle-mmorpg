@@ -10,7 +10,7 @@ namespace Core::System {
 ActionSystem::ActionSystem( Model::Location* location ) :
     _location( location ),
     _sender(),
-    _skillProgressionSystem() {}
+    _progressionSystem() {}
 
 void ActionSystem::notifyCharacterActions( const std::string& sessionId, Model::Character* character ) {
     Json::Value payloadLocationActions;
@@ -68,12 +68,22 @@ int ActionSystem::computeActionDuration( Model::Character* character, const Mode
     return baseDuration;
 }
 
-void ActionSystem::changeAction( Model::Character* character, const Json::Value& payload ) {
+void ActionSystem::changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
     if ( !character || !payload.isObject() || !payload.isMember( "actionId" ) ) {
         return;
     }
 
     std::string actionId = payload[ "actionId" ].asString();
+
+    if ( actionId == "idle" ) {
+        Model::CharacterAction& action = character->action();
+        action.setIdAction( actionId );
+        action.setDuration( 0 );
+        action.setCounter( 0 );
+
+        notifyCharacterCurrentAction( sessionId, character );
+        return;
+    }
 
     const auto& actions = _location->actions();
     auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
@@ -121,7 +131,7 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
                 std::string skillId = experienceEntry.idSkill();
                 int xpGranted = experienceEntry.amount();
 
-                _skillProgressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
+                _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
             }
         }
 
