@@ -17,9 +17,6 @@ public:
     void applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained );
 
 private:
-    int experienceForNextLevel( int currentLevel ) const;
-
-private:
     Core::Message::MessageSender _sender;
 };
 

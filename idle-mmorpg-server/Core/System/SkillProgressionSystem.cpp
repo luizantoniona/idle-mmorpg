@@ -1,7 +1,6 @@
 #include "SkillProgressionSystem.h"
 
-#include <cmath>
-
+#include <Commons/LevelExperienceHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 
@@ -23,7 +22,7 @@ void SkillProgressionSystem::notifyCharacterSkills( const std::string& sessionId
         skillJson[ "id" ] = skill.id();
         skillJson[ "level" ] = skill.level();
         skillJson[ "experience" ] = skill.experience();
-        skillJson[ "experienceNextLevel" ] = experienceForNextLevel( skill.level() );
+        skillJson[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( skill.level() );
 
         payload[ "skills" ].append( skillJson );
     }
@@ -49,7 +48,7 @@ void SkillProgressionSystem::applyExperience( const std::string& sessionId, Mode
     }
 
     int newXp = skill->experience() + xpGained;
-    int xpNeeded = experienceForNextLevel( skill->level() );
+    int xpNeeded = Commons::LevelExperienceHelper::experienceForNextLevel( skill->level() );
 
     if ( newXp >= xpNeeded ) {
         skill->setLevel( skill->level() + 1 );
@@ -62,12 +61,6 @@ void SkillProgressionSystem::applyExperience( const std::string& sessionId, Mode
     }
 
     notifyCharacterSkills( sessionId, character );
-}
-
-int SkillProgressionSystem::experienceForNextLevel( int currentLevel ) const {
-    const double baseXp = 100.0;
-    const double growthRate = 1.05;
-    return baseXp * std::pow( growthRate, currentLevel );
 }
 
 } // namespace Core::System

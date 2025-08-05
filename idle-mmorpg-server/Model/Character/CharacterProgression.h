@@ -17,8 +17,6 @@ public:
     int experience() const;
     void setExperience( int experience );
 
-    static int experienceForNextLevel( int currentLevel );
-
 private:
     int _level;
     int _experience;
