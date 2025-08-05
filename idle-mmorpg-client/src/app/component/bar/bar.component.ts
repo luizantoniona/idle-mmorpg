@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
     selector: 'app-bar',
     templateUrl: './bar.component.html',
     styleUrls: ['./bar.component.scss'],
-    standalone: true,
+    imports: [],
 })
 
 export class BarComponent {

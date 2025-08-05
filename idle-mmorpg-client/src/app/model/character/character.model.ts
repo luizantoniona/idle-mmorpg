@@ -1,6 +1,6 @@
 import type { CharacterAction } from "./character-action.model";
 import type { CharacterAttributes } from "./character-attributes.model";
-import type { CharacterEquipament } from "./character-equipament.model";
+import type { CharacterEquipment } from "./character-equipment.model";
 import type { CharacterInventory } from "./character-inventory.model";
 import type { CharacterProgression } from "./character-progression.model";
 import type { CharacterSkill } from "./character-skill.model";
@@ -13,7 +13,7 @@ export type Character = {
     name: string;
     action: CharacterAction;
     attributes: CharacterAttributes;
-    equipament: CharacterEquipament;
+    equipament: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;
     skills: CharacterSkill[];

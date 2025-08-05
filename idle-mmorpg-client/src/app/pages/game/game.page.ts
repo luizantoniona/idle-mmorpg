@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { CharacterPanel } from './component';
 import { CharacterAttributesPanel } from './component';
-import { CharacterEquipamentPanel } from './component';
+import { CharacterEquipmentPanel } from './component';
 import { CharacterInventoryPanel } from './component';
 import { CharacterSkillsPanel } from './component';
 import { CharacterWalletPanel } from './component';
@@ -23,7 +23,7 @@ import { WebsocketService } from '../../service/websocket.service';
     imports: [
         CharacterPanel,
         CharacterAttributesPanel,
-        CharacterEquipamentPanel,
+        CharacterEquipmentPanel,
         CharacterInventoryPanel,
         CharacterSkillsPanel,
         CharacterWalletPanel,

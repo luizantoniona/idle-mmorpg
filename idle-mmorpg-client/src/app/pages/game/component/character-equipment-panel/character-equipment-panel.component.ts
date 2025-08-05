@@ -5,14 +5,14 @@ import { PanelVerticalComponent } from '../../../../component';
 import { Character } from '../../../../model';
 
 @Component({
-    selector: 'app-character-equipament-panel',
-    templateUrl: './character-equipament-panel.component.html',
-    styleUrl: './character-equipament-panel.component.scss',
+    selector: 'app-character-equipment-panel',
+    templateUrl: './character-equipment-panel.component.html',
+    styleUrl: './character-equipment-panel.component.scss',
     imports: [
         PanelVerticalComponent
     ],
 })
 
-export class CharacterEquipamentPanel {
+export class CharacterEquipmentPanel {
     @Input() character!: Character;
 }
