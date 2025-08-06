@@ -1,0 +1,108 @@
+CREATE TABLE user (
+    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+    ds_username VARCHAR,
+    ds_password VARCHAR
+);
+
+CREATE TABLE 'character' (
+    id_character INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER NOT NULL,
+    ds_name VARCHAR(20) NOT NULL,
+
+    FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE
+);
+
+CREATE TABLE character_attributes (
+    id_character INTEGER PRIMARY KEY,
+    strength NUMERIC DEFAULT 0.0,
+    dexterity NUMERIC DEFAULT 0.0,
+    constitution NUMERIC DEFAULT 0.0,
+    intelligence NUMERIC DEFAULT 0.0,
+    wisdom NUMERIC DEFAULT 0.0,
+    charisma NUMERIC DEFAULT 0.0,
+
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_coordinates (
+    id_character INTEGER PRIMARY KEY,
+    x INTEGER DEFAULT 0,
+    y INTEGER DEFAULT 0,
+    z INTEGER DEFAULT 0,
+    x_spawn INTEGER DEFAULT 0,
+    y_spawn INTEGER DEFAULT 0,
+    z_spawn INTEGER DEFAULT 0,
+
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_equipment (
+    id_character INTEGER PRIMARY KEY,
+    head_item_id TEXT DEFAULT NULL,
+    chest_item_id TEXT DEFAULT NULL,
+    legs_item_id TEXT DEFAULT NULL,
+    boots_item_id TEXT DEFAULT NULL,
+    gloves_item_id TEXT DEFAULT NULL,
+    left_hand_item_id TEXT DEFAULT NULL,
+    right_hand_item_id TEXT DEFAULT NULL,
+    amulet_item_id TEXT DEFAULT NULL,
+    ring_item_id TEXT DEFAULT NULL,
+    pickaxe_item_id TEXT DEFAULT NULL,
+    woodaxe_item_id TEXT DEFAULT NULL,
+    rod_item_id TEXT DEFAULT NULL,
+    shovel_item_id TEXT DEFAULT NULL,
+    sickle_item_id TEXT DEFAULT NULL,
+
+    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_inventory (
+    id_character INTEGER NOT NULL,
+    id_item TEXT NOT NULL,
+    amount INTEGER DEFAULT 0,
+
+    PRIMARY KEY (id_character, id_item),
+    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_progression (
+    id_character INTEGER PRIMARY KEY,
+    'level' INTEGER NOT NULL DEFAULT 0,
+    experience INTEGER NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_skills (
+    id_character INTEGER NOT NULL,
+    id_skill TEXT NOT NULL,
+    experience INTEGER DEFAULT 0,
+    level INTEGER DEFAULT 0,
+
+    PRIMARY KEY (id_character, id_skill),
+    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_vitals (
+    id_character INTEGER PRIMARY KEY,
+    health NUMERIC DEFAULT 0.0,
+    max_health NUMERIC DEFAULT 0.0,
+    base_health_regen NUMERIC DEFAULT 0.0,
+    mana NUMERIC DEFAULT 0.0,
+    max_mana NUMERIC DEFAULT 0.0,
+    base_mana_regen NUMERIC DEFAULT 0.0,
+    stamina NUMERIC DEFAULT 0.0,
+    max_stamina NUMERIC DEFAULT 0.0,
+    base_stamina_regen NUMERIC DEFAULT 0.0,
+
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
+);
+
+CREATE TABLE character_wallet (
+    id_character INTEGER PRIMARY KEY,
+    copper INTEGER DEFAULT 0,
+    silver INTEGER DEFAULT 0,
+    gold INTEGER DEFAULT 0,
+
+    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+);
