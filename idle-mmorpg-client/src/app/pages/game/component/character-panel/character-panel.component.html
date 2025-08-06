@@ -1,15 +1,22 @@
-<app-panel-vertical>
-    <h3>{{ character.name }} ( {{character.progression.level}} )</h3>
-    <ng-container *ngIf="character.progression; else loading">
-        <app-bar label="XP" [value]="character.progression.experience" [max]="character.progression.experienceNextLevel"
-            color="#fdd835" />
-        <app-bar label="Health" [value]="character.vitals.health" [max]="character.vitals.maxHealth" color="#e53935" />
-        <app-bar label="Mana" [value]="character.vitals.mana" [max]="character.vitals.maxMana" color="#1e88e5" />
-        <app-bar label="Stamina" [value]="character.vitals.stamina" [max]="character.vitals.maxStamina"
-            color="#4caf50" />
-    </ng-container>
-</app-panel-vertical>
+<div class="character-column">
+    <app-panel-vertical>
+        <app-button [text]="character.name + ' (' + character.progression.level + ')'"
+            (clickEvent)="handleClick()"></app-button>
+    </app-panel-vertical>
 
-<ng-template #loading>
-    <app-loading></app-loading>
-</ng-template>
+    <app-panel-vertical>
+        <ng-container *ngIf="character.progression; else loading">
+            <app-bar label="XP" [value]="character.progression.experience"
+                [max]="character.progression.experienceNextLevel" color="#fdd835" />
+            <app-bar label="Health" [value]="character.vitals.health" [max]="character.vitals.maxHealth"
+                color="#e53935" />
+            <app-bar label="Mana" [value]="character.vitals.mana" [max]="character.vitals.maxMana" color="#1e88e5" />
+            <app-bar label="Stamina" [value]="character.vitals.stamina" [max]="character.vitals.maxStamina"
+                color="#4caf50" />
+        </ng-container>
+    </app-panel-vertical>
+
+    <ng-template #loading>
+        <app-loading></app-loading>
+    </ng-template>
+</div>

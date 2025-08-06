@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { BarComponent } from '../../../../component';
+import { ButtonComponent } from '../../../../component';
 import { LoadingComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
 
@@ -14,6 +16,7 @@ import { Character } from '../../../../model';
     imports: [
         CommonModule,
         BarComponent,
+        ButtonComponent,
         LoadingComponent,
         PanelVerticalComponent,
     ],
@@ -21,4 +24,10 @@ import { Character } from '../../../../model';
 
 export class CharacterPanel {
     @Input() character!: Character;
+
+    private router = inject(Router);
+
+    handleClick() {
+        this.router.navigate(['/account']);
+    }
 }

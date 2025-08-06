@@ -8,6 +8,7 @@ export type { CharacterProgression } from "./character/character-progression.mod
 export type { CharacterSkill } from "./character/character-skill.model";
 export type { CharacterVitals } from "./character/character-vitals.model";
 export type { CharacterWallet } from "./character/character-wallet.model";
+export type { Item } from "./item/item.model";
 export type { Location } from "./location/location.model";
 export type { LocationAction } from "./location/location-action.model";
 export type { LocationConnection } from "./location/location-connection.model";

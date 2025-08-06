@@ -1,3 +1,10 @@
 export type Item = {
-    dsName: string;
+    id: string;
+    type: string;
+    category: string;
+    name: string;
+    description: string;
+    rarity: string;
+    icon: string;
+    value: number;
 };
