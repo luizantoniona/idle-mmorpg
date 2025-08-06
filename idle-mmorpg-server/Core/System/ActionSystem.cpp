@@ -87,8 +87,8 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     const auto& actions = _location->actions();
     auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            return action.id() == actionId;
-        } );
+        return action.id() == actionId;
+    } );
 
     if ( it == actions.end() ) {
         return;
@@ -121,8 +121,8 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
         const auto& actions = _location->actions();
         auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-                return action.id() == characterAction.idAction();
-            } );
+            return action.id() == characterAction.idAction();
+        } );
 
         if ( it != actions.end() ) {
             const Model::LocationAction& completedAction = *it;
