@@ -1,5 +1,17 @@
 #include "Item.h"
 
+namespace {
+constexpr const char* JSON_ID = "id";
+constexpr const char* JSON_TYPE = "type";
+constexpr const char* JSON_CATEGORY = "category";
+constexpr const char* JSON_NAME = "name";
+constexpr const char* JSON_DESCRIPTION = "description";
+constexpr const char* JSON_RARITY = "rarity";
+constexpr const char* JSON_ICON = "icon";
+constexpr const char* JSON_VALUE = "value";
+constexpr const char* JSON_MODIFIERS = "modifiers";
+} // namespace
+
 namespace Model {
 
 Item::Item() :
@@ -12,6 +24,24 @@ Item::Item() :
     _icon( "" ),
     _value( 0 ),
     _modifiers( {} ) {}
+
+Json::Value Item::toJson() const {
+    Json::Value root;
+    root[ JSON_ID ] = id();
+    root[ JSON_TYPE ] = type();
+    root[ JSON_CATEGORY ] = category();
+    root[ JSON_NAME ] = name();
+    root[ JSON_DESCRIPTION ] = description();
+    root[ JSON_RARITY ] = rarity();
+    root[ JSON_ICON ] = icon();
+    root[ JSON_VALUE ] = value();
+
+    // for ( auto& modifier : modifiers() ) {
+    //     root[ JSON_MODIFIERS ].append( modifier.toJson() );
+    // }
+
+    return root;
+}
 
 std::string Item::id() const {
     return _id;

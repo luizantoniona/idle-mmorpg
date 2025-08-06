@@ -1,17 +1,10 @@
 {
     "categories": [
         {
-            "category": "sword",
-            "path": "swords",
+            "category": "helmet",
+            "path": "helmets",
             "items": [
-                "wooden_sword"
-            ]
-        },
-        {
-            "category": "dagger",
-            "path": "daggers",
-            "items": [
-                "copper_dagger"
+                "copper_helmet"
             ]
         }
     ]

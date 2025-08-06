@@ -1,5 +1,9 @@
 #include "CharacterInventory.h"
 
+namespace {
+constexpr const char* JSON_INVENTORY = "inventory";
+} // namespace
+
 namespace Model {
 
 CharacterInventory::CharacterInventory() {}
@@ -7,16 +11,18 @@ CharacterInventory::CharacterInventory() {}
 Json::Value CharacterInventory::toJson() {
     Json::Value root;
 
-    //TODO: Implement inventary json when ready;
+    for ( auto& item : items() ) {
+        root[ JSON_INVENTORY ].append( item.toJson() );
+    }
 
     return root;
 }
 
-std::vector<CharacterItem>& CharacterInventory::items() {
+std::vector<CharacterInventoryItem>& CharacterInventory::items() {
     return _items;
 }
 
-void CharacterInventory::addItem( CharacterItem item ) {
+void CharacterInventory::addItem( CharacterInventoryItem item ) {
     _items.push_back( item );
 }
 

@@ -3,11 +3,15 @@
 
 #include <string>
 
+#include <json/json.h>
+
 namespace Model {
 
 class ItemModifier {
 public:
     ItemModifier();
+
+    Json::Value toJson();
 
     std::string type() const;
     void setType( const std::string& type );

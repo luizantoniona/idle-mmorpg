@@ -25,7 +25,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
 
             std::string category = categoryEntry[ "category" ].asString();
             std::string categoryPath = categoryEntry[ "path" ].asString();
-            std::string itemPath = typesPath + "/" + categoryPath;
+            std::string itemPath = typesPath + categoryPath;
 
             for ( const Json::Value& itemEntry : categoryEntry[ "items" ] ) {
                 std::string itemId = itemEntry.asString();

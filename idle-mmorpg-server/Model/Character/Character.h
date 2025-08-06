@@ -8,6 +8,7 @@
 #include "CharacterAction.h"
 #include "CharacterAttributes.h"
 #include "CharacterCoordinates.h"
+#include "CharacterEquipment.h"
 #include "CharacterInventory.h"
 #include "CharacterProgression.h"
 #include "CharacterSkills.h"
@@ -40,6 +41,9 @@ public:
     CharacterCoordinates& coordinates();
     void setCoordinates( const CharacterCoordinates& coordinates );
 
+    CharacterEquipment& equipament();
+    void setEquipament( const CharacterEquipment& equipament );
+
     CharacterInventory& inventory();
     void setInventory( const CharacterInventory& inventory );
 
@@ -62,6 +66,7 @@ private:
     CharacterAction _action;
     CharacterAttributes _attributes;
     CharacterCoordinates _coordinates;
+    CharacterEquipment _equipament;
     CharacterInventory _inventory;
     CharacterProgression _progression;
     CharacterSkills _skills;

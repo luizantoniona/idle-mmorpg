@@ -1,5 +1,11 @@
 #include "Character.h"
 
+namespace {
+constexpr const char* JSON_ID_USER = "idUser";
+constexpr const char* JSON_ID_CHARACTER = "idCharacter";
+constexpr const char* JSON_NAME = "name";
+} // namespace
+
 namespace Model {
 
 Character::Character() :
@@ -9,18 +15,19 @@ Character::Character() :
     _action(),
     _attributes(),
     _coordinates(),
+    _equipament(),
     _inventory(),
     _progression(),
     _skills(),
     _vitals(),
-    _wallet() {}
+    _wallet() {
+}
 
 Json::Value Character::toJson() {
     Json::Value root;
-    root[ "idUser" ] = idUser();
-    root[ "idCharacter" ] = idCharacter();
-    root[ "name" ] = name();
-
+    root[ JSON_ID_USER ] = idUser();
+    root[ JSON_ID_CHARACTER ] = idCharacter();
+    root[ JSON_NAME ] = name();
     return root;
 }
 
@@ -70,6 +77,14 @@ CharacterCoordinates& Character::coordinates() {
 
 void Character::setCoordinates( const CharacterCoordinates& coordinates ) {
     _coordinates = coordinates;
+}
+
+CharacterEquipment& Character::equipament() {
+    return _equipament;
+}
+
+void Character::setEquipament( const CharacterEquipment& equipament ) {
+    _equipament = equipament;
 }
 
 CharacterInventory& Character::inventory() {

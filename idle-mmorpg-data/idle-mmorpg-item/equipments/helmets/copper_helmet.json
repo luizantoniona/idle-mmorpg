@@ -1,0 +1,11 @@
+{
+    "id": "copper_helmet",
+    "type": "equipment",
+    "category": "helmet",
+    "name": "Copper Helmet",
+    "description": "A basic helmet made of copper.",
+    "rarity": "common",
+    "icon": ".png",
+    "value": 10,
+    "modifiers": []
+}

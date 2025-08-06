@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <json/json.h>
+
 #include "ItemModifier.h"
 
 namespace Model {
@@ -11,6 +13,8 @@ namespace Model {
 class Item {
 public:
     Item();
+
+    Json::Value toJson() const;
 
     std::string id() const;
     void setId( const std::string& id );

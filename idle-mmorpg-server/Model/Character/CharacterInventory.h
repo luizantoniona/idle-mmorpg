@@ -5,7 +5,7 @@
 
 #include <json/json.h>
 
-#include <Model/Character/CharacterItem.h>
+#include "CharacterInventoryItem.h"
 
 namespace Model {
 
@@ -15,11 +15,11 @@ public:
 
     Json::Value toJson();
 
-    std::vector<CharacterItem>& items();
-    void addItem( CharacterItem item );
+    std::vector<CharacterInventoryItem>& items();
+    void addItem( CharacterInventoryItem item );
 
 private:
-    std::vector<CharacterItem> _items;
+    std::vector<CharacterInventoryItem> _items;
 };
 
 } // namespace Model

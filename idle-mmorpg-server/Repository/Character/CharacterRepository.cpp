@@ -4,6 +4,7 @@
 
 #include "CharacterAttributesRepository.h"
 #include "CharacterCoordinateRepository.h"
+#include "CharacterEquipmentRepository.h"
 #include "CharacterInventoryRepository.h"
 #include "CharacterProgressionRepository.h"
 #include "CharacterSkillsRepository.h"
@@ -37,6 +38,7 @@ bool CharacterRepository::createCharacter( const int idUser, const std::string& 
 
     success &= CharacterAttributesRepository().createAttributes( idCharacter );
     success &= CharacterCoordinateRepository().createCoordinates( idCharacter );
+    success &= CharacterEquipmentRepository().createEquipment( idCharacter );
     success &= CharacterInventoryRepository().createInventory( idCharacter );
     success &= CharacterProgressionRepository().createProgression( idCharacter );
     success &= CharacterSkillsRepository().createSkills( idCharacter );
@@ -53,7 +55,8 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
 
     success &= CharacterAttributesRepository().updateAttributes( idCharacter, character.attributes() );
     success &= CharacterCoordinateRepository().updateCoordinates( idCharacter, character.coordinates() );
-    // success &= CharacterInventoryRepository().updateCharacterInventory(idCharacter, character.inventory());
+    success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipament() );
+    success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
     success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
     success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
     success &= CharacterVitalsRepository().updateVitals( idCharacter, character.vitals() );
@@ -95,10 +98,15 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
             character->setCoordinates( *coordinates );
         }
 
-//        auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
-//        if ( inventory ) {
-//            character->setInventory( *inventory );
-//        }
+        auto equipament = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
+        if ( equipament ) {
+            character->setEquipament( *equipament );
+        }
+
+        auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
+        if ( inventory ) {
+            character->setInventory( *inventory );
+        }
 
         auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
         if ( progression ) {
@@ -156,10 +164,15 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
             character->setCoordinates( *coordinates );
         }
 
-//        auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
-//        if ( inventory ) {
-//            character->setInventory( *inventory );
-//        }
+        auto equipament = CharacterEquipmentRepository().findByCharacterId( idCharacter );
+        if ( equipament ) {
+            character->setEquipament( *equipament );
+        }
+
+        auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
+        if ( inventory ) {
+            character->setInventory( *inventory );
+        }
 
         auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
         if ( progression ) {

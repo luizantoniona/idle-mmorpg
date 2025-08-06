@@ -5,7 +5,8 @@
 namespace Repository {
 
 CharacterAttributesRepository::CharacterAttributesRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterAttributesRepository::createAttributes( int idCharacter ) {
     const std::string sql = R"SQL(
