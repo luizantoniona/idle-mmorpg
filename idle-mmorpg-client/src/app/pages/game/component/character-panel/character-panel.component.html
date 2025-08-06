@@ -1,7 +1,7 @@
 <div class="character-column">
     <app-panel-vertical>
-        <app-button [text]="character.name + ' (' + character.progression.level + ')'"
-            (clickEvent)="handleClick()"></app-button>
+        <app-button [text]="nameLevel" (clickEvent)="handleClick()">
+        </app-button>
     </app-panel-vertical>
 
     <app-panel-vertical>

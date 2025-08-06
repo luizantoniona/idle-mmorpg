@@ -8,6 +8,17 @@ namespace Core::Message {
 
 MessageSender::MessageSender() {}
 
+void MessageSender::send( const std::string& sessionId, MessageSenderType type, const Json::Value& payload ) {
+    Json::Value message;
+    message[ "type" ] = MessageHelper::typeToString( type );
+    message[ "payload" ] = payload;
+
+    Json::StreamWriterBuilder writer;
+    const std::string serialized = Json::writeString( writer, message );
+
+    send( sessionId, serialized );
+}
+
 void MessageSender::send( const std::string& sessionId, const std::string& message ) {
     auto sessionOpt = Commons::Singleton<Network::NetworkServer>::instance().getSession( sessionId );
 
@@ -16,17 +27,6 @@ void MessageSender::send( const std::string& sessionId, const std::string& messa
     }
 
     sessionOpt->connection()->send( message );
-}
-
-void MessageSender::send( const std::string& sessionId, MessageSenderType type, const Json::Value& payload ) {
-    Json::Value message;
-    message[ "type" ] = MessageHelper::typeToString( type );
-    message["payload"] = payload;
-
-    Json::StreamWriterBuilder writer;
-    const std::string serialized = Json::writeString( writer, message );
-
-    send( sessionId, serialized );
 }
 
 } // namespace Core::Message

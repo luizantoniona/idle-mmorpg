@@ -14,7 +14,7 @@ class Location {
 public:
     Location();
 
-    Json::Value toJson();
+    Json::Value toJson() const;
 
     std::string id() const;
     void setId( const std::string& id );

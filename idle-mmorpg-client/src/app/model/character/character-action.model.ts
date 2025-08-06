@@ -1,5 +1,5 @@
 export type CharacterAction = {
-    idAction: string;
+    id: string;
     duration: number;
     counter: number;
 };

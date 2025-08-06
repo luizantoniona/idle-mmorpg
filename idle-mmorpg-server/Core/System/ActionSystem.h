@@ -6,6 +6,7 @@
 #include <Model/World/Location/Location.h>
 #include <Model/World/Location/LocationAction.h>
 
+#include "NotificationSystem.h"
 #include "ProgressionSystem.h"
 
 namespace Core::System {
@@ -15,9 +16,9 @@ public:
     explicit ActionSystem( Model::Location* location );
 
     void notifyCharacterActions( const std::string& sessionId, Model::Character* character );
-    void notifyCharacterCurrentAction( const std::string& sessionId, Model::Character* character );
 
     void changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
+    void changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
 
     void process( const std::string& sessionId, Model::Character* character );
 
@@ -28,6 +29,7 @@ private:
 private:
     Model::Location* _location;
     Core::Message::MessageSender _sender;
+    NotificationSystem _notificationSystem;
     ProgressionSystem _progressionSystem;
 };
 

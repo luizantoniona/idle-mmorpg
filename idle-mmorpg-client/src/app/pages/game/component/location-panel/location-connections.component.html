@@ -1,8 +1,16 @@
 <app-panel-vertical>
     <div class="section">
         <h3>Connections</h3>
-        <app-button *ngFor="let connection of location.connections" [text]="connection.destination"
-            (clickEvent)="onConnectionClick(connection.destination)">
-        </app-button>
+
+        <ng-container *ngIf="location; else loading">
+            <app-button *ngFor="let connection of location.connections" [text]="connection.destination"
+                (clickEvent)="onConnectionClick(connection.destination)">
+            </app-button>
+        </ng-container>
+
+        <ng-template #loading>
+            <app-loading></app-loading>
+        </ng-template>
+
     </div>
 </app-panel-vertical>

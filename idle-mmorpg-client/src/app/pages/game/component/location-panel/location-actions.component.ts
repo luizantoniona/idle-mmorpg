@@ -28,11 +28,11 @@ export class LocationActionsPanel {
         this.websocketService.send(data);
     }
 
-    onActionClick(actionId: string): void {
+    onActionClick(action: string): void {
         this.sendMessage({
             type: 'character_update_action',
             payload: {
-                actionId: actionId,
+                action: action,
             },
         });
     }

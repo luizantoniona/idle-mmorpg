@@ -30,4 +30,10 @@ export class CharacterPanel {
     handleClick() {
         this.router.navigate(['/account']);
     }
+
+    get nameLevel(): string {
+        return this.character?.progression
+            ? `${this.character.name} (${this.character.progression.level})`
+            : this.character?.name || '...';
+    }
 }

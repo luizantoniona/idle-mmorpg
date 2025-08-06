@@ -22,7 +22,7 @@ Location::Location() :
     _actions( {} ),
     _structures( {} ) {}
 
-Json::Value Location::toJson() {
+Json::Value Location::toJson() const {
     Json::Value root;
     root[ JSON_ID ] = id();
     root[ JSON_NAME ] = name();

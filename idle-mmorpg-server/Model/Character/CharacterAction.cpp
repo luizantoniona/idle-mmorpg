@@ -1,29 +1,34 @@
 #include "CharacterAction.h"
 
+namespace {
+constexpr const char* JSON_ID = "id";
+constexpr const char* JSON_DURATION = "duration";
+constexpr const char* JSON_COUNTER = "counter";
+} // namespace
+
 namespace Model {
 
 CharacterAction::CharacterAction() :
-    _idAction( "idle" ),
+    _id( "idle" ),
     _duration( 0 ),
     _counter( 0 ) {
 }
 
 Json::Value CharacterAction::toJson() {
     Json::Value root;
-
-    root[ "idAction" ] = idAction();
-    root[ "duration" ] = duration();
-    root[ "counter" ] = counter();
+    root[ JSON_ID ] = id();
+    root[ JSON_DURATION ] = duration();
+    root[ JSON_COUNTER ] = counter();
 
     return root;
 }
 
-std::string CharacterAction::idAction() const {
-    return _idAction;
+std::string CharacterAction::id() const {
+    return _id;
 }
 
-void CharacterAction::setIdAction( const std::string& idAction ) {
-    _idAction = idAction;
+void CharacterAction::setId( const std::string& id ) {
+    _id = id;
 }
 
 int CharacterAction::duration() const {
@@ -40,6 +45,12 @@ int CharacterAction::counter() const {
 
 void CharacterAction::setCounter( int counter ) {
     _counter = counter;
+}
+
+void CharacterAction::clear() {
+    setId( "idle" );
+    setDuration( 0 );
+    setCounter( 0 );
 }
 
 } // namespace Model

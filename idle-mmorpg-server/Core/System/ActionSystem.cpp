@@ -9,8 +9,10 @@ namespace Core::System {
 
 ActionSystem::ActionSystem( Model::Location* location ) :
     _location( location ),
+    _notificationSystem(),
     _sender(),
-    _progressionSystem() {}
+    _progressionSystem() {
+}
 
 void ActionSystem::notifyCharacterActions( const std::string& sessionId, Model::Character* character ) {
     Json::Value payloadLocationActions;
@@ -26,18 +28,19 @@ void ActionSystem::notifyCharacterActions( const std::string& sessionId, Model::
     _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
 }
 
-void ActionSystem::notifyCharacterCurrentAction( const std::string& sessionId, Model::Character* character ) {
-    Json::Value payloadCurrentAction;
-    payloadCurrentAction[ "action" ] = character->action().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE_ACTION, payloadCurrentAction );
-}
-
 bool Core::System::ActionSystem::canPerformAction( Model::Character* character, const Model::LocationAction& action ) {
     if ( !character ) {
         return false;
     }
 
-    if ( !action.structure().empty() && character->coordinates().currentStructure() != action.structure() ) {
+    const std::string& characterStructure = character->coordinates().currentStructure();
+    const std::string& actionStructure = action.structure();
+
+    if ( !actionStructure.empty() && characterStructure != actionStructure ) {
+        return false;
+    }
+
+    if ( actionStructure.empty() && !characterStructure.empty() ) {
         return false;
     }
 
@@ -73,21 +76,17 @@ int ActionSystem::computeActionDuration( Model::Character* character, const Mode
 }
 
 void ActionSystem::changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
-    if ( !character || !payload.isObject() || !payload.isMember( "actionId" ) ) {
+    if ( !character || !payload.isObject() || !payload.isMember( "action" ) ) {
         return;
     }
 
-    std::string actionId = payload[ "actionId" ].asString();
+    std::string actionId = payload[ "action" ].asString();
 
     //TODO: Treat special actions separated -> Idle - Combat - Train
 
     if ( actionId == "idle" ) {
-        Model::CharacterAction& action = character->action();
-        action.setIdAction( actionId );
-        action.setDuration( 0 );
-        action.setCounter( 0 );
-
-        notifyCharacterCurrentAction( sessionId, character );
+        character->action().clear();
+        _notificationSystem.notifyCurrentAction( sessionId, character );
         return;
     }
 
@@ -107,9 +106,28 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
     }
 
     Model::CharacterAction& action = character->action();
-    action.setIdAction( actionId );
+    action.setId( actionId );
     action.setDuration( computeActionDuration( character, selectedAction ) );
     action.setCounter( 0 );
+}
+
+void ActionSystem::changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
+    if ( !character || !payload.isObject() || !payload.isMember( "structure" ) ) {
+        return;
+    }
+
+    std::string structureId = payload[ "structure" ].asString();
+
+    if ( character->coordinates().currentStructure() == structureId ) {
+        return;
+    }
+
+    character->coordinates().setCurrentStructure( structureId );
+    character->action().clear();
+
+    _notificationSystem.notifyCurrentAction( sessionId, character );
+    _notificationSystem.notifyCurrentCoordinates( sessionId, character );
+    notifyCharacterActions( sessionId, character );
 }
 
 void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {
@@ -119,16 +137,12 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
     Model::CharacterAction& characterAction = character->action();
 
-    if ( characterAction.idAction() == "idle" ) {
-        return;
-    }
-
     if ( characterAction.counter() >= characterAction.duration() ) {
 
         const auto& actions = _location->actions();
         auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-                return action.id() == characterAction.idAction();
-            } );
+            return action.id() == characterAction.id();
+        } );
 
         if ( it != actions.end() ) {
             const Model::LocationAction& completedAction = *it;
@@ -147,7 +161,7 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
         characterAction.setCounter( characterAction.counter() + 1 );
     }
 
-    notifyCharacterCurrentAction( sessionId, character );
+    _notificationSystem.notifyCurrentAction( sessionId, character );
 }
 
 } // namespace Core::System

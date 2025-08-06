@@ -13,8 +13,8 @@ public:
 
     Json::Value toJson();
 
-    std::string idAction() const;
-    void setIdAction( const std::string& idAction );
+    std::string id() const;
+    void setId( const std::string& id );
 
     int duration() const;
     void setDuration( int duration );
@@ -22,8 +22,10 @@ public:
     int counter() const;
     void setCounter( int counter );
 
+    void clear();
+
 private:
-    std::string _idAction;
+    std::string _id;
     int _duration;
     int _counter;
 };

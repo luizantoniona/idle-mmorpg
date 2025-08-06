@@ -8,6 +8,7 @@
 #include <Core/Message/MessageReceiverType.h>
 #include <Core/Message/MessageSender.h>
 #include <Core/System/ActionSystem.h>
+#include <Core/System/NotificationSystem.h>
 #include <Model/Character/Character.h>
 #include <Model/World/Location/Location.h>
 
@@ -16,9 +17,6 @@ namespace Core::Instance {
 class LocationInstance {
 public:
     explicit LocationInstance( Model::Location* location );
-
-    void notifyCharacter( const std::string& sessionId, Model::Character* character );
-    void notifyLocation( const std::string& sessionId );
 
     bool addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );
@@ -33,6 +31,7 @@ private:
     std::unordered_map<std::string, Model::Character*> _characters;
     Core::Message::MessageSender _sender;
     Core::System::ActionSystem _actionSystem;
+    Core::System::NotificationSystem _notificationSystem;
 };
 
 } // namespace Core::Instance

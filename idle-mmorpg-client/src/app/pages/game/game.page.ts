@@ -116,6 +116,16 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'character_update_coordinates': {
+                if (data.payload?.coordinates) {
+                    this.character = {
+                        ...this.character!,
+                        coordinates: data.payload.coordinates,
+                    };
+                }
+                break;
+            }
+
             case 'character_update_equipament':
                 if (data.payload?.equipament) {
                     this.character = {
@@ -177,10 +187,8 @@ export class GamePage implements OnInit, OnDestroy {
                 break;
 
             case 'location_update_actions':
-                if (Array.isArray(data.payload?.actions)) {
-                    this.location = this.location
-                        ? { ...this.location, actions: data.payload.actions }
-                        : this.location;
+                if (this.location) {
+                    this.location.actions = data.payload?.actions ?? [];
                 }
                 break;
 

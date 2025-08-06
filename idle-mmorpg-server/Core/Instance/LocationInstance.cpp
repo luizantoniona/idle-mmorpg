@@ -12,27 +12,8 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _location( location ),
     _characters( {} ),
     _sender(),
-    _actionSystem( location ) {}
-
-void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Character* character ) {
-    Json::Value characterJson = character->toJson();
-    characterJson[ "action" ] = character->action().toJson();
-    characterJson[ "attributes" ] = character->attributes().toJson();
-    characterJson[ "coordinates" ] = character->coordinates().toJson();
-    characterJson[ "inventory" ] = character->inventory().toJson();
-    characterJson[ "equipament" ] = character->equipament().toJson();
-    characterJson[ "progression" ] = character->progression().toJson();
-    characterJson[ "skills" ] = character->skills().toJson();
-    characterJson[ "vitals" ] = character->vitals().toJson();
-    characterJson[ "wallet" ] = character->wallet().toJson();
-
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
-}
-
-void LocationInstance::notifyLocation( const std::string& sessionId ) {
-    Json::Value payloadLocation;
-    payloadLocation[ "location" ] = _location->toJson();
-    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_POSITION, payloadLocation );
+    _actionSystem( location ),
+    _notificationSystem() {
 }
 
 bool LocationInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
@@ -44,8 +25,8 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
               << " [Entering] " << _location->name()
               << " [SessionID] " << sessionId << std::endl;
 
-    notifyCharacter( sessionId, character );
-    notifyLocation( sessionId );
+    _notificationSystem.notifyFullCharacter( sessionId, character );
+    _notificationSystem.notifyFullLocation( sessionId, _location );
     _actionSystem.notifyCharacterActions( sessionId, character );
 
     return true;
@@ -61,6 +42,20 @@ void LocationInstance::tick() {
     std::lock_guard lock( _mutex );
 
     for ( const auto& [ sessionId, character ] : _characters ) {
+        if ( character->action().id() == "idle" ) {
+            continue;
+        }
+
+        if ( character->action().id() == "train" ) {
+            // TODO IMPLEMENT TRAINING
+            continue;
+        }
+
+        if ( character->action().id() == "combat" ) {
+            // TODO IMPLEMENT COMBAT
+            continue;
+        }
+
         _actionSystem.process( sessionId, character );
     }
 }
@@ -76,11 +71,14 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     Model::Character* character = it->second;
 
     switch ( type ) {
-        case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
-            _actionSystem.changeAction( sessionId, character, payload );
-            break;
-        default:
-            break;
+    case Message::MessageReceiverType::CHARACTER_UPDATE_STRUCTURE:
+        _actionSystem.changeStructure( sessionId, character, payload );
+        break;
+    case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
+        _actionSystem.changeAction( sessionId, character, payload );
+        break;
+    default:
+        break;
     }
 }
 
