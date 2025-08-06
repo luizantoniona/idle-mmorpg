@@ -1,19 +1,32 @@
 #include "Skill.h"
 
+namespace {
+constexpr const char* JSON_ID = "id";
+constexpr const char* JSON_NAME = "name";
+constexpr const char* JSON_DESCRIPTION = "description";
+constexpr const char* JSON_TYPE = "type";
+} // namespace
+
 namespace Model {
 
-Skill::Skill() {}
+Skill::Skill() :
+    _id( "" ),
+    _name( "" ),
+    _description( "" ),
+    _type( "" ),
+    _millestones( {} ) {
+}
 
 Json::Value Skill::toJson() {
     Json::Value root;
-    root[ "id" ] = id();
-    root[ "name" ] = name();
-    root[ "description" ] = description();
-    root[ "type" ] = type();
-
-    //TODO: Send milestones?
+    root[ JSON_ID ] = id();
+    root[ JSON_NAME ] = name();
+    root[ JSON_DESCRIPTION ] = description();
+    root[ JSON_TYPE ] = type();
 
     return root;
+
+    // TODO: Send milestones?
 }
 
 std::string Skill::id() const {
