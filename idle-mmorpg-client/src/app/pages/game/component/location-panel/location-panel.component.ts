@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BarComponent } from '../../../../component';
-import { ButtonComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { LocationActionsPanel } from './location-actions.component'
+import { LocationCharacterActionPanel } from './location-character-action.component';
+import { LocationConnectionsComponent } from './location-connections.component'
+import { LocationDescriptionPanel } from './location-description.component';
+import { LocationStructuresPanel } from './location-structures.component';
 
 import { Character } from '../../../../model';
 import { Location } from '../../../../model';
@@ -14,24 +16,15 @@ import { Location } from '../../../../model';
     styleUrl: './location-panel.component.scss',
     imports: [
         CommonModule,
-        BarComponent,
-        ButtonComponent,
-        PanelVerticalComponent,
+        LocationActionsPanel,
+        LocationCharacterActionPanel,
+        LocationConnectionsComponent,
+        LocationDescriptionPanel,
+        LocationStructuresPanel,
     ],
 })
 
 export class LocationPanel {
     @Input() character!: Character;
     @Input() location!: Location;
-
-    @Output() actionClick = new EventEmitter<string>();
-    @Output() connectionClick = new EventEmitter<string>();
-
-    onActionClick(actionId: string): void {
-        this.actionClick.emit(actionId);
-    }
-
-    onConnectionClick(destination: string): void {
-        this.connectionClick.emit(destination);
-    }
 }

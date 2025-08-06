@@ -1,5 +1,6 @@
-import type { LocationAction } from "./location-action.model";
-import type { LocationConnection } from "./location-connection.model";
+import { LocationAction } from "./location-action.model";
+import { LocationConnection } from "./location-connection.model";
+import { LocationStructure } from "./location-structure.model";
 
 export type Location = {
     id: string;
@@ -7,4 +8,5 @@ export type Location = {
     description: string;
     actions: LocationAction[];
     connections: LocationConnection[];
+    structures: LocationStructure[];
 };

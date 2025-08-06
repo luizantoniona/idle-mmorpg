@@ -51,6 +51,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         Model::LocationAction action;
         action.setId( actionJson[ "id" ].asString() );
         action.setLabel( actionJson[ "label" ].asString() );
+        action.setStructure( actionJson.get( "structure", "" ).asString() );
         action.setDuration( actionJson[ "duration" ].asInt() );
 
         for ( const Json::Value& requirementJson : actionJson[ "requirements" ] ) {
@@ -70,6 +71,17 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         }
 
         location->addAction( action );
+    }
+
+    std::string structuresJsonPath = locationPath + "/structures.json";
+    Json::Value structuresJson = Commons::JsonHelper::loadJsonFile( structuresJsonPath );
+    for ( const Json::Value& structureJson : structuresJson[ "structures" ] ) {
+        Model::LocationStructure structure;
+        structure.setId( structureJson["id"].asString() );
+        structure.setLabel( structureJson["label"].asString() );
+        structure.setDescription( structureJson["description"].asString() );
+
+        location->addStructure( structure );
     }
 
     std::string enemiesJsonPath = locationPath + "/enemies.json";

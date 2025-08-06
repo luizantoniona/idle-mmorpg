@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 #include "LocationAction.h"
+#include "LocationStructure.h"
 
 namespace Model {
 
@@ -35,7 +36,11 @@ public:
 
     const std::vector<LocationAction>& actions() const;
     void setActions( const std::vector<LocationAction>& actions );
-    void addAction( const LocationAction action );
+    void addAction( const LocationAction& action );
+
+    const std::vector<LocationStructure>& structures() const;
+    void setStructures( const std::vector<LocationStructure>& structures );
+    void addStructure( const LocationStructure& structure );
 
 private:
     std::string _id;
@@ -45,6 +50,7 @@ private:
     int _y;
     int _z;
     std::vector<LocationAction> _actions;
+    std::vector<LocationStructure> _structures;
 };
 
 } // namespace Core::Model

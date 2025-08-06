@@ -7,6 +7,7 @@ namespace Core::Message {
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
         { "character_update_action", MessageReceiverType::CHARACTER_UPDATE_ACTION },
+        { "character_update_structure", MessageReceiverType::CHARACTER_UPDATE_STRUCTURE },
         { "character_update_location", MessageReceiverType::CHARACTER_UPDATE_LOCATION },
     };
 

@@ -23,6 +23,9 @@ public:
     std::string label() const;
     void setLabel( const std::string& label );
 
+    std::string structure() const;
+    void setStructure( const std::string& structure );
+
     int duration() const;
     void setDuration( int duration );
 
@@ -37,6 +40,7 @@ public:
 private:
     std::string _id;
     std::string _label;
+    std::string _structure;
     int _duration;
     std::vector<LocationActionRequirement> _requirements;
     std::vector<LocationActionExperience> _experience;

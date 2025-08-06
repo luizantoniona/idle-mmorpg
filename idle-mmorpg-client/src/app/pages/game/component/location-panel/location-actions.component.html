@@ -1,0 +1,16 @@
+<app-panel-vertical>
+    <div class="section">
+        <h3>Available Actions</h3>
+
+        <ng-container *ngIf="location.actions?.length; else noActions">
+            <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
+            <app-button *ngFor="let action of location.actions" [text]="action.label"
+                (clickEvent)="onActionClick(action.id)">
+            </app-button>
+        </ng-container>
+
+        <ng-template #noActions>
+            <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
+        </ng-template>
+    </div>
+</app-panel-vertical>

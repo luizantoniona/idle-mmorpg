@@ -4,6 +4,12 @@
     gap: 12px;
 }
 
+.location-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
 .section {
     display: flex;
     flex-direction: column;
@@ -11,12 +17,6 @@
     align-items: center;
 }
 
-.action-row {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-}
-
-.action-row app-panel-vertical {
+.location-row app-panel-vertical {
     width: 100%;
 }

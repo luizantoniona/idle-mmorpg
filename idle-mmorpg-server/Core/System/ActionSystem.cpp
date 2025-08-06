@@ -37,6 +37,10 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
         return false;
     }
 
+    if ( !action.structure().empty() && character->coordinates().currentStructure() != action.structure() ) {
+        return false;
+    }
+
     for ( const auto& requirement : action.requirements() ) {
         const std::string& type = requirement.type();
         const std::string& id = requirement.id();
@@ -75,6 +79,8 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     std::string actionId = payload[ "actionId" ].asString();
 
+    //TODO: Treat special actions separated -> Idle - Combat - Train
+
     if ( actionId == "idle" ) {
         Model::CharacterAction& action = character->action();
         action.setIdAction( actionId );
@@ -87,8 +93,8 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     const auto& actions = _location->actions();
     auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-        return action.id() == actionId;
-    } );
+            return action.id() == actionId;
+        } );
 
     if ( it == actions.end() ) {
         return;
@@ -121,8 +127,8 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
         const auto& actions = _location->actions();
         auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            return action.id() == characterAction.idAction();
-        } );
+                return action.id() == characterAction.idAction();
+            } );
 
         if ( it != actions.end() ) {
             const Model::LocationAction& completedAction = *it;

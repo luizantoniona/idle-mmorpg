@@ -1,5 +1,12 @@
 #include "CharacterCoordinates.h"
 
+namespace {
+constexpr const char* JSON_X = "x";
+constexpr const char* JSON_Y = "y";
+constexpr const char* JSON_Z = "z";
+constexpr const char* JSON_STRUCTURE = "structure";
+} // namespace
+
 namespace Model {
 
 CharacterCoordinates::CharacterCoordinates() :
@@ -8,19 +15,15 @@ CharacterCoordinates::CharacterCoordinates() :
     _z( 0 ),
     _xSpawn( 0 ),
     _ySpawn( 0 ),
-    _zSpawn( 0 ) {}
+    _zSpawn( 0 ),
+    _currentStructure( "" ) {}
 
 Json::Value CharacterCoordinates::toJson() {
     Json::Value root;
-
-    root[ "x" ] = x();
-    root[ "y" ] = y();
-    root[ "z" ] = z();
-
-    root[ "xSpawn" ] = xSpawn();
-    root[ "ySpawn" ] = ySpawn();
-    root[ "zSpawn" ] = zSpawn();
-
+    root[ JSON_X ] = x();
+    root[ JSON_Y ] = y();
+    root[ JSON_Z ] = z();
+    root[ JSON_STRUCTURE ] = currentStructure();
     return root;
 }
 
@@ -70,6 +73,14 @@ int CharacterCoordinates::zSpawn() const {
 
 void CharacterCoordinates::setZSpawn( int zSpawn ) {
     _zSpawn = zSpawn;
+}
+
+std::string CharacterCoordinates::currentStructure() const {
+    return _currentStructure;
+}
+
+void CharacterCoordinates::setCurrentStructure( const std::string& currentStructure ) {
+    _currentStructure = currentStructure;
 }
 
 } // namespace Model

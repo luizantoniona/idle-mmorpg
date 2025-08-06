@@ -1,11 +1,12 @@
-import type { CharacterAction } from "./character-action.model";
-import type { CharacterAttributes } from "./character-attributes.model";
-import type { CharacterEquipment } from "./character-equipment.model";
-import type { CharacterInventory } from "./character-inventory.model";
-import type { CharacterProgression } from "./character-progression.model";
-import type { CharacterSkill } from "./character-skill.model";
-import type { CharacterVitals } from "./character-vitals.model";
-import type { CharacterWallet } from "./character-wallet.model";
+import { CharacterAction } from "./character-action.model";
+import { CharacterAttributes } from "./character-attributes.model";
+import { CharacterCoordinates } from "./character-coordinates.model";
+import { CharacterEquipment } from "./character-equipment.model";
+import { CharacterInventory } from "./character-inventory.model";
+import { CharacterProgression } from "./character-progression.model";
+import { CharacterSkill } from "./character-skill.model";
+import { CharacterVitals } from "./character-vitals.model";
+import { CharacterWallet } from "./character-wallet.model";
 
 export type Character = {
     idUser: number;
@@ -13,6 +14,7 @@ export type Character = {
     name: string;
     action: CharacterAction;
     attributes: CharacterAttributes;
+    coordinates: CharacterCoordinates;
     equipament: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;

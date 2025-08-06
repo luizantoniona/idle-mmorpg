@@ -1,0 +1,12 @@
+<app-panel-vertical>
+
+    <ng-container *ngIf="character.action; else loading">
+        <app-bar *ngIf="character.action?.idAction" [label]="character.action.idAction"
+            [value]="character.action.counter" [max]="character.action.duration" color="#2196f3"></app-bar>
+    </ng-container>
+
+    <ng-template #loading>
+        <app-loading></app-loading>
+    </ng-template>
+
+</app-panel-vertical>

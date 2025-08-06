@@ -7,6 +7,7 @@ enum class MessageReceiverType {
     UNKNOWN,
 
     CHARACTER_UPDATE_ACTION,
+    CHARACTER_UPDATE_STRUCTURE,
     CHARACTER_UPDATE_LOCATION,
 };
 

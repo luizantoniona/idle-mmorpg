@@ -1,6 +1,8 @@
 #ifndef CHARACTERCOORDINATES_H
 #define CHARACTERCOORDINATES_H
 
+#include <string>
+
 #include <json/json.h>
 
 namespace Model {
@@ -29,6 +31,9 @@ public:
     int zSpawn() const;
     void setZSpawn( int zSpawn );
 
+    std::string currentStructure() const;
+    void setCurrentStructure( const std::string& currentStructure );
+
 private:
     int _x;
     int _y;
@@ -36,6 +41,7 @@ private:
     int _xSpawn;
     int _ySpawn;
     int _zSpawn;
+    std::string _currentStructure;
 };
 
 } // namespace Model

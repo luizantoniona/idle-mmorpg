@@ -49,12 +49,13 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
     MessageReceiverType type = MessageHelper::stringToType( root[ "type" ].asString() );
     Json::Value payload = root[ "payload" ];
     switch ( type ) {
-    case MessageReceiverType::CHARACTER_UPDATE_ACTION: {
-        locationInstance->handleCharacterMessage( sessionId, type, payload );
-        break;
-    }
-    default:
-        break;
+        case MessageReceiverType::CHARACTER_UPDATE_STRUCTURE:
+        case MessageReceiverType::CHARACTER_UPDATE_ACTION: {
+            locationInstance->handleCharacterMessage( sessionId, type, payload );
+            break;
+        }
+        default:
+            break;
     }
 }
 

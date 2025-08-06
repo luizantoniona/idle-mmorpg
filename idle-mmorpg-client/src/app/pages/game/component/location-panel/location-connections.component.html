@@ -1,0 +1,8 @@
+<app-panel-vertical>
+    <div class="section">
+        <h3>Connections</h3>
+        <app-button *ngFor="let connection of location.connections" [text]="connection.destination"
+            (clickEvent)="onConnectionClick(connection.destination)">
+        </app-button>
+    </div>
+</app-panel-vertical>

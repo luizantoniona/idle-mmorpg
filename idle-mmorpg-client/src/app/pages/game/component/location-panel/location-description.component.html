@@ -1,0 +1,12 @@
+<app-panel-vertical>
+
+    <ng-container *ngIf="location; else loading">
+        <h3>{{ location.name }}</h3>
+        <p class="description">{{ location.description }}</p>
+    </ng-container>
+
+    <ng-template #loading>
+        <app-loading></app-loading>
+    </ng-template>
+
+</app-panel-vertical>

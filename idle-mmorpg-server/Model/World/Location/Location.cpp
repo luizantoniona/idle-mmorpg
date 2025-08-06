@@ -1,5 +1,15 @@
 #include "Location.h"
 
+namespace {
+constexpr const char* JSON_ID = "id";
+constexpr const char* JSON_NAME = "name";
+constexpr const char* JSON_DESCRIPTION = "description";
+constexpr const char* JSON_X = "x";
+constexpr const char* JSON_Y = "y";
+constexpr const char* JSON_Z = "z";
+constexpr const char* JSON_STRUCTURES = "structures";
+} // namespace
+
 namespace Model {
 
 Location::Location() :
@@ -9,17 +19,21 @@ Location::Location() :
     _x( 0 ),
     _y( 0 ),
     _z( 0 ),
-    _actions( {} ) {}
+    _actions( {} ),
+    _structures( {} ) {}
 
 Json::Value Location::toJson() {
     Json::Value root;
+    root[ JSON_ID ] = id();
+    root[ JSON_NAME ] = name();
+    root[ JSON_DESCRIPTION ] = description();
+    root[ JSON_X ] = x();
+    root[ JSON_Y ] = y();
+    root[ JSON_Z ] = z();
 
-    root[ "id" ] = id();
-    root[ "name" ] = name();
-    root[ "description" ] = description();
-    root[ "x" ] = x();
-    root[ "y" ] = y();
-    root[ "z" ] = z();
+    for ( auto& structure : structures() ) {
+        root[JSON_STRUCTURES].append( structure.toJson() );
+    }
 
     return root;
 }
@@ -80,8 +94,20 @@ void Location::setActions( const std::vector<LocationAction>& actions ) {
     _actions = actions;
 }
 
-void Location::addAction( const LocationAction action ) {
+void Location::addAction( const LocationAction& action ) {
     _actions.push_back( action );
+}
+
+const std::vector<LocationStructure>& Location::structures() const {
+    return _structures;
+}
+
+void Location::setStructures( const std::vector<LocationStructure>& structures ) {
+    _structures = structures;
+}
+
+void Location::addStructure( const LocationStructure& structure ) {
+    _structures.push_back( structure );
 }
 
 } // namespace Model

@@ -1,0 +1,14 @@
+<app-panel-vertical>
+    <div class="section">
+
+        <h3>Structures</h3>
+
+        <app-button text="Leave" (clickEvent)="onStructureClick('')"></app-button>
+        <ng-container *ngIf="location.structures?.length;">
+            <app-button *ngFor="let structure of location.structures" [text]="structure.label"
+                (clickEvent)="onStructureClick(structure.id)">
+            </app-button>
+        </ng-container>
+
+    </div>
+</app-panel-vertical>

@@ -18,6 +18,7 @@ void LocationInstance::notifyCharacter( const std::string& sessionId, Model::Cha
     Json::Value characterJson = character->toJson();
     characterJson[ "action" ] = character->action().toJson();
     characterJson[ "attributes" ] = character->attributes().toJson();
+    characterJson[ "coordinates" ] = character->coordinates().toJson();
     characterJson[ "inventory" ] = character->inventory().toJson();
     characterJson[ "equipament" ] = character->equipament().toJson();
     characterJson[ "progression" ] = character->progression().toJson();

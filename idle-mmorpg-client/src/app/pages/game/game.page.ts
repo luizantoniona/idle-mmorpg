@@ -202,24 +202,4 @@ export class GamePage implements OnInit, OnDestroy {
     sendMessage(data: any): void {
         this.websocketService.send(data);
     }
-
-    onActionClick(actionId: string): void {
-        if (!this.character) return;
-        this.sendMessage({
-            type: 'character_update_action',
-            payload: {
-                actionId: actionId,
-            },
-        });
-    }
-
-    onConnectionClick(destination: string): void {
-        if (!this.character) return;
-        this.sendMessage({
-            type: 'character_update_location',
-            payload: {
-                destination: destination,
-            },
-        });
-    }
 }
