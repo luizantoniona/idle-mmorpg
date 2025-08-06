@@ -1,0 +1,19 @@
+{
+    "structures": [
+        {
+            "id": "campfire",
+            "label": "Campfire",
+            "description": "A warm fire to rest and regain your strength."
+        },
+        {
+            "id": "training_dummy",
+            "label": "Training Dummy",
+            "description": "A wooden dummy used to practice combat."
+        },
+        {
+            "id": "altar_of_light",
+            "label": "Altar of Light",
+            "description": "A mysterious altar that glows faintly."
+        }
+    ]
+}
