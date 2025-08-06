@@ -8,23 +8,11 @@
 namespace Repository {
 
 CharacterEquipmentRepository::CharacterEquipmentRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
     const std::string sql = R"SQL(
-        INSERT INTO character_equipment (
-            id_character,
-            head_item_id,
-            chest_item_id,
-            legs_item_id,
-            boots_item_id,
-            gloves_item_id,
-            left_hand_item_id,
-            right_hand_item_id,
-            amulet_item_id,
-            ring_item_id
-        ) VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+        INSERT INTO character_equipment (id_character) VALUES (?)
     )SQL";
 
     Database::Query query( _db, sql );
@@ -43,7 +31,12 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, const Model
             left_hand_item_id = ?,
             right_hand_item_id = ?,
             amulet_item_id = ?,
-            ring_item_id = ?
+            ring_item_id = ?,
+            pickaxe_item_id = ?,
+            woodaxe_item_id = ?,
+            rod_item_id = ?,
+            shovel_item_id = ?,
+            sickle_item_id = ?
         WHERE id_character = ?
     )SQL";
 
@@ -57,7 +50,12 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, const Model
     query.bindText( 7, equipment.rightHand().id() );
     query.bindText( 8, equipment.amulet().id() );
     query.bindText( 9, equipment.ring().id() );
-    query.bindInt( 10, idCharacter );
+    query.bindText( 10, equipment.pickaxe().id() );
+    query.bindText( 11, equipment.woodaxe().id() );
+    query.bindText( 12, equipment.rod().id() );
+    query.bindText( 13, equipment.shovel().id() );
+    query.bindText( 14, equipment.sickle().id() );
+    query.bindInt( 15, idCharacter );
 
     return query.exec();
 }
@@ -73,7 +71,12 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
             left_hand_item_id,
             right_hand_item_id,
             amulet_item_id,
-            ring_item_id
+            ring_item_id,
+            pickaxe_item_id,
+            woodaxe_item_id,
+            rod_item_id,
+            shovel_item_id,
+            sickle_item_id
         FROM character_equipment
         WHERE id_character = ?
     )SQL";
@@ -88,12 +91,12 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
     auto& manager = Commons::Singleton<Core::Manager::ItemManager>::instance();
     auto equipment = std::make_unique<Model::CharacterEquipment>();
 
-    auto makeItem = [ & ]( const std::string& id ) {
-        Model::CharacterEquipmentItem item;
-        item.setId( id );
-        item.setItem( manager.itemById( id ) );
-        return item;
-    };
+    auto makeItem = [&]( const std::string& id ) {
+                        Model::CharacterEquipmentItem item;
+                        item.setId( id );
+                        item.setItem( manager.itemById( id ) );
+                        return item;
+                    };
 
     equipment->setHead( makeItem( query.getColumnText( 0 ) ) );
     equipment->setChest( makeItem( query.getColumnText( 1 ) ) );
@@ -104,6 +107,11 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
     equipment->setRightHand( makeItem( query.getColumnText( 6 ) ) );
     equipment->setAmulet( makeItem( query.getColumnText( 7 ) ) );
     equipment->setRing( makeItem( query.getColumnText( 8 ) ) );
+    equipment->setPickaxe( makeItem( query.getColumnText( 9 ) ) );
+    equipment->setWoodaxe( makeItem( query.getColumnText( 10 ) ) );
+    equipment->setRod( makeItem( query.getColumnText( 11 ) ) );
+    equipment->setShovel( makeItem( query.getColumnText( 12 ) ) );
+    equipment->setSickle( makeItem( query.getColumnText( 13 ) ) );
 
     return equipment;
 }

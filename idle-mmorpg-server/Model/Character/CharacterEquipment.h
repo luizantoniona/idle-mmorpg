@@ -40,6 +40,21 @@ public:
     CharacterEquipmentItem ring() const;
     void setRing( const CharacterEquipmentItem& ring );
 
+    CharacterEquipmentItem pickaxe() const;
+    void setPickaxe( const CharacterEquipmentItem& pickaxe );
+
+    CharacterEquipmentItem woodaxe() const;
+    void setWoodaxe( const CharacterEquipmentItem& woodaxe );
+
+    CharacterEquipmentItem rod() const;
+    void setRod( const CharacterEquipmentItem& rod );
+
+    CharacterEquipmentItem shovel() const;
+    void setShovel( const CharacterEquipmentItem& shovel );
+
+    CharacterEquipmentItem sickle() const;
+    void setSickle( const CharacterEquipmentItem& sickle );
+
 private:
     CharacterEquipmentItem _head;
     CharacterEquipmentItem _chest;
@@ -52,6 +67,12 @@ private:
 
     CharacterEquipmentItem _amulet;
     CharacterEquipmentItem _ring;
+
+    CharacterEquipmentItem _pickaxe;
+    CharacterEquipmentItem _woodaxe;
+    CharacterEquipmentItem _rod;
+    CharacterEquipmentItem _shovel;
+    CharacterEquipmentItem _sickle;
 };
 
 } // namespace Model

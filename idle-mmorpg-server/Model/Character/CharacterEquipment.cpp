@@ -10,6 +10,11 @@ constexpr const char* JSON_LEFT_HAND = "leftHand";
 constexpr const char* JSON_RIGHT_HAND = "righHand";
 constexpr const char* JSON_AMULET = "amulet";
 constexpr const char* JSON_RING = "ring";
+constexpr const char* JSON_PICKAXE = "pickaxe";
+constexpr const char* JSON_WOODAXE = "woodaxe";
+constexpr const char* JSON_ROD = "rod";
+constexpr const char* JSON_SHOVEL = "shovel";
+constexpr const char* JSON_SICKLE = "sickle";
 } // namespace
 
 namespace Model {
@@ -23,8 +28,12 @@ CharacterEquipment::CharacterEquipment() :
     _leftHand(),
     _rightHand(),
     _amulet(),
-    _ring() {
-}
+    _ring(),
+    _pickaxe(),
+    _woodaxe(),
+    _rod(),
+    _shovel(),
+    _sickle() {}
 
 Json::Value CharacterEquipment::toJson() {
     Json::Value root;
@@ -37,6 +46,11 @@ Json::Value CharacterEquipment::toJson() {
     root[ JSON_RIGHT_HAND ] = rightHand().toJson();
     root[ JSON_AMULET ] = amulet().toJson();
     root[ JSON_RING ] = ring().toJson();
+    root[ JSON_PICKAXE ] = pickaxe().toJson();
+    root[ JSON_WOODAXE ] = woodaxe().toJson();
+    root[ JSON_ROD ] = rod().toJson();
+    root[ JSON_SHOVEL ] = shovel().toJson();
+    root[ JSON_SICKLE ] = sickle().toJson();
     return root;
 }
 
@@ -110,6 +124,46 @@ CharacterEquipmentItem CharacterEquipment::ring() const {
 
 void CharacterEquipment::setRing( const CharacterEquipmentItem& ring ) {
     _ring = ring;
+}
+
+CharacterEquipmentItem CharacterEquipment::pickaxe() const {
+    return _pickaxe;
+}
+
+void CharacterEquipment::setPickaxe( const CharacterEquipmentItem& pickaxe ) {
+    _pickaxe = pickaxe;
+}
+
+CharacterEquipmentItem CharacterEquipment::woodaxe() const {
+    return _woodaxe;
+}
+
+void CharacterEquipment::setWoodaxe( const CharacterEquipmentItem& woodaxe ) {
+    _woodaxe = woodaxe;
+}
+
+CharacterEquipmentItem CharacterEquipment::rod() const {
+    return _rod;
+}
+
+void CharacterEquipment::setRod( const CharacterEquipmentItem& rod ) {
+    _rod = rod;
+}
+
+CharacterEquipmentItem CharacterEquipment::shovel() const {
+    return _shovel;
+}
+
+void CharacterEquipment::setShovel( const CharacterEquipmentItem& shovel ) {
+    _shovel = shovel;
+}
+
+CharacterEquipmentItem CharacterEquipment::sickle() const {
+    return _sickle;
+}
+
+void CharacterEquipment::setSickle( const CharacterEquipmentItem& sickle ) {
+    _sickle = sickle;
 }
 
 } // namespace Model
