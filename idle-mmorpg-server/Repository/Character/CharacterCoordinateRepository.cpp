@@ -22,7 +22,7 @@ bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
     Database::Query query( _db, sql );
 
     query.bindInt( 1, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 bool CharacterCoordinateRepository::updateCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates ) {
@@ -46,7 +46,7 @@ bool CharacterCoordinateRepository::updateCoordinates( int idCharacter, const Mo
     query.bindInt( 6, coordinates.zSpawn() );
     query.bindInt( 7, idCharacter );
 
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Model::CharacterCoordinates> CharacterCoordinateRepository::findByCharacterId( int idCharacter ) {

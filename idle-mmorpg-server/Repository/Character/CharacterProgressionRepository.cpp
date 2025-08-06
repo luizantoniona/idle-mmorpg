@@ -19,7 +19,7 @@ bool CharacterProgressionRepository::createProgression( int idCharacter ) {
 
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 bool CharacterProgressionRepository::updateProgression( int idCharacter, const Model::CharacterProgression& progression ) {
@@ -35,7 +35,7 @@ bool CharacterProgressionRepository::updateProgression( int idCharacter, const M
     query.bindInt( 2, progression.experience() );
     query.bindInt( 3, idCharacter );
 
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Model::CharacterProgression> CharacterProgressionRepository::findByCharacterId( int idCharacter ) {

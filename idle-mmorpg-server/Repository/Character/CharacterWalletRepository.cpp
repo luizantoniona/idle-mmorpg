@@ -18,7 +18,7 @@ bool CharacterWalletRepository::createWallet( int idCharacter ) {
     )SQL";
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 bool CharacterWalletRepository::updateWallet( int idCharacter, const Model::CharacterWallet& wallet ) {
@@ -34,7 +34,7 @@ bool CharacterWalletRepository::updateWallet( int idCharacter, const Model::Char
     query.bindInt( 2, wallet.silver() );
     query.bindInt( 3, wallet.gold() );
     query.bindInt( 4, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Model::CharacterWallet> CharacterWalletRepository::findByCharacterId( int idCharacter ) {

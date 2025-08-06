@@ -6,8 +6,7 @@ namespace Database {
 
 Database::Database() :
     _database( nullptr ),
-    _databasePath( "" ) {
-}
+    _databasePath( "" ) {}
 
 Database::~Database() {
     close();
@@ -51,6 +50,8 @@ bool Database::open() {
         _database = nullptr;
         return false;
     }
+
+    sqlite3_exec( _database, "PRAGMA foreign_keys = ON;", nullptr, nullptr, nullptr );
 
     return true;
 }

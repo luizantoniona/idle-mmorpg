@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CharacterCardComponent } from '../character-card/character-card.component';
-import { PanelHorizontalComponent } from '../../../../component/panel/panel-horizontal.component';
 
 import type { Character } from '../../../../model';
 
@@ -12,7 +11,6 @@ import type { Character } from '../../../../model';
     imports: [
         CommonModule,
         CharacterCardComponent,
-        PanelHorizontalComponent
     ],
 })
 export class CharacterListComponent {

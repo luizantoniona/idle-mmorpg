@@ -1,16 +1,19 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { PanelVerticalComponent } from '../../../../component/panel/panel-vertical.component';
-import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
+
 import { ButtonComponent } from '../../../../component/button/button.component';
+import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
+import { PanelVerticalComponent } from '../../../../component/panel/panel-vertical.component';
+
 import { AuthService } from '../../../../service/auth.service';
 import { APIService } from '../../../../service/api.service';
 
 @Component({
     selector: 'app-login-form',
-    standalone: true,
+    templateUrl: './login-form.component.html',
+    styleUrls: ['./login-form.component.scss'],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -18,8 +21,6 @@ import { APIService } from '../../../../service/api.service';
         InputFieldComponent,
         ButtonComponent
     ],
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss']
 })
 
 export class LoginFormComponent {

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { ButtonComponent } from '../../component/button/button.component';
 import { PanelVerticalComponent } from '../../component/panel/panel-vertical.component'
+
+import { CharacterFormComponent } from './component/character-form/character-form.component';
 import { CharacterListComponent } from './component/character-list/character-list.component';
 
 import { APIService } from '../../service/api.service';
@@ -17,6 +19,7 @@ import type { Character } from '../../model';
         CommonModule,
         ButtonComponent,
         PanelVerticalComponent,
+        CharacterFormComponent,
         CharacterListComponent,
     ],
     templateUrl: './account.page.html',

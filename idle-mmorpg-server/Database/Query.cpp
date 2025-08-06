@@ -22,6 +22,11 @@ bool Query::step() {
     return result == SQLITE_ROW;
 }
 
+bool Query::exec() {
+    int result = sqlite3_step( _stmt );
+    return result == SQLITE_DONE;
+}
+
 void Query::reset() {
     sqlite3_reset( _stmt );
     sqlite3_clear_bindings( _stmt );

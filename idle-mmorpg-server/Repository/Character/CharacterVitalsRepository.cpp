@@ -25,7 +25,7 @@ bool CharacterVitalsRepository::createVitals( int idCharacter ) {
 
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 bool CharacterVitalsRepository::updateVitals( int idCharacter, const Model::CharacterVitals& vitals ) {
@@ -55,7 +55,7 @@ bool CharacterVitalsRepository::updateVitals( int idCharacter, const Model::Char
     query.bindDouble( 9, vitals.baseStaminaRegen() );
     query.bindInt( 10, idCharacter );
 
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Model::CharacterVitals> CharacterVitalsRepository::findByCharacterId( int idCharacter ) {

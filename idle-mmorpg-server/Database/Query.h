@@ -12,6 +12,7 @@ public:
     ~Query();
 
     bool step();
+    bool exec();
     void reset();
 
     bool bindInt( int index, int value );

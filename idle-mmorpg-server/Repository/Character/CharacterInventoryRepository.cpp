@@ -21,7 +21,7 @@ bool CharacterInventoryRepository::updateInventory( int idCharacter, Model::Char
     Database::Query deleteQuery( _db, deleteSql );
     deleteQuery.bindInt( 1, idCharacter );
 
-    if ( !deleteQuery.step() ) {
+    if ( !deleteQuery.exec() ) {
         return false;
     }
 
@@ -35,7 +35,7 @@ bool CharacterInventoryRepository::updateInventory( int idCharacter, Model::Char
         insertQuery.bindText( 2, item.id() );
         insertQuery.bindInt( 3, item.amount() );
 
-        if ( !insertQuery.step() ) {
+        if ( !insertQuery.exec() ) {
             return false;
         }
     }

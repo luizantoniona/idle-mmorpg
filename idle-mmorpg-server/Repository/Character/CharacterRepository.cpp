@@ -16,7 +16,7 @@ namespace Repository {
 CharacterRepository::CharacterRepository() :
     Repository() {}
 
-bool CharacterRepository::createCharacter( const int idUser, const std::string& dsName ) {
+int CharacterRepository::createCharacter( const int idUser, const std::string& dsName ) {
     const std::string sql = R"SQL(
         INSERT INTO character (
             id_user,
@@ -28,7 +28,7 @@ bool CharacterRepository::createCharacter( const int idUser, const std::string& 
     query.bindInt( 1, idUser );
     query.bindText( 2, dsName );
 
-    if ( !query.step() ) {
+    if ( !query.exec() ) {
         return false;
     }
 
@@ -45,7 +45,7 @@ bool CharacterRepository::createCharacter( const int idUser, const std::string& 
     success &= CharacterVitalsRepository().createVitals( idCharacter );
     success &= CharacterWalletRepository().createWallet( idCharacter );
 
-    return success;
+    return success ? idCharacter : 0;
 }
 
 bool CharacterRepository::updateCharacter( Model::Character character ) {

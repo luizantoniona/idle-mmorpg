@@ -13,7 +13,7 @@ class CharacterRepository : public Repository {
 public:
     explicit CharacterRepository();
 
-    bool createCharacter( const int idUser, const std::string& dsName );
+    int createCharacter( const int idUser, const std::string& dsName );
     bool updateCharacter( Model::Character character );
 
     std::vector<std::unique_ptr<Model::Character> > findAllByIdUser( const int idUser );

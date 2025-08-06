@@ -5,8 +5,7 @@
 namespace Repository {
 
 CharacterAttributesRepository::CharacterAttributesRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterAttributesRepository::createAttributes( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -23,7 +22,7 @@ bool CharacterAttributesRepository::createAttributes( int idCharacter ) {
     Database::Query query( _db, sql );
 
     query.bindInt( 1, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 bool CharacterAttributesRepository::updateAttributes( int idCharacter, const Model::CharacterAttributes& attributes ) {
@@ -47,7 +46,7 @@ bool CharacterAttributesRepository::updateAttributes( int idCharacter, const Mod
     query.bindDouble( 6, attributes.baseCharisma() );
     query.bindInt( 7, idCharacter );
 
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Model::CharacterAttributes> CharacterAttributesRepository::findByCharacterId( int idCharacter ) {

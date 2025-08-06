@@ -29,7 +29,7 @@ bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
 
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
-    return query.step();
+    return query.exec();
 }
 
 bool CharacterEquipmentRepository::updateEquipment( int idCharacter, const Model::CharacterEquipment& equipment ) {
@@ -59,7 +59,7 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, const Model
     query.bindText( 9, equipment.ring().id() );
     query.bindInt( 10, idCharacter );
 
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByCharacterId( int idCharacter ) {

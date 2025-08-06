@@ -30,7 +30,7 @@ bool CharacterSkillsRepository::updateSkills( int idCharacter, Model::CharacterS
         upsertQuery.bindInt( 3, skill.experience() );
         upsertQuery.bindInt( 4, skill.level() );
 
-        if ( !upsertQuery.step() ) {
+        if ( !upsertQuery.exec() ) {
             return false;
         }
     }
