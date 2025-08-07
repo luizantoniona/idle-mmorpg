@@ -10,13 +10,9 @@
     gap: 12px;
 }
 
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-}
-
-.location-row app-panel-vertical {
-    width: 100%;
+.location-row app-location-actions-panel,
+.location-row app-location-structures-panel,
+.location-row app-location-description-panel,
+.location-row app-location-connections-panel {
+    flex: 1;
 }
