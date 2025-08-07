@@ -39,9 +39,15 @@
         {
             "id": "train",
             "label": "Train with a wooden dummy",
-            "structure": "training_dummy",
+            "duration": 100,
+            "structure": "training_fields",
             "requirements": [],
-            "experience": []
+            "experience": [
+                {
+                    "skill": "combat",
+                    "amount": 1
+                }
+            ]
         }
     ]
 }

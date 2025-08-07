@@ -2,19 +2,23 @@
     "skills": [
         {
             "id": "mining",
-            "path": "skills/mining.json"
+            "path": "skills/gathering/mining.json"
         },
         {
             "id": "fishing",
-            "path": "skills/fishing.json"
-        },
-        {
-            "id": "resting",
-            "path": "skills/resting.json"
+            "path": "skills/gathering/fishing.json"
         },
         {
             "id": "woodcutting",
-            "path": "skills/woodcutting.json"
+            "path": "skills/gathering/woodcutting.json"
+        },
+        {
+            "id": "resting",
+            "path": "skills/recovery/resting.json"
+        },
+        {
+            "id": "unarmed",
+            "path": "skills/combat/unarmed.json"
         }
     ]
 }
