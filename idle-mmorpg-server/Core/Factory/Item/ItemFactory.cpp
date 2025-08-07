@@ -11,8 +11,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
 
     std::unordered_map<std::string, std::unique_ptr<Model::Item> > items;
 
-    const std::string basePath = itemsPath;
-    Json::Value itemsConfig = Commons::JsonHelper::loadJsonFile( basePath + "items.json" );
+    Json::Value itemsConfig = Commons::JsonHelper::loadJsonFile( itemsPath + "items.json" );
 
     for ( const auto& typeEntry : itemsConfig[ "types" ] ) {
 
