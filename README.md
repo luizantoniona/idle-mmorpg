@@ -1,7 +1,7 @@
 # 🛡️🧙 iMMO — Idle-mmorpg
 
 <p align="center">
-  <img src="icon.512.png" alt="iMMO Logo"/>
+  <img src="documentation/images/icon.512.png" alt="iMMO Logo"/>
 </p>
 
 # 💡 Motivation
@@ -17,32 +17,69 @@ This project was envisioned, created, and is maintained by:
 - 🌐 Build a scalable multiplayer backend in **C++**  
 - 💬 Offer real-time interaction via **WebSocket** and web interface  
 
-# 📦 Repositories
-The project is structured:
-- [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data) – All game data: items, world map, character skills, and more.
-- [`idle-mmorpg-server`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-server) – C++ server.
-- [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client) – Web interface for players.
+# 📦 Project Organization:
 
-# 🧱 Architecture Overview
-The project is composed of three main parts, working together to provide a scalable and interactive idle MMORPG experience:
+## ⚙️ [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
+- **Data Project**
+  - Tools and scripts to generate, validate, and maintain game content.
+  - Outputs JSON files that are consumed by the server.
+  - Easily expandable to support balancing, batch editing, or procedural generation.
 
-TODO: Generate Graphic Workflow
+### 🗡️ **idle-mmorpg-item**:  
+Modular item data.  
+This folder defines the items structure used by the game server.
 
-### 🔁 Flow Summary
-- **Web Client**
-  - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.
-  - Built with web tooling (Angular and Typescript).
+### 🗺️ **idle-mmorpg-map**:  
+Modular map data.  
+This folder defines the world structure, continents, areas, enemies, NPCs, and navigation logic used by the game server.
 
+### 🤺 **idle-mmorpg-skill**:  
+Modular skills data.  
+This folder defines all the skills in game.
+
+### ⚙️ **utility**:  
+Tools and scripts.  
+This folder has the tools and scripts to visualize and generate the data information.
+
+### 📖 **Documentation**:  
+TODO
+
+## 🛡️ [`idle-mmorpg-server`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-server)
 - **C++ Server**
   - Central game logic and state management.
   - Manages user sessions, world state, entities, and events.
   - Communicates with the client via API and WebSocket.
   - Loads static game data (items, maps, skills) at runtime from JSON files.
 
-- **Data Project**
-  - Tools and scripts to generate, validate, and maintain game content.
-  - Outputs JSON files that are consumed by the server.
-  - Easily expandable to support balancing, batch editing, or procedural generation.
+Base URL: http://localhost:8080
+
+### 📖 **Documentation**:  
+[`API`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/API.md) – API requests documentation.  
+[`WebSocket`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/WebSocket.md) – WebSocket messages documentation.  
+
+## ⚔️ [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client)
+- **Web Client**
+  - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.
+  - Built with web tooling (Angular and Typescript).
+
+### 📖 **Documentation**:  
+TODO
+
+### 🖼️ **Images**:  
+Login Page:
+<div align="left">
+  <img src="documentation/images/login.png" alt="Login" height="500"/>
+</div>
+
+Account Page:
+<p align="left">
+  <img src="documentation/images/account.png" alt="Account" height="500"/>
+</p>
+
+Game Page:
+<p align="lfet">
+  <img src="documentation/images/game.png" alt="Game" height="500"/>
+</p>
 
 # 🚀 Running
 These instructions will help you set up the project locally for development and testing.
