@@ -84,8 +84,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         location->addStructure( structure );
     }
 
-    std::string enemiesJsonPath = locationPath + "/enemies.json";
-    Json::Value enemiesJson = Commons::JsonHelper::loadJsonFile( enemiesJsonPath );
+    std::string creaturesJsonPath = locationPath + "/creatures.json";
+    Json::Value creaturesJson = Commons::JsonHelper::loadJsonFile( creaturesJsonPath );
 
     return location;
 }

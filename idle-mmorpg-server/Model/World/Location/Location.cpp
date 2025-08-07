@@ -20,6 +20,7 @@ Location::Location() :
     _y( 0 ),
     _z( 0 ),
     _actions( {} ),
+    _creatures( {} ),
     _structures( {} ) {}
 
 Json::Value Location::toJson() const {
@@ -96,6 +97,18 @@ void Location::setActions( const std::vector<LocationAction>& actions ) {
 
 void Location::addAction( const LocationAction& action ) {
     _actions.push_back( action );
+}
+
+std::vector<LocationCreature> Location::creatures() const {
+    return _creatures;
+}
+
+void Location::setCreatures( const std::vector<LocationCreature>& creatures ) {
+    _creatures = creatures;
+}
+
+void Location::addCreature( const LocationCreature& creature ) {
+    _creatures.push_back( creature );
 }
 
 const std::vector<LocationStructure>& Location::structures() const {
