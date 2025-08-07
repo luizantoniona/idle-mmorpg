@@ -1,0 +1,11 @@
+{
+    "categories": [
+        {
+            "category": "trophy",
+            "path": "trophies",
+            "items": [
+                "rat_tail"
+            ]
+        }
+    ]
+}

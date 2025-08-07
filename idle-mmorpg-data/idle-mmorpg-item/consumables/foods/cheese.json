@@ -1,0 +1,8 @@
+{
+    "id": "cheese",
+    "name": "Cheese",
+    "description": "A simple chunk of cheese. Smells... questionable.",
+    "rarity": "common",
+    "value": 1,
+    "modifiers": []
+}

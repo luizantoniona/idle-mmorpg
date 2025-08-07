@@ -32,7 +32,7 @@
         },
         {
             "id": "combat",
-            "label": "Fight with mobs",
+            "label": "Fight with location enemies",
             "requirements": [],
             "experience": []
         },

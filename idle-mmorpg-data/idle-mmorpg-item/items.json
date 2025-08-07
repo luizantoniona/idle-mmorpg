@@ -1,16 +1,24 @@
 {
     "types": [
         {
-            "type": "consumables"
+            "type": "consumable",
+            "path": "consumables"
         },
         {
-            "type": "equipments"
+            "type": "equipment",
+            "path": "equipments"
         },
         {
-            "type": "tools"
+            "type": "miscellaneous",
+            "path": "miscellaneous"
         },
         {
-            "type": "weapons"
+            "type": "tool",
+            "path": "tools"
+        },
+        {
+            "type": "weapon",
+            "path": "weapons"
         }
     ]
 }

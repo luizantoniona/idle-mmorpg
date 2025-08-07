@@ -1,3 +1,11 @@
 {
-    "categories": []
+    "categories": [
+        {
+            "category": "food",
+            "path": "foods",
+            "items": [
+                "cheese"
+            ]
+        }
+    ]
 }

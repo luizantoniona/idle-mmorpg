@@ -1,11 +1,8 @@
 {
     "id": "wooden_pickaxe",
-    "type": "tool",
-    "category": "pickaxe",
     "name": "Wooden Pickaxe",
     "description": "A basic pickaxe made of wood.",
     "rarity": "common",
-    "icon": ".png",
     "value": 10,
     "modifiers": []
 }

@@ -18,8 +18,8 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
     for ( const auto& typeEntry : itemsConfig[ "types" ] ) {
 
         std::string type = typeEntry[ "type" ].asString();
-        std::string typesPath = itemsPath + type + "/";
-        Json::Value typesConfig = Commons::JsonHelper::loadJsonFile( typesPath + type + ".json" );
+        std::string typesPath = itemsPath + typeEntry[ "path" ].asString() + "/";
+        Json::Value typesConfig = Commons::JsonHelper::loadJsonFile( typesPath + typeEntry[ "path" ].asString() + ".json" );
 
         for ( const auto& categoryEntry : typesConfig[ "categories" ] ) {
 
@@ -34,6 +34,9 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
                 auto item = createItem( itemFilePath );
                 if ( item ) {
                     item->setId( itemId );
+                    item->setType( type );
+                    item->setCategory( category );
+                    item->setIcon( itemId + ".png" );
                     items[itemId] = std::move( item );
 
                 } else {
@@ -56,11 +59,8 @@ std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPat
     auto item = std::make_unique<Model::Item>();
     item->setName( itemJson[ "name" ].asString() );
     item->setDescription( itemJson[ "description" ].asString() );
-    item->setType( itemJson[ "type" ].asString() );
-    item->setCategory( itemJson[ "category" ].asString() );
     item->setRarity( itemJson[ "rarity" ].asString() );
     item->setValue( itemJson[ "value" ].asInt() );
-    item->setIcon( itemJson[ "icon" ].asString() );
 
     if ( itemJson.isMember( "modifiers" ) && itemJson["modifiers"].isArray() ) {
         const Json::Value& modifiersJson = itemJson["modifiers"];
