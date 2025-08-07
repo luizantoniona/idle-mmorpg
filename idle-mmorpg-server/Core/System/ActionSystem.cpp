@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include <Commons/ActionsHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 
@@ -12,61 +13,6 @@ ActionSystem::ActionSystem( Model::Location* location ) :
     _notificationSystem(),
     _sender(),
     _progressionSystem() {
-}
-
-void ActionSystem::notifyCharacterActions( const std::string& sessionId, Model::Character* character ) {
-    Json::Value payloadLocationActions;
-    Json::Value availableActions;
-
-    for ( auto action : _location->actions() ) {
-        if ( canPerformAction( character, action ) ) {
-            availableActions.append( action.toJson() );
-        }
-    }
-
-    payloadLocationActions[ "actions" ] = availableActions;
-    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
-}
-
-bool Core::System::ActionSystem::canPerformAction( Model::Character* character, const Model::LocationAction& action ) {
-    if ( !character ) {
-        return false;
-    }
-
-    const std::string& characterStructure = character->coordinates().currentStructure();
-    const std::string& actionStructure = action.structure();
-
-    if ( !actionStructure.empty() && characterStructure != actionStructure ) {
-        return false;
-    }
-
-    if ( actionStructure.empty() && !characterStructure.empty() ) {
-        return false;
-    }
-
-    for ( const auto& requirement : action.requirements() ) {
-        const std::string& type = requirement.type();
-        const std::string& id = requirement.id();
-
-        if ( type == "skill" ) {
-
-            Model::CharacterSkill* skill = character->skills().skill( id );
-            if ( !skill || skill->level() < requirement.level() ) {
-                return false;
-            }
-
-        } else if ( type == "item" ) {
-            // TODO: Implementar verificação de inventário
-            // if ( !character->hasItemInCategory( requirement.category() ) ) {
-            return false;
-            // }
-
-        } else {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
@@ -100,7 +46,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     const Model::LocationAction& selectedAction = *it;
 
-    if ( !canPerformAction( character, selectedAction ) ) {
+    if ( !Commons::ActionsHelper::canCharacterPerformAction( character, selectedAction ) ) {
         return;
     }
 
@@ -126,7 +72,7 @@ void ActionSystem::changeStructure( const std::string& sessionId, Model::Charact
 
     _notificationSystem.notifyCurrentAction( sessionId, character );
     _notificationSystem.notifyCurrentCoordinates( sessionId, character );
-    notifyCharacterActions( sessionId, character );
+    _notificationSystem.notifyLocationActions( sessionId, character, _location );
 }
 
 void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {

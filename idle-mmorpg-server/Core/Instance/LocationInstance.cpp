@@ -27,7 +27,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
 
     _notificationSystem.notifyFullCharacter( sessionId, character );
     _notificationSystem.notifyFullLocation( sessionId, _location );
-    _actionSystem.notifyCharacterActions( sessionId, character );
+    _notificationSystem.notifyLocationActions( sessionId, character, _location );
 
     return true;
 }

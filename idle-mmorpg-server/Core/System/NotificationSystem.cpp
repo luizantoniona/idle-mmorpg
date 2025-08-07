@@ -1,5 +1,7 @@
 #include "NotificationSystem.h"
 
+#include <Commons/ActionsHelper.h>
+
 namespace Core::System {
 
 NotificationSystem::NotificationSystem() :
@@ -63,6 +65,17 @@ void NotificationSystem::notifyFullLocation( const std::string& sessionId, const
 }
 
 void NotificationSystem::notifyLocationActions( const std::string& sessionId, Model::Character* character, const Model::Location* location ) {
+    Json::Value payloadLocationActions;
+    Json::Value availableActions;
+
+    for ( auto action : location->actions() ) {
+        if ( Commons::ActionsHelper::canCharacterPerformAction( character, action ) ) {
+            availableActions.append( action.toJson() );
+        }
+    }
+
+    payloadLocationActions[ "actions" ] = availableActions;
+    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
 }
 
 } // namespace Core::System

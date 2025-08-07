@@ -15,15 +15,12 @@ class ActionSystem {
 public:
     explicit ActionSystem( Model::Location* location );
 
-    void notifyCharacterActions( const std::string& sessionId, Model::Character* character );
-
     void changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
     void changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
 
     void process( const std::string& sessionId, Model::Character* character );
 
 private:
-    bool canPerformAction( Model::Character* character, const Model::LocationAction& action );
     int computeActionDuration( Model::Character* character, const Model::LocationAction& action );
 
 private:
