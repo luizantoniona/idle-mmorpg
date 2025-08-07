@@ -2,10 +2,11 @@
 
 namespace Core::System {
 
-CombatSystem::CombatSystem() {
-}
+CombatSystem::CombatSystem( Model::Location* location ) :
+    _location( location ),
+    _notificationSystem(),
+    _progressionSystem() {}
 
-void CombatSystem::process( const std::string& sessionId, Model::Character* character ) {
-}
+void CombatSystem::process( const std::string& sessionId, Model::Character* character ) {}
 
 } // namespace Core::System

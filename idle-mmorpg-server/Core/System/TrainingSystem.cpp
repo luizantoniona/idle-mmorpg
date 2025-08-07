@@ -1,12 +1,13 @@
 #include "TrainingSystem.h"
 
+#include <algorithm>
+
 namespace Core::System {
 
 TrainingSystem::TrainingSystem( Model::Location* location ) :
     _location( location ),
     _notificationSystem(),
-    _progressionSystem() {
-}
+    _progressionSystem() {}
 
 void TrainingSystem::process( const std::string& sessionId, Model::Character* character ) {
     if ( !character ) {
@@ -19,8 +20,8 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
 
         auto& actions = _location->actions();
         auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            return action.id() == characterAction.id();
-        } );
+                return action.id() == characterAction.id();
+            } );
 
         if ( it == actions.end() ) {
             return;

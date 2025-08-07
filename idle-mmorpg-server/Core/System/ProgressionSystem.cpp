@@ -9,8 +9,7 @@
 namespace Core::System {
 
 ProgressionSystem::ProgressionSystem() :
-    _notificationSystem() {
-}
+    _notificationSystem() {}
 
 void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained ) {
     if ( !character ) {
@@ -39,7 +38,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         applyMilestone( character, characterSkill );
 
         _notificationSystem.notifyCharacterAttributes( sessionId, character );
-        _notificationSystem.notifyVitals();
+        _notificationSystem.notifyCharacterVitals( sessionId, character );
         _notificationSystem.notifyCharacterProgression( sessionId, character );
 
     } else {

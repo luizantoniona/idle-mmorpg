@@ -13,9 +13,8 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _characters( {} ),
     _notificationSystem(),
     _actionSystem( location ),
-    _combatSystem(),
-    _trainingSystem( location ) {
-}
+    _combatSystem( location ),
+    _trainingSystem( location ) {}
 
 bool LocationInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
     std::lock_guard lock( _mutex );
@@ -72,14 +71,14 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     Model::Character* character = it->second;
 
     switch ( type ) {
-    case Message::MessageReceiverType::CHARACTER_UPDATE_STRUCTURE:
-        _actionSystem.changeStructure( sessionId, character, payload );
-        break;
-    case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
-        _actionSystem.changeAction( sessionId, character, payload );
-        break;
-    default:
-        break;
+        case Message::MessageReceiverType::CHARACTER_UPDATE_STRUCTURE:
+            _actionSystem.changeStructure( sessionId, character, payload );
+            break;
+        case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
+            _actionSystem.changeAction( sessionId, character, payload );
+            break;
+        default:
+            break;
     }
 }
 
