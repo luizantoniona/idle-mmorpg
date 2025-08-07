@@ -5,6 +5,9 @@
 
 #include <Core/Message/MessageSender.h>
 #include <Model/Character/Character.h>
+#include <Model/Skill/Skill.h>
+
+#include "NotificationSystem.h"
 
 namespace Core::System {
 
@@ -12,13 +15,12 @@ class ProgressionSystem {
 public:
     ProgressionSystem();
 
-    void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
-    void notifyCharacterSkills( const std::string& sessionId, Model::Character* character );
-
     void applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained );
+    void applyMilestone( Model::Character* character, Model::CharacterSkill* characterSkill );
+    void applyMilestoneBonus( Model::Character* character, const Model::SkillMilestoneBonus milestoneBonus );
 
 private:
-    Core::Message::MessageSender _sender;
+    NotificationSystem _notificationSystem;
 };
 
 } // namespace Core::System

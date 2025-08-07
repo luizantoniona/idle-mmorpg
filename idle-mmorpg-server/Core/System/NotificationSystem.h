@@ -14,6 +14,10 @@ public:
     NotificationSystem();
 
     void notifyFullCharacter( const std::string& sessionId, Model::Character* character );
+    void notifyCharacterAttributes( const std::string& sessionId, Model::Character* character );
+    void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
+    void notifyCharacterSkills( const std::string& sessionId, Model::Character* character );
+    void notifyCharacterVitals( const std::string& sessionId, Model::Character* character );
 
     void notifyCurrentAction( const std::string& sessionId, Model::Character* character );
     void notifyCurrentCoordinates( const std::string& sessionId, Model::Character* character );

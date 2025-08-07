@@ -15,12 +15,13 @@ Character::Character() :
     _action(),
     _attributes(),
     _coordinates(),
-    _equipament(),
+    _equipment(),
     _inventory(),
     _progression(),
     _skills(),
     _vitals(),
-    _wallet() {}
+    _wallet() {
+}
 
 Json::Value Character::toJson() {
     Json::Value root;
@@ -78,12 +79,12 @@ void Character::setCoordinates( const CharacterCoordinates& coordinates ) {
     _coordinates = coordinates;
 }
 
-CharacterEquipment& Character::equipament() {
-    return _equipament;
+CharacterEquipment& Character::equipment() {
+    return _equipment;
 }
 
-void Character::setEquipament( const CharacterEquipment& equipament ) {
-    _equipament = equipament;
+void Character::setEquipment( const CharacterEquipment& equipment ) {
+    _equipment = equipment;
 }
 
 CharacterInventory& Character::inventory() {

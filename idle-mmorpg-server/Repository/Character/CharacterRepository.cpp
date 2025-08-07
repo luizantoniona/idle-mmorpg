@@ -55,7 +55,7 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
 
     success &= CharacterAttributesRepository().updateAttributes( idCharacter, character.attributes() );
     success &= CharacterCoordinateRepository().updateCoordinates( idCharacter, character.coordinates() );
-    success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipament() );
+    success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipment() );
     success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
     success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
     success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
@@ -98,9 +98,9 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
             character->setCoordinates( *coordinates );
         }
 
-        auto equipament = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
-        if ( equipament ) {
-            character->setEquipament( *equipament );
+        auto equipment = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
+        if ( equipment ) {
+            character->setEquipment( *equipment );
         }
 
         auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
@@ -164,9 +164,9 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
             character->setCoordinates( *coordinates );
         }
 
-        auto equipament = CharacterEquipmentRepository().findByCharacterId( idCharacter );
-        if ( equipament ) {
-            character->setEquipament( *equipament );
+        auto equipment = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
+        if ( equipment ) {
+            character->setEquipment( *equipment );
         }
 
         auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );

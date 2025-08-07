@@ -72,6 +72,7 @@ bool Core::System::ActionSystem::canPerformAction( Model::Character* character, 
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
     int baseDuration = action.duration();
     // TODO: Compute depending the action
+    // TODO: Treat special actions separated -> Combat - Train
     return baseDuration;
 }
 
@@ -81,8 +82,6 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
     }
 
     std::string actionId = payload[ "action" ].asString();
-
-    //TODO: Treat special actions separated -> Idle - Combat - Train
 
     if ( actionId == "idle" ) {
         character->action().clear();

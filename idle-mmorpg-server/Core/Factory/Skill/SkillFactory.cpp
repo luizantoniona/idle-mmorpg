@@ -49,7 +49,7 @@ std::unique_ptr<Model::Skill> SkillFactory::createSkill( const std::string& skil
 
             milestoneBonus.setType( bonusJson[ "type" ].asString() );
             milestoneBonus.setId( bonusJson[ "id" ].asString() );
-            milestoneBonus.setValue( bonusJson[ "value" ].asInt() );
+            milestoneBonus.setValue( bonusJson[ "value" ].asDouble() );
             milestone.addBonus( milestoneBonus );
         }
 

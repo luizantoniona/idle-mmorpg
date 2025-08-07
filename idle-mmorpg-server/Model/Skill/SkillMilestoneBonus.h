@@ -15,13 +15,13 @@ public:
     std::string id() const;
     void setId( const std::string& id );
 
-    int value() const;
-    void setValue( int value );
+    double value() const;
+    void setValue( double value );
 
 private:
     std::string _type;
     std::string _id;
-    int _value;
+    double _value;
 };
 
 } // namespace Model

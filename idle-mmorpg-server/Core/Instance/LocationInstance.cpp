@@ -11,9 +11,10 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _mutex(),
     _location( location ),
     _characters( {} ),
-    _sender(),
+    _notificationSystem(),
     _actionSystem( location ),
-    _notificationSystem() {
+    _combatSystem(),
+    _trainingSystem( location ) {
 }
 
 bool LocationInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
@@ -47,12 +48,12 @@ void LocationInstance::tick() {
         }
 
         if ( character->action().id() == "train" ) {
-            // TODO IMPLEMENT TRAINING
+            _trainingSystem.process( sessionId, character );
             continue;
         }
 
         if ( character->action().id() == "combat" ) {
-            // TODO IMPLEMENT COMBAT
+            _combatSystem.process( sessionId, character );
             continue;
         }
 

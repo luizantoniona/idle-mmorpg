@@ -41,8 +41,8 @@ public:
     CharacterCoordinates& coordinates();
     void setCoordinates( const CharacterCoordinates& coordinates );
 
-    CharacterEquipment& equipament();
-    void setEquipament( const CharacterEquipment& equipament );
+    CharacterEquipment& equipment();
+    void setEquipment( const CharacterEquipment& equipment );
 
     CharacterInventory& inventory();
     void setInventory( const CharacterInventory& inventory );
@@ -66,7 +66,7 @@ private:
     CharacterAction _action;
     CharacterAttributes _attributes;
     CharacterCoordinates _coordinates;
-    CharacterEquipment _equipament;
+    CharacterEquipment _equipment;
     CharacterInventory _inventory;
     CharacterProgression _progression;
     CharacterSkills _skills;

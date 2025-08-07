@@ -5,7 +5,7 @@ namespace Model {
 SkillMilestoneBonus::SkillMilestoneBonus() :
     _type( "" ),
     _id( "" ),
-    _value( 0 ) {
+    _value( 0.0 ) {
 }
 
 std::string SkillMilestoneBonus::type() const {
@@ -24,11 +24,11 @@ void SkillMilestoneBonus::setId( const std::string& id ) {
     _id = id;
 }
 
-int SkillMilestoneBonus::value() const {
+double SkillMilestoneBonus::value() const {
     return _value;
 }
 
-void SkillMilestoneBonus::setValue( int value ) {
+void SkillMilestoneBonus::setValue( double value ) {
     _value = value;
 }
 
