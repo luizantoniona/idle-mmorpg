@@ -1,27 +1,13 @@
 {
     "types": [
         {
-            "id": "animal",
-            "resistances": [],
-            "weaknesses": [],
+            "type": "animal",
             "creatures": [
                 "rat"
             ]
         },
         {
-            "id": "undead",
-            "resistances": [
-                {
-                    "type": "death",
-                    "modifier": 0.5
-                }
-            ],
-            "weaknesses": [
-                {
-                    "type": "holy",
-                    "modifier": 2.0
-                }
-            ],
+            "type": "undead",
             "creatures": [
                 "skeleton"
             ]

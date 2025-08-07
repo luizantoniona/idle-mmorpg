@@ -2,21 +2,18 @@
     "id": "skeleton",
     "name": "Skeleton",
     "description": "A reanimated skeleton held together by dark magic.",
-    "level": 5,
+    "experience": 35,
     "health": 50,
     "mana": 0,
     "defense": 2,
     "evasion": 5,
-    "attack": {
-        "min_damage": 0,
-        "max_damage": 25
-    },
+    "min_damage": 0,
+    "max_damage": 25,
     "loot": [
         {
             "id": "coin",
             "chance": 0.5,
             "amount": 2
         }
-    ],
-    "experience": 35
+    ]
 }

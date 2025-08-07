@@ -2,15 +2,13 @@
     "id": "rat",
     "name": "Rat",
     "description": "A aggressive rat with sharp teeth.",
-    "level": 1,
+    "experience": 5,
     "health": 20,
     "mana": 0,
     "defense": 1,
     "evasion": 5,
-    "attack": {
-        "min_damage": 0,
-        "max_damage": 8
-    },
+    "min_damage": 0,
+    "max_damage": 8,
     "loot": [
         {
             "id": "rat_tail",
@@ -22,6 +20,5 @@
             "chance": 0.1,
             "amount": 1
         }
-    ],
-    "experience": 5
+    ]
 }
