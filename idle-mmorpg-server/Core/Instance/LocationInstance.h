@@ -13,6 +13,8 @@
 #include <Model/Character/Character.h>
 #include <Model/World/Location/Location.h>
 
+#include "CombatInstance.h"
+
 namespace Core::Instance {
 
 class LocationInstance {
@@ -21,6 +23,10 @@ public:
 
     bool addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );
+
+    void createCombat( const std::string& sessionId, Model::Character* character );
+    void enterCombat( const std::string& sessionId, Model::Character* character, int roomId );
+    void exitCombat( const std::string& sessionId );
 
     void tick();
 
@@ -34,6 +40,9 @@ private:
     Core::System::ActionSystem _actionSystem;
     Core::System::CombatSystem _combatSystem;
     Core::System::TrainingSystem _trainingSystem;
+
+    std::vector<std::unique_ptr<CombatInstance> > _combatInstances;
+    std::unordered_map<std::string, CombatInstance*> _characterCombatCache;
 };
 
 } // namespace Core::Instance

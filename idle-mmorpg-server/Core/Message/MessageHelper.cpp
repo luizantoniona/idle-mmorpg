@@ -9,6 +9,10 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
         { "character_update_action", MessageReceiverType::CHARACTER_UPDATE_ACTION },
         { "character_update_structure", MessageReceiverType::CHARACTER_UPDATE_STRUCTURE },
         { "character_update_location", MessageReceiverType::CHARACTER_UPDATE_LOCATION },
+
+        { "combat_room_create", MessageReceiverType::COMBAT_ROOM_CREATE },
+        { "combat_room_enter", MessageReceiverType::COMBAT_ROOM_ENTER },
+        { "combat_room_exit", MessageReceiverType::COMBAT_ROOM_EXIT },
     };
 
     auto it = map.find( type );
@@ -44,6 +48,10 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
             return "location_update_position";
         case MessageSenderType::LOCATION_UPDATE_ACTIONS:
             return "location_update_actions";
+
+        case MessageSenderType::COMBAT_ROOMS_UPDATE:
+            return "combat_rooms_update";
+
         default:
             return "unknown";
     }

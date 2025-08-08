@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include <Core/Instance/CombatInstance.h>
 #include <Core/Message/MessageSender.h>
 #include <Model/Character/Character.h>
 #include <Model/World/Location/Location.h>
@@ -25,6 +26,8 @@ public:
 
     void notifyFullLocation( const std::string& sessionId, const Model::Location* location );
     void notifyLocationActions( const std::string& sessionId, Model::Character* character, const Model::Location* location );
+
+    void notifyCombatInstances( const std::string& sessionId, std::vector<Core::Instance::CombatInstance* > combatInstances );
 
 private:
     Message::MessageSender _sender;

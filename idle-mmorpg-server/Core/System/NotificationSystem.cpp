@@ -5,8 +5,7 @@
 namespace Core::System {
 
 NotificationSystem::NotificationSystem() :
-    _sender() {
-}
+    _sender() {}
 
 void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Model::Character* character ) {
     Json::Value characterJson = character->toJson();
@@ -83,6 +82,18 @@ void NotificationSystem::notifyLocationActions( const std::string& sessionId, Mo
 
     payloadLocationActions[ "actions" ] = availableActions;
     _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE_ACTIONS, payloadLocationActions );
+}
+
+void NotificationSystem::notifyCombatInstances( const std::string& sessionId, std::vector<Instance::CombatInstance*> combatInstances ) {
+    Json::Value payloadCombatInstances;
+    Json::Value combatArray;
+
+    for ( const auto* combat : combatInstances ) {
+        combatArray.append( combat->toJson() );
+    }
+
+    payloadCombatInstances["combat_instances"] = combatArray;
+    _sender.send( sessionId, Message::MessageSenderType::COMBAT_ROOMS_UPDATE, payloadCombatInstances );
 }
 
 } // namespace Core::System

@@ -9,6 +9,10 @@ enum class MessageReceiverType {
     CHARACTER_UPDATE_ACTION,
     CHARACTER_UPDATE_STRUCTURE,
     CHARACTER_UPDATE_LOCATION,
+
+    COMBAT_ROOM_CREATE,
+    COMBAT_ROOM_ENTER,
+    COMBAT_ROOM_EXIT,
 };
 
 } // namespace Core::Message
