@@ -2,27 +2,27 @@ import { Component, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ButtonComponent } from '../../../../component';
-import { LoadingComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
 
+import { Character } from '../../../../model';
 import { Location } from '../../../../model';
 
 import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
-    selector: 'app-connections-panel',
-    templateUrl: './connections-panel.component.html',
-    styleUrl: './connections-panel.component.scss',
+    selector: 'app-location-structures-panel',
+    templateUrl: './location-structures-panel.component.html',
+    styleUrl: './location-structures-panel.component.scss',
     imports: [
         CommonModule,
         ButtonComponent,
-        LoadingComponent,
         PanelVerticalComponent,
     ],
 })
 
-export class ConnectionsPanel {
+export class LocationStructuresPanel {
     @Input() location!: Location;
+    @Input() character!: Character;
 
     private websocketService = inject(WebsocketService);
 
@@ -30,11 +30,11 @@ export class ConnectionsPanel {
         this.websocketService.send(data);
     }
 
-    onConnectionClick(locationId: string): void {
+    onStructureClick(structure: string): void {
         this.sendMessage({
-            type: 'character_update_location',
+            type: 'character_update_structure',
             payload: {
-                locationId: locationId,
+                structure: structure,
             },
         });
     }

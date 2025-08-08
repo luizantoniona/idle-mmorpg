@@ -2,40 +2,46 @@ import { Component, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ButtonComponent } from '../../../../component';
+import { LoadingComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
 
-import { Character } from '../../../../model';
 import { Location } from '../../../../model';
 
 import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
-    selector: 'app-location-structures-panel',
-    templateUrl: './location-structures.component.html',
-    styleUrl: './location-structures.component.scss',
+    selector: 'app-location-connections-panel',
+    templateUrl: './location-connections-panel.component.html',
+    styleUrl: './location-connections-panel.component.scss',
     imports: [
         CommonModule,
         ButtonComponent,
+        LoadingComponent,
         PanelVerticalComponent,
     ],
 })
 
-export class LocationStructuresPanel {
+export class LocationConnectionsPanel {
     @Input() location!: Location;
-    @Input() character!: Character;
 
     private websocketService = inject(WebsocketService);
+
+    showPopup = false;
 
     sendMessage(data: any): void {
         this.websocketService.send(data);
     }
 
-    onStructureClick(structure: string): void {
+    onConnectionClick(locationId: string): void {
         this.sendMessage({
-            type: 'character_update_structure',
+            type: 'character_update_location',
             payload: {
-                structure: structure,
+                locationId: locationId,
             },
         });
+    }
+
+    onConnectionOpen() {
+        this.showPopup = !this.showPopup;
     }
 }

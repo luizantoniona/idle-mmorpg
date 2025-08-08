@@ -1,0 +1,22 @@
+<app-panel-vertical>
+    <app-button text="Connections" (clickEvent)="onConnectionOpen()"></app-button>
+
+    @if(showPopup){
+    <div class="popup-overlay" (click)="onConnectionOpen()">
+        <app-panel-vertical (click)="$event.stopPropagation()">
+            <div class="section">
+                <h2>Connections</h2>
+
+                @if(location && location.connections && location.connections.length) {
+                @for(connection of location.connections; track connection){
+                <app-button [text]="connection.destination" (clickEvent)="onConnectionClick(connection.destination)">
+                </app-button>
+                }
+                } @else {
+                <app-loading></app-loading>
+                }
+            </div>
+        </app-panel-vertical>
+    </div>
+    }
+</app-panel-vertical>

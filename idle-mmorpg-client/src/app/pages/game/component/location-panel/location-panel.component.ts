@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LocationActionsPanel } from './location-actions.component'
 import { LocationCharacterActionPanel } from './location-character-action.component';
 import { LocationDescriptionPanel } from './location-description.component';
-import { LocationStructuresPanel } from './location-structures.component';
+import { LocationStructuresPanel } from '../location-structures-panel/location-structures-panel.component';
 
 import { Character } from '../../../../model';
 import { Location } from '../../../../model';
