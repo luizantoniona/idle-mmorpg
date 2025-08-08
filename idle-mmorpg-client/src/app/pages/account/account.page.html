@@ -8,8 +8,12 @@
     <app-panel-vertical>
         <h2>Characters</h2>
         <app-character-list [characters]="characters" (onSelect)="handleStartGame($event)"></app-character-list>
-        <p *ngIf="loading">Loading...</p>
-        <p *ngIf="error" style="color: red;">Error: {{ error }}</p>
+        @if(loading){
+        <app-loading></app-loading>
+        }
+        @if(error){
+        <p style="color: red;">Error: {{ error }}</p>
+        }
     </app-panel-vertical>
 
     <app-character-form />

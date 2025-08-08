@@ -8,8 +8,9 @@
 
         <app-button text="Connect" type="submit" [disabled]="form.invalid || status === 'loading'" />
 
-        <app-panel-horizontal *ngIf="error">
-            <p style="color: red;">{{ error }}</p>
-        </app-panel-horizontal>
+        @if(error){
+        <p style="color: red;">Error: {{ error }}</p>
+        }
+
     </app-panel-horizontal>
 </form>

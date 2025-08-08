@@ -2,8 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { ButtonComponent } from '../../component/button/button.component';
-import { PanelVerticalComponent } from '../../component/panel/panel-vertical.component'
+import { ButtonComponent } from '../../component';
+import { LoadingComponent } from '../../component';
+import { PanelVerticalComponent } from '../../component';
 
 import { CharacterFormComponent } from './component/character-form/character-form.component';
 import { CharacterListComponent } from './component/character-list/character-list.component';
@@ -18,6 +19,7 @@ import type { Character } from '../../model';
     imports: [
         CommonModule,
         ButtonComponent,
+        LoadingComponent,
         PanelVerticalComponent,
         CharacterFormComponent,
         CharacterListComponent,

@@ -2,15 +2,14 @@
     <div class="section">
         <h3>Connections</h3>
 
-        <ng-container *ngIf="location; else loading">
-            <app-button *ngFor="let connection of location.connections" [text]="connection.destination"
-                (clickEvent)="onConnectionClick(connection.destination)">
-            </app-button>
-        </ng-container>
-
-        <ng-template #loading>
-            <app-loading></app-loading>
-        </ng-template>
+        @if(location && location.connections && location.connections.length) {
+        @for(connection of location.connections; track connection){
+        <app-button [text]="connection.destination" (clickEvent)="onConnectionClick(connection.destination)">
+        </app-button>
+        }
+        } @else {
+        <app-loading></app-loading>
+        }
 
     </div>
 </app-panel-vertical>
