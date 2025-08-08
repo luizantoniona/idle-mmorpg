@@ -3,6 +3,7 @@
 #include <Database/Query.h>
 
 #include "CharacterAttributesRepository.h"
+#include "CharacterCombatAttributesRepository.h"
 #include "CharacterCoordinateRepository.h"
 #include "CharacterEquipmentRepository.h"
 #include "CharacterInventoryRepository.h"
@@ -37,6 +38,7 @@ int CharacterRepository::createCharacter( const int idUser, const std::string& d
     bool success = true;
 
     success &= CharacterAttributesRepository().createAttributes( idCharacter );
+    success &= CharacterCombatAttributesRepository().createAttributes( idCharacter );
     success &= CharacterCoordinateRepository().createCoordinates( idCharacter );
     success &= CharacterEquipmentRepository().createEquipment( idCharacter );
     success &= CharacterInventoryRepository().createInventory( idCharacter );
@@ -54,6 +56,7 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
     bool success = true;
 
     success &= CharacterAttributesRepository().updateAttributes( idCharacter, character.attributes() );
+    success &= CharacterCombatAttributesRepository().updateAttributes( idCharacter, character.combatAttributes() );
     success &= CharacterCoordinateRepository().updateCoordinates( idCharacter, character.coordinates() );
     success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipment() );
     success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
@@ -91,6 +94,11 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
         auto attributes = CharacterAttributesRepository().findByCharacterId( character->idCharacter() );
         if ( attributes ) {
             character->setAttributes( *attributes );
+        }
+
+        auto combatAttributes = CharacterCombatAttributesRepository().findByCharacterId( character->idCharacter() );
+        if ( combatAttributes ) {
+            character->setCombatAttributes( *combatAttributes );
         }
 
         auto coordinates = CharacterCoordinateRepository().findByCharacterId( character->idCharacter() );
@@ -157,6 +165,11 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
         auto attributes = CharacterAttributesRepository().findByCharacterId( character->idCharacter() );
         if ( attributes ) {
             character->setAttributes( *attributes );
+        }
+
+        auto combatAttributes = CharacterCombatAttributesRepository().findByCharacterId( character->idCharacter() );
+        if ( combatAttributes ) {
+            character->setCombatAttributes( *combatAttributes );
         }
 
         auto coordinates = CharacterCoordinateRepository().findByCharacterId( character->idCharacter() );

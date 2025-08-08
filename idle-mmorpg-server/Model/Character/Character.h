@@ -7,6 +7,7 @@
 
 #include "CharacterAction.h"
 #include "CharacterAttributes.h"
+#include "CharacterCombatAttributes.h"
 #include "CharacterCoordinates.h"
 #include "CharacterEquipment.h"
 #include "CharacterInventory.h"
@@ -38,6 +39,9 @@ public:
     CharacterAttributes& attributes();
     void setAttributes( const CharacterAttributes& attributes );
 
+    CharacterCombatAttributes& combatAttributes();
+    void setCombatAttributes( const CharacterCombatAttributes& combatAttributes );
+
     CharacterCoordinates& coordinates();
     void setCoordinates( const CharacterCoordinates& coordinates );
 
@@ -65,6 +69,7 @@ private:
     std::string _name;
     CharacterAction _action;
     CharacterAttributes _attributes;
+    CharacterCombatAttributes _combatAttributes;
     CharacterCoordinates _coordinates;
     CharacterEquipment _equipment;
     CharacterInventory _inventory;

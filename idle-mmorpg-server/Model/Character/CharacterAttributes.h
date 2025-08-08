@@ -11,11 +11,11 @@ public:
 
     Json::Value toJson() const;
 
-    double Strength() const;
-    double Dexterity() const;
-    double Constitution() const;
-    double Intelligence() const;
-    double Wisdom() const;
+    double strength() const;
+    double dexterity() const;
+    double constitution() const;
+    double intelligence() const;
+    double wisdom() const;
 
     double baseStrength() const;
     void setBaseStrength( double baseStrength );

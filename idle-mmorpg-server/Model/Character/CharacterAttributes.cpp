@@ -1,5 +1,13 @@
 #include "CharacterAttributes.h"
 
+namespace {
+constexpr const char* JSON_STRENGTH = "strength";
+constexpr const char* JSON_DEXTERITY = "dexterity";
+constexpr const char* JSON_CONSTITUTION = "constitution";
+constexpr const char* JSON_INTELLIGENCE = "intelligence";
+constexpr const char* JSON_WISDOM = "wisdom";
+} // namespace
+
 namespace Model {
 
 CharacterAttributes::CharacterAttributes() :
@@ -17,18 +25,11 @@ CharacterAttributes::CharacterAttributes() :
 
 Json::Value CharacterAttributes::toJson() const {
     Json::Value root;
-
-    root[ "strength" ] = Strength();
-    root[ "dexterity" ] = Dexterity();
-    root[ "constitution" ] = Constitution();
-    root[ "intelligence" ] = Intelligence();
-    root[ "wisdom" ] = Wisdom();
-
-    root[ "baseStrength" ] = _baseStrength;
-    root[ "baseDexterity" ] = _baseDexterity;
-    root[ "baseConstitution" ] = _baseConstitution;
-    root[ "baseIntelligence" ] = _baseIntelligence;
-    root[ "baseWisdom" ] = _baseWisdom;
+    root[ JSON_STRENGTH ] = _baseStrength;
+    root[ JSON_DEXTERITY ] = _baseDexterity;
+    root[ JSON_CONSTITUTION ] = _baseConstitution;
+    root[ JSON_INTELLIGENCE ] = _baseIntelligence;
+    root[ JSON_WISDOM ] = _baseWisdom;
 
     root[ "modifierStrength" ] = _modifierStrength;
     root[ "modifierDexterity" ] = _modifierDexterity;
@@ -39,23 +40,23 @@ Json::Value CharacterAttributes::toJson() const {
     return root;
 }
 
-double CharacterAttributes::Strength() const {
+double CharacterAttributes::strength() const {
     return _baseStrength + _modifierStrength;
 }
 
-double CharacterAttributes::Dexterity() const {
+double CharacterAttributes::dexterity() const {
     return _baseDexterity + _modifierDexterity;
 }
 
-double CharacterAttributes::Constitution() const {
+double CharacterAttributes::constitution() const {
     return _baseConstitution + _modifierConstitution;
 }
 
-double CharacterAttributes::Intelligence() const {
+double CharacterAttributes::intelligence() const {
     return _baseIntelligence + _modifierIntelligence;
 }
 
-double CharacterAttributes::Wisdom() const {
+double CharacterAttributes::wisdom() const {
     return _baseWisdom + _modifierWisdom;
 }
 
