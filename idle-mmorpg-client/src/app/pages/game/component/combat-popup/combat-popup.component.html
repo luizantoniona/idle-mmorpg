@@ -1,0 +1,12 @@
+@if(show){
+<div class="popup-overlay" (click)="onOverlayClick()">
+    <app-panel-vertical (click)="$event.stopPropagation()">
+        <div class="section">
+            <h2>Combat Selection</h2>
+
+            <app-loading></app-loading>
+
+        </div>
+    </app-panel-vertical>
+</div>
+}

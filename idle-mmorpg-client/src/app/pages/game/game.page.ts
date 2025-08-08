@@ -94,22 +94,13 @@ export class GamePage implements OnInit, OnDestroy {
     handleMessage(data: any): void {
         console.log(data)
         switch (data.type) {
-            case 'character_update':
+            case 'CHARACTER_UPDATE':
                 if (data.payload) {
                     this.character = data.payload as Character;
                 }
                 break;
 
-            case 'character_update_action':
-                if (data.payload?.action) {
-                    this.character = {
-                        ...this.character!,
-                        action: data.payload.action,
-                    };
-                }
-                break;
-
-            case 'character_update_attributes':
+            case 'CHARACTER_ATTRIBUTES_UPDATE':
                 if (data.payload?.attributes) {
                     this.character = {
                         ...this.character!,
@@ -118,7 +109,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'character_update_combat_attributes':
+            case 'CHARACTER_COMBAT_ATTRIBUTES_UPDATE':
                 if (data.payload?.combatAttributes) {
                     this.character = {
                         ...this.character!,
@@ -127,7 +118,70 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'character_update_coordinates': {
+            case 'CHARACTER_EQUIPAMENT_UPDATE':
+                if (data.payload?.equipament) {
+                    this.character = {
+                        ...this.character!,
+                        equipament: data.payload.equipament,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_INVENTORY_UPDATE':
+                if (data.payload?.inventory) {
+                    this.character = {
+                        ...this.character!,
+                        inventory: data.payload.inventory,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_PROGRESSION_UPDATE':
+                if (data.payload?.progression) {
+                    this.character = {
+                        ...this.character!,
+                        progression: data.payload.progression,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_SKILLS_UPDATE':
+                if (Array.isArray(data.payload?.skills)) {
+                    this.character = {
+                        ...this.character!,
+                        skills: data.payload.skills,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_VITALS_UPDATE':
+                if (data.payload?.vitals) {
+                    this.character = {
+                        ...this.character!,
+                        vitals: data.payload.vitals,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_WALLET_UPDATE':
+                if (data.payload?.wallet) {
+                    this.character = {
+                        ...this.character!,
+                        wallet: data.payload.wallet,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_CURRENT_ACTION_UPDATE':
+                if (data.payload?.action) {
+                    this.character = {
+                        ...this.character!,
+                        action: data.payload.action,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_CURRENT_COORDINATES_UPDATE': {
                 if (data.payload?.coordinates) {
                     this.character = {
                         ...this.character!,
@@ -137,70 +191,20 @@ export class GamePage implements OnInit, OnDestroy {
                 break;
             }
 
-            case 'character_update_equipament':
-                if (data.payload?.equipament) {
-                    this.character = {
-                        ...this.character!,
-                        equipament: data.payload.equipament,
-                    };
-                }
-                break;
-
-            case 'character_update_inventory':
-                if (data.payload?.inventory) {
-                    this.character = {
-                        ...this.character!,
-                        inventory: data.payload.inventory,
-                    };
-                }
-                break;
-
-            case 'character_update_progression':
-                if (data.payload?.progression) {
-                    this.character = {
-                        ...this.character!,
-                        progression: data.payload.progression,
-                    };
-                }
-                break;
-
-            case 'character_update_skills':
-                if (Array.isArray(data.payload?.skills)) {
-                    this.character = {
-                        ...this.character!,
-                        skills: data.payload.skills,
-                    };
-                }
-                break;
-
-            case 'character_update_vitals':
-                if (data.payload?.vitals) {
-                    this.character = {
-                        ...this.character!,
-                        vitals: data.payload.vitals,
-                    };
-                }
-                break;
-
-            case 'character_update_wallet':
-                if (data.payload?.wallet) {
-                    this.character = {
-                        ...this.character!,
-                        wallet: data.payload.wallet,
-                    };
-                }
-                break;
-
-            case 'location_update_position':
+            case 'LOCATION_UPDATE':
                 if (data.payload?.location) {
                     this.location = data.payload.location;
                 }
                 break;
 
-            case 'location_update_actions':
+            case 'LOCATION_ACTIONS_UPDATE':
                 if (this.location) {
                     this.location.actions = data.payload?.actions ?? [];
                 }
+                break;
+
+            case 'COMBAT_ROOMS_UPDATE':
+                console.log(data.payload)
                 break;
 
             default:

@@ -34,7 +34,7 @@ export class LocationConnectionsPanel {
 
     onConnectionClick(locationId: string): void {
         this.sendMessage({
-            type: 'character_update_location',
+            type: 'CHARACTER_LOCATION_UPDATE',
             payload: {
                 locationId: locationId,
             },

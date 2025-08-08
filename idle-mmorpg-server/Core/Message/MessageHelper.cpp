@@ -6,13 +6,13 @@ namespace Core::Message {
 
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
-        { "character_update_action", MessageReceiverType::CHARACTER_UPDATE_ACTION },
-        { "character_update_structure", MessageReceiverType::CHARACTER_UPDATE_STRUCTURE },
-        { "character_update_location", MessageReceiverType::CHARACTER_UPDATE_LOCATION },
+        { "CHARACTER_ACTION_UPDATE", MessageReceiverType::CHARACTER_ACTION_UPDATE },
+        { "CHARACTER_STRUCTURE_UPDATE", MessageReceiverType::CHARACTER_STRUCTURE_UPDATE },
+        { "CHARACTER_LOCATION_UPDATE", MessageReceiverType::CHARACTER_LOCATION_UPDATE },
 
-        { "combat_room_create", MessageReceiverType::COMBAT_ROOM_CREATE },
-        { "combat_room_enter", MessageReceiverType::COMBAT_ROOM_ENTER },
-        { "combat_room_exit", MessageReceiverType::COMBAT_ROOM_EXIT },
+        { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
+        { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },
+        { "COMBAT_ROOM_EXIT", MessageReceiverType::COMBAT_ROOM_EXIT },
     };
 
     auto it = map.find( type );
@@ -22,38 +22,39 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
 std::string MessageHelper::typeToString( const MessageSenderType type ) {
     switch ( type ) {
         case MessageSenderType::CHARACTER_UPDATE:
-            return "character_update";
-        case MessageSenderType::CHARACTER_UPDATE_ACTION:
-            return "character_update_action";
-        case MessageSenderType::CHARACTER_UPDATE_ATTRIBUTES:
-            return "character_update_attributes";
-        case MessageSenderType::CHARACTER_UPDATE_COMBAT_ATTRIBUTES:
-            return "character_update_combat_attributes";
-        case MessageSenderType::CHARACTER_UPDATE_COORDINATES:
-            return "character_update_coordinates";
-        case MessageSenderType::CHARACTER_UPDATE_EQUIPAMENT:
-            return "character_update_equipament";
-        case MessageSenderType::CHARACTER_UPDATE_INVENTORY:
-            return "character_update_inventory";
-        case MessageSenderType::CHARACTER_UPDATE_PROGRESSION:
-            return "character_update_progression";
-        case MessageSenderType::CHARACTER_UPDATE_SKILLS:
-            return "character_update_skills";
-        case MessageSenderType::CHARACTER_UPDATE_VITALS:
-            return "character_update_vitals";
-        case MessageSenderType::CHARACTER_UPDATE_WALLET:
-            return "character_update_wallet";
+            return "CHARACTER_UPDATE";
+        case MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE:
+            return "CHARACTER_ATTRIBUTES_UPDATE";
+        case MessageSenderType::CHARACTER_COMBAT_ATTRIBUTES_UPDATE:
+            return "CHARACTER_COMBAT_ATTRIBUTES_UPDATE";
+        case MessageSenderType::CHARACTER_EQUIPAMENT_UPDATE:
+            return "CHARACTER_EQUIPAMENT_UPDATE";
+        case MessageSenderType::CHARACTER_INVENTORY_UPDATE:
+            return "CHARACTER_INVENTORY_UPDATE";
+        case MessageSenderType::CHARACTER_PROGRESSION_UPDATE:
+            return "CHARACTER_PROGRESSION_UPDATE";
+        case MessageSenderType::CHARACTER_SKILLS_UPDATE:
+            return "CHARACTER_SKILLS_UPDATE";
+        case MessageSenderType::CHARACTER_VITALS_UPDATE:
+            return "CHARACTER_VITALS_UPDATE";
+        case MessageSenderType::CHARACTER_WALLET_UPDATE:
+            return "CHARACTER_WALLET_UPDATE";
 
-        case MessageSenderType::LOCATION_UPDATE_POSITION:
-            return "location_update_position";
-        case MessageSenderType::LOCATION_UPDATE_ACTIONS:
-            return "location_update_actions";
+        case MessageSenderType::CHARACTER_CURRENT_ACTION_UPDATE:
+            return "CHARACTER_CURRENT_ACTION_UPDATE";
+        case MessageSenderType::CHARACTER_CURRENT_COORDINATES_UPDATE:
+            return "CHARACTER_CURRENT_COORDINATES_UPDATE";
+
+        case MessageSenderType::LOCATION_UPDATE:
+            return "LOCATION_UPDATE";
+        case MessageSenderType::LOCATION_ACTIONS_UPDATE:
+            return "LOCATION_ACTIONS_UPDATE";
 
         case MessageSenderType::COMBAT_ROOMS_UPDATE:
-            return "combat_rooms_update";
+            return "COMBAT_ROOMS_UPDATE";
 
         default:
-            return "unknown";
+            return "UNKNOWN";
     }
 }
 

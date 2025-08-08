@@ -32,7 +32,7 @@ export class LocationStructuresPanel {
 
     onStructureClick(structure: string): void {
         this.sendMessage({
-            type: 'character_update_structure',
+            type: 'CHARACTER_STRUCTURE_UPDATE',
             payload: {
                 structure: structure,
             },

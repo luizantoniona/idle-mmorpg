@@ -137,10 +137,10 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     Model::Character* character = it->second;
 
     switch ( type ) {
-        case Message::MessageReceiverType::CHARACTER_UPDATE_STRUCTURE:
+        case Message::MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
             _actionSystem.changeStructure( sessionId, character, payload );
             break;
-        case Message::MessageReceiverType::CHARACTER_UPDATE_ACTION:
+        case Message::MessageReceiverType::CHARACTER_ACTION_UPDATE:
             _actionSystem.changeAction( sessionId, character, payload );
             break;
 
