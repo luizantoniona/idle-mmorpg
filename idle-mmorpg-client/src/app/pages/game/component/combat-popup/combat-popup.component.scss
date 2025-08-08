@@ -10,3 +10,17 @@
     align-items: center;
     z-index: 1000;
 }
+
+.combat-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.combat-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}

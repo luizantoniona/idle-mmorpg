@@ -28,6 +28,7 @@ public:
     void notifyLocationActions( const std::string& sessionId, Model::Character* character, const Model::Location* location );
 
     void notifyCombatInstances( const std::string& sessionId, std::vector<Core::Instance::CombatInstance* > combatInstances );
+    void notifyCombat( const Instance::CombatInstance* combatInstance );
 
 private:
     Message::MessageSender _sender;

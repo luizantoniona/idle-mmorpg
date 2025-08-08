@@ -49,6 +49,11 @@ export class LocationActionsPanel {
     closePopup(): void {
         this.showCombatPopup = false;
         this.sendMessage({
+            type: 'COMBAT_ROOM_EXIT',
+            payload: {},
+        });
+
+        this.sendMessage({
             type: 'CHARACTER_ACTION_UPDATE',
             payload: {
                 action: 'idle',

@@ -89,11 +89,20 @@ void NotificationSystem::notifyCombatInstances( const std::string& sessionId, st
     Json::Value combatArray;
 
     for ( const auto* combat : combatInstances ) {
-        combatArray.append( combat->toJson() );
+        combatArray.append( combat->instanceToJson() );
     }
 
-    payloadCombatInstances["combat_instances"] = combatArray;
+    payloadCombatInstances["combatInstances"] = combatArray;
     _sender.send( sessionId, Message::MessageSenderType::COMBAT_ROOMS_UPDATE, payloadCombatInstances );
+}
+
+void NotificationSystem::notifyCombat( const Core::Instance::CombatInstance* combatInstance ) {
+    Json::Value payloadCombatInstance;
+    payloadCombatInstance["combat"] = combatInstance->combatToJson();
+
+    for ( const auto& [sessionId, character] : combatInstance->characters() ) {
+        _sender.send( sessionId, Message::MessageSenderType::COMBAT_UPDATE, payloadCombatInstance );
+    }
 }
 
 } // namespace Core::System

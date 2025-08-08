@@ -13,7 +13,6 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _characters( {} ),
     _notificationSystem(),
     _actionSystem( location ),
-    _combatSystem( location ),
     _trainingSystem( location ),
     _combatInstances(),
     _characterCombatCache() {}
@@ -113,6 +112,7 @@ void LocationInstance::tick() {
     for ( auto it = _combatInstances.begin(); it != _combatInstances.end(); ) {
         CombatInstance* combatInstance = it->get();
         combatInstance->process();
+        _notificationSystem.notifyCombat( combatInstance );
 
         if ( combatInstance->isFinished() ) {
             for ( const auto& [ sessionId, _ ] : combatInstance->characters() ) {

@@ -52,6 +52,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
 
         case MessageSenderType::COMBAT_ROOMS_UPDATE:
             return "COMBAT_ROOMS_UPDATE";
+        case MessageSenderType::COMBAT_UPDATE:
+            return "COMBAT_UPDATE";
 
         default:
             return "UNKNOWN";

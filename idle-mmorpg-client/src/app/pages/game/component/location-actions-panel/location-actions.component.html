@@ -12,4 +12,6 @@
     </div>
 </app-panel-vertical>
 
-<app-combat-popup [show]="showCombatPopup" (close)="closePopup()"></app-combat-popup>
+@if(showCombatPopup){
+<app-combat-popup (close)="closePopup()"></app-combat-popup>
+}

@@ -23,6 +23,7 @@ enum class MessageSenderType {
     LOCATION_ACTIONS_UPDATE,
 
     COMBAT_ROOMS_UPDATE,
+    COMBAT_UPDATE,
 };
 
 } // namespace Core::Message

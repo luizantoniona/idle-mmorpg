@@ -7,7 +7,6 @@
 
 #include <Core/Message/MessageReceiverType.h>
 #include <Core/System/ActionSystem.h>
-#include <Core/System/CombatSystem.h>
 #include <Core/System/NotificationSystem.h>
 #include <Core/System/TrainingSystem.h>
 #include <Model/Character/Character.h>
@@ -38,7 +37,6 @@ private:
     std::unordered_map<std::string, Model::Character*> _characters;
     Core::System::NotificationSystem _notificationSystem;
     Core::System::ActionSystem _actionSystem;
-    Core::System::CombatSystem _combatSystem;
     Core::System::TrainingSystem _trainingSystem;
 
     std::vector<std::unique_ptr<CombatInstance> > _combatInstances;

@@ -92,6 +92,10 @@ export class GamePage implements OnInit, OnDestroy {
     }
 
     handleMessage(data: any): void {
+        if (data && (data.type === 'COMBAT_ROOMS_UPDATE' || data.type === 'COMBAT_UPDATE')) {
+            return;
+        }
+
         console.log(data)
         switch (data.type) {
             case 'CHARACTER_UPDATE':
@@ -201,10 +205,6 @@ export class GamePage implements OnInit, OnDestroy {
                 if (this.location) {
                     this.location.actions = data.payload?.actions ?? [];
                 }
-                break;
-
-            case 'COMBAT_ROOMS_UPDATE':
-                console.log(data.payload)
                 break;
 
             default:

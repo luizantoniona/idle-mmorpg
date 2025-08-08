@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include <Core/System/NotificationSystem.h>
 #include <Core/Message/MessageSender.h>
 #include <Model/Character/Character.h>
 #include <Model/Skill/Skill.h>
