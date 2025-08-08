@@ -8,9 +8,9 @@ import { PanelVerticalComponent } from '../../../../component';
 import { Character } from '../../../../model';
 
 @Component({
-    selector: 'app-location-character-action-panel',
-    templateUrl: './location-character-action.component.html',
-    styleUrl: './location-character-action.component.scss',
+    selector: 'app-character-action-panel',
+    templateUrl: './character-action-panel.component.html',
+    styleUrl: './character-action-panel.component.scss',
     imports: [
         CommonModule,
         BarComponent,
@@ -19,6 +19,6 @@ import { Character } from '../../../../model';
     ],
 })
 
-export class LocationCharacterActionPanel {
+export class CharacterActionPanel {
     @Input() character!: Character;
 }

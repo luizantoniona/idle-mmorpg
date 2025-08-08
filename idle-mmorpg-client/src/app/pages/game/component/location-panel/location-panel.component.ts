@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LocationActionsPanel } from './location-actions.component'
-import { LocationCharacterActionPanel } from './location-character-action.component';
-import { LocationDescriptionPanel } from './location-description.component';
+import { CharacterActionPanel } from '../character-action-panel/character-action-panel.component';
+import { LocationActionsPanel } from '../location-actions-panel/location-actions.component'
+import { LocationDescriptionPanel } from '../location-description-panel/location-description.component';
 import { LocationStructuresPanel } from '../location-structures-panel/location-structures-panel.component';
 
 import { Character } from '../../../../model';
@@ -15,8 +15,8 @@ import { Location } from '../../../../model';
     styleUrl: './location-panel.component.scss',
     imports: [
         CommonModule,
+        CharacterActionPanel,
         LocationActionsPanel,
-        LocationCharacterActionPanel,
         LocationDescriptionPanel,
         LocationStructuresPanel,
     ],
