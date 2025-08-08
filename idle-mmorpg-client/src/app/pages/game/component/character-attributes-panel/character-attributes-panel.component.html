@@ -1,16 +1,30 @@
 <app-panel-vertical>
-    <ng-container *ngIf="character.attributes; else loading">
-        <div class="attribute-grid">
+    <div class="attributes-row">
+
+        <div class="attribute-column">
+            @if (character.attributes) {
             <app-card><strong>STR</strong>: {{ character.attributes.strength }}</app-card>
             <app-card><strong>DEX</strong>: {{ character.attributes.dexterity }}</app-card>
             <app-card><strong>CON</strong>: {{ character.attributes.constitution }}</app-card>
             <app-card><strong>INT</strong>: {{ character.attributes.intelligence }}</app-card>
             <app-card><strong>WIS</strong>: {{ character.attributes.wisdom }}</app-card>
-            <app-card><strong>CHA</strong>: {{ character.attributes.charisma }}</app-card>
+            } @else {
+            <app-loading></app-loading>
+            }
         </div>
-    </ng-container>
-</app-panel-vertical>
 
-<ng-template #loading>
-    <app-loading></app-loading>
-</ng-template>
+        <div class="attribute-column">
+            @if (character.combatAttributes) {
+            <app-card><strong>ATK</strong>: {{ character.combatAttributes.attack }}</app-card>
+            <app-card><strong>DEF</strong>: {{ character.combatAttributes.defense }}</app-card>
+            <app-card><strong>SPD</strong>: {{ character.combatAttributes.speed }}</app-card>
+            <app-card><strong>EVA</strong>: {{ character.combatAttributes.evasion }}</app-card>
+            <app-card><strong>CRT</strong>: {{ character.combatAttributes.criticalHitChance }}</app-card>
+            } @else {
+            <app-loading></app-loading>
+            }
+        </div>
+
+    </div>
+
+</app-panel-vertical>

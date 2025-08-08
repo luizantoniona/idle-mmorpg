@@ -17,11 +17,11 @@ public:
     std::string structure() const;
     void setStructure( const std::string& structure );
 
-    int min() const;
-    void setMin( int min );
+    int spawnMin() const;
+    void setSpawnMin( int min );
 
-    int max() const;
-    void setMax( int max );
+    int spawnMax() const;
+    void setSpawnMax( int max );
 
     Creature* creature() const;
     void setCreature( Creature* creature );
@@ -29,8 +29,8 @@ public:
 private:
     std::string _id;
     std::string _structure;
-    int _min;
-    int _max;
+    int _spawnMin;
+    int _spawnMax;
     Creature* _creature;
 };
 

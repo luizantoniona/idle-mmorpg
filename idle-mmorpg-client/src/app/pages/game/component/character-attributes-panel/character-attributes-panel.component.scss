@@ -1,9 +1,12 @@
-.attribute-grid {
+.attributes-row {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     gap: 8px;
+}
 
-    app-card {
-        flex: 0 0 calc(50% - 6px);
-    }
+.attribute-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
 }

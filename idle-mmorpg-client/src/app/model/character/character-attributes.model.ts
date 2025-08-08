@@ -4,5 +4,4 @@ export type CharacterAttributes = {
     constitution: number;
     intelligence: number;
     wisdom: number;
-    charisma: number;
 };

@@ -1,12 +1,11 @@
 <app-panel-vertical>
 
-    <ng-container *ngIf="character.action; else loading">
-        <app-bar *ngIf="character.action?.id" [label]="character.action.id" [value]="character.action.counter"
-            [max]="character.action.duration" color="#2196f3"></app-bar>
-    </ng-container>
-
-    <ng-template #loading>
-        <app-loading></app-loading>
-    </ng-template>
+    @if(character && character.action && character.action.id) {
+    <app-bar [label]="character.action.id" [value]="character.action.counter" [max]="character.action.duration"
+        color="#2196f3"></app-bar>
+    }
+    @else {
+    <app-loading></app-loading>
+    }
 
 </app-panel-vertical>

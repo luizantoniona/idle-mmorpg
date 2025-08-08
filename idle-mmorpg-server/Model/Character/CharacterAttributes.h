@@ -16,7 +16,6 @@ public:
     double Constitution() const;
     double Intelligence() const;
     double Wisdom() const;
-    double Charisma() const;
 
     double baseStrength() const;
     void setBaseStrength( double baseStrength );
@@ -33,15 +32,11 @@ public:
     double baseWisdom() const;
     void setBaseWisdom( double baseWisdom );
 
-    double baseCharisma() const;
-    void setBaseCharisma( double baseCharisma );
-
     void modifyStrength( double modifier );
     void modifyDexterity( double modifier );
     void modifyConstitution( double modifier );
     void modifyIntelligence( double modifier );
     void modifyWisdom( double modifier );
-    void modifyCharisma( double modifier );
 
 private:
     double _baseStrength;
@@ -49,14 +44,12 @@ private:
     double _baseConstitution;
     double _baseIntelligence;
     double _baseWisdom;
-    double _baseCharisma;
 
     double _modifierStrength;
     double _modifierDexterity;
     double _modifierConstitution;
     double _modifierIntelligence;
     double _modifierWisdom;
-    double _modifierCharisma;
 };
 
 } // namespace Model

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { LocationActionsPanel } from './location-actions.component'
 import { LocationCharacterActionPanel } from './location-character-action.component';
-import { LocationConnectionsComponent } from './location-connections.component'
 import { LocationDescriptionPanel } from './location-description.component';
 import { LocationStructuresPanel } from './location-structures.component';
 
@@ -18,7 +17,6 @@ import { Location } from '../../../../model';
         CommonModule,
         LocationActionsPanel,
         LocationCharacterActionPanel,
-        LocationConnectionsComponent,
         LocationDescriptionPanel,
         LocationStructuresPanel,
     ],

@@ -5,9 +5,10 @@ namespace Model {
 LocationCreature::LocationCreature() :
     _id( "" ),
     _structure( "" ),
-    _min( 0 ),
-    _max( 0 ),
-    _creature( nullptr ) {}
+    _spawnMin( 0 ),
+    _spawnMax( 0 ),
+    _creature( nullptr ) {
+}
 
 std::string LocationCreature::id() const {
     return _id;
@@ -25,20 +26,20 @@ void LocationCreature::setStructure( const std::string& structure ) {
     _structure = structure;
 }
 
-int LocationCreature::min() const {
-    return _min;
+int LocationCreature::spawnMin() const {
+    return _spawnMin;
 }
 
-void LocationCreature::setMin( int min ) {
-    _min = min;
+void LocationCreature::setSpawnMin( int spawnMin ) {
+    _spawnMin = spawnMin;
 }
 
-int LocationCreature::max() const {
-    return _max;
+int LocationCreature::spawnMax() const {
+    return _spawnMax;
 }
 
-void LocationCreature::setMax( int max ) {
-    _max = max;
+void LocationCreature::setSpawnMax( int spawnMax ) {
+    _spawnMax = spawnMax;
 }
 
 Creature* LocationCreature::creature() const {

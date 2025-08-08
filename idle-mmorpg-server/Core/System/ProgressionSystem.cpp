@@ -88,9 +88,6 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
         } else if ( id == "wisdom" ) {
             character->attributes().setBaseWisdom( character->attributes().baseWisdom() + static_cast<int>( value ) );
 
-        } else if ( id == "charisma" ) {
-            character->attributes().setBaseCharisma( character->attributes().baseCharisma() + static_cast<int>( value ) );
-
         } else {
             std::cerr << "[ProgressionSystem] Unknown attribute id: " << id << std::endl;
         }

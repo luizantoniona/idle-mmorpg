@@ -10,9 +10,9 @@ import { Location } from '../../../../model';
 import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
-    selector: 'app-location-connections-panel',
-    templateUrl: './location-connections.component.html',
-    styleUrl: './location-connections.component.scss',
+    selector: 'app-connections-panel',
+    templateUrl: './connections.component.html',
+    styleUrl: './connections.component.scss',
     imports: [
         CommonModule,
         ButtonComponent,

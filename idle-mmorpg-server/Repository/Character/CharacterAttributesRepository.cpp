@@ -15,9 +15,8 @@ bool CharacterAttributesRepository::createAttributes( int idCharacter ) {
             dexterity,
             constitution,
             intelligence,
-            wisdom,
-            charisma
-        ) VALUES (?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+            wisdom
+        ) VALUES (?, 0.0, 0.0, 0.0, 0.0, 0.0)
     )SQL";
     Database::Query query( _db, sql );
 
@@ -32,8 +31,7 @@ bool CharacterAttributesRepository::updateAttributes( int idCharacter, const Mod
             dexterity = ?,
             constitution = ?,
             intelligence = ?,
-            wisdom = ?,
-            charisma = ?
+            wisdom = ?
         WHERE id_character = ?
     )SQL";
     Database::Query query( _db, sql );
@@ -43,8 +41,7 @@ bool CharacterAttributesRepository::updateAttributes( int idCharacter, const Mod
     query.bindDouble( 3, attributes.baseConstitution() );
     query.bindDouble( 4, attributes.baseIntelligence() );
     query.bindDouble( 5, attributes.baseWisdom() );
-    query.bindDouble( 6, attributes.baseCharisma() );
-    query.bindInt( 7, idCharacter );
+    query.bindInt( 6, idCharacter );
 
     return query.exec();
 }
@@ -56,8 +53,7 @@ std::unique_ptr<Model::CharacterAttributes> CharacterAttributesRepository::findB
             dexterity,
             constitution,
             intelligence,
-            wisdom,
-            charisma
+            wisdom
         FROM character_attributes
         WHERE id_character = ?
     )SQL";
@@ -75,7 +71,6 @@ std::unique_ptr<Model::CharacterAttributes> CharacterAttributesRepository::findB
     attributes->setBaseConstitution( query.getColumnDouble( 2 ) );
     attributes->setBaseIntelligence( query.getColumnDouble( 3 ) );
     attributes->setBaseWisdom( query.getColumnDouble( 4 ) );
-    attributes->setBaseCharisma( query.getColumnDouble( 5 ) );
 
     return attributes;
 }

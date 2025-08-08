@@ -3,7 +3,8 @@
 #include <iostream>
 
 #include <Commons/JsonHelper.h>
-
+#include <Commons/Singleton.h>
+#include <Core/Manager/CreatureManager.h>
 #include <Model/World/Location/LocationAction.h>
 #include <Model/World/Location/LocationActionExperience.h>
 #include <Model/World/Location/LocationActionRequirement.h>
@@ -86,6 +87,15 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
 
     std::string creaturesJsonPath = locationPath + "/creatures.json";
     Json::Value creaturesJson = Commons::JsonHelper::loadJsonFile( creaturesJsonPath );
+    for ( const Json::Value& creatureJson : creaturesJson[ "creatures" ] ) {
+        Model::LocationCreature creature;
+        creature.setId( creatureJson[ "id" ].asString() );
+        creature.setSpawnMin( creatureJson[ "min" ].asInt() );
+        creature.setSpawnMax( creatureJson[ "max" ].asInt() );
+        creature.setStructure( creatureJson.get( "structure", "" ).asString() );
+
+        location->addCreature( creature );
+    }
 
     return location;
 }

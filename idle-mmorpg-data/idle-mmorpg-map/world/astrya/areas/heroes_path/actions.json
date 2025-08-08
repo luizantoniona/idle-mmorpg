@@ -37,6 +37,13 @@
             "experience": []
         },
         {
+            "id": "combat",
+            "label": "Fight for the altar",
+            "structure": "altar_of_light",
+            "requirements": [],
+            "experience": []
+        },
+        {
             "id": "train",
             "label": "Train with a wooden dummy",
             "duration": 100,
