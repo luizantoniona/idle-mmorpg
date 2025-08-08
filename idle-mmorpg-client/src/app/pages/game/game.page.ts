@@ -116,6 +116,15 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'character_update_combat_attributes':
+                if (data.payload?.combatAttributes) {
+                    this.character = {
+                        ...this.character!,
+                        combatAttributes: data.payload.combatAttributes,
+                    };
+                }
+                break;
+
             case 'character_update_coordinates': {
                 if (data.payload?.coordinates) {
                     this.character = {

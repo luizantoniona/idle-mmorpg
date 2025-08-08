@@ -23,6 +23,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
             return "character_update_action";
         case MessageSenderType::CHARACTER_UPDATE_ATTRIBUTES:
             return "character_update_attributes";
+        case MessageSenderType::CHARACTER_UPDATE_COMBAT_ATTRIBUTES:
+            return "character_update_combat_attributes";
         case MessageSenderType::CHARACTER_UPDATE_COORDINATES:
             return "character_update_coordinates";
         case MessageSenderType::CHARACTER_UPDATE_EQUIPAMENT:

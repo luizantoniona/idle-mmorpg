@@ -15,6 +15,7 @@ public:
 
     void notifyFullCharacter( const std::string& sessionId, Model::Character* character );
     void notifyCharacterAttributes( const std::string& sessionId, Model::Character* character );
+    void notifyCharacterCombatAttributes( const std::string& sessionId, Model::Character* character );
     void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
     void notifyCharacterSkills( const std::string& sessionId, Model::Character* character );
     void notifyCharacterVitals( const std::string& sessionId, Model::Character* character );
