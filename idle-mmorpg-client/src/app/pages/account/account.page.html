@@ -1,20 +1,24 @@
 <div class="account-page">
-    <app-panel-vertical>
-        <h2>Account: {{ getUsername() }}</h2>
-        Session ID: {{ getSessionId() }}
-        <app-button text="Logout" (clickEvent)="logout()"></app-button>
-    </app-panel-vertical>
+    <div class="left-panel">
+        <app-panel-vertical>
+            <h2>Account: {{ getUsername() }}</h2>
+            Session ID: {{ getSessionId() }}
+            <app-button text="Logout" (clickEvent)="logout()"></app-button>
+        </app-panel-vertical>
 
-    <app-panel-vertical>
-        <h2>Characters</h2>
-        <app-character-list [characters]="characters" (onSelect)="handleStartGame($event)"></app-character-list>
-        @if(loading){
-        <app-loading></app-loading>
-        }
-        @if(error){
-        <p style="color: red;">Error: {{ error }}</p>
-        }
-    </app-panel-vertical>
+        <app-character-form />
+    </div>
 
-    <app-character-form />
+    <div class="right-panel">
+        <app-panel-vertical>
+            <h2>Characters</h2>
+            <app-character-list [characters]="characters" (onSelect)="handleStartGame($event)"></app-character-list>
+            @if(loading){
+            <app-loading></app-loading>
+            }
+            @if(error){
+            <p style="color: red;">Error: {{ error }}</p>
+            }
+        </app-panel-vertical>
+    </div>
 </div>

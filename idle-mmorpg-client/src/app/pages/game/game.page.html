@@ -7,10 +7,11 @@
 
     <div class="main-panel">
         <app-location-panel [character]="character!" [location]="location!"></app-location-panel>
-        <app-chat-panel></app-chat-panel>
     </div>
 
     <div class="right-panel">
+        <app-connections-panel [location]="location!"></app-connections-panel>
+        <app-chat-panel></app-chat-panel>
         <app-character-wallet-panel [character]="character!"></app-character-wallet-panel>
         <app-character-equipment-panel [character]="character!"></app-character-equipment-panel>
         <app-character-inventory-panel [character]="character!"></app-character-inventory-panel>

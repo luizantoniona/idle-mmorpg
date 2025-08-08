@@ -1,8 +1,16 @@
 .account-page {
-    background-color: var(--color-bg);
+    display: flex;
+    width: 100%;
+    gap: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.left-panel,
+.right-panel {
+    flex: 1 1 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
+    gap: 12px;
+    overflow-y: auto;
 }

@@ -9,6 +9,7 @@ import { CharacterInventoryPanel } from './component';
 import { CharacterSkillsPanel } from './component';
 import { CharacterWalletPanel } from './component';
 import { ChatPanel } from './component';
+import { ConnectionsPanel } from './component';
 import { LocationPanel } from './component';
 
 import { Character } from '../../model';
@@ -28,6 +29,7 @@ import { WebsocketService } from '../../service/websocket.service';
         CharacterSkillsPanel,
         CharacterWalletPanel,
         ChatPanel,
+        ConnectionsPanel,
         LocationPanel,
     ],
 })

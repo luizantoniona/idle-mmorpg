@@ -11,8 +11,8 @@ import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
     selector: 'app-connections-panel',
-    templateUrl: './connections.component.html',
-    styleUrl: './connections.component.scss',
+    templateUrl: './connections-panel.component.html',
+    styleUrl: './connections-panel.component.scss',
     imports: [
         CommonModule,
         ButtonComponent,
@@ -21,7 +21,7 @@ import { WebsocketService } from '../../../../service/websocket.service';
     ],
 })
 
-export class LocationConnectionsComponent {
+export class ConnectionsPanel {
     @Input() location!: Location;
 
     private websocketService = inject(WebsocketService);
