@@ -53,36 +53,6 @@
                     "value": 1
                 }
             ]
-        },
-        {
-            "level": 10,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "dexterity",
-                    "value": 1
-                },
-                {
-                    "type": "combat",
-                    "id": "evasion",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 15,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "dexterity",
-                    "value": 1
-                },
-                {
-                    "type": "combat",
-                    "id": "evasion",
-                    "value": 1
-                }
-            ]
         }
     ]
 }

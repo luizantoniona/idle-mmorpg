@@ -1,0 +1,10 @@
+{
+    "id": "heroes_path_cave",
+    "name": "Heroes Path Cave",
+    "description": "A small cave with .",
+    "coordinates": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+    }
+}

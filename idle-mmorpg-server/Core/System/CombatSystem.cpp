@@ -1,7 +1,10 @@
 #include "CombatSystem.h"
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
+
+#include <Commons/DecimalHelper.h>
 
 namespace Core::System {
 
@@ -62,6 +65,14 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
     double hitChance = 0.5 + diff * 0.03;
     hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
+    if ( character->vitals().stamina() >= 1 ) {
+        double newStamina = character->vitals().stamina() - 1;
+        newStamina = std::max( 0.0, newStamina );
+        character->vitals().setStamina( newStamina );
+    }
+
+    // TODO: Apply debuf when stamina reaches 0
+
     double roll = static_cast<double>( rand() ) / RAND_MAX;
     if ( roll > hitChance ) {
         std::cout << "Attack missed!" << std::endl;
@@ -87,6 +98,14 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     double hitChance = 0.5 + diff * 0.03;
     hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
+    if ( creature->vitals().stamina() >= 1 ) {
+        double newStamina = creature->vitals().stamina() - 1;
+        newStamina = std::max( 0.0, newStamina );
+        creature->vitals().setStamina( newStamina );
+    }
+
+    // TODO: Apply debuf when stamina reaches 0
+
     double roll = static_cast<double>( rand() ) / RAND_MAX;
     if ( roll > hitChance ) {
         std::cout << "Attack missed!" << std::endl;
@@ -109,30 +128,6 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     _progressionSystem.applyExperience( sessionId, character, "resilience", damage );
 
     std::cout << "Hit for " << damage << " damage. Character HP left: " << character->vitals().health() << std::endl;
-}
-
-void CombatSystem::computeRegeneration( const std::string& sessionId, Model::Character* character ) {
-    const double healthRegen = character->vitals().healthRegen() + character->attributes().constitution() * 0.1;
-    const double staminaRegen = character->vitals().staminaRegen() + character->attributes().constitution() * 0.1;
-    const double manaRegen = character->vitals().manaRegen() + character->attributes().constitution() * 0.1;
-
-    int newHealth = character->vitals().health() + healthRegen;
-    if ( newHealth > character->vitals().maxHealth() ) {
-        newHealth = character->vitals().maxHealth();
-    }
-    character->vitals().setHealth( newHealth );
-
-    int newStamina = character->vitals().stamina() + staminaRegen;
-    if ( newStamina > character->vitals().maxStamina() ) {
-        newStamina = character->vitals().maxStamina();
-    }
-    character->vitals().setStamina( newStamina );
-
-    int newMana = character->vitals().mana() + manaRegen;
-    if ( newMana > character->vitals().maxMana() ) {
-        newMana = character->vitals().maxMana();
-    }
-    character->vitals().setMana( newMana );
 }
 
 void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {

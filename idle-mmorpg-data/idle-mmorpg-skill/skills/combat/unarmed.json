@@ -28,23 +28,13 @@
             "level": 3,
             "bonuses": [
                 {
-                    "type": "combat",
-                    "id": "accuracy",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 4,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "attack",
+                    "type": "attribute",
+                    "id": "strength",
                     "value": 1
                 },
                 {
                     "type": "combat",
-                    "id": "accuracy",
+                    "id": "attack",
                     "value": 1
                 }
             ]
@@ -59,43 +49,8 @@
                 },
                 {
                     "type": "combat",
-                    "id": "accuracy",
+                    "id": "attack",
                     "value": 1
-                },
-                {
-                    "type": "combat",
-                    "id": "speed",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 10,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "strength",
-                    "value": 1
-                },
-                {
-                    "type": "vital",
-                    "id": "stamina",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 15,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "strength",
-                    "value": 1
-                },
-                {
-                    "type": "vital",
-                    "id": "stamina",
-                    "value": 5
                 }
             ]
         }

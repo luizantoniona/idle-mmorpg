@@ -1,0 +1,14 @@
+{
+    "creatures": [
+        {
+            "id": "cave_rat",
+            "min": 0,
+            "max": 1
+        },
+        {
+            "id": "rat",
+            "min": 1,
+            "max": 2
+        }
+    ]
+}

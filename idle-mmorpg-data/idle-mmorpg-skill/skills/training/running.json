@@ -1,16 +1,16 @@
 {
-    "id": "resting",
-    "name": "Resting",
-    "description": "Take a break to recover your health, stamina, and mana.",
-    "type": "recovery",
+    "id": "running",
+    "name": "Running",
+    "description": "Run to increase stamina capacities.",
+    "type": "training",
     "milestones": [
         {
             "level": 1,
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "health",
-                    "value": 10
+                    "id": "stamina",
+                    "value": 5
                 }
             ]
         },
@@ -19,7 +19,7 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "health_regen",
+                    "id": "stamina_regen",
                     "value": 0.1
                 }
             ]
@@ -29,12 +29,12 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "health",
-                    "value": 10
+                    "id": "stamina",
+                    "value": 5
                 },
                 {
                     "type": "vital",
-                    "id": "health_regen",
+                    "id": "stamina_regen",
                     "value": 0.1
                 }
             ]
@@ -44,12 +44,12 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "health",
-                    "value": 10
+                    "id": "stamina",
+                    "value": 5
                 },
                 {
                     "type": "vital",
-                    "id": "health_regen",
+                    "id": "stamina_regen",
                     "value": 0.1
                 }
             ]

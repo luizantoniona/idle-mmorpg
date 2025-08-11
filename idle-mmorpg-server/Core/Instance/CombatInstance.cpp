@@ -13,8 +13,7 @@ CombatInstance::CombatInstance( Model::Location* location, const std::string& id
     _location( location ),
     _characters(),
     _creatures(),
-    _combatSystem( location ) {
-}
+    _combatSystem( location ) {}
 
 Json::Value CombatInstance::instanceToJson() const {
     Json::Value root;
@@ -128,13 +127,6 @@ void CombatInstance::process() {
         } else {
             action.setCounter( action.counter() + 1 );
         }
-
-        if ( action.regenCounter() >= action.regenDuration() ) {
-            _combatSystem.computeRegeneration( sessionId, character );
-
-        } else {
-            action.setRegenCounter( action.regenCounter() + 1 );
-        }
     }
 
     for ( auto& creature : _creatures ) {
@@ -146,7 +138,7 @@ void CombatInstance::process() {
 
         if ( action.counter() >= action.duration() ) {
 
-            std::vector<std::pair<std::string, Model::Character*>> aliveCharacters;
+            std::vector<std::pair<std::string, Model::Character*> > aliveCharacters;
             aliveCharacters.reserve( _characters.size() );
 
             for ( const auto& [ sessionId, character ] : _characters ) {
@@ -191,7 +183,6 @@ void CombatInstance::process() {
         _creatures.clear();
     }
 
-    std::vector<std::string> deadCharacters;
     for ( const auto& [ sessionId, character ] : _characters ) {
         if ( character->vitals().health() <= 0 ) {
             Core::System::NotificationSystem::notifyDeadCharacter( sessionId );

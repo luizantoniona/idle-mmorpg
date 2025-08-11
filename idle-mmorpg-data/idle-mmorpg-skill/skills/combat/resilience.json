@@ -28,8 +28,13 @@
             "level": 3,
             "bonuses": [
                 {
+                    "type": "attribute",
+                    "id": "constitution",
+                    "value": 1
+                },
+                {
                     "type": "combat",
-                    "id": "evasion",
+                    "id": "defense",
                     "value": 1
                 }
             ]
@@ -43,54 +48,9 @@
                     "value": 1
                 },
                 {
-                    "type": "vital",
-                    "id": "stamina",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 10,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "constitution",
+                    "type": "combat",
+                    "id": "defense",
                     "value": 1
-                },
-                {
-                    "type": "vital",
-                    "id": "health",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 15,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "constitution",
-                    "value": 1
-                },
-                {
-                    "type": "vital",
-                    "id": "stamina",
-                    "value": 10
-                }
-            ]
-        },
-        {
-            "level": 20,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "constitution",
-                    "value": 1
-                },
-                {
-                    "type": "vital",
-                    "id": "health",
-                    "value": 10
                 }
             ]
         }

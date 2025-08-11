@@ -26,11 +26,17 @@
             @for (character of combat.characters; track character.idCharacter) {
             <div class="combat-character">
                 <strong>{{ character.name }}</strong>
-                <app-bar label="Health ( {{character.vitals.health}} / {{character.vitals.maxHealth}} )"
+
+                <app-bar
+                    label="Health ( {{character.vitals.health | number:'1.2-2'}} / {{character.vitals.maxHealth | number:'1.2-2'}} )"
                     [value]="character.vitals.health" [max]="character.vitals.maxHealth" color="#e53935" />
-                <app-bar label="Mana ( {{character.vitals.mana}} / {{character.vitals.maxMana}} )"
+
+                <app-bar
+                    label="Mana ( {{character.vitals.mana | number:'1.2-2'}} / {{character.vitals.maxMana | number:'1.2-2'}} )"
                     [value]="character.vitals.mana" [max]="character.vitals.maxMana" color="#1e88e5" />
-                <app-bar label="Stamina ( {{character.vitals.stamina}} / {{character.vitals.maxStamina}} )"
+
+                <app-bar
+                    label="Stamina ( {{character.vitals.stamina | number:'1.2-2'}} / {{character.vitals.maxStamina | number:'1.2-2'}} )"
                     [value]="character.vitals.stamina" [max]="character.vitals.maxStamina" color="#4caf50" />
 
                 <app-bar label="Attack" [value]="character.combatAction.counter" [max]="character.combatAction.duration"
@@ -45,11 +51,17 @@
             @for (creature of combat.creatures; track creature.id) {
             <div class="combat-creature">
                 <strong>{{ creature.name }}</strong>
-                <app-bar label="Health ( {{creature.vitals.health}} / {{creature.vitals.maxHealth}} )"
+
+                <app-bar
+                    label="Health ( {{creature.vitals.health | number:'1.2-2'}} / {{creature.vitals.maxHealth | number:'1.2-2'}} )"
                     [value]="creature.vitals.health" [max]="creature.vitals.maxHealth" color="#e53935" />
-                <app-bar label="Mana ( {{creature.vitals.health}} / {{creature.vitals.maxHealth}} )"
+
+                <app-bar
+                    label="Mana ( {{creature.vitals.mana | number:'1.2-2'}} / {{creature.vitals.maxMana | number:'1.2-2'}} )"
                     [value]="creature.vitals.mana" [max]="creature.vitals.maxMana" color="#1e88e5" />
-                <app-bar label="Stamina ( {{creature.vitals.health}} / {{creature.vitals.maxHealth}} )"
+
+                <app-bar
+                    label="Stamina ( {{creature.vitals.stamina | number:'1.2-2'}} / {{creature.vitals.maxStamina | number:'1.2-2'}} )"
                     [value]="creature.vitals.stamina" [max]="creature.vitals.maxStamina" color="#4caf50" />
 
                 <app-bar label="Attack" [value]="creature.combatAction.counter" [max]="creature.combatAction.duration"

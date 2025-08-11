@@ -21,8 +21,6 @@ public:
     void computeHitDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature );
     void computeHitDamage( Model::Creature* creature, const std::string& sessionId, Model::Character* character );
 
-    void computeRegeneration( const std::string& sessionId, Model::Character* character );
-
     void computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures );
     void computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures );
 

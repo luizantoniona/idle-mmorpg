@@ -3,7 +3,8 @@
         {
             "type": "animal",
             "creatures": [
-                "rat"
+                "rat",
+                "cave_rat"
             ]
         },
         {

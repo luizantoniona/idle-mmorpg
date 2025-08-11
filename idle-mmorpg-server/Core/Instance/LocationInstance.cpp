@@ -7,6 +7,7 @@
 #include <Core/Message/MessageSenderType.h>
 #include <Core/System/ActionSystem.h>
 #include <Core/System/NotificationSystem.h>
+#include <Core/System/RegenerationSystem.h>
 
 namespace Core::Instance {
 
@@ -38,6 +39,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
 void LocationInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
     std::cout << "LocationInstance::removeCharacter" << " [SessionID] " << sessionId << std::endl;
+    exitCombat( sessionId );
     _characters.erase( sessionId );
 }
 
@@ -85,6 +87,16 @@ void LocationInstance::tick() {
     std::lock_guard lock( _mutex );
 
     for ( const auto& [ sessionId, character ] : _characters ) {
+
+        auto& combatAction = character->combatAction();
+        if ( combatAction.regenCounter() >= combatAction.regenDuration() ) {
+            Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
+            combatAction.setRegenCounter( 0 );
+
+        } else {
+            combatAction.setRegenCounter( combatAction.regenCounter() + 1 );
+        }
+
         if ( character->action().id() == "idle" ) {
             continue;
         }

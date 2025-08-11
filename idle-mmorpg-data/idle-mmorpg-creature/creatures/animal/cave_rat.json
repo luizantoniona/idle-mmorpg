@@ -1,0 +1,27 @@
+{
+    "id": "cave_rat",
+    "name": "Cave Rat",
+    "description": "A larger and tougher rat that dwells in dark caves.",
+    "experience": 10,
+    "health": 30,
+    "mana": 0,
+    "stamina": 10,
+    "min_damage": 0,
+    "max_damage": 10,
+    "accuracy": 3,
+    "speed": 3,
+    "defense": 1,
+    "evasion": 3,
+    "loot": [
+        {
+            "id": "rat_tail",
+            "chance": 0.7,
+            "amount": 1
+        },
+        {
+            "id": "cheese",
+            "chance": 0.15,
+            "amount": 1
+        }
+    ]
+}

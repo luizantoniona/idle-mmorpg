@@ -5,6 +5,7 @@
     "experience": 5,
     "health": 20,
     "mana": 0,
+    "stamina": 10,
     "min_damage": 0,
     "max_damage": 8,
     "accuracy": 2,

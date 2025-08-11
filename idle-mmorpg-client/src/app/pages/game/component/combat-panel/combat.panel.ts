@@ -51,7 +51,7 @@ export class CombatPanel {
     }
 
     handleMessage(data: any): void {
-        if (data.type === "CHARACTER_UPDATE") {
+        if (data.type !== 'COMBAT_ROOMS_UPDATE' && data.type !== 'COMBAT_UPDATE' && data.type !== 'CHARACTER_DEAD') {
             return;
         }
 

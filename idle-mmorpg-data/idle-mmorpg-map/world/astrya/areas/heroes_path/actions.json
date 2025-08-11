@@ -2,7 +2,7 @@
     "actions": [
         {
             "id": "rest",
-            "label": "Rest by the heroes camp",
+            "label": "Rest and recover energy at the heroes camp",
             "duration": 20,
             "structure": "campfire",
             "requirements": [],
@@ -14,8 +14,20 @@
             ]
         },
         {
+            "id": "run",
+            "label": "Run training laps to improve stamina",
+            "duration": 100,
+            "requirements": [],
+            "experience": [
+                {
+                    "skill": "running",
+                    "amount": 1
+                }
+            ]
+        },
+        {
             "id": "mine",
-            "label": "Mine for copper ores",
+            "label": "Mine copper ore from nearby rocks",
             "duration": 200,
             "requirements": [
                 {
@@ -32,10 +44,9 @@
         },
         {
             "id": "combat",
-            "label": "Fight with location enemies",
+            "label": "Engage in battle against local enemies",
             "requirements": [],
-            "experience": [],
-            "effects": []
+            "experience": []
         },
         {
             "id": "combat",
@@ -46,7 +57,7 @@
         },
         {
             "id": "train",
-            "label": "Train with a wooden dummy",
+            "label": "Practice combat techniques with a wooden dummy",
             "duration": 40,
             "structure": "training_fields",
             "requirements": [],

@@ -1,0 +1,27 @@
+{
+    "actions": [
+        {
+            "id": "mine",
+            "label": "Mine copper ore from nearby rocks",
+            "duration": 200,
+            "requirements": [
+                {
+                    "type": "item",
+                    "category": "pickaxe"
+                }
+            ],
+            "experience": [
+                {
+                    "skill": "mining",
+                    "amount": 1
+                }
+            ]
+        },
+        {
+            "id": "combat",
+            "label": "Engage in battle against local enemies",
+            "requirements": [],
+            "experience": []
+        }
+    ]
+}
