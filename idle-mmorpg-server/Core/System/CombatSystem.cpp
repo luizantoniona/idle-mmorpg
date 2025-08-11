@@ -4,7 +4,6 @@ namespace Core::System {
 
 CombatSystem::CombatSystem( Model::Location* location ) :
     _location( location ),
-    _notificationSystem(),
     _progressionSystem() {}
 
 void CombatSystem::process( const std::string& sessionId, Model::Character* character ) {}

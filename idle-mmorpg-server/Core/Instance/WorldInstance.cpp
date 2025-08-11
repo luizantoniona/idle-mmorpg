@@ -8,7 +8,6 @@ namespace Core::Instance {
 
 WorldInstance::WorldInstance( Model::World* world ) :
     _mutex(),
-    _sender(),
     _characters(),
     _world( world ) {}
 
@@ -62,6 +61,8 @@ void WorldInstance::removeCharacter( const std::string& sessionId ) {
         Repository::CharacterRepository().updateCharacter( *itCharacter->second );
         _characters.erase( itCharacter );
     }
+
+    // TODO: If region instance empty, delete it;
 }
 
 void WorldInstance::moveCharacter( const std::string& sessionId ) {

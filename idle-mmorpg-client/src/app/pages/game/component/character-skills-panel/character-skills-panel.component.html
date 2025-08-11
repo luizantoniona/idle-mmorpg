@@ -1,6 +1,6 @@
 <app-panel-vertical>
     <div class="scrollable-panel">
-        @for(characterSkill of character.skills; track characterSkill){
+        @for(characterSkill of character.skills; track characterSkill.id){
         <app-bar [label]="characterSkill.skill.name + ' (Nv ' + characterSkill.level + ')'"
             [value]="characterSkill.experience" [max]="characterSkill.experienceNextLevel"
             [color]="getSkillColor(characterSkill.id)">

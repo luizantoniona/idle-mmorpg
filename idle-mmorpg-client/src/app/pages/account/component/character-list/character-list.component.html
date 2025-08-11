@@ -1,5 +1,5 @@
 <div class="character-list">
-    @for( character of characters; track characters){
+    @for( character of characters; track character.idCharacter ){
     <app-character-card [character]="character" (click)="selectCharacter(character)">
     </app-character-card>
     }

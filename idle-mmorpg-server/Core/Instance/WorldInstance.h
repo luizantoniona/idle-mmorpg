@@ -32,7 +32,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<RegionInstance>> _regions;
     std::unordered_map<std::string, std::unique_ptr<Model::Character> > _characters;
     std::unordered_map<std::string, RegionInstance*> _characterToRegion;
-    Core::Message::MessageSender _sender;
 };
 
 } // namespace Core::Instance

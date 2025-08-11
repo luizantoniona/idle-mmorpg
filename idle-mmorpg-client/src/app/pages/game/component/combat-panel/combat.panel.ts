@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
+import { BarComponent } from '../../../../component';
 import { ButtonComponent } from '../../../../component';
 import { CardComponent } from '../../../../component';
 import { LoadingComponent } from '../../../../component';
@@ -13,11 +14,12 @@ import { Combat } from '../../../../model';
 import { WebsocketService } from '../../../../service/websocket.service';
 
 @Component({
-    selector: 'app-combat-popup',
-    templateUrl: './combat-popup.component.html',
-    styleUrls: ['./combat-popup.component.scss'],
+    selector: 'app-combat-panel',
+    templateUrl: './combat.panel.html',
+    styleUrls: ['./combat.panel.scss'],
     imports: [
         CommonModule,
+        BarComponent,
         ButtonComponent,
         CardComponent,
         LoadingComponent,
@@ -25,8 +27,8 @@ import { WebsocketService } from '../../../../service/websocket.service';
     ],
 })
 
-export class CombatPopupComponent {
-    @Output() close = new EventEmitter<void>();
+export class CombatPanel {
+    @Output() closeCombat = new EventEmitter<void>();
 
     private websocketService = inject(WebsocketService);
     private subscriptions = new Subscription();
@@ -49,12 +51,14 @@ export class CombatPopupComponent {
     }
 
     handleMessage(data: any): void {
+        if (data.type === "CHARACTER_UPDATE") {
+            return;
+        }
+
         console.log(data)
         switch (data.type) {
             case 'COMBAT_ROOMS_UPDATE':
-                if (data.payload.combatInstances) {
-                    this.combatInstances = data.payload.combatInstances
-                }
+                this.combatInstances = data.payload.combatInstances
                 break;
             case 'COMBAT_UPDATE':
                 if (data.payload.combat) {
@@ -71,14 +75,14 @@ export class CombatPopupComponent {
         });
     }
 
-    onJoinClicked(id: number): void {
+    onJoinClicked(id: string): void {
         this.sendMessage({
             type: 'COMBAT_ROOM_ENTER',
             payload: { id: id },
         });
     }
 
-    onExitClicked(): void {
+    onExitCombatClicked(): void {
         this.sendMessage({
             type: 'COMBAT_ROOM_EXIT',
             payload: {},
@@ -87,11 +91,7 @@ export class CombatPopupComponent {
         this.combat = null;
     }
 
-    onOverlayClick() {
-        this.close.emit();
-    }
-
-    stopPropagation(event: MouseEvent) {
-        event.stopPropagation();
+    onExitClicked(): void {
+        this.closeCombat.emit();
     }
 }

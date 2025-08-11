@@ -2,8 +2,11 @@
 
 #include <iostream>
 
+#include <drogon/drogon.h>
+
 #include <Core/Message/MessageSenderType.h>
 #include <Core/System/ActionSystem.h>
+#include <Core/System/NotificationSystem.h>
 
 namespace Core::Instance {
 
@@ -11,7 +14,6 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _mutex(),
     _location( location ),
     _characters( {} ),
-    _notificationSystem(),
     _actionSystem( location ),
     _trainingSystem( location ),
     _combatInstances(),
@@ -26,9 +28,9 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
               << " [Entering] " << _location->name()
               << " [SessionID] " << sessionId << std::endl;
 
-    _notificationSystem.notifyFullCharacter( sessionId, character );
-    _notificationSystem.notifyFullLocation( sessionId, _location );
-    _notificationSystem.notifyLocationActions( sessionId, character, _location );
+    Core::System::NotificationSystem::notifyFullCharacter( sessionId, character );
+    Core::System::NotificationSystem::notifyFullLocation( sessionId, _location );
+    Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
 
     return true;
 }
@@ -44,7 +46,9 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
         return;
     }
 
-    auto combatInstance = std::make_unique<CombatInstance>( _location, character->idCharacter(), character->coordinates().currentStructure() );
+    std::string roomId = drogon::utils::getUuid();
+
+    auto combatInstance = std::make_unique<CombatInstance>( _location, roomId, character->name(), character->coordinates().currentStructure() );
     CombatInstance* combatInstancePtr = combatInstance.get();
 
     combatInstancePtr->addCharacter( sessionId, character );
@@ -52,7 +56,7 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
     _combatInstances.push_back( std::move( combatInstance ) );
 }
 
-void LocationInstance::enterCombat( const std::string& sessionId, Model::Character* character, int roomId ) {
+void LocationInstance::enterCombat( const std::string& sessionId, Model::Character* character, const std::string& roomId ) {
     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
         return;
     }
@@ -101,7 +105,7 @@ void LocationInstance::tick() {
                     }
                 }
 
-                _notificationSystem.notifyCombatInstances( sessionId, instancesToNotify );
+                Core::System::NotificationSystem::notifyCombatInstances( sessionId, instancesToNotify );
             }
             continue;
         }
@@ -112,7 +116,12 @@ void LocationInstance::tick() {
     for ( auto it = _combatInstances.begin(); it != _combatInstances.end(); ) {
         CombatInstance* combatInstance = it->get();
         combatInstance->process();
-        _notificationSystem.notifyCombat( combatInstance );
+
+        for ( const auto& [ sessionId, character ] : combatInstance->characters() ) {
+            Core::System::NotificationSystem::notifyFullCharacter( sessionId, character );
+        }
+
+        Core::System::NotificationSystem::notifyCombat( combatInstance );
 
         if ( combatInstance->isFinished() ) {
             for ( const auto& [ sessionId, _ ] : combatInstance->characters() ) {
@@ -148,7 +157,7 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
             createCombat( sessionId, character );
             break;
         case Message::MessageReceiverType::COMBAT_ROOM_ENTER: {
-            int roomId = payload["id"].asInt();
+            std::string roomId = payload[ "id" ].asString();
             enterCombat( sessionId, character, roomId );
             break;
         }

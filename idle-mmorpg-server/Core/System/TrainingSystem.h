@@ -5,7 +5,6 @@
 
 #include <Model/Character/Character.h>
 
-#include "NotificationSystem.h"
 #include "ProgressionSystem.h"
 
 namespace Core::System {
@@ -21,7 +20,6 @@ private:
 
 private:
     Model::Location* _location;
-    NotificationSystem _notificationSystem;
     ProgressionSystem _progressionSystem;
 };
 

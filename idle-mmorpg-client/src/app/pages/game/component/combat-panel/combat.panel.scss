@@ -1,0 +1,36 @@
+.combat-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.combat-panel {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 12px;
+    width: 100%;
+}
+
+.characters-column,
+.creatures-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    width: 100%;
+}
+
+.combat-character,
+.combat-creature {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    border-width: 2px;
+    border-color: var(--color-accent);
+    border-style: solid;
+    border-radius: 8px;
+    padding: 12px;
+}

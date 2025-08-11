@@ -4,17 +4,21 @@ namespace Model {
 
 Creature::Creature() :
     _id( "" ),
+    _combatId( 0 ),
     _type( "" ),
     _name( "" ),
     _description( "" ),
     _experience( 0 ),
-    _health( 0.0 ),
-    _mana( 0.0 ),
-    _defense( 0.0 ),
-    _evasion( 0.0 ),
+    _vitals(),
+    _combatAction(),
     _maxAttack( 0.0 ),
     _minAttack( 0.0 ),
-    _loot( {} ) {}
+    _accuracy( 0.0 ),
+    _speed( 0.0 ),
+    _defense( 0.0 ),
+    _evasion( 0.0 ),
+    _loot( {} ) {
+}
 
 std::string Creature::id() const {
     return _id;
@@ -22,6 +26,14 @@ std::string Creature::id() const {
 
 void Creature::setId( const std::string& id ) {
     _id = id;
+}
+
+int Creature::combatId() const {
+    return _combatId;
+}
+
+void Creature::setCombatId( int combatId ) {
+    _combatId = combatId;
 }
 
 std::string Creature::type() const {
@@ -56,36 +68,20 @@ void Creature::setExperience( int experience ) {
     _experience = experience;
 }
 
-double Creature::health() const {
-    return _health;
+CreatureCombatAction& Creature::combatAction() {
+    return _combatAction;
 }
 
-void Creature::setHealth( double health ) {
-    _health = health;
+void Creature::setCombatAction( const CreatureCombatAction& combatAction ) {
+    _combatAction = combatAction;
 }
 
-double Creature::mana() const {
-    return _mana;
+CreatureVitals& Creature::vitals() {
+    return _vitals;
 }
 
-void Creature::setMana( double mana ) {
-    _mana = mana;
-}
-
-double Creature::defense() const {
-    return _defense;
-}
-
-void Creature::setDefense( double defense ) {
-    _defense = defense;
-}
-
-double Creature::evasion() const {
-    return _evasion;
-}
-
-void Creature::setEvasion( double evasion ) {
-    _evasion = evasion;
+void Creature::setVitals( const CreatureVitals& vitals ) {
+    _vitals = vitals;
 }
 
 double Creature::maxAttack() const {
@@ -102,6 +98,38 @@ double Creature::minAttack() const {
 
 void Creature::setMinAttack( double minAttack ) {
     _minAttack = minAttack;
+}
+
+double Creature::accuracy() const {
+    return _accuracy;
+}
+
+void Creature::setAccuracy( double accuracy ) {
+    _accuracy = accuracy;
+}
+
+double Creature::speed() const {
+    return _speed;
+}
+
+void Creature::setSpeed( double speed ) {
+    _speed = speed;
+}
+
+double Creature::defense() const {
+    return _defense;
+}
+
+void Creature::setDefense( double defense ) {
+    _defense = defense;
+}
+
+double Creature::evasion() const {
+    return _evasion;
+}
+
+void Creature::setEvasion( double evasion ) {
+    _evasion = evasion;
 }
 
 std::vector<CreatureLoot> Creature::loot() const {

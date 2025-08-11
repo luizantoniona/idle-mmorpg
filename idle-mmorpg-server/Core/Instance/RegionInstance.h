@@ -29,7 +29,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<LocationInstance> > _locations;
     std::unordered_map<std::string, Model::Character*> _characters;
     std::unordered_map<std::string, LocationInstance*> _characterToLocation;
-    Core::Message::MessageSender _sender;
 };
 
 } // namespace Core::Instance

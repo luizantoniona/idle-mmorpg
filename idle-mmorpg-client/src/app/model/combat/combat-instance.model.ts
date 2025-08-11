@@ -1,5 +1,6 @@
 export type CombatInstance = {
-    id: number;
+    id: string;
+    name: string;
     structure: string;
     characters: number;
 };

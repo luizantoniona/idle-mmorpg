@@ -45,21 +45,28 @@ std::unique_ptr<Model::Creature> CreatureFactory::createCreature( const std::str
     Json::Value creatureJson = Commons::JsonHelper::loadJsonFile( creaturePath );
 
     auto creature = std::make_unique<Model::Creature>();
-    creature->setName( creatureJson["name"].asString() );
-    creature->setDescription( creatureJson["description"].asString() );
-    creature->setExperience( creatureJson["experience"].asInt() );
-    creature->setHealth( creatureJson["health"].asDouble() );
-    creature->setMana( creatureJson["mana"].asDouble() );
-    creature->setDefense( creatureJson["defense"].asDouble() );
-    creature->setEvasion( creatureJson["evasion"].asDouble() );
-    creature->setMinAttack( creatureJson["min_damage"].asDouble() );
-    creature->setMaxAttack( creatureJson["max_damage"].asDouble() );
+    creature->setName( creatureJson[ "name" ].asString() );
+    creature->setDescription( creatureJson[ "description" ].asString() );
+    creature->setExperience( creatureJson[ "experience" ].asInt() );
 
-    for ( const auto& lootJson : creatureJson["loot"] ) {
+    creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );
+    creature->vitals().setHealth( creatureJson[ "health" ].asDouble() );
+    creature->vitals().setMaxMana( creatureJson[ "mana" ].asDouble() );
+    creature->vitals().setMana( creatureJson[ "mana" ].asDouble() );
+
+    creature->setMinAttack( creatureJson[ "min_damage" ].asDouble() );
+    creature->setMaxAttack( creatureJson[ "max_damage" ].asDouble() );
+    creature->setAccuracy( creatureJson[ "accuracy" ].asDouble() );
+    creature->setSpeed( creatureJson[ "speed" ].asDouble() );
+
+    creature->setDefense( creatureJson[ "defense" ].asDouble() );
+    creature->setEvasion( creatureJson[ "evasion" ].asDouble() );
+
+    for ( const auto& lootJson : creatureJson[ "loot" ] ) {
         Model::CreatureLoot loot;
-        loot.setId( lootJson["id"].asString() );
-        loot.setChance( lootJson["chance"].asDouble() );
-        loot.setAmount( lootJson["amount"].asInt() );
+        loot.setId( lootJson[ "id" ].asString() );
+        loot.setChance( lootJson[ "chance" ].asDouble() );
+        loot.setAmount( lootJson[ "amount" ].asInt() );
 
         creature->addLoot( loot );
     }

@@ -1,5 +1,6 @@
 import { CharacterAction } from "./character-action.model";
 import { CharacterAttributes } from "./character-attributes.model";
+import { CharacterCombatAction } from "./character-combat-action.model";
 import { CharacterCombatAttributes } from "./character-combat-attributes.model";
 import { CharacterCoordinates } from "./character-coordinates.model";
 import { CharacterEquipment } from "./character-equipment.model";
@@ -15,6 +16,7 @@ export type Character = {
     name: string;
     action: CharacterAction;
     attributes: CharacterAttributes;
+    combatAction: CharacterCombatAction;
     combatAttributes: CharacterCombatAttributes;
     coordinates: CharacterCoordinates;
     equipament: CharacterEquipment;

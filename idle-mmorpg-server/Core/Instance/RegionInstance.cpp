@@ -7,7 +7,6 @@ namespace Core::Instance {
 
 RegionInstance::RegionInstance( Model::Region* region ) :
     _mutex(),
-    _sender(),
     _characters( {} ),
     _region( region ) {}
 
@@ -55,6 +54,8 @@ void RegionInstance::removeCharacter( const std::string& sessionId ) {
     }
 
     _characters.erase( sessionId );
+
+    // TODO: If location instance empty, delete it;
 }
 
 void RegionInstance::moveCharacter( const std::string& sessionId ) {

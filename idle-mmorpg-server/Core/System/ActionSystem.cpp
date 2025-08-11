@@ -15,13 +15,6 @@ ActionSystem::ActionSystem( Model::Location* location ) :
     _progressionSystem() {
 }
 
-int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
-    int baseDuration = action.duration();
-    // TODO: Compute depending the action
-    // TODO: Treat special actions separated -> Combat - Train
-    return baseDuration;
-}
-
 void ActionSystem::changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
     if ( !character || !payload.isObject() || !payload.isMember( "action" ) ) {
         return;
@@ -107,6 +100,13 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
     }
 
     _notificationSystem.notifyCurrentAction( sessionId, character );
+}
+
+int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
+    int baseDuration = action.duration();
+    // TODO: Compute depending the action
+    // TODO: Treat special actions separated -> Combat - Train
+    return baseDuration;
 }
 
 } // namespace Core::System

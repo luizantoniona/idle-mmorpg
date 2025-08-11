@@ -1,13 +1,16 @@
 <div class="location-column">
 
-    <div class="location-row">
-        <app-location-description-panel [location]="location"></app-location-description-panel>
-    </div>
+    @if(!showCombat){
 
     <div class="location-row">
-        <app-location-actions-panel [location]="location"></app-location-actions-panel>
+        <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"></app-location-actions-panel>
         <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>
     </div>
 
     <app-character-action-panel [character]="character"></app-character-action-panel>
+
+    } @else {
+    <app-combat-panel (closeCombat)="onCloseCombat()"></app-combat-panel>
+    }
+
 </div>

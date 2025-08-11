@@ -5,10 +5,12 @@
     "experience": 5,
     "health": 20,
     "mana": 0,
-    "defense": 1,
-    "evasion": 5,
     "min_damage": 0,
     "max_damage": 8,
+    "accuracy": 10,
+    "speed": 5,
+    "defense": 1,
+    "evasion": 5,
     "loot": [
         {
             "id": "rat_tail",

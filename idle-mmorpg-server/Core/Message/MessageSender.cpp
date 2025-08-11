@@ -6,8 +6,6 @@
 
 namespace Core::Message {
 
-MessageSender::MessageSender() {}
-
 void MessageSender::send( const std::string& sessionId, MessageSenderType type, const Json::Value& payload ) {
     Json::Value message;
     message[ "type" ] = MessageHelper::typeToString( type );

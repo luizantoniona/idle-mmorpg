@@ -5,10 +5,12 @@
     "experience": 35,
     "health": 50,
     "mana": 0,
-    "defense": 2,
-    "evasion": 5,
     "min_damage": 0,
     "max_damage": 25,
+    "accuracy": 10,
+    "speed": 5,
+    "defense": 2,
+    "evasion": 5,
     "loot": [
         {
             "id": "coin",

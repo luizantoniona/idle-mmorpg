@@ -93,6 +93,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         creature.setSpawnMin( creatureJson[ "min" ].asInt() );
         creature.setSpawnMax( creatureJson[ "max" ].asInt() );
         creature.setStructure( creatureJson.get( "structure", "" ).asString() );
+        creature.setCreature( Commons::Singleton<Manager::CreatureManager>::instance().creatureById( creature.id() ) );
 
         location->addCreature( creature );
     }

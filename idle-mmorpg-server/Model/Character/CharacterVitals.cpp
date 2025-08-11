@@ -14,7 +14,8 @@ CharacterVitals::CharacterVitals() :
     _stamina( 0.0 ),
     _maxStamina( 0.0 ),
     _baseStaminaRegen( 0.0 ),
-    _modifierStaminaRegen( 0.0 ) {}
+    _modifierStaminaRegen( 0.0 ) {
+}
 
 Json::Value CharacterVitals::toJson() {
     Json::Value root;

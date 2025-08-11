@@ -1,9 +1,7 @@
 <app-panel-vertical>
     <div class="section">
         <h3>Available Actions</h3>
-
         <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
-
         @if(location && location.actions && location.actions.length) {
         @for(action of location.actions; track action){
         <app-button [text]="action.label" (clickEvent)="onActionClick(action.id)"></app-button>
@@ -11,7 +9,3 @@
         }
     </div>
 </app-panel-vertical>
-
-@if(showCombatPopup){
-<app-combat-popup (close)="closePopup()"></app-combat-popup>
-}

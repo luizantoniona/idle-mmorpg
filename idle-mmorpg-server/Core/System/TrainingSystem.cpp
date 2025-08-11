@@ -2,11 +2,12 @@
 
 #include <algorithm>
 
+#include "NotificationSystem.h"
+
 namespace Core::System {
 
 TrainingSystem::TrainingSystem( Model::Location* location ) :
     _location( location ),
-    _notificationSystem(),
     _progressionSystem() {}
 
 void TrainingSystem::process( const std::string& sessionId, Model::Character* character ) {
@@ -48,7 +49,7 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
         characterAction.setCounter( characterAction.counter() + 1 );
     }
 
-    _notificationSystem.notifyCurrentAction( sessionId, character );
+    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 std::string TrainingSystem::combatSkill( Model::Character* character ) {

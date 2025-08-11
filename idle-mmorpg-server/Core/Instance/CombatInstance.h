@@ -3,7 +3,6 @@
 
 #include <unordered_map>
 
-//#include <Core/System/CombatSystem.h>
 #include <Model/World/Location/Location.h>
 #include <Model/Character/Character.h>
 
@@ -11,7 +10,7 @@ namespace Core::Instance {
 
 class CombatInstance {
 public:
-    explicit CombatInstance( Model::Location* location, const int id, const std::string& structureId = "" );
+    explicit CombatInstance( Model::Location* location, const std::string& id, const std::string& name, const std::string& structureId = "" );
 
     Json::Value instanceToJson() const;
     Json::Value combatToJson() const;
@@ -21,21 +20,27 @@ public:
 
     bool isFinished() const;
 
-    int id() const;
+    std::string id() const;
     std::string structureId() const;
     const std::unordered_map<std::string, Model::Character*>& characters() const;
+
+    void spawnCreatures();
 
     void process();
 
 private:
-    int _id;
+    int computeCharacterCombatActionDuration( Model::Character* character );
+    int computeCreatureCombatActionDuration( Model::Creature* creature );
+
+private:
+    std::string _id;
+    std::string _name;
     std::string _structureId;
     Model::Location* _location;
     std::unordered_map<std::string, Model::Character*> _characters;
-    std::vector<Model::Creature*> _enemies;
-//    Core::System::CombatSystem _combatSystem;
+    std::vector<std::unique_ptr<Model::Creature>> _creatures;
 };
 
-}
+} // namespace Core::Instance
 
 #endif // COMBATINSTANCE_H

@@ -1,11 +1,9 @@
 #include "NotificationSystem.h"
 
 #include <Commons/ActionsHelper.h>
+#include <Core/Message/MessageSender.h>
 
 namespace Core::System {
-
-NotificationSystem::NotificationSystem() :
-    _sender() {}
 
 void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Model::Character* character ) {
     Json::Value characterJson = character->toJson();
@@ -19,55 +17,55 @@ void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Mode
     characterJson[ "skills" ] = character->skills().toJson();
     characterJson[ "vitals" ] = character->vitals().toJson();
     characterJson[ "wallet" ] = character->wallet().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
 }
 
 void NotificationSystem::notifyCharacterAttributes( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "attributes" ] = character->attributes().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE, payload );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterCombatAttributes( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "combatAttributes" ] = character->combatAttributes().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_COMBAT_ATTRIBUTES_UPDATE, payload );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_COMBAT_ATTRIBUTES_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterProgression( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "progression" ] = character->progression().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_PROGRESSION_UPDATE, payload );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_PROGRESSION_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterSkills( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "skills" ] = character->skills().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_SKILLS_UPDATE, payload );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_SKILLS_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterVitals( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "vitals" ] = character->vitals().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_VITALS_UPDATE, payload );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_VITALS_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCurrentAction( const std::string& sessionId, Model::Character* character ) {
     Json::Value payloadCurrentAction;
     payloadCurrentAction[ "action" ] = character->action().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_CURRENT_ACTION_UPDATE, payloadCurrentAction );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_CURRENT_ACTION_UPDATE, payloadCurrentAction );
 }
 
 void NotificationSystem::notifyCurrentCoordinates( const std::string& sessionId, Model::Character* character ) {
     Json::Value payloadCurrentCoordinates;
     payloadCurrentCoordinates[ "coordinates" ] = character->coordinates().toJson();
-    _sender.send( sessionId, Message::MessageSenderType::CHARACTER_CURRENT_COORDINATES_UPDATE, payloadCurrentCoordinates );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_CURRENT_COORDINATES_UPDATE, payloadCurrentCoordinates );
 }
 
 void NotificationSystem::notifyFullLocation( const std::string& sessionId, const Model::Location* location ) {
     Json::Value payloadLocation;
     payloadLocation[ "location" ] = location->toJson();
-    _sender.send( sessionId, Message::MessageSenderType::LOCATION_UPDATE, payloadLocation );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::LOCATION_UPDATE, payloadLocation );
 }
 
 void NotificationSystem::notifyLocationActions( const std::string& sessionId, Model::Character* character, const Model::Location* location ) {
@@ -81,7 +79,7 @@ void NotificationSystem::notifyLocationActions( const std::string& sessionId, Mo
     }
 
     payloadLocationActions[ "actions" ] = availableActions;
-    _sender.send( sessionId, Message::MessageSenderType::LOCATION_ACTIONS_UPDATE, payloadLocationActions );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::LOCATION_ACTIONS_UPDATE, payloadLocationActions );
 }
 
 void NotificationSystem::notifyCombatInstances( const std::string& sessionId, std::vector<Instance::CombatInstance*> combatInstances ) {
@@ -93,7 +91,7 @@ void NotificationSystem::notifyCombatInstances( const std::string& sessionId, st
     }
 
     payloadCombatInstances["combatInstances"] = combatArray;
-    _sender.send( sessionId, Message::MessageSenderType::COMBAT_ROOMS_UPDATE, payloadCombatInstances );
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::COMBAT_ROOMS_UPDATE, payloadCombatInstances );
 }
 
 void NotificationSystem::notifyCombat( const Core::Instance::CombatInstance* combatInstance ) {
@@ -101,7 +99,7 @@ void NotificationSystem::notifyCombat( const Core::Instance::CombatInstance* com
     payloadCombatInstance["combat"] = combatInstance->combatToJson();
 
     for ( const auto& [sessionId, character] : combatInstance->characters() ) {
-        _sender.send( sessionId, Message::MessageSenderType::COMBAT_UPDATE, payloadCombatInstance );
+        Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::COMBAT_UPDATE, payloadCombatInstance );
     }
 }
 

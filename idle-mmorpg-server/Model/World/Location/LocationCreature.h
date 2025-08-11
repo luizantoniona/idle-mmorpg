@@ -23,15 +23,15 @@ public:
     int spawnMax() const;
     void setSpawnMax( int max );
 
-    Creature* creature() const;
-    void setCreature( Creature* creature );
+    const Creature* creature() const;
+    void setCreature( const Creature* creature );
 
 private:
     std::string _id;
     std::string _structure;
     int _spawnMin;
     int _spawnMax;
-    Creature* _creature;
+    const Creature* _creature;
 };
 
 } // namespace Model

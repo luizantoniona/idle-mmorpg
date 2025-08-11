@@ -8,8 +8,10 @@ export { CharacterWalletPanel } from './character-wallet-panel/character-wallet-
 
 export { ChatPanel } from './chat-panel/chat-panel.component';
 
-export { CombatPopupComponent } from './combat-popup/combat-popup.component'
+export { CombatPanel } from './combat-panel/combat.panel'
 
-export { LocationPanel } from './location-panel/location-panel.component';
 export { LocationConnectionsPanel } from './location-connections-panel/location-connections-panel.component';
+export { LocationDescriptionPanel } from './location-description-panel/location-description.component';
 export { LocationStructuresPanel } from './location-structures-panel/location-structures-panel.component';
+
+export { MainPanel } from './main-panel/main.panel';

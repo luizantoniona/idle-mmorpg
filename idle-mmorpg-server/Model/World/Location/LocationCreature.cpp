@@ -42,11 +42,11 @@ void LocationCreature::setSpawnMax( int spawnMax ) {
     _spawnMax = spawnMax;
 }
 
-Creature* LocationCreature::creature() const {
+const Creature* LocationCreature::creature() const {
     return _creature;
 }
 
-void LocationCreature::setCreature( Creature* creature ) {
+void LocationCreature::setCreature( const Creature* creature ) {
     _creature = creature;
 }
 

@@ -1,6 +1,7 @@
 export type { Character } from "./character/character.model";
 export type { CharacterAction } from "./character/character-action.model";
 export type { CharacterAttributes } from "./character/character-attributes.model";
+export type { CharacterCombatAction } from "./character/character-combat-action.model";
 export type { CharacterCombatAttributes } from "./character/character-combat-attributes.model";
 export type { CharacterCoordinates } from "./character/character-coordinates.model"
 export type { CharacterEquipment } from "./character/character-equipment.model";
@@ -12,6 +13,10 @@ export type { CharacterWallet } from "./character/character-wallet.model";
 
 export type { CombatInstance } from './combat/combat-instance.model';
 export type { Combat } from './combat/combat.model';
+
+export type { Creature } from "./creature/creature.model";
+export type { CreatureCombatAction } from "./creature/creature-combat-action.model";
+export type { CreatureVitals } from "./creature/creature-vitals.model";
 
 export type { Item } from "./item/item.model";
 
