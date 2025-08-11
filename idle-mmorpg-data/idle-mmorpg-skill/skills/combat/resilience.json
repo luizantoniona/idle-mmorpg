@@ -15,6 +15,26 @@
             ]
         },
         {
+            "level": 2,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 3,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "evasion",
+                    "value": 1
+                }
+            ]
+        },
+        {
             "level": 5,
             "bonuses": [
                 {
@@ -26,11 +46,6 @@
                     "type": "vital",
                     "id": "stamina",
                     "value": 5
-                },
-                {
-                    "type": "combat",
-                    "id": "defense",
-                    "value": 1
                 }
             ]
         },

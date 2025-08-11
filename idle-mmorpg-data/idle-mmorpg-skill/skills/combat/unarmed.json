@@ -15,6 +15,41 @@
             ]
         },
         {
+            "level": 2,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "attack",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 3,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "accuracy",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 4,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "attack",
+                    "value": 1
+                },
+                {
+                    "type": "combat",
+                    "id": "accuracy",
+                    "value": 1
+                }
+            ]
+        },
+        {
             "level": 5,
             "bonuses": [
                 {
@@ -24,7 +59,12 @@
                 },
                 {
                     "type": "combat",
-                    "id": "attack",
+                    "id": "accuracy",
+                    "value": 1
+                },
+                {
+                    "type": "combat",
+                    "id": "speed",
                     "value": 1
                 }
             ]

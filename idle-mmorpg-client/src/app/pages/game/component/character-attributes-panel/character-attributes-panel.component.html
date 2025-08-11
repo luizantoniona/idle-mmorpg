@@ -16,10 +16,10 @@
         <div class="attribute-column">
             @if (character.combatAttributes) {
             <app-card><strong>ATK</strong>: {{ character.combatAttributes.attack }}</app-card>
-            <app-card><strong>DEF</strong>: {{ character.combatAttributes.defense }}</app-card>
+            <app-card><strong>ACC</strong>: {{ character.combatAttributes.accuracy }}</app-card>
             <app-card><strong>SPD</strong>: {{ character.combatAttributes.speed }}</app-card>
+            <app-card><strong>DEF</strong>: {{ character.combatAttributes.defense }}</app-card>
             <app-card><strong>EVA</strong>: {{ character.combatAttributes.evasion }}</app-card>
-            <app-card><strong>CRT</strong>: {{ character.combatAttributes.criticalChance }}</app-card>
             } @else {
             <app-loading></app-loading>
             }
