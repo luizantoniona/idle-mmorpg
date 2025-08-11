@@ -91,6 +91,11 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
                 _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
             }
+
+            if ( completedAction.id() == "rest" || completedAction.id() == "sleep" ) {
+                regenerativeActionEffect( character );
+                NotificationSystem::notifyCharacterVitals( sessionId, character );
+            }
         }
 
         characterAction.setCounter( 0 );
@@ -107,6 +112,34 @@ int ActionSystem::computeActionDuration( Model::Character* character, const Mode
     // TODO: Compute depending the action
     // TODO: Treat special actions separated -> Combat - Train
     return baseDuration;
+}
+
+void ActionSystem::regenerativeActionEffect( Model::Character* character ) {
+    if ( !character ) {
+        return;
+    }
+
+    const double healthRegen = 5 + character->vitals().baseHealthRegen() + character->attributes().constitution();
+    const double staminaRegen = 2 + character->vitals().baseStaminaRegen() + character->attributes().constitution();
+    const double manaRegen = 1 + character->vitals().baseManaRegen() + +character->attributes().constitution();
+
+    int newHealth = character->vitals().health() + healthRegen;
+    if ( newHealth > character->vitals().maxHealth() ) {
+        newHealth = character->vitals().maxHealth();
+    }
+    character->vitals().setHealth( newHealth );
+
+    int newStamina = character->vitals().stamina() + staminaRegen;
+    if ( newStamina > character->vitals().maxStamina() ) {
+        newStamina = character->vitals().maxStamina();
+    }
+    character->vitals().setStamina( newStamina );
+
+    int newMana = character->vitals().mana() + manaRegen;
+    if ( newMana > character->vitals().maxMana() ) {
+        newMana = character->vitals().maxMana();
+    }
+    character->vitals().setMana( newMana );
 }
 
 } // namespace Core::System

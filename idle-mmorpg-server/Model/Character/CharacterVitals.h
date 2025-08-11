@@ -47,6 +47,10 @@ public:
     double modifierStaminaRegen() const;
     void setModifierStaminaRegen( double modifierStaminaRegen );
 
+    double healthRegen() const;
+    double manaRegen() const;
+    double staminaRegen() const;
+
 private:
     double _health;
     double _maxHealth;

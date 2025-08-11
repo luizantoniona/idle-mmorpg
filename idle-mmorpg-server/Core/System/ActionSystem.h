@@ -22,6 +22,7 @@ public:
 
 private:
     int computeActionDuration( Model::Character* character, const Model::LocationAction& action );
+    void regenerativeActionEffect( Model::Character* character );
 
 private:
     Model::Location* _location;

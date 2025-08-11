@@ -3,8 +3,9 @@
 
 #include <unordered_map>
 
-#include <Model/World/Location/Location.h>
+#include <Core/System/CombatSystem.h>
 #include <Model/Character/Character.h>
+#include <Model/World/Location/Location.h>
 
 namespace Core::Instance {
 
@@ -29,16 +30,13 @@ public:
     void process();
 
 private:
-    int computeCharacterCombatActionDuration( Model::Character* character );
-    int computeCreatureCombatActionDuration( Model::Creature* creature );
-
-private:
     std::string _id;
     std::string _name;
     std::string _structureId;
     Model::Location* _location;
     std::unordered_map<std::string, Model::Character*> _characters;
     std::vector<std::unique_ptr<Model::Creature>> _creatures;
+    Core::System::CombatSystem _combatSystem;
 };
 
 } // namespace Core::Instance

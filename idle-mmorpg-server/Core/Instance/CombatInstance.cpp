@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <Core/System/NotificationSystem.h>
+
 namespace Core::Instance {
 
 CombatInstance::CombatInstance( Model::Location* location, const std::string& id, const std::string& name, const std::string& structureId ) :
@@ -10,7 +12,8 @@ CombatInstance::CombatInstance( Model::Location* location, const std::string& id
     _structureId( structureId ),
     _location( location ),
     _characters(),
-    _creatures() {
+    _creatures(),
+    _combatSystem( location ) {
 }
 
 Json::Value CombatInstance::instanceToJson() const {
@@ -48,8 +51,7 @@ Json::Value CombatInstance::combatToJson() const {
 }
 
 void CombatInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
-    character->combatAction().setCounter( 0 );
-    character->combatAction().setDuration( computeCharacterCombatActionDuration( character ) );
+    _combatSystem.computeCombatActionDuration( character );
     _characters[sessionId] = character;
 }
 
@@ -92,18 +94,18 @@ void CombatInstance::spawnCreatures() {
             auto creatureInstance = std::make_unique<Model::Creature>( *locCreature.creature() );
 
             creatureInstance->setCombatId( _creatures.size() );
-            creatureInstance->combatAction().setCounter( 0 );
-            creatureInstance->combatAction().setDuration( computeCreatureCombatActionDuration( creatureInstance.get() ) );
+            _combatSystem.computeCombatActionDuration( creatureInstance.get() );
 
             _creatures.push_back( std::move( creatureInstance ) );
         }
     }
+
+    std::cout << "CombatInstance::process [ID]" << _id << " Spawned creatures: " << _creatures.size() << std::endl;
 }
 
 void CombatInstance::process() {
     if ( _creatures.empty() ) {
         spawnCreatures();
-        std::cout << "[Combat] Spawned creatures: " << _creatures.size() << std::endl;
     }
 
     for ( auto& [ sessionId, character ] : _characters ) {
@@ -119,21 +121,22 @@ void CombatInstance::process() {
             }
 
             if ( target ) {
-                std::cout << "[Combat] Character " << character->name() << " attacks creature " << target->name() << std::endl;
-
-                // TODO: calcular dano, aplicar no target
-                // Exemplo fictício:
-                // int damage = calculateDamage(character, target);
-                // target->reduceHealth(damage);
-
+                _combatSystem.computeHitDamage( sessionId, character, target );
                 action.setCounter( 0 );
             }
+
         } else {
             action.setCounter( action.counter() + 1 );
         }
+
+        if ( action.regenCounter() >= action.regenDuration() ) {
+            _combatSystem.computeRegeneration( sessionId, character );
+
+        } else {
+            action.setRegenCounter( action.regenCounter() + 1 );
+        }
     }
 
-    // Processar turno dos inimigos (semelhante ao dos personagens)
     for ( auto& creature : _creatures ) {
         auto& action = creature->combatAction();
         if ( creature->vitals().health() <= 0 ) {
@@ -141,30 +144,29 @@ void CombatInstance::process() {
         }
 
         if ( action.counter() >= action.duration() ) {
-            // Atacar personagem aleatório vivo
+
             Model::Character* target = nullptr;
+            std::string targetSessionId = "";
             for ( const auto& [ sessionId, character ] : _characters ) {
-                // Você pode checar se personagem está vivo, se tiver vitais
+
+                if ( character->vitals().health() <= 0 ) {
+                    continue;
+                }
+
                 target = character;
+                targetSessionId = sessionId;
                 break;
             }
 
             if ( target ) {
-                std::cout << "[Combat] Creature " << creature->name() << " attacks character " << target->name() << std::endl;
-
-                // TODO: calcular dano e aplicar no personagem
-                // Exemplo fictício:
-                // int damage = calculateDamage(creature.get(), target);
-                // target->reduceHealth(damage);
-
+                _combatSystem.computeHitDamage( creature.get(), targetSessionId, target );
                 action.setCounter( 0 );
             }
+
         } else {
             action.setCounter( action.counter() + 1 );
         }
     }
-
-    // TODO: checar se algum personagem morreu, remover da luta, notificar
 
     bool allCreaturesDead = true;
     for ( const auto& creature : _creatures ) {
@@ -175,54 +177,17 @@ void CombatInstance::process() {
     }
 
     if ( allCreaturesDead ) {
-        std::cout << "[Combat] All creatures dead, rewarding characters and respawning..." << std::endl;
+        std::cout << "[Combat] All creatures dead, rewarding characters" << std::endl;
+        _combatSystem.computeLoot( _characters, _creatures );
+        _combatSystem.computeExperience( _characters, _creatures );
+    }
 
-        for ( const auto& [ sessionId, character ] : _characters ) {
-            // Exemplo fictício: character->addExperience(100);
-            std::cout << "[Combat] Rewarding character: " << character->name() << std::endl;
+    std::vector<std::string> deadCharacters;
+    for ( const auto& [ sessionId, character ] : _characters ) {
+        if ( character->vitals().health() <= 0 ) {
+            Core::System::NotificationSystem::notifyDeadCharacter( sessionId );
         }
     }
-}
-
-int CombatInstance::computeCharacterCombatActionDuration( Model::Character* character ) {
-    // TODO VERIFY HOW WE WILL HANDLE THE DURATION OF AN ATACK
-    // CONSIDERING:
-    /*
-
-    private:
-    double _baseStrength;
-    double _baseDexterity;
-    double _baseConstitution;
-    double _baseIntelligence;
-    double _baseWisdom;
-
-    private:
-    double _baseAttack;
-    double _baseAccuracy;
-    double _baseDefense;
-    double _baseSpeed;
-    double _baseEvasion;
-    double _baseCriticalChance;
-    double _baseCriticalMultiplier;
-
-     */
-    return 100;
-}
-
-int CombatInstance::computeCreatureCombatActionDuration( Model::Creature* creature ) {
-    // TODO VERIFY HOW WE WILL HANDLE THE DURATION OF AN ATACK
-    // CONSIDERING:
-    /*
-     *
-    double _maxAttack;
-    double _minAttack;
-    double _accuracy;
-    double _speed;
-    double _defense;
-    double _evasion;
-     *
-     */
-    return 100;
 }
 
 } // namespace Core::Instance

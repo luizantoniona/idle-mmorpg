@@ -1,15 +1,15 @@
 {
-    "id": "unarmed",
-    "name": "Unarmed",
-    "description": "Your skill in fighting without weapons, using your fists and body.",
-    "type": "combat",
+    "id": "sleeping",
+    "name": "Sleeping",
+    "description": "Sleep to recover your health, stamina, and mana.",
+    "type": "recovery",
     "milestones": [
         {
             "level": 1,
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "strength",
+                    "id": "constitution",
                     "value": 1
                 }
             ]
@@ -18,24 +18,9 @@
             "level": 5,
             "bonuses": [
                 {
-                    "type": "attribute",
-                    "id": "strength",
-                    "value": 1
-                },
-                {
-                    "type": "combat",
-                    "id": "attack",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 10,
-            "bonuses": [
-                {
-                    "type": "attribute",
-                    "id": "strength",
-                    "value": 1
+                    "type": "vital",
+                    "id": "health",
+                    "value": 10
                 },
                 {
                     "type": "vital",
@@ -45,12 +30,32 @@
             ]
         },
         {
-            "level": 15,
+            "level": 7,
+            "bonuses": [
+                {
+                    "type": "vital",
+                    "id": "health_regen",
+                    "value": 0.1
+                },
+                {
+                    "type": "vital",
+                    "id": "stamina_regen",
+                    "value": 0.1
+                }
+            ]
+        },
+        {
+            "level": 10,
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "strength",
+                    "id": "constitution",
                     "value": 1
+                },
+                {
+                    "type": "vital",
+                    "id": "health",
+                    "value": 10
                 },
                 {
                     "type": "vital",

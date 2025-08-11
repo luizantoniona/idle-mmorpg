@@ -20,6 +20,10 @@ void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Mode
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
 }
 
+void NotificationSystem::notifyDeadCharacter( const std::string& sessionId ) {
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_DEAD, "" );
+}
+
 void NotificationSystem::notifyCharacterAttributes( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "attributes" ] = character->attributes().toJson();

@@ -130,4 +130,16 @@ void CharacterVitals::setModifierStaminaRegen( double modifierStaminaRegen ) {
     _modifierStaminaRegen = modifierStaminaRegen;
 }
 
+double CharacterVitals::healthRegen() const {
+    return _baseHealthRegen + _modifierHealthRegen;
+}
+
+double CharacterVitals::manaRegen() const {
+    return _baseManaRegen + _modifierManaRegen;
+}
+
+double CharacterVitals::staminaRegen() const {
+    return _baseStaminaRegen + _modifierStaminaRegen;
+}
+
 } // namespace Model

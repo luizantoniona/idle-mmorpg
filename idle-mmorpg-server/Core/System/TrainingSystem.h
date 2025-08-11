@@ -4,6 +4,7 @@
 #include <string>
 
 #include <Model/Character/Character.h>
+#include <Model/World/Location/Location.h>
 
 #include "ProgressionSystem.h"
 

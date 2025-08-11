@@ -34,7 +34,8 @@
             "id": "combat",
             "label": "Fight with location enemies",
             "requirements": [],
-            "experience": []
+            "experience": [],
+            "effects": []
         },
         {
             "id": "combat",

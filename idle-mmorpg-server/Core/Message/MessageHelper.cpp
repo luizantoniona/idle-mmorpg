@@ -23,6 +23,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
     switch ( type ) {
         case MessageSenderType::CHARACTER_UPDATE:
             return "CHARACTER_UPDATE";
+        case MessageSenderType::CHARACTER_DEAD:
+            return "CHARACTER_DEAD";
         case MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE:
             return "CHARACTER_ATTRIBUTES_UPDATE";
         case MessageSenderType::CHARACTER_COMBAT_ATTRIBUTES_UPDATE:

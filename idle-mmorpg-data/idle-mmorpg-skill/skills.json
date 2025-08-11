@@ -1,6 +1,18 @@
 {
     "skills": [
         {
+            "id": "evasion",
+            "path": "skills/combat/evasion.json"
+        },
+        {
+            "id": "resilience",
+            "path": "skills/combat/resilience.json"
+        },
+        {
+            "id": "unarmed",
+            "path": "skills/combat/unarmed.json"
+        },
+        {
             "id": "mining",
             "path": "skills/gathering/mining.json"
         },
@@ -17,8 +29,8 @@
             "path": "skills/recovery/resting.json"
         },
         {
-            "id": "unarmed",
-            "path": "skills/combat/unarmed.json"
+            "id": "sleeping",
+            "path": "skills/recovery/sleeping.json"
         }
     ]
 }

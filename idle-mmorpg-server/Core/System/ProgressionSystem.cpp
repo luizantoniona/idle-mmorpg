@@ -5,11 +5,12 @@
 #include <Commons/LevelExperienceHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
+#include <Core/System/NotificationSystem.h>
 
 namespace Core::System {
 
-ProgressionSystem::ProgressionSystem() :
-    _notificationSystem() {}
+ProgressionSystem::ProgressionSystem() {
+}
 
 void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained ) {
     if ( !character ) {
@@ -24,6 +25,12 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         newSkill.setExperience( 0 );
         newSkill.setLevel( 0 );
         newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId ) );
+
+        if ( !newSkill.skill() ) {
+            std::cerr << "[ProgressionSystem] Unknown skill id: " << skillId << std::endl;
+            return;
+        }
+
         character->skills().addSkill( newSkill );
         characterSkill = character->skills().skill( skillId );
     }
@@ -37,15 +44,16 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
 
         applyMilestone( character, characterSkill );
 
-        _notificationSystem.notifyCharacterAttributes( sessionId, character );
-        _notificationSystem.notifyCharacterVitals( sessionId, character );
-        _notificationSystem.notifyCharacterProgression( sessionId, character );
+        NotificationSystem::notifyCharacterAttributes( sessionId, character );
+        NotificationSystem::notifyCharacterCombatAttributes( sessionId, character );
+        NotificationSystem::notifyCharacterVitals( sessionId, character );
+        NotificationSystem::notifyCharacterProgression( sessionId, character );
 
     } else {
         characterSkill->setExperience( newXp );
     }
 
-    _notificationSystem.notifyCharacterSkills( sessionId, character );
+    NotificationSystem::notifyCharacterSkills( sessionId, character );
 }
 
 void ProgressionSystem::applyMilestone( Model::Character* character, Model::CharacterSkill* characterSkill ) {
@@ -71,46 +79,77 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
     const std::string& id = milestoneBonus.id();
     double value = milestoneBonus.value();
 
+    Model::CharacterAttributes& attributes = character->attributes();
+    Model::CharacterCombatAttributes& combat = character->combatAttributes();
+    Model::CharacterVitals& vitals = character->vitals();
+
     if ( type == "attribute" ) {
 
         if ( id == "strength" ) {
-            character->attributes().setBaseStrength( character->attributes().baseStrength() + static_cast<int>( value ) );
+            attributes.setBaseStrength( attributes.baseStrength() + static_cast<int>( value ) );
 
         } else if ( id == "constitution" ) {
-            character->attributes().setBaseConstitution( character->attributes().baseConstitution() + static_cast<int>( value ) );
+            attributes.setBaseConstitution( attributes.baseConstitution() + static_cast<int>( value ) );
 
         } else if ( id == "dexterity" ) {
-            character->attributes().setBaseDexterity( character->attributes().baseDexterity() + static_cast<int>( value ) );
+            attributes.setBaseDexterity( attributes.baseDexterity() + static_cast<int>( value ) );
 
         } else if ( id == "intelligence" ) {
-            character->attributes().setBaseIntelligence( character->attributes().baseIntelligence() + static_cast<int>( value ) );
+            attributes.setBaseIntelligence( attributes.baseIntelligence() + static_cast<int>( value ) );
 
         } else if ( id == "wisdom" ) {
-            character->attributes().setBaseWisdom( character->attributes().baseWisdom() + static_cast<int>( value ) );
+            attributes.setBaseWisdom( attributes.baseWisdom() + static_cast<int>( value ) );
 
         } else {
             std::cerr << "[ProgressionSystem] Unknown attribute id: " << id << std::endl;
         }
 
+    } else if ( type == "combat" ) {
+
+        if ( id == "attack" ) {
+            combat.setBaseAttack( combat.baseAttack() + value );
+
+        } else if ( id == "accuracy" ) {
+            combat.setBaseAccuracy( combat.baseAccuracy() + value );
+
+        } else if ( id == "speed" ) {
+            combat.setBaseSpeed( combat.baseSpeed() + value );
+
+        } else if ( id == "defense" ) {
+            combat.setBaseDefense( combat.baseDefense() + value );
+
+        } else if ( id == "evasion" ) {
+            combat.setBaseEvasion( combat.baseEvasion() + value );
+
+        } else if ( id == "critical_chance" ) {
+            combat.setBaseCriticalChance( combat.baseCriticalChance() + value );
+
+        } else if ( id == "critical_multiplier" ) {
+            combat.setBaseCriticalMultiplier( combat.baseCriticalMultiplier() + value );
+
+        } else {
+            std::cerr << "[ProgressionSystem] Unknown combat attribute id: " << id << std::endl;
+        }
+
     } else if ( type == "vital" ) {
 
         if ( id == "health" ) {
-            character->vitals().setMaxHealth( character->vitals().maxHealth() + static_cast<int>( value ) );
+            vitals.setMaxHealth( vitals.maxHealth() + static_cast<int>( value ) );
 
         } else if ( id == "health_regen" ) {
-            character->vitals().setBaseHealthRegen( character->vitals().baseHealthRegen() + static_cast<double>( value ) );
+            vitals.setBaseHealthRegen( vitals.baseHealthRegen() + value );
 
         } else if ( id == "mana" ) {
-            character->vitals().setMaxMana( character->vitals().maxMana() + static_cast<int>( value ) );
+            vitals.setMaxMana( vitals.maxMana() + static_cast<int>( value ) );
 
         } else if ( id == "mana_regen" ) {
-            character->vitals().setBaseManaRegen( character->vitals().baseManaRegen() + static_cast<double>( value ) );
+            vitals.setBaseManaRegen( vitals.baseManaRegen() + value );
 
         } else if ( id == "stamina" ) {
-            character->vitals().setMaxStamina( character->vitals().maxStamina() + static_cast<int>( value ) );
+            vitals.setMaxStamina( vitals.maxStamina() + static_cast<int>( value ) );
 
         } else if ( id == "stamina_regen" ) {
-            character->vitals().setBaseStaminaRegen( character->vitals().baseStaminaRegen() + static_cast<double>( value ) );
+            vitals.setBaseStaminaRegen( vitals.baseStaminaRegen() + value );
 
         } else {
             std::cerr << "[ProgressionSystem] Unknown vital id: " << id << std::endl;
@@ -119,6 +158,38 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
     } else {
         std::cerr << "[ProgressionSystem] Unknown milestone bonus type: " << type << std::endl;
     }
+}
+
+void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, int xpGained ) {
+    if ( !character ) {
+        return;
+    }
+
+    auto& progression = character->progression();
+
+    int newXp = progression.experience() + xpGained;
+    int xpNeeded = Commons::LevelExperienceHelper::experienceForNextLevel( progression.level() );
+
+    if ( newXp >= xpNeeded ) {
+        progression.setLevel( progression.level() + 1 );
+        progression.setExperience( newXp - xpNeeded );
+
+        applyLevelUp( character );
+
+        NotificationSystem::notifyCharacterAttributes( sessionId, character );
+        NotificationSystem::notifyCharacterCombatAttributes( sessionId, character );
+        NotificationSystem::notifyCharacterVitals( sessionId, character );
+        NotificationSystem::notifyCharacterProgression( sessionId, character );
+
+    } else {
+        progression.setExperience( newXp - xpNeeded );
+    }
+
+    NotificationSystem::notifyCharacterSkills( sessionId, character );
+}
+
+void ProgressionSystem::applyLevelUp( Model::Character* character ) {
+    // TODO: New level reached
 }
 
 } // namespace Core::System

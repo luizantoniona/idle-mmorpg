@@ -94,7 +94,7 @@ export class GamePage implements OnInit, OnDestroy {
     }
 
     handleMessage(data: any): void {
-        if (data && (data.type === 'COMBAT_ROOMS_UPDATE' || data.type === 'COMBAT_UPDATE')) {
+        if (data && (data.type === 'COMBAT_ROOMS_UPDATE' || data.type === 'COMBAT_UPDATE' || data.type === 'CHARACTER_DEAD')) {
             return;
         }
 

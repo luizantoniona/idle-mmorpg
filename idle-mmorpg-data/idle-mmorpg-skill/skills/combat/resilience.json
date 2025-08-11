@@ -1,7 +1,7 @@
 {
-    "id": "unarmed",
-    "name": "Unarmed",
-    "description": "Your skill in fighting without weapons, using your fists and body.",
+    "id": "resilience",
+    "name": "Resilience",
+    "description": "Your ability to endure damage and keep fighting.",
     "type": "combat",
     "milestones": [
         {
@@ -9,7 +9,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "strength",
+                    "id": "constitution",
                     "value": 1
                 }
             ]
@@ -19,12 +19,17 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "strength",
+                    "id": "constitution",
                     "value": 1
                 },
                 {
+                    "type": "vital",
+                    "id": "stamina",
+                    "value": 5
+                },
+                {
                     "type": "combat",
-                    "id": "attack",
+                    "id": "defense",
                     "value": 1
                 }
             ]
@@ -34,12 +39,12 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "strength",
+                    "id": "constitution",
                     "value": 1
                 },
                 {
                     "type": "vital",
-                    "id": "stamina",
+                    "id": "health",
                     "value": 5
                 }
             ]
@@ -49,13 +54,28 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "strength",
+                    "id": "constitution",
                     "value": 1
                 },
                 {
                     "type": "vital",
                     "id": "stamina",
-                    "value": 5
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "level": 20,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "constitution",
+                    "value": 1
+                },
+                {
+                    "type": "vital",
+                    "id": "health",
+                    "value": 10
                 }
             ]
         }

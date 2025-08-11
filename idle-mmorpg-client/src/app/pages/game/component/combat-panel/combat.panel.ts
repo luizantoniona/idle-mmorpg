@@ -65,6 +65,10 @@ export class CombatPanel {
                     this.combat = data.payload.combat
                 }
                 break;
+            case 'CHARACTER_DEAD':
+                this.onExitCombatClicked();
+                this.onExitClicked();
+                break;
         }
     }
 

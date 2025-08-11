@@ -7,7 +7,7 @@
     "mana": 0,
     "min_damage": 0,
     "max_damage": 8,
-    "accuracy": 10,
+    "accuracy": 5,
     "speed": 5,
     "defense": 1,
     "evasion": 5,

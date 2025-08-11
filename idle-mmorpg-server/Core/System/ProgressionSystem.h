@@ -3,12 +3,9 @@
 
 #include <string>
 
-#include <Core/System/NotificationSystem.h>
 #include <Core/Message/MessageSender.h>
 #include <Model/Character/Character.h>
 #include <Model/Skill/Skill.h>
-
-#include "NotificationSystem.h"
 
 namespace Core::System {
 
@@ -20,8 +17,8 @@ public:
     void applyMilestone( Model::Character* character, Model::CharacterSkill* characterSkill );
     void applyMilestoneBonus( Model::Character* character, const Model::SkillMilestoneBonus milestoneBonus );
 
-private:
-    NotificationSystem _notificationSystem;
+    void applyExperience( const std::string& sessionId, Model::Character* character, int xpGained );
+    void applyLevelUp( Model::Character* character );
 };
 
 } // namespace Core::System
