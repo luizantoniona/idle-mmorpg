@@ -170,7 +170,7 @@ void CombatSystem::computeExperience( std::unordered_map<std::string, Model::Cha
     double xpPerCharacter = totalXP / characters.size();
     for ( auto& [ sessionId, character ] : characters ) {
         if ( character->vitals().health() > 0 ) {
-            // _progressionSystem.addExperience( sessionId, character, xpPerCharacter );
+            _progressionSystem.applyExperience( sessionId, character, xpPerCharacter );
             std::cout << "[CHARACTER] " << character->name() << " [XP] " << xpPerCharacter << " XP.\n";
         }
     }

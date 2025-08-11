@@ -182,7 +182,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         NotificationSystem::notifyCharacterProgression( sessionId, character );
 
     } else {
-        progression.setExperience( newXp - xpNeeded );
+        progression.setExperience( newXp );
     }
 
     NotificationSystem::notifyCharacterSkills( sessionId, character );
