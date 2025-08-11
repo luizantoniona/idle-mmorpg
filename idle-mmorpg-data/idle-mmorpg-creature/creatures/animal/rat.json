@@ -9,7 +9,7 @@
     "max_damage": 8,
     "accuracy": 2,
     "speed": 2,
-    "defense": 1,
+    "defense": 0,
     "evasion": 2,
     "loot": [
         {

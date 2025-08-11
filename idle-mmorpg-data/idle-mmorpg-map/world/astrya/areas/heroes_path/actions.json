@@ -47,7 +47,7 @@
         {
             "id": "train",
             "label": "Train with a wooden dummy",
-            "duration": 100,
+            "duration": 40,
             "structure": "training_fields",
             "requirements": [],
             "experience": [

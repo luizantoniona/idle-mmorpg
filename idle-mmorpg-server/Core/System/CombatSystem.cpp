@@ -56,7 +56,7 @@ void CombatSystem::computeCombatActionDuration( Model::Creature* creature ) {
 }
 
 void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature ) {
-    std::cout << "CombatSystem::computeHitDamage [CHARACTER]" << character->name() << " [CREATURE] " << creature->name() << std::endl;
+    std::cout << "CombatSystem::computeHitDamage [CHARACTER] " << character->name() << " [CREATURE] " << creature->name() << std::endl;
 
     double diff = ( character->combatAttributes().accuracy() + character->attributes().dexterity() ) - creature->evasion();
     double hitChance = 0.5 + diff * 0.03;
@@ -81,7 +81,7 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
 }
 
 void CombatSystem::computeHitDamage( Model::Creature* creature, const std::string& sessionId, Model::Character* character ) {
-    std::cout << "CombatSystem::computeHitDamage [CREATURE]" << creature->name() << " [CHARACTER] " << character->name() << std::endl;
+    std::cout << "CombatSystem::computeHitDamage [CREATURE] " << creature->name() << " [CHARACTER] " << character->name() << std::endl;
 
     double diff = ( character->combatAttributes().accuracy() + character->attributes().dexterity() ) - creature->evasion();
     double hitChance = 0.5 + diff * 0.03;
