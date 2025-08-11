@@ -23,8 +23,8 @@ public:
 
     void computeRegeneration( const std::string& sessionId, Model::Character* character );
 
-    void computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<std::unique_ptr<Model::Creature>> creatures );
-    void computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<std::unique_ptr<Model::Creature>> creatures );
+    void computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures );
+    void computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures );
 
 private:
     std::string combatSkill( Model::Character* character );

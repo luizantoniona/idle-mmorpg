@@ -58,8 +58,9 @@ void CombatSystem::computeCombatActionDuration( Model::Creature* creature ) {
 void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature ) {
     std::cout << "CombatSystem::computeHitDamage [CHARACTER]" << character->name() << " [CREATURE] " << creature->name() << std::endl;
 
-    double hitChance = character->combatAttributes().accuracy() + character->attributes().dexterity() - creature->evasion();
-    hitChance = std::clamp( hitChance, 0.1, 0.95 );
+    double diff = ( character->combatAttributes().accuracy() + character->attributes().dexterity() ) - creature->evasion();
+    double hitChance = 0.5 + diff * 0.03;
+    hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
     double roll = static_cast<double>( rand() ) / RAND_MAX;
     if ( roll > hitChance ) {
@@ -82,8 +83,9 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
 void CombatSystem::computeHitDamage( Model::Creature* creature, const std::string& sessionId, Model::Character* character ) {
     std::cout << "CombatSystem::computeHitDamage [CREATURE]" << creature->name() << " [CHARACTER] " << character->name() << std::endl;
 
-    double hitChance = creature->accuracy() - character->combatAttributes().evasion() - character->attributes().dexterity();
-    hitChance = std::clamp( hitChance, 0.1, 0.95 );
+    double diff = ( character->combatAttributes().accuracy() + character->attributes().dexterity() ) - creature->evasion();
+    double hitChance = 0.5 + diff * 0.03;
+    hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
     double roll = static_cast<double>( rand() ) / RAND_MAX;
     if ( roll > hitChance ) {
@@ -133,7 +135,7 @@ void CombatSystem::computeRegeneration( const std::string& sessionId, Model::Cha
     character->vitals().setMana( newMana );
 }
 
-void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<std::unique_ptr<Model::Creature>> creatures ) {
+void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {
     if ( characters.empty() ) {
         return;
     }
@@ -155,7 +157,7 @@ void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character
     }
 }
 
-void CombatSystem::computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<std::unique_ptr<Model::Creature>> creatures ) {
+void CombatSystem::computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {
     double totalXP = 0.0;
     for ( const auto& creature : creatures ) {
         totalXP += creature->experience();

@@ -178,8 +178,15 @@ void CombatInstance::process() {
 
     if ( allCreaturesDead ) {
         std::cout << "[Combat] All creatures dead, rewarding characters" << std::endl;
-        _combatSystem.computeLoot( _characters, _creatures );
-        _combatSystem.computeExperience( _characters, _creatures );
+
+        std::vector<Model::Creature*> creatures;
+
+        for ( auto& creature : _creatures ) {
+            creatures.push_back( creature.get() );
+        }
+
+        _combatSystem.computeLoot( _characters, creatures );
+        _combatSystem.computeExperience( _characters, creatures );
     }
 
     std::vector<std::string> deadCharacters;
