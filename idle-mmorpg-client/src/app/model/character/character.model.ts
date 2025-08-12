@@ -19,7 +19,7 @@ export type Character = {
     combatAction: CharacterCombatAction;
     combatAttributes: CharacterCombatAttributes;
     coordinates: CharacterCoordinates;
-    equipament: CharacterEquipment;
+    equipment: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;
     skills: CharacterSkill[];

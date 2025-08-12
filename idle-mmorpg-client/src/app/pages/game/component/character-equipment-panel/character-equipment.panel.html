@@ -1,0 +1,35 @@
+<app-panel-vertical>
+    <nav class="tabs">
+        <app-button text="Equipment" (click)="setTab('equipment')"></app-button>
+        <app-button text="Tools" (click)="setTab('tools')"></app-button>
+    </nav>
+
+    @if(activeTab == 'equipment'){
+    @if(character.equipment){
+    <div class="equipment-layout">
+        <app-equipment-slot class="amulet" [item]="character.equipment.amulet" slot="amulet" />
+        <app-equipment-slot class="ring" [item]="character.equipment.ring" slot="ring" />
+        <app-equipment-slot class="head" [item]="character.equipment.head" slot="head" />
+        <app-equipment-slot class="left-hand" [item]="character.equipment.leftHand" slot="left-hand" />
+        <app-equipment-slot class="chest" [item]="character.equipment.chest" slot="chest" />
+        <app-equipment-slot class="right-hand" [item]="character.equipment.rightHand" slot="right-hand" />
+        <app-equipment-slot class="gloves" [item]="character.equipment.gloves" slot="gloves" />
+        <app-equipment-slot class="legs" [item]="character.equipment.legs" slot="legs" />
+        <app-equipment-slot class="boots" [item]="character.equipment.boots" slot="boots" />
+    </div>
+    }
+    }
+
+    @if(activeTab == 'tools'){
+    @if(character.equipment){
+    <div class="tools-layout">
+        <app-equipment-slot class="pickaxe" [item]="character.equipment.pickaxe" slot="empty" />
+        <app-equipment-slot class="woodaxe" [item]="character.equipment.woodaxe" slot="empty" />
+        <app-equipment-slot class="rod" [item]="character.equipment.rod" slot="empty" />
+        <app-equipment-slot class="shovel" [item]="character.equipment.shovel" slot="empty" />
+        <app-equipment-slot class="sickle" [item]="character.equipment.sickle" slot="empty" />
+    </div>
+    }
+    }
+
+</app-panel-vertical>

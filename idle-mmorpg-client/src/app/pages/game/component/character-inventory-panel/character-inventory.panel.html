@@ -1,9 +1,8 @@
 <app-panel-vertical>
     Inventory
 
+    @if(character && character.inventory && character.inventory.items){
     <div class="inventory-grid">
-
-        @if(character && character.inventory && character.inventory.items){
         @for(item of character.inventory.items; track item.id){
         <app-tooltip>
             <div tooltip-target class="item-box">
@@ -18,10 +17,10 @@
             </div>
         </app-tooltip>
         }
-
-        } @else {
-        <p>No items in inventory.</p>
-        }
     </div>
+
+    } @else {
+    <p>No items in inventory.</p>
+    }
 
 </app-panel-vertical>

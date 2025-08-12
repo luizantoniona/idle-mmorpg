@@ -1,3 +1,5 @@
+import { ItemModifier } from "./item.modifier.model";
+
 export type Item = {
     id: string;
     amount: number;
@@ -8,4 +10,5 @@ export type Item = {
     rarity: string;
     icon: string;
     value: number;
+    modifiers: ItemModifier[];
 };

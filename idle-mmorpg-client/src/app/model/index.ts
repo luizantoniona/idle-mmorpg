@@ -19,6 +19,7 @@ export type { CreatureCombatAction } from "./creature/creature-combat-action.mod
 export type { CreatureVitals } from "./creature/creature-vitals.model";
 
 export type { Item } from "./item/item.model";
+export type { ItemModifier } from "./item/item.modifier.model";
 
 export type { Location } from "./location/location.model";
 export type { LocationAction } from "./location/location-action.model";

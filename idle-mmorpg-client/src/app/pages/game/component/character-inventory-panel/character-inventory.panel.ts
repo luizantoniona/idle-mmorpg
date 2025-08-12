@@ -7,8 +7,8 @@ import { Character } from '../../../../model';
 
 @Component({
     selector: 'app-character-inventory-panel',
-    templateUrl: './character-inventory-panel.component.html',
-    styleUrl: './character-inventory-panel.component.scss',
+    templateUrl: './character-inventory.panel.html',
+    styleUrl: './character-inventory.panel.scss',
     imports: [
         PanelVerticalComponent,
         TooltipComponent

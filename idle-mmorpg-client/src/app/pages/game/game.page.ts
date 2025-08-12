@@ -124,11 +124,11 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_EQUIPAMENT_UPDATE':
-                if (data.payload?.equipament) {
+            case 'CHARACTER_EQUIPMENT_UPDATE':
+                if (data.payload?.equipment) {
                     this.character = {
                         ...this.character!,
-                        equipament: data.payload.equipament,
+                        equipment: data.payload.equipment,
                     };
                 }
                 break;

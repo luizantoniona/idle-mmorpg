@@ -23,10 +23,7 @@ Json::Value Skill::toJson() {
     root[ JSON_NAME ] = name();
     root[ JSON_DESCRIPTION ] = description();
     root[ JSON_TYPE ] = type();
-
     return root;
-
-    // TODO: Send milestones?
 }
 
 std::string Skill::id() const {

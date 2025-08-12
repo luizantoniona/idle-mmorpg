@@ -12,4 +12,10 @@ export type CharacterEquipment = {
 
     amulet: Item;
     ring: Item;
+
+    pickaxe: Item;
+    woodaxe: Item;
+    rod: Item;
+    shovel: Item;
+    sickle: Item;
 };

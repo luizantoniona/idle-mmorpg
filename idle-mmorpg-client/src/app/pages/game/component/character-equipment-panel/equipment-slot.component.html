@@ -1,0 +1,18 @@
+<app-tooltip>
+
+    <div tooltip-target class="slot">
+        @if(item && item.id){
+        <img class="slot-icon" [src]="'/assets/' + item.icon" alt="{{ item.name }}" />
+        } @else {
+        <img class="slot-icon" [src]="'/assets/slots/' + slot + '.png'" />
+        }
+    </div>
+
+    @if(item && item.id){
+    <div tooltip-content>
+        <strong>{{ item.name }}</strong><br />
+        {{ item.description }}<br />
+        <em>Value: {{ item.value }}</em>
+    </div>
+    }
+</app-tooltip>

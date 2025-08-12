@@ -1,10 +1,29 @@
 <app-panel-vertical>
+
     <div class="scrollable-panel">
-        @for(characterSkill of character.skills; track characterSkill.id){
-        <app-bar [label]="characterSkill.skill.name + ' (Nv ' + characterSkill.level + ')'"
-            [value]="characterSkill.experience" [max]="characterSkill.experienceNextLevel"
-            [color]="getSkillColor(characterSkill.id)">
-        </app-bar>
+
+        @if(character && character.skills){
+
+        @for(characterSkill of character.skills; track characterSkill.id) {
+        <app-tooltip>
+            <div tooltip-target>
+                <app-bar [label]="characterSkill.skill.name + ' (LVL ' + characterSkill.level + ')'"
+                    [value]="characterSkill.experience" [max]="characterSkill.experienceNextLevel" color="#3498db">
+                </app-bar>
+            </div>
+
+            <div tooltip-content>
+                <strong>{{ characterSkill.skill.name }}</strong><br />
+                Level: {{ characterSkill.level }}<br />
+                Experience: {{ characterSkill.experience }} / {{ characterSkill.experienceNextLevel }}<br />
+                {{ characterSkill.skill.description }}
+            </div>
+        </app-tooltip>
         }
+        } @else {
+        <app-loading></app-loading>
+        }
+
     </div>
+
 </app-panel-vertical>

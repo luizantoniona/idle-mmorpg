@@ -1,0 +1,87 @@
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.equipment-layout {
+    display: grid;
+    grid-template-areas:
+        "amulet head ring"
+        "left-hand chest right-hand"
+        ". legs gloves"
+        ". boots .";
+    grid-template-columns: 40px 40px 40px;
+    gap: 12px;
+    justify-items: center;
+    align-items: center;
+    padding: 12px;
+}
+
+.head {
+    grid-area: head;
+}
+
+.left-hand {
+    grid-area: left-hand;
+}
+
+.chest {
+    grid-area: chest;
+}
+
+.right-hand {
+    grid-area: right-hand;
+}
+
+.legs {
+    grid-area: legs;
+}
+
+.gloves {
+    grid-area: gloves;
+}
+
+.boots {
+    grid-area: boots;
+}
+
+.amulet {
+    grid-area: amulet;
+}
+
+.ring {
+    grid-area: ring;
+}
+
+.tools-layout {
+    display: grid;
+    grid-template-areas:
+        "pickaxe woodaxe rod"
+        "shovel . sickle";
+    grid-template-columns: 40px 40px 40px;
+    gap: 12px;
+    justify-items: center;
+    align-items: center;
+    padding: 12px;
+}
+
+.pickaxe {
+    grid-area: pickaxe;
+}
+
+.woodaxe {
+    grid-area: woodaxe;
+}
+
+.rod {
+    grid-area: rod;
+}
+
+.shovel {
+    grid-area: shovel;
+}
+
+.sickle {
+    grid-area: sickle;
+}
