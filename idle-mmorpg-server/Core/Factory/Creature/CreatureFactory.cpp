@@ -68,7 +68,8 @@ std::unique_ptr<Model::Creature> CreatureFactory::createCreature( const std::str
         Model::CreatureLoot loot;
         loot.setId( lootJson[ "id" ].asString() );
         loot.setChance( lootJson[ "chance" ].asDouble() );
-        loot.setAmount( lootJson[ "amount" ].asInt() );
+        loot.setMinAmount( lootJson[ "minAmount" ].asInt() );
+        loot.setMaxAmount( lootJson[ "maxAmount" ].asInt() );
 
         creature->addLoot( loot );
     }

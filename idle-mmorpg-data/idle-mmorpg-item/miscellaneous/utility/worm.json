@@ -1,0 +1,8 @@
+{
+    "id": "worm",
+    "name": "Worm",
+    "description": "Worm used to fish.",
+    "rarity": "common",
+    "value": 1,
+    "modifiers": []
+}

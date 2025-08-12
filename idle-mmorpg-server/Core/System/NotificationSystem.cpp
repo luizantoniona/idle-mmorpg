@@ -36,6 +36,12 @@ void NotificationSystem::notifyCharacterCombatAttributes( const std::string& ses
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_COMBAT_ATTRIBUTES_UPDATE, payload );
 }
 
+void NotificationSystem::notifyCharacterInventory( const std::string& sessionId, Model::Character* character ) {
+    Json::Value payload;
+    payload[ "inventory" ] = character->inventory().toJson();
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_INVENTORY_UPDATE, payload );
+}
+
 void NotificationSystem::notifyCharacterProgression( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "progression" ] = character->progression().toJson();

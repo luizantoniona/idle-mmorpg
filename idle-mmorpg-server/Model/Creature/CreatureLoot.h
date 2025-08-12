@@ -15,13 +15,17 @@ public:
     double chance() const;
     void setChance( double chance );
 
-    int amount() const;
-    void setAmount( int amount );
+    int minAmount() const;
+    void setMinAmount( int minAmount );
+
+    int maxAmount() const;
+    void setMaxAmount( int maxAmount );
 
 private:
     std::string _id;
     double _chance;
-    int _amount;
+    int _minAmount;
+    int _maxAmount;
 };
 
 } // namespace Model

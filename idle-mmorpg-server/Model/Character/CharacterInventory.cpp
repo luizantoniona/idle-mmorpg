@@ -1,7 +1,7 @@
 #include "CharacterInventory.h"
 
 namespace {
-constexpr const char* JSON_INVENTORY = "inventory";
+constexpr const char* JSON_ITEMS = "items";
 } // namespace
 
 namespace Model {
@@ -10,11 +10,9 @@ CharacterInventory::CharacterInventory() {}
 
 Json::Value CharacterInventory::toJson() {
     Json::Value root;
-
     for ( auto& item : items() ) {
-        root[ JSON_INVENTORY ].append( item.toJson() );
+        root[ JSON_ITEMS ].append( item.toJson() );
     }
-
     return root;
 }
 

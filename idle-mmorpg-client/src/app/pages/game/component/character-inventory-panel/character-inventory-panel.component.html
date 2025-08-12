@@ -1,3 +1,27 @@
 <app-panel-vertical>
     Inventory
+
+    <div class="inventory-grid">
+
+        @if(character && character.inventory && character.inventory.items){
+        @for(item of character.inventory.items; track item.id){
+        <app-tooltip>
+            <div tooltip-target class="item-box">
+                <img [src]="'/assets/' + item.icon" alt="{{ item.name }}" />
+                <span class="amount">{{ item.amount }}</span>
+            </div>
+
+            <div tooltip-content>
+                <strong>{{ item.name }}</strong><br />
+                {{ item.description }}<br />
+                <em>Value: {{ item.value }}</em>
+            </div>
+        </app-tooltip>
+        }
+
+        } @else {
+        <p>No items in inventory.</p>
+        }
+    </div>
+
 </app-panel-vertical>

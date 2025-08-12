@@ -1,0 +1,27 @@
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-radius: var(--border-radius);
+    padding: 12px;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    max-width: 200px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: var(--box-shadow);
+}
+
+.tooltip-container:hover .tooltip,
+.tooltip:hover {
+    visibility: visible;
+    pointer-events: auto;
+}

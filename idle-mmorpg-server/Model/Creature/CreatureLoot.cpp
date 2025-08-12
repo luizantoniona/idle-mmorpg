@@ -5,7 +5,9 @@ namespace Model {
 CreatureLoot::CreatureLoot() :
     _id( "" ),
     _chance( 0.0 ),
-    _amount( 0 ) {}
+    _minAmount( 0 ),
+    _maxAmount( 0 ) {
+}
 
 std::string CreatureLoot::id() const {
     return _id;
@@ -23,12 +25,20 @@ void CreatureLoot::setChance( double chance ) {
     _chance = chance;
 }
 
-int CreatureLoot::amount() const {
-    return _amount;
+int CreatureLoot::minAmount() const {
+    return _minAmount;
 }
 
-void CreatureLoot::setAmount( int amount ) {
-    _amount = amount;
+void CreatureLoot::setMinAmount( int minAmount ) {
+    _minAmount = minAmount;
+}
+
+int CreatureLoot::maxAmount() const {
+    return _maxAmount;
+}
+
+void CreatureLoot::setMaxAmount( int maxAmount ) {
+    _maxAmount = maxAmount;
 }
 
 } // namespace Model

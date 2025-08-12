@@ -3,7 +3,6 @@
 namespace {
 constexpr const char* JSON_ID = "id";
 constexpr const char* JSON_AMOUNT = "amount";
-constexpr const char* JSON_ITEM = "item";
 } // namespace
 
 namespace Model {
@@ -20,7 +19,10 @@ Json::Value CharacterInventoryItem::toJson() {
     root[ JSON_AMOUNT ] = amount();
 
     if ( _item ) {
-        root[ JSON_ITEM ] = item()->toJson();
+        Json::Value itemJson = item()->toJson();
+        for ( const auto& key : itemJson.getMemberNames() ) {
+            root[ key ] = itemJson[ key ];
+        }
     }
 
     return root;

@@ -1,10 +1,10 @@
 {
     "categories": [
         {
-            "category": "trophy",
-            "path": "trophies",
+            "category": "utility",
+            "path": "utility",
             "items": [
-                "rat_tail"
+                "worm"
             ]
         }
     ]

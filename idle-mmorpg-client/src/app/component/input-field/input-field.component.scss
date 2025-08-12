@@ -5,15 +5,15 @@
 }
 
 .input-field label {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+    margin-bottom: 4px;
+    font-weight: bold;
     color: var(--color-text);
 }
 
 .input-field input {
-    padding: 0.5rem 0.75rem;
+    padding: 12px;
     border: 1px solid var(--color-text);
-    border-radius: 0.375rem;
+    border-radius: var(--border-radius);
     font-size: 1rem;
     transition: border-color 0.2s ease;
 }

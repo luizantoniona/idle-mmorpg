@@ -14,14 +14,16 @@
     "evasion": 2,
     "loot": [
         {
-            "id": "rat_tail",
+            "id": "worm",
             "chance": 0.5,
-            "amount": 1
+            "minAmount": 1,
+            "maxAmount": 2
         },
         {
             "id": "cheese",
             "chance": 0.1,
-            "amount": 1
+            "minAmount": 1,
+            "maxAmount": 1
         }
     ]
 }

@@ -6,11 +6,14 @@
 
 #include <Commons/DecimalHelper.h>
 
+#include "LootSystem.h"
+
 namespace Core::System {
 
 CombatSystem::CombatSystem( Model::Location* location ) :
     _location( location ),
-    _progressionSystem() {}
+    _progressionSystem() {
+}
 
 void CombatSystem::computeCombatActionDuration( Model::Character* character ) {
     double speed = character->combatAttributes().speed();
@@ -144,9 +147,9 @@ void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character
                 std::advance( it, rand() % characters.size() );
                 Model::Character* receiver = it->second;
 
-                // receiver->inventory().addItem( lootEntry.itemId, lootEntry.quantity );
-                // Core::System::NotificationSystem::notifyInventory
-                std::cout << "[CHARACTER] " << receiver->name() << " [QUANTITY] " << lootEntry.amount() << " [ITEM] " << lootEntry.id() << std::endl;
+                int amount = lootEntry.minAmount() + ( rand() % ( lootEntry.maxAmount() - lootEntry.minAmount() + 1 ) );
+                std::cout << "[CHARACTER] " << receiver->name() << " [QUANTITY] " << amount << " [ITEM] " << lootEntry.id() << std::endl;
+                LootSystem::addItem( it->first, receiver, lootEntry.id(), amount );
             }
         }
     }
