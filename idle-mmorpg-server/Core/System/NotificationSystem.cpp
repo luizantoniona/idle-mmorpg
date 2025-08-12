@@ -60,6 +60,12 @@ void NotificationSystem::notifyCharacterVitals( const std::string& sessionId, Mo
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_VITALS_UPDATE, payload );
 }
 
+void NotificationSystem::notifyCharacterWallet( const std::string& sessionId, Model::Character* character ) {
+    Json::Value payload;
+    payload[ "wallet" ] = character->wallet().toJson();
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_WALLET_UPDATE, payload );
+}
+
 void NotificationSystem::notifyCurrentAction( const std::string& sessionId, Model::Character* character ) {
     Json::Value payloadCurrentAction;
     payloadCurrentAction[ "action" ] = character->action().toJson();

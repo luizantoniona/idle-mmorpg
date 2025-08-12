@@ -1,5 +1,19 @@
 <app-panel-vertical>
-    <div class="copper">Copper: {{ character.wallet.copper }}</div>
-    <div class="silver">Silver: {{ character.wallet.silver }}</div>
-    <div class="gold">Gold: {{ character.wallet.gold }}</div>
+    @if(character && character.wallet){
+    <div class="copper">
+        <img [src]="'/assets/coins/copper.gif'" alt="Copper" />
+        Copper: {{ character.wallet.copper }}
+    </div>
+    <div class="silver">
+        <img [src]="'/assets/coins/silver.gif'" alt="Silver" />
+        Silver: {{ character.wallet.silver }}
+    </div>
+    <div class="gold">
+        <img [src]="'/assets/coins/gold.gif'" alt="Gold" />
+        Gold: {{ character.wallet.gold }}
+    </div>
+
+    } @else {
+    <app-loading></app-loading>
+    }
 </app-panel-vertical>

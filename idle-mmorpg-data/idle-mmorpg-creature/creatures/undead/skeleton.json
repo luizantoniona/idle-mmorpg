@@ -2,6 +2,7 @@
     "id": "skeleton",
     "name": "Skeleton",
     "description": "A reanimated skeleton held together by dark magic.",
+    "icon": "undead/skeleton.gif",
     "experience": 35,
     "health": 50,
     "mana": 0,
@@ -14,9 +15,10 @@
     "evasion": 5,
     "loot": [
         {
-            "id": "coin",
-            "chance": 0.5,
-            "amount": 2
+            "id": "copper_coin",
+            "chance": 0.35,
+            "minAmount": 1,
+            "maxAmount": 5
         }
     ]
 }

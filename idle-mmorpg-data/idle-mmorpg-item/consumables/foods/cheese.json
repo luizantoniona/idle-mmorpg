@@ -2,6 +2,7 @@
     "id": "cheese",
     "name": "Cheese",
     "description": "A simple chunk of cheese. Smells... questionable.",
+    "icon": "consumables/food/cheese.gif",
     "rarity": "common",
     "value": 1,
     "modifiers": []

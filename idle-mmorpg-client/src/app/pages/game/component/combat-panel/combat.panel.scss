@@ -22,8 +22,7 @@
     width: 100%;
 }
 
-.combat-character,
-.combat-creature {
+.combat-character {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -31,6 +30,32 @@
     border-width: 2px;
     border-color: var(--color-accent);
     border-style: solid;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     padding: 12px;
+}
+
+.combat-creature {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    border-width: 2px;
+    border-color: var(--color-accent);
+    border-style: solid;
+    border-radius: var(--border-radius);
+    padding: 12px;
+}
+
+.combat-creature img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.creature-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
 }

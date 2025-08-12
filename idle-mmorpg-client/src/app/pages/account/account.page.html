@@ -1,15 +1,13 @@
-<div class="account-page">
+<div class="account-layout">
     <div class="left-panel">
         <app-panel-vertical>
             <h2>Account: {{ getUsername() }}</h2>
             Session ID: {{ getSessionId() }}
             <app-button text="Logout" (clickEvent)="logout()"></app-button>
         </app-panel-vertical>
-
-        <app-character-form />
     </div>
 
-    <div class="right-panel">
+    <div class="main-panel">
         <app-panel-vertical>
             <h2>Characters</h2>
             <app-character-list [characters]="characters" (onSelect)="handleStartGame($event)"></app-character-list>
@@ -20,5 +18,9 @@
             <p style="color: red;">Error: {{ error }}</p>
             }
         </app-panel-vertical>
+    </div>
+
+    <div class="right-panel">
+        <app-character-form />
     </div>
 </div>

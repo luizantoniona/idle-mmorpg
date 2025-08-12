@@ -34,7 +34,6 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
                     item->setId( itemId );
                     item->setType( type );
                     item->setCategory( category );
-                    item->setIcon( itemId + ".png" );
                     items[itemId] = std::move( item );
 
                 } else {
@@ -59,6 +58,7 @@ std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPat
     item->setDescription( itemJson[ "description" ].asString() );
     item->setRarity( itemJson[ "rarity" ].asString() );
     item->setValue( itemJson[ "value" ].asInt() );
+    item->setIcon( itemJson[ "icon" ].asString() );
 
     if ( itemJson.isMember( "modifiers" ) && itemJson["modifiers"].isArray() ) {
         const Json::Value& modifiersJson = itemJson["modifiers"];

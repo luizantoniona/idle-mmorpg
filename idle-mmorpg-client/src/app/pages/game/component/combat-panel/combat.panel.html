@@ -50,22 +50,28 @@
 
             @for (creature of combat.creatures; track creature.id) {
             <div class="combat-creature">
-                <strong>{{ creature.name }}</strong>
 
-                <app-bar
-                    label="Health ( {{creature.vitals.health | number:'1.2-2'}} / {{creature.vitals.maxHealth | number:'1.2-2'}} )"
-                    [value]="creature.vitals.health" [max]="creature.vitals.maxHealth" color="#e53935" />
+                <img [src]="'/assets/creatures/' + creature.icon" alt="{{ creature.name }}" />
 
-                <app-bar
-                    label="Mana ( {{creature.vitals.mana | number:'1.2-2'}} / {{creature.vitals.maxMana | number:'1.2-2'}} )"
-                    [value]="creature.vitals.mana" [max]="creature.vitals.maxMana" color="#1e88e5" />
+                <div class="creature-stats">
 
-                <app-bar
-                    label="Stamina ( {{creature.vitals.stamina | number:'1.2-2'}} / {{creature.vitals.maxStamina | number:'1.2-2'}} )"
-                    [value]="creature.vitals.stamina" [max]="creature.vitals.maxStamina" color="#4caf50" />
+                    <strong>{{ creature.name }}</strong>
 
-                <app-bar label="Attack" [value]="creature.combatAction.counter" [max]="creature.combatAction.duration"
-                    color="#fdd835" />
+                    <app-bar
+                        label="Health ( {{creature.vitals.health | number:'1.2-2'}} / {{creature.vitals.maxHealth | number:'1.2-2'}} )"
+                        [value]="creature.vitals.health" [max]="creature.vitals.maxHealth" color="#e53935" />
+
+                    <app-bar
+                        label="Mana ( {{creature.vitals.mana | number:'1.2-2'}} / {{creature.vitals.maxMana | number:'1.2-2'}} )"
+                        [value]="creature.vitals.mana" [max]="creature.vitals.maxMana" color="#1e88e5" />
+
+                    <app-bar
+                        label="Stamina ( {{creature.vitals.stamina | number:'1.2-2'}} / {{creature.vitals.maxStamina | number:'1.2-2'}} )"
+                        [value]="creature.vitals.stamina" [max]="creature.vitals.maxStamina" color="#4caf50" />
+
+                    <app-bar label="Attack" [value]="creature.combatAction.counter"
+                        [max]="creature.combatAction.duration" color="#fdd835" />
+                </div>
             </div>
             }
         </div>

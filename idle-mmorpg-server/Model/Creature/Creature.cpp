@@ -8,6 +8,7 @@ Creature::Creature() :
     _type( "" ),
     _name( "" ),
     _description( "" ),
+    _icon( "" ),
     _experience( 0 ),
     _vitals(),
     _combatAction(),
@@ -17,8 +18,7 @@ Creature::Creature() :
     _speed( 0.0 ),
     _defense( 0.0 ),
     _evasion( 0.0 ),
-    _loot( {} ) {
-}
+    _loot( {} ) {}
 
 std::string Creature::id() const {
     return _id;
@@ -58,6 +58,14 @@ std::string Creature::description() const {
 
 void Creature::setDescription( const std::string& description ) {
     _description = description;
+}
+
+std::string Creature::icon() const {
+    return _icon;
+}
+
+void Creature::setIcon( const std::string& icon ) {
+    _icon = icon;
 }
 
 int Creature::experience() const {

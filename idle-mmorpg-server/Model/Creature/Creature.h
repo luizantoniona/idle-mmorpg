@@ -29,6 +29,9 @@ public:
     std::string description() const;
     void setDescription( const std::string& description );
 
+    std::string icon() const;
+    void setIcon( const std::string& icon );
+
     int experience() const;
     void setExperience( int experience );
 
@@ -72,6 +75,7 @@ private:
     std::string _type;
     std::string _name;
     std::string _description;
+    std::string _icon;
     int _experience;
 
     CreatureCombatAction _combatAction;
