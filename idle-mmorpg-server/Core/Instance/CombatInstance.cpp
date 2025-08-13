@@ -40,7 +40,7 @@ Json::Value CombatInstance::combatToJson() const {
         Json::Value creatureJson;
         creatureJson[ "name" ] = creature->name();
         creatureJson[ "id" ] = creature->combatId();
-        creatureJson[ "icon" ] = creature->id();
+        creatureJson[ "icon" ] = creature->icon();
         creatureJson[ "combatAction" ] = creature->combatAction().toJson();
         creatureJson[ "vitals" ] = creature->vitals().toJson();
         creaturesJson.append( creatureJson );

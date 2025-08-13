@@ -47,6 +47,7 @@ std::unique_ptr<Model::Creature> CreatureFactory::createCreature( const std::str
     auto creature = std::make_unique<Model::Creature>();
     creature->setName( creatureJson[ "name" ].asString() );
     creature->setDescription( creatureJson[ "description" ].asString() );
+    creature->setIcon( creatureJson[ "icon" ].asString() );
     creature->setExperience( creatureJson[ "experience" ].asInt() );
 
     creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );
