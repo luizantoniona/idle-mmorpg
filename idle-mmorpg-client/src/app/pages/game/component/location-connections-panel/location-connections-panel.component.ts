@@ -41,6 +41,7 @@ export class LocationConnectionsPanel {
                 destination: destination,
             },
         });
+        this.showPopup = false;
     }
 
     onConnectionOpen() {

@@ -10,7 +10,9 @@
     "connections": [
         {
             "destination": "heroes_path_cave",
-            "direction": "down"
+            "direction": "down",
+            "label": "Enter the small cave",
+            "requirements": []
         },
         {
             "destination": "teste",

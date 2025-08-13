@@ -1,10 +1,22 @@
 {
     "id": "heroes_path_cave",
     "name": "Heroes Path Cave",
-    "description": "A small cave with .",
+    "description": "A small cave with mysterious echoes and ancient markings.",
     "coordinates": {
         "x": 0,
         "y": 0,
         "z": 1
-    }
+    },
+    "connections": [
+        {
+            "destination": "heroes_path",
+            "direction": "up",
+            "label": "Back to Heroes Path",
+            "requirements": []
+        },
+        {
+            "destination": "teste",
+            "direction": "up"
+        }
+    ]
 }
