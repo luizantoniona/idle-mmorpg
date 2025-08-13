@@ -1,0 +1,63 @@
+{
+    "id": "shield_mastery",
+    "name": "Shield Mastery",
+    "description": "Your skill in using shields, improving defense and blocking.",
+    "type": "combat",
+    "milestones": [
+        {
+            "level": 1,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 5,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                },
+                {
+                    "type": "combat",
+                    "id": "evasion",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 10,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                },
+                {
+                    "type": "combat",
+                    "id": "evasion",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 15,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                },
+                {
+                    "type": "combat",
+                    "id": "evasion",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}

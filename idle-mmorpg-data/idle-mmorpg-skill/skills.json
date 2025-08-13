@@ -35,6 +35,26 @@
         {
             "id": "running",
             "path": "skills/training/running.json"
+        },
+        {
+            "id": "axe_mastery",
+            "path": "skills/weapon/axe_mastery.json"
+        },
+        {
+            "id": "club_mastery",
+            "path": "skills/weapon/club_mastery.json"
+        },
+        {
+            "id": "dagger_mastery",
+            "path": "skills/weapon/dagger_mastery.json"
+        },
+        {
+            "id": "shield_mastery",
+            "path": "skills/weapon/shield_mastery.json"
+        },
+        {
+            "id": "sword_mastery",
+            "path": "skills/weapon/sword_mastery.json"
         }
     ]
 }
