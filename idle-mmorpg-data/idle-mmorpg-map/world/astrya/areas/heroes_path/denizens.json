@@ -1,0 +1,67 @@
+{
+    "denizens": [
+        {
+            "id": "guardian_heroes_path",
+            "name": "Guardian",
+            "structure": "campfire",
+            "dialogues": [
+                {
+                    "id": "greeting",
+                    "lines": [
+                        "Ah, another traveler on the Hero's Path!",
+                        "Rest by the fire, it's dangerous out there."
+                    ]
+                },
+                {
+                    "id": "farewell",
+                    "lines": [
+                        "Stay safe out there.",
+                        "The fire will be here if you need it."
+                    ]
+                }
+            ],
+            "quests": [
+                {
+                    "id": "guardian_heroes_path_01",
+                    "title": "Cleaning the place",
+                    "description": "The Guardian has asked you to get rid of some rats that have infested the camp area.",
+                    "type": "kill",
+                    "objectiveID": "rat",
+                    "amount": 5,
+                    "rewards": [
+                        {
+                            "type": "item",
+                            "id": "wooden_sword",
+                            "amount": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "guardian_heroes_path_02",
+                    "title": "Sharing a meal",
+                    "description": "The Guardian is hungry and asks you to bring him some cheese to share by the fire.",
+                    "type": "item",
+                    "objectiveID": "cheese",
+                    "amount": 1,
+                    "rewards": [
+                        {
+                            "type": "spell",
+                            "id": "minor_healing"
+                        }
+                    ]
+                }
+            ],
+            "sell": [
+                "wooden_axe",
+                "wooden_club",
+                "wooden_dagger",
+                "wooden_sword",
+                "wooden_shield"
+            ],
+            "buy": [
+                "cheese",
+                "worm"
+            ]
+        }
+    ]
+}

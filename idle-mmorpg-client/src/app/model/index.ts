@@ -18,6 +18,8 @@ export type { Creature } from "./creature/creature.model";
 export type { CreatureCombatAction } from "./creature/creature-combat-action.model";
 export type { CreatureVitals } from "./creature/creature-vitals.model";
 
+export type { Denizen } from "./denizen/denizen.model"
+
 export type { Item } from "./item/item.model";
 export type { ItemModifier } from "./item/item.modifier.model";
 
