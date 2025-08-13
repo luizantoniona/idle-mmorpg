@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../../component';
 import { LoadingComponent } from '../../../../component';
 import { PanelVerticalComponent } from '../../../../component';
+import { PopupComponent } from '../../../../component/popup/popup.component';
 
 import { Location } from '../../../../model';
 
@@ -18,6 +19,7 @@ import { WebsocketService } from '../../../../service/websocket.service';
         ButtonComponent,
         LoadingComponent,
         PanelVerticalComponent,
+        PopupComponent,
     ],
 })
 
