@@ -11,8 +11,8 @@ export type { CharacterSkill } from "./character/character-skill.model";
 export type { CharacterVitals } from "./character/character-vitals.model";
 export type { CharacterWallet } from "./character/character-wallet.model";
 
-export type { CombatInstance } from './combat/combat-instance.model';
-export type { Combat } from './combat/combat.model';
+export type { CombatInstance } from "./combat/combat-instance.model";
+export type { Combat } from "./combat/combat.model";
 
 export type { Creature } from "./creature/creature.model";
 export type { CreatureCombatAction } from "./creature/creature-combat-action.model";

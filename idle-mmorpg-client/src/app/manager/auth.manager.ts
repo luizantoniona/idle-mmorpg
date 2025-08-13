@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { StorageManager } from './storage.manager';
+import { StorageManager } from "./storage.manager";
 
 export interface AuthData {
     userID: number;
@@ -8,10 +8,10 @@ export interface AuthData {
     sessionID: string;
 }
 
-const STORAGE_KEY = 'auth';
+const STORAGE_KEY = "auth";
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: "root",
 })
 
 export class AuthManager {

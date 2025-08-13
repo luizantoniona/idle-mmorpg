@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
-    selector: 'app-card',
-    standalone: true,
-    templateUrl: './card.component.html',
-    styleUrls: ['./card.component.scss'],
+    selector: "app-card",
+    templateUrl: "./card.component.html",
+    styleUrls: ["./card.component.scss"],
     imports: [
         CommonModule
     ],
