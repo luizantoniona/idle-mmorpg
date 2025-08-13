@@ -12,6 +12,15 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
         return;
     }
 
+    auto& combatAction = character->combatAction();
+
+    if ( combatAction.regenCounter() < combatAction.regenDuration() ) {
+        combatAction.setRegenCounter( combatAction.regenCounter() + 1 );
+        return;
+    }
+
+    combatAction.setRegenCounter( 0 );
+
     const double healthRegen = characterVitals.healthRegen() + character->attributes().constitution() * 0.1;
     const double staminaRegen = characterVitals.staminaRegen() + character->attributes().constitution() * 0.1;
     const double manaRegen = characterVitals.manaRegen() + character->attributes().intelligence() * 0.1;

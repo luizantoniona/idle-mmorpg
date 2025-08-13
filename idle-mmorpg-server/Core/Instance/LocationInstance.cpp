@@ -88,14 +88,7 @@ void LocationInstance::tick() {
 
     for ( const auto& [ sessionId, character ] : _characters ) {
 
-        auto& combatAction = character->combatAction();
-        if ( combatAction.regenCounter() >= combatAction.regenDuration() ) {
-            Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
-            combatAction.setRegenCounter( 0 );
-
-        } else {
-            combatAction.setRegenCounter( combatAction.regenCounter() + 1 );
-        }
+        Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
 
         if ( character->action().id() == "idle" ) {
             continue;
