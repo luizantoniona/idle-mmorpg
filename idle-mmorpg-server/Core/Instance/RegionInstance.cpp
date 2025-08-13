@@ -60,8 +60,8 @@ void RegionInstance::removeCharacter( const std::string& sessionId ) {
 
 void RegionInstance::moveCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
-    // TODO: Ver lógica para mover no locationInstance
-    // TODO: Lembrar de ajustar cache
+    // TODO: How to move the character between LocationInstances
+    // TODO: Remember to adjust cache.
 }
 
 LocationInstance* RegionInstance::characterLocationInstance( const std::string& sessionId ) {

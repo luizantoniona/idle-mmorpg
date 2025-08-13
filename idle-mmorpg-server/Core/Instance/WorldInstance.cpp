@@ -67,8 +67,8 @@ void WorldInstance::removeCharacter( const std::string& sessionId ) {
 
 void WorldInstance::moveCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
-    // TODO: Ver lógica para mover no locationInstance ou region
-    // TODO: Lembrar de ajustar cache
+    // TODO: How to move the character between RegionInstances
+    // TODO: Remember to adjust cache.
 }
 
 bool WorldInstance::hasCharacter( const int idCharacter ) {

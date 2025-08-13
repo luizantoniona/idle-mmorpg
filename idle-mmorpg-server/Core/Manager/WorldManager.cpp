@@ -2,7 +2,9 @@
 
 #include <chrono>
 
+#include <Commons/Singleton.h>
 #include <Core/Factory/World/WorldFactory.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 #include <Model/Character/Character.h>
 #include <Repository/Character/CharacterRepository.h>
 
@@ -37,19 +39,24 @@ void WorldManager::start() {
         return;
     }
 
+    // TODO: Make the regionInstance or the localInstance running on a threadPool
+
+    const int tick = Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate();
+    const int msPerTick = 1000 / tick;
+
     _running = true;
-    _thread = std::thread( [ this ]() {
-            using clock = std::chrono::steady_clock;
-            auto nextTick = clock::now();
+    _thread = std::thread( [ this, msPerTick ]() {
+        using clock = std::chrono::steady_clock;
+        auto nextTick = clock::now();
 
-            while ( _running ) {
-                nextTick += std::chrono::milliseconds( 50 );
+        while ( _running ) {
+            nextTick += std::chrono::milliseconds( msPerTick );
 
-                _worldInstance->tick();
+            _worldInstance->tick();
 
-                std::this_thread::sleep_until( nextTick );
-            }
-        } );
+            std::this_thread::sleep_until( nextTick );
+        }
+    } );
 }
 
 void WorldManager::stop() {
