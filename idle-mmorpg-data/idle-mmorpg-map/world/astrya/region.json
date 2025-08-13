@@ -4,12 +4,5 @@
     "locations": [
         "heroes_path",
         "heroes_path_cave"
-    ],
-    "connections": [
-        {
-            "origin": "heroes_path",
-            "destination": "heroes_path_cave",
-            "direction": "down"
-        }
     ]
 }

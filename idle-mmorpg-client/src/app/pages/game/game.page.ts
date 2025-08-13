@@ -209,6 +209,12 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'LOCATION_CONNECTIONS_UPDATE':
+                if (this.location) {
+                    this.location.connections = data.payload?.connections ?? [];
+                }
+                break;
+
             default:
                 console.warn('Unkown message:', data.type);
         }

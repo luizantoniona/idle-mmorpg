@@ -31,7 +31,12 @@
                     "type": "attribute",
                     "id": "dexterity",
                     "value": 1
-                },
+                }
+            ]
+        },
+        {
+            "level": 4,
+            "bonuses": [
                 {
                     "type": "combat",
                     "id": "evasion",
@@ -50,6 +55,16 @@
                 {
                     "type": "combat",
                     "id": "evasion",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 6,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "speed",
                     "value": 1
                 }
             ]

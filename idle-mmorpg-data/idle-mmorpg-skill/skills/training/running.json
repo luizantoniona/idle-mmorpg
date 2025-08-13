@@ -31,7 +31,12 @@
                     "type": "vital",
                     "id": "stamina",
                     "value": 5
-                },
+                }
+            ]
+        },
+        {
+            "level": 4,
+            "bonuses": [
                 {
                     "type": "vital",
                     "id": "stamina_regen",
@@ -46,11 +51,16 @@
                     "type": "vital",
                     "id": "stamina",
                     "value": 5
-                },
+                }
+            ]
+        },
+        {
+            "level": 6,
+            "bonuses": [
                 {
                     "type": "vital",
-                    "id": "stamina_regen",
-                    "value": 0.1
+                    "id": "stamina",
+                    "value": 5
                 }
             ]
         }

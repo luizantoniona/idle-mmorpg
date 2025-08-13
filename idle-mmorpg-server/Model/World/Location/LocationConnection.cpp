@@ -1,18 +1,21 @@
 #include "LocationConnection.h"
 
+namespace {
+constexpr const char* JSON_DESTINATION = "destination";
+constexpr const char* JSON_DIRECTION = "direction";
+} // namespace
+
 namespace Model {
 
 LocationConnection::LocationConnection() :
-    _origin( "" ),
     _destination( "" ),
     _direction( "" ) {}
 
-std::string LocationConnection::origin() const {
-    return _origin;
-}
-
-void LocationConnection::setOrigin( const std::string& origin ) {
-    _origin = origin;
+Json::Value LocationConnection::toJson() {
+    Json::Value root;
+    root[ JSON_DESTINATION ] = destination();
+    root[ JSON_DIRECTION ] = direction();
+    return root;
 }
 
 std::string LocationConnection::destination() const {

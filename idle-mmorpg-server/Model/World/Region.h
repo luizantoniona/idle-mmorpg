@@ -23,13 +23,11 @@ public:
     std::string description() const;
     void setDescription( const std::string& description );
 
-    std::vector<std::unique_ptr<Location> >& locations();
-    void setLocations( std::vector<std::unique_ptr<Location> > locations );
+    std::vector<std::unique_ptr<Location>>& locations();
+    void setLocations( std::vector<std::unique_ptr<Location>> locations );
     void addLocation( std::unique_ptr<Location> location );
 
-    std::vector<std::unique_ptr<LocationConnection> >& connections();
-    void setConnections( std::vector<std::unique_ptr<LocationConnection> >connections );
-    void addConnection( std::unique_ptr<LocationConnection> connection );
+    Location* locationById( const std::string& locationId );
 
     bool hasLocationWithCoordinates( int x, int y, int z ) const;
     Location* locationByCoordinates( int x, int y, int z );
@@ -38,8 +36,7 @@ private:
     std::string _id;
     std::string _name;
     std::string _description;
-    std::vector<std::unique_ptr<Location> > _locations;
-    std::vector<std::unique_ptr<LocationConnection> > _connections;
+    std::vector<std::unique_ptr<Location>> _locations;
 };
 
 } // namespace Core::Model

@@ -1,8 +1,8 @@
-#include "ActionsHelper.h"
+#include "LocationHelper.h"
 
 namespace Commons {
 
-bool ActionsHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
+bool LocationHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
     if ( !character ) {
         return false;
     }
@@ -39,6 +39,12 @@ bool ActionsHelper::canCharacterPerformAction( Model::Character* character, cons
             return false;
         }
     }
+
+    return true;
+}
+
+bool LocationHelper::canCharacterUseConnections( Model::Character* character, const Model::LocationConnection& connection ) {
+    // TODO: Implementar verificações se pode ou nao usar a connection
 
     return true;
 }

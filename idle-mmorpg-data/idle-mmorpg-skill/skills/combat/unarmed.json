@@ -31,7 +31,12 @@
                     "type": "attribute",
                     "id": "strength",
                     "value": 1
-                },
+                }
+            ]
+        },
+        {
+            "level": 4,
+            "bonuses": [
                 {
                     "type": "combat",
                     "id": "attack",
@@ -50,6 +55,16 @@
                 {
                     "type": "combat",
                     "id": "attack",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 6,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "accuracy",
                     "value": 1
                 }
             ]

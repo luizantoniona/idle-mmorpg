@@ -26,14 +26,6 @@ std::unique_ptr<Model::World> WorldFactory::createWorld( const std::string& mapP
         world->addRegion( std::move( RegionFactory::createRegion( regionName, regionPath ) ) );
     }
 
-    for ( const Json::Value& regionConnectionJson : worldConfig["connections"] ) {
-        if ( !regionConnectionJson.isMember( "origin" ) || !regionConnectionJson.isMember( "destination" ) ) {
-            continue;
-        }
-
-        world->addConnection( std::move( RegionFactory::createRegionConnection( regionConnectionJson ) ) );
-    }
-
     return world;
 }
 

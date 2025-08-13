@@ -56,6 +56,10 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         case MessageReceiverType::CHARACTER_ACTION_UPDATE: {
             locationInstance->handleCharacterMessage( sessionId, type, payload );
             break;
+
+        case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
+            regionInstance->handleCharacterMessage( sessionId, type, payload );
+            break;
         }
         default:
             break;

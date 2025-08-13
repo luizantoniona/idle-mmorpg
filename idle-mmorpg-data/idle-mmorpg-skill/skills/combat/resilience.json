@@ -19,7 +19,7 @@
             "bonuses": [
                 {
                     "type": "combat",
-                    "id": "defense",
+                    "id": "     ",
                     "value": 1
                 }
             ]
@@ -31,7 +31,12 @@
                     "type": "attribute",
                     "id": "constitution",
                     "value": 1
-                },
+                }
+            ]
+        },
+        {
+            "level": 4,
+            "bonuses": [
                 {
                     "type": "combat",
                     "id": "defense",
@@ -47,6 +52,16 @@
                     "id": "constitution",
                     "value": 1
                 },
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 6,
+            "bonuses": [
                 {
                     "type": "combat",
                     "id": "defense",

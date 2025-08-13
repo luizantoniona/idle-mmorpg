@@ -13,7 +13,6 @@ namespace Core::Factory {
 class LocationFactory {
 public:
     static std::unique_ptr<Model::Location> createLocation( const std::string& locationName, const std::string& locationPath );
-    static std::unique_ptr<Model::LocationConnection> createLocationConnection( const Json::Value& connectionJson );
 };
 
 } // namespace Core::Factory

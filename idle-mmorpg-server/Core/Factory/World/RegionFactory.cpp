@@ -31,24 +31,7 @@ std::unique_ptr<Model::Region> RegionFactory::createRegion( const std::string& r
         region->addLocation( std::move( LocationFactory::createLocation( locationId, locationPath ) ) );
     }
 
-    for ( const Json::Value& connectionJson : regionConfig["connections"] ) {
-        if ( !connectionJson.isMember( "origin" ) || !connectionJson.isMember( "destination" ) ) {
-            continue;
-        }
-
-        region->addConnection( std::move( LocationFactory::createLocationConnection( connectionJson ) ) );
-    }
-
     return region;
-}
-
-std::unique_ptr<Model::RegionConnection> RegionFactory::createRegionConnection( const Json::Value& connectionJson ) {
-    auto connection = std::make_unique<Model::RegionConnection>();
-
-    connection->setOrigin( connectionJson["origin"].asString() );
-    connection->setDestination( connectionJson["destination"].asString() );
-
-    return connection;
 }
 
 } // namespace Core::Factory

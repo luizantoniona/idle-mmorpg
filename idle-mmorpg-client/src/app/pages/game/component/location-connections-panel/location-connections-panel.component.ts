@@ -34,11 +34,11 @@ export class LocationConnectionsPanel {
         this.websocketService.send(data);
     }
 
-    onConnectionClick(locationId: string): void {
+    onConnectionClick(destination: string): void {
         this.sendMessage({
             type: 'CHARACTER_LOCATION_UPDATE',
             payload: {
-                locationId: locationId,
+                destination: destination,
             },
         });
     }

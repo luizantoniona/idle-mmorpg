@@ -13,7 +13,6 @@ namespace Core::Factory {
 class RegionFactory {
 public:
     static std::unique_ptr<Model::Region> createRegion( const std::string& regionName, const std::string& regionPath );
-    static std::unique_ptr<Model::RegionConnection> createRegionConnection( const Json::Value& connectionJson );
 };
 
 } // namespace Core::Factory

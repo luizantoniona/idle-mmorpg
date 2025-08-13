@@ -8,6 +8,7 @@ constexpr const char* JSON_X = "x";
 constexpr const char* JSON_Y = "y";
 constexpr const char* JSON_Z = "z";
 constexpr const char* JSON_STRUCTURES = "structures";
+constexpr const char* JSON_CONNECTIONS = "connections";
 } // namespace
 
 namespace Model {
@@ -21,7 +22,9 @@ Location::Location() :
     _z( 0 ),
     _actions( {} ),
     _creatures( {} ),
-    _structures( {} ) {}
+    _structures( {} ),
+    _connections( {} ) {
+}
 
 Json::Value Location::toJson() const {
     Json::Value root;
@@ -121,6 +124,18 @@ void Location::setStructures( const std::vector<LocationStructure>& structures )
 
 void Location::addStructure( const LocationStructure& structure ) {
     _structures.push_back( structure );
+}
+
+const std::vector<LocationConnection>& Location::connections() const {
+    return _connections;
+}
+
+void Location::setConnections( const std::vector<LocationConnection>& connections ) {
+    _connections = connections;
+}
+
+void Location::addConnection( const LocationConnection& connection ) {
+    _connections.push_back( connection );
 }
 
 } // namespace Model

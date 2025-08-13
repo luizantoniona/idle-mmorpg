@@ -2,11 +2,5 @@
     "regions": [
         "astrya",
         "liphus"
-    ],
-    "connections": [
-        {
-            "origin": "astrya_city",
-            "destination": "liphus_port"
-        }
     ]
 }

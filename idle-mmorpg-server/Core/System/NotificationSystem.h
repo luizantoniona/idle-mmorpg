@@ -26,6 +26,7 @@ public:
 
     static void notifyFullLocation( const std::string& sessionId, const Model::Location* location );
     static void notifyLocationActions( const std::string& sessionId, Model::Character* character, const Model::Location* location );
+    static void notifyLocationConnections( const std::string& sessionId, Model::Character* character, const Model::Location* location );
 
     static void notifyCombatInstances( const std::string& sessionId, std::vector<Core::Instance::CombatInstance*> combatInstances );
     static void notifyCombat( const Instance::CombatInstance* combatInstance );

@@ -20,6 +20,10 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _combatInstances(),
     _characterCombatCache() {}
 
+Model::Location* LocationInstance::location() {
+    return _location;
+}
+
 bool LocationInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
     std::lock_guard lock( _mutex );
     _characters[sessionId] = character;
@@ -32,6 +36,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
     Core::System::NotificationSystem::notifyFullCharacter( sessionId, character );
     Core::System::NotificationSystem::notifyFullLocation( sessionId, _location );
     Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
+    Core::System::NotificationSystem::notifyLocationConnections( sessionId, character, _location );
 
     return true;
 }

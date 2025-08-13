@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include <Commons/ActionsHelper.h>
+#include <Commons/LocationHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 
@@ -39,7 +39,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     const Model::LocationAction& selectedAction = *it;
 
-    if ( !Commons::ActionsHelper::canCharacterPerformAction( character, selectedAction ) ) {
+    if ( !Commons::LocationHelper::canCharacterPerformAction( character, selectedAction ) ) {
         return;
     }
 

@@ -18,32 +18,21 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     Json::Value locationJson = Commons::JsonHelper::loadJsonFile( locationJsonPath );
     auto location = std::make_unique<Model::Location>();
 
-    if ( locationJson.isMember( "id" ) ) {
-        location->setId( locationJson[ "id" ].asString() );
-    }
+    location->setId( locationJson[ "id" ].asString() );
+    location->setName( locationJson[ "name" ].asString() );
+    location->setDescription( locationJson[ "description" ].asString() );
 
-    if ( locationJson.isMember( "name" ) ) {
-        location->setName( locationJson[ "name" ].asString() );
-    }
+    Json::Value coordinatesJson = locationJson[ "coordinates" ];
+    location->setX( coordinatesJson[ "x" ].asInt() );
+    location->setY( coordinatesJson[ "y" ].asInt() );
+    location->setZ( coordinatesJson[ "z" ].asInt() );
 
-    if ( locationJson.isMember( "description" ) ) {
-        location->setDescription( locationJson[ "description" ].asString() );
-    }
-
-    if ( locationJson.isMember( "coordinates" ) ) {
-        Json::Value coordinatesJson = locationJson[ "coordinates" ];
-
-        if ( coordinatesJson.isMember( "x" ) ) {
-            location->setX( coordinatesJson[ "x" ].asInt() );
-        }
-
-        if ( coordinatesJson.isMember( "y" ) ) {
-            location->setY( coordinatesJson[ "y" ].asInt() );
-        }
-
-        if ( coordinatesJson.isMember( "z" ) ) {
-            location->setZ( coordinatesJson[ "z" ].asInt() );
-        }
+    Json::Value connectionsJson = locationJson[ "connections" ];
+    for ( const Json::Value& connectionJson : connectionsJson ) {
+        Model::LocationConnection connection;
+        connection.setDestination( connectionJson[ "destination" ].asString() );
+        connection.setDirection( connectionJson[ "direction" ].asString() );
+        location->addConnection( connection );
     }
 
     std::string actionsJsonPath = locationPath + "/actions.json";
@@ -78,9 +67,9 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     Json::Value structuresJson = Commons::JsonHelper::loadJsonFile( structuresJsonPath );
     for ( const Json::Value& structureJson : structuresJson[ "structures" ] ) {
         Model::LocationStructure structure;
-        structure.setId( structureJson["id"].asString() );
-        structure.setLabel( structureJson["label"].asString() );
-        structure.setDescription( structureJson["description"].asString() );
+        structure.setId( structureJson[ "id" ].asString() );
+        structure.setLabel( structureJson[ "label" ].asString() );
+        structure.setDescription( structureJson[ "description" ].asString() );
 
         location->addStructure( structure );
     }
@@ -99,16 +88,6 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     }
 
     return location;
-}
-
-std::unique_ptr<Model::LocationConnection> LocationFactory::createLocationConnection( const Json::Value& connectionJson ) {
-    auto connection = std::make_unique<Model::LocationConnection>();
-
-    connection->setOrigin( connectionJson[ "origin" ].asString() );
-    connection->setDestination( connectionJson[ "destination" ].asString() );
-    connection->setDirection( connectionJson[ "direction" ].asString() );
-
-    return connection;
 }
 
 } // namespace Core::Factory

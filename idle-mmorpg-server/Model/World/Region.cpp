@@ -6,8 +6,8 @@ Region::Region() :
     _id( "" ),
     _name( "" ),
     _description( "" ),
-    _locations(),
-    _connections() {}
+    _locations() {
+}
 
 std::string Region::id() const {
     return _id;
@@ -33,11 +33,11 @@ void Region::setDescription( const std::string& description ) {
     _description = description;
 }
 
-std::vector<std::unique_ptr<Location> >& Region::locations() {
+std::vector<std::unique_ptr<Location>>& Region::locations() {
     return _locations;
 }
 
-void Region::setLocations( std::vector<std::unique_ptr<Location> > locations ) {
+void Region::setLocations( std::vector<std::unique_ptr<Location>> locations ) {
     _locations = std::move( locations );
 }
 
@@ -45,16 +45,14 @@ void Region::addLocation( std::unique_ptr<Location> location ) {
     _locations.push_back( std::move( location ) );
 }
 
-std::vector<std::unique_ptr<LocationConnection> >& Region::connections() {
-    return _connections;
-}
+Location* Region::locationById( const std::string& locationId ) {
+    for ( const auto& locationPtr : _locations ) {
+        if ( locationPtr->id() == locationId ) {
+            return locationPtr.get();
+        }
+    }
 
-void Region::setConnections( std::vector<std::unique_ptr<LocationConnection> > connections ) {
-    _connections = std::move( connections );
-}
-
-void Region::addConnection( std::unique_ptr<LocationConnection> connection ) {
-    _connections.push_back( std::move( connection ) );
+    return nullptr;
 }
 
 bool Region::hasLocationWithCoordinates( int x, int y, int z ) const {

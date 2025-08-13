@@ -6,5 +6,15 @@
         "x": 0,
         "y": 0,
         "z": 0
-    }
+    },
+    "connections": [
+        {
+            "destination": "heroes_path_cave",
+            "direction": "down"
+        },
+        {
+            "destination": "teste",
+            "direction": "up"
+        }
+    ]
 }

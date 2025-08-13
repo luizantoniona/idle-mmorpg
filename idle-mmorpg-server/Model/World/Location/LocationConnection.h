@@ -1,6 +1,8 @@
 #ifndef LOCATIONCONNECTION_H
 #define LOCATIONCONNECTION_H
 
+#include <json/json.h>
+
 #include <string>
 
 namespace Model {
@@ -9,8 +11,7 @@ class LocationConnection {
 public:
     LocationConnection();
 
-    std::string origin() const;
-    void setOrigin( const std::string& origin );
+    Json::Value toJson();
 
     std::string destination() const;
     void setDestination( const std::string& destination );
@@ -19,7 +20,6 @@ public:
     void setDirection( const std::string& direction );
 
 private:
-    std::string _origin;
     std::string _destination;
     std::string _direction;
 };

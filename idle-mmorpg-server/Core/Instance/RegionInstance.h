@@ -17,14 +17,16 @@ public:
 
     bool addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );
-    void moveCharacter( const std::string& sessionId );
+    void moveCharacter( const std::string& sessionId, const std::string& destination );
 
     LocationInstance* characterLocationInstance( const std::string& sessionId );
 
     void tick();
 
+    void handleCharacterMessage( const std::string& sessionId, Message::MessageReceiverType type, const Json::Value& payload );
+
 private:
-    mutable std::mutex _mutex;
+    mutable std::recursive_mutex _mutex;
     Model::Region* _region;
     std::unordered_map<std::string, std::unique_ptr<LocationInstance> > _locations;
     std::unordered_map<std::string, Model::Character*> _characters;

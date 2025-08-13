@@ -1,6 +1,6 @@
 #include "NotificationSystem.h"
 
-#include <Commons/ActionsHelper.h>
+#include <Commons/LocationHelper.h>
 #include <Core/Message/MessageSender.h>
 
 namespace Core::System {
@@ -89,13 +89,27 @@ void NotificationSystem::notifyLocationActions( const std::string& sessionId, Mo
     Json::Value availableActions;
 
     for ( auto action : location->actions() ) {
-        if ( Commons::ActionsHelper::canCharacterPerformAction( character, action ) ) {
+        if ( Commons::LocationHelper::canCharacterPerformAction( character, action ) ) {
             availableActions.append( action.toJson() );
         }
     }
 
     payloadLocationActions[ "actions" ] = availableActions;
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::LOCATION_ACTIONS_UPDATE, payloadLocationActions );
+}
+
+void NotificationSystem::notifyLocationConnections( const std::string& sessionId, Model::Character* character, const Model::Location* location ) {
+    Json::Value payloadLocationConnections;
+    Json::Value availableConnections;
+
+    for ( auto connection : location->connections() ) {
+        if ( Commons::LocationHelper::canCharacterUseConnections( character, connection ) ) {
+            availableConnections.append( connection.toJson() );
+        }
+    }
+
+    payloadLocationConnections[ "connections" ] = availableConnections;
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::LOCATION_CONNECTIONS_UPDATE, payloadLocationConnections );
 }
 
 void NotificationSystem::notifyCombatInstances( const std::string& sessionId, std::vector<Instance::CombatInstance*> combatInstances ) {
