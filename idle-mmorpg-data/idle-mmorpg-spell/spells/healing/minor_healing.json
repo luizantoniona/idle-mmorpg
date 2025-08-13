@@ -1,0 +1,14 @@
+{
+    "id": "minor_healing",
+    "name": "Minor Healing",
+    "description": "Restores a small amount of health to the target.",
+    "type": "healing",
+    "manaCost": 5,
+    "cooldown": 3,
+    "effects": [
+        {
+            "type": "heal",
+            "value": 10
+        }
+    ]
+}
