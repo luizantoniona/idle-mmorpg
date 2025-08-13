@@ -1,0 +1,15 @@
+{
+    "id": "hand_axe",
+    "name": "Hand Axe",
+    "description": "A simple axe.",
+    "icon": "weapons/axes/hand_axe.gif",
+    "rarity": "common",
+    "value": 5,
+    "modifiers": [
+        {
+            "type": "combat",
+            "attribute": "attack",
+            "value": 5
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "id": "iron_dagger",
+    "name": "Iron Dagger",
+    "description": "A small dagger made of iron.",
+    "icon": "weapons/daggers/iron_dagger.gif",
+    "rarity": "common",
+    "value": 5,
+    "modifiers": [
+        {
+            "type": "combat",
+            "attribute": "attack",
+            "value": 5
+        }
+    ]
+}

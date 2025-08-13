@@ -1,0 +1,15 @@
+{
+    "id": "studded_club",
+    "name": "Studded Club",
+    "description": "A basic club.",
+    "icon": "weapons/clubs/studded_club.gif",
+    "rarity": "common",
+    "value": 5,
+    "modifiers": [
+        {
+            "type": "combat",
+            "attribute": "attack",
+            "value": 5
+        }
+    ]
+}

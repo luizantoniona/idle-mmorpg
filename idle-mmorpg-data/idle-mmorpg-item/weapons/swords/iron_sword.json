@@ -1,0 +1,15 @@
+{
+    "id": "iron_sword",
+    "name": "Iron Sword",
+    "description": "A basic sword made of iron.",
+    "icon": "weapons/swords/iron_sword.gif",
+    "rarity": "common",
+    "value": 5,
+    "modifiers": [
+        {
+            "type": "combat",
+            "attribute": "attack",
+            "value": 5
+        }
+    ]
+}

@@ -1,17 +1,43 @@
 {
     "categories": [
         {
-            "category": "sword",
-            "path": "swords",
+            "category": "axe",
+            "path": "axes",
             "items": [
-                "wooden_sword"
+                "wooden_axe",
+                "hand_axe"
             ]
         },
         {
             "category": "dagger",
             "path": "daggers",
             "items": [
-                "copper_dagger"
+                "wooden_dagger",
+                "iron_dagger"
+            ]
+        },
+        {
+            "category": "club",
+            "path": "clubs",
+            "items": [
+                "wooden_club",
+                "studded_club"
+            ]
+        },
+        {
+            "category": "shield",
+            "path": "shields",
+            "items": [
+                "wooden_shield",
+                "basic_shield"
+            ]
+        },
+        {
+            "category": "sword",
+            "path": "swords",
+            "items": [
+                "wooden_sword",
+                "iron_sword"
             ]
         }
     ]

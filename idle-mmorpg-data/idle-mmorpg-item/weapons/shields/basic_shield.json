@@ -1,0 +1,15 @@
+{
+    "id": "basic_shield",
+    "name": "Basic Shield",
+    "description": "A basic shield.",
+    "icon": "weapons/shields/basic_shield.gif",
+    "rarity": "common",
+    "value": 5,
+    "modifiers": [
+        {
+            "type": "combat",
+            "attribute": "defense",
+            "value": 5
+        }
+    ]
+}
