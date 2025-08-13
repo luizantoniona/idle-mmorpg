@@ -14,8 +14,9 @@ CharacterVitals::CharacterVitals() :
     _stamina( 0.0 ),
     _maxStamina( 0.0 ),
     _baseStaminaRegen( 0.0 ),
-    _modifierStaminaRegen( 0.0 ) {
-}
+    _modifierStaminaRegen( 0.0 ),
+    _regenDuration( 20 ),
+    _regenCounter( 0 ) {}
 
 Json::Value CharacterVitals::toJson() {
     Json::Value root;
@@ -140,6 +141,22 @@ double CharacterVitals::manaRegen() const {
 
 double CharacterVitals::staminaRegen() const {
     return _baseStaminaRegen + _modifierStaminaRegen;
+}
+
+int CharacterVitals::regenDuration() const {
+    return _regenDuration;
+}
+
+void CharacterVitals::setRegenDuration( int regenDuration ) {
+    _regenDuration = regenDuration;
+}
+
+int CharacterVitals::regenCounter() const {
+    return _regenCounter;
+}
+
+void CharacterVitals::setRegenCounter( int regenCounter ) {
+    _regenCounter = regenCounter;
 }
 
 } // namespace Model

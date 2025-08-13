@@ -1,0 +1,9 @@
+<app-panel-horizontal>
+    <app-button text="Map" (clickEvent)="onMapClick()"></app-button>
+    <app-button text="Chat" (clickEvent)="onChatClick()"></app-button>
+</app-panel-horizontal>
+
+<app-location-connections-panel [location]="location" [visible]="showMap" (closed)="onMapClose()">
+</app-location-connections-panel>
+
+<app-chat-panel [visible]="showChat" (closed)="onChatClose()"></app-chat-panel>

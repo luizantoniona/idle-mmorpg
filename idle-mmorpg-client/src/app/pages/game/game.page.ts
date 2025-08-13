@@ -8,10 +8,9 @@ import { CharacterEquipmentPanel } from './component';
 import { CharacterInventoryPanel } from './component';
 import { CharacterSkillsPanel } from './component';
 import { CharacterWalletPanel } from './component';
-import { ChatPanel } from './component';
-import { LocationConnectionsPanel } from './component';
 import { LocationDescriptionPanel } from './component';
 import { MainPanel } from './component';
+import { OptionsPanel } from './component';
 
 import { Character } from '../../model';
 import { Location } from '../../model';
@@ -29,10 +28,9 @@ import { WebsocketService } from '../../service/websocket.service';
         CharacterInventoryPanel,
         CharacterSkillsPanel,
         CharacterWalletPanel,
-        ChatPanel,
-        LocationConnectionsPanel,
         LocationDescriptionPanel,
         MainPanel,
+        OptionsPanel,
     ],
 })
 

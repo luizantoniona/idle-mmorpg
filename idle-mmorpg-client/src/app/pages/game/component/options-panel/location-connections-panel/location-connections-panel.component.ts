@@ -1,14 +1,13 @@
-import { Component, Input, Output, inject } from '@angular/core';
+import { Component, Input, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonComponent } from '../../../../component';
-import { LoadingComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
-import { PopupComponent } from '../../../../component/popup/popup.component';
+import { ButtonComponent } from '../../../../../component';
+import { LoadingComponent } from '../../../../../component';
+import { PopupComponent } from '../../../../../component';
 
-import { Location } from '../../../../model';
+import { Location } from '../../../../../model';
 
-import { WebsocketService } from '../../../../service/websocket.service';
+import { WebsocketService } from '../../../../../service/websocket.service';
 
 @Component({
     selector: 'app-location-connections-panel',
@@ -18,17 +17,16 @@ import { WebsocketService } from '../../../../service/websocket.service';
         CommonModule,
         ButtonComponent,
         LoadingComponent,
-        PanelVerticalComponent,
         PopupComponent,
     ],
 })
 
 export class LocationConnectionsPanel {
     @Input() location!: Location;
+    @Input() visible = false;
+    @Output() closed = new EventEmitter<void>();
 
     private websocketService = inject(WebsocketService);
-
-    showPopup = false;
 
     sendMessage(data: any): void {
         this.websocketService.send(data);
@@ -41,10 +39,6 @@ export class LocationConnectionsPanel {
                 destination: destination,
             },
         });
-        this.showPopup = false;
-    }
-
-    onConnectionOpen() {
-        this.showPopup = !this.showPopup;
+        this.closed.emit();
     }
 }

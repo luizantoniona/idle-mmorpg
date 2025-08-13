@@ -9,10 +9,7 @@ namespace Model {
 
 CharacterCombatAction::CharacterCombatAction() :
     _duration( 0 ),
-    _counter( 0 ),
-    _regenDuration( 20 ),
-    _regenCounter( 0 ) {
-}
+    _counter( 0 ) {}
 
 Json::Value CharacterCombatAction::toJson() {
     Json::Value root;
@@ -35,22 +32,6 @@ int CharacterCombatAction::counter() const {
 
 void CharacterCombatAction::setCounter( int counter ) {
     _counter = counter;
-}
-
-int CharacterCombatAction::regenDuration() const {
-    return _regenDuration;
-}
-
-void CharacterCombatAction::setRegenDuration( int regenDuration ) {
-    _regenDuration = regenDuration;
-}
-
-int CharacterCombatAction::regenCounter() const {
-    return _regenCounter;
-}
-
-void CharacterCombatAction::setRegenCounter( int regenCounter ) {
-    _regenCounter = regenCounter;
 }
 
 } // namespace Model

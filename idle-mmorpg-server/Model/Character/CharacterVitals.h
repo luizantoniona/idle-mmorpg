@@ -51,6 +51,12 @@ public:
     double manaRegen() const;
     double staminaRegen() const;
 
+    int regenDuration() const;
+    void setRegenDuration( int regenDuration );
+
+    int regenCounter() const;
+    void setRegenCounter( int regenCounter );
+
 private:
     double _health;
     double _maxHealth;
@@ -66,6 +72,9 @@ private:
     double _maxStamina;
     double _baseStaminaRegen;
     double _modifierStaminaRegen;
+
+    int _regenDuration;
+    int _regenCounter;
 };
 
 } // namespace Model

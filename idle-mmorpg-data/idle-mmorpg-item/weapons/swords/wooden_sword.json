@@ -3,6 +3,17 @@
     "name": "Wooden Sword",
     "description": "A basic sword made of wood, suitable for beginners.",
     "rarity": "common",
-    "value": 5,
-    "modifiers": []
+    "value": 1,
+    "modifiers": [
+        {
+            "type": "combatAttribute",
+            "attribute": "attack",
+            "value": 1
+        },
+        {
+            "type": "combatAttribute",
+            "attribute": "accuracy",
+            "value": 2
+        }
+    ]
 }

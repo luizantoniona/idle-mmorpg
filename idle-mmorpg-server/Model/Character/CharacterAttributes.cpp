@@ -2,10 +2,15 @@
 
 namespace {
 constexpr const char* JSON_STRENGTH = "strength";
+constexpr const char* JSON_MODIFIER_STRENGTH = "modifierStrength";
 constexpr const char* JSON_DEXTERITY = "dexterity";
+constexpr const char* JSON_MODIFIER_DEXTERITY = "modifierDexterity";
 constexpr const char* JSON_CONSTITUTION = "constitution";
+constexpr const char* JSON_MODIFIER_CONSTITUTION = "modifierConstitution";
 constexpr const char* JSON_INTELLIGENCE = "intelligence";
+constexpr const char* JSON_MODIFIER_INTELLIGENCE = "modifierIntelligence";
 constexpr const char* JSON_WISDOM = "wisdom";
+constexpr const char* JSON_MODIFIER_WISDOM = "modifierWisdom";
 } // namespace
 
 namespace Model {
@@ -20,23 +25,20 @@ CharacterAttributes::CharacterAttributes() :
     _modifierDexterity( 0.0 ),
     _modifierConstitution( 0.0 ),
     _modifierIntelligence( 0.0 ),
-    _modifierWisdom( 0.0 ) {
-}
+    _modifierWisdom( 0.0 ) {}
 
 Json::Value CharacterAttributes::toJson() const {
     Json::Value root;
     root[ JSON_STRENGTH ] = _baseStrength;
+    root[ JSON_MODIFIER_STRENGTH ] = _modifierStrength;
     root[ JSON_DEXTERITY ] = _baseDexterity;
+    root[ JSON_MODIFIER_DEXTERITY ] = _modifierDexterity;
     root[ JSON_CONSTITUTION ] = _baseConstitution;
+    root[ JSON_MODIFIER_CONSTITUTION ] = _modifierConstitution;
     root[ JSON_INTELLIGENCE ] = _baseIntelligence;
+    root[ JSON_MODIFIER_INTELLIGENCE ] = _modifierIntelligence;
     root[ JSON_WISDOM ] = _baseWisdom;
-
-    root[ "modifierStrength" ] = _modifierStrength;
-    root[ "modifierDexterity" ] = _modifierDexterity;
-    root[ "modifierConstitution" ] = _modifierConstitution;
-    root[ "modifierIntelligence" ] = _modifierIntelligence;
-    root[ "modifierWisdom" ] = _modifierWisdom;
-
+    root[ JSON_MODIFIER_WISDOM ] = _modifierWisdom;
     return root;
 }
 

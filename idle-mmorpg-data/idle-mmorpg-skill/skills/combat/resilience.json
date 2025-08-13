@@ -19,7 +19,7 @@
             "bonuses": [
                 {
                     "type": "combat",
-                    "id": "     ",
+                    "id": "defense",
                     "value": 1
                 }
             ]

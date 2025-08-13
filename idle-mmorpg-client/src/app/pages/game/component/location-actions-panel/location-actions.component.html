@@ -1,6 +1,6 @@
 <app-panel-vertical>
     <div class="section">
-        <h3>Available Actions</h3>
+        <strong>Available Actions</strong>
         <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
         @if(location && location.actions && location.actions.length) {
         @for(action of location.actions; track action){

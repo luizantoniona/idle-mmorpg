@@ -1,0 +1,11 @@
+<app-popup [visible]="visible" (closed)="closed.emit()">
+    <h2>Location Connections</h2>
+    @if(location && location.connections && location.connections.length) {
+    @for(connection of location.connections; track connection) {
+    <app-button [text]="connection.destination" (clickEvent)="onConnectionClick(connection.destination)">
+    </app-button>
+    }
+    } @else {
+    <app-loading></app-loading>
+    }
+</app-popup>

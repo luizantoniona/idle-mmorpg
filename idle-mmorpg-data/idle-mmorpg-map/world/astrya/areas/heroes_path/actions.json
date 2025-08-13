@@ -21,7 +21,7 @@
             "experience": [
                 {
                     "skill": "running",
-                    "amount": 1
+                    "amount": 2
                 }
             ]
         },
@@ -38,7 +38,7 @@
             "experience": [
                 {
                     "skill": "mining",
-                    "amount": 1
+                    "amount": 2
                 }
             ]
         },

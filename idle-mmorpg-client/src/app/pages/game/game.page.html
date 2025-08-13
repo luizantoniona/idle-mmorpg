@@ -11,9 +11,8 @@
     </div>
 
     <div class="right-panel">
-        <app-location-connections-panel [location]="location!"></app-location-connections-panel>
-        <app-chat-panel></app-chat-panel>
-        <app-character-wallet-panel [character]="character!"></app-character-wallet-panel>
+        <app-options-panel [character]="character!" [location]="location!"></app-options-panel>
+        <app-character-wallet-panel [character]=" character!"></app-character-wallet-panel>
         <app-character-equipment-panel [character]="character!"></app-character-equipment-panel>
         <app-character-inventory-panel [character]="character!"></app-character-inventory-panel>
     </div>
