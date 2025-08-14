@@ -6,7 +6,6 @@
 #include <Model/World/Location/Location.h>
 #include <Model/World/Location/LocationAction.h>
 
-#include "NotificationSystem.h"
 #include "ProgressionSystem.h"
 
 namespace Core::System {
@@ -26,8 +25,6 @@ private:
 
 private:
     Model::Location* _location;
-    Core::Message::MessageSender _sender;
-    NotificationSystem _notificationSystem;
     ProgressionSystem _progressionSystem;
 };
 

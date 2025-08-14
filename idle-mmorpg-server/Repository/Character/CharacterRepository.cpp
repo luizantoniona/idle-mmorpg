@@ -8,6 +8,7 @@
 #include "CharacterEquipmentRepository.h"
 #include "CharacterInventoryRepository.h"
 #include "CharacterProgressionRepository.h"
+#include "CharacterQuestsRepository.h"
 #include "CharacterSkillsRepository.h"
 #include "CharacterVitalsRepository.h"
 #include "CharacterWalletRepository.h"
@@ -43,6 +44,7 @@ int CharacterRepository::createCharacter( const int idUser, const std::string& d
     success &= CharacterEquipmentRepository().createEquipment( idCharacter );
     success &= CharacterInventoryRepository().createInventory( idCharacter );
     success &= CharacterProgressionRepository().createProgression( idCharacter );
+    success &= CharacterQuestsRepository().createQuests( idCharacter );
     success &= CharacterSkillsRepository().createSkills( idCharacter );
     success &= CharacterVitalsRepository().createVitals( idCharacter );
     success &= CharacterWalletRepository().createWallet( idCharacter );
@@ -61,6 +63,7 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
     success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipment() );
     success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
     success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
+    success &= CharacterQuestsRepository().updateQuests( idCharacter, character.quests() );
     success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
     success &= CharacterVitalsRepository().updateVitals( idCharacter, character.vitals() );
     success &= CharacterWalletRepository().updateWallet( idCharacter, character.wallet() );
@@ -119,6 +122,11 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
         auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
         if ( progression ) {
             character->setProgression( *progression );
+        }
+
+        auto quests = CharacterQuestsRepository().findByCharacterId( character->idCharacter() );
+        if ( quests ) {
+            character->setQuests( *quests );
         }
 
         auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
@@ -190,6 +198,11 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
         auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
         if ( progression ) {
             character->setProgression( *progression );
+        }
+
+        auto quests = CharacterQuestsRepository().findByCharacterId( character->idCharacter() );
+        if ( quests ) {
+            character->setQuests( *quests );
         }
 
         auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );

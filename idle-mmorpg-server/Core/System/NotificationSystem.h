@@ -17,6 +17,7 @@ public:
     static void notifyCharacterCombatAttributes( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterInventory( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
+    static void notifyCharacterQuests( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterSkills( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterVitals( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterWallet( const std::string& sessionId, Model::Character* character );
@@ -27,6 +28,7 @@ public:
     static void notifyFullLocation( const std::string& sessionId, const Model::Location* location );
     static void notifyLocationActions( const std::string& sessionId, Model::Character* character, const Model::Location* location );
     static void notifyLocationConnections( const std::string& sessionId, Model::Character* character, const Model::Location* location );
+    static void notifyLocationDenizens( const std::string& sessionId, Model::Character* character, const Model::Location* location );
 
     static void notifyCombatInstances( const std::string& sessionId, std::vector<Core::Instance::CombatInstance*> combatInstances );
     static void notifyCombat( const Instance::CombatInstance* combatInstance );

@@ -20,6 +20,7 @@ Location::Location() :
     _x( 0 ),
     _y( 0 ),
     _z( 0 ),
+    _denizens( {} ),
     _actions( {} ),
     _creatures( {} ),
     _structures( {} ),
@@ -88,6 +89,18 @@ int Location::z() const {
 
 void Location::setZ( int z ) {
     _z = z;
+}
+
+std::vector<Denizen> Location::denizens() const {
+    return _denizens;
+}
+
+void Location::setDenizens( const std::vector<Denizen>& denizens ) {
+    _denizens = denizens;
+}
+
+void Location::addDenizen( const Denizen& denizen ) {
+    _denizens.push_back( denizen );
 }
 
 const std::vector<LocationAction>& Location::actions() const {

@@ -213,6 +213,12 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'LOCATION_DENIZENS_UPDATE':
+                if (this.location) {
+                    this.location.denizens = data.payload?.denizens ?? [];
+                }
+                break;
+
             default:
                 console.warn('Unkown message:', data.type);
         }

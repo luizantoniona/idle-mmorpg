@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+#include <Model/Denizen/Denizen.h>
+
 #include "LocationAction.h"
 #include "LocationConnection.h"
 #include "LocationCreature.h"
@@ -36,6 +38,10 @@ public:
     int z() const;
     void setZ( int z );
 
+    std::vector<Denizen> denizens() const;
+    void setDenizens( const std::vector<Denizen>& denizens );
+    void addDenizen( const Denizen& denizen );
+
     const std::vector<LocationAction>& actions() const;
     void setActions( const std::vector<LocationAction>& actions );
     void addAction( const LocationAction& action );
@@ -59,6 +65,7 @@ private:
     int _x;
     int _y;
     int _z;
+    std::vector<Denizen> _denizens;
     std::vector<LocationAction> _actions;
     std::vector<LocationCreature> _creatures;
     std::vector<LocationStructure> _structures;

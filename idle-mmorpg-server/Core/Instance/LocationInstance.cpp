@@ -37,6 +37,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
     Core::System::NotificationSystem::notifyFullLocation( sessionId, _location );
     Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
     Core::System::NotificationSystem::notifyLocationConnections( sessionId, character, _location );
+    Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
 
     return true;
 }

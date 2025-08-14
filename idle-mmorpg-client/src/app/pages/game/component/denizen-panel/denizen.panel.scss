@@ -1,0 +1,10 @@
+.denizen-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex: 1;
+}
+
+.denizen-row app-panel-vertical {
+    flex: 1;
+}

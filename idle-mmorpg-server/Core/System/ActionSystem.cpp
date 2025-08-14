@@ -6,12 +6,12 @@
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 
+#include "NotificationSystem.h"
+
 namespace Core::System {
 
 ActionSystem::ActionSystem( Model::Location* location ) :
     _location( location ),
-    _notificationSystem(),
-    _sender(),
     _progressionSystem() {
 }
 
@@ -24,7 +24,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     if ( actionId == "idle" ) {
         character->action().clear();
-        _notificationSystem.notifyCurrentAction( sessionId, character );
+        Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
         return;
     }
 
@@ -63,9 +63,10 @@ void ActionSystem::changeStructure( const std::string& sessionId, Model::Charact
     character->coordinates().setCurrentStructure( structureId );
     character->action().clear();
 
-    _notificationSystem.notifyCurrentAction( sessionId, character );
-    _notificationSystem.notifyCurrentCoordinates( sessionId, character );
-    _notificationSystem.notifyLocationActions( sessionId, character, _location );
+    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+    Core::System::NotificationSystem::notifyCurrentCoordinates( sessionId, character );
+    Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
+    Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
 }
 
 void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {
@@ -104,7 +105,7 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
         characterAction.setCounter( characterAction.counter() + 1 );
     }
 
-    _notificationSystem.notifyCurrentAction( sessionId, character );
+    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {

@@ -5,6 +5,7 @@
 #include <Commons/JsonHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/CreatureManager.h>
+#include <Core/Manager/ItemManager.h>
 #include <Model/World/Location/LocationAction.h>
 #include <Model/World/Location/LocationActionExperience.h>
 #include <Model/World/Location/LocationActionRequirement.h>
@@ -85,6 +86,64 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         creature.setCreature( Commons::Singleton<Manager::CreatureManager>::instance().creatureById( creature.id() ) );
 
         location->addCreature( creature );
+    }
+
+    std::string denizensJsonPath = locationPath + "/denizens.json";
+    Json::Value denizensJson = Commons::JsonHelper::loadJsonFile( denizensJsonPath );
+    for ( const Json::Value& denizenJson : denizensJson[ "denizens" ] ) {
+        Model::Denizen denizen;
+        denizen.setId( denizenJson[ "id" ].asString() );
+        denizen.setName( denizenJson[ "name" ].asString() );
+        denizen.setStructure( denizenJson.get( "structure", "" ).asString() );
+        denizen.setIcon( denizenJson.get( "icon", "" ).asString() );
+
+        // for ( const Json::Value& dialogueJson : denizenJson[ "dialogues" ] ) {
+        //     Model::DenizenDialogue dialogue;
+        //     dialogue.setOption( dialogueJson[ "option" ].asString() );
+        //     for ( const Json::Value& line : dialogueJson[ "lines" ] ) {
+        //         dialogue.addLine( line.asString() );
+        //     }
+        //     denizen.addDialogue( dialogue );
+        // }
+
+        for ( const Json::Value& questJson : denizenJson[ "quests" ] ) {
+            Model::DenizenQuest quest;
+            quest.setId( questJson[ "id" ].asString() );
+            quest.setTitle( questJson[ "title" ].asString() );
+            quest.setDescription( questJson[ "description" ].asString() );
+            quest.setType( questJson[ "type" ].asString() );
+            quest.setObjectiveId( questJson[ "objectiveId" ].asString() );
+            quest.setAmount( questJson[ "amount" ].asInt() );
+
+            for ( const Json::Value& rewardJson : questJson[ "rewards" ] ) {
+                Model::DenizenQuestReward reward;
+                reward.setType( rewardJson[ "type" ].asString() );
+                reward.setId( rewardJson[ "id" ].asString() );
+                reward.setAmount( rewardJson.get( "amount", 0 ).asInt() );
+                quest.addReward( reward );
+            }
+
+            denizen.addQuest( quest );
+        }
+
+        Model::DenizenTrade trade;
+        for ( const Json::Value& sellItem : denizenJson[ "sell" ] ) {
+            Model::DenizenTradeItem item;
+            item.setId( sellItem.asString() );
+            item.setItem( Commons::Singleton<Manager::ItemManager>::instance().itemById( item.id() ) );
+            trade.addSellItem( item );
+        }
+
+        for ( const Json::Value& buyItem : denizenJson[ "buy" ] ) {
+            Model::DenizenTradeItem item;
+            item.setId( buyItem.asString() );
+            item.setItem( Commons::Singleton<Manager::ItemManager>::instance().itemById( item.id() ) );
+            trade.addBuyItem( item );
+        }
+
+        denizen.setTrade( trade );
+
+        location->addDenizen( denizen );
     }
 
     return location;

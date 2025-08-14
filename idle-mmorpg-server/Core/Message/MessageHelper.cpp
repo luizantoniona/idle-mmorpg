@@ -53,6 +53,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
             return "LOCATION_ACTIONS_UPDATE";
         case MessageSenderType::LOCATION_CONNECTIONS_UPDATE:
             return "LOCATION_CONNECTIONS_UPDATE";
+        case MessageSenderType::LOCATION_DENIZENS_UPDATE:
+            return "LOCATION_DENIZENS_UPDATE";
 
         case MessageSenderType::COMBAT_ROOMS_UPDATE:
             return "COMBAT_ROOMS_UPDATE";

@@ -121,6 +121,14 @@ void Character::setProgression( const CharacterProgression& progression ) {
     _progression = progression;
 }
 
+CharacterQuests& Character::quests() {
+    return _quests;
+}
+
+void Character::setQuests( const CharacterQuests& quests ) {
+    _quests = quests;
+}
+
 CharacterSkills& Character::skills() {
     return _skills;
 }

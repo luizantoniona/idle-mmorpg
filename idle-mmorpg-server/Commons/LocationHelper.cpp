@@ -3,10 +3,6 @@
 namespace Commons {
 
 bool LocationHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
-    if ( !character ) {
-        return false;
-    }
-
     const std::string& characterStructure = character->coordinates().currentStructure();
     const std::string& actionStructure = action.structure();
 
@@ -44,7 +40,43 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
 }
 
 bool LocationHelper::canCharacterUseConnections( Model::Character* character, const Model::LocationConnection& connection ) {
-    // TODO: Implementar verificações se pode ou nao usar a connection
+    // TODO: Verify if can use the connection;
+
+    return true;
+}
+
+bool LocationHelper::canCharacterInteractDenizen( Model::Character* character, const Model::Denizen& denizen ) {
+    const std::string& characterStructure = character->coordinates().currentStructure();
+    const std::string& denizenStructure = denizen.structure();
+
+    if ( !denizenStructure.empty() && characterStructure != denizenStructure ) {
+        return false;
+    }
+
+    if ( denizenStructure.empty() && !characterStructure.empty() ) {
+        return false;
+    }
+
+    // TODO: Verify conditions in the future;
+
+    return true;
+}
+
+bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, const Model::DenizenQuest& quest ) {
+    auto& quests = character->quests();
+    const std::string& questId = quest.id();
+
+    if ( quests.isQuestFinished( questId ) ) {
+        return false;
+    }
+
+    if ( quests.isQuestInProgress( questId ) ) {
+        if ( quests.isQuestObjectiveCompleted( questId ) ) {
+            return true;
+        }
+
+        return false;
+    }
 
     return true;
 }

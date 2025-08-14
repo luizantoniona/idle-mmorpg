@@ -4,16 +4,17 @@
             "id": "guardian_heroes_path",
             "name": "Guardian",
             "structure": "campfire",
+            "icon": "",
             "dialogues": [
                 {
-                    "id": "greeting",
+                    "option": "Greetings!",
                     "lines": [
                         "Ah, another traveler on the Hero's Path!",
                         "Rest by the fire, it's dangerous out there."
                     ]
                 },
                 {
-                    "id": "farewell",
+                    "option": "Farewell!",
                     "lines": [
                         "Stay safe out there.",
                         "The fire will be here if you need it."
@@ -24,9 +25,9 @@
                 {
                     "id": "guardian_heroes_path_01",
                     "title": "Cleaning the place",
-                    "description": "The Guardian has asked you to get rid of some rats that have infested the camp area.",
+                    "description": "The Guardian has asked you to get rid of some rats (5) that have infested the camp area.",
                     "type": "kill",
-                    "objectiveID": "rat",
+                    "objectiveId": "rat",
                     "amount": 5,
                     "rewards": [
                         {
@@ -41,7 +42,7 @@
                     "title": "Sharing a meal",
                     "description": "The Guardian is hungry and asks you to bring him some cheese to share by the fire.",
                     "type": "item",
-                    "objectiveID": "cheese",
+                    "objectiveId": "cheese",
                     "amount": 1,
                     "rewards": [
                         {

@@ -13,6 +13,7 @@
 #include "CharacterEquipment.h"
 #include "CharacterInventory.h"
 #include "CharacterProgression.h"
+#include "CharacterQuests.h"
 #include "CharacterSkills.h"
 #include "CharacterVitals.h"
 #include "CharacterWallet.h"
@@ -58,6 +59,9 @@ public:
     CharacterProgression& progression();
     void setProgression( const CharacterProgression& progression );
 
+    CharacterQuests& quests();
+    void setQuests( const CharacterQuests& quests );
+
     CharacterSkills& skills();
     void setSkills( const CharacterSkills& skills );
 
@@ -79,6 +83,7 @@ private:
     CharacterEquipment _equipment;
     CharacterInventory _inventory;
     CharacterProgression _progression;
+    CharacterQuests _quests;
     CharacterSkills _skills;
     CharacterVitals _vitals;
     CharacterWallet _wallet;

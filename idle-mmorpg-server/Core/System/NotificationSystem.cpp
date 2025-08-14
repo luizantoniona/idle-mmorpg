@@ -48,6 +48,10 @@ void NotificationSystem::notifyCharacterProgression( const std::string& sessionI
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_PROGRESSION_UPDATE, payload );
 }
 
+void NotificationSystem::notifyCharacterQuests( const std::string& sessionId, Model::Character* character ) {
+    // TODO: NOTIFY CLIENT ABOUT CHARACTER QUESTS
+}
+
 void NotificationSystem::notifyCharacterSkills( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "skills" ] = character->skills().toJson();
@@ -110,6 +114,33 @@ void NotificationSystem::notifyLocationConnections( const std::string& sessionId
 
     payloadLocationConnections[ "connections" ] = availableConnections;
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::LOCATION_CONNECTIONS_UPDATE, payloadLocationConnections );
+}
+
+void NotificationSystem::notifyLocationDenizens( const std::string& sessionId, Model::Character* character, const Model::Location* location ) {
+    Json::Value payloadLocationDenizens;
+    Json::Value availableDenizens;
+
+    for ( auto denizen : location->denizens() ) {
+        if ( Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+            Json::Value denizenJson = denizen.toJson();
+
+            Json::Value availableQuests;
+            for ( const auto& quest : denizen.quests() ) {
+                if ( Commons::LocationHelper::canCharacterSeeDenizenQuest( character, quest ) ) {
+                    availableQuests.append( quest.toJson() );
+                }
+            }
+
+            if ( !availableQuests.empty() ) {
+                denizenJson[ "quests" ] = availableQuests;
+            }
+
+            availableDenizens.append( denizenJson );
+        }
+    }
+
+    payloadLocationDenizens[ "denizens" ] = availableDenizens;
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::LOCATION_DENIZENS_UPDATE, payloadLocationDenizens );
 }
 
 void NotificationSystem::notifyCombatInstances( const std::string& sessionId, std::vector<Instance::CombatInstance*> combatInstances ) {

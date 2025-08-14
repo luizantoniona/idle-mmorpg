@@ -1,0 +1,42 @@
+<div class="denizen-row">
+    @if(location.denizens.length){
+    <app-panel-vertical>
+        <strong>Denizens</strong>
+        @for(denizen of location.denizens; track denizen.id) {
+        <app-button [text]="denizen.name" (clickEvent)="onDenizenClick(denizen)"></app-button>
+        }
+    </app-panel-vertical>
+
+
+    @if(selectedDenizen && (selectedDenizen.quests || selectedDenizen.trade)) {
+    <app-panel-vertical>
+        <strong>Options</strong>
+        @if(selectedDenizen.trade){
+        <app-button text="Trade" (clickEvent)="onTradeClick()"></app-button>
+        }
+        @if(selectedDenizen.quests){
+        <app-button text="Quests" (clickEvent)="onQuestsClick()"></app-button>
+        }
+    </app-panel-vertical>
+
+    } @else{
+
+    }
+    }
+</div>
+
+@if(tradeVisible){
+<app-popup [visible]="tradeVisible" (closed)="tradeVisible=false">
+    <div class="trade">
+        <!-- TODO -->
+    </div>
+</app-popup>
+}
+
+@if(questVisible){
+<app-popup [visible]="questVisible" (closed)="questVisible=false">
+    <div class="quest">
+        <!-- TODO -->
+    </div>
+</app-popup>
+}
