@@ -69,7 +69,28 @@ Response:
 
 ## POST /character
 
-**Description:** Creates a new character. (Not yet implemented)
+**Description:** Creates a new character.
+
+Request Header:
+```json
+{
+  "Authorization": "X-Session 5f5c...7a"
+}
+```
+
+Body:
+```json
+{
+  "name": "Character Name"
+}
+```
+
+Response:
+```json
+{
+  "message": "Character created"
+}
+```
 
 ---
 

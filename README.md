@@ -1,12 +1,12 @@
-# 🛡️🧙 iMMO — Idle-mmorpg
+# 🛡️🧙 iMMO — Idle-MMORPG
 
 <p align="center">
-  <img src="documentation/images/icon.512.png" alt="iMMO Logo"/>
+  <img src="documentation/images/icon.512.png" alt="iMMO Logo" height="300"/>
 </p>
 
 # 💡 Motivation
-I got tired of playing idle MMORPGs that are abandoned by developers, filled with aggressive monetization, and lacking meaningful updates or player interaction.
-iMMO was born from the desire to build something better: a idle-friendly game with constant progression, active community features, and no paywalls — focused on fun, accessibility, and long-term evolution.
+I got tired of playing idle MMORPGs that are abandoned by developers, filled with aggressive monetization, and lacking meaningful updates or player interaction.  
+iMMO was born from the desire to build something better: a idle-friendly game with constant progression, active features, and no paywalls — focused on fun, accessibility, and long-term evolution.
 
 # 👥 People
 This project was envisioned, created, and is maintained by:  
@@ -25,6 +25,10 @@ This project was envisioned, created, and is maintained by:
   - Outputs JSON files that are consumed by the server.
   - Easily expandable to support balancing, batch editing, or procedural generation.
 
+### 🐾 **idle-mmorpg-creature**:  
+Modular creature data.  
+This folder defines the structure and attributes of all creatures used by the game server.
+
 ### 🗡️ **idle-mmorpg-item**:  
 Modular item data.  
 This folder defines the items structure used by the game server.
@@ -36,6 +40,10 @@ This folder defines the world structure, continents, areas, enemies, NPCs, and n
 ### 🤺 **idle-mmorpg-skill**:  
 Modular skills data.  
 This folder defines all the skills in game.
+
+### 🔮 idle-mmorpg-spell
+Modular spell data.  
+This folder defines all the magical spells available in the game.
 
 ### ⚙️ **utility**:  
 Tools and scripts.  
@@ -51,8 +59,6 @@ TODO
   - Communicates with the client via API and WebSocket.
   - Loads static game data (items, maps, skills) at runtime from JSON files.
 
-Base URL: http://localhost:8080
-
 ### 📖 **Documentation**:  
 [`API`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/API.md) – API requests documentation.  
 [`WebSocket`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/WebSocket.md) – WebSocket messages documentation.  
@@ -60,7 +66,7 @@ Base URL: http://localhost:8080
 ## ⚔️ [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client)
 - **Web Client**
   - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.
-  - Built with web tooling (Angular and Typescript).
+  - Built with **Angular** and **Typescript**.
 
 ### 📖 **Documentation**:  
 TODO
@@ -77,7 +83,7 @@ Account Page:
 </p>
 
 Game Page:
-<p align="lfet">
+<p align="left">
   <img src="documentation/images/game.png" alt="Game" height="500"/>
 </p>
 
