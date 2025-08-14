@@ -102,6 +102,7 @@ void RegionInstance::moveCharacter( const std::string& sessionId, const std::str
     character->coordinates().setX( destinationLocation->x() );
     character->coordinates().setY( destinationLocation->y() );
     character->coordinates().setZ( destinationLocation->z() );
+    character->coordinates().setCurrentStructure( "" );
 
     addCharacter( sessionId, character );
 }
