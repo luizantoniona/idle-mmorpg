@@ -1,7 +1,7 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { CharacterActionPanel } from "../character-action-panel/character-action-panel.component";
+import { CharacterActionPanel } from "../character-action-panel/character-action.panel";
 import { CombatPanel } from "../combat-panel/combat.panel";
 import { DenizenPanel } from "../denizen-panel/denizen.panel";
 import { LocationActionsPanel } from "../location-actions-panel/location-actions.component";
