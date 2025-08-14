@@ -6,7 +6,10 @@ import { ButtonComponent } from "../../../../component";
 import { PanelVerticalComponent } from "../../../../component";
 import { PopupComponent } from "../../../../component";
 
-import { Denizen, Location } from "../../../../model";
+import { QuestPanel } from "./quest-panel/quest.panel";
+import { TradePanel } from "./trade-panel/trade.panel";
+
+import { Character, Denizen, Location } from "../../../../model";
 
 import { WebsocketService } from "../../../../service/websocket.service";
 
@@ -19,11 +22,14 @@ import { WebsocketService } from "../../../../service/websocket.service";
         ButtonComponent,
         PanelVerticalComponent,
         PopupComponent,
+        QuestPanel,
+        TradePanel,
     ],
 })
 
 export class DenizenPanel {
     @Input() location!: Location;
+    @Input() character!: Character;
 
     private websocketService = inject(WebsocketService);
     private subscriptions = new Subscription();

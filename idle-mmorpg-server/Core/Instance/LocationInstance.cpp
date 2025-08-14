@@ -8,6 +8,7 @@
 #include <Core/System/ActionSystem.h>
 #include <Core/System/NotificationSystem.h>
 #include <Core/System/RegenerationSystem.h>
+#include <Core/System/TradeSystem.h>
 
 namespace Core::Instance {
 
@@ -162,6 +163,10 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
             break;
         case Message::MessageReceiverType::CHARACTER_ACTION_UPDATE:
             _actionSystem.changeAction( sessionId, character, payload );
+            break;
+
+        case Message::MessageReceiverType::CHARACTER_DENIZEN_TRADE:
+            Core::System::TradeSystem::characterTradeDenizen( sessionId, character, _location, payload );
             break;
 
         case Message::MessageReceiverType::COMBAT_ROOM_CREATE:

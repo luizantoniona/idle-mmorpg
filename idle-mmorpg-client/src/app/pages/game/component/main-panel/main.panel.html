@@ -9,7 +9,7 @@
 
     <app-character-action-panel [character]="character"></app-character-action-panel>
 
-    <app-denizen-panel [location]="location"></app-denizen-panel>
+    <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
 
     } @else {
     <app-combat-panel (closeCombat)="onCloseCombat()"></app-combat-panel>

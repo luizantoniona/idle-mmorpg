@@ -1,0 +1,45 @@
+<div class="trade-grid">
+    <div class="header">
+        <h3>Trade with {{ denizen?.name }}</h3>
+    </div>
+
+    <div class="buy-column">
+        <strong>Items to buy</strong>
+        @if(denizen?.trade && denizen?.trade?.sell?.length){
+        @for(item of denizen?.trade?.sell; track item.id){
+        <div class="trade-item">
+            <app-button text="-" (clickEvent)="onMinusClicked(item,'buy')"></app-button>
+            <span>{{ item.name }} x {{ getQuantity(item,'buy') }}</span>
+            <app-button text="+" (clickEvent)="onPlusClicked(item,'buy')"></app-button>
+        </div>
+        }
+        }
+    </div>
+
+    <div class="sell-column">
+        <strong>Items to sell</strong>
+        @for(item of getSellableItems(); track item.id){
+        <div class="trade-item">
+            <app-button text="-" (clickEvent)="onMinusClicked(item,'sell')"></app-button>
+            <span>{{ item.name }} x {{ getQuantity(item,'sell') }}</span>
+            <app-button text="+" (clickEvent)="onPlusClicked(item,'sell')"></app-button>
+        </div>
+        }
+    </div>
+
+    <div class="footer">
+        <app-button text="Cancel" (clickEvent)="onCancel()"></app-button>
+
+        <img src="/assets/coins/copper.gif" alt="Copper" />
+        <span>{{ coinBreakdown.copper }}</span>
+
+        <img src="/assets/coins/silver.gif" alt="Silver" />
+        <span>{{ coinBreakdown.silver }}</span>
+
+        <img src="/assets/coins/gold.gif" alt="Gold" />
+        <span>{{ coinBreakdown.gold }}</span>
+
+        <app-button [disabled]="!hasSelection" text="Confirm" (clickEvent)="onConfirm()"></app-button>
+    </div>
+
+</div>

@@ -27,16 +27,12 @@
 
 @if(tradeVisible){
 <app-popup [visible]="tradeVisible" (closed)="tradeVisible=false">
-    <div class="trade">
-        <!-- TODO -->
-    </div>
+    <app-trade-panel [character]="character" [denizen]="selectedDenizen" (close)="tradeVisible=false"></app-trade-panel>
 </app-popup>
 }
 
 @if(questVisible){
 <app-popup [visible]="questVisible" (closed)="questVisible=false">
-    <div class="quest">
-        <!-- TODO -->
-    </div>
+    <app-quest-panel [character]="character" [denizen]="selectedDenizen"></app-quest-panel>
 </app-popup>
 }

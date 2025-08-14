@@ -18,6 +18,10 @@ public:
     std::vector<CharacterInventoryItem>& items();
     void addItem( CharacterInventoryItem item );
 
+    bool hasItem( const std::string& itemId, int amount );
+    bool removeItem( const std::string& itemId, int amount );
+    bool addItem( const std::string& itemId, int amount );
+
 private:
     std::vector<CharacterInventoryItem> _items;
 };

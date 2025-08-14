@@ -52,15 +52,16 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         case MessageReceiverType::COMBAT_ROOM_CREATE:
         case MessageReceiverType::COMBAT_ROOM_ENTER:
         case MessageReceiverType::COMBAT_ROOM_EXIT:
+        case MessageReceiverType::CHARACTER_DENIZEN_TRADE:
         case MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
-        case MessageReceiverType::CHARACTER_ACTION_UPDATE: {
+        case MessageReceiverType::CHARACTER_ACTION_UPDATE:
             locationInstance->handleCharacterMessage( sessionId, type, payload );
             break;
 
         case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
             regionInstance->handleCharacterMessage( sessionId, type, payload );
             break;
-        }
+
         default:
             break;
     }
