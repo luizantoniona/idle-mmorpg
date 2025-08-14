@@ -36,6 +36,8 @@ export class CombatPanel {
     combatInstances: CombatInstance[] | null = null;
     combat: Combat | null = null;
 
+    private pendingExit = false;
+
     ngOnInit(): void {
         this.subscriptions.add(
             this.websocketService.messages$.subscribe((msg) => this.handleMessage(msg))
@@ -59,10 +61,13 @@ export class CombatPanel {
         switch (data.type) {
             case 'COMBAT_ROOMS_UPDATE':
                 this.combatInstances = data.payload.combatInstances
+                this.pendingExit = false;
                 break;
             case 'COMBAT_UPDATE':
-                if (data.payload.combat) {
-                    this.combat = data.payload.combat
+                if (!this.pendingExit) {
+                    if (data.payload.combat) {
+                        this.combat = data.payload.combat
+                    }
                 }
                 break;
             case 'CHARACTER_DEAD':
@@ -87,6 +92,7 @@ export class CombatPanel {
     }
 
     onExitCombatClicked(): void {
+        this.pendingExit = true;
         this.sendMessage({
             type: 'COMBAT_ROOM_EXIT',
             payload: {},
