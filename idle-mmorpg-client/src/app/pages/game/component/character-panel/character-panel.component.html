@@ -6,7 +6,8 @@
 
     <app-panel-vertical>
         @if(character && character.progression){
-        <app-bar label="XP" [value]="character.progression.experience" [max]="character.progression.experienceNextLevel"
+        <app-bar label="XP ( {{character.progression.experience}} / {{character.progression.experienceNextLevel}} )"
+            [value]="character.progression.experience" [max]="character.progression.experienceNextLevel"
             color="#fdd835" />
 
         <app-bar
