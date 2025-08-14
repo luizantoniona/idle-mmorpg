@@ -14,29 +14,8 @@ void LootSystem::addItem( const std::string& sessionId, Model::Character* charac
         return;
     }
 
-    auto& characterInventory = character->inventory();
-    auto& items = characterInventory.items();
-
-    auto it = std::find_if( items.begin(), items.end(), [ & ]( auto& item ) {
-            return item.id() == itemId;
-        } );
-
-    if ( it != items.end() ) {
-        it->setAmount( it->amount() + amount );
-
-    } else {
-
-        auto itemPtr = Commons::Singleton<Core::Manager::ItemManager>::instance().itemById( itemId );
-
-        if ( !itemPtr ) {
-            return;
-        }
-
-        Model::CharacterInventoryItem newItem;
-        newItem.setId( itemId );
-        newItem.setAmount( amount );
-        newItem.setItem( itemPtr );
-        characterInventory.addItem( newItem );
+    if ( amount > 0 ) {
+        character->inventory().addItem( itemId, amount );
     }
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );
