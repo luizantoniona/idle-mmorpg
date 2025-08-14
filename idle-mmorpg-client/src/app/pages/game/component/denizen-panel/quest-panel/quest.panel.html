@@ -1,0 +1,27 @@
+<div class="trade">
+    <h3>Trade with {{ denizen?.name }}</h3>
+
+    <div class="trade-section">
+        <!-- <strong>Items to Buy</strong>
+        <div *ngIf="trade?.buy?.length; else noBuy">
+            <app-button *ngFor="let item of trade.buy; trackBy: trackItemId" [text]="item.name + ' x' + item.quantity"
+                (clickEvent)="onSell(item)">
+            </app-button>
+        </div>
+        <ng-template #noBuy>
+            <p>Nothing the denizen wants to buy.</p>
+        </ng-template> -->
+    </div>
+
+    <div class="trade-section">
+        <!-- <strong>Items to Sell</strong>
+        <div *ngIf="trade?.sell?.length; else noSell">
+            <app-button *ngFor="let item of trade.sell; trackBy: trackItemId" [text]="item.name + ' x' + item.quantity"
+                (clickEvent)="onBuy(item)">
+            </app-button>
+        </div>
+        <ng-template #noSell>
+            <p>Nothing to sell.</p>
+        </ng-template> -->
+    </div>
+</div>
