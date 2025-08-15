@@ -10,7 +10,9 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
         { "CHARACTER_STRUCTURE_UPDATE", MessageReceiverType::CHARACTER_STRUCTURE_UPDATE },
         { "CHARACTER_LOCATION_UPDATE", MessageReceiverType::CHARACTER_LOCATION_UPDATE },
 
-        { "CHARACTER_DENIZEN_TRADE", MessageReceiverType::CHARACTER_DENIZEN_TRADE },
+        { "CHARACTER_TRADE_DENIZEN", MessageReceiverType::CHARACTER_TRADE_DENIZEN },
+        { "CHARACTER_ACCEPT_DENIZEN_QUEST", MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST },
+        { "CHARACTER_FINISH_DENIZEN_QUEST", MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST },
 
         { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
         { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },
@@ -37,6 +39,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
             return "CHARACTER_INVENTORY_UPDATE";
         case MessageSenderType::CHARACTER_PROGRESSION_UPDATE:
             return "CHARACTER_PROGRESSION_UPDATE";
+        case MessageSenderType::CHARACTER_QUESTS_UPDATE:
+            return "CHARACTER_QUESTS_UPDATE";
         case MessageSenderType::CHARACTER_SKILLS_UPDATE:
             return "CHARACTER_SKILLS_UPDATE";
         case MessageSenderType::CHARACTER_VITALS_UPDATE:

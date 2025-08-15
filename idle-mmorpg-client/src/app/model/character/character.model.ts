@@ -6,6 +6,7 @@ import { CharacterCoordinates } from "./character-coordinates.model";
 import { CharacterEquipment } from "./character-equipment.model";
 import { CharacterInventory } from "./character-inventory.model";
 import { CharacterProgression } from "./character-progression.model";
+import { CharacterQuests } from "./character-quests.model";
 import { CharacterSkill } from "./character-skill.model";
 import { CharacterVitals } from "./character-vitals.model";
 import { CharacterWallet } from "./character-wallet.model";
@@ -22,6 +23,7 @@ export type Character = {
     equipment: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;
+    quests: CharacterQuests;
     skills: CharacterSkill[];
     vitals: CharacterVitals;
     wallet: CharacterWallet;

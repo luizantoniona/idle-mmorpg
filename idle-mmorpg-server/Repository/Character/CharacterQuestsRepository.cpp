@@ -1,5 +1,7 @@
 #include "CharacterQuestsRepository.h"
 
+#include <Commons/Singleton.h>
+#include <Core/Manager/QuestManager.h>
 #include <Database/Query.h>
 
 namespace Repository {
@@ -23,7 +25,7 @@ bool CharacterQuestsRepository::updateQuests( int idCharacter, Model::CharacterQ
             claimed = excluded.claimed
     )SQL";
 
-    for ( auto& quest : characterQuests.inProgress() ) {
+    for ( auto& quest : characterQuests.proceeding() ) {
         Database::Query upsertQuery( _db, upsertSql );
         upsertQuery.bindInt( 1, idCharacter );
         upsertQuery.bindText( 2, quest.id() );
@@ -78,16 +80,17 @@ std::unique_ptr<Model::CharacterQuests> CharacterQuestsRepository::findByCharact
         quest.setCurrentAmount( query.getColumnInt( 3 ) );
         quest.setObjectiveAmount( query.getColumnInt( 4 ) );
         quest.setFinished( query.getColumnInt( 5 ) != 0 );
+        quest.setQuest( Commons::Singleton<Core::Manager::QuestManager>::instance().questById( quest.id() ) );
 
         bool claimed = query.getColumnInt( 6 ) != 0;
         if ( quest.finished() ) {
             if ( claimed ) {
                 characterQuests->addFinished( quest );
             } else {
-                characterQuests->addInProgress( quest );
+                characterQuests->addProceeding( quest );
             }
         } else {
-            characterQuests->addInProgress( quest );
+            characterQuests->addProceeding( quest );
         }
     }
 

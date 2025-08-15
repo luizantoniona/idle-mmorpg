@@ -3,11 +3,17 @@
 
 #include <string>
 
+#include <json/json.h>
+
+#include <Model/Quest/Quest.h>
+
 namespace Model {
 
 class CharacterQuest {
 public:
     CharacterQuest();
+
+    Json::Value toJson();
 
     std::string id() const;
     void setId( const std::string& id );
@@ -27,6 +33,9 @@ public:
     bool finished() const;
     void setFinished( bool finished );
 
+    const Quest* quest() const;
+    void setQuest( const Quest* quest );
+
 private:
     std::string _id;
     std::string _type;
@@ -34,6 +43,7 @@ private:
     int _currentAmount;
     int _objectiveAmount;
     bool _finished;
+    const Quest* _quest;
 };
 
 } // namespace Model

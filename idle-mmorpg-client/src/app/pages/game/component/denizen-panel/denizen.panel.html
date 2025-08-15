@@ -1,5 +1,5 @@
 <div class="denizen-row">
-    @if(location.denizens.length){
+    @if(location && location.denizens && location.denizens.length){
     <app-panel-vertical>
         <strong>Denizens</strong>
         @for(denizen of location.denizens; track denizen.id) {

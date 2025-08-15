@@ -6,6 +6,7 @@
 #include <Commons/Singleton.h>
 #include <Core/Manager/CreatureManager.h>
 #include <Core/Manager/ItemManager.h>
+#include <Core/Manager/QuestManager.h>
 #include <Model/World/Location/LocationAction.h>
 #include <Model/World/Location/LocationActionExperience.h>
 #include <Model/World/Location/LocationActionRequirement.h>
@@ -107,23 +108,33 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         // }
 
         for ( const Json::Value& questJson : denizenJson[ "quests" ] ) {
-            Model::DenizenQuest quest;
-            quest.setId( questJson[ "id" ].asString() );
-            quest.setTitle( questJson[ "title" ].asString() );
-            quest.setDescription( questJson[ "description" ].asString() );
-            quest.setType( questJson[ "type" ].asString() );
-            quest.setObjectiveId( questJson[ "objectiveId" ].asString() );
-            quest.setAmount( questJson[ "amount" ].asInt() );
+            auto quest = std::make_unique<Model::Quest>();
+            quest->setId( questJson[ "id" ].asString() );
+            quest->setDenizenId( denizen.id() );
+            quest->setTitle( questJson[ "title" ].asString() );
+            quest->setDescription( questJson[ "description" ].asString() );
+            quest->setType( questJson[ "type" ].asString() );
+            quest->setObjectiveId( questJson[ "objectiveId" ].asString() );
+            quest->setAmount( questJson[ "amount" ].asInt() );
 
             for ( const Json::Value& rewardJson : questJson[ "rewards" ] ) {
-                Model::DenizenQuestReward reward;
+                Model::QuestReward reward;
                 reward.setType( rewardJson[ "type" ].asString() );
                 reward.setId( rewardJson[ "id" ].asString() );
                 reward.setAmount( rewardJson.get( "amount", 0 ).asInt() );
-                quest.addReward( reward );
+                quest->addReward( reward );
             }
 
-            denizen.addQuest( quest );
+            std::string questId = quest->id();
+
+            Commons::Singleton<Core::Manager::QuestManager>::instance().addQuest( std::move( quest ) );
+            const Model::Quest* questPtr = Commons::Singleton<Core::Manager::QuestManager>::instance().questById( questId );
+
+            Model::DenizenQuest denizenQuest;
+            denizenQuest.setId( questId );
+            denizenQuest.setQuest( questPtr );
+
+            denizen.addQuest( denizenQuest );
         }
 
         Model::DenizenTrade trade;

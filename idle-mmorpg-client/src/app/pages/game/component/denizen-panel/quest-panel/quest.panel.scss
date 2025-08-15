@@ -1,0 +1,42 @@
+.quest-grid {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-template-areas:
+        "header header"
+        "list details"
+        "footer footer";
+    gap: 16px;
+}
+
+.header {
+    grid-area: header;
+    border-bottom: 2px solid var(--color-button);
+}
+
+.quest-list {
+    grid-area: list;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+}
+
+.quest-details {
+    grid-area: details;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+}
+
+.footer {
+    grid-area: footer;
+    border-top: 2px solid var(--color-button);
+    padding-top: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

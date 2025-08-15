@@ -1,13 +1,13 @@
-#ifndef DENIZENQUESTREWARD_H
-#define DENIZENQUESTREWARD_H
+#ifndef QUESTREWARD_H
+#define QUESTREWARD_H
 
 #include <string>
 
 namespace Model {
 
-class DenizenQuestReward {
+class QuestReward {
 public:
-    DenizenQuestReward();
+    QuestReward();
 
     std::string type() const;
     void setType( const std::string& type );
@@ -15,15 +15,15 @@ public:
     std::string id() const;
     void setId( const std::string& id );
 
-    int getAmount() const;
+    int amount() const;
     void setAmount( int amount );
 
 private:
     std::string _type;
     std::string _id;
-    int amount;
+    int _amount;
 };
 
 } // namespace Model
 
-#endif // DENIZENQUESTREWARD_H
+#endif // QUESTREWARD_H

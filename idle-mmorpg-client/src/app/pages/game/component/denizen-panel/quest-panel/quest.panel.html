@@ -1,27 +1,31 @@
-<div class="trade">
-    <h3>Trade with {{ denizen?.name }}</h3>
-
-    <div class="trade-section">
-        <!-- <strong>Items to Buy</strong>
-        <div *ngIf="trade?.buy?.length; else noBuy">
-            <app-button *ngFor="let item of trade.buy; trackBy: trackItemId" [text]="item.name + ' x' + item.quantity"
-                (clickEvent)="onSell(item)">
-            </app-button>
-        </div>
-        <ng-template #noBuy>
-            <p>Nothing the denizen wants to buy.</p>
-        </ng-template> -->
+<div class="quest-grid">
+    <div class="header">
+        <h3>{{ denizen?.name }}</h3>
     </div>
 
-    <div class="trade-section">
-        <!-- <strong>Items to Sell</strong>
-        <div *ngIf="trade?.sell?.length; else noSell">
-            <app-button *ngFor="let item of trade.sell; trackBy: trackItemId" [text]="item.name + ' x' + item.quantity"
-                (clickEvent)="onBuy(item)">
-            </app-button>
-        </div>
-        <ng-template #noSell>
-            <p>Nothing to sell.</p>
-        </ng-template> -->
+    <div class="quest-list">
+        @if(denizen?.quests){
+        @for(quest of denizen?.quests; track quest.id){
+        <app-button [text]="quest.title" (clickEvent)="onSelectedQuest(quest)"></app-button>
+        }
+        }
+    </div>
+
+    <div class="quest-details">
+        @if(selectedQuest) {
+        <h3>{{ selectedQuest.title }}</h3>
+        <p>{{ selectedQuest.description }}</p>
+
+        @if(isQuestFinished(selectedQuest.id)) {
+        <app-button text="Finish" (clickEvent)="finishQuest(selectedQuest)"></app-button>
+        }
+        @else {
+        <app-button text="Accept" (clickEvent)="acceptQuest(selectedQuest)"></app-button>
+        }
+        }
+    </div>
+
+    <div class="footer">
+        <app-button text="Exit"></app-button>
     </div>
 </div>

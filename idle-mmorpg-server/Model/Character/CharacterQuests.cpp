@@ -5,16 +5,34 @@ namespace Model {
 CharacterQuests::CharacterQuests() {
 }
 
-std::vector<CharacterQuest>& CharacterQuests::inProgress() {
-    return _inProgress;
+Json::Value CharacterQuests::toJson() {
+    Json::Value root;
+
+    Json::Value proceedingJson;
+    for ( auto& quest : _proceeding ) {
+        proceedingJson.append( quest.toJson() );
+    }
+    root[ "proceeding" ] = proceedingJson;
+
+    Json::Value finishedJson;
+    for ( auto& quest : _finished ) {
+        finishedJson.append( quest.toJson() );
+    }
+    root[ "finished" ] = finishedJson;
+
+    return root;
 }
 
-void CharacterQuests::setInProgress( const std::vector<CharacterQuest>& inProgress ) {
-    _inProgress = inProgress;
+std::vector<CharacterQuest>& CharacterQuests::proceeding() {
+    return _proceeding;
 }
 
-void CharacterQuests::addInProgress( const CharacterQuest& inProgress ) {
-    _inProgress.push_back( inProgress );
+void CharacterQuests::setProceeding( const std::vector<CharacterQuest>& proceeding ) {
+    _proceeding = proceeding;
+}
+
+void CharacterQuests::addProceeding( const CharacterQuest& proceeding ) {
+    _proceeding.push_back( proceeding );
 }
 
 std::vector<CharacterQuest>& CharacterQuests::finished() {
@@ -29,8 +47,8 @@ void CharacterQuests::addFinished( const CharacterQuest& finished ) {
     _finished.push_back( finished );
 }
 
-bool CharacterQuests::isQuestInProgress( const std::string& questId ) const {
-    for ( const auto& quest : _inProgress ) {
+bool CharacterQuests::isQuestProceeding( const std::string& questId ) const {
+    for ( const auto& quest : _proceeding ) {
         if ( quest.id() == questId ) {
             return true;
         }
@@ -50,7 +68,7 @@ bool CharacterQuests::isQuestFinished( const std::string& questId ) const {
 }
 
 bool CharacterQuests::isQuestObjectiveCompleted( const std::string& questId ) const {
-    for ( const auto& quest : _inProgress ) {
+    for ( const auto& quest : _proceeding ) {
         if ( quest.id() == questId ) {
             return quest.finished();
         }
@@ -59,8 +77,8 @@ bool CharacterQuests::isQuestObjectiveCompleted( const std::string& questId ) co
     return false;
 }
 
-CharacterQuest* CharacterQuests::findQuestInProgress( const std::string& questId ) {
-    for ( auto& quest : _inProgress ) {
+CharacterQuest* CharacterQuests::findQuestProceeding( const std::string& questId ) {
+    for ( auto& quest : _proceeding ) {
         if ( quest.id() == questId )
             return &quest;
     }

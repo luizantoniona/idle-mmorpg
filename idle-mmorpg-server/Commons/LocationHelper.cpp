@@ -70,7 +70,7 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
         return false;
     }
 
-    if ( quests.isQuestInProgress( questId ) ) {
+    if ( quests.isQuestProceeding( questId ) ) {
         if ( quests.isQuestObjectiveCompleted( questId ) ) {
             return true;
         }

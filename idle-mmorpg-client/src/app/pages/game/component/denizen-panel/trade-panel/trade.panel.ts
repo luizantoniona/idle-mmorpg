@@ -24,7 +24,7 @@ type TradeSelection = {
 export class TradePanel {
     @Input() denizen: Denizen | null = null;
     @Input() character!: Character;
-    @Output() close = new EventEmitter<Item>();
+    @Output() close = new EventEmitter<true>();
 
     private websocketService = inject(WebsocketService);
 
@@ -116,7 +116,7 @@ export class TradePanel {
 
     onConfirm() {
         this.sendMessage({
-            type: 'CHARACTER_DENIZEN_TRADE',
+            type: 'CHARACTER_TRADE_DENIZEN',
             payload: {
                 buy: Object.entries(this.buySelection).map(([itemId, quantity]) => ({ itemId, quantity })),
                 sell: Object.entries(this.sellSelection).map(([itemId, quantity]) => ({ itemId, quantity })),

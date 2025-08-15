@@ -65,11 +65,4 @@ export class DenizenPanel {
     onQuestsClick(): void {
         this.questVisible = true;
     }
-
-    // this.sendMessage({
-    //     type: 'CHARACTER_ACTION_UPDATE',
-    //     payload: {
-    //         action: action,
-    //     },
-    // });
 }

@@ -5,6 +5,22 @@ namespace Model {
 CharacterQuest::CharacterQuest() {
 }
 
+Json::Value CharacterQuest::toJson() {
+    Json::Value root;
+    root[ "id" ] = _id;
+    root[ "type" ] = _type;
+    root[ "currentAmount" ] = _currentAmount;
+    root[ "objectiveAmount" ] = _objectiveAmount;
+    root[ "finished" ] = _finished;
+
+    if ( _quest ) {
+        root[ "title" ] = _quest->title();
+        root[ "description" ] = _quest->description();
+    }
+
+    return root;
+}
+
 std::string CharacterQuest::id() const {
     return _id;
 }
@@ -51,6 +67,14 @@ bool CharacterQuest::finished() const {
 
 void CharacterQuest::setFinished( bool finished ) {
     _finished = finished;
+}
+
+const Quest* CharacterQuest::quest() const {
+    return _quest;
+}
+
+void CharacterQuest::setQuest( const Quest* quest ) {
+    _quest = quest;
 }
 
 } // namespace Model
