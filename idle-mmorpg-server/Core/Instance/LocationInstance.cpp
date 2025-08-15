@@ -7,6 +7,7 @@
 #include <Core/Message/MessageSenderType.h>
 #include <Core/System/ActionSystem.h>
 #include <Core/System/NotificationSystem.h>
+#include <Core/System/QuestSystem.h>
 #include <Core/System/RegenerationSystem.h>
 #include <Core/System/TradeSystem.h>
 
