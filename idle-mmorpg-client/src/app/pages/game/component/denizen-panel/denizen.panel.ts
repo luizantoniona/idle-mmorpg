@@ -1,6 +1,5 @@
-import { Component, Input, inject } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Subscription } from "rxjs";
 
 import { ButtonComponent } from "../../../../component";
 import { PanelVerticalComponent } from "../../../../component";
@@ -10,8 +9,6 @@ import { QuestPanel } from "./quest-panel/quest.panel";
 import { TradePanel } from "./trade-panel/trade.panel";
 
 import { Character, Denizen, Location } from "../../../../model";
-
-import { WebsocketService } from "../../../../service/websocket.service";
 
 @Component({
     selector: "app-denizen-panel",
@@ -31,29 +28,18 @@ export class DenizenPanel {
     @Input() location!: Location;
     @Input() character!: Character;
 
-    private websocketService = inject(WebsocketService);
-    private subscriptions = new Subscription();
+    private _selectedDenizen: Denizen | null = null;
 
-    ngOnInit(): void {
-        this.subscriptions.add(
-            this.websocketService.messages$.subscribe((msg) => this.handleMessage(msg))
-        );
+    get selectedDenizen(): Denizen | null {
+        if (!this._selectedDenizen || !this.location) {
+            return this._selectedDenizen;
+        }
+
+        return this.location.denizens.find(d => d.id === this._selectedDenizen!.id) ?? null;
     }
 
-    ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
-    }
-
-    sendMessage(data: any): void {
-        this.websocketService.send(data);
-    }
-
-    handleMessage(data: any): void {
-    }
-
-    selectedDenizen: Denizen | null = null;
     onDenizenClick(denizen: Denizen): void {
-        this.selectedDenizen = denizen;
+        this._selectedDenizen = denizen;
     }
 
     tradeVisible = false;

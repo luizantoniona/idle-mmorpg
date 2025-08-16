@@ -80,6 +80,16 @@ void Denizen::addQuest( const DenizenQuest& quest ) {
     _quests.push_back( quest );
 }
 
+bool Denizen::hasQuestById( const std::string& questId ) {
+    for ( const auto& quest : _quests ) {
+        if ( quest.id() == questId ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 DenizenTrade Denizen::trade() const {
     return _trade;
 }

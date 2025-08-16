@@ -1,8 +1,14 @@
 #include "QuestSystem.h"
 
-#include <Commons/LocationHelper.h>
+#include <iostream>
 
+#include <Commons/LocationHelper.h>
+#include <Commons/Singleton.h>
+#include <Core/Manager/QuestManager.h>
+
+#include "LootSystem.h"
 #include "NotificationSystem.h"
+#include "SpellSystem.h"
 
 namespace Core::System {
 
@@ -10,10 +16,10 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
     const std::string denizenId = payload["denizenId"].asString();
 
     bool found = false;
-    Model::Denizen denizenToTrade;
+    Model::Denizen denizenToAccept;
     for ( auto& denizen : location->denizens() ) {
         if ( denizenId == denizen.id() && Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
-            denizenToTrade = denizen;
+            denizenToAccept = denizen;
             found = true;
             break;
         }
@@ -24,29 +30,43 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
     }
 
     const std::string questId = payload["questId"].asString();
+    if ( !denizenToAccept.hasQuestById( questId ) ) {
+        return;
+    }
 
-    // Verificar se denizem possui quest
+    Model::CharacterQuests& characterQuests = character->quests();
+    if ( characterQuests.isQuestProceeding( questId ) || characterQuests.isQuestFinished( questId ) ) {
+        return;
+    }
 
-    Model::CharacterQuests& quests = character->quests();
+    const Model::Quest* quest = Commons::Singleton<Core::Manager::QuestManager>::instance().questById( questId );
+    if ( !quest ) {
+        return;
+    }
 
-    //TODO Verificar se quest já está com personagem;
-//    quests.finished();
-//    quests.proceeding();
+    Model::CharacterQuest questToAdd;
+    questToAdd.setId( questId );
+    questToAdd.setType( quest->type() );
+    questToAdd.setObjectiveId( quest->objectiveId() );
+    questToAdd.setCurrentAmount( 0 );
+    questToAdd.setObjectiveAmount( quest->amount() );
+    questToAdd.setFinished( false );
+    questToAdd.setQuest( quest );
 
-    // Se não estiver, adicionar ao character a nova
-    // Criar a nova
+    characterQuests.addProceeding( questToAdd );
 
     NotificationSystem::notifyCharacterQuests( sessionId, character );
+    NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 
 void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Character* character, const Model::Location* location, const Json::Value& payload ) {
     const std::string denizenId = payload["denizenId"].asString();
 
     bool found = false;
-    Model::Denizen denizenToTrade;
+    Model::Denizen denizenToFinish;
     for ( auto& denizen : location->denizens() ) {
         if ( denizenId == denizen.id() && Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
-            denizenToTrade = denizen;
+            denizenToFinish = denizen;
             found = true;
             break;
         }

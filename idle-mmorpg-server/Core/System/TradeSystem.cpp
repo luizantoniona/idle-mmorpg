@@ -1,7 +1,5 @@
 #include "TradeSystem.h"
 
-#include <algorithm>
-
 #include <Commons/LocationHelper.h>
 
 #include "NotificationSystem.h"
@@ -105,6 +103,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterWallet( sessionId, character );
+    NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 
 } // namespace Core::System

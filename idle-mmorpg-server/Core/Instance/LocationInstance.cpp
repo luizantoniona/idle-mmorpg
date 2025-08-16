@@ -170,10 +170,10 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
             Core::System::TradeSystem::characterTradeDenizen( sessionId, character, _location, payload );
             break;
         case Message::MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
-            // TODO ACCEPT QUEST
+            Core::System::QuestSystem::characterAcceptQuest( sessionId, character, _location, payload );
             break;
         case Message::MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
-            // TODO FINISH QUEST
+            Core::System::QuestSystem::characterFinishQuest( sessionId, character, _location, payload );
             break;
 
         case Message::MessageReceiverType::COMBAT_ROOM_CREATE:

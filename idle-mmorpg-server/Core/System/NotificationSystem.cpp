@@ -134,10 +134,7 @@ void NotificationSystem::notifyLocationDenizens( const std::string& sessionId, M
                 }
             }
 
-            if ( !availableQuests.empty() ) {
-                denizenJson[ "quests" ] = availableQuests;
-            }
-
+            denizenJson[ "quests" ] = availableQuests;
             availableDenizens.append( denizenJson );
         }
     }

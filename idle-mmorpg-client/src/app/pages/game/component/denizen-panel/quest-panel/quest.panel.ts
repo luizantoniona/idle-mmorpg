@@ -21,16 +21,10 @@ export class QuestPanel {
     @Input() character!: Character;
     @Output() close = new EventEmitter<true>();
 
-    selectedQuest: DenizenQuest | null = null;
-
     private websocketService = inject(WebsocketService);
 
     sendMessage(data: any): void {
         this.websocketService.send(data);
-    }
-
-    onSelectedQuest(quest: DenizenQuest) {
-        this.selectedQuest = quest;
     }
 
     isQuestFinished(questId: string): boolean {
@@ -55,5 +49,23 @@ export class QuestPanel {
                 questId: quest.id
             }
         });
+    }
+
+    onClose() {
+        this.close.emit();
+    }
+
+    private _selectedQuestId: string | null = null;
+
+    get selectedQuest(): DenizenQuest | null {
+        if (!this._selectedQuestId || !this.denizen) {
+            return null;
+        }
+
+        return this.denizen.quests?.find(q => q.id === this._selectedQuestId) ?? null;
+    }
+
+    onSelectedQuest(quest: DenizenQuest) {
+        this._selectedQuestId = quest.id;
     }
 }

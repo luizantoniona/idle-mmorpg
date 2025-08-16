@@ -1,7 +1,5 @@
 #include "LootSystem.h"
 
-#include <algorithm>
-
 #include <Commons/Singleton.h>
 #include <Core/Manager/ItemManager.h>
 #include <Core/System/NotificationSystem.h>

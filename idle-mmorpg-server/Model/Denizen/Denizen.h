@@ -38,6 +38,7 @@ public:
     std::vector<DenizenQuest> quests() const;
     void setQuests( const std::vector<DenizenQuest>& quests );
     void addQuest( const DenizenQuest& quest );
+    bool hasQuestById( const std::string& questId );
 
     DenizenTrade trade() const;
     void setTrade( const DenizenTrade& trade );
