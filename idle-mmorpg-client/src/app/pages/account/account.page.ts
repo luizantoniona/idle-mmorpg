@@ -59,12 +59,13 @@ export class AccountPage implements OnInit {
             const logoutResponse = await this.apiService.postNoData<any>('/logout');
 
             this.authService.logout();
-            this.router.navigate(['/']);
 
         } catch (err: any) {
             console.error('Logout failed:', err);
             this.error = err.message || 'Logout failed.';
         }
+
+        this.router.navigate(['/']);
     }
 
     getUsername(): string | null {
