@@ -74,17 +74,22 @@ TODO
 ### 🖼️ **Images**:  
 Login Page:
 <div align="left">
-  <img src="documentation/images/login.png" alt="Login" height="500"/>
+  <img src="documentation/images/01_login.png" alt="Login" height="500"/>
 </div>
 
 Account Page:
 <p align="left">
-  <img src="documentation/images/account.png" alt="Account" height="500"/>
+  <img src="documentation/images/02_account.png" alt="Account" height="500"/>
 </p>
 
 Game Page:
 <p align="left">
-  <img src="documentation/images/game.png" alt="Game" height="500"/>
+  <img src="documentation/images/03_game.png" alt="Game" height="500"/>
+</p>
+
+Combat:
+<p align="left">
+  <img src="documentation/images/05_combat.png" alt="Game" height="500"/>
 </p>
 
 # 🚀 Running
