@@ -27,6 +27,7 @@ public:
     bool isQuestFinished( const std::string& questId ) const;
     bool isQuestObjectiveCompleted( const std::string& questId ) const;
     CharacterQuest* findQuestProceeding( const std::string& questId );
+    void moveQuestToFinished( const std::string& questId );
 
 private:
     std::vector<CharacterQuest> _proceeding;

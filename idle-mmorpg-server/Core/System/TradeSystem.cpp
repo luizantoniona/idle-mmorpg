@@ -3,6 +3,7 @@
 #include <Commons/LocationHelper.h>
 
 #include "NotificationSystem.h"
+#include "QuestSystem.h"
 
 namespace Core::System {
 
@@ -100,6 +101,8 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
     totalCoins %= 1000;
 
     wallet.setCopper( totalCoins );
+
+    Core::System::QuestSystem::updateItemQuest( sessionId, character );
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterWallet( sessionId, character );

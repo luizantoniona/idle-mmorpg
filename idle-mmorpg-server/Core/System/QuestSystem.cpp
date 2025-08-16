@@ -55,6 +55,8 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
 
     characterQuests.addProceeding( questToAdd );
 
+    updateItemQuest( sessionId, character );
+
     NotificationSystem::notifyCharacterQuests( sessionId, character );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
@@ -77,23 +79,84 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
     }
 
     const std::string questId = payload["questId"].asString();
+    if ( !denizenToFinish.hasQuestById( questId ) ) {
+        return;
+    }
 
-    // Verificar se denizem possui quest
+    Model::CharacterQuests& characterQuests = character->quests();
+    if ( !characterQuests.isQuestProceeding( questId ) ) {
+        return;
+    }
 
-    Model::CharacterQuests& quests = character->quests();
+    if ( !characterQuests.isQuestObjectiveCompleted( questId ) ) {
+        return;
+    }
 
-    //TODO Verificar se quest já está com personagem;
-    //quests.proceeding();
-    //validar requisitos para finalizar
-    //finalizar quest
-    //dar recompensa
-    //
+    if ( auto* quest = characterQuests.findQuestProceeding( questId ) ) {
+        quest->setFinished( true );
+
+        if ( quest->quest() ) {
+            const Model::Quest* baseQuest = quest->quest();
+
+            for ( auto& reward : baseQuest->rewards() ) {
+                if ( reward.type() == "item" ) {
+                    Core::System::LootSystem::addItem( sessionId, character, reward.id(), reward.amount() );
+
+                } else if ( reward.type() == "spell" ) {
+                    Core::System::SpellSystem::learnSpell( sessionId, character, reward.id() );
+
+                } else {
+                    std::cerr << "QuestSystem::characterFinishQuest Unknow reward type: " << reward.type() << std::endl;
+                }
+            }
+        }
+
+        characterQuests.moveQuestToFinished( questId );
+    }
 
     NotificationSystem::notifyCharacterQuests( sessionId, character );
-    NotificationSystem::notifyCharacterInventory( sessionId, character );
-    NotificationSystem::notifyCharacterWallet( sessionId, character );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
+}
 
+void QuestSystem::updateKillQuest( const std::string& sessionId, Model::Character* character, const std::string creatureId ) {
+    for ( auto& quest : character->quests().proceeding() ) {
+
+        if ( quest.type() == "kill" && !quest.finished() ) {
+            if ( quest.objectiveId() == creatureId ) {
+                quest.setCurrentAmount( quest.currentAmount() + 1 );
+
+                if ( quest.currentAmount() >= quest.objectiveAmount() ) {
+                    quest.setFinished( true );
+                }
+
+                NotificationSystem::notifyCharacterQuests( sessionId, character );
+            }
+        }
+    }
+}
+
+void QuestSystem::updateItemQuest( const std::string& sessionId, Model::Character* character ) {
+    for ( auto& quest : character->quests().proceeding() ) {
+        if ( quest.type() == "item" ) {
+            int count = 0;
+
+            for ( const auto& item : character->inventory().items() ) {
+                if ( item.id() == quest.objectiveId() ) {
+                    count += item.amount();
+                }
+            }
+
+            int oldAmount = quest.currentAmount();
+            bool oldFinished = quest.finished();
+
+            quest.setCurrentAmount( count );
+            quest.setFinished( count >= quest.objectiveAmount() );
+
+            if ( quest.currentAmount() != oldAmount || quest.finished() != oldFinished ) {
+                NotificationSystem::notifyCharacterQuests( sessionId, character );
+            }
+        }
+    }
 }
 
 } // namespace Core::System

@@ -20,7 +20,25 @@ export class CharacterQuestPanel {
     @Input() visible = false;
     @Output() closed = new EventEmitter<void>();
 
-    selectedQuest: CharacterQuest | null = null;
+    private _selectedQuestId: string | null = null;
+
+    get selectedQuest(): CharacterQuest | null {
+        if (!this._selectedQuestId || !this.character) {
+            return null;
+        }
+
+        let quest = this.character.quests.proceeding?.find(q => q.id === this._selectedQuestId);
+
+        if (!quest) {
+            quest = this.character.quests.finished?.find(q => q.id === this._selectedQuestId);
+        }
+
+        return quest ?? null;
+    }
+
+    set selectedQuest(quest: CharacterQuest | null) {
+        this._selectedQuestId = quest?.id ?? null;
+    }
 
     onSelectedQuest(quest: CharacterQuest) {
         this.selectedQuest = quest;

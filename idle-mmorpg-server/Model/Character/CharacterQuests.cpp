@@ -86,4 +86,15 @@ CharacterQuest* CharacterQuests::findQuestProceeding( const std::string& questId
     return nullptr;
 }
 
+void CharacterQuests::moveQuestToFinished( const std::string& questId ) {
+    for ( auto it = _proceeding.begin(); it != _proceeding.end(); ++it ) {
+
+        if ( it->id() == questId ) {
+            _finished.push_back( std::move( *it ) );
+            _proceeding.erase( it );
+            return;
+        }
+    }
+}
+
 } // namespace Model

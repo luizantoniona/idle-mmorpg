@@ -3,6 +3,7 @@
 #include <Commons/Singleton.h>
 #include <Core/Manager/ItemManager.h>
 #include <Core/System/NotificationSystem.h>
+#include <Core/System/QuestSystem.h>
 
 namespace Core::System {
 
@@ -14,6 +15,7 @@ void LootSystem::addItem( const std::string& sessionId, Model::Character* charac
 
     if ( amount > 0 ) {
         character->inventory().addItem( itemId, amount );
+        QuestSystem::updateItemQuest( sessionId, character );
     }
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );

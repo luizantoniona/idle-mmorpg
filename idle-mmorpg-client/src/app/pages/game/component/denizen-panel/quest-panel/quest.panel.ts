@@ -28,7 +28,7 @@ export class QuestPanel {
     }
 
     isQuestFinished(questId: string): boolean {
-        return this.character.quests.finished && this.character.quests.finished.some(q => q.id === questId);
+        return this.character.quests.proceeding && this.character.quests.proceeding.some(q => q.id === questId);
     }
 
     acceptQuest(quest: DenizenQuest) {

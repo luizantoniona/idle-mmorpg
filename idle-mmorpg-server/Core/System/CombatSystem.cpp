@@ -7,6 +7,7 @@
 #include <Commons/DecimalHelper.h>
 
 #include "LootSystem.h"
+#include "QuestSystem.h"
 
 namespace Core::System {
 
@@ -168,6 +169,11 @@ void CombatSystem::computeExperience( std::unordered_map<std::string, Model::Cha
     double xpPerCharacter = totalXP / characters.size();
     for ( auto& [ sessionId, character ] : characters ) {
         if ( character->vitals().health() > 0 ) {
+
+            for ( const auto& creature : creatures ) {
+                Core::System::QuestSystem::updateKillQuest( sessionId, character, creature->id() );
+            }
+
             _progressionSystem.applyExperience( sessionId, character, xpPerCharacter );
             std::cout << "[CHARACTER] " << character->name() << " [XP] " << xpPerCharacter << " XP.\n";
         }

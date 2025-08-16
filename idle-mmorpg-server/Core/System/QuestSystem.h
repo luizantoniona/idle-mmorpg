@@ -10,6 +10,9 @@ class QuestSystem {
 public:
     static void characterAcceptQuest( const std::string& sessionId, Model::Character* character, const Model::Location* location, const Json::Value& payload );
     static void characterFinishQuest( const std::string& sessionId, Model::Character* character, const Model::Location* location, const Json::Value& payload );
+
+    static void updateKillQuest( const std::string& sessionId, Model::Character* character, const std::string creatureId );
+    static void updateItemQuest( const std::string& sessionId, Model::Character* character );
 };
 
 } // namespace Core::System
