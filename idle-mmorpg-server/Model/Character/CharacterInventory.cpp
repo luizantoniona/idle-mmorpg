@@ -3,10 +3,6 @@
 #include <Commons/Singleton.h>
 #include <Core/Manager/ItemManager.h>
 
-namespace {
-constexpr const char* JSON_ITEMS = "items";
-} // namespace
-
 namespace Model {
 
 CharacterInventory::CharacterInventory() {}
@@ -14,7 +10,7 @@ CharacterInventory::CharacterInventory() {}
 Json::Value CharacterInventory::toJson() {
     Json::Value root;
     for ( auto& item : items() ) {
-        root[ JSON_ITEMS ].append( item.toJson() );
+        root[ "items" ].append( item.toJson() );
     }
     return root;
 }

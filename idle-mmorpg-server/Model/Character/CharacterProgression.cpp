@@ -13,7 +13,6 @@ Json::Value CharacterProgression::toJson() {
     root[ "level" ] = level();
     root[ "experience" ] = experience();
     root[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( level() );
-
     return root;
 }
 

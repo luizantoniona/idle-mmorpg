@@ -15,6 +15,7 @@ public:
     static void notifyDeadCharacter( const std::string& sessionId );
     static void notifyCharacterAttributes( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterCombatAttributes( const std::string& sessionId, Model::Character* character );
+    static void notifyCharacterEquipment( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterInventory( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterQuests( const std::string& sessionId, Model::Character* character );

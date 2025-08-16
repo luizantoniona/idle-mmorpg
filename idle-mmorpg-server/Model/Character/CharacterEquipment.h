@@ -13,20 +13,20 @@ public:
 
     Json::Value toJson();
 
-    CharacterEquipmentItem head() const;
-    void setHead( const CharacterEquipmentItem& head );
+    CharacterEquipmentItem helmet() const;
+    void setHelmet( const CharacterEquipmentItem& helmet );
 
-    CharacterEquipmentItem chest() const;
-    void setChest( const CharacterEquipmentItem& chest );
+    CharacterEquipmentItem armor() const;
+    void setArmor( const CharacterEquipmentItem& armor );
 
-    CharacterEquipmentItem legs() const;
-    void setLegs( const CharacterEquipmentItem& legs );
+    CharacterEquipmentItem leg() const;
+    void setLeg( const CharacterEquipmentItem& leg );
 
-    CharacterEquipmentItem boots() const;
-    void setBoots( const CharacterEquipmentItem& boots );
+    CharacterEquipmentItem boot() const;
+    void setBoot( const CharacterEquipmentItem& boot );
 
-    CharacterEquipmentItem gloves() const;
-    void setGloves( const CharacterEquipmentItem& gloves );
+    CharacterEquipmentItem glove() const;
+    void setGlove( const CharacterEquipmentItem& glove );
 
     CharacterEquipmentItem leftHand() const;
     void setLeftHand( const CharacterEquipmentItem& leftHand );
@@ -46,8 +46,8 @@ public:
     CharacterEquipmentItem woodaxe() const;
     void setWoodaxe( const CharacterEquipmentItem& woodaxe );
 
-    CharacterEquipmentItem rod() const;
-    void setRod( const CharacterEquipmentItem& rod );
+    CharacterEquipmentItem fishrod() const;
+    void setFishrod( const CharacterEquipmentItem& fishrod );
 
     CharacterEquipmentItem shovel() const;
     void setShovel( const CharacterEquipmentItem& shovel );
@@ -56,11 +56,11 @@ public:
     void setSickle( const CharacterEquipmentItem& sickle );
 
 private:
-    CharacterEquipmentItem _head;
-    CharacterEquipmentItem _chest;
-    CharacterEquipmentItem _legs;
-    CharacterEquipmentItem _boots;
-    CharacterEquipmentItem _gloves;
+    CharacterEquipmentItem _helmet;
+    CharacterEquipmentItem _armor;
+    CharacterEquipmentItem _leg;
+    CharacterEquipmentItem _boot;
+    CharacterEquipmentItem _glove;
 
     CharacterEquipmentItem _leftHand;
     CharacterEquipmentItem _rightHand;
@@ -70,7 +70,7 @@ private:
 
     CharacterEquipmentItem _pickaxe;
     CharacterEquipmentItem _woodaxe;
-    CharacterEquipmentItem _rod;
+    CharacterEquipmentItem _fishrod;
     CharacterEquipmentItem _shovel;
     CharacterEquipmentItem _sickle;
 };

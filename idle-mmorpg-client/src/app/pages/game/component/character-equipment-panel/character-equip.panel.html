@@ -1,0 +1,25 @@
+<app-popup [visible]="visible" (closed)="closed.emit()">
+
+    <h3>Equip item in {{ slot }} slot</h3>
+
+    <div class="inventory-grid">
+        @for(item of getEquipableItems(); track item.id){
+        <app-tooltip>
+            <div tooltip-target class="item-box" (click)="equipItem(item)">
+                <img [src]="'/assets/items/' + item.icon" alt="{{ item.name }}" />
+            </div>
+
+            <div tooltip-content>
+                <strong>{{ item.name }}</strong><br />
+                {{ item.description }}<br />
+                <em>Value: {{ item.value }}</em>
+            </div>
+        </app-tooltip>
+        }
+        @if(getEquipableItems().length === 0){
+        <p>No items available for this slot.</p>
+        }
+    </div>
+
+    <app-button text="Close" (clickEvent)="closed.emit()"></app-button>
+</app-popup>

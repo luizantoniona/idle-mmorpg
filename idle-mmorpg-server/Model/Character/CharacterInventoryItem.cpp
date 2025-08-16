@@ -1,10 +1,5 @@
 #include "CharacterInventoryItem.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_AMOUNT = "amount";
-} // namespace
-
 namespace Model {
 
 CharacterInventoryItem::CharacterInventoryItem() :
@@ -15,8 +10,8 @@ CharacterInventoryItem::CharacterInventoryItem() :
 
 Json::Value CharacterInventoryItem::toJson() {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_AMOUNT ] = amount();
+    root[ "id" ] = id();
+    root[ "amount" ] = amount();
 
     if ( _item ) {
         Json::Value itemJson = item()->toJson();

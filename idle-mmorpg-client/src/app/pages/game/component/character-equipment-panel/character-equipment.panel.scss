@@ -7,43 +7,15 @@
 .equipment-layout {
     display: grid;
     grid-template-areas:
-        "amulet head ring"
-        "left-hand chest right-hand"
-        ". legs gloves"
-        ". boots .";
+        "amulet helmet ring"
+        "left-hand armor right-hand"
+        ". leg glove"
+        ". boot .";
     grid-template-columns: 40px 40px 40px;
     gap: 12px;
     justify-items: center;
     align-items: center;
     padding: 12px;
-}
-
-.head {
-    grid-area: head;
-}
-
-.left-hand {
-    grid-area: left-hand;
-}
-
-.chest {
-    grid-area: chest;
-}
-
-.right-hand {
-    grid-area: right-hand;
-}
-
-.legs {
-    grid-area: legs;
-}
-
-.gloves {
-    grid-area: gloves;
-}
-
-.boots {
-    grid-area: boots;
 }
 
 .amulet {
@@ -52,6 +24,34 @@
 
 .ring {
     grid-area: ring;
+}
+
+.helmet {
+    grid-area: helmet;
+}
+
+.armor {
+    grid-area: armor;
+}
+
+.leg {
+    grid-area: leg;
+}
+
+.glove {
+    grid-area: glove;
+}
+
+.boot {
+    grid-area: boot;
+}
+
+.left-hand {
+    grid-area: left-hand;
+}
+
+.right-hand {
+    grid-area: right-hand;
 }
 
 .tools-layout {

@@ -1,11 +1,11 @@
 import { Item } from "../item/item.model";
 
 export type CharacterEquipment = {
-    head: Item;
-    chest: Item;
-    legs: Item;
-    boots: Item;
-    gloves: Item;
+    helmet: Item;
+    armor: Item;
+    leg: Item;
+    boot: Item;
+    glove: Item;
 
     leftHand: Item;
     rightHand: Item;
@@ -15,7 +15,7 @@ export type CharacterEquipment = {
 
     pickaxe: Item;
     woodaxe: Item;
-    rod: Item;
+    fishrod: Item;
     shovel: Item;
     sickle: Item;
 };

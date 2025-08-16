@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { TooltipComponent } from '../../../../component';
+import { TooltipComponent } from "../../../../component";
 
-import { Item } from '../../../../model';
+import { Item } from "../../../../model";
 
 @Component({
-    selector: 'app-equipment-slot',
-    templateUrl: './equipment-slot.component.html',
-    styleUrls: ['./equipment-slot.component.scss'],
+    selector: "app-equipment-slot",
+    templateUrl: "./equipment-slot.component.html",
+    styleUrls: ["./equipment-slot.component.scss"],
     imports: [
         CommonModule,
         TooltipComponent
@@ -18,4 +18,9 @@ import { Item } from '../../../../model';
 export class EquipmentSlotComponent {
     @Input() item: Item | null = null;
     @Input() slot: string = "";
+    @Output() slotClick = new EventEmitter<string>();
+
+    onClick() {
+        this.slotClick.emit(this.slot);
+    }
 }

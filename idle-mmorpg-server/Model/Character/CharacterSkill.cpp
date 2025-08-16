@@ -17,7 +17,6 @@ Json::Value CharacterSkill::toJson() {
     root[ "experience" ] = experience();
     root[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( level() );
     root[ "skill" ] = skill()->toJson();
-
     return root;
 }
 

@@ -9,11 +9,9 @@ CharacterWallet::CharacterWallet() :
 
 Json::Value CharacterWallet::toJson() {
     Json::Value root;
-
     root[ "copper" ] = copper();
     root[ "silver" ] = silver();
     root[ "gold" ] = gold();
-
     return root;
 }
 
