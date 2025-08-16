@@ -72,10 +72,6 @@ export class GamePage implements OnInit, OnDestroy {
             this.websocketService.messages$.subscribe((msg) => this.handleMessage(msg))
         );
 
-        this.subscriptions.add(
-            this.websocketService.status$.subscribe((status) => this.handleStatus(status))
-        );
-
         try {
             this.websocketService.connect(this.character.idCharacter);
 
@@ -231,16 +227,6 @@ export class GamePage implements OnInit, OnDestroy {
             default:
                 console.warn('Unkown message:', data.type);
         }
-    }
-
-    handleStatus(status: string): void {
-        const statusMap: Record<string, string> = {
-            connecting: 'Conectando...',
-            connected: 'Conectado',
-            disconnected: 'Desconectado',
-            error: 'Erro na conexão',
-        };
-        this.connectionStatus = statusMap[status] ?? 'Desconhecido';
     }
 
     sendMessage(data: any): void {

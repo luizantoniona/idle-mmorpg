@@ -18,11 +18,9 @@
         <app-button text="Quests" (clickEvent)="onQuestsClick()"></app-button>
         }
     </app-panel-vertical>
-
-    } @else{
-
     }
     }
+
 </div>
 
 @if(tradeVisible){
@@ -33,6 +31,6 @@
 
 @if(questVisible){
 <app-popup [visible]="questVisible" (closed)="questVisible=false">
-    <app-quest-panel [character]="character" [denizen]="selectedDenizen"></app-quest-panel>
+    <app-quest-panel [character]="character" [denizen]="selectedDenizen" (close)="questVisible=false"></app-quest-panel>
 </app-popup>
 }
