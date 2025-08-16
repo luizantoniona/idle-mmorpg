@@ -7,6 +7,8 @@ export type { CharacterCoordinates } from "./character/character-coordinates.mod
 export type { CharacterEquipment } from "./character/character-equipment.model";
 export type { CharacterInventory } from "./character/character-inventory.model";
 export type { CharacterProgression } from "./character/character-progression.model";
+export type { CharacterQuests } from "./character/character-quests.model"
+export type { CharacterQuest } from "./character/character-quest.model"
 export type { CharacterSkill } from "./character/character-skill.model";
 export type { CharacterVitals } from "./character/character-vitals.model";
 export type { CharacterWallet } from "./character/character-wallet.model";

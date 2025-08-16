@@ -1,3 +1,40 @@
 <app-popup [visible]="visible" (closed)="closed.emit()">
-    <h3>QUESTs</h3>
+    <div class="quest-grid">
+        <div class="header">
+            <h3>{{ character.name }} - Quests</h3>
+        </div>
+
+        <div class="quest-list">
+            @if(character.quests && character.quests.proceeding && character.quests.proceeding.length){
+            @for(quest of character.quests.proceeding; track quest.id){
+            <app-button [text]="quest.title + ' (' + quest.currentAmount + '/' + quest.objectiveAmount + ')'"
+                (clickEvent)="onSelectedQuest(quest)">
+            </app-button>
+            }
+            }
+
+            @if(character.quests && character.quests.finished && character.quests.finished.length){
+            @for(quest of character.quests.finished; track quest.id){
+            <app-button [text]="quest.title + ' (Finished)'" (clickEvent)="onSelectedQuest(quest)">
+            </app-button>
+            }
+            }
+        </div>
+
+        <div class="quest-details">
+            @if(selectedQuest) {
+            <h3>{{ selectedQuest.title }}</h3>
+            <p>{{ selectedQuest.description }}</p>
+            @if(selectedQuest && !selectedQuest.finished) {
+            <p>Objective: {{ selectedQuest.currentAmount }}/{{ selectedQuest.objectiveAmount }}</p>
+            } @else {
+            <p>Finished</p>
+            }
+            }
+        </div>
+
+        <div class="footer">
+            <app-button text="Close" (clickEvent)="closed.emit()"></app-button>
+        </div>
+    </div>
 </app-popup>
