@@ -24,7 +24,7 @@ type TradeSelection = {
 export class TradePanel {
     @Input() denizen: Denizen | null = null;
     @Input() character!: Character;
-    @Output() close = new EventEmitter<true>();
+    @Output() close = new EventEmitter<void>();
 
     private websocketService = inject(WebsocketService);
 
@@ -33,10 +33,11 @@ export class TradePanel {
     }
 
     getSellableItems(): Item[] {
-        if (!this.denizen?.trade?.buy || !this.character) return [];
-        return this.denizen.trade.buy.filter(item => {
-            const charItem = this.character.inventory.items.find(i => i.id === item.id);
-            return charItem && charItem.amount > 0;
+        const items = this.character?.inventory?.items ?? [];
+        const tradeBuy = this.denizen?.trade?.buy ?? [];
+        return tradeBuy.filter(item => {
+            const charItem = items.find(i => i.id === item.id);
+            return !!charItem && charItem.amount > 0;
         });
     }
 

@@ -8,7 +8,7 @@
     display: grid;
     grid-template-areas:
         "amulet helmet ring"
-        "left-hand armor right-hand"
+        "leftHand armor rightHand"
         ". leg glove"
         ". boot .";
     grid-template-columns: 40px 40px 40px;
@@ -46,18 +46,18 @@
     grid-area: boot;
 }
 
-.left-hand {
-    grid-area: left-hand;
+.leftHand {
+    grid-area: leftHand;
 }
 
-.right-hand {
-    grid-area: right-hand;
+.rightHand {
+    grid-area: rightHand;
 }
 
 .tools-layout {
     display: grid;
     grid-template-areas:
-        "pickaxe woodaxe rod"
+        "pickaxe woodaxe fishrod"
         "shovel . sickle";
     grid-template-columns: 40px 40px 40px;
     gap: 12px;
@@ -74,8 +74,8 @@
     grid-area: woodaxe;
 }
 
-.rod {
-    grid-area: rod;
+.fishrod {
+    grid-area: fishrod;
 }
 
 .shovel {

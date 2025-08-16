@@ -4,7 +4,7 @@
             "id": "guardian_heroes_path",
             "name": "Guardian",
             "structure": "campfire",
-            "icon": "",
+            "icon": "guardian_heroes_path.gif",
             "dialogues": [
                 {
                     "option": "Greetings!",
@@ -23,17 +23,39 @@
             ],
             "quests": [
                 {
-                    "id": "guardian_heroes_path_01",
-                    "title": "Cleaning the place",
-                    "description": "The Guardian has asked you to get rid of some rats (5) that have infested the camp area.",
-                    "type": "kill",
-                    "objectiveId": "rat",
-                    "amount": 5,
+                    "id": "guardian_heroes_path_00",
+                    "title": "Welcome",
+                    "description": "The Guardian welcomes you by the campfire and explains the dangers you will face in this new world.",
+                    "type": "talk",
+                    "objectiveId": "guardian_heroes_path",
+                    "amount": 0,
+                    "requirements": [],
                     "rewards": [
                         {
                             "type": "item",
                             "id": "wooden_sword",
                             "amount": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "guardian_heroes_path_01",
+                    "title": "Cleaning the place",
+                    "description": "The Guardian is asking you to get rid of some rats (5) that have infested the camp area.",
+                    "type": "kill",
+                    "objectiveId": "rat",
+                    "amount": 5,
+                    "requirements": [
+                        {
+                            "type": "quest",
+                            "requirementId": "guardian_heroes_path_00"
+                        }
+                    ],
+                    "rewards": [
+                        {
+                            "type": "item",
+                            "id": "copper_coin",
+                            "amount": 10
                         }
                     ]
                 },
@@ -44,6 +66,12 @@
                     "type": "item",
                     "objectiveId": "cheese",
                     "amount": 1,
+                    "requirements": [
+                        {
+                            "type": "quest",
+                            "requirementId": "guardian_heroes_path_01"
+                        }
+                    ],
                     "rewards": [
                         {
                             "type": "spell",

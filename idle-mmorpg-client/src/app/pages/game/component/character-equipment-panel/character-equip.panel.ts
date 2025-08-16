@@ -33,6 +33,18 @@ export class CharacterEquipPanel {
         this.websocketService.send(data);
     }
 
+    getSlotName(): string {
+        if (!this.slot) return "";
+
+        const treated = this.slot
+            .replace(/([a-z])([A-Z])/g, "$1 $2");
+
+        return treated
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    }
+
     getEquipableItems() {
         if (!this.character || !this.character.inventory) {
             return [];
@@ -47,7 +59,7 @@ export class CharacterEquipPanel {
                 return true;
             }
 
-            if (["left-hand", "right-hand"].includes(this.slot) && item.type === "weapon") {
+            if (["leftHand", "rightHand"].includes(this.slot) && item.type === "weapon") {
                 return true;
             }
 
@@ -55,13 +67,15 @@ export class CharacterEquipPanel {
         });
     }
 
-    equipItem(item: Item) {
+    equipItem(item: Item | null) {
         this.sendMessage({
             type: "CHARACTER_EQUIP_ITEM",
             payload: {
-                itemId: item.id,
+                itemId: item ? item.id : "",
                 slot: this.slot
             }
         });
+
+        this.closed.emit();
     }
 }

@@ -70,6 +70,18 @@ void Quest::setAmount( int amount ) {
     _amount = amount;
 }
 
+std::vector<QuestRequirement> Quest::requirements() const {
+    return _requirements;
+}
+
+void Quest::setRequirements( const std::vector<QuestRequirement>& requirements ) {
+    _requirements = requirements;
+}
+
+void Quest::addRequirement( const QuestRequirement& requirement ) {
+    _requirements.push_back( requirement );
+}
+
 std::vector<QuestReward> Quest::rewards() const {
     return _rewards;
 }

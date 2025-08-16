@@ -1,6 +1,6 @@
 <app-popup [visible]="visible" (closed)="closed.emit()">
 
-    <h3>Equip item in {{ slot }} slot</h3>
+    <h3>Equip item in {{ getSlotName() }} slot</h3>
 
     <div class="inventory-grid">
         @for(item of getEquipableItems(); track item.id){
@@ -16,6 +16,16 @@
             </div>
         </app-tooltip>
         }
+        <app-tooltip>
+            <div tooltip-target class="item-box" (click)="equipItem(null)">
+                <img [src]="'/assets/slots/remove.png'" alt="Remove" />
+            </div>
+
+            <div tooltip-content>
+                <strong>Unequip</strong><br />
+            </div>
+        </app-tooltip>
+
         @if(getEquipableItems().length === 0){
         <p>No items available for this slot.</p>
         }

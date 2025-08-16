@@ -19,7 +19,7 @@ import { WebsocketService } from "../../../../../service/websocket.service";
 export class QuestPanel {
     @Input() denizen: Denizen | null = null;
     @Input() character!: Character;
-    @Output() close = new EventEmitter<true>();
+    @Output() close = new EventEmitter<void>();
 
     private websocketService = inject(WebsocketService);
 

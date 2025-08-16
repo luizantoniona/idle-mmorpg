@@ -9,12 +9,9 @@ CharacterEquipmentItem::CharacterEquipmentItem() :
 
 Json::Value CharacterEquipmentItem::toJson() {
     Json::Value root;
-    root[ "id" ] = id();
-
     if ( _item ) {
-        root[ "item" ] = item()->toJson();
+        root = item()->toJson();
     }
-
     return root;
 }
 

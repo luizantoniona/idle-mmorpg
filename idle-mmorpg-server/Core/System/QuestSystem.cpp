@@ -44,18 +44,32 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
         return;
     }
 
-    Model::CharacterQuest questToAdd;
-    questToAdd.setId( questId );
-    questToAdd.setType( quest->type() );
-    questToAdd.setObjectiveId( quest->objectiveId() );
-    questToAdd.setCurrentAmount( 0 );
-    questToAdd.setObjectiveAmount( quest->amount() );
-    questToAdd.setFinished( false );
-    questToAdd.setQuest( quest );
+    if ( quest->type() == "talk" && quest->objectiveId() == denizenId ) {
+        Model::CharacterQuest questToAdd;
+        questToAdd.setId( questId );
+        questToAdd.setType( quest->type() );
+        questToAdd.setObjectiveId( quest->objectiveId() );
+        questToAdd.setCurrentAmount( quest->amount() );
+        questToAdd.setObjectiveAmount( quest->amount() );
+        questToAdd.setFinished( true );
+        questToAdd.setQuest( quest );
 
-    characterQuests.addProceeding( questToAdd );
+        characterQuests.addProceeding( questToAdd );
 
-    updateItemQuest( sessionId, character );
+    } else {
+        Model::CharacterQuest questToAdd;
+        questToAdd.setId( questId );
+        questToAdd.setType( quest->type() );
+        questToAdd.setObjectiveId( quest->objectiveId() );
+        questToAdd.setCurrentAmount( 0 );
+        questToAdd.setObjectiveAmount( quest->amount() );
+        questToAdd.setFinished( false );
+        questToAdd.setQuest( quest );
+
+        characterQuests.addProceeding( questToAdd );
+
+        updateItemQuest( sessionId, character );
+    }
 
     NotificationSystem::notifyCharacterQuests( sessionId, character );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );

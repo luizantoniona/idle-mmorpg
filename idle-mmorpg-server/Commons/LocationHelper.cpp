@@ -1,5 +1,7 @@
 #include "LocationHelper.h"
 
+#include <iostream>
+
 namespace Commons {
 
 bool LocationHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
@@ -76,6 +78,20 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
         }
 
         return false;
+    }
+
+    const Model::Quest* questPtr = quest.quest();
+    if ( questPtr ) {
+        for ( const auto& requirement : questPtr->requirements() ) {
+
+            if ( requirement.type() == "quest" ) {
+                if ( !quests.isQuestFinished( requirement.requirementId() ) ) {
+                    return false;
+                }
+            } else {
+                std::cerr << "LocationHelper::canCharacterSeeDenizenQuest Quest requirement not mapped: " << requirement.type() << std::endl;
+            }
+        }
     }
 
     return true;

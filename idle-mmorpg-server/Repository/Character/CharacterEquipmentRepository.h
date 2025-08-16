@@ -11,7 +11,7 @@ public:
     explicit CharacterEquipmentRepository();
 
     bool createEquipment( int idCharacter );
-    bool updateEquipment( int idCharacter, const Model::CharacterEquipment& equipment );
+    bool updateEquipment( int idCharacter, Model::CharacterEquipment& equipment );
 
     std::unique_ptr<Model::CharacterEquipment> findByCharacterId( int idCharacter );
 };

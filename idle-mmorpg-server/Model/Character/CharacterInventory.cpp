@@ -78,4 +78,14 @@ bool CharacterInventory::addItem( const std::string& itemId, int amount ) {
     return true;
 }
 
+CharacterInventoryItem* CharacterInventory::itemById( const std::string& itemId ) {
+    for ( auto& item : _items ) {
+        if ( item.id() == itemId ) {
+            return &item;
+        }
+    }
+
+    return nullptr;
+}
+
 } // namespace Model

@@ -20,7 +20,7 @@ bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
     return query.exec();
 }
 
-bool CharacterEquipmentRepository::updateEquipment( int idCharacter, const Model::CharacterEquipment& equipment ) {
+bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::CharacterEquipment& equipment ) {
     const std::string sql = R"SQL(
         UPDATE character_equipment SET
             helmet_item_id = ?,

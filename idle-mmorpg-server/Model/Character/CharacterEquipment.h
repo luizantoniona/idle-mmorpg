@@ -13,46 +13,46 @@ public:
 
     Json::Value toJson();
 
-    CharacterEquipmentItem helmet() const;
+    CharacterEquipmentItem& helmet();
     void setHelmet( const CharacterEquipmentItem& helmet );
 
-    CharacterEquipmentItem armor() const;
+    CharacterEquipmentItem& armor();
     void setArmor( const CharacterEquipmentItem& armor );
 
-    CharacterEquipmentItem leg() const;
+    CharacterEquipmentItem& leg();
     void setLeg( const CharacterEquipmentItem& leg );
 
-    CharacterEquipmentItem boot() const;
+    CharacterEquipmentItem& boot();
     void setBoot( const CharacterEquipmentItem& boot );
 
-    CharacterEquipmentItem glove() const;
+    CharacterEquipmentItem& glove();
     void setGlove( const CharacterEquipmentItem& glove );
 
-    CharacterEquipmentItem leftHand() const;
+    CharacterEquipmentItem& leftHand();
     void setLeftHand( const CharacterEquipmentItem& leftHand );
 
-    CharacterEquipmentItem rightHand() const;
+    CharacterEquipmentItem& rightHand();
     void setRightHand( const CharacterEquipmentItem& rightHand );
 
-    CharacterEquipmentItem amulet() const;
+    CharacterEquipmentItem& amulet();
     void setAmulet( const CharacterEquipmentItem& amulet );
 
-    CharacterEquipmentItem ring() const;
+    CharacterEquipmentItem& ring();
     void setRing( const CharacterEquipmentItem& ring );
 
-    CharacterEquipmentItem pickaxe() const;
+    CharacterEquipmentItem& pickaxe();
     void setPickaxe( const CharacterEquipmentItem& pickaxe );
 
-    CharacterEquipmentItem woodaxe() const;
+    CharacterEquipmentItem& woodaxe();
     void setWoodaxe( const CharacterEquipmentItem& woodaxe );
 
-    CharacterEquipmentItem fishrod() const;
+    CharacterEquipmentItem& fishrod();
     void setFishrod( const CharacterEquipmentItem& fishrod );
 
-    CharacterEquipmentItem shovel() const;
+    CharacterEquipmentItem& shovel();
     void setShovel( const CharacterEquipmentItem& shovel );
 
-    CharacterEquipmentItem sickle() const;
+    CharacterEquipmentItem& sickle();
     void setSickle( const CharacterEquipmentItem& sickle );
 
 private:

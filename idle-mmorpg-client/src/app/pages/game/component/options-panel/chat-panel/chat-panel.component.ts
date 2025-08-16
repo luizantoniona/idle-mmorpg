@@ -1,11 +1,11 @@
-import { Component, Input, EventEmitter, Output, inject } from '@angular/core';
+import { Component, Input, EventEmitter, Output, inject } from "@angular/core";
 
-import { PopupComponent } from '../../../../../component';
+import { PopupComponent } from "../../../../../component";
 
 @Component({
-    selector: 'app-chat-panel',
-    templateUrl: './chat-panel.component.html',
-    styleUrl: './chat-panel.component.scss',
+    selector: "app-chat-panel",
+    templateUrl: "./chat-panel.component.html",
+    styleUrls: ["./chat-panel.component.scss"],
     imports: [
         PopupComponent,
     ],

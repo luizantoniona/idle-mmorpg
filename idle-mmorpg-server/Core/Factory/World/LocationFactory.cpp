@@ -117,6 +117,14 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
             quest->setObjectiveId( questJson[ "objectiveId" ].asString() );
             quest->setAmount( questJson[ "amount" ].asInt() );
 
+            for ( const Json::Value& requirementJson : questJson[ "requirements" ] ) {
+                Model::QuestRequirement requirement;
+                requirement.setType( requirementJson[ "type" ].asString() );
+                requirement.setRequirementId( requirementJson[ "requirementId" ].asString() );
+                requirement.setAmount( requirementJson.get( "amount", 0 ).asInt() );
+                quest->addRequirement( requirement );
+            }
+
             for ( const Json::Value& rewardJson : questJson[ "rewards" ] ) {
                 Model::QuestReward reward;
                 reward.setType( rewardJson[ "type" ].asString() );

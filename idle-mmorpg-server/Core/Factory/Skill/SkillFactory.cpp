@@ -6,7 +6,9 @@
 
 namespace Core::Factory {
 
-std::unordered_map<std::string, std::unique_ptr<Model::Skill> > SkillFactory::createSkills( const std::string& skillsPath ) {
+// TODO REVIEW THIS, MAYBE REMOVE FROM JSONS AND MADE SKILLS HARD CODED
+
+std::unordered_map<std::string, std::unique_ptr<Model::Skill>> SkillFactory::createSkills( const std::string& skillsPath ) {
     std::cout << "SkillFactory::createSkills" << std::endl;
 
     std::unordered_map<std::string, std::unique_ptr<Model::Skill> > skills;

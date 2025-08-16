@@ -1,3 +1,9 @@
+.inventory-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 .item-box {
     width: 40px;
     height: 40px;

@@ -1,11 +1,5 @@
 #include "Character.h"
 
-namespace {
-constexpr const char* JSON_ID_USER = "idUser";
-constexpr const char* JSON_ID_CHARACTER = "idCharacter";
-constexpr const char* JSON_NAME = "name";
-} // namespace
-
 namespace Model {
 
 Character::Character() :
@@ -27,9 +21,9 @@ Character::Character() :
 
 Json::Value Character::toJson() {
     Json::Value root;
-    root[ JSON_ID_USER ] = idUser();
-    root[ JSON_ID_CHARACTER ] = idCharacter();
-    root[ JSON_NAME ] = name();
+    root[ "idUser" ] = idUser();
+    root[ "idCharacter" ] = idCharacter();
+    root[ "name" ] = name();
     return root;
 }
 

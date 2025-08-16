@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { TooltipComponent } from "../../../../component";
 
-import { Item } from "../../../../model";
+import { Character, CharacterEquipment } from "../../../../model";
 
 @Component({
     selector: "app-equipment-slot",
@@ -16,11 +16,19 @@ import { Item } from "../../../../model";
 })
 
 export class EquipmentSlotComponent {
-    @Input() item: Item | null = null;
-    @Input() slot: string = "";
+    @Input() character!: Character;
+    @Input() slot!: keyof CharacterEquipment;
     @Output() slotClick = new EventEmitter<string>();
 
     onClick() {
         this.slotClick.emit(this.slot);
+    }
+
+    get item() {
+        if (!this.character || !this.character.equipment) {
+            return null;
+        }
+
+        return this.character.equipment[this.slot];
     }
 }

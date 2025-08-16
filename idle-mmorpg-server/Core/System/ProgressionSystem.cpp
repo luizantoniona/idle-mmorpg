@@ -27,7 +27,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId ) );
 
         if ( !newSkill.skill() ) {
-            std::cerr << "[ProgressionSystem] Unknown skill id: " << skillId << std::endl;
+            std::cerr << "ProgressionSystem::applyExperience Unknown skill id: " << skillId << std::endl;
             return;
         }
 

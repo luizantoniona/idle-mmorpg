@@ -6,6 +6,7 @@
 
 #include <json/json.h>
 
+#include "QuestRequirement.h"
 #include "QuestReward.h"
 
 namespace Model {
@@ -37,6 +38,10 @@ public:
     int amount() const;
     void setAmount( int amount );
 
+    std::vector<QuestRequirement> requirements() const;
+    void setRequirements( const std::vector<QuestRequirement>& requirements );
+    void addRequirement( const QuestRequirement& requirement );
+
     std::vector<QuestReward> rewards() const;
     void setRewards( const std::vector<QuestReward>& rewards );
     void addReward( const QuestReward& reward );
@@ -49,6 +54,7 @@ private:
     std::string _type;
     std::string _objectiveId;
     int _amount;
+    std::vector<QuestRequirement> _requirements;
     std::vector<QuestReward> _rewards;
 };
 

@@ -7,23 +7,16 @@
     @if(activeTab == 'equipment'){
     @if(character.equipment){
     <div class="equipment-layout">
-        <app-equipment-slot class="amulet" [item]="character.equipment.amulet" slot="amulet"
+        <app-equipment-slot class="amulet" [character]="character!" slot="amulet" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="ring" [character]="character!" slot="ring" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="helmet" [character]="character" slot="helmet" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="armor" [character]="character" slot="armor" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="glove" [character]="character" slot="glove" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="leg" [character]="character" slot="leg" s (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="boot" [character]="character" slot="boot" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="leftHand" [character]="character" slot="leftHand"
             (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="ring" [item]="character.equipment.ring" slot="ring"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="helmet" [item]="character.equipment.head" slot="helmet"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="armor" [item]="character.equipment.chest" slot="armor"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="glove" [item]="character.equipment.gloves" slot="glove"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="leg" [item]="character.equipment.legs" slot="leg"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="boot" [item]="character.equipment.boots" slot="boot"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="left-hand" [item]="character.equipment.leftHand" slot="left-hand"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="right-hand" [item]="character.equipment.rightHand" slot="right-hand"
+        <app-equipment-slot class="rightHand" [character]="character" slot="rightHand"
             (slotClick)="onSlotClick($event)" />
     </div>
     }
@@ -32,16 +25,11 @@
     @if(activeTab == 'tools'){
     @if(character.equipment){
     <div class="tools-layout">
-        <app-equipment-slot class="pickaxe" [item]="character.equipment.pickaxe" slot="pickaxe"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="woodaxe" [item]="character.equipment.woodaxe" slot="woodaxe"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="fishrod" [item]="character.equipment.rod" slot="fishrod"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="shovel" [item]="character.equipment.shovel" slot="shovel"
-            (slotClick)="onSlotClick($event)" />
-        <app-equipment-slot class="sickle" [item]="character.equipment.sickle" slot="sickle"
-            (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="pickaxe" [character]="character" slot="pickaxe" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="woodaxe" [character]="character" slot="woodaxe" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="fishrod" [character]="character" slot="fishrod" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="shovel" [character]="character" slot="shovel" (slotClick)="onSlotClick($event)" />
+        <app-equipment-slot class="sickle" [character]="character" slot="sickle" (slotClick)="onSlotClick($event)" />
     </div>
     }
     }

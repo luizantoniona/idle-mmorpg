@@ -22,6 +22,8 @@ public:
     bool removeItem( const std::string& itemId, int amount );
     bool addItem( const std::string& itemId, int amount );
 
+    CharacterInventoryItem* itemById( const std::string& itemId );
+
 private:
     std::vector<CharacterInventoryItem> _items;
 };
