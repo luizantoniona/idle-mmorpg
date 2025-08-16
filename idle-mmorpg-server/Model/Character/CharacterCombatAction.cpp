@@ -1,10 +1,5 @@
 #include "CharacterCombatAction.h"
 
-namespace {
-constexpr const char* JSON_DURATION = "duration";
-constexpr const char* JSON_COUNTER = "counter";
-} // namespace
-
 namespace Model {
 
 CharacterCombatAction::CharacterCombatAction() :
@@ -13,8 +8,8 @@ CharacterCombatAction::CharacterCombatAction() :
 
 Json::Value CharacterCombatAction::toJson() {
     Json::Value root;
-    root[ JSON_DURATION ] = duration();
-    root[ JSON_COUNTER ] = counter();
+    root[ "duration" ] = duration();
+    root[ "counter" ] = counter();
     return root;
 }
 

@@ -1,97 +1,81 @@
 #include "CharacterEquipment.h"
 
-namespace {
-constexpr const char* JSON_HEAD = "head";
-constexpr const char* JSON_CHEST = "chest";
-constexpr const char* JSON_LEGS = "legs";
-constexpr const char* JSON_BOOTS = "boots";
-constexpr const char* JSON_GLOVES = "gloves";
-constexpr const char* JSON_LEFT_HAND = "leftHand";
-constexpr const char* JSON_RIGHT_HAND = "righHand";
-constexpr const char* JSON_AMULET = "amulet";
-constexpr const char* JSON_RING = "ring";
-constexpr const char* JSON_PICKAXE = "pickaxe";
-constexpr const char* JSON_WOODAXE = "woodaxe";
-constexpr const char* JSON_ROD = "rod";
-constexpr const char* JSON_SHOVEL = "shovel";
-constexpr const char* JSON_SICKLE = "sickle";
-} // namespace
-
 namespace Model {
 
 CharacterEquipment::CharacterEquipment() :
-    _head(),
-    _chest(),
-    _legs(),
-    _boots(),
-    _gloves(),
+    _helmet(),
+    _armor(),
+    _leg(),
+    _boot(),
+    _glove(),
     _leftHand(),
     _rightHand(),
     _amulet(),
     _ring(),
     _pickaxe(),
     _woodaxe(),
-    _rod(),
+    _fishrod(),
     _shovel(),
-    _sickle() {}
+    _sickle() {
+}
 
 Json::Value CharacterEquipment::toJson() {
     Json::Value root;
-    root[ JSON_HEAD ] = head().toJson();
-    root[ JSON_CHEST ] = chest().toJson();
-    root[ JSON_LEGS ] = legs().toJson();
-    root[ JSON_BOOTS ] = boots().toJson();
-    root[ JSON_GLOVES ] = gloves().toJson();
-    root[ JSON_LEFT_HAND ] = leftHand().toJson();
-    root[ JSON_RIGHT_HAND ] = rightHand().toJson();
-    root[ JSON_AMULET ] = amulet().toJson();
-    root[ JSON_RING ] = ring().toJson();
-    root[ JSON_PICKAXE ] = pickaxe().toJson();
-    root[ JSON_WOODAXE ] = woodaxe().toJson();
-    root[ JSON_ROD ] = rod().toJson();
-    root[ JSON_SHOVEL ] = shovel().toJson();
-    root[ JSON_SICKLE ] = sickle().toJson();
+    root[ "helmet" ] = helmet().toJson();
+    root[ "armor" ] = armor().toJson();
+    root[ "leg" ] = leg().toJson();
+    root[ "boot" ] = boot().toJson();
+    root[ "glove" ] = glove().toJson();
+    root[ "leftHand" ] = leftHand().toJson();
+    root[ "righHand" ] = rightHand().toJson();
+    root[ "amulet" ] = amulet().toJson();
+    root[ "ring" ] = ring().toJson();
+    root[ "pickaxe" ] = pickaxe().toJson();
+    root[ "woodaxe" ] = woodaxe().toJson();
+    root[ "fishrod" ] = fishrod().toJson();
+    root[ "shovel" ] = shovel().toJson();
+    root[ "sickle" ] = sickle().toJson();
     return root;
 }
 
-CharacterEquipmentItem CharacterEquipment::head() const {
-    return _head;
+CharacterEquipmentItem CharacterEquipment::helmet() const {
+    return _helmet;
 }
 
-void CharacterEquipment::setHead( const CharacterEquipmentItem& head ) {
-    _head = head;
+void CharacterEquipment::setHelmet( const CharacterEquipmentItem& helmet ) {
+    _helmet = helmet;
 }
 
-CharacterEquipmentItem CharacterEquipment::chest() const {
-    return _chest;
+CharacterEquipmentItem CharacterEquipment::armor() const {
+    return _armor;
 }
 
-void CharacterEquipment::setChest( const CharacterEquipmentItem& chest ) {
-    _chest = chest;
+void CharacterEquipment::setArmor( const CharacterEquipmentItem& armor ) {
+    _armor = armor;
 }
 
-CharacterEquipmentItem CharacterEquipment::legs() const {
-    return _legs;
+CharacterEquipmentItem CharacterEquipment::leg() const {
+    return _leg;
 }
 
-void CharacterEquipment::setLegs( const CharacterEquipmentItem& legs ) {
-    _legs = legs;
+void CharacterEquipment::setLeg( const CharacterEquipmentItem& leg ) {
+    _leg = leg;
 }
 
-CharacterEquipmentItem CharacterEquipment::boots() const {
-    return _boots;
+CharacterEquipmentItem CharacterEquipment::boot() const {
+    return _boot;
 }
 
-void CharacterEquipment::setBoots( const CharacterEquipmentItem& boots ) {
-    _boots = boots;
+void CharacterEquipment::setBoot( const CharacterEquipmentItem& boot ) {
+    _boot = boot;
 }
 
-CharacterEquipmentItem CharacterEquipment::gloves() const {
-    return _gloves;
+CharacterEquipmentItem CharacterEquipment::glove() const {
+    return _glove;
 }
 
-void CharacterEquipment::setGloves( const CharacterEquipmentItem& gloves ) {
-    _gloves = gloves;
+void CharacterEquipment::setGlove( const CharacterEquipmentItem& glove ) {
+    _glove = glove;
 }
 
 CharacterEquipmentItem CharacterEquipment::leftHand() const {
@@ -142,12 +126,12 @@ void CharacterEquipment::setWoodaxe( const CharacterEquipmentItem& woodaxe ) {
     _woodaxe = woodaxe;
 }
 
-CharacterEquipmentItem CharacterEquipment::rod() const {
-    return _rod;
+CharacterEquipmentItem CharacterEquipment::fishrod() const {
+    return _fishrod;
 }
 
-void CharacterEquipment::setRod( const CharacterEquipmentItem& rod ) {
-    _rod = rod;
+void CharacterEquipment::setFishrod( const CharacterEquipmentItem& fishrod ) {
+    _fishrod = fishrod;
 }
 
 CharacterEquipmentItem CharacterEquipment::shovel() const {

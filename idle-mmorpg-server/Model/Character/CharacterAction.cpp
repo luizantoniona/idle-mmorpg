@@ -1,11 +1,5 @@
 #include "CharacterAction.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_DURATION = "duration";
-constexpr const char* JSON_COUNTER = "counter";
-} // namespace
-
 namespace Model {
 
 CharacterAction::CharacterAction() :
@@ -16,9 +10,9 @@ CharacterAction::CharacterAction() :
 
 Json::Value CharacterAction::toJson() {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_DURATION ] = duration();
-    root[ JSON_COUNTER ] = counter();
+    root[ "id" ] = id();
+    root[ "duration" ] = duration();
+    root[ "counter" ] = counter();
 
     return root;
 }

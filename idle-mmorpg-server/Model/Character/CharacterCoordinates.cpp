@@ -1,12 +1,5 @@
 #include "CharacterCoordinates.h"
 
-namespace {
-constexpr const char* JSON_X = "x";
-constexpr const char* JSON_Y = "y";
-constexpr const char* JSON_Z = "z";
-constexpr const char* JSON_STRUCTURE = "structure";
-} // namespace
-
 namespace Model {
 
 CharacterCoordinates::CharacterCoordinates() :
@@ -20,10 +13,10 @@ CharacterCoordinates::CharacterCoordinates() :
 
 Json::Value CharacterCoordinates::toJson() {
     Json::Value root;
-    root[ JSON_X ] = x();
-    root[ JSON_Y ] = y();
-    root[ JSON_Z ] = z();
-    root[ JSON_STRUCTURE ] = currentStructure();
+    root[ "x" ] = x();
+    root[ "y" ] = y();
+    root[ "z" ] = z();
+    root[ "structure" ] = currentStructure();
     return root;
 }
 
