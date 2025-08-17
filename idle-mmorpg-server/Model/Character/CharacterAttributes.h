@@ -38,6 +38,8 @@ public:
     void modifyIntelligence( double modifier );
     void modifyWisdom( double modifier );
 
+    void resetModifiers();
+
 private:
     double _baseStrength;
     double _baseDexterity;

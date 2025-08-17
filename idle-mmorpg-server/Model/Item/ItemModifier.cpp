@@ -1,23 +1,18 @@
 #include "ItemModifier.h"
 
-namespace {
-constexpr const char* JSON_TYPE = "type";
-constexpr const char* JSON_TARGET = "target";
-constexpr const char* JSON_VALUE = "value";
-} // namespace
-
 namespace Model {
 
 ItemModifier::ItemModifier() :
     _type( "" ),
-    _target( "" ),
-    _value( 0.0 ) {}
+    _id( "" ),
+    _value( 0.0 ) {
+}
 
 Json::Value ItemModifier::toJson() {
     Json::Value root;
-    root[ JSON_TYPE ] = type();
-    root[ JSON_TARGET ] = target();
-    root[ JSON_VALUE ] = value();
+    root[ "type" ] = type();
+    root[ "id" ] = id();
+    root[ "value" ] = value();
 
     return root;
 }
@@ -30,12 +25,12 @@ void ItemModifier::setType( const std::string& type ) {
     _type = type;
 }
 
-std::string ItemModifier::target() const {
-    return _target;
+std::string ItemModifier::id() const {
+    return _id;
 }
 
-void ItemModifier::setTarget( const std::string& target ) {
-    _target = target;
+void ItemModifier::setId( const std::string& id ) {
+    _id = id;
 }
 
 double ItemModifier::value() const {

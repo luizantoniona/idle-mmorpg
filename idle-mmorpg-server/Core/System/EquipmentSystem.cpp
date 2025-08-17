@@ -2,14 +2,120 @@
 
 #include <iostream>
 
-#include "LootSystem.h"
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
 
 namespace Core::System {
 
 void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, Model::Character* character ) {
-    // VERIFICAR TODOS OS EQUIPAMENTOS E AUMENTAR OS MODIFIERS DE ATTRIBUTES E COMBATATTRIBUTES
+    character->attributes().resetModifiers();
+    character->combatAttributes().resetModifiers();
+    // TODO: Add modifiers for health, mana and stamina
+    // character->vitals().resetModifiers
+
+    auto& equipments = character->equipment();
+
+    std::vector<Model::CharacterEquipmentItem*> slots = {
+        &equipments.helmet(),
+        &equipments.armor(),
+        &equipments.leg(),
+        &equipments.boot(),
+        &equipments.glove(),
+        &equipments.leftHand(),
+        &equipments.rightHand(),
+        &equipments.amulet(),
+        &equipments.ring(),
+        &equipments.pickaxe(),
+        &equipments.woodaxe(),
+        &equipments.fishrod(),
+        &equipments.shovel(),
+        &equipments.sickle() };
+
+    for ( auto* slot : slots ) {
+        const auto* item = slot->item();
+        if ( !item ) {
+            continue;
+        }
+
+        for ( const Model::ItemModifier& modifier : item->modifiers() ) {
+            const std::string& type = modifier.type();
+            const std::string& targetId = modifier.id();
+            double value = modifier.value();
+
+            if ( type == "attribute" ) {
+                if ( targetId == "strength" ) {
+                    character->attributes().modifyStrength( value );
+
+                } else if ( targetId == "dexterity" ) {
+                    character->attributes().modifyDexterity( value );
+
+                } else if ( targetId == "constitution" ) {
+                    character->attributes().modifyConstitution( value );
+
+                } else if ( targetId == "intelligence" ) {
+                    character->attributes().modifyIntelligence( value );
+
+                } else if ( targetId == "wisdom" ) {
+                    character->attributes().modifyWisdom( value );
+
+                } else {
+                    std::cerr << "Unknown attribute: " << targetId << std::endl;
+                }
+
+            } else if ( type == "combat" ) {
+                if ( targetId == "attack" ) {
+                    character->combatAttributes().modifyAttack( value );
+
+                } else if ( targetId == "accuracy" ) {
+                    character->combatAttributes().modifyAccuracy( value );
+
+                } else if ( targetId == "speed" ) {
+                    character->combatAttributes().modifySpeed( value );
+
+                } else if ( targetId == "defense" ) {
+                    character->combatAttributes().modifyDefense( value );
+
+                } else if ( targetId == "evasion" ) {
+                    character->combatAttributes().modifyEvasion( value );
+
+                } else if ( targetId == "criticalChance" ) {
+                    character->combatAttributes().modifyCriticalChance( value );
+
+                } else if ( targetId == "criticalMultiplier" ) {
+                    character->combatAttributes().modifyCriticalMultiplier( value );
+
+                } else {
+                    std::cerr << "Unknown combat attribute: " << targetId << std::endl;
+                }
+
+            } else if ( type == "vital" ) {
+                if ( targetId == "health" ) {
+                    // character->vitals().setModifierHealth( value );
+
+                } else if ( targetId == "health_regen" ) {
+                    // character->vitals().setModifierHealthRegen( value );
+
+                } else if ( targetId == "mana" ) {
+                    // character->vitals().setModifierMana( value );
+
+                } else if ( targetId == "mana_regen" ) {
+                    // character->vitals().setModifierManaRegen( value );
+
+                } else if ( targetId == "stamina" ) {
+                    // character->vitals().setModifierStamina( value );
+
+                } else if ( targetId == "stamina_regen" ) {
+                    // character->vitals().setModifierStaminaRegen( value );
+
+                } else {
+                    std::cerr << "Unknown vital: " << targetId << std::endl;
+                }
+
+            } else {
+                std::cerr << "EquipmentSystem::computeEquipmentModifiers Unknown modifier type: " << type << std::endl;
+            }
+        }
+    }
 
     NotificationSystem::notifyCharacterAttributes( sessionId, character );
     NotificationSystem::notifyCharacterCombatAttributes( sessionId, character );

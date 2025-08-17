@@ -66,9 +66,9 @@ std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPat
 
         for ( const auto& modifierJson : modifiersJson ) {
             Model::ItemModifier modifier;
-            modifier.setType( modifierJson["type"].asString() );
-            modifier.setTarget( modifierJson["target"].asString() );
-            modifier.setValue( modifierJson["value"].asDouble() );
+            modifier.setType( modifierJson[ "type" ].asString() );
+            modifier.setTarget( modifierJson[ "id" ].asString() );
+            modifier.setValue( modifierJson[ "value" ].asDouble() );
 
             modifiers.push_back( modifier );
         }

@@ -152,4 +152,14 @@ void CharacterCombatAttributes::modifyCriticalMultiplier( double modifier ) {
     _modifierCriticalMultiplier += modifier;
 }
 
+void CharacterCombatAttributes::resetModifiers() {
+    _modifierAttack = 0.0;
+    _modifierAccuracy = 0.0;
+    _modifierSpeed = 0.0;
+    _modifierDefense = 0.0;
+    _modifierEvasion = 0.0;
+    _modifierCriticalChance = 0.0;
+    _modifierCriticalMultiplier = 0.0;
+}
+
 } // namespace Model

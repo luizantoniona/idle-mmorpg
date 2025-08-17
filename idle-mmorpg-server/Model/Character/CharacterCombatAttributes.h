@@ -48,6 +48,8 @@ public:
     void modifyCriticalChance( double modifier );
     void modifyCriticalMultiplier( double modifier );
 
+    void resetModifiers();
+
 private:
     double _baseAttack;
     double _baseAccuracy;

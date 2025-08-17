@@ -8,7 +8,7 @@
     "modifiers": [
         {
             "type": "combat",
-            "attribute": "defense",
+            "id": "defense",
             "value": 1
         }
     ]

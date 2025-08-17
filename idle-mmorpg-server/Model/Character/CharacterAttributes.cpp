@@ -110,4 +110,12 @@ void CharacterAttributes::modifyWisdom( double modifier ) {
     _modifierWisdom += modifier;
 }
 
+void CharacterAttributes::resetModifiers() {
+    _modifierStrength = 0;
+    _modifierDexterity = 0;
+    _modifierConstitution = 0;
+    _modifierIntelligence = 0;
+    _modifierWisdom = 0;
+}
+
 } // namespace Model
