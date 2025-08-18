@@ -46,7 +46,7 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
 
             auto it = slotMap.find( id );
             if ( it == slotMap.end() ) {
-                std::cerr << "EquipmentSystem::characterEquipItem Unknown slot: " << id << std::endl;
+                std::cerr << "LocationHelper::canCharacterPerformAction Unknown slot: " << action.label() << id << std::endl;
                 return false;
             }
 

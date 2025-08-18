@@ -2,12 +2,12 @@
     "actions": [
         {
             "id": "woodcut",
-            "label": "Mine copper ore from nearby rocks",
+            "label": "Cut trees from the forest",
             "duration": 200,
             "requirements": [
                 {
                     "type": "equipment",
-                    "category": "woodaxe"
+                    "id": "woodaxe"
                 }
             ],
             "experience": [

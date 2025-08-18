@@ -7,7 +7,7 @@
             "requirements": [
                 {
                     "type": "equipment",
-                    "category": "pickaxe"
+                    "id": "pickaxe"
                 }
             ],
             "experience": [
