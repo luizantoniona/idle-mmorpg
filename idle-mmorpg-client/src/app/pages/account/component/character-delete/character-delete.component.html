@@ -1,0 +1,23 @@
+<app-panel-vertical>
+    <h2>Delete character</h2>
+
+    @if (characters && characters.length) {
+    <form class="delete-column" (ngSubmit)="handleDelete()">
+        <select class="selection" id="characterSelect" [(ngModel)]="selectedCharacterId" name="character" required>
+            @for (character of characters; track character.idCharacter) {
+            <option [ngValue]="character.idCharacter">
+                {{ character.name }}
+            </option>
+            }
+        </select>
+
+        <app-button text="Delete" type="submit"></app-button>
+    </form>
+    } @else {
+    <h3>No characters to delete</h3>
+    }
+
+    @if (error) {
+    <p style="color: red;">Error: {{ error }}</p>
+    }
+</app-panel-vertical>

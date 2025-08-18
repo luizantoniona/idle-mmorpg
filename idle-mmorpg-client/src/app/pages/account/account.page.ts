@@ -1,31 +1,33 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 
-import { ButtonComponent } from '../../component';
-import { LoadingComponent } from '../../component';
-import { PanelVerticalComponent } from '../../component';
+import { ButtonComponent } from "../../component";
+import { LoadingComponent } from "../../component";
+import { PanelVerticalComponent } from "../../component";
 
-import { CharacterFormComponent } from './component/character-form/character-form.component';
-import { CharacterListComponent } from './component/character-list/character-list.component';
+import { CharacterDeleteComponent } from "./component/character-delete/character-delete.component";
+import { CharacterFormComponent } from "./component/character-form/character-form.component";
+import { CharacterListComponent } from "./component/character-list/character-list.component";
 
-import { APIService } from '../../service/api.service';
-import { AuthService } from '../../service/auth.service';
-import type { Character } from '../../model';
+import { Character } from "../../model";
+
+import { APIService } from "../../service/api.service";
+import { AuthService } from "../../service/auth.service";
 
 @Component({
-    selector: 'app-account-page',
-    standalone: true,
+    selector: "app-account-page",
+    templateUrl: "./account.page.html",
+    styleUrls: ["./account.page.scss"],
     imports: [
         CommonModule,
         ButtonComponent,
         LoadingComponent,
         PanelVerticalComponent,
+        CharacterDeleteComponent,
         CharacterFormComponent,
         CharacterListComponent,
     ],
-    templateUrl: './account.page.html',
-    styleUrls: ['./account.page.scss'],
 })
 
 export class AccountPage implements OnInit {

@@ -15,6 +15,7 @@ public:
 
     int createCharacter( const int idUser, const std::string& dsName );
     bool updateCharacter( Model::Character character );
+    bool deleteCharacter( int idCharacter );
 
     std::vector<std::unique_ptr<Model::Character> > findAllByIdUser( const int idUser );
 

@@ -1,0 +1,16 @@
+.delete-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.selection {
+    border-radius: var(--border-radius);
+    background-color: var(--color-button);
+    border: 2px solid var(--color-bg);
+    color: var(--text-color);
+    width: 100%;
+    padding: 8px 8px;
+}

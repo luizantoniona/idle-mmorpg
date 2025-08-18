@@ -71,6 +71,18 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
     return success;
 }
 
+bool CharacterRepository::deleteCharacter( int idCharacter ) {
+    const std::string sql = R"SQL(
+        DELETE FROM character
+        WHERE id_character = ?
+    )SQL";
+
+    Database::Query query( _db, sql );
+    query.bindInt( 1, idCharacter );
+
+    return query.exec();
+}
+
 std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllByIdUser( const int idUser ) {
     const std::string sql = R"SQL(
         SELECT

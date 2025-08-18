@@ -1,18 +1,18 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import { ButtonComponent } from '../../../../component/button/button.component';
-import { PanelVerticalComponent } from '../../../../component/panel/panel-vertical.component';
-import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
+import { ButtonComponent } from "../../../../component";
+import { PanelVerticalComponent } from "../../../../component";
+import { InputFieldComponent } from "../../../../component";
 
-import { APIService } from '../../../../service/api.service';
+import { APIService } from "../../../../service/api.service";
 
 @Component({
-    selector: 'app-character-form',
-    templateUrl: './character-form.component.html',
-    styleUrls: ['./character-form.component.scss'],
+    selector: "app-character-form",
+    templateUrl: "./character-form.component.html",
+    styleUrls: ["./character-form.component.scss"],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -39,7 +39,7 @@ export class CharacterFormComponent {
         const { name } = this.form.value;
 
         try {
-            const loginResponse = await this.apiService.postData<any>('/character', { name });
+            const loginResponse = await this.apiService.postData<any>('/create', { name });
 
             if (!loginResponse?.idCharacter) {
                 throw new Error('Character creation failed');
