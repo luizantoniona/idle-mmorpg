@@ -20,6 +20,8 @@ public:
     CharacterSkill* skill( const std::string& idSkill );
     void addSkill( CharacterSkill skill );
 
+    int skillLevel( const std::string& idSkill );
+
 private:
     std::vector<CharacterSkill> _skills;
 };

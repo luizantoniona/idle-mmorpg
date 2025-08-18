@@ -77,7 +77,7 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
 
     int masteryLevel = 0;
     for ( const auto& skill : skills ) {
-        masteryLevel = std::max( masteryLevel, character->skills().skill( skill )->level() );
+        masteryLevel = std::max( masteryLevel, character->skills().skillLevel( skill ) );
     }
 
     double diff = ( character->combatAttributes().accuracy() + character->attributes().dexterity() ) - creature->evasion();
@@ -124,8 +124,8 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newStamina = std::max( 0.0, newStamina );
     creature->vitals().setStamina( newStamina );
 
-    int evasionLevel = character->skills().skill( "evasion" )->level();
-    int resilienceLevel = character->skills().skill( "resilience" )->level();
+    int evasionLevel = character->skills().skillLevel( "evasion" );
+    int resilienceLevel = character->skills().skillLevel( "resilience" );
 
     double diff = creature->accuracy() - ( character->combatAttributes().evasion() + character->attributes().dexterity() );
     double hitChance = 0.5 + diff * 0.03;
@@ -151,7 +151,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
                              ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
 
     if ( hasShieldEquipped ) {
-        int shieldLevel = character->skills().skill( "shield_mastery" )->level();
+        int shieldLevel = character->skills().skillLevel( "shield_mastery" );
         double blockChance = 0.05 + 0.05 * shieldLevel;
         blockChance = std::clamp( blockChance, 0.05, 0.95 );
 
@@ -159,7 +159,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         if ( blockRoll < blockChance ) {
             std::cout << "Attack blocked by shield!" << std::endl;
             int xpBlock = std::max( 1, static_cast<int>( damage * 0.5 ) );
-            _progressionSystem.applyExperience( sessionId, character, "shield_mastery", damage * 0.5 );
+            _progressionSystem.applyExperience( sessionId, character, "shield_mastery", xpBlock );
             damage *= 0.5;
         }
     }
