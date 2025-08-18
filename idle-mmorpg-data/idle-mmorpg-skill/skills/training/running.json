@@ -63,6 +63,16 @@
                     "value": 5
                 }
             ]
+        },
+        {
+            "level": 7,
+            "bonuses": [
+                {
+                    "type": "vital",
+                    "id": "stamina",
+                    "value": 5
+                }
+            ]
         }
     ]
 }

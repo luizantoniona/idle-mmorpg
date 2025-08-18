@@ -68,6 +68,16 @@
                     "value": 1
                 }
             ]
+        },
+        {
+            "level": 7,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "dexterity",
+                    "value": 1
+                }
+            ]
         }
     ]
 }

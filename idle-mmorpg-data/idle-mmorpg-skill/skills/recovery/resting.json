@@ -59,8 +59,18 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "health_regen",
-                    "value": 0.1
+                    "id": "health",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "level": 7,
+            "bonuses": [
+                {
+                    "type": "vital",
+                    "id": "health",
+                    "value": 10
                 }
             ]
         }

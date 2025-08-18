@@ -9,11 +9,6 @@
             "bonuses": [
                 {
                     "type": "combat",
-                    "id": "attack",
-                    "value": 1
-                },
-                {
-                    "type": "combat",
                     "id": "speed",
                     "value": 1
                 }

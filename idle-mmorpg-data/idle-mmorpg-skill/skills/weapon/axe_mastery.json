@@ -10,7 +10,7 @@
                 {
                     "type": "combat",
                     "id": "attack",
-                    "value": 2
+                    "value": 1
                 }
             ]
         },

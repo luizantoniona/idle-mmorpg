@@ -112,6 +112,10 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
         if ( quest->quest() ) {
             const Model::Quest* baseQuest = quest->quest();
 
+            if ( baseQuest->type() == "item" ) {
+                character->inventory().removeItem( baseQuest->objectiveId(), baseQuest->amount() );
+            }
+
             for ( auto& reward : baseQuest->rewards() ) {
                 if ( reward.type() == "item" ) {
                     Core::System::LootSystem::addItem( sessionId, character, reward.id(), reward.amount() );
@@ -128,11 +132,12 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
         characterQuests.moveQuestToFinished( questId );
     }
 
+    NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterQuests( sessionId, character );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 
-void QuestSystem::updateKillQuest( const std::string& sessionId, Model::Character* character, const std::string creatureId ) {
+void QuestSystem::updateKillQuest( const std::string& sessionId, Model::Character* character, const std::string& creatureId ) {
     for ( auto& quest : character->quests().proceeding() ) {
 
         if ( quest.type() == "kill" && !quest.finished() ) {
@@ -171,6 +176,10 @@ void QuestSystem::updateItemQuest( const std::string& sessionId, Model::Characte
             }
         }
     }
+}
+
+void QuestSystem::updateTalkQuest( const std::string& sessionId, Model::Character* character, const std::string& denizenId ) {
+    // TODO IMPLEMENT TALK QUESTS UPDATE
 }
 
 } // namespace Core::System
