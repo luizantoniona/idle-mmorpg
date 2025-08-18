@@ -125,20 +125,20 @@ void ActionSystem::regenerativeActionEffect( Model::Character* character ) {
     const double manaRegen = 1 + character->vitals().baseManaRegen() + +character->attributes().constitution();
 
     int newHealth = character->vitals().health() + healthRegen;
-    if ( newHealth > character->vitals().maxHealth() ) {
-        newHealth = character->vitals().maxHealth();
+    if ( newHealth > character->vitals().fullHealth() ) {
+        newHealth = character->vitals().fullHealth();
     }
     character->vitals().setHealth( newHealth );
 
     int newStamina = character->vitals().stamina() + staminaRegen;
-    if ( newStamina > character->vitals().maxStamina() ) {
-        newStamina = character->vitals().maxStamina();
+    if ( newStamina > character->vitals().fullStamina() ) {
+        newStamina = character->vitals().fullStamina();
     }
     character->vitals().setStamina( newStamina );
 
     int newMana = character->vitals().mana() + manaRegen;
-    if ( newMana > character->vitals().maxMana() ) {
-        newMana = character->vitals().maxMana();
+    if ( newMana > character->vitals().fullMana() ) {
+        newMana = character->vitals().fullMana();
     }
     character->vitals().setMana( newMana );
 }

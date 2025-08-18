@@ -35,8 +35,10 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
             int xpGranted = experienceEntry.amount();
 
             if ( skillId == "combat" ) {
-                std::string combatSkillToTrain = combatSkill( character );
-                _progressionSystem.applyExperience( sessionId, character, combatSkillToTrain, xpGranted );
+                auto combatSkillToTrain = combatSkill( character );
+                for ( const auto& skill : combatSkillToTrain ) {
+                    _progressionSystem.applyExperience( sessionId, character, skill, xpGranted );
+                }
 
             } else {
                 _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
@@ -52,22 +54,59 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
     Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
-std::string TrainingSystem::combatSkill( Model::Character* character ) {
+std::vector<std::string> TrainingSystem::combatSkill( Model::Character* character ) {
+    const Model::Item* leftHand = character->equipment().leftHand().item();
+    const Model::Item* rightHand = character->equipment().rightHand().item();
 
-    // TODO O que acontece se estiver com duas armas diferentes?
-    // Quais skills upar?
-    // TODO Dividir a XP entre todas?
+    std::vector<std::string> skills = {};
 
-    // if ( character->equipment().leftHand().id().empty() || character->equipment().rightHand().id().empty() ) {
-    //     std::string weaponType = character->equipment();
-    //     if ( weaponType == "sword" )
-    //         return "swordsmanship";
-    //     if ( weaponType == "bow" )
-    //         return "archery";
-    //     // ... outros tipos de armas
-    // }
+    if ( !leftHand && !rightHand ) {
+        return { "unarmed" };
+    }
 
-    return "unarmed";
+    auto getSkillForWeapon = []( const Model::Item* weapon ) -> std::string {
+        if ( !weapon ) {
+            return "";
+        }
+
+        const std::string& category = weapon->category();
+        if ( category == "sword" ) {
+            return "sword_mastery";
+        }
+
+        if ( category == "axe" ) {
+            return "axe_mastery";
+        }
+
+        if ( category == "club" ) {
+            return "club_mastery";
+        }
+
+        if ( category == "dagger" ) {
+            return "dagger_mastery";
+        }
+
+        if ( category == "shield" ) {
+            return "shield_mastery";
+        }
+
+        return "";
+    };
+
+    std::string leftSkill = getSkillForWeapon( leftHand );
+    std::string rightSkill = getSkillForWeapon( rightHand );
+
+    if ( !leftSkill.empty() ) {
+        skills.push_back( leftSkill );
+    }
+
+    if ( !rightSkill.empty() && rightSkill != leftSkill ) {
+        skills.push_back( rightSkill );
+    }
+
+    // TODO Add dual-wielding
+
+    return skills;
 }
 
 } // namespace Core::System

@@ -8,7 +8,7 @@ namespace Core::System {
 void RegenerationSystem::computeRegeneration( const std::string& sessionId, Model::Character* character ) {
     auto& characterVitals = character->vitals();
 
-    if ( characterVitals.health() >= characterVitals.maxHealth() && characterVitals.mana() >= characterVitals.maxMana() && characterVitals.stamina() >= characterVitals.maxStamina() ) {
+    if ( characterVitals.health() >= characterVitals.fullHealth() && characterVitals.mana() >= characterVitals.fullMana() && characterVitals.stamina() >= characterVitals.fullStamina() ) {
         return;
     }
 
@@ -24,20 +24,20 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
     const double manaRegen = characterVitals.manaRegen() + character->attributes().intelligence() * 0.1;
 
     double newHealth = characterVitals.health() + Commons::DecimalHelper::roundDecimals( healthRegen );
-    if ( newHealth > characterVitals.maxHealth() ) {
-        newHealth = characterVitals.maxHealth();
+    if ( newHealth > characterVitals.fullHealth() ) {
+        newHealth = characterVitals.fullHealth();
     }
     characterVitals.setHealth( newHealth );
 
     double newStamina = characterVitals.stamina() + Commons::DecimalHelper::roundDecimals( staminaRegen );
-    if ( newStamina > characterVitals.maxStamina() ) {
-        newStamina = characterVitals.maxStamina();
+    if ( newStamina > characterVitals.fullStamina() ) {
+        newStamina = characterVitals.fullStamina();
     }
     characterVitals.setStamina( newStamina );
 
     double newMana = characterVitals.mana() + Commons::DecimalHelper::roundDecimals( manaRegen );
-    if ( newMana > characterVitals.maxMana() ) {
-        newMana = characterVitals.maxMana();
+    if ( newMana > characterVitals.fullMana() ) {
+        newMana = characterVitals.fullMana();
     }
     characterVitals.setMana( newMana );
 

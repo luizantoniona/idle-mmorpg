@@ -10,8 +10,7 @@ namespace Core::System {
 void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, Model::Character* character ) {
     character->attributes().resetModifiers();
     character->combatAttributes().resetModifiers();
-    // TODO: Add modifiers for health, mana and stamina
-    // character->vitals().resetModifiers
+    character->vitals().resetModifiers();
 
     auto& equipments = character->equipment();
 
@@ -90,19 +89,19 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
 
             } else if ( type == "vital" ) {
                 if ( targetId == "health" ) {
-                    // character->vitals().setModifierHealth( value );
+                    character->vitals().setModifierMaxHealth( value );
 
                 } else if ( targetId == "health_regen" ) {
                     // character->vitals().setModifierHealthRegen( value );
 
                 } else if ( targetId == "mana" ) {
-                    // character->vitals().setModifierMana( value );
+                    character->vitals().setModifierMaxMana( value );
 
                 } else if ( targetId == "mana_regen" ) {
                     // character->vitals().setModifierManaRegen( value );
 
                 } else if ( targetId == "stamina" ) {
-                    // character->vitals().setModifierStamina( value );
+                    character->vitals().setModifierMaxStamina( value );
 
                 } else if ( targetId == "stamina_regen" ) {
                     // character->vitals().setModifierStaminaRegen( value );

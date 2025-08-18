@@ -17,7 +17,7 @@ public:
     void process( const std::string& sessionId, Model::Character* character );
 
 private:
-    std::string combatSkill( Model::Character* character );
+    std::vector<std::string> combatSkill( Model::Character* character );
 
 private:
     Model::Location* _location;

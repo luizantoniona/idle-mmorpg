@@ -25,7 +25,7 @@ public:
     void computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures );
 
 private:
-    std::string combatSkill( Model::Character* character );
+    std::vector<std::string> combatSkill( Model::Character* character );
 
 private:
     Model::Location* _location;

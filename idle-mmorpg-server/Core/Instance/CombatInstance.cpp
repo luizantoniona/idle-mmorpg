@@ -126,6 +126,11 @@ void CombatInstance::process() {
             }
 
         } else {
+
+            if ( character->vitals().stamina() < 1 ) {
+                continue;
+            }
+
             action.setCounter( action.counter() + 1 );
         }
     }
@@ -157,6 +162,11 @@ void CombatInstance::process() {
             action.setCounter( 0 );
 
         } else {
+
+            // if ( creature->vitals().stamina() < 1 ) {
+            //     return;
+            // }
+
             action.setCounter( action.counter() + 1 );
         }
     }
