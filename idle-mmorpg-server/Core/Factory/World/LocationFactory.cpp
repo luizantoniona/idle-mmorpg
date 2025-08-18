@@ -33,7 +33,17 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     for ( const Json::Value& connectionJson : connectionsJson ) {
         Model::LocationConnection connection;
         connection.setDestination( connectionJson[ "destination" ].asString() );
-        connection.setDirection( connectionJson[ "direction" ].asString() );
+        connection.setStructure( connectionJson[ "structure" ].asString() );
+        connection.setLabel( connectionJson[ "label" ].asString() );
+
+        Json::Value requirementsJson = connectionJson["requirements"];
+        for ( const Json::Value& reqJson : requirementsJson ) {
+            Model::LocationConnectionRequirement requirement;
+            requirement.setType( reqJson[ "type" ].asString() );
+            requirement.setId( reqJson[ "id" ].asString() );
+            connection.addRequirement( requirement );
+        }
+
         location->addConnection( connection );
     }
 
@@ -50,8 +60,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
             Model::LocationActionRequirement requirement;
             requirement.setId( requirementJson[ "id" ].asString() );
             requirement.setType( requirementJson[ "type" ].asString() );
-            requirement.setCategory( requirementJson.get( "category", "" ).asString() );
-            requirement.setLevel( requirementJson.get( "level", 0 ).asInt() );
+            requirement.setAmount( requirementJson[ "amount" ].asInt() );
             action.addRequirement( requirement );
         }
 
@@ -120,7 +129,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
             for ( const Json::Value& requirementJson : questJson[ "requirements" ] ) {
                 Model::QuestRequirement requirement;
                 requirement.setType( requirementJson[ "type" ].asString() );
-                requirement.setRequirementId( requirementJson[ "requirementId" ].asString() );
+                requirement.setId( requirementJson[ "id" ].asString() );
                 requirement.setAmount( requirementJson.get( "amount", 0 ).asInt() );
                 quest->addRequirement( requirement );
             }

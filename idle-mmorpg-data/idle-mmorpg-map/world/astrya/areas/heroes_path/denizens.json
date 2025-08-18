@@ -25,7 +25,7 @@
                 {
                     "id": "guardian_heroes_path_00",
                     "title": "Welcome",
-                    "description": "The Guardian welcomes you by the campfire and explains the dangers you will face in this new world.",
+                    "description": "The Guardian warmly welcomes you around the campfire. He explains that the Hero's Path is full of dangers and that you must always stay alert. This is your first step in getting to know the world you are about to explore.",
                     "type": "talk",
                     "objectiveId": "guardian_heroes_path",
                     "amount": 0,
@@ -41,14 +41,14 @@
                 {
                     "id": "guardian_heroes_path_01",
                     "title": "Cleaning the place",
-                    "description": "The Guardian is asking you to get rid of some rats (5) that have infested the camp area.",
+                    "description": "The Guardian has noticed that the camp has been overrun by rats. He asks you to take care of five of them to keep the area safe and clean. A small test of your combat skills and courage.",
                     "type": "kill",
                     "objectiveId": "rat",
                     "amount": 5,
                     "requirements": [
                         {
                             "type": "quest",
-                            "requirementId": "guardian_heroes_path_00"
+                            "id": "guardian_heroes_path_00"
                         }
                     ],
                     "rewards": [
@@ -62,20 +62,62 @@
                 {
                     "id": "guardian_heroes_path_02",
                     "title": "Sharing a meal",
-                    "description": "The Guardian is hungry and asks you to bring him some cheese to share by the fire.",
+                    "description": "After cleaning, the Guardian feels hungry and suggests sharing a meal by the fire. He asks you to bring a piece of cheese so you can eat together, strengthening friendship and trust.",
                     "type": "item",
                     "objectiveId": "cheese",
                     "amount": 1,
                     "requirements": [
                         {
                             "type": "quest",
-                            "requirementId": "guardian_heroes_path_01"
+                            "id": "guardian_heroes_path_01"
                         }
                     ],
                     "rewards": [
                         {
                             "type": "spell",
                             "id": "minor_healing"
+                        }
+                    ]
+                },
+                {
+                    "id": "guardian_heroes_path_03",
+                    "title": "Speak with the cave man",
+                    "description": "The Guardian mentions a man working in the nearby cave who might have useful information. Your task is to visit the cave and talk to him, learning more about the world and possible challenges ahead.",
+                    "type": "talk",
+                    "objectiveId": "cave_man_heroes_path_cave",
+                    "amount": 1,
+                    "requirements": [
+                        {
+                            "type": "quest",
+                            "id": "guardian_heroes_path_01"
+                        }
+                    ],
+                    "rewards": [
+                        {
+                            "type": "item",
+                            "id": "copper_coin",
+                            "amount": 5
+                        }
+                    ]
+                },
+                {
+                    "id": "guardian_heroes_path_04",
+                    "title": "Speak with the lumberjack",
+                    "description": "The Guardian tells you about a lumberjack working in the nearby forest. He asks you to go and talk to him. The lumberjack might have resources or valuable tips for your journey along the Hero's Path.",
+                    "type": "talk",
+                    "objectiveId": "lumberjack_heros_path_forest",
+                    "amount": 1,
+                    "requirements": [
+                        {
+                            "type": "quest",
+                            "id": "guardian_heroes_path_01"
+                        }
+                    ],
+                    "rewards": [
+                        {
+                            "type": "item",
+                            "id": "copper_coin",
+                            "amount": 5
                         }
                     ]
                 }

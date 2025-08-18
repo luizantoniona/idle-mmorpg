@@ -12,6 +12,7 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
 
         { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
 
+        { "CHARACTER_INTERACT_DENIZEM", MessageReceiverType::CHARACTER_INTERACT_DENIZEM },
         { "CHARACTER_TRADE_DENIZEN", MessageReceiverType::CHARACTER_TRADE_DENIZEN },
         { "CHARACTER_ACCEPT_DENIZEN_QUEST", MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST },
         { "CHARACTER_FINISH_DENIZEN_QUEST", MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST },

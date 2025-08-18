@@ -1,13 +1,13 @@
-#ifndef LOCATIONACTIONREQUIREMENT_H
-#define LOCATIONACTIONREQUIREMENT_H
+#ifndef LOCATIONCONNECTIONREQUIREMENT_H
+#define LOCATIONCONNECTIONREQUIREMENT_H
 
 #include <string>
 
 namespace Model {
 
-class LocationActionRequirement {
+class LocationConnectionRequirement {
 public:
-    LocationActionRequirement();
+    LocationConnectionRequirement();
 
     std::string type() const;
     void setType( const std::string& type );
@@ -26,4 +26,4 @@ private:
 
 } // namespace Model
 
-#endif // LOCATIONACTIONREQUIREMENT_H
+#endif // LOCATIONCONNECTIONREQUIREMENT_H

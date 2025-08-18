@@ -49,24 +49,25 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
     MessageReceiverType type = MessageHelper::stringToType( root[ "type" ].asString() );
     Json::Value payload = root[ "payload" ];
     switch ( type ) {
-    case MessageReceiverType::COMBAT_ROOM_CREATE:
-    case MessageReceiverType::COMBAT_ROOM_ENTER:
-    case MessageReceiverType::COMBAT_ROOM_EXIT:
-    case MessageReceiverType::CHARACTER_TRADE_DENIZEN:
-    case MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
-    case MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
-    case MessageReceiverType::CHARACTER_EQUIP_ITEM:
-    case MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
-    case MessageReceiverType::CHARACTER_ACTION_UPDATE:
-        locationInstance->handleCharacterMessage( sessionId, type, payload );
-        break;
+        case MessageReceiverType::COMBAT_ROOM_CREATE:
+        case MessageReceiverType::COMBAT_ROOM_ENTER:
+        case MessageReceiverType::COMBAT_ROOM_EXIT:
+        case MessageReceiverType::CHARACTER_INTERACT_DENIZEM:
+        case MessageReceiverType::CHARACTER_TRADE_DENIZEN:
+        case MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
+        case MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
+        case MessageReceiverType::CHARACTER_EQUIP_ITEM:
+        case MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
+        case MessageReceiverType::CHARACTER_ACTION_UPDATE:
+            locationInstance->handleCharacterMessage( sessionId, type, payload );
+            break;
 
-    case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
-        regionInstance->handleCharacterMessage( sessionId, type, payload );
-        break;
+        case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
+            regionInstance->handleCharacterMessage( sessionId, type, payload );
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 }
 

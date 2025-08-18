@@ -20,6 +20,8 @@
     align-items: center;
     gap: 8px;
     padding: 8px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .quest-details {

@@ -4,7 +4,8 @@
             "type": "animal",
             "creatures": [
                 "rat",
-                "cave_rat"
+                "cave_rat",
+                "wolf"
             ]
         },
         {

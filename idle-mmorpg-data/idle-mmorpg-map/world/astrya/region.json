@@ -3,6 +3,7 @@
     "description": "Small island where all heroes are born.",
     "locations": [
         "heroes_path",
-        "heroes_path_cave"
+        "heroes_path_cave",
+        "heroes_path_forest"
     ]
 }

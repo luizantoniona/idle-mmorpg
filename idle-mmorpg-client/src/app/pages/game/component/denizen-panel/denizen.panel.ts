@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from "../../../../component";
@@ -9,6 +9,8 @@ import { QuestPanel } from "./quest-panel/quest.panel";
 import { TradePanel } from "./trade-panel/trade.panel";
 
 import { Character, Denizen, Location } from "../../../../model";
+
+import { WebsocketService } from "../../../../service/websocket.service";
 
 @Component({
     selector: "app-denizen-panel",
@@ -28,6 +30,12 @@ export class DenizenPanel {
     @Input() location!: Location;
     @Input() character!: Character;
 
+    private websocketService = inject(WebsocketService);
+
+    sendMessage(data: any): void {
+        this.websocketService.send(data);
+    }
+
     private _selectedDenizen: Denizen | null = null;
 
     get selectedDenizen(): Denizen | null {
@@ -40,6 +48,13 @@ export class DenizenPanel {
 
     onDenizenClick(denizen: Denizen): void {
         this._selectedDenizen = denizen;
+
+        this.sendMessage({
+            type: "CHARACTER_INTERACT_DENIZEM",
+            payload: {
+                denizenId: this._selectedDenizen?.id
+            }
+        });
     }
 
     tradeVisible = false;

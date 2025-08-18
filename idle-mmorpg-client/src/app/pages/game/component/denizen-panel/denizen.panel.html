@@ -13,7 +13,7 @@
 
         <img [src]="'/assets/denizens/' + selectedDenizen.icon" alt="{{ selectedDenizen.name }}" />
 
-        @if(selectedDenizen.trade){
+        @if(selectedDenizen.trade && (selectedDenizen.trade.sell || selectedDenizen.trade.buy)){
         <app-button text="Trade" (clickEvent)="onTradeClick()"></app-button>
         }
         @if(selectedDenizen.quests){

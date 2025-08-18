@@ -1,18 +1,18 @@
 {
     "actions": [
         {
-            "id": "mine",
+            "id": "woodcut",
             "label": "Mine copper ore from nearby rocks",
             "duration": 200,
             "requirements": [
                 {
                     "type": "equipment",
-                    "category": "pickaxe"
+                    "category": "woodaxe"
                 }
             ],
             "experience": [
                 {
-                    "skill": "mining",
+                    "skill": "woodcutting",
                     "amount": 2
                 }
             ]

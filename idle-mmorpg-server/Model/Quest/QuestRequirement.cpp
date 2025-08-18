@@ -2,8 +2,10 @@
 
 namespace Model {
 
-QuestRequirement::QuestRequirement() {
-}
+QuestRequirement::QuestRequirement() :
+    _type( "" ),
+    _id( "" ),
+    _amount( 0 ) {}
 
 std::string QuestRequirement::type() const {
     return _type;
@@ -13,12 +15,12 @@ void QuestRequirement::setType( const std::string& type ) {
     _type = type;
 }
 
-std::string QuestRequirement::requirementId() const {
-    return _requirementId;
+std::string QuestRequirement::id() const {
+    return _id;
 }
 
-void QuestRequirement::setRequirementId( const std::string& requirementId ) {
-    _requirementId = requirementId;
+void QuestRequirement::setId( const std::string& id ) {
+    _id = id;
 }
 
 int QuestRequirement::amount() const {

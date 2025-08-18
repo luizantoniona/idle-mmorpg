@@ -1,4 +1,4 @@
 export type LocationConnection = {
     destination: string;
-    direction: string;
+    label: string;
 };

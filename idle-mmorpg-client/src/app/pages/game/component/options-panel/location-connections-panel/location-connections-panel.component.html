@@ -2,7 +2,7 @@
     <h2>Location Connections</h2>
     @if(location && location.connections && location.connections.length) {
     @for(connection of location.connections; track connection.destination) {
-    <app-button [text]="connection.destination" (clickEvent)="onConnectionClick(connection.destination)">
+    <app-button [text]="connection.label" (clickEvent)="onConnectionClick(connection.destination)">
     </app-button>
     }
     } @else {

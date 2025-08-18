@@ -14,7 +14,7 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
 
     auto& equipments = character->equipment();
 
-    std::vector<Model::CharacterEquipmentItem*> slots = {
+    std::vector<Model::CharacterEquipmentItem*> characterSlot = {
         &equipments.helmet(),
         &equipments.armor(),
         &equipments.leg(),
@@ -30,7 +30,7 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
         &equipments.shovel(),
         &equipments.sickle() };
 
-    for ( auto* slot : slots ) {
+    for ( auto* slot : characterSlot ) {
         const auto* item = slot->item();
         if ( !item ) {
             continue;

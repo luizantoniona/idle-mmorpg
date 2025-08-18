@@ -173,6 +173,11 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
             Core::System::EquipmentSystem::characterEquipItem( sessionId, character, payload );
             break;
 
+        case Message::MessageReceiverType::CHARACTER_INTERACT_DENIZEM: {
+            std::string denizemId = payload[ "denizenId" ].asString();
+            Core::System::QuestSystem::updateTalkQuest( sessionId, character, denizemId );
+            break;
+        }
         case Message::MessageReceiverType::CHARACTER_TRADE_DENIZEN:
             Core::System::TradeSystem::characterTradeDenizen( sessionId, character, _location, payload );
             break;

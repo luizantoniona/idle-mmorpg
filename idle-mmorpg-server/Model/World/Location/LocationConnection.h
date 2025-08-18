@@ -5,6 +5,8 @@
 
 #include <string>
 
+#include "LocationConnectionRequirement.h"
+
 namespace Model {
 
 class LocationConnection {
@@ -16,12 +18,21 @@ public:
     std::string destination() const;
     void setDestination( const std::string& destination );
 
-    std::string direction() const;
-    void setDirection( const std::string& direction );
+    std::string structure() const;
+    void setStructure( const std::string& structure );
+
+    std::string label() const;
+    void setLabel( const std::string& label );
+
+    std::vector<LocationConnectionRequirement> requirements() const;
+    void setRequirements( const std::vector<LocationConnectionRequirement>& requirements );
+    void addRequirement( const LocationConnectionRequirement& requirement );
 
 private:
     std::string _destination;
-    std::string _direction;
+    std::string _structure;
+    std::string _label;
+    std::vector<LocationConnectionRequirement> _requirements;
 };
 
 } // namespace Model

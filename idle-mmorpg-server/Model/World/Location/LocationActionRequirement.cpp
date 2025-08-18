@@ -5,9 +5,7 @@ namespace Model {
 LocationActionRequirement::LocationActionRequirement() :
     _type( "" ),
     _id( "" ),
-    _level( 0 ),
-    _category( "" ) {
-}
+    _amount( 0 ) {}
 
 std::string LocationActionRequirement::type() const {
     return _type;
@@ -25,20 +23,12 @@ void LocationActionRequirement::setId( const std::string& id ) {
     _id = id;
 }
 
-int LocationActionRequirement::level() const {
-    return _level;
+int LocationActionRequirement::amount() const {
+    return _amount;
 }
 
-void LocationActionRequirement::setLevel( int level ) {
-    _level = level;
-}
-
-std::string LocationActionRequirement::category() const {
-    return _category;
-}
-
-void LocationActionRequirement::setCategory( const std::string& category ) {
-    _category = category;
+void LocationActionRequirement::setAmount( int amount ) {
+    _amount = amount;
 }
 
 } // namespace Model

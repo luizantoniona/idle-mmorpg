@@ -13,8 +13,7 @@ namespace Core::System {
 
 CombatSystem::CombatSystem( Model::Location* location ) :
     _location( location ),
-    _progressionSystem() {
-}
+    _progressionSystem() {}
 
 void CombatSystem::computeCombatActionDuration( Model::Character* character ) {
     double speed = character->combatAttributes().speed();
@@ -124,19 +123,24 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newStamina = std::max( 0.0, newStamina );
     creature->vitals().setStamina( newStamina );
 
+    bool hasShieldEquipped = ( character->equipment().leftHand().item() && character->equipment().leftHand().item()->category() == "shield" ) ||
+                             ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
+
     int evasionLevel = character->skills().skillLevel( "evasion" );
     int resilienceLevel = character->skills().skillLevel( "resilience" );
 
-    double diff = creature->accuracy() - ( character->combatAttributes().evasion() + character->attributes().dexterity() );
-    double hitChance = 0.5 + diff * 0.03;
-    hitChance -= evasionLevel * 0.005;
-    hitChance = std::clamp( hitChance, 0.05, 0.95 );
+    if ( !hasShieldEquipped ) {
+        double diff = creature->accuracy() - ( character->combatAttributes().evasion() + character->attributes().dexterity() );
+        double hitChance = 0.5 + diff * 0.03;
+        hitChance -= evasionLevel * 0.005;
+        hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
-    double roll = static_cast<double>( rand() ) / RAND_MAX;
-    if ( roll > hitChance ) {
-        std::cout << "Attack missed!" << std::endl;
-        _progressionSystem.applyExperience( sessionId, character, "evasion", creature->accuracy() );
-        return;
+        double roll = static_cast<double>( rand() ) / RAND_MAX;
+        if ( roll > hitChance ) {
+            std::cout << "Attack missed due to evasion!" << std::endl;
+            _progressionSystem.applyExperience( sessionId, character, "evasion", creature->accuracy() );
+            return;
+        }
     }
 
     int minAtk = static_cast<int>( creature->minAttack() );
@@ -147,9 +151,6 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     damage *= ( 1.0 - resilienceLevel * 0.005 );
     damage = std::max( 0.0, damage );
 
-    bool hasShieldEquipped = ( character->equipment().leftHand().item() && character->equipment().leftHand().item()->category() == "shield" ) ||
-                             ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
-
     if ( hasShieldEquipped ) {
         int shieldLevel = character->skills().skillLevel( "shield_mastery" );
         double blockChance = 0.05 + 0.05 * shieldLevel;
@@ -158,9 +159,11 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         double blockRoll = static_cast<double>( rand() ) / RAND_MAX;
         if ( blockRoll < blockChance ) {
             std::cout << "Attack blocked by shield!" << std::endl;
-            int xpBlock = std::max( 1, static_cast<int>( damage * 0.5 ) );
+            int xpBlock = std::max( 1, static_cast<int>( damage ) );
             _progressionSystem.applyExperience( sessionId, character, "shield_mastery", xpBlock );
-            damage *= 0.5;
+            double reduction = 0.5 + 0.005 * shieldLevel;
+            reduction = std::clamp( reduction, 0.05, 0.95 );
+            damage *= ( 1.0 - reduction );
         }
     }
 
@@ -231,29 +234,29 @@ std::vector<std::string> CombatSystem::combatSkill( Model::Character* character 
     }
 
     auto getSkillForWeapon = []( const Model::Item* weapon ) -> std::string {
-        if ( !weapon ) {
-            return "";
-        }
+                                 if ( !weapon ) {
+                                     return "";
+                                 }
 
-        const std::string& category = weapon->category();
-        if ( category == "sword" ) {
-            return "sword_mastery";
-        }
+                                 const std::string& category = weapon->category();
+                                 if ( category == "sword" ) {
+                                     return "sword_mastery";
+                                 }
 
-        if ( category == "axe" ) {
-            return "axe_mastery";
-        }
+                                 if ( category == "axe" ) {
+                                     return "axe_mastery";
+                                 }
 
-        if ( category == "club" ) {
-            return "club_mastery";
-        }
+                                 if ( category == "club" ) {
+                                     return "club_mastery";
+                                 }
 
-        if ( category == "dagger" ) {
-            return "dagger_mastery";
-        }
+                                 if ( category == "dagger" ) {
+                                     return "dagger_mastery";
+                                 }
 
-        return "";
-    };
+                                 return "";
+                             };
 
     std::string leftSkill = getSkillForWeapon( leftHand );
     std::string rightSkill = getSkillForWeapon( rightHand );

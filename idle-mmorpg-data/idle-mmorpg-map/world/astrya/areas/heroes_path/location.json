@@ -10,13 +10,25 @@
     "connections": [
         {
             "destination": "heroes_path_cave",
-            "direction": "down",
             "label": "Enter the small cave",
-            "requirements": []
+            "structure": "",
+            "requirements": [
+                {
+                    "type": "quest",
+                    "id": "guardian_heroes_path_01"
+                }
+            ]
         },
         {
-            "destination": "teste",
-            "direction": "up"
+            "destination": "heroes_path_forest",
+            "label": "Enter the nearby forest",
+            "structure": "",
+            "requirements": [
+                {
+                    "type": "quest",
+                    "id": "guardian_heroes_path_01"
+                }
+            ]
         }
     ]
 }

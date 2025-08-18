@@ -1,11 +1,11 @@
 {
-    "id": "heroes_path_cave",
-    "name": "Heroes Path Cave",
-    "description": "A small cave with mysterious echoes and ancient markings.",
+    "id": "heroes_path_forest",
+    "name": "Heroes Path Forest",
+    "description": "A forest filled with Wolves and trees.",
     "coordinates": {
-        "x": 0,
+        "x": 1,
         "y": 0,
-        "z": -1
+        "z": 0
     },
     "connections": [
         {

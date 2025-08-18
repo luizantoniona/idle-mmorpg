@@ -12,15 +12,15 @@ public:
     std::string type() const;
     void setType( const std::string& type );
 
-    std::string requirementId() const;
-    void setRequirementId( const std::string& requirementId );
+    std::string id() const;
+    void setId( const std::string& id );
 
     int amount() const;
     void setAmount( int amount );
 
 private:
     std::string _type;
-    std::string _requirementId;
+    std::string _id;
     int _amount;
 };
 

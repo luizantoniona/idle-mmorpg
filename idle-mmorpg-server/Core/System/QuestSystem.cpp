@@ -179,7 +179,16 @@ void QuestSystem::updateItemQuest( const std::string& sessionId, Model::Characte
 }
 
 void QuestSystem::updateTalkQuest( const std::string& sessionId, Model::Character* character, const std::string& denizenId ) {
-    // TODO IMPLEMENT TALK QUESTS UPDATE
+    for ( auto& quest : character->quests().proceeding() ) {
+
+        if ( quest.type() == "talk" && !quest.finished() ) {
+
+            if ( quest.objectiveId() == denizenId ) {
+                quest.setFinished( true );
+                NotificationSystem::notifyCharacterQuests( sessionId, character );
+            }
+        }
+    }
 }
 
 } // namespace Core::System

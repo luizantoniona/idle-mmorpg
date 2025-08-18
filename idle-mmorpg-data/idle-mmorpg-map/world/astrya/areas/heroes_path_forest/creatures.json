@@ -1,0 +1,9 @@
+{
+    "creatures": [
+        {
+            "id": "wolf",
+            "min": 1,
+            "max": 2
+        }
+    ]
+}
