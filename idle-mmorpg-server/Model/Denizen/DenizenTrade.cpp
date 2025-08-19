@@ -10,11 +10,15 @@ Json::Value DenizenTrade::toJson() {
     Json::Value buyArray;
 
     for ( auto& item : sellItems() ) {
-        sellArray.append( item.item()->toJson() );
+        if ( item.item() ) {
+            sellArray.append( item.item()->toJson() );
+        }
     }
 
     for ( auto& item : buyItems() ) {
-        buyArray.append( item.item()->toJson() );
+        if ( item.item() ) {
+            buyArray.append( item.item()->toJson() );
+        }
     }
 
     root[ "sell" ] = sellArray;
