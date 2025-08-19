@@ -85,7 +85,7 @@
                     "description": "The Guardian mentions a man working in the nearby cave who might have useful information. Your task is to visit the cave and talk to him, learning more about the world and possible challenges ahead.",
                     "type": "talk",
                     "objectiveId": "cave_man_heroes_path_cave",
-                    "amount": 1,
+                    "amount": 0,
                     "requirements": [
                         {
                             "type": "quest",
@@ -106,7 +106,7 @@
                     "description": "The Guardian tells you about a lumberjack working in the nearby forest. He asks you to go and talk to him. The lumberjack might have resources or valuable tips for your journey along the Hero's Path.",
                     "type": "talk",
                     "objectiveId": "lumberjack_heros_path_forest",
-                    "amount": 1,
+                    "amount": 0,
                     "requirements": [
                         {
                             "type": "quest",
