@@ -27,7 +27,7 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "wooden_woodaxe",
+                            "id": "woodaxe",
                             "amount": 1
                         }
                     ]
@@ -48,7 +48,7 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "wooden_woodaxe",
+                            "id": "",
                             "amount": 1
                         }
                     ]

@@ -33,7 +33,7 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "wooden_sword",
+                            "id": "iron_sword",
                             "amount": 1
                         }
                     ]

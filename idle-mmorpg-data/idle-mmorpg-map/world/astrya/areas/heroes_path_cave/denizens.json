@@ -27,7 +27,7 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "wooden_pickaxe",
+                            "id": "pickaxe",
                             "amount": 1
                         }
                     ]
@@ -48,7 +48,7 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "wooden_pickaxe",
+                            "id": "",
                             "amount": 1
                         }
                     ]
