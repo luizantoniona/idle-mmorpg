@@ -4,6 +4,7 @@
 #include <Core/Manager/CreatureManager.h>
 #include <Core/Manager/ItemManager.h>
 #include <Core/Manager/SkillManager.h>
+#include <Core/Manager/SpellManager.h>
 #include <Core/Manager/WorldManager.h>
 #include <Database/Database.h>
 
@@ -13,6 +14,7 @@ constexpr const char* DATABASE_PATH = "../../../database/server_data";
 constexpr const char* CREATURE_PATH = "../../../idle-mmorpg-data/idle-mmorpg-creature/";
 constexpr const char* ITEM_PATH = "../../../idle-mmorpg-data/idle-mmorpg-item/";
 constexpr const char* SKILL_PATH = "../../../idle-mmorpg-data/idle-mmorpg-skill/";
+constexpr const char* SPELL_PATH = "../../../idle-mmorpg-data/idle-mmorpg-spell/";
 constexpr const char* MAP_PATH = "../../../idle-mmorpg-data/idle-mmorpg-map/";
 } // namespace
 
@@ -23,6 +25,7 @@ int main() {
     Commons::Singleton<Core::Manager::ItemManager>::instance().initialize( ITEM_PATH );
     Commons::Singleton<Core::Manager::CreatureManager>::instance().initialize( CREATURE_PATH );
     Commons::Singleton<Core::Manager::SkillManager>::instance().initialize( SKILL_PATH );
+    Commons::Singleton<Core::Manager::SpellManager>::instance().initialize( SPELL_PATH );
     Commons::Singleton<Core::Manager::WorldManager>::instance().initialize( MAP_PATH );
 
     drogon::app()

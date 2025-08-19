@@ -2,14 +2,13 @@
     "id": "lightning_bolt",
     "name": "Lightning Bolt",
     "description": "Strikes the target with a bolt of lightning, dealing electrical damage.",
+    "icon": "",
     "type": "attack",
-    "manaCost": 8,
-    "cooldown": 2,
-    "effects": [
-        {
-            "type": "damage",
-            "element": "electric",
-            "value": 12
-        }
-    ]
+    "manaCost": 10,
+    "cooldown": 5,
+    "effect": {
+        "type": "damage",
+        "element": "electric",
+        "value": 10
+    }
 }
