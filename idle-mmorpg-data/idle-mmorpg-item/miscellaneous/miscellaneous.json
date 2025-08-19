@@ -1,8 +1,13 @@
 {
     "categories": [
         {
-            "category": "utility",
-            "path": "utility",
+            "category": "ore",
+            "path": "ores",
+            "items": []
+        },
+        {
+            "category": "bait",
+            "path": "baits",
             "items": [
                 "worm"
             ]
