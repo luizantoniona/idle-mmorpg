@@ -1,0 +1,9 @@
+{
+    "id": "shovel",
+    "name": "Shovel",
+    "description": "A normal shovel used to dig holes.",
+    "icon": "tools/shovel.gif",
+    "rarity": "common",
+    "value": 10,
+    "modifiers": []
+}

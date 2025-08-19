@@ -1,8 +1,0 @@
-{
-    "id": "wooden_pickaxe",
-    "name": "Wooden Pickaxe",
-    "description": "A basic pickaxe made of wood.",
-    "rarity": "common",
-    "value": 10,
-    "modifiers": []
-}

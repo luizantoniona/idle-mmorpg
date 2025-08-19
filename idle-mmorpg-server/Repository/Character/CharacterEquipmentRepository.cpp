@@ -34,9 +34,10 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
             ring_item_id = ?,
             pickaxe_item_id = ?,
             woodaxe_item_id = ?,
-            fishrod_item_id = ?,
+            fishingrod_item_id = ?,
             shovel_item_id = ?,
-            sickle_item_id = ?
+            sickle_item_id = ?,
+            rope_item_id = ?
         WHERE id_character = ?
     )SQL";
 
@@ -52,10 +53,11 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
     query.bindText( 9, equipment.ring().id() );
     query.bindText( 10, equipment.pickaxe().id() );
     query.bindText( 11, equipment.woodaxe().id() );
-    query.bindText( 12, equipment.fishrod().id() );
+    query.bindText( 12, equipment.fishingrod().id() );
     query.bindText( 13, equipment.shovel().id() );
     query.bindText( 14, equipment.sickle().id() );
-    query.bindInt( 15, idCharacter );
+    query.bindText( 15, equipment.rope().id() );
+    query.bindInt( 16, idCharacter );
 
     return query.exec();
 }
@@ -74,9 +76,10 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
             ring_item_id,
             pickaxe_item_id,
             woodaxe_item_id,
-            fishrod_item_id,
+            fishingrod_item_id,
             shovel_item_id,
-            sickle_item_id
+            sickle_item_id,
+            rope_item_id,
         FROM character_equipment
         WHERE id_character = ?
     )SQL";
@@ -109,9 +112,10 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
     equipment->setRing( makeItem( query.getColumnText( 8 ) ) );
     equipment->setPickaxe( makeItem( query.getColumnText( 9 ) ) );
     equipment->setWoodaxe( makeItem( query.getColumnText( 10 ) ) );
-    equipment->setFishrod( makeItem( query.getColumnText( 11 ) ) );
+    equipment->setFishingrod( makeItem( query.getColumnText( 11 ) ) );
     equipment->setShovel( makeItem( query.getColumnText( 12 ) ) );
     equipment->setSickle( makeItem( query.getColumnText( 13 ) ) );
+    equipment->setRope( makeItem( query.getColumnText( 14 ) ) );
 
     return equipment;
 }

@@ -1,9 +1,0 @@
-{
-    "id": "worm",
-    "name": "Worm",
-    "description": "Worm used to fish.",
-    "icon": "miscellaneous/utility/worm.gif",
-    "rarity": "common",
-    "value": 1,
-    "modifiers": []
-}

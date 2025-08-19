@@ -1,10 +1,38 @@
 {
     "categories": [
         {
+            "category": "fishingrod",
+            "path": "fishingrods",
+            "items": [
+                "fishingrod"
+            ]
+        },
+        {
             "category": "pickaxe",
             "path": "pickaxes",
             "items": [
-                "wooden_pickaxe"
+                "pickaxe"
+            ]
+        },
+        {
+            "category": "rope",
+            "path": "ropes",
+            "items": [
+                "rope"
+            ]
+        },
+        {
+            "category": "shovel",
+            "path": "shovels",
+            "items": [
+                "shovel"
+            ]
+        },
+        {
+            "category": "woodaxe",
+            "path": "woodaxes",
+            "items": [
+                "woodaxe"
             ]
         }
     ]

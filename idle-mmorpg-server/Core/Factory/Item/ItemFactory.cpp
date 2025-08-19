@@ -26,18 +26,17 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
             std::string itemPath = typesPath + categoryPath;
 
             for ( const Json::Value& itemEntry : categoryEntry[ "items" ] ) {
-                std::string itemId = itemEntry.asString();
-                std::string itemFilePath = itemPath + "/" + itemId + ".json";
+                std::string itemFile = itemEntry.asString();
+                std::string itemFilePath = itemPath + "/" + itemFile + ".json";
 
                 auto item = createItem( itemFilePath );
                 if ( item ) {
-                    item->setId( itemId );
                     item->setType( type );
                     item->setCategory( category );
-                    items[itemId] = std::move( item );
+                    items[item->id()] = std::move( item );
 
                 } else {
-                    std::cerr << "Failed to load item: " << itemId << " from " << itemFilePath << std::endl;
+                    std::cerr << "Failed to load item: " << itemFilePath << " from " << itemFilePath << std::endl;
                 }
             }
         }
@@ -54,6 +53,7 @@ std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPat
     Json::Value itemJson = Commons::JsonHelper::loadJsonFile( itemPath );
 
     auto item = std::make_unique<Model::Item>();
+    item->setId( itemJson[ "id" ].asString() );
     item->setName( itemJson[ "name" ].asString() );
     item->setDescription( itemJson[ "description" ].asString() );
     item->setRarity( itemJson[ "rarity" ].asString() );

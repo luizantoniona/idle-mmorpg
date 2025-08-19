@@ -14,10 +14,10 @@ CharacterEquipment::CharacterEquipment() :
     _ring(),
     _pickaxe(),
     _woodaxe(),
-    _fishrod(),
+    _fishingrod(),
     _shovel(),
-    _sickle() {
-}
+    _sickle(),
+    _rope() {}
 
 Json::Value CharacterEquipment::toJson() {
     Json::Value root;
@@ -32,9 +32,10 @@ Json::Value CharacterEquipment::toJson() {
     root[ "ring" ] = ring().toJson();
     root[ "pickaxe" ] = pickaxe().toJson();
     root[ "woodaxe" ] = woodaxe().toJson();
-    root[ "fishrod" ] = fishrod().toJson();
+    root[ "fishingrod" ] = fishingrod().toJson();
     root[ "shovel" ] = shovel().toJson();
     root[ "sickle" ] = sickle().toJson();
+    root[ "rope" ] = rope().toJson();
     return root;
 }
 
@@ -126,12 +127,12 @@ void CharacterEquipment::setWoodaxe( const CharacterEquipmentItem& woodaxe ) {
     _woodaxe = woodaxe;
 }
 
-CharacterEquipmentItem& CharacterEquipment::fishrod() {
-    return _fishrod;
+CharacterEquipmentItem& CharacterEquipment::fishingrod() {
+    return _fishingrod;
 }
 
-void CharacterEquipment::setFishrod( const CharacterEquipmentItem& fishrod ) {
-    _fishrod = fishrod;
+void CharacterEquipment::setFishingrod( const CharacterEquipmentItem& fishingrod ) {
+    _fishingrod = fishingrod;
 }
 
 CharacterEquipmentItem& CharacterEquipment::shovel() {
@@ -148,6 +149,14 @@ CharacterEquipmentItem& CharacterEquipment::sickle() {
 
 void CharacterEquipment::setSickle( const CharacterEquipmentItem& sickle ) {
     _sickle = sickle;
+}
+
+CharacterEquipmentItem CharacterEquipment::rope() const {
+    return _rope;
+}
+
+void CharacterEquipment::setRope( const CharacterEquipmentItem& rope ) {
+    _rope = rope;
 }
 
 } // namespace Model

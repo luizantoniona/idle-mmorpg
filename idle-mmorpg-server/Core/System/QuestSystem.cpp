@@ -184,6 +184,7 @@ void QuestSystem::updateTalkQuest( const std::string& sessionId, Model::Characte
         if ( quest.type() == "talk" && !quest.finished() ) {
 
             if ( quest.objectiveId() == denizenId ) {
+                quest.setCurrentAmount( 1 );
                 quest.setFinished( true );
                 NotificationSystem::notifyCharacterQuests( sessionId, character );
             }
