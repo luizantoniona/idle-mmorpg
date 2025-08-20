@@ -8,7 +8,6 @@ import { CharacterEquipmentPanel } from './component';
 import { CharacterInventoryPanel } from './component';
 import { CharacterSkillsPanel } from './component';
 import { CharacterWalletPanel } from './component';
-import { LocationDescriptionPanel } from './component';
 import { MainPanel } from './component';
 import { OptionsPanel } from './component';
 
@@ -28,7 +27,6 @@ import { WebsocketService } from '../../service/websocket.service';
         CharacterInventoryPanel,
         CharacterSkillsPanel,
         CharacterWalletPanel,
-        LocationDescriptionPanel,
         MainPanel,
         OptionsPanel,
     ],

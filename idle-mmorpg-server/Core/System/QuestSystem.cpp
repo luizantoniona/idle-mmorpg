@@ -134,6 +134,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterQuests( sessionId, character );
+    NotificationSystem::notifyLocationConnections( sessionId, character, location );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 

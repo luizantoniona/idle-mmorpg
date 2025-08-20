@@ -22,10 +22,18 @@ public:
     std::string description() const;
     void setDescription( const std::string& description );
 
+    int x() const;
+    void setX( int x );
+
+    int y() const;
+    void setY( int y );
+
 private:
     std::string _id;
     std::string _label;
     std::string _description;
+    int _x;
+    int _y;
 };
 
 } // namespace Model

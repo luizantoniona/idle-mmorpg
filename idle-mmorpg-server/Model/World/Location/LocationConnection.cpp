@@ -6,12 +6,17 @@ LocationConnection::LocationConnection() :
     _destination( "" ),
     _structure( "" ),
     _label( "" ),
-    _requirements( {} ) {}
+    _x( 0 ),
+    _y( 0 ),
+    _requirements( {} ) {
+}
 
 Json::Value LocationConnection::toJson() {
     Json::Value root;
     root[ "destination" ] = destination();
     root[ "label" ] = label();
+    root[ "x" ] = x();
+    root[ "y" ] = y();
     return root;
 }
 
@@ -37,6 +42,22 @@ std::string LocationConnection::label() const {
 
 void LocationConnection::setLabel( const std::string& label ) {
     _label = label;
+}
+
+int LocationConnection::x() const {
+    return _x;
+}
+
+void LocationConnection::setX( int x ) {
+    _x = x;
+}
+
+int LocationConnection::y() const {
+    return _y;
+}
+
+void LocationConnection::setY( int y ) {
+    _y = y;
 }
 
 std::vector<LocationConnectionRequirement> LocationConnection::requirements() const {

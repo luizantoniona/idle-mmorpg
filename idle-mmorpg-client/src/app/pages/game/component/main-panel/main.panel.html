@@ -2,6 +2,8 @@
 
     @if(!showCombat){
 
+    <app-location-panel [location]="location!"></app-location-panel>
+
     <div class="location-row">
         <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"></app-location-actions-panel>
         <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>

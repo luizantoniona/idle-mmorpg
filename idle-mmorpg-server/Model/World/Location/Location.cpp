@@ -1,16 +1,5 @@
 #include "Location.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_NAME = "name";
-constexpr const char* JSON_DESCRIPTION = "description";
-constexpr const char* JSON_X = "x";
-constexpr const char* JSON_Y = "y";
-constexpr const char* JSON_Z = "z";
-constexpr const char* JSON_STRUCTURES = "structures";
-constexpr const char* JSON_CONNECTIONS = "connections";
-} // namespace
-
 namespace Model {
 
 Location::Location() :
@@ -20,6 +9,8 @@ Location::Location() :
     _x( 0 ),
     _y( 0 ),
     _z( 0 ),
+    _tileSizeX( 0 ),
+    _tileSizeY( 0 ),
     _denizens( {} ),
     _actions( {} ),
     _creatures( {} ),
@@ -29,15 +20,17 @@ Location::Location() :
 
 Json::Value Location::toJson() const {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_NAME ] = name();
-    root[ JSON_DESCRIPTION ] = description();
-    root[ JSON_X ] = x();
-    root[ JSON_Y ] = y();
-    root[ JSON_Z ] = z();
+    root[ "id" ] = id();
+    root[ "name" ] = name();
+    root[ "description" ] = description();
+    root[ "x" ] = x();
+    root[ "y" ] = y();
+    root[ "z" ] = z();
+    root[ "sizeX" ] = tileSizeX();
+    root[ "sizeY" ] = tileSizeY();
 
     for ( auto& structure : structures() ) {
-        root[JSON_STRUCTURES].append( structure.toJson() );
+        root[ "structures" ].append( structure.toJson() );
     }
 
     return root;
@@ -89,6 +82,22 @@ int Location::z() const {
 
 void Location::setZ( int z ) {
     _z = z;
+}
+
+int Location::tileSizeX() const {
+    return _tileSizeX;
+}
+
+void Location::setTileSizeX( int tileSizeX ) {
+    _tileSizeX = tileSizeX;
+}
+
+int Location::tileSizeY() const {
+    return _tileSizeY;
+}
+
+void Location::setTileSizeY( int tileSizeY ) {
+    _tileSizeY = tileSizeY;
 }
 
 std::vector<Denizen> Location::denizens() const {

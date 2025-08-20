@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, inject, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, inject, Output } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { ButtonComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { ButtonComponent } from "../../../../component";
+import { PanelVerticalComponent } from "../../../../component";
 
-import { Location } from '../../../../model';
+import { Location } from "../../../../model";
 
-import { WebsocketService } from '../../../../service/websocket.service';
+import { WebsocketService } from "../../../../service/websocket.service";
 
 @Component({
-    selector: 'app-location-actions-panel',
-    templateUrl: './location-actions.component.html',
-    styleUrl: './location-actions.component.scss',
+    selector: "app-location-actions-panel",
+    templateUrl: "./location-actions.panel.html",
+    styleUrls: ["./location-actions.panel.scss"],
     imports: [
         CommonModule,
         ButtonComponent,

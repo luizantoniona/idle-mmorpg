@@ -1,23 +1,22 @@
 #include "LocationStructure.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_LABEL = "label";
-constexpr const char* JSON_DESCRIPTION = "description";
-} // namespace
-
 namespace Model {
 
 LocationStructure::LocationStructure() :
     _id( "" ),
     _label( "" ),
-    _description( "" ) {}
+    _description( "" ),
+    _x( 0 ),
+    _y( 0 ) {
+}
 
 Json::Value LocationStructure::toJson() const {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_LABEL ] = label();
-    root[ JSON_DESCRIPTION ] = description();
+    root[ "id" ] = id();
+    root[ "label" ] = label();
+    root[ "description" ] = description();
+    root[ "x" ] = x();
+    root[ "y" ] = y();
     return root;
 }
 
@@ -43,6 +42,22 @@ std::string LocationStructure::description() const {
 
 void LocationStructure::setDescription( const std::string& description ) {
     _description = description;
+}
+
+int LocationStructure::x() const {
+    return _x;
+}
+
+void LocationStructure::setX( int x ) {
+    _x = x;
+}
+
+int LocationStructure::y() const {
+    return _y;
+}
+
+void LocationStructure::setY( int y ) {
+    _y = y;
 }
 
 } // namespace Model

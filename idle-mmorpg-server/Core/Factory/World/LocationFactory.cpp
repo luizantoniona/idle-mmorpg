@@ -23,6 +23,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     location->setId( locationJson[ "id" ].asString() );
     location->setName( locationJson[ "name" ].asString() );
     location->setDescription( locationJson[ "description" ].asString() );
+    location->setTileSizeX( locationJson[ "sizeX" ].asInt() );
+    location->setTileSizeY( locationJson[ "sizeY" ].asInt() );
 
     Json::Value coordinatesJson = locationJson[ "coordinates" ];
     location->setX( coordinatesJson[ "x" ].asInt() );
@@ -35,6 +37,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         connection.setDestination( connectionJson[ "destination" ].asString() );
         connection.setStructure( connectionJson[ "structure" ].asString() );
         connection.setLabel( connectionJson[ "label" ].asString() );
+        connection.setX( connectionJson[ "x" ].asInt() );
+        connection.setY( connectionJson[ "y" ].asInt() );
 
         Json::Value requirementsJson = connectionJson["requirements"];
         for ( const Json::Value& reqJson : requirementsJson ) {
@@ -81,6 +85,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         structure.setId( structureJson[ "id" ].asString() );
         structure.setLabel( structureJson[ "label" ].asString() );
         structure.setDescription( structureJson[ "description" ].asString() );
+        structure.setX( structureJson[ "x" ].asInt() );
+        structure.setY( structureJson[ "y" ].asInt() );
 
         location->addStructure( structure );
     }

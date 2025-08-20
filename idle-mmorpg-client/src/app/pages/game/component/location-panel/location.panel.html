@@ -1,0 +1,20 @@
+<app-panel-vertical>
+    @if(location) {
+    <h3>{{ location.name }}</h3>
+    {{ location.description }}
+
+    <div class="location-row">
+        <div class="tile-grid" [style.--rows]="location.sizeY" [style.--cols]="location.sizeX">
+            @for (row of tiles; track $index;) {
+            @for (tile of row; track $index;) {
+            <div class="tile" [ngClass]="tile.type" (click)="onTileClick(tile)">
+            </div>
+            }
+            }
+        </div>
+    </div>
+
+    } @else {
+    <app-loading></app-loading>
+    }
+</app-panel-vertical>

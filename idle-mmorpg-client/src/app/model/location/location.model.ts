@@ -7,6 +7,8 @@ export type Location = {
     id: string;
     name: string;
     description: string;
+    sizeX: number;
+    sizeY: number;
     denizens: Denizen[];
     actions: LocationAction[];
     connections: LocationConnection[];

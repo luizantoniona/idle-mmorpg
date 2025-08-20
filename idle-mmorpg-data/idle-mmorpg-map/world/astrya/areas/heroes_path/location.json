@@ -2,6 +2,8 @@
     "id": "heroes_path",
     "name": "Heroes Path",
     "description": "Where all heroes are born.",
+    "sizeX": 10,
+    "sizeY": 10,
     "coordinates": {
         "x": 0,
         "y": 0,
@@ -12,6 +14,8 @@
             "destination": "heroes_path_cave",
             "label": "Enter the small cave",
             "structure": "",
+            "x": 5,
+            "y": 5,
             "requirements": [
                 {
                     "type": "quest",
@@ -23,6 +27,8 @@
             "destination": "heroes_path_forest",
             "label": "Enter the nearby forest",
             "structure": "",
+            "x": 5,
+            "y": 0,
             "requirements": [
                 {
                     "type": "quest",

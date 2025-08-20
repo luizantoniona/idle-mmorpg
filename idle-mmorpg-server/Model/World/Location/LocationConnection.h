@@ -24,6 +24,12 @@ public:
     std::string label() const;
     void setLabel( const std::string& label );
 
+    int x() const;
+    void setX( int x );
+
+    int y() const;
+    void setY( int y );
+
     std::vector<LocationConnectionRequirement> requirements() const;
     void setRequirements( const std::vector<LocationConnectionRequirement>& requirements );
     void addRequirement( const LocationConnectionRequirement& requirement );
@@ -32,6 +38,8 @@ private:
     std::string _destination;
     std::string _structure;
     std::string _label;
+    int _x;
+    int _y;
     std::vector<LocationConnectionRequirement> _requirements;
 };
 

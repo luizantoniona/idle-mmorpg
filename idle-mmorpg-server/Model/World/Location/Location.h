@@ -38,6 +38,12 @@ public:
     int z() const;
     void setZ( int z );
 
+    int tileSizeX() const;
+    void setTileSizeX( int tileSizeX );
+
+    int tileSizeY() const;
+    void setTileSizeY( int tileSizeY );
+
     std::vector<Denizen> denizens() const;
     void setDenizens( const std::vector<Denizen>& denizens );
     void addDenizen( const Denizen& denizen );
@@ -65,6 +71,8 @@ private:
     int _x;
     int _y;
     int _z;
+    int _tileSizeX;
+    int _tileSizeY;
     std::vector<Denizen> _denizens;
     std::vector<LocationAction> _actions;
     std::vector<LocationCreature> _creatures;
