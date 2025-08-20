@@ -47,7 +47,7 @@ public:
     void setWoodaxe( const CharacterEquipmentItem& woodaxe );
 
     CharacterEquipmentItem& fishingrod();
-    void setFishrod( const CharacterEquipmentItem& fishingrod );
+    void setFishingrod( const CharacterEquipmentItem& fishingrod );
 
     CharacterEquipmentItem& shovel();
     void setShovel( const CharacterEquipmentItem& shovel );

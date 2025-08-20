@@ -79,7 +79,7 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
             fishingrod_item_id,
             shovel_item_id,
             sickle_item_id,
-            rope_item_id,
+            rope_item_id
         FROM character_equipment
         WHERE id_character = ?
     )SQL";

@@ -26,7 +26,7 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
         &equipments.ring(),
         &equipments.pickaxe(),
         &equipments.woodaxe(),
-        &equipments.fishrod(),
+        &equipments.fishingrod(),
         &equipments.shovel(),
         &equipments.sickle() };
 
@@ -139,7 +139,7 @@ void EquipmentSystem::characterEquipItem( const std::string& sessionId, Model::C
         { "ring", characterEquipments.ring() },
         { "pickaxe", characterEquipments.pickaxe() },
         { "woodaxe", characterEquipments.woodaxe() },
-        { "fishrod", characterEquipments.fishrod() },
+        { "fishingrod", characterEquipments.fishingrod() },
         { "shovel", characterEquipments.shovel() },
         { "sickle", characterEquipments.sickle() },
     };

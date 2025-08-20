@@ -39,7 +39,7 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
             std::unordered_map<std::string, Model::CharacterEquipmentItem&> slotMap = {
                 { "pickaxe", characterEquipments.pickaxe() },
                 { "woodaxe", characterEquipments.woodaxe() },
-                { "fishrod", characterEquipments.fishrod() },
+                { "fishingrod", characterEquipments.fishingrod() },
                 { "shovel", characterEquipments.shovel() },
                 { "sickle", characterEquipments.sickle() },
             };
@@ -103,7 +103,7 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
             std::unordered_map<std::string, Model::CharacterEquipmentItem&> slotMap = {
                 { "pickaxe", characterEquipments.pickaxe() },
                 { "woodaxe", characterEquipments.woodaxe() },
-                { "fishrod", characterEquipments.fishrod() },
+                { "fishingrod", characterEquipments.fishingrod() },
                 { "shovel", characterEquipments.shovel() },
                 { "sickle", characterEquipments.sickle() },
             };
