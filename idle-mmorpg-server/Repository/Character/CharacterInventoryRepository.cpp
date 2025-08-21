@@ -59,12 +59,14 @@ std::unique_ptr<Model::CharacterInventory> CharacterInventoryRepository::findByC
         std::string idItem = query.getColumnText( 0 );
         int amount = query.getColumnInt( 1 );
 
-        Model::CharacterInventoryItem inventoryItem;
-        inventoryItem.setId( idItem );
-        inventoryItem.setAmount( amount );
-        inventoryItem.setItem( itemManager.itemById( idItem ) );
-
-        inventory->addItem( inventoryItem );
+        auto item = itemManager.itemById( idItem );
+        if ( item ) {
+            Model::CharacterInventoryItem inventoryItem;
+            inventoryItem.setId( idItem );
+            inventoryItem.setAmount( amount );
+            inventoryItem.setItem( item );
+            inventory->addItem( inventoryItem );
+        }
     }
 
     return inventory;

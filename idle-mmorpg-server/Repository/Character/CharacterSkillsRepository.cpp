@@ -53,13 +53,15 @@ std::unique_ptr<Model::CharacterSkills> CharacterSkillsRepository::findByCharact
         int experience = query.getColumnInt( 1 );
         int level = query.getColumnInt( 2 );
 
-        Model::CharacterSkill characterSkill;
-        characterSkill.setId( skillId );
-        characterSkill.setExperience( experience );
-        characterSkill.setLevel( level );
-        characterSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId ) );
-
-        skills->addSkill( characterSkill );
+        auto skill = Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId );
+        if ( skill ) {
+            Model::CharacterSkill characterSkill;
+            characterSkill.setId( skillId );
+            characterSkill.setExperience( experience );
+            characterSkill.setLevel( level );
+            characterSkill.setSkill( skill );
+            skills->addSkill( characterSkill );
+        }
     }
 
     return skills;

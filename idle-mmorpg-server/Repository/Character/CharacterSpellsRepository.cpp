@@ -7,8 +7,7 @@
 namespace Repository {
 
 CharacterSpellsRepository::CharacterSpellsRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterSpellsRepository::createSpells( int idCharacter ) {
     return true;
@@ -58,15 +57,20 @@ std::unique_ptr<Model::CharacterSpells> CharacterSpellsRepository::findByCharact
 
     while ( query.step() ) {
         std::string spellId = query.getColumnText( 0 );
-        Model::CharacterSpell spell;
-        spell.setId( spellId );
-        spell.setSpell( Commons::Singleton<Core::Manager::SpellManager>::instance().spellById( spellId ) );
 
-        if ( spell.spell()->type() == "healing" ) {
-            characterSpells->addHealingSpell( spell );
+        auto spell = Commons::Singleton<Core::Manager::SpellManager>::instance().spellById( spellId );
+        if ( spell ) {
+            Model::CharacterSpell characterSpell;
+            characterSpell.setId( spellId );
+            characterSpell.setSpell( spell );
+            characterSpell.setCount( spell->cooldown() );
 
-        } else if ( spell.spell()->type() == "attack" ) {
-            characterSpells->addAttackSpell( spell );
+            if ( spell->type() == "healing" ) {
+                characterSpells->addHealingSpell( characterSpell );
+
+            } else if ( spell->type() == "attack" ) {
+                characterSpells->addAttackSpell( characterSpell );
+            }
         }
     }
 
