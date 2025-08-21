@@ -233,33 +233,8 @@ std::vector<std::string> CombatSystem::combatSkill( Model::Character* character 
         return { "unarmed" };
     }
 
-    auto getSkillForWeapon = []( const Model::Item* weapon ) -> std::string {
-                                 if ( !weapon ) {
-                                     return "";
-                                 }
-
-                                 const std::string& category = weapon->category();
-                                 if ( category == "sword" ) {
-                                     return "sword_mastery";
-                                 }
-
-                                 if ( category == "axe" ) {
-                                     return "axe_mastery";
-                                 }
-
-                                 if ( category == "club" ) {
-                                     return "club_mastery";
-                                 }
-
-                                 if ( category == "dagger" ) {
-                                     return "dagger_mastery";
-                                 }
-
-                                 return "";
-                             };
-
-    std::string leftSkill = getSkillForWeapon( leftHand );
-    std::string rightSkill = getSkillForWeapon( rightHand );
+    std::string leftSkill = combatSkillByWeapon( leftHand );
+    std::string rightSkill = combatSkillByWeapon( rightHand );
 
     if ( !leftSkill.empty() ) {
         skills.push_back( leftSkill );
@@ -272,6 +247,31 @@ std::vector<std::string> CombatSystem::combatSkill( Model::Character* character 
     // TODO Add dual-wielding
 
     return skills;
+}
+
+std::string CombatSystem::combatSkillByWeapon( const Model::Item* weapon ) {
+    if ( !weapon ) {
+        return "";
+    }
+
+    const std::string& category = weapon->category();
+    if ( category == "sword" ) {
+        return "sword_mastery";
+    }
+
+    if ( category == "axe" ) {
+        return "axe_mastery";
+    }
+
+    if ( category == "club" ) {
+        return "club_mastery";
+    }
+
+    if ( category == "dagger" ) {
+        return "dagger_mastery";
+    }
+
+    return "";
 }
 
 } // namespace Core::System

@@ -86,9 +86,11 @@ std::unique_ptr<Model::CharacterQuests> CharacterQuestsRepository::findByCharact
         if ( quest.finished() ) {
             if ( claimed ) {
                 characterQuests->addFinished( quest );
+
             } else {
                 characterQuests->addProceeding( quest );
             }
+
         } else {
             characterQuests->addProceeding( quest );
         }

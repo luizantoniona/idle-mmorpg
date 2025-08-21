@@ -26,6 +26,7 @@ public:
 
 private:
     std::vector<std::string> combatSkill( Model::Character* character );
+    std::string combatSkillByWeapon( const Model::Item* weapon );
 
 private:
     Model::Location* _location;
