@@ -49,26 +49,6 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
     action.setCounter( 0 );
 }
 
-void ActionSystem::changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
-    if ( !character || !payload.isObject() || !payload.isMember( "structure" ) ) {
-        return;
-    }
-
-    std::string structureId = payload[ "structure" ].asString();
-
-    if ( character->coordinates().currentStructure() == structureId ) {
-        return;
-    }
-
-    character->coordinates().setCurrentStructure( structureId );
-    character->action().clear();
-
-    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
-    Core::System::NotificationSystem::notifyCurrentCoordinates( sessionId, character );
-    Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
-    Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
-}
-
 void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {
     if ( !character ) {
         return;
@@ -93,7 +73,7 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
                 _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
             }
 
-            if ( completedAction.id() == "rest" || completedAction.id() == "sleep" ) {
+            if ( completedAction.id() == "rest" ) {
                 regenerativeActionEffect( character );
                 NotificationSystem::notifyCharacterVitals( sessionId, character );
             }

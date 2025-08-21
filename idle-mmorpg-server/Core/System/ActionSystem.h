@@ -15,7 +15,6 @@ public:
     explicit ActionSystem( Model::Location* location );
 
     void changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
-    void changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
 
     void process( const std::string& sessionId, Model::Character* character );
 

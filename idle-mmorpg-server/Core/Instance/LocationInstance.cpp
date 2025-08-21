@@ -54,6 +54,26 @@ void LocationInstance::removeCharacter( const std::string& sessionId ) {
     _characters.erase( sessionId );
 }
 
+void LocationInstance::changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
+    if ( !character || !payload.isObject() || !payload.isMember( "structure" ) ) {
+        return;
+    }
+
+    std::string structureId = payload[ "structure" ].asString();
+
+    if ( character->coordinates().currentStructure() == structureId ) {
+        return;
+    }
+
+    character->coordinates().setCurrentStructure( structureId );
+    character->action().clear();
+
+    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+    Core::System::NotificationSystem::notifyCurrentCoordinates( sessionId, character );
+    Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
+    Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
+}
+
 void LocationInstance::createCombat( const std::string& sessionId, Model::Character* character ) {
     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
         return;
@@ -163,7 +183,7 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
 
     switch ( type ) {
         case Message::MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
-            _actionSystem.changeStructure( sessionId, character, payload );
+            changeStructure( sessionId, character, payload );
             break;
         case Message::MessageReceiverType::CHARACTER_ACTION_UPDATE:
             _actionSystem.changeAction( sessionId, character, payload );

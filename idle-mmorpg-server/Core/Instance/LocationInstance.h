@@ -24,6 +24,8 @@ public:
     bool addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );
 
+    void changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
+
     void createCombat( const std::string& sessionId, Model::Character* character );
     void enterCombat( const std::string& sessionId, Model::Character* character, const std::string& roomId );
     void exitCombat( const std::string& sessionId );
