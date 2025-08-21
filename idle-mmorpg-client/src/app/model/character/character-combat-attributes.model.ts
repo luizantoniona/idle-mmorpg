@@ -7,8 +7,6 @@ export type CharacterCombatAttributes = {
     modifierDefense: number;
     speed: number;
     modifierSpeed: number;
-    evasion: number;
-    modifierEvasion: number;
     criticalChance: number;
     modifierCriticalChance: number;
     criticalMultiplier: number;

@@ -74,9 +74,6 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
                 } else if ( targetId == "defense" ) {
                     character->combatAttributes().modifyDefense( value );
 
-                } else if ( targetId == "evasion" ) {
-                    character->combatAttributes().modifyEvasion( value );
-
                 } else if ( targetId == "criticalChance" ) {
                     character->combatAttributes().modifyCriticalChance( value );
 

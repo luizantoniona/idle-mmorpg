@@ -15,13 +15,6 @@
             ]
         },
         {
-            "category": "club",
-            "path": "clubs",
-            "items": [
-                "01_iron_club"
-            ]
-        },
-        {
             "category": "shield",
             "path": "shields",
             "items": [

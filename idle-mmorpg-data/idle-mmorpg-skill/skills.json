@@ -1,48 +1,60 @@
 {
     "skills": [
         {
-            "id": "evasion",
-            "path": "skills/combat/evasion.json"
+            "id": "meditation",
+            "path": "skills/activity/meditation.json"
         },
         {
-            "id": "resilience",
-            "path": "skills/combat/resilience.json"
+            "id": "resting",
+            "path": "skills/activity/resting.json"
+        },
+        {
+            "id": "running",
+            "path": "skills/activity/running.json"
+        },
+        {
+            "id": "agility",
+            "path": "skills/combat/agility.json"
+        },
+        {
+            "id": "clarity",
+            "path": "skills/combat/clarity.json"
+        },
+        {
+            "id": "endurance",
+            "path": "skills/combat/endurance.json"
+        },
+        {
+            "id": "focus",
+            "path": "skills/combat/focus.json"
         },
         {
             "id": "unarmed",
             "path": "skills/combat/unarmed.json"
         },
         {
-            "id": "mining",
-            "path": "skills/gathering/mining.json"
-        },
-        {
             "id": "fishing",
             "path": "skills/gathering/fishing.json"
+        },
+        {
+            "id": "foraging",
+            "path": "skills/gathering/foraging.json"
+        },
+        {
+            "id": "herbalism",
+            "path": "skills/gathering/herbalism.json"
+        },
+        {
+            "id": "mining",
+            "path": "skills/gathering/mining.json"
         },
         {
             "id": "woodcutting",
             "path": "skills/gathering/woodcutting.json"
         },
         {
-            "id": "resting",
-            "path": "skills/recovery/resting.json"
-        },
-        {
-            "id": "sleeping",
-            "path": "skills/recovery/sleeping.json"
-        },
-        {
-            "id": "running",
-            "path": "skills/training/running.json"
-        },
-        {
             "id": "axe_mastery",
             "path": "skills/weapon/axe_mastery.json"
-        },
-        {
-            "id": "club_mastery",
-            "path": "skills/weapon/club_mastery.json"
         },
         {
             "id": "dagger_mastery",

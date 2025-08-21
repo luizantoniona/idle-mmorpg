@@ -1,7 +1,7 @@
 {
-    "id": "woodcutting",
-    "name": "Woodcutting",
-    "description": "Chop down trees to gather wood.",
+    "id": "herbalism",
+    "name": "Herbalism",
+    "description": "Identify and harvest herbs for potions, remedies, or magical uses.",
     "type": "gathering",
     "milestones": [
         {
@@ -9,7 +9,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -19,7 +19,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -29,7 +29,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -39,7 +39,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -49,7 +49,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -59,7 +59,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -69,7 +69,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]
@@ -79,7 +79,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "intelligence",
                     "value": 1
                 }
             ]

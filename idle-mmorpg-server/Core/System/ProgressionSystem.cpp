@@ -118,9 +118,6 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
         } else if ( id == "defense" ) {
             combat.setBaseDefense( combat.baseDefense() + value );
 
-        } else if ( id == "evasion" ) {
-            combat.setBaseEvasion( combat.baseEvasion() + value );
-
         } else if ( id == "critical_chance" ) {
             combat.setBaseCriticalChance( combat.baseCriticalChance() + value );
 

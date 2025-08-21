@@ -78,10 +78,6 @@ std::vector<std::string> TrainingSystem::combatSkill( Model::Character* characte
             return "axe_mastery";
         }
 
-        if ( category == "club" ) {
-            return "club_mastery";
-        }
-
         if ( category == "dagger" ) {
             return "dagger_mastery";
         }

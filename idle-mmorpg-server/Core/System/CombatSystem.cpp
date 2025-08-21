@@ -126,13 +126,13 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     bool hasShieldEquipped = ( character->equipment().leftHand().item() && character->equipment().leftHand().item()->category() == "shield" ) ||
                              ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
 
-    int evasionLevel = character->skills().skillLevel( "evasion" );
-    int resilienceLevel = character->skills().skillLevel( "resilience" );
+    // int evasionLevel = character->skills().skillLevel( "evasion" );
+    // int resilienceLevel = character->skills().skillLevel( "resilience" );
 
-    if ( !hasShieldEquipped ) {
-        double diff = creature->accuracy() - ( character->combatAttributes().evasion() + character->attributes().dexterity() );
+    if ( !hasShieldEquipped ) { // TODO CREATE EVASION SKILL
+        double diff = creature->accuracy() - ( /*character->combatAttributes().evasion() +*/ character->attributes().dexterity() );
         double hitChance = 0.5 + diff * 0.03;
-        hitChance -= evasionLevel * 0.005;
+        // hitChance -= evasionLevel * 0.005;
         hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
         double roll = static_cast<double>( rand() ) / RAND_MAX;
@@ -148,10 +148,10 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     int randAtk = minAtk + ( rand() % ( maxAtk - minAtk + 1 ) );
     double damage = static_cast<double>( randAtk );
 
-    damage *= ( 1.0 - resilienceLevel * 0.005 );
+    // damage *= ( 1.0 - resilienceLevel * 0.005 );
     damage = std::max( 0.0, damage );
 
-    if ( hasShieldEquipped ) {
+    if ( hasShieldEquipped ) { // TODO CREATE BLOCK SKILL INSTEAD
         int shieldLevel = character->skills().skillLevel( "shield_mastery" );
         double blockChance = 0.05 + 0.05 * shieldLevel;
         blockChance = std::clamp( blockChance, 0.05, 0.95 );
@@ -263,12 +263,12 @@ std::string CombatSystem::combatSkillByWeapon( const Model::Item* weapon ) {
         return "axe_mastery";
     }
 
-    if ( category == "club" ) {
-        return "club_mastery";
-    }
-
     if ( category == "dagger" ) {
         return "dagger_mastery";
+    }
+
+    if ( category == "shield" ) {
+        return "shield_mastery";
     }
 
     return "";

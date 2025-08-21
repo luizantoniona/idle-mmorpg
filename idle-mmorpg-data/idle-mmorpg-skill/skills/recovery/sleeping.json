@@ -1,7 +1,0 @@
-{
-    "id": "sleeping",
-    "name": "Sleeping",
-    "description": "Sleep to fully recover your health, stamina, and mana.",
-    "type": "recovery",
-    "milestones": []
-}

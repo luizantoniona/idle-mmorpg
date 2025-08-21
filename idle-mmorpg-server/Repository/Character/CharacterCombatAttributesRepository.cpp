@@ -16,10 +16,9 @@ bool CharacterCombatAttributesRepository::createAttributes( int idCharacter ) {
             accuracy,
             defense,
             speed,
-            evasion,
             critical_chance,
             critical_multiplier
-        ) VALUES (?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0)
+        ) VALUES (?, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0)
     )SQL";
     Database::Query query( _db, sql );
 
@@ -34,7 +33,6 @@ bool CharacterCombatAttributesRepository::updateAttributes( int idCharacter, con
             accuracy = ?,
             defense = ?,
             speed = ?,
-            evasion = ?,
             critical_chance = ?,
             critical_multiplier = ?
         WHERE id_character = ?
@@ -45,10 +43,9 @@ bool CharacterCombatAttributesRepository::updateAttributes( int idCharacter, con
     query.bindDouble( 2, attributes.baseAccuracy() );
     query.bindDouble( 3, attributes.baseDefense() );
     query.bindDouble( 4, attributes.baseSpeed() );
-    query.bindDouble( 5, attributes.baseEvasion() );
-    query.bindDouble( 6, attributes.baseCriticalChance() );
-    query.bindDouble( 7, attributes.baseCriticalMultiplier() );
-    query.bindInt( 8, idCharacter );
+    query.bindDouble( 5, attributes.baseCriticalChance() );
+    query.bindDouble( 6, attributes.baseCriticalMultiplier() );
+    query.bindInt( 7, idCharacter );
 
     return query.exec();
 }
@@ -60,7 +57,6 @@ std::unique_ptr<Model::CharacterCombatAttributes> CharacterCombatAttributesRepos
             accuracy,
             defense,
             speed,
-            evasion,
             critical_chance,
             critical_multiplier
         FROM character_combat_attributes
@@ -79,9 +75,8 @@ std::unique_ptr<Model::CharacterCombatAttributes> CharacterCombatAttributesRepos
     attributes->setBaseAccuracy( query.getColumnDouble( 1 ) );
     attributes->setBaseDefense( query.getColumnDouble( 2 ) );
     attributes->setBaseSpeed( query.getColumnDouble( 3 ) );
-    attributes->setBaseEvasion( query.getColumnDouble( 4 ) );
-    attributes->setBaseCriticalChance( query.getColumnDouble( 5 ) );
-    attributes->setBaseCriticalMultiplier( query.getColumnDouble( 6 ) );
+    attributes->setBaseCriticalChance( query.getColumnDouble( 4 ) );
+    attributes->setBaseCriticalMultiplier( query.getColumnDouble( 5 ) );
 
     return attributes;
 }

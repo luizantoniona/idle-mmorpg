@@ -1,15 +1,25 @@
 {
     "id": "sword_mastery",
     "name": "Sword Mastery",
-    "description": "Your skill in fighting with swords, improving attack speed and precision.",
-    "type": "combat",
+    "description": "Increase your accuracy with swords.",
+    "type": "weapon",
     "milestones": [
         {
             "level": 1,
             "bonuses": [
                 {
                     "type": "combat",
-                    "id": "attack",
+                    "id": "accuracy",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 3,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "accuracy",
                     "value": 1
                 }
             ]
@@ -19,9 +29,14 @@
             "bonuses": [
                 {
                     "type": "combat",
-                    "id": "attack",
+                    "id": "accuracy",
                     "value": 1
-                },
+                }
+            ]
+        },
+        {
+            "level": 7,
+            "bonuses": [
                 {
                     "type": "combat",
                     "id": "accuracy",
@@ -30,13 +45,28 @@
             ]
         },
         {
-            "level": 10,
+            "level": 9,
             "bonuses": [
                 {
                     "type": "combat",
-                    "id": "attack",
+                    "id": "accuracy",
                     "value": 1
-                },
+                }
+            ]
+        },
+        {
+            "level": 11,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "accuracy",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 13,
+            "bonuses": [
                 {
                     "type": "combat",
                     "id": "accuracy",
@@ -47,11 +77,6 @@
         {
             "level": 15,
             "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "attack",
-                    "value": 1
-                },
                 {
                     "type": "combat",
                     "id": "accuracy",

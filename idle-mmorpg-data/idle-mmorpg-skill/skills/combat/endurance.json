@@ -1,7 +1,7 @@
 {
-    "id": "evasion",
-    "name": "Evasion",
-    "description": "Your skill in dodging attacks, increasing your chance to avoid harm.",
+    "id": "endurance",
+    "name": "Endurance",
+    "description": "Your ability to endure damage and keep fighting.",
     "type": "combat",
     "milestones": [
         {
@@ -9,17 +9,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "dexterity",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 2,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "evasion",
+                    "id": "constitution",
                     "value": 1
                 }
             ]
@@ -29,17 +19,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "dexterity",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 4,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "evasion",
+                    "id": "constitution",
                     "value": 1
                 }
             ]
@@ -49,22 +29,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "dexterity",
-                    "value": 1
-                },
-                {
-                    "type": "combat",
-                    "id": "evasion",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 6,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "speed",
+                    "id": "constitution",
                     "value": 1
                 }
             ]
@@ -74,7 +39,47 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "dexterity",
+                    "id": "constitution",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 9,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "constitution",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 11,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "constitution",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 13,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "constitution",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 15,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "constitution",
                     "value": 1
                 }
             ]

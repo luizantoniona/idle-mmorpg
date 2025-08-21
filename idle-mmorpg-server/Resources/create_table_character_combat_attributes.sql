@@ -4,7 +4,6 @@ CREATE TABLE character_combat_attributes (
     accuracy NUMERIC DEFAULT 0.0,
     defense NUMERIC DEFAULT 0.0,
     speed NUMERIC DEFAULT 0.0,
-    evasion NUMERIC DEFAULT 0.0,
     critical_chance NUMERIC DEFAULT 0.0,
     critical_multiplier NUMERIC DEFAULT 1.0,
 

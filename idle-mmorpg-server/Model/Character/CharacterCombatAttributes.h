@@ -15,7 +15,6 @@ public:
     double accuracy() const;
     double speed() const;
     double defense() const;
-    double evasion() const;
     double criticalChance() const;
     double criticalMultiplier() const;
 
@@ -31,9 +30,6 @@ public:
     double baseDefense() const;
     void setBaseDefense( double baseDefense );
 
-    double baseEvasion() const;
-    void setBaseEvasion( double baseEvasion );
-
     double baseCriticalChance() const;
     void setBaseCriticalChance( double baseCriticalChance );
 
@@ -44,7 +40,6 @@ public:
     void modifyAccuracy( double modifier );
     void modifySpeed( double modifier );
     void modifyDefense( double modifier );
-    void modifyEvasion( double modifier );
     void modifyCriticalChance( double modifier );
     void modifyCriticalMultiplier( double modifier );
 
@@ -55,7 +50,6 @@ private:
     double _baseAccuracy;
     double _baseSpeed;
     double _baseDefense;
-    double _baseEvasion;
     double _baseCriticalChance;
     double _baseCriticalMultiplier;
 
@@ -63,7 +57,6 @@ private:
     double _modifierAccuracy;
     double _modifierSpeed;
     double _modifierDefense;
-    double _modifierEvasion;
     double _modifierCriticalChance;
     double _modifierCriticalMultiplier;
 };

@@ -7,14 +7,12 @@ CharacterCombatAttributes::CharacterCombatAttributes() :
     _baseAccuracy( 0.0 ),
     _baseSpeed( 0.0 ),
     _baseDefense( 0.0 ),
-    _baseEvasion( 0.0 ),
     _baseCriticalChance( 0.0 ),
     _baseCriticalMultiplier( 1.0 ),
     _modifierAttack( 0.0 ),
     _modifierAccuracy( 0.0 ),
     _modifierSpeed( 0.0 ),
     _modifierDefense( 0.0 ),
-    _modifierEvasion( 0.0 ),
     _modifierCriticalChance( 0.0 ),
     _modifierCriticalMultiplier( 0.0 ) {
 }
@@ -25,7 +23,6 @@ Json::Value CharacterCombatAttributes::toJson() const {
     root[ "accuracy" ] = _baseAccuracy;
     root[ "speed" ] = _baseSpeed;
     root[ "defense" ] = _baseDefense;
-    root[ "evasion" ] = _baseEvasion;
     root[ "criticalChance" ] = _baseCriticalChance;
     root[ "criticalMultiplier" ] = _baseCriticalMultiplier;
 
@@ -33,7 +30,6 @@ Json::Value CharacterCombatAttributes::toJson() const {
     root[ "modifierAccuracy" ] = _modifierAccuracy;
     root[ "modifierSpeed" ] = _modifierSpeed;
     root[ "modifierDefense" ] = _modifierDefense;
-    root[ "modifierEvasion" ] = _modifierEvasion;
     root[ "modifierCriticalChance" ] = _modifierCriticalChance;
     root[ "modifierCriticalMultiplier" ] = _modifierCriticalMultiplier;
 
@@ -54,10 +50,6 @@ double CharacterCombatAttributes::speed() const {
 
 double CharacterCombatAttributes::defense() const {
     return _baseDefense + _modifierDefense;
-}
-
-double CharacterCombatAttributes::evasion() const {
-    return _baseEvasion + _modifierEvasion;
 }
 
 double CharacterCombatAttributes::criticalChance() const {
@@ -100,14 +92,6 @@ void CharacterCombatAttributes::setBaseDefense( double baseDefense ) {
     _baseDefense = baseDefense;
 }
 
-double CharacterCombatAttributes::baseEvasion() const {
-    return _baseEvasion;
-}
-
-void CharacterCombatAttributes::setBaseEvasion( double baseEvasion ) {
-    _baseEvasion = baseEvasion;
-}
-
 double CharacterCombatAttributes::baseCriticalChance() const {
     return _baseCriticalChance;
 }
@@ -140,10 +124,6 @@ void CharacterCombatAttributes::modifyDefense( double modifier ) {
     _modifierDefense += modifier;
 }
 
-void CharacterCombatAttributes::modifyEvasion( double modifier ) {
-    _modifierEvasion += modifier;
-}
-
 void CharacterCombatAttributes::modifyCriticalChance( double modifier ) {
     _modifierCriticalChance += modifier;
 }
@@ -157,7 +137,6 @@ void CharacterCombatAttributes::resetModifiers() {
     _modifierAccuracy = 0.0;
     _modifierSpeed = 0.0;
     _modifierDefense = 0.0;
-    _modifierEvasion = 0.0;
     _modifierCriticalChance = 0.0;
     _modifierCriticalMultiplier = 0.0;
 }

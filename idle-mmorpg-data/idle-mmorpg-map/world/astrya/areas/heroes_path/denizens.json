@@ -123,11 +123,10 @@
                 }
             ],
             "sell": [
-                "wooden_axe",
-                "wooden_club",
-                "wooden_dagger",
-                "wooden_sword",
-                "wooden_shield"
+                "iron_axe",
+                "iron_dagger",
+                "iron_sword",
+                "small_shield"
             ],
             "buy": [
                 "cheese",

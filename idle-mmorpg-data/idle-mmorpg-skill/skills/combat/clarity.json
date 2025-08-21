@@ -1,15 +1,15 @@
 {
-    "id": "woodcutting",
-    "name": "Woodcutting",
-    "description": "Chop down trees to gather wood.",
-    "type": "gathering",
+    "id": "clarity",
+    "name": "Clarity",
+    "description": "Your ability to maintain awareness and spiritual insight during combat.",
+    "type": "combat",
     "milestones": [
         {
             "level": 1,
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -19,7 +19,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -29,7 +29,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -39,7 +39,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -49,7 +49,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -59,7 +59,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -69,7 +69,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]
@@ -79,7 +79,7 @@
             "bonuses": [
                 {
                     "type": "attribute",
-                    "id": "constitution",
+                    "id": "wisdom",
                     "value": 1
                 }
             ]

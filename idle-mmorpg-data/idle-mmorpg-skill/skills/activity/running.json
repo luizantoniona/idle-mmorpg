@@ -15,32 +15,12 @@
             ]
         },
         {
-            "level": 2,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "stamina_regen",
-                    "value": 0.1
-                }
-            ]
-        },
-        {
             "level": 3,
             "bonuses": [
                 {
                     "type": "vital",
                     "id": "stamina",
                     "value": 5
-                }
-            ]
-        },
-        {
-            "level": 4,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "stamina_regen",
-                    "value": 0.1
                 }
             ]
         },
@@ -55,7 +35,7 @@
             ]
         },
         {
-            "level": 6,
+            "level": 7,
             "bonuses": [
                 {
                     "type": "vital",
@@ -65,7 +45,37 @@
             ]
         },
         {
-            "level": 7,
+            "level": 9,
+            "bonuses": [
+                {
+                    "type": "vital",
+                    "id": "stamina",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "level": 11,
+            "bonuses": [
+                {
+                    "type": "vital",
+                    "id": "stamina",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "level": 13,
+            "bonuses": [
+                {
+                    "type": "vital",
+                    "id": "stamina",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "level": 15,
             "bonuses": [
                 {
                     "type": "vital",

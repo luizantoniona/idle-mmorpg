@@ -15,31 +15,11 @@
             ]
         },
         {
-            "level": 2,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "attack",
-                    "value": 1
-                }
-            ]
-        },
-        {
             "level": 3,
             "bonuses": [
                 {
                     "type": "attribute",
                     "id": "strength",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 4,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "attack",
                     "value": 1
                 }
             ]
@@ -51,26 +31,51 @@
                     "type": "attribute",
                     "id": "strength",
                     "value": 1
-                },
-                {
-                    "type": "combat",
-                    "id": "attack",
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "level": 6,
-            "bonuses": [
-                {
-                    "type": "combat",
-                    "id": "accuracy",
-                    "value": 1
                 }
             ]
         },
         {
             "level": 7,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 9,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 11,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 13,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "strength",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 15,
             "bonuses": [
                 {
                     "type": "attribute",
