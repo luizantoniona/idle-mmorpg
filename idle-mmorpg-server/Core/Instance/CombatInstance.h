@@ -18,6 +18,7 @@ public:
 
     void addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );
+
     void handleCharacterAttackSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId );
 
     bool isFinished() const;

@@ -68,7 +68,7 @@ void RegenerationSystem::computeSpellsCooldown( const std::string& sessionId, Mo
     }
 }
 
-void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::Character* character ) {
+void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId ) {
     //TODO IMPLEMENT
 }
 
