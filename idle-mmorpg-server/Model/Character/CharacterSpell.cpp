@@ -8,9 +8,16 @@ CharacterSpell::CharacterSpell() :
     _spell( nullptr ) {
 }
 
-Json::Value CharacterSpell::toJson() {
+Json::Value CharacterSpell::toJson() const {
     Json::Value root;
-    // TODO
+    root[ "id" ] = id();
+    if ( spell() ) {
+        root[ "name" ] = spell()->name();
+        root[ "description" ] = spell()->description();
+        root[ "icon" ] = spell()->icon();
+        root[ "manaCost" ] = spell()->manaCost();
+        root[ "cooldown" ] = spell()->cooldown();
+    }
     return root;
 }
 

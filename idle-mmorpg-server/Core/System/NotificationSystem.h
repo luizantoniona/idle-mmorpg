@@ -20,6 +20,7 @@ public:
     static void notifyCharacterProgression( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterQuests( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterSkills( const std::string& sessionId, Model::Character* character );
+    static void notifyCharacterSpells( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterVitals( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterWallet( const std::string& sessionId, Model::Character* character );
 

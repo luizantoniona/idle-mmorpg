@@ -16,6 +16,7 @@ void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Mode
     characterJson[ "progression" ] = character->progression().toJson();
     characterJson[ "quests" ] = character->quests().toJson();
     characterJson[ "skills" ] = character->skills().toJson();
+    characterJson[ "spells" ] = character->spells().toJson();
     characterJson[ "vitals" ] = character->vitals().toJson();
     characterJson[ "wallet" ] = character->wallet().toJson();
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_UPDATE, characterJson );
@@ -65,6 +66,12 @@ void NotificationSystem::notifyCharacterSkills( const std::string& sessionId, Mo
     Json::Value payload;
     payload[ "skills" ] = character->skills().toJson();
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_SKILLS_UPDATE, payload );
+}
+
+void NotificationSystem::notifyCharacterSpells( const std::string& sessionId, Model::Character* character ) {
+    Json::Value payload;
+    payload[ "spells" ] = character->spells().toJson();
+    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_SPELLS_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterVitals( const std::string& sessionId, Model::Character* character ) {

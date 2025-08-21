@@ -7,7 +7,58 @@ CharacterSpells::CharacterSpells() {
 
 Json::Value CharacterSpells::toJson() {
     Json::Value root;
+
+    Json::Value healing( Json::arrayValue );
+    for ( const auto& spell : _healingSpells ) {
+        healing.append( spell.toJson() );
+    }
+    root[ "healing" ] = healing;
+
+    Json::Value attack( Json::arrayValue );
+    for ( const auto& spell : _attackSpells ) {
+        attack.append( spell.toJson() );
+    }
+    root[ "attack" ] = attack;
+
     return root;
+}
+
+std::vector<CharacterSpell> CharacterSpells::healingSpells() const {
+    return _healingSpells;
+}
+
+void CharacterSpells::setHealingSpells( const std::vector<CharacterSpell>& healingSpells ) {
+    _healingSpells = healingSpells;
+}
+
+void CharacterSpells::addHealingSpell( const CharacterSpell& healingSpell ) {
+}
+
+std::vector<CharacterSpell> CharacterSpells::attackSpells() const {
+    return _attackSpells;
+}
+
+void CharacterSpells::setAttackSpells( const std::vector<CharacterSpell>& attackSpells ) {
+    _attackSpells = attackSpells;
+}
+
+void CharacterSpells::addAttackSpell( const CharacterSpell& attackSpell ) {
+}
+
+bool CharacterSpells::hasSpell( const std::string& spellId ) const {
+    for ( const auto& spell : _healingSpells ) {
+        if ( spell.id() == spellId ) {
+            return true;
+        }
+    }
+
+    for ( const auto& spell : _attackSpells ) {
+        if ( spell.id() == spellId ) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 } // namespace Model

@@ -15,6 +15,7 @@
 #include "CharacterProgression.h"
 #include "CharacterQuests.h"
 #include "CharacterSkills.h"
+#include "CharacterSpells.h"
 #include "CharacterVitals.h"
 #include "CharacterWallet.h"
 
@@ -65,6 +66,9 @@ public:
     CharacterSkills& skills();
     void setSkills( const CharacterSkills& skills );
 
+    CharacterSpells& spells();
+    void setSpells( const CharacterSpells& spells );
+
     CharacterVitals& vitals();
     void setVitals( const CharacterVitals& vitals );
 
@@ -85,6 +89,7 @@ private:
     CharacterProgression _progression;
     CharacterQuests _quests;
     CharacterSkills _skills;
+    CharacterSpells _spells;
     CharacterVitals _vitals;
     CharacterWallet _wallet;
 };

@@ -46,6 +46,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
             return "CHARACTER_QUESTS_UPDATE";
         case MessageSenderType::CHARACTER_SKILLS_UPDATE:
             return "CHARACTER_SKILLS_UPDATE";
+        case MessageSenderType::CHARACTER_SPELLS_UPDATE:
+            return "CHARACTER_SPELLS_UPDATE";
         case MessageSenderType::CHARACTER_VITALS_UPDATE:
             return "CHARACTER_VITALS_UPDATE";
         case MessageSenderType::CHARACTER_WALLET_UPDATE:

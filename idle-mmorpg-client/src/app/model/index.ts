@@ -10,6 +10,7 @@ export type { CharacterProgression } from "./character/character-progression.mod
 export type { CharacterQuests } from "./character/character-quests.model"
 export type { CharacterQuest } from "./character/character-quest.model"
 export type { CharacterSkill } from "./character/character-skill.model";
+export type { CharacterSpells } from "./character/character-spells.model";
 export type { CharacterVitals } from "./character/character-vitals.model";
 export type { CharacterWallet } from "./character/character-wallet.model";
 
@@ -33,3 +34,4 @@ export type { LocationConnection } from "./location/location-connection.model";
 export type { LocationStructure } from "./location/location-structure.model";
 
 export type { Skill } from "./skill/skill.model";
+export type { Spell } from "./spell/spell.model"

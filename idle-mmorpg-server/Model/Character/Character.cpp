@@ -131,6 +131,14 @@ void Character::setSkills( const CharacterSkills& skills ) {
     _skills = skills;
 }
 
+CharacterSpells& Character::spells() {
+    return _spells;
+}
+
+void Character::setSpells( const CharacterSpells& spells ) {
+    _spells = spells;
+}
+
 CharacterVitals& Character::vitals() {
     return _vitals;
 }

@@ -12,7 +12,7 @@ void SpellManager::initialize( const std::string& spellsPath ) {
     _spells = Core::Factory::SpellFactory::createSpells( spellsPath );
 }
 
-Model::Spell* SpellManager::spell( const std::string& spellId ) {
+Model::Spell* SpellManager::spellById( const std::string& spellId ) {
     auto it = _spells.find( spellId );
     if ( it != _spells.end() ) {
         return it->second.get();

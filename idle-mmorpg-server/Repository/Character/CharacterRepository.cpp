@@ -10,6 +10,7 @@
 #include "CharacterProgressionRepository.h"
 #include "CharacterQuestsRepository.h"
 #include "CharacterSkillsRepository.h"
+#include "CharacterSpellsRepository.h"
 #include "CharacterVitalsRepository.h"
 #include "CharacterWalletRepository.h"
 
@@ -46,6 +47,7 @@ int CharacterRepository::createCharacter( const int idUser, const std::string& d
     success &= CharacterProgressionRepository().createProgression( idCharacter );
     success &= CharacterQuestsRepository().createQuests( idCharacter );
     success &= CharacterSkillsRepository().createSkills( idCharacter );
+    success &= CharacterSpellsRepository().createSpells( idCharacter );
     success &= CharacterVitalsRepository().createVitals( idCharacter );
     success &= CharacterWalletRepository().createWallet( idCharacter );
 
@@ -65,6 +67,7 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
     success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
     success &= CharacterQuestsRepository().updateQuests( idCharacter, character.quests() );
     success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
+    success &= CharacterSpellsRepository().updateSpells( idCharacter, character.spells() );
     success &= CharacterVitalsRepository().updateVitals( idCharacter, character.vitals() );
     success &= CharacterWalletRepository().updateWallet( idCharacter, character.wallet() );
 
@@ -146,6 +149,11 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
             character->setSkills( *skills );
         }
 
+        auto spells = CharacterSpellsRepository().findByCharacterId( character->idCharacter() );
+        if ( spells ) {
+            character->setSpells( *spells );
+        }
+
         auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
         if ( vitals ) {
             character->setVitals( *vitals );
@@ -220,6 +228,11 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
         auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
         if ( skills ) {
             character->setSkills( *skills );
+        }
+
+        auto spells = CharacterSpellsRepository().findByCharacterId( character->idCharacter() );
+        if ( spells ) {
+            character->setSpells( *spells );
         }
 
         auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );

@@ -15,7 +15,7 @@ public:
 
     void initialize( const std::string& spellsPath );
 
-    Model::Spell* spell( const std::string& spellId );
+    Model::Spell* spellById( const std::string& spellId );
 
 private:
     std::unordered_map<std::string, std::unique_ptr<Model::Spell>> _spells;

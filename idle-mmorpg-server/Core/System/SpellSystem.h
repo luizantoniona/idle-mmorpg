@@ -9,8 +9,6 @@ namespace Core::System {
 
 class SpellSystem {
 public:
-    SpellSystem();
-
     static void learnSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId );
 };
 
