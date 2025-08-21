@@ -25,6 +25,9 @@ public:
     void computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures );
 
 private:
+    bool rollChance( double probability );
+    double rollRange( double min, double max );
+
     std::vector<std::string> combatSkill( Model::Character* character );
     std::string combatSkillByWeapon( const Model::Item* weapon );
 

@@ -74,32 +74,29 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
         skills.push_back( "unarmed" );
     }
 
+    double chanceDiff = character->combatAttributes().accuracy() + character->attributes().dexterity() - creature->evasion();
+    double hitChance = 0.5 + ( 0.005 * chanceDiff );
+    hitChance = std::clamp( hitChance, 0.05, 0.95 );
+
+    if ( !rollChance( hitChance ) ) {
+        std::cout << "Attack missed!" << std::endl;
+        return;
+    }
+    _progressionSystem.applyExperience( sessionId, character, "agility", creature->evasion() );
+
+    double minDamage = ( character->combatAttributes().attack() + character->attributes().strength() ) / 2;
+    double maxDamage = character->combatAttributes().attack() + character->attributes().strength();
+    double damage = rollRange( minDamage, maxDamage ) - creature->defense();
+    damage = std::max( 1.0, damage );
+
     int masteryLevel = 0;
     for ( const auto& skill : skills ) {
         masteryLevel = std::max( masteryLevel, character->skills().skillLevel( skill ) );
     }
-
-    double diff = ( character->combatAttributes().accuracy() + character->attributes().dexterity() ) - creature->evasion();
-    double hitChance = 0.5 + diff * 0.03;
-    hitChance += masteryLevel * 0.005;
-    hitChance = std::clamp( hitChance, 0.05, 0.95 );
-
-    double roll = static_cast<double>( rand() ) / RAND_MAX;
-    if ( roll > hitChance ) {
-        std::cout << "Attack missed!" << std::endl;
-        return;
-    }
-
-    double baseDamage = character->combatAttributes().attack() + character->attributes().strength();
-    double damage = baseDamage - creature->defense();
-    damage *= ( 1.0 + masteryLevel * 0.01 );
-
-    double critRoll = static_cast<double>( rand() ) / RAND_MAX;
     double critChance = character->combatAttributes().criticalChance();
+    critChance += masteryLevel * 0.005;
 
-    critChance += masteryLevel * 0.002;
-
-    if ( critRoll < critChance ) {
+    if ( rollChance( critChance ) ) {
         damage *= character->combatAttributes().criticalMultiplier();
         std::cout << "Critical hit!" << std::endl;
     }
@@ -126,44 +123,35 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     bool hasShieldEquipped = ( character->equipment().leftHand().item() && character->equipment().leftHand().item()->category() == "shield" ) ||
                              ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
 
-    // int evasionLevel = character->skills().skillLevel( "evasion" );
-    // int resilienceLevel = character->skills().skillLevel( "resilience" );
+    int minCreatureAttack = static_cast<int>( creature->minAttack() );
+    int maxCreatureAttack = static_cast<int>( creature->maxAttack() );
+    double damage = rollRange( minCreatureAttack, maxCreatureAttack );
 
-    if ( !hasShieldEquipped ) { // TODO CREATE EVASION SKILL
-        double diff = creature->accuracy() - ( /*character->combatAttributes().evasion() +*/ character->attributes().dexterity() );
-        double hitChance = 0.5 + diff * 0.03;
-        // hitChance -= evasionLevel * 0.005;
-        hitChance = std::clamp( hitChance, 0.05, 0.95 );
+    if ( hasShieldEquipped ) {
+        int blockingLevel = character->skills().skillLevel( "blocking" );
+        double blockChance = 0.5 + ( 0.005 * ( blockingLevel - creature->accuracy() ) );
+        blockChance = std::clamp( blockChance, 0.05, 0.95 );
 
-        double roll = static_cast<double>( rand() ) / RAND_MAX;
-        if ( roll > hitChance ) {
+        if ( rollChance( blockChance ) ) {
+            std::cout << "Attack blocked by shield!" << std::endl;
+            _progressionSystem.applyExperience( sessionId, character, "blocking", creature->accuracy() );
+
+            int shieldLevel = character->skills().skillLevel( "shield_mastery" );
+            double reduction = 0.5 + ( 0.005 * shieldLevel );
+            reduction = std::clamp( reduction, 0.05, 1.0 );
+            damage *= ( 1.0 - reduction );
+            _progressionSystem.applyExperience( sessionId, character, "shield_mastery", damage );
+        }
+
+    } else {
+        int evasionLevel = character->skills().skillLevel( "evasion" );
+        double evasionChance = ( 0.5 + 0.005 * ( evasionLevel - creature->accuracy() ) );
+        evasionChance = std::clamp( evasionChance, 0.05, 0.95 );
+
+        if ( rollChance( evasionChance ) ) {
             std::cout << "Attack missed due to evasion!" << std::endl;
             _progressionSystem.applyExperience( sessionId, character, "evasion", creature->accuracy() );
             return;
-        }
-    }
-
-    int minAtk = static_cast<int>( creature->minAttack() );
-    int maxAtk = static_cast<int>( creature->maxAttack() );
-    int randAtk = minAtk + ( rand() % ( maxAtk - minAtk + 1 ) );
-    double damage = static_cast<double>( randAtk );
-
-    // damage *= ( 1.0 - resilienceLevel * 0.005 );
-    damage = std::max( 0.0, damage );
-
-    if ( hasShieldEquipped ) { // TODO CREATE BLOCK SKILL INSTEAD
-        int shieldLevel = character->skills().skillLevel( "shield_mastery" );
-        double blockChance = 0.05 + 0.05 * shieldLevel;
-        blockChance = std::clamp( blockChance, 0.05, 0.95 );
-
-        double blockRoll = static_cast<double>( rand() ) / RAND_MAX;
-        if ( blockRoll < blockChance ) {
-            std::cout << "Attack blocked by shield!" << std::endl;
-            int xpBlock = std::max( 1, static_cast<int>( damage ) );
-            _progressionSystem.applyExperience( sessionId, character, "shield_mastery", xpBlock );
-            double reduction = 0.5 + 0.005 * shieldLevel;
-            reduction = std::clamp( reduction, 0.05, 0.95 );
-            damage *= ( 1.0 - reduction );
         }
     }
 
@@ -171,8 +159,8 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newHealth = std::max( 0.0, newHealth );
     character->vitals().setHealth( newHealth );
 
-    int xpResilience = std::max( 1, static_cast<int>( damage * 0.5 ) );
-    _progressionSystem.applyExperience( sessionId, character, "resilience", xpResilience );
+    int xpEndurance = std::max( 1, static_cast<int>( damage * 0.5 ) );
+    _progressionSystem.applyExperience( sessionId, character, "endurance", xpEndurance );
 
     std::cout << "Hit for " << damage << " damage. Character HP left: " << character->vitals().health() << std::endl;
 }
@@ -223,6 +211,17 @@ void CombatSystem::computeExperience( std::unordered_map<std::string, Model::Cha
     }
 }
 
+bool CombatSystem::rollChance( double probability ) {
+    probability = std::clamp( probability, 0.0, 1.0 );
+    double roll = static_cast<double>( rand() ) / RAND_MAX;
+    return roll < probability;
+}
+
+double CombatSystem::rollRange( double min, double max ) {
+    double roll = static_cast<double>( rand() ) / RAND_MAX;
+    return min + roll * ( max - min );
+}
+
 std::vector<std::string> CombatSystem::combatSkill( Model::Character* character ) {
     const Model::Item* leftHand = character->equipment().leftHand().item();
     const Model::Item* rightHand = character->equipment().rightHand().item();
@@ -265,10 +264,6 @@ std::string CombatSystem::combatSkillByWeapon( const Model::Item* weapon ) {
 
     if ( category == "dagger" ) {
         return "dagger_mastery";
-    }
-
-    if ( category == "shield" ) {
-        return "shield_mastery";
     }
 
     return "";
