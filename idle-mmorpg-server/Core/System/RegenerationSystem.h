@@ -8,6 +8,9 @@ namespace Core::System {
 class RegenerationSystem {
 public:
     static void computeRegeneration( const std::string& sessionId, Model::Character* character );
+    static void computeSpellsCooldown( const std::string& sessionId, Model::Character* character );
+
+    static void castHealingSpell( const std::string& sessionId, Model::Character* character );
 };
 
 } // namespace Core::System

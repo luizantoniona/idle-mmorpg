@@ -3,7 +3,7 @@
         {
             "id": "guardian_heroes_path",
             "name": "Guardian",
-            "structure": "campfire",
+            "structure": "",
             "icon": "guardian_heroes_path.gif",
             "dialogues": [
                 {

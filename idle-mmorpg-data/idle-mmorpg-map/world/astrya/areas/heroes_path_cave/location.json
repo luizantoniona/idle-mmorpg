@@ -2,6 +2,8 @@
     "id": "heroes_path_cave",
     "name": "Heroes Path Cave",
     "description": "A small cave with mysterious echoes and ancient markings.",
+    "sizeX": 10,
+    "sizeY": 10,
     "coordinates": {
         "x": 0,
         "y": 0,
@@ -11,6 +13,8 @@
         {
             "destination": "heroes_path",
             "label": "Back to Heroes Path",
+            "x": 5,
+            "y": 5,
             "requirements": []
         }
     ]

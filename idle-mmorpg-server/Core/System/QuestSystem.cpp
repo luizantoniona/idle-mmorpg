@@ -114,6 +114,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
 
             if ( baseQuest->type() == "item" ) {
                 character->inventory().removeItem( baseQuest->objectiveId(), baseQuest->amount() );
+                NotificationSystem::notifyCharacterInventory( sessionId, character );
             }
 
             for ( auto& reward : baseQuest->rewards() ) {
@@ -132,7 +133,6 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
         characterQuests.moveQuestToFinished( questId );
     }
 
-    NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterQuests( sessionId, character );
     NotificationSystem::notifyLocationConnections( sessionId, character, location );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );

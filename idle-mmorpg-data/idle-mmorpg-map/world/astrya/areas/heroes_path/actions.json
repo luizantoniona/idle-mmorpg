@@ -4,7 +4,7 @@
             "id": "rest",
             "label": "Rest and recover energy at the heroes camp",
             "duration": 20,
-            "structure": "campfire",
+            "structure": "",
             "requirements": [],
             "experience": [
                 {

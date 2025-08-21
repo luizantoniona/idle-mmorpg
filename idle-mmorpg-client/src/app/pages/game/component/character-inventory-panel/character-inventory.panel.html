@@ -1,7 +1,7 @@
 <app-panel-vertical>
     Inventory
 
-    @if(character && character.inventory && character.inventory.items){
+    @if(character && character.inventory && character.inventory.items.length){
     <div class="inventory-grid">
         @for(item of character.inventory.items; track item.id){
         <app-tooltip>

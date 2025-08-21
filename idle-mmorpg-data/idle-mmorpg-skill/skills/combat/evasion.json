@@ -1,0 +1,7 @@
+{
+    "id": "evasion",
+    "name": "Evasion",
+    "description": "Your skill at avoiding incoming attacks, giving you a higher chance to dodge enemy strikes.",
+    "type": "combat",
+    "milestones": []
+}

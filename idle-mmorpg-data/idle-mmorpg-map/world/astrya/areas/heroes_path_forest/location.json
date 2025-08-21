@@ -2,15 +2,19 @@
     "id": "heroes_path_forest",
     "name": "Heroes Path Forest",
     "description": "A forest filled with Wolves and trees.",
+    "sizeX": 10,
+    "sizeY": 10,
     "coordinates": {
-        "x": 1,
-        "y": 0,
+        "x": 0,
+        "y": 1,
         "z": 0
     },
     "connections": [
         {
             "destination": "heroes_path",
             "label": "Back to Heroes Path",
+            "x": 5,
+            "y": 9,
             "requirements": []
         }
     ]

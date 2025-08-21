@@ -2,6 +2,7 @@ import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { CharacterActionPanel } from "../character-action-panel/character-action.panel";
+import { CharacterSpellsPanel } from "../character-spells-panel/character-spells.panel";
 import { CombatPanel } from "../combat-panel/combat.panel";
 import { DenizenPanel } from "../denizen-panel/denizen.panel";
 import { LocationPanel } from "../location-panel/location.panel";
@@ -25,6 +26,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
         LocationPanel,
         LocationActionsPanel,
         LocationStructuresPanel,
+        CharacterSpellsPanel,
     ],
 })
 

@@ -1,13 +1,6 @@
 {
     "structures": [
         {
-            "id": "campfire",
-            "label": "Campfire",
-            "description": "A warm fire to rest and regain your strength.",
-            "x": 2,
-            "y": 2
-        },
-        {
             "id": "training_fields",
             "label": "Training Fields",
             "description": "A training field used by novice adventurers.",

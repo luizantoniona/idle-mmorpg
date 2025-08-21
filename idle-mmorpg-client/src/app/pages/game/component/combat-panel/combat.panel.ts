@@ -1,33 +1,38 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Component, Input, Output, EventEmitter, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Subscription } from "rxjs";
 
-import { BarComponent } from '../../../../component';
-import { ButtonComponent } from '../../../../component';
-import { CardComponent } from '../../../../component';
-import { LoadingComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { BarComponent } from "../../../../component";
+import { ButtonComponent } from "../../../../component";
+import { CardComponent } from "../../../../component";
+import { LoadingComponent } from "../../../../component";
+import { PanelVerticalComponent } from "../../../../component";
 
-import { CombatInstance } from '../../../../model';
-import { Combat } from '../../../../model';
+import { CharacterSpellsPanel } from "../character-spells-panel/character-spells.panel";
 
-import { WebsocketService } from '../../../../service/websocket.service';
+import { Character } from "../../../../model";
+import { CombatInstance } from "../../../../model";
+import { Combat } from "../../../../model";
+
+import { WebsocketService } from "../../../../service/websocket.service";
 
 @Component({
-    selector: 'app-combat-panel',
-    templateUrl: './combat.panel.html',
-    styleUrls: ['./combat.panel.scss'],
+    selector: "app-combat-panel",
+    templateUrl: "./combat.panel.html",
+    styleUrls: ["./combat.panel.scss"],
     imports: [
         CommonModule,
         BarComponent,
         ButtonComponent,
         CardComponent,
         LoadingComponent,
-        PanelVerticalComponent
+        PanelVerticalComponent,
+        CharacterSpellsPanel,
     ],
 })
 
 export class CombatPanel {
+    @Input() character!: Character;
     @Output() closeCombat = new EventEmitter<void>();
 
     private websocketService = inject(WebsocketService);

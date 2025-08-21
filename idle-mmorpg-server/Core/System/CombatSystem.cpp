@@ -165,6 +165,10 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     std::cout << "Hit for " << damage << " damage. Character HP left: " << character->vitals().health() << std::endl;
 }
 
+void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature, const std::string& spellId ) {
+    //TODO IMPLEMENT
+}
+
 void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {
     if ( characters.empty() ) {
         return;

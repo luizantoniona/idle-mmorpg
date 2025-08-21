@@ -2,8 +2,7 @@
 
 namespace Model {
 
-CharacterSpells::CharacterSpells() {
-}
+CharacterSpells::CharacterSpells() {}
 
 Json::Value CharacterSpells::toJson() {
     Json::Value root;
@@ -32,6 +31,7 @@ void CharacterSpells::setHealingSpells( const std::vector<CharacterSpell>& heali
 }
 
 void CharacterSpells::addHealingSpell( const CharacterSpell& healingSpell ) {
+    _healingSpells.push_back( healingSpell );
 }
 
 std::vector<CharacterSpell> CharacterSpells::attackSpells() const {
@@ -43,6 +43,7 @@ void CharacterSpells::setAttackSpells( const std::vector<CharacterSpell>& attack
 }
 
 void CharacterSpells::addAttackSpell( const CharacterSpell& attackSpell ) {
+    _attackSpells.push_back( attackSpell );
 }
 
 bool CharacterSpells::hasSpell( const std::string& spellId ) const {

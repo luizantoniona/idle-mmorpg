@@ -1,0 +1,46 @@
+<app-panel-vertical>
+    Spells
+
+    @if(character && character.spells){
+    @if(character.spells.healing.length || character.spells.attack.length){
+    <div class="spells-grid">
+
+        @for(spell of character.spells.healing; track spell.id){
+        <app-tooltip>
+            <div tooltip-target class="spell-box healing" (click)="onSpellClicked(spell)">
+                <img [src]="'/assets/spells/' + spell.icon" alt="{{ spell.name }}" />
+                @if(spell.count < spell.cooldown){ <span class="cooldown-overlay">{{ spell.cooldown - spell.count
+                    }}</span>
+                    }
+            </div>
+
+            <div tooltip-content>
+                <strong>{{ spell.name }}</strong><br />
+                {{ spell.description }}
+            </div>
+        </app-tooltip>
+        }
+
+        @for(spell of character.spells.attack; track spell.id){
+        <app-tooltip>
+            <div tooltip-target class="spell-box attack" (click)="onSpellClicked(spell)">
+                <img [src]="'/assets/spells/' + spell.icon" alt="{{ spell.name }}" />
+                @if(spell.count < spell.cooldown){ <span class="cooldown-overlay">{{ spell.cooldown - spell.count
+                    }}</span>
+                    }
+            </div>
+
+            <div tooltip-content>
+                <strong>{{ spell.name }}</strong><br />
+                {{ spell.description }}
+            </div>
+        </app-tooltip>
+        }
+
+    </div>
+    }
+    }
+    @else{
+    <p>No spells available.</p>
+    }
+</app-panel-vertical>

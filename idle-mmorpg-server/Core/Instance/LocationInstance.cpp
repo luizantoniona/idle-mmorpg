@@ -120,6 +120,7 @@ void LocationInstance::tick() {
     for ( const auto& [ sessionId, character ] : _characters ) {
 
         Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
+        Core::System::RegenerationSystem::computeSpellsCooldown( sessionId, character );
 
         if ( character->action().id() == "idle" ) {
             continue;
@@ -178,8 +179,13 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     if ( it == _characters.end() ) {
         return;
     }
-
     Model::Character* character = it->second;
+
+    CombatInstance* combat = nullptr;
+    auto itCombat = _characterCombatCache.find( sessionId );
+    if ( itCombat != _characterCombatCache.end() ) {
+        combat = itCombat->second;
+    }
 
     switch ( type ) {
         case Message::MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
@@ -192,6 +198,19 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
         case Message::MessageReceiverType::CHARACTER_EQUIP_ITEM:
             Core::System::EquipmentSystem::characterEquipItem( sessionId, character, payload );
             break;
+        case Message::MessageReceiverType::CHARACTER_CAST_SPELL: {
+            std::string spellType = payload["type"].asString();
+            std::string spellId = payload["id"].asString();
+
+            if ( spellType == "healing" ) {
+                Core::System::RegenerationSystem::castHealingSpell( sessionId, character );
+
+            } else if ( spellType == "attack" && combat ) {
+                combat->applyAttackSpell( character, spellId );
+            }
+
+            break;
+        }
 
         case Message::MessageReceiverType::CHARACTER_INTERACT_DENIZEM: {
             std::string denizemId = payload[ "denizenId" ].asString();

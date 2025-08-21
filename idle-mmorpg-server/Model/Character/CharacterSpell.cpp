@@ -5,16 +5,17 @@ namespace Model {
 CharacterSpell::CharacterSpell() :
     _id( "" ),
     _count( 0 ),
-    _spell( nullptr ) {
-}
+    _spell( nullptr ) {}
 
 Json::Value CharacterSpell::toJson() const {
     Json::Value root;
     root[ "id" ] = id();
+    root[ "count" ] = count();
     if ( spell() ) {
         root[ "name" ] = spell()->name();
         root[ "description" ] = spell()->description();
         root[ "icon" ] = spell()->icon();
+        root[ "type" ] = spell()->type();
         root[ "manaCost" ] = spell()->manaCost();
         root[ "cooldown" ] = spell()->cooldown();
     }

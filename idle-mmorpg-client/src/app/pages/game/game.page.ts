@@ -126,7 +126,7 @@ export class GamePage implements OnInit, OnDestroy {
                 break;
 
             case 'CHARACTER_INVENTORY_UPDATE':
-                if (data.payload?.inventory) {
+                if ('inventory' in data.payload) {
                     this.character = {
                         ...this.character!,
                         inventory: data.payload.inventory,

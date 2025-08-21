@@ -59,6 +59,27 @@ void CombatInstance::removeCharacter( const std::string& sessionId ) {
     _characters.erase( sessionId );
 }
 
+void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId ) {
+    if ( character->vitals().health() <= 0 ) {
+        return;
+    }
+
+    Model::Creature* target = nullptr;
+    for ( auto& creature : _creatures ) {
+        if ( creature->vitals().health() > 0 ) {
+            target = creature.get();
+            break;
+        }
+    }
+
+    if ( !target ) {
+        std::cout << "No valid target for attack spell" << std::endl;
+        return;
+    }
+
+    _combatSystem.computeSpellDamage( sessionId, character, target, spellId );
+}
+
 bool CombatInstance::isFinished() const {
     return _characters.empty();
 }

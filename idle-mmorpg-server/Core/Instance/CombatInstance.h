@@ -18,6 +18,7 @@ public:
 
     void addCharacter( const std::string& sessionId, Model::Character* character );
     void removeCharacter( const std::string& sessionId );
+    void handleCharacterAttackSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId );
 
     bool isFinished() const;
 
@@ -35,7 +36,7 @@ private:
     std::string _structureId;
     Model::Location* _location;
     std::unordered_map<std::string, Model::Character*> _characters;
-    std::vector<std::unique_ptr<Model::Creature>> _creatures;
+    std::vector<std::unique_ptr<Model::Creature> > _creatures;
     Core::System::CombatSystem _combatSystem;
 };
 

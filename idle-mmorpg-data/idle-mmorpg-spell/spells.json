@@ -5,6 +5,10 @@
             "path": "spells/healing/minor_healing.json"
         },
         {
+            "id": "great_healing",
+            "path": "spells/healing/great_healing.json"
+        },
+        {
             "id": "lightning_bolt",
             "path": "spells/attack/lightning_bolt.json"
         }

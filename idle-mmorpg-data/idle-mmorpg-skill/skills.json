@@ -17,12 +17,20 @@
             "path": "skills/combat/agility.json"
         },
         {
+            "id": "blocking",
+            "path": "skills/combat/blocking.json"
+        },
+        {
             "id": "clarity",
             "path": "skills/combat/clarity.json"
         },
         {
             "id": "endurance",
             "path": "skills/combat/endurance.json"
+        },
+        {
+            "id": "evasion",
+            "path": "skills/combat/evasion.json"
         },
         {
             "id": "focus",

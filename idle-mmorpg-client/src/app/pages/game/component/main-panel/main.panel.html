@@ -2,19 +2,22 @@
 
     @if(!showCombat){
 
-    <app-location-panel [location]="location!"></app-location-panel>
+    <app-character-spells-panel [character]="character!"></app-character-spells-panel>
 
-    <div class="location-row">
-        <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"></app-location-actions-panel>
-        <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>
-    </div>
+    <app-location-panel [location]="location!"></app-location-panel>
 
     <app-character-action-panel [character]="character"></app-character-action-panel>
 
-    <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
+    <div class="location-row">
+        <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"></app-location-actions-panel>
+        <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
+    </div>
+
+    <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>
 
     } @else {
-    <app-combat-panel (closeCombat)="onCloseCombat()"></app-combat-panel>
+
+    <app-combat-panel [character]="character!" (closeCombat)="onCloseCombat()"></app-combat-panel>
     }
 
 </div>
