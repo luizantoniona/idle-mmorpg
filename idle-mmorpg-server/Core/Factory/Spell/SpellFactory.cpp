@@ -3,13 +3,15 @@
 #include <iostream>
 
 #include <Commons/JsonHelper.h>
+#include <Commons/Singleton.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 
 namespace Core::Factory {
 
-std::unordered_map<std::string, std::unique_ptr<Model::Spell>> SpellFactory::createSpells( const std::string& spellsPath ) {
+std::unordered_map<std::string, std::unique_ptr<Model::Spell> > SpellFactory::createSpells( const std::string& spellsPath ) {
     std::cout << "SpellFactory::createSpells" << std::endl;
 
-    std::unordered_map<std::string, std::unique_ptr<Model::Spell>> spells;
+    std::unordered_map<std::string, std::unique_ptr<Model::Spell> > spells;
 
     Json::Value spellsConfig = Commons::JsonHelper::loadJsonFile( spellsPath + "spells.json" );
 
@@ -39,7 +41,7 @@ std::unique_ptr<Model::Spell> SpellFactory::createSpell( const std::string& spel
     spell->setIcon( spellJson[ "icon" ].asString() );
     spell->setType( spellJson[ "type" ].asString() );
     spell->setManaCost( spellJson[ "manaCost" ].asInt() );
-    spell->setCooldown( spellJson[ "cooldown" ].asInt() );
+    spell->setCooldown( spellJson[ "cooldown" ].asInt() * Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() );
     spell->effect().setType( spellJson[ "effect" ][ "type" ].asString() );
     spell->effect().setValue( spellJson[ "effect" ][ "value" ].asDouble() );
 

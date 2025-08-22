@@ -133,7 +133,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         blockChance = std::clamp( blockChance, 0.05, 0.95 );
 
         if ( rollChance( blockChance ) ) {
-            std::cout << "Attack blocked by shield!" << std::endl;
+            std::cout << "Attack blocked by shield" << std::endl;
             _progressionSystem.applyExperience( sessionId, character, "blocking", creature->accuracy() );
 
             int shieldLevel = character->skills().skillLevel( "shield_mastery" );
@@ -149,7 +149,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         evasionChance = std::clamp( evasionChance, 0.05, 0.95 );
 
         if ( rollChance( evasionChance ) ) {
-            std::cout << "Attack missed due to evasion!" << std::endl;
+            std::cout << "Attack missed due to evasion" << std::endl;
             _progressionSystem.applyExperience( sessionId, character, "evasion", creature->accuracy() );
             return;
         }
@@ -165,8 +165,33 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     std::cout << "Hit for " << damage << " damage. Character HP left: " << character->vitals().health() << std::endl;
 }
 
-void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature, const std::string& spellId ) {
-    //TODO IMPLEMENT
+void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature, Model::CharacterSpell* characterSpell ) {
+    double newMana = character->vitals().mana() - characterSpell->spell()->manaCost();
+    newMana = std::max( 0.0, newMana );
+    character->vitals().setMana( newMana );
+
+    characterSpell->setCount( 0 );
+
+    int focusLevel = character->skills().skillLevel( "focus" );
+
+    double hitChance = 0.5 + 0.005 * ( focusLevel - creature->evasion() );
+    hitChance = std::clamp( hitChance, 0.05, 0.95 );
+    if ( !rollChance( hitChance ) ) {
+        std::cout << character->name() << " missed spell " << characterSpell->spell()->name() << " on " << creature->name() << std::endl;
+        return;
+    }
+
+    double minDamage = characterSpell->spell()->effect().value();
+    double maxDamage = minDamage + character->attributes().intelligence();
+    double damage = rollRange( minDamage, maxDamage );
+
+    double newHealth = creature->vitals().health() - damage;
+    newHealth = std::max( 0.0, newHealth );
+    creature->vitals().setHealth( newHealth );
+
+    _progressionSystem.applyExperience( sessionId, character, "focus", damage );
+
+    std::cout << character->name() << " casts " << characterSpell->spell()->name() << " dealing " << damage << " damage to " << creature->name() << std::endl;
 }
 
 void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {

@@ -64,6 +64,20 @@ void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, M
         return;
     }
 
+    auto characterSpell = character->spells().attackSpell( spellId );
+    if ( !characterSpell ) {
+        return;
+    }
+
+    auto spell = characterSpell->spell();
+    if ( characterSpell->count() < spell->cooldown() ) {
+        return;
+    }
+
+    if ( character->vitals().mana() < spell->manaCost() ) {
+        return;
+    }
+
     Model::Creature* target = nullptr;
     for ( auto& creature : _creatures ) {
         if ( creature->vitals().health() > 0 ) {
@@ -77,7 +91,7 @@ void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, M
         return;
     }
 
-    _combatSystem.computeSpellDamage( sessionId, character, target, spellId );
+    _combatSystem.computeSpellDamage( sessionId, character, target, characterSpell );
 }
 
 bool CombatInstance::isFinished() const {

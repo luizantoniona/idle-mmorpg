@@ -206,7 +206,7 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
                 Core::System::RegenerationSystem::castHealingSpell( sessionId, character, spellId );
 
             } else if ( spellType == "attack" && combat ) {
-                combat->applyAttackSpell( character, spellId );
+                combat->handleCharacterAttackSpell( sessionId, character, spellId );
             }
 
             break;

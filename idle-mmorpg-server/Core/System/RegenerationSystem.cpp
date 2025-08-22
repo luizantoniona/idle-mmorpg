@@ -1,7 +1,10 @@
 #include "RegenerationSystem.h"
 
+#include <iostream>
+
 #include <Commons/DecimalHelper.h>
 #include <Core/System/NotificationSystem.h>
+#include <Core/System/ProgressionSystem.h>
 
 namespace Core::System {
 
@@ -47,29 +50,57 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
 void RegenerationSystem::computeSpellsCooldown( const std::string& sessionId, Model::Character* character ) {
     auto& characterSpells = character->spells();
 
+    bool changed = false;
+
     for ( auto& spell : characterSpells.healingSpells() ) {
-        if ( spell.count() >= spell.spell()->cooldown() ) {
-            continue;
+        if ( spell.count() < spell.spell()->cooldown() ) {
+            spell.setCount( spell.count() + 1 );
+            changed = true;
         }
-
-        spell.setCount( spell.count() + 1 );
-
-        NotificationSystem::notifyCharacterSpells( sessionId, character );
     }
 
     for ( auto& spell : characterSpells.attackSpells() ) {
-        if ( spell.count() >= spell.spell()->cooldown() ) {
-            continue;
+        if ( spell.count() < spell.spell()->cooldown() ) {
+            spell.setCount( spell.count() + 1 );
+            changed = true;
         }
+    }
 
-        spell.setCount( spell.count() + 1 );
-
+    if ( changed ) {
         NotificationSystem::notifyCharacterSpells( sessionId, character );
     }
 }
 
 void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId ) {
-    //TODO IMPLEMENT
+    auto characterSpell = character->spells().healingSpell( spellId );
+    if ( !characterSpell ) {
+        return;
+    }
+
+    auto spell = characterSpell->spell();
+    if ( characterSpell->count() < spell->cooldown() ) {
+        return;
+    }
+
+    if ( character->vitals().mana() < spell->manaCost() ) {
+        return;
+    }
+
+    double newMana = character->vitals().mana() - spell->manaCost();
+    newMana = std::max( 0.0, newMana );
+    character->vitals().setMana( newMana );
+
+    characterSpell->setCount( 0 );
+
+    double heal = spell->effect().value() + character->attributes().wisdom();
+
+    double newHealth = character->vitals().health() + heal;
+    newHealth = std::min( character->vitals().health() + heal, character->vitals().fullHealth() );
+    character->vitals().setHealth( newHealth );
+
+    ProgressionSystem().applyExperience( sessionId, character, "clarity", heal );
+
+    std::cout << character->name() << " casts " << spell->name() << " healing " << heal << " health." << std::endl;
 }
 
 } // namespace Core::System

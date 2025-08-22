@@ -22,7 +22,7 @@ Json::Value CharacterSpells::toJson() {
     return root;
 }
 
-std::vector<CharacterSpell> CharacterSpells::healingSpells() const {
+std::vector<CharacterSpell>& CharacterSpells::healingSpells() {
     return _healingSpells;
 }
 
@@ -34,7 +34,7 @@ void CharacterSpells::addHealingSpell( const CharacterSpell& healingSpell ) {
     _healingSpells.push_back( healingSpell );
 }
 
-std::vector<CharacterSpell> CharacterSpells::attackSpells() const {
+std::vector<CharacterSpell>& CharacterSpells::attackSpells() {
     return _attackSpells;
 }
 
@@ -60,6 +60,26 @@ bool CharacterSpells::hasSpell( const std::string& spellId ) const {
     }
 
     return false;
+}
+
+CharacterSpell* CharacterSpells::attackSpell( const std::string& spellId ) {
+    for ( auto& spell : _attackSpells ) {
+        if ( spell.id() == spellId ) {
+            return &spell;
+        }
+    }
+
+    return nullptr;
+}
+
+CharacterSpell* CharacterSpells::healingSpell( const std::string& spellId ) {
+    for ( auto& spell : _healingSpells ) {
+        if ( spell.id() == spellId ) {
+            return &spell;
+        }
+    }
+
+    return nullptr;
 }
 
 } // namespace Model
