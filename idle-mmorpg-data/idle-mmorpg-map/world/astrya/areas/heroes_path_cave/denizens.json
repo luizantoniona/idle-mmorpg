@@ -5,16 +5,6 @@
             "name": "Cave Man",
             "structure": "",
             "icon": "cave_man_heroes_path_cave.gif",
-            "dialogues": [
-                {
-                    "option": "Greetings!",
-                    "lines": []
-                },
-                {
-                    "option": "Farewell!",
-                    "lines": []
-                }
-            ],
             "quests": [
                 {
                     "id": "cave_man_heroes_path_cave_00",

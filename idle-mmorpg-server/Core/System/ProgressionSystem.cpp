@@ -9,8 +9,7 @@
 
 namespace Core::System {
 
-ProgressionSystem::ProgressionSystem() {
-}
+ProgressionSystem::ProgressionSystem() {}
 
 void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained ) {
     if ( !character ) {
@@ -186,7 +185,33 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
 }
 
 void ProgressionSystem::applyLevelUp( Model::Character* character ) {
-    // TODO: New level reached
+    auto& vitals = character->vitals();
+    vitals.setMaxHealth( vitals.maxHealth() + 10 );
+    vitals.setMaxMana( vitals.maxMana() + 5 );
+    vitals.setMaxStamina( vitals.maxStamina() + 5 );
+
+    auto& attributes = character->attributes();
+    int level = character->progression().level();
+
+    if ( level % 10 == 1 || level % 10 == 6 ) {
+        attributes.setBaseStrength( attributes.baseStrength() + 1 );
+    }
+
+    if ( level % 10 == 2 || level % 10 == 7 ) {
+        attributes.setBaseConstitution( attributes.baseConstitution() + 1 );
+    }
+
+    if ( level % 10 == 3 || level % 10 == 8 ) {
+        attributes.setBaseDexterity( attributes.baseDexterity() + 1 );
+    }
+
+    if ( level % 10 == 4 || level % 10 == 9 ) {
+        attributes.setBaseIntelligence( attributes.baseIntelligence() + 1 );
+    }
+
+    if ( level % 10 == 5 || level % 10 == 0 ) {
+        attributes.setBaseWisdom( attributes.baseWisdom() + 1 );
+    }
 }
 
 } // namespace Core::System

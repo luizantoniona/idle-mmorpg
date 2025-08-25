@@ -1,12 +1,12 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { LoadingComponent } from "../../../../component";
 import { PanelVerticalComponent } from "../../../../component";
 
-// import { LocationActionsPanel } from "../location-actions-panel/location-actions.panel";
-
 import { Location } from "../../../../model";
+
+import { WebsocketService } from "../../../../service/websocket.service";
 
 @Component({
     selector: "app-location-panel",
@@ -16,7 +16,6 @@ import { Location } from "../../../../model";
         CommonModule,
         LoadingComponent,
         PanelVerticalComponent,
-        // LocationActionsPanel,
     ],
 })
 
@@ -24,6 +23,12 @@ export class LocationPanel {
     @Input() location!: Location;
 
     tiles: { type: 'empty' | 'structure' | 'connection'; content: any }[][] = [];
+
+    private websocketService = inject(WebsocketService);
+
+    sendMessage(data: any): void {
+        this.websocketService.send(data);
+    }
 
     previousConnections: any[] = [];
 
@@ -49,8 +54,22 @@ export class LocationPanel {
     }
 
     onTileClick(tile: any) {
-        if (tile.type === 'structure' || tile.type === 'connection') {
-            console.log('Clicked tile:', tile.content);
+        if (tile.type === 'structure') {
+            this.sendMessage({
+                type: 'CHARACTER_STRUCTURE_UPDATE',
+                payload: {
+                    structure: tile.content.id,
+                },
+            });
+        }
+
+        if (tile.type === 'connection') {
+            this.sendMessage({
+                type: 'CHARACTER_LOCATION_UPDATE',
+                payload: {
+                    destination: tile.content.destination,
+                },
+            });
         }
     }
 }

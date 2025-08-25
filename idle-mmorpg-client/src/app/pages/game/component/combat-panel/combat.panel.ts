@@ -8,8 +8,6 @@ import { CardComponent } from "../../../../component";
 import { LoadingComponent } from "../../../../component";
 import { PanelVerticalComponent } from "../../../../component";
 
-import { CharacterSpellsPanel } from "../character-spells-panel/character-spells.panel";
-
 import { Character } from "../../../../model";
 import { CombatInstance } from "../../../../model";
 import { Combat } from "../../../../model";
@@ -27,7 +25,6 @@ import { WebsocketService } from "../../../../service/websocket.service";
         CardComponent,
         LoadingComponent,
         PanelVerticalComponent,
-        CharacterSpellsPanel,
     ],
 })
 

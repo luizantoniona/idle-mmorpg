@@ -3,24 +3,36 @@
         {
             "id": "rest",
             "label": "Rest and recover energy at the heroes camp",
-            "duration": 20,
+            "duration": 3,
             "structure": "",
             "requirements": [],
             "experience": [
                 {
                     "skill": "resting",
-                    "amount": 1
+                    "amount": 2
                 }
             ]
         },
         {
             "id": "run",
             "label": "Run training laps to improve stamina",
-            "duration": 100,
+            "duration": 3,
             "requirements": [],
             "experience": [
                 {
                     "skill": "running",
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "id": "meditate",
+            "label": "Meditate to increase mana",
+            "duration": 3,
+            "requirements": [],
+            "experience": [
+                {
+                    "skill": "meditation",
                     "amount": 2
                 }
             ]
@@ -41,13 +53,13 @@
         {
             "id": "train",
             "label": "Practice combat techniques with a wooden dummy",
-            "duration": 40,
+            "duration": 3,
             "structure": "training_fields",
             "requirements": [],
             "experience": [
                 {
                     "skill": "combat",
-                    "amount": 1
+                    "amount": 2
                 }
             ]
         }

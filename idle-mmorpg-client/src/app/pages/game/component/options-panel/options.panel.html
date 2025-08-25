@@ -1,7 +1,6 @@
 <app-panel-vertical>
     <div class="options">
         <app-button text="Quests" (clickEvent)="OnQuestsClick()"></app-button>
-        <app-button text="Map" (clickEvent)="onMapClick()"></app-button>
         <app-button text="Chat" (clickEvent)="onChatClick()"></app-button>
         <!-- TODO:<app-button text="Bestiary"></app-button> -->
     </div>
@@ -9,9 +8,6 @@
 
 <app-character-quest-panel [character]="character" [visible]="showQuests" (closed)="onClose()">
 </app-character-quest-panel>
-
-<app-location-connections-panel [location]="location" [visible]="showMap" (closed)="onClose()">
-</app-location-connections-panel>
 
 <app-chat-panel [visible]="showChat" (closed)="onClose()">
 </app-chat-panel>

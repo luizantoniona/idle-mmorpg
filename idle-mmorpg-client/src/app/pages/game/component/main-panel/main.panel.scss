@@ -1,6 +1,7 @@
 .location-column {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 12px;
 }
 
@@ -14,7 +15,7 @@
 .location-row app-denizen-panel,
 .location-row app-location-actions-panel,
 .location-row app-location-structures-panel,
-.location-row app-location-description-panel,
+.location-row app-location-panel,
 .location-row app-location-connections-panel {
     flex: 1;
 }

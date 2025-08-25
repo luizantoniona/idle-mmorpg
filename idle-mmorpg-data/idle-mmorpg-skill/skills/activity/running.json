@@ -2,7 +2,7 @@
     "id": "running",
     "name": "Running",
     "description": "Run to increase stamina capacities.",
-    "type": "training",
+    "type": "activity",
     "milestones": [
         {
             "level": 1,

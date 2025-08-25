@@ -23,6 +23,66 @@
                     "value": 1
                 }
             ]
+        },
+        {
+            "level": 5,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 7,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 9,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 11,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 13,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 15,
+            "bonuses": [
+                {
+                    "type": "combat",
+                    "id": "defense",
+                    "value": 1
+                }
+            ]
         }
     ]
 }

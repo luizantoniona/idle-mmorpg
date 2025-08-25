@@ -7,6 +7,7 @@
 #include <Core/Manager/CreatureManager.h>
 #include <Core/Manager/ItemManager.h>
 #include <Core/Manager/QuestManager.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 #include <Model/World/Location/LocationAction.h>
 #include <Model/World/Location/LocationActionExperience.h>
 #include <Model/World/Location/LocationActionRequirement.h>
@@ -58,7 +59,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         action.setId( actionJson[ "id" ].asString() );
         action.setLabel( actionJson[ "label" ].asString() );
         action.setStructure( actionJson.get( "structure", "" ).asString() );
-        action.setDuration( actionJson[ "duration" ].asInt() );
+        action.setDuration( actionJson[ "duration" ].asInt() * Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() );
 
         for ( const Json::Value& requirementJson : actionJson[ "requirements" ] ) {
             Model::LocationActionRequirement requirement;
@@ -159,6 +160,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
 
             denizen.addQuest( denizenQuest );
         }
+
+        std::cout << "LocationFactory::createLocation Denizen: " << denizen.name() << " Quests: " << denizen.quests().size() << std::endl;
 
         Model::DenizenTrade trade;
         for ( const Json::Value& sellItem : denizenJson[ "sell" ] ) {

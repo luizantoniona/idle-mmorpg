@@ -1,7 +1,7 @@
 {
     "id": "agility",
     "name": "Agility",
-    "description": "Your agility in dodging attacks, increasing your chance to avoid harm.",
+    "description": "Your skill in attacks, increasing your chance to hit creatures.",
     "type": "combat",
     "milestones": [
         {

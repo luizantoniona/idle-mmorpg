@@ -1,19 +1,23 @@
 <div class="location-column">
 
-    @if(!showCombat){
-
     <app-character-spells-panel [character]="character!"></app-character-spells-panel>
 
-    <app-location-panel [location]="location!"></app-location-panel>
-
-    <app-character-action-panel [character]="character"></app-character-action-panel>
+    @if(!showCombat){
 
     <div class="location-row">
-        <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"></app-location-actions-panel>
-        <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
+        <div class="location-column">
+            <app-location-actions-panel (openCombat)="onOpenCombat()"
+                [location]="location"></app-location-actions-panel>
+            <app-character-action-panel [character]="character"></app-character-action-panel>
+        </div>
+
+        <app-location-panel [location]="location!"></app-location-panel>
     </div>
 
-    <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>
+    <div class="location-row">
+        <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>
+        <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
+    </div>
 
     } @else {
 

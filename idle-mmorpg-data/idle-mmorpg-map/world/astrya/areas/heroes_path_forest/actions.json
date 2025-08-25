@@ -3,7 +3,7 @@
         {
             "id": "woodcut",
             "label": "Cut trees from the forest",
-            "duration": 200,
+            "duration": 10,
             "requirements": [
                 {
                     "type": "equipment",

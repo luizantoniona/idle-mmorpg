@@ -5,22 +5,6 @@
             "name": "Guardian",
             "structure": "",
             "icon": "guardian_heroes_path.gif",
-            "dialogues": [
-                {
-                    "option": "Greetings!",
-                    "lines": [
-                        "Ah, another traveler on the Hero's Path!",
-                        "Rest by the fire, it's dangerous out there."
-                    ]
-                },
-                {
-                    "option": "Farewell!",
-                    "lines": [
-                        "Stay safe out there.",
-                        "The fire will be here if you need it."
-                    ]
-                }
-            ],
             "quests": [
                 {
                     "id": "guardian_heroes_path_00",
@@ -74,8 +58,9 @@
                     ],
                     "rewards": [
                         {
-                            "type": "spell",
-                            "id": "minor_healing"
+                            "type": "item",
+                            "id": "copper_coin",
+                            "amount": 5
                         }
                     ]
                 },
@@ -105,7 +90,7 @@
                     "title": "Speak with the lumberjack",
                     "description": "The Guardian tells you about a lumberjack working in the nearby forest. He asks you to go and talk to him. The lumberjack might have resources or valuable tips for your journey along the Hero's Path.",
                     "type": "talk",
-                    "objectiveId": "lumberjack_heros_path_forest",
+                    "objectiveId": "lumberjack_heroes_path_forest",
                     "amount": 1,
                     "requirements": [
                         {
@@ -118,6 +103,46 @@
                             "type": "item",
                             "id": "copper_coin",
                             "amount": 5
+                        }
+                    ]
+                },
+                {
+                    "id": "guardian_heroes_path_05",
+                    "title": "Spell - Healing",
+                    "description": "The Guardian teaches you the basics of healing magic, a spell to recover your vitality during your journey.",
+                    "type": "talk",
+                    "objectiveId": "guardian_heroes_path",
+                    "amount": 1,
+                    "requirements": [
+                        {
+                            "type": "quest",
+                            "id": "guardian_heroes_path_01"
+                        }
+                    ],
+                    "rewards": [
+                        {
+                            "type": "spell",
+                            "id": "minor_healing"
+                        }
+                    ]
+                },
+                {
+                    "id": "guardian_heroes_path_06",
+                    "title": "Spell - Lightning Bolt",
+                    "description": "Impressed by your growing courage, the Guardian decides to share with you the secrets of elemental power. He teaches you the basics of channeling energy into a focused Lightning Bolt — a spell capable of striking your foes with the raw force of the storm.",
+                    "type": "talk",
+                    "objectiveId": "guardian_heroes_path",
+                    "amount": 1,
+                    "requirements": [
+                        {
+                            "type": "quest",
+                            "id": "guardian_heroes_path_01"
+                        }
+                    ],
+                    "rewards": [
+                        {
+                            "type": "spell",
+                            "id": "lightning_bolt"
                         }
                     ]
                 }

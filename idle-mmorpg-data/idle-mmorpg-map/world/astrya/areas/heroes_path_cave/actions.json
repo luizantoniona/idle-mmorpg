@@ -3,7 +3,7 @@
         {
             "id": "mine",
             "label": "Mine copper ore from nearby rocks",
-            "duration": 200,
+            "duration": 10,
             "requirements": [
                 {
                     "type": "equipment",

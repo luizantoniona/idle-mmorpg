@@ -22,9 +22,9 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
 
     characterVitals.setRegenCounter( 0 );
 
-    const double healthRegen = characterVitals.healthRegen() + character->attributes().constitution() * 0.1;
-    const double staminaRegen = characterVitals.staminaRegen() + character->attributes().constitution() * 0.1;
-    const double manaRegen = characterVitals.manaRegen() + character->attributes().intelligence() * 0.1;
+    const double healthRegen = characterVitals.healthRegen() + character->attributes().constitution() * 0.05;
+    const double staminaRegen = characterVitals.staminaRegen() + character->attributes().dexterity() * 0.05;
+    const double manaRegen = characterVitals.manaRegen() + character->attributes().intelligence() * 0.05;
 
     double newHealth = characterVitals.health() + Commons::DecimalHelper::roundDecimals( healthRegen );
     if ( newHealth > characterVitals.fullHealth() ) {
@@ -94,8 +94,7 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::
 
     double heal = spell->effect().value() + character->attributes().wisdom();
 
-    double newHealth = character->vitals().health() + heal;
-    newHealth = std::min( character->vitals().health() + heal, character->vitals().fullHealth() );
+    double newHealth = std::min( character->vitals().health() + heal, character->vitals().fullHealth() );
     character->vitals().setHealth( newHealth );
 
     ProgressionSystem().applyExperience( sessionId, character, "clarity", heal );

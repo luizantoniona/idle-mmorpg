@@ -2,9 +2,12 @@
 
     <div class="scrollable-panel">
 
-        @if(character && character.skills){
+        @if(character && character.skills) {
 
-        @for(characterSkill of character.skills; track characterSkill.id) {
+        @for (category of groupSkillsByCategory(character.skills) | keyvalue; track category.key) {
+        <h4 class="category-title">{{ category.key | titlecase }}</h4>
+
+        @for (characterSkill of category.value; track characterSkill.id) {
         <app-tooltip>
             <div tooltip-target>
                 <app-bar [label]="characterSkill.skill.name + ' (LVL ' + characterSkill.level + ')'"
@@ -20,8 +23,9 @@
             </div>
         </app-tooltip>
         }
+        }
         } @else {
-        <app-loading></app-loading>
+        <h3>No skills</h3>
         }
 
     </div>

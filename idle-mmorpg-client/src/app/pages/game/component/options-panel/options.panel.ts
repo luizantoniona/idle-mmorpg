@@ -5,7 +5,6 @@ import { PanelVerticalComponent } from "../../../../component";
 
 import { CharacterQuestPanel } from "./character-quest-panel/character-quest.panel";
 import { ChatPanel } from "./chat-panel/chat-panel.component";
-import { LocationConnectionsPanel } from "./location-connections-panel/location-connections-panel.component";
 
 import { Character } from "../../../../model";
 import { Location } from "../../../../model";
@@ -19,7 +18,6 @@ import { Location } from "../../../../model";
         PanelVerticalComponent,
         CharacterQuestPanel,
         ChatPanel,
-        LocationConnectionsPanel,
     ],
 })
 
@@ -27,13 +25,8 @@ export class OptionsPanel {
     @Input() character!: Character;
     @Input() location!: Location;
 
-    showMap = false;
     showChat = false;
     showQuests = false;
-
-    onMapClick() {
-        this.showMap = true;
-    }
 
     onChatClick() {
         this.showChat = true;
@@ -44,7 +37,6 @@ export class OptionsPanel {
     }
 
     onClose() {
-        this.showMap = false;
         this.showChat = false;
         this.showQuests = false;
     }

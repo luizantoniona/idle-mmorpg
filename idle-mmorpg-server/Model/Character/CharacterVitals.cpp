@@ -1,5 +1,8 @@
 #include "CharacterVitals.h"
 
+#include <Commons/Singleton.h>
+#include <Core/Manager/ServerConfigurationManager.h>
+
 namespace Model {
 
 CharacterVitals::CharacterVitals() :
@@ -18,9 +21,8 @@ CharacterVitals::CharacterVitals() :
     _modifierMaxStamina( 0.0 ),
     _baseStaminaRegen( 0.0 ),
     _modifierStaminaRegen( 0.0 ),
-    _regenDuration( 20 ),
-    _regenCounter( 0 ) {
-}
+    _regenDuration( Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() ),
+    _regenCounter( 0 ) {}
 
 Json::Value CharacterVitals::toJson() {
     Json::Value root;

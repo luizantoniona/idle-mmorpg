@@ -3,14 +3,17 @@
     <app-panel-vertical>
         <strong>Denizens</strong>
         @for(denizen of location.denizens; track denizen.id) {
-        <app-button [text]="denizen.name" (clickEvent)="onDenizenClick(denizen)"></app-button>
+        <div class="denizen-row">
+            <img [src]="'/assets/denizens/' + denizen.icon" alt="{{ denizen.name }}" />
+            <app-button [text]="denizen.name" (clickEvent)="onDenizenClick(denizen)"></app-button>
+        </div>
         }
     </app-panel-vertical>
 
 
     @if(selectedDenizen && (selectedDenizen.quests || selectedDenizen.trade)) {
     <app-panel-vertical>
-
+        <h3>{{selectedDenizen.name}}</h3>
         <img [src]="'/assets/denizens/' + selectedDenizen.icon" alt="{{ selectedDenizen.name }}" />
 
         @if(selectedDenizen.trade && (selectedDenizen.trade.sell || selectedDenizen.trade.buy)){
