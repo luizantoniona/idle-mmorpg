@@ -103,6 +103,7 @@ void RegionInstance::moveCharacter( const std::string& sessionId, const std::str
     character->coordinates().setY( destinationLocation->y() );
     character->coordinates().setZ( destinationLocation->z() );
     character->coordinates().setCurrentStructure( "" );
+    character->action().clear();
 
     addCharacter( sessionId, character );
 }
@@ -132,13 +133,13 @@ void RegionInstance::handleCharacterMessage( const std::string& sessionId, Messa
     }
 
     switch ( type ) {
-    case Message::MessageReceiverType::CHARACTER_LOCATION_UPDATE: {
-        std::string destination = payload[ "destination" ].asString();
-        moveCharacter( sessionId, destination );
-        break;
-    }
-    default:
-        break;
+        case Message::MessageReceiverType::CHARACTER_LOCATION_UPDATE: {
+            std::string destination = payload[ "destination" ].asString();
+            moveCharacter( sessionId, destination );
+            break;
+        }
+        default:
+            break;
     }
 }
 
