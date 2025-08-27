@@ -1,7 +1,7 @@
 .location-row {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 8px;
 }
 
 .tile-grid {
@@ -9,7 +9,7 @@
     grid-template-columns: repeat(var(--cols), 32px);
     grid-template-rows: repeat(var(--rows), 32px);
     border-radius: 8px;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .tile {

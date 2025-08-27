@@ -7,7 +7,6 @@ import { CombatPanel } from "../combat-panel/combat.panel";
 import { DenizenPanel } from "../denizen-panel/denizen.panel";
 import { LocationPanel } from "../location-panel/location.panel";
 import { LocationActionsPanel } from "../location-actions-panel/location-actions.panel";
-import { LocationStructuresPanel } from "../location-structures-panel/location-structures-panel.component";
 
 import { Character } from "../../../../model";
 import { Location } from "../../../../model";
@@ -25,7 +24,6 @@ import { WebsocketService } from "../../../../service/websocket.service";
         DenizenPanel,
         LocationPanel,
         LocationActionsPanel,
-        LocationStructuresPanel,
         CharacterSpellsPanel,
     ],
 })

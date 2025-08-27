@@ -1,9 +1,7 @@
 <div class="location-column">
-
     <app-character-spells-panel [character]="character!"></app-character-spells-panel>
 
-    @if(!showCombat){
-
+    @if(!showCombat) {
     <div class="location-row">
         <div class="location-column">
             <app-location-actions-panel (openCombat)="onOpenCombat()"
@@ -11,17 +9,12 @@
             <app-character-action-panel [character]="character"></app-character-action-panel>
         </div>
 
-        <app-location-panel [location]="location!"></app-location-panel>
+        <app-location-panel [character]="character!" [location]="location!"></app-location-panel>
     </div>
 
-    <div class="location-row">
-        <app-location-structures-panel [location]="location" [character]="character"></app-location-structures-panel>
-        <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
-    </div>
+    <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
 
-    } @else {
-
+    }@else {
     <app-combat-panel [character]="character!" (closeCombat)="onCloseCombat()"></app-combat-panel>
     }
-
 </div>

@@ -1,10 +1,12 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
+import { ButtonComponent } from '../../../../component';
 import { LoadingComponent } from "../../../../component";
 import { PanelVerticalComponent } from "../../../../component";
+import { TooltipComponent } from "../../../../component";
 
-import { Location } from "../../../../model";
+import { Character, Location } from "../../../../model";
 
 import { WebsocketService } from "../../../../service/websocket.service";
 
@@ -14,13 +16,16 @@ import { WebsocketService } from "../../../../service/websocket.service";
     styleUrls: ["./location.panel.scss"],
     imports: [
         CommonModule,
+        ButtonComponent,
         LoadingComponent,
         PanelVerticalComponent,
+        TooltipComponent,
     ],
 })
 
 export class LocationPanel {
     @Input() location!: Location;
+    @Input() character!: Character;
 
     tiles: { type: 'empty' | 'structure' | 'connection'; content: any }[][] = [];
 
@@ -71,5 +76,18 @@ export class LocationPanel {
                 },
             });
         }
+    }
+
+    onStructureClick(structure: string): void {
+        this.sendMessage({
+            type: 'CHARACTER_STRUCTURE_UPDATE',
+            payload: {
+                structure: structure,
+            },
+        });
+    }
+
+    getStructure(structureId?: string) {
+        return this.location?.structures.find(s => s.id === structureId);
     }
 }

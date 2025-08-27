@@ -24,3 +24,7 @@
     visibility: visible;
     pointer-events: auto;
 }
+
+.tooltip:empty {
+    display: none;
+}

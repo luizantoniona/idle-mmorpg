@@ -119,17 +119,7 @@ void LocationInstance::tick() {
 
     for ( const auto& [ sessionId, character ] : _characters ) {
 
-        Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
         Core::System::RegenerationSystem::computeSpellsCooldown( sessionId, character );
-
-        if ( character->action().id() == "idle" ) {
-            continue;
-        }
-
-        if ( character->action().id() == "train" ) {
-            _trainingSystem.process( sessionId, character );
-            continue;
-        }
 
         if ( character->action().id() == "combat" ) {
             if ( _characterCombatCache.find( sessionId ) == _characterCombatCache.end() ) {
@@ -144,6 +134,17 @@ void LocationInstance::tick() {
 
                 Core::System::NotificationSystem::notifyCombatInstances( sessionId, instancesToNotify );
             }
+            continue;
+        }
+
+        Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
+
+        if ( character->action().id() == "idle" ) {
+            continue;
+        }
+
+        if ( character->action().id() == "train" ) {
+            _trainingSystem.process( sessionId, character );
             continue;
         }
 
