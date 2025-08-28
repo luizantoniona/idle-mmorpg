@@ -1,7 +1,12 @@
 <app-panel-vertical>
     <div class="section">
+
         <strong>Available Actions</strong>
+
+        @if(character && character.action.id != "idle"){
         <app-button text="Idle" (clickEvent)="onActionClick('idle')"></app-button>
+        }
+
         @if(location && location.actions && location.actions.length) {
         @for(action of location.actions; track action){
         <app-button [text]="action.label" (clickEvent)="onActionClick(action.id)"></app-button>

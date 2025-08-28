@@ -1,0 +1,25 @@
+<div class="location-row">
+    <div class="tile-grid" [style.--rows]="location.sizeY" [style.--cols]="location.sizeX">
+        @for (row of tiles; track $index;) {
+        @for (tile of row; track $index;) {
+        <app-tooltip>
+            <div tooltip-target class="tile" [ngClass]="tile.type" (click)="onTileClick(tile)">
+            </div>
+
+            @if(tile.type === 'structure' || tile.type === 'connection') {
+            <div tooltip-content>
+                @if(tile.type === 'structure') {
+                <strong>{{ tile.content.label }}</strong><br />
+                {{ tile.content.description }}
+                }
+                @if(tile.type === 'connection') {
+                <strong>Connection</strong><br />
+                Leads to: {{ tile.content.destination }}
+                }
+            </div>
+            }
+        </app-tooltip>
+        }
+        }
+    </div>
+</div>

@@ -4,8 +4,9 @@
     @if(!showCombat) {
     <div class="location-row">
         <div class="location-column">
-            <app-location-actions-panel (openCombat)="onOpenCombat()"
-                [location]="location"></app-location-actions-panel>
+            <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"
+                [character]="character"></app-location-actions-panel>
+
             <app-character-action-panel [character]="character"></app-character-action-panel>
         </div>
 

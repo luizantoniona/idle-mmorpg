@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { ButtonComponent } from "../../../../component";
 import { PanelVerticalComponent } from "../../../../component";
 
-import { Location } from "../../../../model";
+import { Character, Location } from "../../../../model";
 
 import { WebsocketService } from "../../../../service/websocket.service";
 
@@ -21,6 +21,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
 
 export class LocationActionsPanel {
     @Input() location!: Location;
+    @Input() character!: Character;
     @Output() openCombat = new EventEmitter<void>();
 
     private websocketService = inject(WebsocketService);
