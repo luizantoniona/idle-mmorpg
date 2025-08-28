@@ -63,6 +63,10 @@ TODO
 [`API`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/API.md) – API requests documentation.  
 [`WebSocket`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/WebSocket.md) – WebSocket messages documentation.  
 
+### ⚙️ **Database**
+- **For now, you need to run the schema manually.**
+- **Once all tables are defined and only minor changes are needed, we will create the migration steps.**
+
 ## ⚔️ [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client)
 - **Web Client**
   - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.

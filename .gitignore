@@ -5,6 +5,7 @@
 #Folders
 idle-mmorpg-server/build/
 idle-mmorpg-server/.vs/
+idle-mmorpg-server/database/server_data
 
 #Files
 idle-mmorpg-server/*.txt.user
