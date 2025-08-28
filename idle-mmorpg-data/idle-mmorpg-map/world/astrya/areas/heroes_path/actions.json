@@ -2,6 +2,7 @@
     "actions": [
         {
             "id": "rest",
+            "type": "regenerative",
             "label": "Rest and recover energy at the heroes camp",
             "duration": 3,
             "structure": "",
@@ -40,15 +41,13 @@
         {
             "id": "combat",
             "label": "Engage in battle against local enemies",
-            "requirements": [],
-            "experience": []
+            "requirements": []
         },
         {
             "id": "combat",
             "label": "Fight for the altar",
             "structure": "altar_of_light",
-            "requirements": [],
-            "experience": []
+            "requirements": []
         },
         {
             "id": "train",

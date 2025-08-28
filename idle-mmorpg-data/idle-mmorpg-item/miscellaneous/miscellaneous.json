@@ -3,7 +3,9 @@
         {
             "category": "ore",
             "path": "ores",
-            "items": []
+            "items": [
+                "copper_ore"
+            ]
         },
         {
             "category": "bait",

@@ -57,6 +57,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     for ( const Json::Value& actionJson : actionsJson[ "actions" ] ) {
         Model::LocationAction action;
         action.setId( actionJson[ "id" ].asString() );
+        action.setType( actionJson[ "type" ].asString() );
         action.setLabel( actionJson[ "label" ].asString() );
         action.setStructure( actionJson.get( "structure", "" ).asString() );
         action.setDuration( actionJson[ "duration" ].asInt() * Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() );
@@ -74,6 +75,16 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
             experience.setIdSkill( experienceJson[ "skill" ].asString() );
             experience.setAmount( experienceJson[ "amount" ].asInt() );
             action.addExperience( experience );
+        }
+
+        for ( const Json::Value& lootJson : actionJson[ "loot" ] ) {
+            Model::LocationActionLoot loot;
+            loot.setId( lootJson[ "id" ].asString() );
+            loot.setBaseAmount( lootJson[ "baseAmount" ].asDouble() );
+            loot.setModifierAmount( lootJson[ "modifierAmount" ].asDouble() );
+            loot.setBaseChance( lootJson[ "baseChance" ].asDouble() );
+            loot.setModifierChance( lootJson[ "modifierChance" ].asDouble() );
+            action.addLoot( loot );
         }
 
         location->addAction( action );

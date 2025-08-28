@@ -20,7 +20,8 @@ public:
 
 private:
     int computeActionDuration( Model::Character* character, const Model::LocationAction& action );
-    void regenerativeActionEffect( Model::Character* character );
+    void regenerativeActionEffect( const std::string& sessionId, Model::Character* character );
+    void gatheringActionEffect( const std::string& sessionId, Model::Character* character, const Model::LocationAction& action );
 
 private:
     Model::Location* _location;

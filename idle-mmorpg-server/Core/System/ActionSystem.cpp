@@ -12,8 +12,7 @@ namespace Core::System {
 
 ActionSystem::ActionSystem( Model::Location* location ) :
     _location( location ),
-    _progressionSystem() {
-}
+    _progressionSystem() {}
 
 void ActionSystem::changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
     if ( !character || !payload.isObject() || !payload.isMember( "action" ) ) {
@@ -60,8 +59,8 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
         const auto& actions = _location->actions();
         auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            return action.id() == characterAction.id();
-        } );
+                return action.id() == characterAction.id();
+            } );
 
         if ( it != actions.end() ) {
             const Model::LocationAction& completedAction = *it;
@@ -73,9 +72,11 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
                 _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
             }
 
-            if ( completedAction.id() == "rest" ) {
-                regenerativeActionEffect( character );
-                NotificationSystem::notifyCharacterVitals( sessionId, character );
+            if ( completedAction.type() == "gathering" ) {
+                gatheringActionEffect( sessionId, character, completedAction );
+
+            } else if ( completedAction.type() == "regenerative" ) {
+                regenerativeActionEffect( sessionId, character );
             }
         }
 
@@ -90,12 +91,24 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
     int baseDuration = action.duration();
-    // TODO: Compute depending the action
-    // TODO: Treat special actions separated -> Combat - Train
-    return baseDuration;
+
+    std::string skill;
+    if ( action.id() == "mine" ) {
+        skill = "mining";
+
+    } else if ( action.id() == "woodcut" ) {
+        skill = "woodcutting";
+
+    } else {
+        return baseDuration;
+    }
+
+    int skillLevel = character->skills().skillLevel( skill );
+    double modifier = std::max( 0.5, 1.0 - 0.01 * skillLevel );
+    return static_cast<int>( baseDuration * modifier );
 }
 
-void ActionSystem::regenerativeActionEffect( Model::Character* character ) {
+void ActionSystem::regenerativeActionEffect( const std::string& sessionId, Model::Character* character ) {
     if ( !character ) {
         return;
     }
@@ -121,6 +134,30 @@ void ActionSystem::regenerativeActionEffect( Model::Character* character ) {
         newMana = character->vitals().fullMana();
     }
     character->vitals().setMana( newMana );
+
+    NotificationSystem::notifyCharacterVitals( sessionId, character );
+}
+
+void ActionSystem::gatheringActionEffect( const std::string& sessionId, Model::Character* character, const Model::LocationAction& action ) {
+    int skillLevel = 0;
+
+    if ( action.id() == "mine" ) {
+        skillLevel = character->skills().skillLevel( "mining" );
+
+    } else if ( action.id() == "woodcut" ) {
+        skillLevel = character->skills().skillLevel( "woodcutting" );
+    }
+
+    for ( const auto& loot : action.loot() ) {
+        double amount = loot.realAmountByLevel( skillLevel );
+        double chance = std::min( 1.0, loot.realChanceByLevel( skillLevel ) );
+        if ( ( rand() / double(RAND_MAX) ) <= chance ) {
+            int finalAmount = static_cast<int>( amount );
+            character->inventory().addItem( loot.id(), finalAmount );
+        }
+    }
+
+    NotificationSystem::notifyCharacterInventory( sessionId, character );
 }
 
 } // namespace Core::System

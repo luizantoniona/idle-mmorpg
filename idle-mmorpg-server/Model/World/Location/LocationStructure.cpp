@@ -7,8 +7,7 @@ LocationStructure::LocationStructure() :
     _label( "" ),
     _description( "" ),
     _x( 0 ),
-    _y( 0 ) {
-}
+    _y( 0 ) {}
 
 Json::Value LocationStructure::toJson() const {
     Json::Value root;

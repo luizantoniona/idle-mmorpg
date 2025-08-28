@@ -1,0 +1,9 @@
+{
+    "id": "copper_ore",
+    "name": "Copper Ore",
+    "description": "A basic metal ore commonly mined from rocks. Used for creating ingots.",
+    "icon": "miscellaneous/ores/copper_ore.gif",
+    "rarity": "common",
+    "value": 2,
+    "modifiers": []
+}

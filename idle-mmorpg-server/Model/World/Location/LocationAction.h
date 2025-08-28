@@ -7,6 +7,7 @@
 #include <json/json.h>
 
 #include "LocationActionExperience.h"
+#include "LocationActionLoot.h"
 #include "LocationActionRequirement.h"
 
 namespace Model {
@@ -19,6 +20,9 @@ public:
 
     std::string id() const;
     void setId( const std::string& id );
+
+    std::string type() const;
+    void setType( const std::string& type );
 
     std::string label() const;
     void setLabel( const std::string& label );
@@ -37,13 +41,19 @@ public:
     void setExperience( const std::vector<LocationActionExperience>& experience );
     void addExperience( const LocationActionExperience& experience );
 
+    std::vector<LocationActionLoot> loot() const;
+    void setLoot( const std::vector<LocationActionLoot>& loot );
+    void addLoot( const LocationActionLoot& loot );
+
 private:
     std::string _id;
+    std::string _type;
     std::string _label;
     std::string _structure;
     int _duration;
     std::vector<LocationActionRequirement> _requirements;
     std::vector<LocationActionExperience> _experience;
+    std::vector<LocationActionLoot> _loot;
 };
 
 } // namespace Model

@@ -1,14 +1,10 @@
 #include "LocationAction.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_LABEL = "label";
-} // namespace
-
 namespace Model {
 
 LocationAction::LocationAction() :
     _id( "" ),
+    _type( "" ),
     _label( "" ),
     _structure( "" ),
     _duration( 0 ),
@@ -17,8 +13,8 @@ LocationAction::LocationAction() :
 
 Json::Value LocationAction::toJson() {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_LABEL ] = label();
+    root[ "id" ] = id();
+    root[ "label" ] = label();
     return root;
 }
 
@@ -28,6 +24,14 @@ std::string LocationAction::id() const {
 
 void LocationAction::setId( const std::string& id ) {
     _id = id;
+}
+
+std::string LocationAction::type() const {
+    return _type;
+}
+
+void LocationAction::setType( const std::string& type ) {
+    _type = type;
 }
 
 std::string LocationAction::label() const {
@@ -76,6 +80,18 @@ void LocationAction::setExperience( const std::vector<LocationActionExperience>&
 
 void LocationAction::addExperience( const LocationActionExperience& experience ) {
     _experience.push_back( experience );
+}
+
+std::vector<LocationActionLoot> LocationAction::loot() const {
+    return _loot;
+}
+
+void LocationAction::setLoot( const std::vector<LocationActionLoot>& loot ) {
+    _loot = loot;
+}
+
+void LocationAction::addLoot( const LocationActionLoot& loot ) {
+    _loot.push_back( loot );
 }
 
 } // namespace Model
