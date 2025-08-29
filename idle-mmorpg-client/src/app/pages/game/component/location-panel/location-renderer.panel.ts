@@ -32,7 +32,7 @@ export class LocationRendererPanel {
 
     ngDoCheck() {
         if (this.location && this.location.connections !== this.previousConnections) {
-            this.previousConnections = [...this.location.connections];
+            this.previousConnections = [...(this.location.connections || [])];
             this.generateGrid();
         }
     }

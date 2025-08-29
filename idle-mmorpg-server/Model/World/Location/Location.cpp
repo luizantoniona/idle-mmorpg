@@ -118,6 +118,16 @@ void Location::addStructure( const LocationStructure& structure ) {
     _structures.push_back( structure );
 }
 
+bool Location::hasStructure( const std::string& structureId ) {
+    for ( const auto& structure : _structures ) {
+        if ( structure.id() == structureId ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 const std::vector<LocationConnection>& Location::connections() const {
     return _connections;
 }

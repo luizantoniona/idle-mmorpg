@@ -50,6 +50,7 @@ public:
     const std::vector<LocationStructure>& structures() const;
     void setStructures( const std::vector<LocationStructure>& structures );
     void addStructure( const LocationStructure& structure );
+    bool hasStructure( const std::string& structureId );
 
     const std::vector<LocationConnection>& connections() const;
     void setConnections( const std::vector<LocationConnection>& connections );

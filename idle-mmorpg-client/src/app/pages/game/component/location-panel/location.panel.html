@@ -1,7 +1,9 @@
 <app-panel>
     @if(location) {
-    <h3>{{ getStructure(character.coordinates.structure)?.label || location.name }}</h3>
-    <p>{{ getStructure(character.coordinates.structure)?.description || location.description }}</p>
+    <div class="location-header">
+        <strong>{{ getStructure(character.coordinates.structure)?.label || location.name }}</strong>
+        <p>{{ getStructure(character.coordinates.structure)?.description || location.description }}</p>
+    </div>
 
     @if(!character.coordinates.structure) {
     <app-location-renderer-panel [location]="location"></app-location-renderer-panel>

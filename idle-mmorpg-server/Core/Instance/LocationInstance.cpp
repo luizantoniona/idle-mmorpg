@@ -61,6 +61,10 @@ void LocationInstance::changeStructure( const std::string& sessionId, Model::Cha
 
     std::string structureId = payload[ "structure" ].asString();
 
+    if ( !_location->hasStructure( structureId ) ) {
+        return;
+    }
+
     if ( character->coordinates().structureId() == structureId ) {
         return;
     }

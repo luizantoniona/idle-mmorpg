@@ -44,6 +44,6 @@ export class LocationPanel {
     }
 
     getStructure(structureId?: string) {
-        return this.location?.structures.find(s => s.id === structureId);
+        return this.location?.structures?.find(structure => structure.id === structureId) || null;
     }
 }

@@ -99,7 +99,7 @@ void RegionInstance::moveCharacter( const std::string& sessionId, const std::str
 
     removeCharacter( sessionId );
 
-    character->coordinates().setLocationId( destination );
+    character->coordinates().setLocationId( destinationLocation->id() );
     character->coordinates().setStructureId( "" );
     character->action().clear();
 
