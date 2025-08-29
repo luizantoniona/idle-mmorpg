@@ -155,10 +155,6 @@ void LocationInstance::tick() {
         CombatInstance* combatInstance = it->get();
         combatInstance->process();
 
-        for ( const auto& [ sessionId, character ] : combatInstance->characters() ) {
-            Core::System::NotificationSystem::notifyFullCharacter( sessionId, character );
-        }
-
         Core::System::NotificationSystem::notifyCombat( combatInstance );
 
         if ( combatInstance->isFinished() ) {

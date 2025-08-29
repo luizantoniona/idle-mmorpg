@@ -7,6 +7,7 @@
 #include <Commons/DecimalHelper.h>
 
 #include "LootSystem.h"
+#include "NotificationSystem.h"
 #include "QuestSystem.h"
 
 namespace Core::System {
@@ -67,6 +68,8 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
     double newStamina = character->vitals().stamina() - 1;
     newStamina = std::max( 0.0, newStamina );
     character->vitals().setStamina( newStamina );
+
+    NotificationSystem::notifyCharacterVitals( sessionId, character );
 
     auto skills = CombatSystem::combatSkill( character );
 
@@ -163,6 +166,8 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     _progressionSystem.applyExperience( sessionId, character, "endurance", xpEndurance );
 
     std::cout << "Hit for " << damage << " damage. Character HP left: " << character->vitals().health() << std::endl;
+
+    NotificationSystem::notifyCharacterVitals( sessionId, character );
 }
 
 void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature, Model::CharacterSpell* characterSpell ) {

@@ -25,6 +25,7 @@ void SpellSystem::learnSpell( const std::string& sessionId, Model::Character* ch
     Model::CharacterSpell characterSpell;
     characterSpell.setId( spellId );
     characterSpell.setSpell( spell );
+    characterSpell.setCount( spell->cooldown() );
 
     if ( spell->type() == "healing" ) {
         characterSpells.addHealingSpell( characterSpell );
