@@ -3,6 +3,9 @@
     flex-direction: column;
     width: 100%;
     gap: 8px;
+    overflow-y: auto;
+    padding-right: 8px;
+    max-height: 400px;
 }
 
 .category-title {
