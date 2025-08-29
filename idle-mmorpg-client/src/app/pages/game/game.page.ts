@@ -156,7 +156,7 @@ export class GamePage implements OnInit, OnDestroy {
                 if (data.payload?.spells) {
                     this.character = {
                         ...this.character!,
-                        quests: data.payload.spells,
+                        spells: data.payload.spells,
                     };
                 }
                 break;
