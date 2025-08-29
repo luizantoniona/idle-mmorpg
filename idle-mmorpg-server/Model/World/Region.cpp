@@ -55,24 +55,14 @@ Location* Region::locationById( const std::string& locationId ) {
     return nullptr;
 }
 
-bool Region::hasLocationWithCoordinates( int x, int y, int z ) const {
-    for ( const auto& location : _locations ) {
-        if ( location->x() == x && location->y() == y && location->z() == z ) {
+bool Region::hasLocationById( const std::string& locationId ) {
+    for ( const auto& locationPtr : _locations ) {
+        if ( locationPtr->id() == locationId ) {
             return true;
         }
     }
 
     return false;
-}
-
-Location* Region::locationByCoordinates( int x, int y, int z ) {
-    for ( const auto& location : _locations ) {
-        if ( location->x() == x && location->y() == y && location->z() == z ) {
-            return location.get();
-        }
-    }
-
-    return nullptr;
 }
 
 } // namespace Model

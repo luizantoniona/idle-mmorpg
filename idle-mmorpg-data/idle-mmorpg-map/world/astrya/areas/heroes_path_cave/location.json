@@ -4,11 +4,6 @@
     "description": "A small cave with mysterious echoes and ancient markings.",
     "sizeX": 10,
     "sizeY": 10,
-    "coordinates": {
-        "x": 0,
-        "y": 0,
-        "z": -1
-    },
     "connections": [
         {
             "destination": "heroes_path",

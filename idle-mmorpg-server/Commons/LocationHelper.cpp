@@ -6,7 +6,7 @@
 namespace Commons {
 
 bool LocationHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
-    const std::string& characterStructure = character->coordinates().currentStructure();
+    const std::string& characterStructure = character->coordinates().structureId();
     const std::string& actionStructure = action.structure();
 
     if ( !actionStructure.empty() && characterStructure != actionStructure ) {
@@ -66,7 +66,7 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
 }
 
 bool LocationHelper::canCharacterUseConnections( Model::Character* character, const Model::LocationConnection& connection ) {
-    const std::string& characterStructure = character->coordinates().currentStructure();
+    const std::string& characterStructure = character->coordinates().structureId();
     const std::string& connectionStructure = connection.structure();
 
     if ( !connectionStructure.empty() && characterStructure != connectionStructure ) {
@@ -130,7 +130,7 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
 }
 
 bool LocationHelper::canCharacterInteractDenizen( Model::Character* character, const Model::Denizen& denizen ) {
-    const std::string& characterStructure = character->coordinates().currentStructure();
+    const std::string& characterStructure = character->coordinates().structureId();
     const std::string& denizenStructure = denizen.structure();
 
     if ( !denizenStructure.empty() && characterStructure != denizenStructure ) {

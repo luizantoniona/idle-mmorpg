@@ -29,15 +29,6 @@ public:
     std::string description() const;
     void setDescription( const std::string& description );
 
-    int x() const;
-    void setX( int x );
-
-    int y() const;
-    void setY( int y );
-
-    int z() const;
-    void setZ( int z );
-
     int tileSizeX() const;
     void setTileSizeX( int tileSizeX );
 
@@ -68,9 +59,6 @@ private:
     std::string _id;
     std::string _name;
     std::string _description;
-    int _x;
-    int _y;
-    int _z;
     int _tileSizeX;
     int _tileSizeY;
     std::vector<Denizen> _denizens;

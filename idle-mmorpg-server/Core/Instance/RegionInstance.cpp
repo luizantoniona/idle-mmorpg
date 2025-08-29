@@ -19,7 +19,7 @@ bool RegionInstance::addCharacter( const std::string& sessionId, Model::Characte
 
     const Model::CharacterCoordinates coordinates = character->coordinates();
 
-    Model::Location* location = _region->locationByCoordinates( coordinates.x(), coordinates.y(), coordinates.z() );
+    Model::Location* location = _region->locationById( coordinates.locationId() );
     if ( !location ) {
         return false;
     }
@@ -99,10 +99,8 @@ void RegionInstance::moveCharacter( const std::string& sessionId, const std::str
 
     removeCharacter( sessionId );
 
-    character->coordinates().setX( destinationLocation->x() );
-    character->coordinates().setY( destinationLocation->y() );
-    character->coordinates().setZ( destinationLocation->z() );
-    character->coordinates().setCurrentStructure( "" );
+    character->coordinates().setLocationId( destination );
+    character->coordinates().setStructureId( "" );
     character->action().clear();
 
     addCharacter( sessionId, character );

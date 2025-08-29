@@ -13,35 +13,23 @@ public:
 
     Json::Value toJson();
 
-    int x() const;
-    void setX( int x );
+    std::string locationId() const;
+    void setLocationId( const std::string& locationId );
 
-    int y() const;
-    void setY( int y );
+    std::string spawnLocationId() const;
+    void setSpawnLocationId( const std::string& locationId );
 
-    int z() const;
-    void setZ( int z );
+    std::string structureId() const;
+    void setStructureId( const std::string& structureId );
 
-    int xSpawn() const;
-    void setXSpawn( int xSpawn );
-
-    int ySpawn() const;
-    void setYSpawn( int ySpawn );
-
-    int zSpawn() const;
-    void setZSpawn( int zSpawn );
-
-    std::string currentStructure() const;
-    void setCurrentStructure( const std::string& currentStructure );
+    std::string spawnStructureId() const;
+    void setSpawnStructureId( const std::string& structureId );
 
 private:
-    int _x;
-    int _y;
-    int _z;
-    int _xSpawn;
-    int _ySpawn;
-    int _zSpawn;
-    std::string _currentStructure;
+    std::string _locationId;
+    std::string _spawnLocationId;
+    std::string _structureId;
+    std::string _spawnStructureId;
 };
 
 } // namespace Model

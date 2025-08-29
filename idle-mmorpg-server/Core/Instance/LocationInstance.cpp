@@ -61,11 +61,11 @@ void LocationInstance::changeStructure( const std::string& sessionId, Model::Cha
 
     std::string structureId = payload[ "structure" ].asString();
 
-    if ( character->coordinates().currentStructure() == structureId ) {
+    if ( character->coordinates().structureId() == structureId ) {
         return;
     }
 
-    character->coordinates().setCurrentStructure( structureId );
+    character->coordinates().setStructureId( structureId );
     character->action().clear();
 
     Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
@@ -81,7 +81,7 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
 
     std::string roomId = drogon::utils::getUuid();
 
-    auto combatInstance = std::make_unique<CombatInstance>( _location, roomId, character->name(), character->coordinates().currentStructure() );
+    auto combatInstance = std::make_unique<CombatInstance>( _location, roomId, character->name(), character->coordinates().structureId() );
     CombatInstance* combatInstancePtr = combatInstance.get();
 
     combatInstancePtr->addCharacter( sessionId, character );
@@ -124,7 +124,7 @@ void LocationInstance::tick() {
         if ( character->action().id() == "combat" ) {
             if ( _characterCombatCache.find( sessionId ) == _characterCombatCache.end() ) {
                 std::vector<CombatInstance*> instancesToNotify = {};
-                const std::string& characterStructureId = character->coordinates().currentStructure();
+                const std::string& characterStructureId = character->coordinates().structureId();
 
                 for ( const auto& combatInstance : _combatInstances ) {
                     if ( combatInstance->structureId() == characterStructureId ) {

@@ -28,9 +28,7 @@ public:
     void addLocation( std::unique_ptr<Location> location );
 
     Location* locationById( const std::string& locationId );
-
-    bool hasLocationWithCoordinates( int x, int y, int z ) const;
-    Location* locationByCoordinates( int x, int y, int z );
+    bool hasLocationById( const std::string& locationId );
 
 private:
     std::string _id;

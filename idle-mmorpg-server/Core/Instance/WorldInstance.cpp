@@ -16,16 +16,14 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
         return false;
     }
 
-    const Model::CharacterCoordinates coordinates = character->coordinates();
+    Model::CharacterCoordinates& coordinates = character->coordinates();
 
     for ( auto& regionModel : _world->regions() ) {
 
-        if ( regionModel.get()->hasLocationWithCoordinates( coordinates.x(), coordinates.y(), coordinates.z() ) ) {
-
+        if ( regionModel.get()->hasLocationById( coordinates.locationId() ) ) {
             std::lock_guard lock( _mutex );
 
             auto& regionInstance = _regions[regionModel.get()->id()];
-
             if ( !regionInstance ) {
                 regionInstance = std::make_unique<RegionInstance>( regionModel.get() );
             }
@@ -33,7 +31,31 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
             if ( regionInstance->addCharacter( sessionId, character.get() ) ) {
                 _characters[sessionId] = std::move( character );
                 _characterToRegion[sessionId] = regionInstance.get();
+                return true;
+            }
+        }
+    }
 
+    if ( !_world->regions().empty() ) {
+        auto& firstRegionModel = _world->regions().front();
+
+        if ( !firstRegionModel->locations().empty() ) {
+            auto& firstLocation = firstRegionModel->locations().front();
+
+            coordinates.setLocationId( firstLocation->id() );
+            coordinates.setStructureId( "" );
+
+            std::lock_guard lock( _mutex );
+
+            auto& regionInstance = _regions[ firstRegionModel->id() ];
+            if ( !regionInstance ) {
+                regionInstance = std::make_unique<RegionInstance>( firstRegionModel.get() );
+            }
+
+            if ( regionInstance->addCharacter( sessionId, character.get() ) ) {
+                character->setCoordinates( coordinates );
+                _characters[ sessionId ] = std::move( character );
+                _characterToRegion[ sessionId ] = regionInstance.get();
                 return true;
             }
         }

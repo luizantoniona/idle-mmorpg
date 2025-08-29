@@ -4,11 +4,6 @@
     "description": "A forest filled with Wolves and trees.",
     "sizeX": 10,
     "sizeY": 10,
-    "coordinates": {
-        "x": 0,
-        "y": 1,
-        "z": 0
-    },
     "connections": [
         {
             "destination": "heroes_path",

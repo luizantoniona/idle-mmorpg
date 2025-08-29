@@ -11,13 +11,11 @@ bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
     const std::string sql = R"SQL(
         INSERT INTO character_coordinates (
             id_character,
-            x,
-            y,
-            z,
-            x_spawn,
-            y_spawn,
-            z_spawn
-        ) VALUES (?, 0, 0, 0, 0, 0, 0)
+            location_id,
+            structure_id,
+            spawn_location_id,
+            spawn_structure_id
+        ) VALUES (?, '', NULL, '', NULL)
     )SQL";
     Database::Query query( _db, sql );
 
@@ -25,26 +23,23 @@ bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
     return query.exec();
 }
 
-bool CharacterCoordinateRepository::updateCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates ) {
+bool CharacterCoordinateRepository::updateCoordinates(
+    int idCharacter, const Model::CharacterCoordinates& coordinates ) {
     const std::string sql = R"SQL(
         UPDATE character_coordinates SET
-            x = ?,
-            y = ?,
-            z = ?,
-            x_spawn = ?,
-            y_spawn = ?,
-            z_spawn = ?
+            location_id = ?,
+            structure_id = ?,
+            spawn_location_id = ?,
+            spawn_structure_id = ?
         WHERE id_character = ?
     )SQL";
     Database::Query query( _db, sql );
 
-    query.bindInt( 1, coordinates.x() );
-    query.bindInt( 2, coordinates.y() );
-    query.bindInt( 3, coordinates.z() );
-    query.bindInt( 4, coordinates.xSpawn() );
-    query.bindInt( 5, coordinates.ySpawn() );
-    query.bindInt( 6, coordinates.zSpawn() );
-    query.bindInt( 7, idCharacter );
+    query.bindText( 1, coordinates.locationId() );
+    query.bindText( 2, coordinates.structureId() );
+    query.bindText( 3, coordinates.spawnLocationId() );
+    query.bindText( 4, coordinates.spawnStructureId() );
+    query.bindInt( 5, idCharacter );
 
     return query.exec();
 }
@@ -52,12 +47,10 @@ bool CharacterCoordinateRepository::updateCoordinates( int idCharacter, const Mo
 std::unique_ptr<Model::CharacterCoordinates> CharacterCoordinateRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT
-            x,
-            y,
-            z,
-            x_spawn,
-            y_spawn,
-            z_spawn
+            location_id,
+            structure_id,
+            spawn_location_id,
+            spawn_structure_id
         FROM character_coordinates
         WHERE id_character = ?
     )SQL";
@@ -70,12 +63,10 @@ std::unique_ptr<Model::CharacterCoordinates> CharacterCoordinateRepository::find
     }
 
     auto coordinates = std::make_unique<Model::CharacterCoordinates>();
-    coordinates->setX( query.getColumnInt( 0 ) );
-    coordinates->setY( query.getColumnInt( 1 ) );
-    coordinates->setZ( query.getColumnInt( 2 ) );
-    coordinates->setXSpawn( query.getColumnInt( 3 ) );
-    coordinates->setYSpawn( query.getColumnInt( 4 ) );
-    coordinates->setZSpawn( query.getColumnInt( 5 ) );
+    coordinates->setLocationId( query.getColumnText( 0 ) );
+    coordinates->setStructureId( query.getColumnText( 1 ) );
+    coordinates->setSpawnLocationId( query.getColumnText( 2 ) );
+    coordinates->setSpawnStructureId( query.getColumnText( 3 ) );
 
     return coordinates;
 }

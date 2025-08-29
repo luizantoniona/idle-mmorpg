@@ -27,11 +27,6 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     location->setTileSizeX( locationJson[ "sizeX" ].asInt() );
     location->setTileSizeY( locationJson[ "sizeY" ].asInt() );
 
-    Json::Value coordinatesJson = locationJson[ "coordinates" ];
-    location->setX( coordinatesJson[ "x" ].asInt() );
-    location->setY( coordinatesJson[ "y" ].asInt() );
-    location->setZ( coordinatesJson[ "z" ].asInt() );
-
     Json::Value connectionsJson = locationJson[ "connections" ];
     for ( const Json::Value& connectionJson : connectionsJson ) {
         Model::LocationConnection connection;

@@ -1,6 +1,4 @@
 export type CharacterCoordinates = {
-    x: number;
-    y: number;
-    z: number;
+    location: string;
     structure: string;
 };

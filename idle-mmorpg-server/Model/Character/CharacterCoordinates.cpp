@@ -3,77 +3,49 @@
 namespace Model {
 
 CharacterCoordinates::CharacterCoordinates() :
-    _x( 0 ),
-    _y( 0 ),
-    _z( 0 ),
-    _xSpawn( 0 ),
-    _ySpawn( 0 ),
-    _zSpawn( 0 ),
-    _currentStructure( "" ) {}
+    _locationId( "" ),
+    _spawnLocationId( "" ),
+    _structureId( "" ),
+    _spawnStructureId( "" ) {
+}
 
 Json::Value CharacterCoordinates::toJson() {
     Json::Value root;
-    root[ "x" ] = x();
-    root[ "y" ] = y();
-    root[ "z" ] = z();
-    root[ "structure" ] = currentStructure();
+    root[ "location" ] = locationId();
+    root[ "structure" ] = structureId();
     return root;
 }
 
-int CharacterCoordinates::x() const {
-    return _x;
+std::string CharacterCoordinates::locationId() const {
+    return _locationId;
 }
 
-void CharacterCoordinates::setX( int x ) {
-    _x = x;
+void CharacterCoordinates::setLocationId( const std::string& locationId ) {
+    _locationId = locationId;
 }
 
-int CharacterCoordinates::y() const {
-    return _y;
+std::string CharacterCoordinates::spawnLocationId() const {
+    return _spawnLocationId;
 }
 
-void CharacterCoordinates::setY( int y ) {
-    _y = y;
+void CharacterCoordinates::setSpawnLocationId( const std::string& locationId ) {
+    _spawnLocationId = locationId;
 }
 
-int CharacterCoordinates::z() const {
-    return _z;
+std::string CharacterCoordinates::structureId() const {
+    return _structureId;
 }
 
-void CharacterCoordinates::setZ( int z ) {
-    _z = z;
+void CharacterCoordinates::setStructureId( const std::string& structureId ) {
+    _structureId = structureId;
 }
 
-int CharacterCoordinates::xSpawn() const {
-    return _xSpawn;
+std::string CharacterCoordinates::spawnStructureId() const {
+    return _spawnStructureId;
 }
 
-void CharacterCoordinates::setXSpawn( int xSpawn ) {
-    _xSpawn = xSpawn;
-}
-
-int CharacterCoordinates::ySpawn() const {
-    return _ySpawn;
-}
-
-void CharacterCoordinates::setYSpawn( int ySpawn ) {
-    _ySpawn = ySpawn;
-}
-
-int CharacterCoordinates::zSpawn() const {
-    return _zSpawn;
-}
-
-void CharacterCoordinates::setZSpawn( int zSpawn ) {
-    _zSpawn = zSpawn;
-}
-
-std::string CharacterCoordinates::currentStructure() const {
-    return _currentStructure;
-}
-
-void CharacterCoordinates::setCurrentStructure( const std::string& currentStructure ) {
-    _currentStructure = currentStructure;
+void CharacterCoordinates::setSpawnStructureId( const std::string& structureId ) {
+    _spawnStructureId = structureId;
 }
 
 } // namespace Model

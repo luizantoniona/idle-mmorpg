@@ -4,11 +4,6 @@
     "description": "Where all heroes are born.",
     "sizeX": 10,
     "sizeY": 10,
-    "coordinates": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-    },
     "connections": [
         {
             "destination": "heroes_path_cave",

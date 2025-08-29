@@ -6,9 +6,6 @@ Location::Location() :
     _id( "" ),
     _name( "" ),
     _description( "" ),
-    _x( 0 ),
-    _y( 0 ),
-    _z( 0 ),
     _tileSizeX( 0 ),
     _tileSizeY( 0 ),
     _denizens( {} ),
@@ -23,9 +20,6 @@ Json::Value Location::toJson() const {
     root[ "id" ] = id();
     root[ "name" ] = name();
     root[ "description" ] = description();
-    root[ "x" ] = x();
-    root[ "y" ] = y();
-    root[ "z" ] = z();
     root[ "sizeX" ] = tileSizeX();
     root[ "sizeY" ] = tileSizeY();
 
@@ -58,30 +52,6 @@ std::string Location::description() const {
 
 void Location::setDescription( const std::string& description ) {
     _description = description;
-}
-
-int Location::x() const {
-    return _x;
-}
-
-void Location::setX( int x ) {
-    _x = x;
-}
-
-int Location::y() const {
-    return _y;
-}
-
-void Location::setY( int y ) {
-    _y = y;
-}
-
-int Location::z() const {
-    return _z;
-}
-
-void Location::setZ( int z ) {
-    _z = z;
 }
 
 int Location::tileSizeX() const {
