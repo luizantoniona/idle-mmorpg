@@ -61,7 +61,7 @@ void LocationInstance::changeStructure( const std::string& sessionId, Model::Cha
 
     std::string structureId = payload[ "structure" ].asString();
 
-    if ( !_location->hasStructure( structureId ) ) {
+    if ( structureId != "" && !_location->hasStructure( structureId ) ) {
         return;
     }
 
@@ -91,6 +91,17 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
     combatInstancePtr->addCharacter( sessionId, character );
     _characterCombatCache[sessionId] = combatInstancePtr;
     _combatInstances.push_back( std::move( combatInstance ) );
+
+    std::vector<CombatInstance*> allInstances;
+    for ( auto& ci : _combatInstances ) {
+        allInstances.push_back( ci.get() );
+    }
+
+    for ( const auto& [otherSessionId, otherChar] : _characters ) {
+        if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
+            Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
+        }
+    }
 }
 
 void LocationInstance::enterCombat( const std::string& sessionId, Model::Character* character, const std::string& roomId ) {
@@ -126,18 +137,6 @@ void LocationInstance::tick() {
         Core::System::RegenerationSystem::computeSpellsCooldown( sessionId, character );
 
         if ( character->action().id() == "combat" ) {
-            if ( _characterCombatCache.find( sessionId ) == _characterCombatCache.end() ) {
-                std::vector<CombatInstance*> instancesToNotify = {};
-                const std::string& characterStructureId = character->coordinates().structureId();
-
-                for ( const auto& combatInstance : _combatInstances ) {
-                    if ( combatInstance->structureId() == characterStructureId ) {
-                        instancesToNotify.push_back( combatInstance.get() );
-                    }
-                }
-
-                Core::System::NotificationSystem::notifyCombatInstances( sessionId, instancesToNotify );
-            }
             continue;
         }
 
@@ -167,6 +166,18 @@ void LocationInstance::tick() {
             }
 
             it = _combatInstances.erase( it );
+
+            std::vector<CombatInstance*> allInstances;
+            for ( auto& ci : _combatInstances ) {
+                allInstances.push_back( ci.get() );
+            }
+
+            for ( const auto& [ otherSessionId, otherChar ] : _characters ) {
+                if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
+                    Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
+                }
+            }
+
         } else {
             ++it;
         }
