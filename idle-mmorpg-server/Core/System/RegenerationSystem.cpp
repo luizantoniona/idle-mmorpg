@@ -22,9 +22,9 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
 
     characterVitals.setRegenCounter( 0 );
 
-    const double healthRegen = characterVitals.healthRegen() + character->attributes().constitution();
-    const double staminaRegen = characterVitals.staminaRegen() + character->attributes().dexterity();
-    const double manaRegen = characterVitals.manaRegen() + character->attributes().intelligence();
+    const double healthRegen = std::max( 1.0, characterVitals.healthRegen() + character->attributes().constitution() );
+    const double staminaRegen = std::max( 1.0, characterVitals.staminaRegen() + character->attributes().dexterity() );
+    const double manaRegen = std::max( 1.0, characterVitals.manaRegen() + character->attributes().intelligence() );
 
     double newHealth = characterVitals.health() + Commons::DecimalHelper::roundDecimals( healthRegen );
     if ( newHealth > characterVitals.fullHealth() ) {
