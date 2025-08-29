@@ -5,6 +5,7 @@
 #include <Commons/LocationHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 
 #include "NotificationSystem.h"
 
@@ -12,7 +13,8 @@ namespace Core::System {
 
 ActionSystem::ActionSystem( Model::Location* location ) :
     _location( location ),
-    _progressionSystem() {}
+    _progressionSystem(),
+    _tickRate( Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() ) {}
 
 void ActionSystem::changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
     if ( !character || !payload.isObject() || !payload.isMember( "action" ) ) {
@@ -46,6 +48,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
     action.setId( actionId );
     action.setDuration( computeActionDuration( character, selectedAction ) );
     action.setCounter( 0 );
+    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {
@@ -54,6 +57,10 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
     }
 
     Model::CharacterAction& characterAction = character->action();
+
+    if ( character->action().counter() == 0 || characterAction.counter() == characterAction.duration() || characterAction.counter() == characterAction.duration() / 2 ) {
+        Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+    }
 
     if ( characterAction.counter() >= characterAction.duration() ) {
 
@@ -85,8 +92,6 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
     } else {
         characterAction.setCounter( characterAction.counter() + 1 );
     }
-
-    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {

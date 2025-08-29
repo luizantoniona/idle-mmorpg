@@ -26,6 +26,7 @@ private:
 private:
     Model::Location* _location;
     ProgressionSystem _progressionSystem;
+    int _tickRate;
 };
 
 } // namespace Core::System

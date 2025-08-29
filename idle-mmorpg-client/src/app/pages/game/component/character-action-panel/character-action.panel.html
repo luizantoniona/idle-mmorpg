@@ -1,8 +1,7 @@
 <app-panel>
 
     @if(character && character.action && character.action.id) {
-    <app-bar [label]="character.action.id" [value]="character.action.counter" [max]="character.action.duration"
-        color="#2196f3"></app-bar>
+    <app-bar [label]="character.action.id" [value]="progress" [max]="duration" color="#2196f3"></app-bar>
     }
     @else {
     <app-loading></app-loading>
