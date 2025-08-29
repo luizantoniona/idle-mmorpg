@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
-import { PanelVerticalComponent } from "../panel/panel-vertical.component";
+import { PanelComponent } from "../panel/panel.component";
 
 @Component({
     selector: "app-popup",
     templateUrl: "./popup.component.html",
     styleUrls: ["./popup.component.scss"],
     imports: [
-        PanelVerticalComponent
+        PanelComponent
     ],
 })
 

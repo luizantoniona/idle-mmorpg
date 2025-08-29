@@ -1,15 +1,13 @@
 import { Component, Input } from "@angular/core";
-import { NgClass } from "@angular/common";
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: "app-panel",
     templateUrl: "./panel.component.html",
     styleUrls: ["./panel.component.scss"],
     imports: [
-        NgClass
+        CommonModule,
     ],
 })
 
-export class PanelComponent {
-    @Input() className: string = "";
-}
+export class PanelComponent { }

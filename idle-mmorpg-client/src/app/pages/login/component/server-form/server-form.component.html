@@ -1,16 +1,17 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-    <app-panel-horizontal>
-        <app-status-circle [status]="status" />
-        <h2>Server:</h2>
+    <app-panel>
+        <div class="server-row">
+            <app-status-circle [status]="status" />
+            <h2>Server:</h2>
 
-        <app-input-field label="IP Address" type="text" formControlName="ip" placeholder="127.0.0.1" />
-        <app-input-field label="Port" type="text" formControlName="port" placeholder="8080" />
+            <app-input-field label="IP Address" type="text" formControlName="ip" placeholder="127.0.0.1" />
+            <app-input-field label="Port" type="text" formControlName="port" placeholder="8080" />
 
-        <app-button text="Connect" type="submit" [disabled]="form.invalid || status === 'loading'" />
+            <app-button text="Connect" type="submit" [disabled]="form.invalid || status === 'loading'" />
 
-        @if(error){
-        <p style="color: red;">Error: {{ error }}</p>
-        }
-
-    </app-panel-horizontal>
+            @if(error){
+            <p style="color: red;">Error: {{ error }}</p>
+            }
+        </div>
+    </app-panel>
 </form>

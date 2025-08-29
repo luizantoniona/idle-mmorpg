@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { LoadingComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { PanelComponent } from '../../../../component';
 
 import { Character } from '../../../../model';
 
@@ -11,7 +11,7 @@ import { Character } from '../../../../model';
     styleUrl: './character-wallet-panel.component.scss',
     imports: [
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
     ],
 })
 

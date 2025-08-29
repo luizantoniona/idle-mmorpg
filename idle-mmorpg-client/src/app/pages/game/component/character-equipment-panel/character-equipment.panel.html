@@ -1,4 +1,4 @@
-<app-panel-vertical>
+<app-panel>
     <nav class="tabs">
         <app-button text="Equipment" (click)="setTab('equipment')"></app-button>
         <app-button text="Tools" (click)="setTab('tools')"></app-button>
@@ -33,7 +33,7 @@
     </div>
     }
     }
-</app-panel-vertical>
+</app-panel>
 
 <app-character-equip-panel [character]="character" [slot]="selectedSlot" [visible]="showEquip" (closed)="onClose()">
 </app-character-equip-panel>

@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from '../../../../component';
 import { LoadingComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
 import { LocationRendererPanel } from "./location-renderer.panel";
 
@@ -19,7 +19,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
         CommonModule,
         ButtonComponent,
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
         LocationRendererPanel
     ],
 })

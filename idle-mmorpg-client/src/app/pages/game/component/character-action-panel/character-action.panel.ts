@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { BarComponent } from "../../../../component";
 import { LoadingComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
 import { Character } from "../../../../model";
 
@@ -15,7 +15,7 @@ import { Character } from "../../../../model";
         CommonModule,
         BarComponent,
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
     ],
 })
 

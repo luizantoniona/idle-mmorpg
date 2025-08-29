@@ -1,11 +1,11 @@
-<app-panel-vertical>
+<app-panel>
 
     <div class="scrollable-panel">
 
         @if(character && character.skills) {
 
         @for (category of groupSkillsByCategory(character.skills) | keyvalue; track category.key) {
-        <h4 class="category-title">{{ category.key | titlecase }}</h4>
+        <strong class="category-title">{{ category.key | titlecase }}</strong>
 
         @for (characterSkill of category.value; track characterSkill.id) {
         <app-tooltip>
@@ -30,4 +30,4 @@
 
     </div>
 
-</app-panel-vertical>
+</app-panel>

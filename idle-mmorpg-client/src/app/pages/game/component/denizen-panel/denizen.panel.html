@@ -1,6 +1,6 @@
 <div class="denizen-row">
     @if(location && location.denizens && location.denizens.length){
-    <app-panel-vertical>
+    <app-panel>
         <strong>Denizens</strong>
         @for(denizen of location.denizens; track denizen.id) {
         <div class="denizen-row">
@@ -8,11 +8,11 @@
             <app-button [text]="denizen.name" (clickEvent)="onDenizenClick(denizen)"></app-button>
         </div>
         }
-    </app-panel-vertical>
+    </app-panel>
 
 
     @if(selectedDenizen && (selectedDenizen.quests || selectedDenizen.trade)) {
-    <app-panel-vertical>
+    <app-panel>
         <h3>{{selectedDenizen.name}}</h3>
         <img [src]="'/assets/creatures/denizens/' + selectedDenizen.icon" alt="{{ selectedDenizen.name }}" />
 
@@ -22,7 +22,7 @@
         @if(selectedDenizen.quests){
         <app-button text="Quests" (clickEvent)="onQuestsClick()"></app-button>
         }
-    </app-panel-vertical>
+    </app-panel>
     }
     }
 

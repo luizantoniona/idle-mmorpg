@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 import { ButtonComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
 import { CharacterEquipPanel } from "./character-equip.panel";
 import { EquipmentSlotComponent } from "./equipment-slot.component";
@@ -14,7 +14,7 @@ import { Character } from "../../../../model";
     styleUrls: ["./character-equipment.panel.scss"],
     imports: [
         ButtonComponent,
-        PanelVerticalComponent,
+        PanelComponent,
         CharacterEquipPanel,
         EquipmentSlotComponent,
     ],

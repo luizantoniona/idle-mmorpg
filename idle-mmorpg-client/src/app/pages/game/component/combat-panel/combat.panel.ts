@@ -6,7 +6,7 @@ import { BarComponent } from "../../../../component";
 import { ButtonComponent } from "../../../../component";
 import { CardComponent } from "../../../../component";
 import { LoadingComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
 import { Character } from "../../../../model";
 import { CombatInstance } from "../../../../model";
@@ -24,7 +24,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
         ButtonComponent,
         CardComponent,
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
     ],
 })
 

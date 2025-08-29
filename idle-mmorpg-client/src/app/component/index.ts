@@ -4,7 +4,5 @@ export { CardComponent } from "./card/card.component";
 export { InputFieldComponent } from "./input-field/input-field.component";
 export { LoadingComponent } from "./loading/loading.component";
 export { PanelComponent } from "./panel/panel.component";
-export { PanelHorizontalComponent } from "./panel/panel-horizontal.component";
-export { PanelVerticalComponent } from "./panel/panel-vertical.component";
 export { PopupComponent } from "./popup/popup.component";
 export { TooltipComponent } from "./tooltip/tooltip.component";

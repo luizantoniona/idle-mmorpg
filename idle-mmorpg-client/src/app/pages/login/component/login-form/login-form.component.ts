@@ -1,23 +1,23 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import { ButtonComponent } from '../../../../component/button/button.component';
-import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
-import { PanelVerticalComponent } from '../../../../component/panel/panel-vertical.component';
+import { ButtonComponent } from "../../../../component";
+import { InputFieldComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
-import { AuthService } from '../../../../service/auth.service';
-import { APIService } from '../../../../service/api.service';
+import { AuthService } from "../../../../service/auth.service";
+import { APIService } from "../../../../service/api.service";
 
 @Component({
-    selector: 'app-login-form',
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss'],
+    selector: "app-login-form",
+    templateUrl: "./login-form.component.html",
+    styleUrls: ["./login-form.component.scss"],
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        PanelVerticalComponent,
+        PanelComponent,
         InputFieldComponent,
         ButtonComponent
     ],

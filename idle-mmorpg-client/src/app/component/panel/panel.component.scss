@@ -2,18 +2,10 @@
     background-color: var(--color-panel);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: 12px;
+    padding: 10px;
     color: var(--color-text);
     align-items: center;
-}
 
-.panel-horizontal {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-}
-
-.panel-vertical {
     display: flex;
     flex-direction: column;
     gap: 12px;

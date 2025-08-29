@@ -1,10 +1,10 @@
 <div class="character-column">
-    <app-panel-vertical>
+    <app-panel>
         <app-button [text]="nameLevel" (clickEvent)="handleClick()">
         </app-button>
-    </app-panel-vertical>
+    </app-panel>
 
-    <app-panel-vertical>
+    <app-panel>
         @if(character && character.progression){
         <app-bar label="XP ( {{character.progression.experience}} / {{character.progression.experienceNextLevel}} )"
             [value]="character.progression.experience" [max]="character.progression.experienceNextLevel"
@@ -24,5 +24,5 @@
         } @else{
         <app-loading></app-loading>
         }
-    </app-panel-vertical>
+    </app-panel>
 </div>

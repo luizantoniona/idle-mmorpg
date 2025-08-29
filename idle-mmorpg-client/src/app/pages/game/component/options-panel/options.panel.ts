@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 import { ButtonComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
 import { CharacterQuestPanel } from "./character-quest-panel/character-quest.panel";
 import { ChatPanel } from "./chat-panel/chat-panel.component";
@@ -15,7 +15,7 @@ import { Location } from "../../../../model";
     styleUrls: ["./options.panel.scss"],
     imports: [
         ButtonComponent,
-        PanelVerticalComponent,
+        PanelComponent,
         CharacterQuestPanel,
         ChatPanel,
     ],

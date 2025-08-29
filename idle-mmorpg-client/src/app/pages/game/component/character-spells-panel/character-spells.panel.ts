@@ -1,7 +1,7 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 import { TooltipComponent } from "../../../../component";
 
 import { Character, Spell } from "../../../../model";
@@ -14,7 +14,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
     styleUrls: ["./character-spells.panel.scss"],
     imports: [
         CommonModule,
-        PanelVerticalComponent,
+        PanelComponent,
         TooltipComponent,
     ],
 })

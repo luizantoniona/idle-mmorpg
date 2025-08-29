@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BarComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { PanelComponent } from '../../../../component';
 import { TooltipComponent } from '../../../../component';
 
 import { Character, CharacterSkill } from '../../../../model';
@@ -14,7 +14,7 @@ import { Character, CharacterSkill } from '../../../../model';
     imports: [
         CommonModule,
         BarComponent,
-        PanelVerticalComponent,
+        PanelComponent,
         TooltipComponent,
     ],
 })

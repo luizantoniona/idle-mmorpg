@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BarComponent } from '../../../../component';
 import { ButtonComponent } from '../../../../component';
 import { LoadingComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { PanelComponent } from '../../../../component';
 
 import { Character } from '../../../../model';
 
@@ -18,7 +18,7 @@ import { Character } from '../../../../model';
         BarComponent,
         ButtonComponent,
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
     ],
 })
 

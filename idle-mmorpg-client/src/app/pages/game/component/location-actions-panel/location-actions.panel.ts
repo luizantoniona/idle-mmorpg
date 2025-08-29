@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, inject, Output } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
 import { Character, Location } from "../../../../model";
 
@@ -15,7 +15,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
     imports: [
         CommonModule,
         ButtonComponent,
-        PanelVerticalComponent,
+        PanelComponent,
     ],
 })
 

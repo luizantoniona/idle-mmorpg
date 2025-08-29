@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 
 import { ButtonComponent } from "../../component";
 import { LoadingComponent } from "../../component";
-import { PanelVerticalComponent } from "../../component";
+import { PanelComponent } from "../../component";
 
 import { CharacterDeleteComponent } from "./component/character-delete/character-delete.component";
 import { CharacterFormComponent } from "./component/character-form/character-form.component";
@@ -23,7 +23,7 @@ import { AuthService } from "../../service/auth.service";
         CommonModule,
         ButtonComponent,
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
         CharacterDeleteComponent,
         CharacterFormComponent,
         CharacterListComponent,

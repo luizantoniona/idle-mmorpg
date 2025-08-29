@@ -1,7 +1,7 @@
 @if (visible) {
 <div class="popup-overlay" (click)="close()">
-    <app-panel-vertical (click)="$event.stopPropagation()">
+    <app-panel (click)="$event.stopPropagation()">
         <ng-content></ng-content>
-    </app-panel-vertical>
+    </app-panel>
 </div>
 }

@@ -1,21 +1,21 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { CardComponent } from '../../../../component';
-import { LoadingComponent } from '../../../../component';
-import { PanelVerticalComponent } from '../../../../component';
+import { CardComponent } from "../../../../component";
+import { LoadingComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
-import { Character } from '../../../../model';
+import { Character } from "../../../../model";
 
 @Component({
-    selector: 'app-character-attributes-panel',
-    templateUrl: './character-attributes-panel.component.html',
-    styleUrl: './character-attributes-panel.component.scss',
+    selector: "app-character-attributes-panel",
+    templateUrl: "./character-attributes-panel.component.html",
+    styleUrl: "./character-attributes-panel.component.scss",
     imports: [
         CommonModule,
         CardComponent,
         LoadingComponent,
-        PanelVerticalComponent,
+        PanelComponent,
     ],
 })
 

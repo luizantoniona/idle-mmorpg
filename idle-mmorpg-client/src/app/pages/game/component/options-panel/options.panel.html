@@ -1,10 +1,10 @@
-<app-panel-vertical>
+<app-panel>
     <div class="options">
         <app-button text="Quests" (clickEvent)="OnQuestsClick()"></app-button>
         <app-button text="Chat" (clickEvent)="onChatClick()"></app-button>
         <!-- TODO:<app-button text="Bestiary"></app-button> -->
     </div>
-</app-panel-vertical>
+</app-panel>
 
 <app-character-quest-panel [character]="character" [visible]="showQuests" (closed)="onClose()">
 </app-character-quest-panel>

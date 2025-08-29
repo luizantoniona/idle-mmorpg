@@ -1,14 +1,14 @@
 <div class="account-layout">
     <div class="left-panel">
-        <app-panel-vertical>
+        <app-panel>
             <h2>Account: {{ getUsername() }}</h2>
             Session ID: {{ getSessionId() }}
             <app-button text="Logout" (clickEvent)="logout()"></app-button>
-        </app-panel-vertical>
+        </app-panel>
     </div>
 
     <div class="main-panel">
-        <app-panel-vertical>
+        <app-panel>
             <h2>Characters</h2>
             <app-character-list [characters]="characters" (onSelect)="handleStartGame($event)"></app-character-list>
             @if(loading){
@@ -17,7 +17,7 @@
             @if(error){
             <p style="color: red;">Error: {{ error }}</p>
             }
-        </app-panel-vertical>
+        </app-panel>
     </div>
 
     <div class="right-panel">

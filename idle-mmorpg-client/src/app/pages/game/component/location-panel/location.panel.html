@@ -1,4 +1,4 @@
-<app-panel-vertical>
+<app-panel>
     @if(location) {
     <h3>{{ getStructure(character.coordinates.structure)?.label || location.name }}</h3>
     <p>{{ getStructure(character.coordinates.structure)?.description || location.description }}</p>
@@ -13,4 +13,4 @@
     } @else {
     <app-loading></app-loading>
     }
-</app-panel-vertical>
+</app-panel>

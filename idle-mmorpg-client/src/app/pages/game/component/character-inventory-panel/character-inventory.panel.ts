@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 import { TooltipComponent } from "../../../../component";
 
 import { Character } from "../../../../model";
@@ -10,7 +10,7 @@ import { Character } from "../../../../model";
     templateUrl: "./character-inventory.panel.html",
     styleUrls: ["./character-inventory.panel.scss"],
     imports: [
-        PanelVerticalComponent,
+        PanelComponent,
         TooltipComponent
     ],
 })

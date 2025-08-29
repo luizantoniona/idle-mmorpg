@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-    <app-panel-vertical>
+    <app-panel>
         <h2>Create character</h2>
 
         <app-input-field label="" type="text" formControlName="name" placeholder="Enter character name" />
@@ -9,5 +9,5 @@
         @if(error){
         <p style="color: red;">Error: {{ error }}</p>
         }
-    </app-panel-vertical>
+    </app-panel>
 </form>

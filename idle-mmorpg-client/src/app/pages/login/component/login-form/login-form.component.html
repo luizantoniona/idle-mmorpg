@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-    <app-panel-vertical>
+    <app-panel>
         <h2>Login</h2>
 
         <app-input-field label="Username" type="text" formControlName="username" placeholder="Enter your username" />
@@ -12,5 +12,5 @@
         @if(error){
         <p style="color: red;">Error: {{ error }}</p>
         }
-    </app-panel-vertical>
+    </app-panel>
 </form>

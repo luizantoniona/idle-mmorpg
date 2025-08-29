@@ -1,26 +1,27 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 
-import { ButtonComponent } from '../../../../component/button/button.component';
-import { InputFieldComponent } from '../../../../component/input-field/input-field.component';
-import { PanelHorizontalComponent } from "../../../../component/panel/panel-horizontal.component";
-import { StatusCircleComponent } from '../status-circle/status-circle.component';
+import { ButtonComponent } from "../../../../component";
+import { InputFieldComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 
-import { APIService } from '../../../../service/api.service';
-import { ServerService } from '../../../../service/server.service';
+import { StatusCircleComponent } from "../status-circle/status-circle.component";
+
+import { APIService } from "../../../../service/api.service";
+import { ServerService } from "../../../../service/server.service";
 
 
 @Component({
-    selector: 'app-server-form',
-    templateUrl: './server-form.component.html',
-    styleUrls: ['./server-form.component.scss'],
+    selector: "app-server-form",
+    templateUrl: "./server-form.component.html",
+    styleUrls: ["./server-form.component.scss"],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         ButtonComponent,
         InputFieldComponent,
-        PanelHorizontalComponent,
+        PanelComponent,
         StatusCircleComponent,
     ]
 })

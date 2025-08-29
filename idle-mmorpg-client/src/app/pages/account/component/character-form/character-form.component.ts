@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { ButtonComponent } from "../../../../component";
-import { PanelVerticalComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component";
 import { InputFieldComponent } from "../../../../component";
 
 import { APIService } from "../../../../service/api.service";
@@ -16,7 +16,7 @@ import { APIService } from "../../../../service/api.service";
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        PanelVerticalComponent,
+        PanelComponent,
         InputFieldComponent,
         ButtonComponent
     ],
