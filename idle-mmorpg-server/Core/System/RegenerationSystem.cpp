@@ -98,6 +98,7 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::
     character->vitals().setHealth( newHealth );
 
     ProgressionSystem().applyExperience( sessionId, character, "clarity", heal );
+    NotificationSystem::notifyCharacterVitals( sessionId, character );
 
     std::cout << character->name() << " casts " << spell->name() << " healing " << heal << " health." << std::endl;
 }

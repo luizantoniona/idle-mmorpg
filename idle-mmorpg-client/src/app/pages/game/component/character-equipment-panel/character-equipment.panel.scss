@@ -58,7 +58,7 @@
     display: grid;
     grid-template-areas:
         "pickaxe woodaxe fishrod"
-        "shovel . sickle";
+        "shovel rope sickle";
     grid-template-columns: 40px 40px 40px;
     gap: 12px;
     justify-items: center;
@@ -84,4 +84,8 @@
 
 .sickle {
     grid-area: sickle;
+}
+
+.rope {
+    grid-area: rope;
 }

@@ -15,7 +15,8 @@ export type CharacterEquipment = {
 
     pickaxe: Item;
     woodaxe: Item;
-    fishrod: Item;
+    fishingrod: Item;
     shovel: Item;
     sickle: Item;
+    rope: Item;
 };
