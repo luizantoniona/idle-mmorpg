@@ -8,7 +8,7 @@
         @for(spell of character.spells.healing; track spell.id){
         <app-tooltip>
             <div tooltip-target class="spell-box healing" (click)="onSpellClicked(spell)">
-                <img [src]="'/assets/spells/' + spell.icon" alt="{{ spell.name }}" />
+                <img [src]="'assets/spells/' + spell.icon" alt="{{ spell.name }}" />
                 @if(spell.count < spell.cooldown){ <span class="cooldown-overlay">{{ spell.cooldown - spell.count
                     }}</span>
                     }
@@ -24,7 +24,7 @@
         @for(spell of character.spells.attack; track spell.id){
         <app-tooltip>
             <div tooltip-target class="spell-box attack" (click)="onSpellClicked(spell)">
-                <img [src]="'/assets/spells/' + spell.icon" alt="{{ spell.name }}" />
+                <img [src]="'assets/spells/' + spell.icon" alt="{{ spell.name }}" />
                 @if(spell.count < spell.cooldown){ <span class="cooldown-overlay">{{ spell.cooldown - spell.count
                     }}</span>
                     }

@@ -6,7 +6,7 @@
         @for(item of getEquipableItems(); track item.id){
         <app-tooltip>
             <div tooltip-target class="item-box" (click)="equipItem(item)">
-                <img [src]="'/assets/items/' + item.icon" alt="{{ item.name }}" />
+                <img [src]="'assets/items/' + item.icon" alt="{{ item.name }}" />
             </div>
 
             <div tooltip-content>
@@ -18,7 +18,7 @@
         }
         <app-tooltip>
             <div tooltip-target class="item-box" (click)="equipItem(null)">
-                <img [src]="'/assets/slots/remove.png'" alt="Remove" />
+                <img [src]="'assets/slots/remove.png'" alt="Remove" />
             </div>
 
             <div tooltip-content>

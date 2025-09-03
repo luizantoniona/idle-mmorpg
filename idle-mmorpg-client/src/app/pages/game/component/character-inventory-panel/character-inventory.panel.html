@@ -6,7 +6,7 @@
         @for(item of character.inventory.items; track item.id){
         <app-tooltip>
             <div tooltip-target class="item-box">
-                <img [src]="'/assets/items/' + item.icon" alt="{{ item.name }}" />
+                <img [src]="'assets/items/' + item.icon" alt="{{ item.name }}" />
                 <span class="amount">{{ item.amount }}</span>
             </div>
 

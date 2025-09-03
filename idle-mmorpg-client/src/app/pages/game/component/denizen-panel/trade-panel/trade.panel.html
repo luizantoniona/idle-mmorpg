@@ -30,13 +30,13 @@
     <div class="footer">
         <app-button text="Cancel" (clickEvent)="onCancel()"></app-button>
 
-        <img src="/assets/coins/copper.gif" alt="Copper" />
+        <img src="assets/coins/copper.gif" alt="Copper" />
         <span>{{ coinBreakdown.copper }}</span>
 
-        <img src="/assets/coins/silver.gif" alt="Silver" />
+        <img src="assets/coins/silver.gif" alt="Silver" />
         <span>{{ coinBreakdown.silver }}</span>
 
-        <img src="/assets/coins/gold.gif" alt="Gold" />
+        <img src="assets/coins/gold.gif" alt="Gold" />
         <span>{{ coinBreakdown.gold }}</span>
 
         <app-button [disabled]="!hasSelection" text="Confirm" (clickEvent)="onConfirm()"></app-button>
