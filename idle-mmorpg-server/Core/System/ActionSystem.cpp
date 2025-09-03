@@ -22,6 +22,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
     }
 
     std::string actionId = payload[ "action" ].asString();
+    std::string structureId = character->coordinates().structureId();
 
     if ( actionId == "idle" ) {
         character->action().clear();
@@ -31,7 +32,15 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     const auto& actions = _location->actions();
     auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            return action.id() == actionId;
+            if ( action.id() != actionId ) {
+                return false;
+            }
+
+            if ( action.structure() != structureId ) {
+                return false;
+            }
+
+            return true;
         } );
 
     if ( it == actions.end() ) {
