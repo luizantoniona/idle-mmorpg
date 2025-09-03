@@ -2,7 +2,7 @@
     "id": "skeleton",
     "name": "Skeleton",
     "description": "A reanimated skeleton held together by dark magic.",
-    "icon": "undead/skeleton.gif",
+    "icon": "undead/skeleton.png",
     "experience": 35,
     "health": 50,
     "mana": 0,

@@ -2,7 +2,7 @@
     "id": "minor_healing",
     "name": "Minor Healing",
     "description": "Restores a small amount of health to the target.",
-    "icon": "minor_healing.gif",
+    "icon": "healing/minor_healing.gif",
     "type": "healing",
     "manaCost": 10,
     "cooldown": 5,

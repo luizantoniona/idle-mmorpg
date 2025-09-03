@@ -2,7 +2,7 @@
     "id": "small_shield",
     "name": "Small Shield",
     "description": "A small shield made of wood.",
-    "icon": "weapons/shields/01_small_shield.png",
+    "icon": "weapons/shields/small_shield.png",
     "rarity": "common",
     "value": 1,
     "modifiers": [

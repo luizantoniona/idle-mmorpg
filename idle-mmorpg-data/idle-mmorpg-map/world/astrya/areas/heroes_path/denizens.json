@@ -4,7 +4,7 @@
             "id": "guardian_heroes_path",
             "name": "Guardian",
             "structure": "",
-            "icon": "guardian_heroes_path.gif",
+            "icon": "guardian_heroes_path.png",
             "quests": [
                 {
                     "id": "guardian_heroes_path_00",

@@ -2,7 +2,7 @@
     "id": "iron_axe",
     "name": "Iron Axe",
     "description": "A simple axe made of iron.",
-    "icon": "weapons/axes/01_iron_axe.png",
+    "icon": "weapons/axes/iron_axe.png",
     "rarity": "common",
     "value": 1,
     "modifiers": [

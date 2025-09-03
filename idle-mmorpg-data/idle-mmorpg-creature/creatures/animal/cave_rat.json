@@ -2,7 +2,7 @@
     "id": "cave_rat",
     "name": "Cave Rat",
     "description": "A larger and tougher rat that dwells in dark caves.",
-    "icon": "animal/cave_rat.gif",
+    "icon": "animal/cave_rat.png",
     "experience": 10,
     "health": 30,
     "mana": 0,

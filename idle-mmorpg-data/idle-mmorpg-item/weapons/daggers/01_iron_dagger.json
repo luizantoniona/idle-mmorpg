@@ -2,7 +2,7 @@
     "id": "iron_dagger",
     "name": "Iron Dagger",
     "description": "A small dagger made of iron.",
-    "icon": "weapons/daggers/01_iron_dagger.png",
+    "icon": "weapons/daggers/iron_dagger.png",
     "rarity": "common",
     "value": 1,
     "modifiers": [

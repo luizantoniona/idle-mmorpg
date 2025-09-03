@@ -2,7 +2,7 @@
     "id": "shovel",
     "name": "Shovel",
     "description": "A normal shovel used to dig holes.",
-    "icon": "tools/shovel.gif",
+    "icon": "tools/shovels/shovel.png",
     "rarity": "common",
     "value": 10,
     "modifiers": []

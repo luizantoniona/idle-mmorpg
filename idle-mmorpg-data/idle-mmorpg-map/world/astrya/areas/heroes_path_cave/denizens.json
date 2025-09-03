@@ -4,7 +4,7 @@
             "id": "cave_man_heroes_path_cave",
             "name": "Cave Man",
             "structure": "",
-            "icon": "cave_man_heroes_path_cave.gif",
+            "icon": "cave_man_heroes_path_cave.png",
             "quests": [
                 {
                     "id": "cave_man_heroes_path_cave_00",
