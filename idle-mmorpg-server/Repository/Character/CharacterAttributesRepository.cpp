@@ -36,11 +36,11 @@ bool CharacterAttributesRepository::updateAttributes( int idCharacter, const Mod
     )SQL";
     Database::Query query( _db, sql );
 
-    query.bindDouble( 1, attributes.baseStrength() );
-    query.bindDouble( 2, attributes.baseDexterity() );
-    query.bindDouble( 3, attributes.baseConstitution() );
-    query.bindDouble( 4, attributes.baseIntelligence() );
-    query.bindDouble( 5, attributes.baseWisdom() );
+    query.bindDouble( 1, attributes.strength() );
+    query.bindDouble( 2, attributes.dexterity() );
+    query.bindDouble( 3, attributes.constitution() );
+    query.bindDouble( 4, attributes.intelligence() );
+    query.bindDouble( 5, attributes.wisdom() );
     query.bindInt( 6, idCharacter );
 
     return query.exec();
@@ -66,11 +66,11 @@ std::unique_ptr<Model::CharacterAttributes> CharacterAttributesRepository::findB
     }
 
     auto attributes = std::make_unique<Model::CharacterAttributes>();
-    attributes->setBaseStrength( query.getColumnDouble( 0 ) );
-    attributes->setBaseDexterity( query.getColumnDouble( 1 ) );
-    attributes->setBaseConstitution( query.getColumnDouble( 2 ) );
-    attributes->setBaseIntelligence( query.getColumnDouble( 3 ) );
-    attributes->setBaseWisdom( query.getColumnDouble( 4 ) );
+    attributes->setStrength( query.getColumnDouble( 0 ) );
+    attributes->setDexterity( query.getColumnDouble( 1 ) );
+    attributes->setConstitution( query.getColumnDouble( 2 ) );
+    attributes->setIntelligence( query.getColumnDouble( 3 ) );
+    attributes->setWisdom( query.getColumnDouble( 4 ) );
 
     return attributes;
 }

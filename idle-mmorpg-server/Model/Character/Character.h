@@ -8,7 +8,6 @@
 #include "CharacterAction.h"
 #include "CharacterAttributes.h"
 #include "CharacterCombatAction.h"
-#include "CharacterCombatAttributes.h"
 #include "CharacterCoordinates.h"
 #include "CharacterEquipment.h"
 #include "CharacterInventory.h"
@@ -45,9 +44,6 @@ public:
     CharacterCombatAction& combatAction();
     void setCombatAction( const CharacterCombatAction& combatAction );
 
-    CharacterCombatAttributes& combatAttributes();
-    void setCombatAttributes( const CharacterCombatAttributes& combatAttributes );
-
     CharacterCoordinates& coordinates();
     void setCoordinates( const CharacterCoordinates& coordinates );
 
@@ -82,7 +78,6 @@ private:
     CharacterAction _action;
     CharacterAttributes _attributes;
     CharacterCombatAction _combatAction;
-    CharacterCombatAttributes _combatAttributes;
     CharacterCoordinates _coordinates;
     CharacterEquipment _equipment;
     CharacterInventory _inventory;

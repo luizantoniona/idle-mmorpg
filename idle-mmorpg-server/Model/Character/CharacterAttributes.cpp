@@ -3,119 +3,61 @@
 namespace Model {
 
 CharacterAttributes::CharacterAttributes() :
-    _baseStrength( 0.0 ),
-    _baseDexterity( 0.0 ),
-    _baseConstitution( 0.0 ),
-    _baseIntelligence( 0.0 ),
-    _baseWisdom( 0.0 ),
-    _modifierStrength( 0.0 ),
-    _modifierDexterity( 0.0 ),
-    _modifierConstitution( 0.0 ),
-    _modifierIntelligence( 0.0 ),
-    _modifierWisdom( 0.0 ) {
+    _strength( 0.0 ),
+    _dexterity( 0.0 ),
+    _constitution( 0.0 ),
+    _intelligence( 0.0 ),
+    _wisdom( 0.0 ) {
 }
 
 Json::Value CharacterAttributes::toJson() const {
     Json::Value root;
-    root[ "strength" ] = _baseStrength;
-    root[ "modifierStrength" ] = _modifierStrength;
-    root[ "dexterity" ] = _baseDexterity;
-    root[ "modifierDexterity" ] = _modifierDexterity;
-    root[ "constitution" ] = _baseConstitution;
-    root[ "modifierConstitution" ] = _modifierConstitution;
-    root[ "intelligence" ] = _baseIntelligence;
-    root[ "modifierIntelligence" ] = _modifierIntelligence;
-    root[ "wisdom" ] = _baseWisdom;
-    root[ "modifierWisdom" ] = _modifierWisdom;
+    root[ "strength" ] = _strength;
+    root[ "dexterity" ] = _dexterity;
+    root[ "constitution" ] = _constitution;
+    root[ "intelligence" ] = _intelligence;
+    root[ "wisdom" ] = _wisdom;
     return root;
 }
 
 double CharacterAttributes::strength() const {
-    return _baseStrength + _modifierStrength;
+    return _strength;
+}
+
+void CharacterAttributes::setStrength( double strength ) {
+    _strength = strength;
 }
 
 double CharacterAttributes::dexterity() const {
-    return _baseDexterity + _modifierDexterity;
+    return _dexterity;
+}
+
+void CharacterAttributes::setDexterity( double dexterity ) {
+    _dexterity = dexterity;
 }
 
 double CharacterAttributes::constitution() const {
-    return _baseConstitution + _modifierConstitution;
+    return _constitution;
+}
+
+void CharacterAttributes::setConstitution( double constitution ) {
+    _constitution = constitution;
 }
 
 double CharacterAttributes::intelligence() const {
-    return _baseIntelligence + _modifierIntelligence;
+    return _intelligence;
+}
+
+void CharacterAttributes::setIntelligence( double intelligence ) {
+    _intelligence = intelligence;
 }
 
 double CharacterAttributes::wisdom() const {
-    return _baseWisdom + _modifierWisdom;
+    return _wisdom;
 }
 
-double CharacterAttributes::baseStrength() const {
-    return _baseStrength;
-}
-
-void CharacterAttributes::setBaseStrength( double baseStrength ) {
-    _baseStrength = baseStrength;
-}
-
-double CharacterAttributes::baseDexterity() const {
-    return _baseDexterity;
-}
-
-void CharacterAttributes::setBaseDexterity( double baseDexterity ) {
-    _baseDexterity = baseDexterity;
-}
-
-double CharacterAttributes::baseConstitution() const {
-    return _baseConstitution;
-}
-
-void CharacterAttributes::setBaseConstitution( double baseConstitution ) {
-    _baseConstitution = baseConstitution;
-}
-
-double CharacterAttributes::baseIntelligence() const {
-    return _baseIntelligence;
-}
-
-void CharacterAttributes::setBaseIntelligence( double baseIntelligence ) {
-    _baseIntelligence = baseIntelligence;
-}
-
-double CharacterAttributes::baseWisdom() const {
-    return _baseWisdom;
-}
-
-void CharacterAttributes::setBaseWisdom( double baseWisdom ) {
-    _baseWisdom = baseWisdom;
-}
-
-void CharacterAttributes::modifyStrength( double modifier ) {
-    _modifierStrength += modifier;
-}
-
-void CharacterAttributes::modifyDexterity( double modifier ) {
-    _modifierDexterity += modifier;
-}
-
-void CharacterAttributes::modifyConstitution( double modifier ) {
-    _modifierConstitution += modifier;
-}
-
-void CharacterAttributes::modifyIntelligence( double modifier ) {
-    _modifierIntelligence += modifier;
-}
-
-void CharacterAttributes::modifyWisdom( double modifier ) {
-    _modifierWisdom += modifier;
-}
-
-void CharacterAttributes::resetModifiers() {
-    _modifierStrength = 0;
-    _modifierDexterity = 0;
-    _modifierConstitution = 0;
-    _modifierIntelligence = 0;
-    _modifierWisdom = 0;
+void CharacterAttributes::setWisdom( double wisdom ) {
+    _wisdom = wisdom;
 }
 
 } // namespace Model

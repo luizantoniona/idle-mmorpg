@@ -8,8 +8,6 @@
 namespace Core::System {
 
 void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, Model::Character* character ) {
-    character->attributes().resetModifiers();
-    character->combatAttributes().resetModifiers();
     character->vitals().resetModifiers();
 
     auto& equipments = character->equipment();
@@ -43,19 +41,19 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
 
             if ( type == "attribute" ) {
                 if ( targetId == "strength" ) {
-                    character->attributes().modifyStrength( value );
+                    // character->attributes().modifyStrength( value );
 
                 } else if ( targetId == "dexterity" ) {
-                    character->attributes().modifyDexterity( value );
+                    // character->attributes().modifyDexterity( value );
 
                 } else if ( targetId == "constitution" ) {
-                    character->attributes().modifyConstitution( value );
+                    // character->attributes().modifyConstitution( value );
 
                 } else if ( targetId == "intelligence" ) {
-                    character->attributes().modifyIntelligence( value );
+                    // character->attributes().modifyIntelligence( value );
 
                 } else if ( targetId == "wisdom" ) {
-                    character->attributes().modifyWisdom( value );
+                    // character->attributes().modifyWisdom( value );
 
                 } else {
                     std::cerr << "Unknown attribute: " << targetId << std::endl;
@@ -63,22 +61,22 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
 
             } else if ( type == "combat" ) {
                 if ( targetId == "attack" ) {
-                    character->combatAttributes().modifyAttack( value );
+                    // character->combatAttributes().modifyAttack( value );
 
                 } else if ( targetId == "accuracy" ) {
-                    character->combatAttributes().modifyAccuracy( value );
+                    // character->combatAttributes().modifyAccuracy( value );
 
                 } else if ( targetId == "speed" ) {
-                    character->combatAttributes().modifySpeed( value );
+                    // character->combatAttributes().modifySpeed( value );
 
                 } else if ( targetId == "defense" ) {
-                    character->combatAttributes().modifyDefense( value );
+                    // character->combatAttributes().modifyDefense( value );
 
                 } else if ( targetId == "criticalChance" ) {
-                    character->combatAttributes().modifyCriticalChance( value );
+                    // character->combatAttributes().modifyCriticalChance( value );
 
                 } else if ( targetId == "criticalMultiplier" ) {
-                    character->combatAttributes().modifyCriticalMultiplier( value );
+                    // character->combatAttributes().modifyCriticalMultiplier( value );
 
                 } else {
                     std::cerr << "Unknown combat attribute: " << targetId << std::endl;
@@ -114,7 +112,6 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
     }
 
     NotificationSystem::notifyCharacterAttributes( sessionId, character );
-    NotificationSystem::notifyCharacterCombatAttributes( sessionId, character );
 }
 
 void EquipmentSystem::characterEquipItem( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {

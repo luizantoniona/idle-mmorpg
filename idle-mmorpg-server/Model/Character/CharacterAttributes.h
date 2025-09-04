@@ -12,46 +12,26 @@ public:
     Json::Value toJson() const;
 
     double strength() const;
+    void setStrength( double strength );
+
     double dexterity() const;
+    void setDexterity( double dexterity );
+
     double constitution() const;
+    void setConstitution( double constitution );
+
     double intelligence() const;
+    void setIntelligence( double intelligence );
+
     double wisdom() const;
-
-    double baseStrength() const;
-    void setBaseStrength( double baseStrength );
-
-    double baseDexterity() const;
-    void setBaseDexterity( double baseDexterity );
-
-    double baseConstitution() const;
-    void setBaseConstitution( double baseConstitution );
-
-    double baseIntelligence() const;
-    void setBaseIntelligence( double baseIntelligence );
-
-    double baseWisdom() const;
-    void setBaseWisdom( double baseWisdom );
-
-    void modifyStrength( double modifier );
-    void modifyDexterity( double modifier );
-    void modifyConstitution( double modifier );
-    void modifyIntelligence( double modifier );
-    void modifyWisdom( double modifier );
-
-    void resetModifiers();
+    void setWisdom( double wisdom );
 
 private:
-    double _baseStrength;
-    double _baseDexterity;
-    double _baseConstitution;
-    double _baseIntelligence;
-    double _baseWisdom;
-
-    double _modifierStrength;
-    double _modifierDexterity;
-    double _modifierConstitution;
-    double _modifierIntelligence;
-    double _modifierWisdom;
+    double _strength;
+    double _dexterity;
+    double _constitution;
+    double _intelligence;
+    double _wisdom;
 };
 
 } // namespace Model

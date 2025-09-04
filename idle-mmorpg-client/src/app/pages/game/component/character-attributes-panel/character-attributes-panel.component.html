@@ -3,35 +3,14 @@
 
         <div class="attribute-column">
             @if (character.attributes) {
-            <app-card><strong>STR</strong>: {{ character.attributes.strength }}
-                (+{{ character.attributes.modifierStrength }})</app-card>
-            <app-card><strong>DEX</strong>: {{ character.attributes.dexterity }}
-                (+{{ character.attributes.modifierDexterity }})</app-card>
-            <app-card><strong>CON</strong>: {{ character.attributes.constitution }}
-                (+{{ character.attributes.modifierConstitution }})</app-card>
-            <app-card><strong>INT</strong>: {{ character.attributes.intelligence }}
-                (+{{ character.attributes.modifierIntelligence }})</app-card>
-            <app-card><strong>WIS</strong>: {{ character.attributes.wisdom }}
-                (+{{ character.attributes.modifierWisdom }})</app-card>
+            <app-card><strong>STR</strong>: {{ character.attributes.strength }}</app-card>
+            <app-card><strong>DEX</strong>: {{ character.attributes.dexterity }}</app-card>
+            <app-card><strong>CON</strong>: {{ character.attributes.constitution }}</app-card>
+            <app-card><strong>INT</strong>: {{ character.attributes.intelligence }}</app-card>
+            <app-card><strong>WIS</strong>: {{ character.attributes.wisdom }}</app-card>
             } @else {
             <app-loading></app-loading>
             }
         </div>
-
-        <div class="attribute-column">
-            @if (character.combatAttributes) {
-            <app-card><strong>ATK</strong>: {{ character.combatAttributes.attack }}
-                (+{{ character.combatAttributes.modifierAttack }})</app-card>
-            <app-card><strong>ACC</strong>: {{ character.combatAttributes.accuracy }}
-                (+{{ character.combatAttributes.modifierAccuracy }})</app-card>
-            <app-card><strong>SPD</strong>: {{ character.combatAttributes.speed }}
-                (+{{ character.combatAttributes.modifierSpeed }})</app-card>
-            <app-card><strong>DEF</strong>: {{ character.combatAttributes.defense }}
-                (+{{ character.combatAttributes.modifierDefense }})</app-card>
-            } @else {
-            <app-loading></app-loading>
-            }
-        </div>
-
     </div>
 </app-panel>

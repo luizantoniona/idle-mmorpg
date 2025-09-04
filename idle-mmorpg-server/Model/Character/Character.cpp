@@ -9,7 +9,6 @@ Character::Character() :
     _action(),
     _attributes(),
     _combatAction(),
-    _combatAttributes(),
     _coordinates(),
     _equipment(),
     _inventory(),
@@ -67,20 +66,12 @@ void Character::setAttributes( const CharacterAttributes& attributes ) {
     _attributes = attributes;
 }
 
-CharacterCombatAttributes& Character::combatAttributes() {
-    return _combatAttributes;
-}
-
 CharacterCombatAction& Character::combatAction() {
     return _combatAction;
 }
 
 void Character::setCombatAction( const CharacterCombatAction& combatAction ) {
     _combatAction = combatAction;
-}
-
-void Character::setCombatAttributes( const CharacterCombatAttributes& combatAttributes ) {
-    _combatAttributes = combatAttributes;
 }
 
 CharacterCoordinates& Character::coordinates() {

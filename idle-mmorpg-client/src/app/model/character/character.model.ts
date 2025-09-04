@@ -1,7 +1,6 @@
 import { CharacterAction } from "./character-action.model";
 import { CharacterAttributes } from "./character-attributes.model";
 import { CharacterCombatAction } from "./character-combat-action.model";
-import { CharacterCombatAttributes } from "./character-combat-attributes.model";
 import { CharacterCoordinates } from "./character-coordinates.model";
 import { CharacterEquipment } from "./character-equipment.model";
 import { CharacterInventory } from "./character-inventory.model";
@@ -19,7 +18,6 @@ export type Character = {
     action: CharacterAction;
     attributes: CharacterAttributes;
     combatAction: CharacterCombatAction;
-    combatAttributes: CharacterCombatAttributes;
     coordinates: CharacterCoordinates;
     equipment: CharacterEquipment;
     inventory: CharacterInventory;

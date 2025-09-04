@@ -44,7 +44,6 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         applyMilestone( character, characterSkill );
 
         NotificationSystem::notifyCharacterAttributes( sessionId, character );
-        NotificationSystem::notifyCharacterCombatAttributes( sessionId, character );
         NotificationSystem::notifyCharacterVitals( sessionId, character );
         NotificationSystem::notifyCharacterProgression( sessionId, character );
 
@@ -79,25 +78,24 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
     double value = milestoneBonus.value();
 
     Model::CharacterAttributes& attributes = character->attributes();
-    Model::CharacterCombatAttributes& combat = character->combatAttributes();
     Model::CharacterVitals& vitals = character->vitals();
 
     if ( type == "attribute" ) {
 
         if ( id == "strength" ) {
-            attributes.setBaseStrength( attributes.baseStrength() + static_cast<int>( value ) );
+            attributes.setStrength( attributes.strength() + static_cast<int>( value ) );
 
         } else if ( id == "constitution" ) {
-            attributes.setBaseConstitution( attributes.baseConstitution() + static_cast<int>( value ) );
+            attributes.setConstitution( attributes.constitution() + static_cast<int>( value ) );
 
         } else if ( id == "dexterity" ) {
-            attributes.setBaseDexterity( attributes.baseDexterity() + static_cast<int>( value ) );
+            attributes.setDexterity( attributes.dexterity() + static_cast<int>( value ) );
 
         } else if ( id == "intelligence" ) {
-            attributes.setBaseIntelligence( attributes.baseIntelligence() + static_cast<int>( value ) );
+            attributes.setIntelligence( attributes.intelligence() + static_cast<int>( value ) );
 
         } else if ( id == "wisdom" ) {
-            attributes.setBaseWisdom( attributes.baseWisdom() + static_cast<int>( value ) );
+            attributes.setWisdom( attributes.wisdom() + static_cast<int>( value ) );
 
         } else {
             std::cerr << "[ProgressionSystem] Unknown attribute id: " << id << std::endl;
@@ -106,22 +104,22 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
     } else if ( type == "combat" ) {
 
         if ( id == "attack" ) {
-            combat.setBaseAttack( combat.baseAttack() + value );
+            // combat.setBaseAttack( combat.baseAttack() + value );
 
         } else if ( id == "accuracy" ) {
-            combat.setBaseAccuracy( combat.baseAccuracy() + value );
+            // combat.setBaseAccuracy( combat.baseAccuracy() + value );
 
         } else if ( id == "speed" ) {
-            combat.setBaseSpeed( combat.baseSpeed() + value );
+            // combat.setBaseSpeed( combat.baseSpeed() + value );
 
         } else if ( id == "defense" ) {
-            combat.setBaseDefense( combat.baseDefense() + value );
+            // combat.setBaseDefense( combat.baseDefense() + value );
 
         } else if ( id == "critical_chance" ) {
-            combat.setBaseCriticalChance( combat.baseCriticalChance() + value );
+            // combat.setBaseCriticalChance( combat.baseCriticalChance() + value );
 
         } else if ( id == "critical_multiplier" ) {
-            combat.setBaseCriticalMultiplier( combat.baseCriticalMultiplier() + value );
+            // combat.setBaseCriticalMultiplier( combat.baseCriticalMultiplier() + value );
 
         } else {
             std::cerr << "[ProgressionSystem] Unknown combat attribute id: " << id << std::endl;
@@ -173,7 +171,6 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         applyLevelUp( character );
 
         NotificationSystem::notifyCharacterAttributes( sessionId, character );
-        NotificationSystem::notifyCharacterCombatAttributes( sessionId, character );
         NotificationSystem::notifyCharacterVitals( sessionId, character );
         NotificationSystem::notifyCharacterProgression( sessionId, character );
 
@@ -194,23 +191,23 @@ void ProgressionSystem::applyLevelUp( Model::Character* character ) {
     int level = character->progression().level();
 
     if ( level % 10 == 1 || level % 10 == 6 ) {
-        attributes.setBaseStrength( attributes.baseStrength() + 1 );
+        attributes.setStrength( attributes.strength() + 1 );
     }
 
     if ( level % 10 == 2 || level % 10 == 7 ) {
-        attributes.setBaseConstitution( attributes.baseConstitution() + 1 );
+        attributes.setConstitution( attributes.constitution() + 1 );
     }
 
     if ( level % 10 == 3 || level % 10 == 8 ) {
-        attributes.setBaseDexterity( attributes.baseDexterity() + 1 );
+        attributes.setDexterity( attributes.dexterity() + 1 );
     }
 
     if ( level % 10 == 4 || level % 10 == 9 ) {
-        attributes.setBaseIntelligence( attributes.baseIntelligence() + 1 );
+        attributes.setIntelligence( attributes.intelligence() + 1 );
     }
 
     if ( level % 10 == 5 || level % 10 == 0 ) {
-        attributes.setBaseWisdom( attributes.baseWisdom() + 1 );
+        attributes.setWisdom( attributes.wisdom() + 1 );
     }
 }
 

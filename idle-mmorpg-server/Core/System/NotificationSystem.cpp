@@ -9,7 +9,6 @@ void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Mode
     Json::Value characterJson = character->toJson();
     characterJson[ "action" ] = character->action().toJson();
     characterJson[ "attributes" ] = character->attributes().toJson();
-    characterJson[ "combatAttributes" ] = character->combatAttributes().toJson();
     characterJson[ "coordinates" ] = character->coordinates().toJson();
     characterJson[ "inventory" ] = character->inventory().toJson();
     characterJson[ "equipment" ] = character->equipment().toJson();
@@ -30,12 +29,6 @@ void NotificationSystem::notifyCharacterAttributes( const std::string& sessionId
     Json::Value payload;
     payload[ "attributes" ] = character->attributes().toJson();
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE, payload );
-}
-
-void NotificationSystem::notifyCharacterCombatAttributes( const std::string& sessionId, Model::Character* character ) {
-    Json::Value payload;
-    payload[ "combatAttributes" ] = character->combatAttributes().toJson();
-    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_COMBAT_ATTRIBUTES_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterEquipment( const std::string& sessionId, Model::Character* character ) {
