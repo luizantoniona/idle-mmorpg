@@ -5,6 +5,8 @@
 #include <iostream>
 
 #include <Commons/DecimalHelper.h>
+#include <Commons/Singleton.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 
 #include "LootSystem.h"
 #include "NotificationSystem.h"
@@ -13,58 +15,29 @@
 namespace Core::System {
 
 CombatSystem::CombatSystem( Model::Location* location ) :
+    _tickRate( Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() ),
     _location( location ),
     _progressionSystem() {}
 
 void CombatSystem::computeCombatActionDuration( Model::Character* character ) {
-    double speed = character->combatAttributes().speed();
+    double attackSpeed = character->combatAttributes().attackSpeed();
 
-    int minTicks = 5;
-    int maxTicks = 40;
-
-    double adjustedSpeed = speed > 0 ? speed : 1.0;
-    double maxSpeed = 100.0;
-
-    if ( adjustedSpeed > maxSpeed ) {
-        adjustedSpeed = maxSpeed;
-    }
-
-    double normalized = std::sqrt( adjustedSpeed / maxSpeed );
-
-    int duration = static_cast<int>( maxTicks - normalized * ( maxTicks - minTicks ) );
-
-    duration = std::clamp( duration, minTicks, maxTicks );
+    int duration = _tickRate / attackSpeed;
 
     character->combatAction().setCounter( 0 );
     character->combatAction().setDuration( duration );
 }
 
 void CombatSystem::computeCombatActionDuration( Model::Creature* creature ) {
-    double speed = creature->speed();
+    double attackSpeed = creature->attackSpeed();
 
-    int minTicks = 5;
-    int maxTicks = 40;
-
-    double adjustedSpeed = speed > 0 ? speed : 1.0;
-    double maxSpeed = 100.0;
-
-    if ( adjustedSpeed > maxSpeed ) {
-        adjustedSpeed = maxSpeed;
-    }
-
-    double normalized = std::sqrt( adjustedSpeed / maxSpeed );
-
-    int duration = static_cast<int>( maxTicks - normalized * ( maxTicks - minTicks ) );
-
-    duration = std::clamp( duration, minTicks, maxTicks );
+    int duration = _tickRate / attackSpeed;
 
     creature->combatAction().setCounter( 0 );
     creature->combatAction().setDuration( duration );
 }
 
 void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature ) {
-    std::cout << "CombatSystem::computeHitDamage [CHARACTER] " << character->name() << " [CREATURE] " << creature->name() << std::endl;
-
     double newStamina = character->vitals().stamina() - 1;
     newStamina = std::max( 0.0, newStamina );
     character->vitals().setStamina( newStamina );
@@ -77,12 +50,16 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
         skills.push_back( "unarmed" );
     }
 
-    double chanceDiff = character->combatAttributes().accuracy() + character->attributes().dexterity() - creature->evasion();
+    int masteryLevel = 0;
+    for ( const auto& skill : skills ) {
+        masteryLevel = std::max( masteryLevel, character->skills().skillLevel( skill ) );
+    }
+
+    double chanceDiff = masteryLevel + character->attributes().dexterity() - creature->evasion();
     double hitChance = 0.5 + ( 0.005 * chanceDiff );
     hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
     if ( !rollChance( hitChance ) ) {
-        std::cout << "Attack missed!" << std::endl;
         return;
     }
     _progressionSystem.applyExperience( sessionId, character, "agility", creature->evasion() );
@@ -91,18 +68,6 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
     double maxDamage = character->combatAttributes().attack() + character->attributes().strength();
     double damage = rollRange( minDamage, maxDamage ) - creature->defense();
     damage = std::max( 1.0, damage );
-
-    int masteryLevel = 0;
-    for ( const auto& skill : skills ) {
-        masteryLevel = std::max( masteryLevel, character->skills().skillLevel( skill ) );
-    }
-    double critChance = character->combatAttributes().criticalChance();
-    critChance += masteryLevel * 0.005;
-
-    if ( rollChance( critChance ) ) {
-        damage *= character->combatAttributes().criticalMultiplier();
-        std::cout << "Critical hit!" << std::endl;
-    }
 
     double newHealth = creature->vitals().health() - damage;
     newHealth = std::max( 0.0, newHealth );
@@ -113,7 +78,11 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
         _progressionSystem.applyExperience( sessionId, character, skill, xpShare );
     }
 
-    std::cout << "Hit for " << damage << " damage. Creature HP left: " << creature->vitals().health() << std::endl;
+    std::cout << "CombatSystem::computeHitDamage"
+              << " [CHARACTER] " << character->name()
+              << " [DAMAGE] " << damage
+              << " [CREATURE] " << creature->name()
+              << " [HP LEFT]: " << creature->vitals().health() << std::endl;
 }
 
 void CombatSystem::computeHitDamage( Model::Creature* creature, const std::string& sessionId, Model::Character* character ) {
@@ -131,15 +100,13 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     double damage = rollRange( minCreatureAttack, maxCreatureAttack );
 
     if ( hasShieldEquipped ) {
-        int blockingLevel = character->skills().skillLevel( "blocking" );
-        double blockChance = 0.5 + ( 0.005 * ( blockingLevel - creature->accuracy() ) );
+        int shieldLevel = character->skills().skillLevel( "shield_mastery" );
+        double blockChance = 0.5 + ( 0.005 * ( shieldLevel - creature->accuracy() ) );
         blockChance = std::clamp( blockChance, 0.05, 0.95 );
 
         if ( rollChance( blockChance ) ) {
-            std::cout << "Attack blocked by shield" << std::endl;
-            _progressionSystem.applyExperience( sessionId, character, "blocking", creature->accuracy() );
+            _progressionSystem.applyExperience( sessionId, character, "shield_mastery", creature->accuracy() );
 
-            int shieldLevel = character->skills().skillLevel( "shield_mastery" );
             double reduction = 0.5 + ( 0.005 * shieldLevel );
             reduction = std::clamp( reduction, 0.05, 1.0 );
             damage *= ( 1.0 - reduction );
@@ -152,7 +119,6 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         evasionChance = std::clamp( evasionChance, 0.05, 0.95 );
 
         if ( rollChance( evasionChance ) ) {
-            std::cout << "Attack missed due to evasion" << std::endl;
             _progressionSystem.applyExperience( sessionId, character, "evasion", creature->accuracy() );
             return;
         }
@@ -165,9 +131,13 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     int xpEndurance = std::max( 1, static_cast<int>( damage * 0.5 ) );
     _progressionSystem.applyExperience( sessionId, character, "endurance", xpEndurance );
 
-    std::cout << "Hit for " << damage << " damage. Character HP left: " << character->vitals().health() << std::endl;
-
     NotificationSystem::notifyCharacterVitals( sessionId, character );
+
+    std::cout << "CombatSystem::computeHitDamage"
+              << " [CREATURE] " << creature->name()
+              << " [DAMAGE] " << damage
+              << " [CHARACTER] " << character->name()
+              << " [HP LEFT]: " << character->vitals().health() << std::endl;
 }
 
 void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature, Model::CharacterSpell* characterSpell ) {

@@ -10,26 +10,18 @@ public:
     double attack() const;
     void setAttack( double attack );
 
-    double defense() const;
-    void setDefense( double defense );
-
     double attackSpeed() const;
     void setAttackSpeed( double attackSpeed );
 
-    double criticalChance() const;
-    void setCriticalChance( double criticalChance );
-
-    double criticalMultiplier() const;
-    void setCriticalMultiplier( double criticalMultiplier );
+    double defense() const;
+    void setDefense( double attack );
 
     void clear();
 
 private:
     double _attack;
-    double _defense;
     double _attackSpeed;
-    double _criticalChance;
-    double _criticalMultiplier;
+    double _defense;
 };
 
 } // namespace Model

@@ -33,6 +33,7 @@ private:
     std::string combatSkillByWeapon( const Model::Item* weapon );
 
 private:
+    int _tickRate;
     Model::Location* _location;
     ProgressionSystem _progressionSystem;
 };
