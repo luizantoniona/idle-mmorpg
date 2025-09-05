@@ -7,10 +7,10 @@
     "health": 50,
     "mana": 0,
     "stamina": 15,
-    "min_damage": 0,
-    "max_damage": 25,
+    "minAttack": 0,
+    "maxAttack": 25,
+    "attackSpeed": 1.5,
     "accuracy": 5,
-    "speed": 5,
     "defense": 2,
     "evasion": 5,
     "loot": [

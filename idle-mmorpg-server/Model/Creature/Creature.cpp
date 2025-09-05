@@ -14,8 +14,8 @@ Creature::Creature() :
     _combatAction(),
     _maxAttack( 0.0 ),
     _minAttack( 0.0 ),
+    _attackSpeed( 0.0 ),
     _accuracy( 0.0 ),
-    _speed( 0.0 ),
     _defense( 0.0 ),
     _evasion( 0.0 ),
     _loot( {} ) {}
@@ -108,20 +108,20 @@ void Creature::setMinAttack( double minAttack ) {
     _minAttack = minAttack;
 }
 
+double Creature::attackSpeed() const {
+    return _attackSpeed;
+}
+
+void Creature::setAttackSpeed( double attackSpeed ) {
+    _attackSpeed = attackSpeed;
+}
+
 double Creature::accuracy() const {
     return _accuracy;
 }
 
 void Creature::setAccuracy( double accuracy ) {
     _accuracy = accuracy;
-}
-
-double Creature::speed() const {
-    return _speed;
-}
-
-void Creature::setSpeed( double speed ) {
-    _speed = speed;
 }
 
 double Creature::defense() const {

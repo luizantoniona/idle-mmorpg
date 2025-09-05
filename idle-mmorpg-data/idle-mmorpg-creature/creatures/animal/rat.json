@@ -7,19 +7,13 @@
     "health": 20,
     "mana": 0,
     "stamina": 10,
-    "min_damage": 0,
-    "max_damage": 8,
+    "minAttack": 0,
+    "maxAttack": 8,
+    "attackSpeed": 1.5,
     "accuracy": 2,
-    "speed": 2,
     "defense": 0,
     "evasion": 2,
     "loot": [
-        {
-            "id": "worm",
-            "chance": 0.5,
-            "minAmount": 1,
-            "maxAmount": 2
-        },
         {
             "id": "cheese",
             "chance": 0.1,

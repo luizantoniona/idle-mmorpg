@@ -53,11 +53,11 @@ public:
     double minAttack() const;
     void setMinAttack( double minAttack );
 
+    double attackSpeed() const;
+    void setAttackSpeed( double attackSpeed );
+
     double accuracy() const;
     void setAccuracy( double accuracy );
-
-    double speed() const;
-    void setSpeed( double speed );
 
     double defense() const;
     void setDefense( double defense );
@@ -83,8 +83,8 @@ private:
 
     double _maxAttack;
     double _minAttack;
+    double _attackSpeed;
     double _accuracy;
-    double _speed;
     double _defense;
     double _evasion;
 
