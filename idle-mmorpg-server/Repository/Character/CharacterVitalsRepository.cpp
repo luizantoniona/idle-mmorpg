@@ -13,14 +13,11 @@ bool CharacterVitalsRepository::createVitals( int idCharacter ) {
             id_character,
             health,
             max_health,
-            base_health_regen,
             mana,
             max_mana,
-            base_mana_regen,
             stamina,
-            max_stamina,
-            base_stamina_regen
-        ) VALUES (?, 10.0, 10.0, 0.0, 10.0, 10.0, 0.0, 10.0, 10.0, 0.0)
+            max_stamina
+        ) VALUES (?, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0)
     )SQL";
 
     Database::Query query( _db, sql );
@@ -33,27 +30,21 @@ bool CharacterVitalsRepository::updateVitals( int idCharacter, const Model::Char
         UPDATE character_vitals SET
             health = ?,
             max_health = ?,
-            base_health_regen = ?,
             mana = ?,
             max_mana = ?,
-            base_mana_regen = ?,
             stamina = ?,
-            max_stamina = ?,
-            base_stamina_regen = ?
+            max_stamina = ?
         WHERE id_character = ?
     )SQL";
 
     Database::Query query( _db, sql );
     query.bindDouble( 1, vitals.health() );
     query.bindDouble( 2, vitals.maxHealth() );
-    query.bindDouble( 3, vitals.baseHealthRegen() );
-    query.bindDouble( 4, vitals.mana() );
-    query.bindDouble( 5, vitals.maxMana() );
-    query.bindDouble( 6, vitals.baseManaRegen() );
-    query.bindDouble( 7, vitals.stamina() );
-    query.bindDouble( 8, vitals.maxStamina() );
-    query.bindDouble( 9, vitals.baseStaminaRegen() );
-    query.bindInt( 10, idCharacter );
+    query.bindDouble( 3, vitals.mana() );
+    query.bindDouble( 4, vitals.maxMana() );
+    query.bindDouble( 5, vitals.stamina() );
+    query.bindDouble( 6, vitals.maxStamina() );
+    query.bindInt( 7, idCharacter );
 
     return query.exec();
 }
@@ -63,13 +54,10 @@ std::unique_ptr<Model::CharacterVitals> CharacterVitalsRepository::findByCharact
         SELECT
             health,
             max_health,
-            base_health_regen,
             mana,
             max_mana,
-            base_mana_regen,
             stamina,
-            max_stamina,
-            base_stamina_regen
+            max_stamina
         FROM character_vitals
         WHERE id_character = ?
     )SQL";
@@ -84,13 +72,10 @@ std::unique_ptr<Model::CharacterVitals> CharacterVitalsRepository::findByCharact
     auto vitals = std::make_unique<Model::CharacterVitals>();
     vitals->setHealth( query.getColumnDouble( 0 ) );
     vitals->setMaxHealth( query.getColumnDouble( 1 ) );
-    vitals->setBaseHealthRegen( query.getColumnDouble( 2 ) );
-    vitals->setMana( query.getColumnDouble( 3 ) );
-    vitals->setMaxMana( query.getColumnDouble( 4 ) );
-    vitals->setBaseManaRegen( query.getColumnDouble( 5 ) );
-    vitals->setStamina( query.getColumnDouble( 6 ) );
-    vitals->setMaxStamina( query.getColumnDouble( 7 ) );
-    vitals->setBaseStaminaRegen( query.getColumnDouble( 8 ) );
+    vitals->setMana( query.getColumnDouble( 2 ) );
+    vitals->setMaxMana( query.getColumnDouble( 3 ) );
+    vitals->setStamina( query.getColumnDouble( 4 ) );
+    vitals->setMaxStamina( query.getColumnDouble( 5 ) );
 
     return vitals;
 }
