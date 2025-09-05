@@ -78,12 +78,12 @@ export class TradePanel {
 
         Object.entries(this.buySelection).forEach(([itemId, quantity]) => {
             const item = this.denizen?.trade?.sell.find(i => i.id === itemId);
-            if (item) total -= item.value * quantity;
+            if (item) total -= item.price * quantity;
         });
 
         Object.entries(this.sellSelection).forEach(([itemId, quantity]) => {
             const item = this.character.inventory.items.find(i => i.id === itemId);
-            if (item) total += item.value * quantity;
+            if (item) total += item.price * quantity;
         });
 
         return total;
