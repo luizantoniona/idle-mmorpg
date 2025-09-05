@@ -55,7 +55,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
                 continue;
             }
 
-            int gain = itemToSell->value() * quantity;
+            int gain = itemToSell->price() * quantity;
             inventory.removeItem( itemId, quantity );
             totalCoins += gain;
         }
@@ -83,7 +83,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
                 continue;
             }
 
-            int cost = itemToBuy->value() * quantity;
+            int cost = itemToBuy->price() * quantity;
 
             if ( totalCoins < cost ) {
                 continue;
