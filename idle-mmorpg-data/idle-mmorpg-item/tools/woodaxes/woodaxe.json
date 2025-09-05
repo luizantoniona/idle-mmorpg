@@ -1,9 +1,0 @@
-{
-    "id": "woodaxe",
-    "name": "Woodaxe",
-    "description": "A normal woodaxe used to get wood.",
-    "icon": "tools/woodaxes/woodaxe.png",
-    "rarity": "common",
-    "value": 10,
-    "modifiers": []
-}

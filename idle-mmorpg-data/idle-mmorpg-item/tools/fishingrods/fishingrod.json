@@ -1,9 +1,0 @@
-{
-    "id": "fishingrod",
-    "name": "Fishingrod",
-    "description": "A normal fishrod used to catch fishes.",
-    "icon": "tools/fishingrods/fishingrod.png",
-    "rarity": "common",
-    "value": 10,
-    "modifiers": []
-}

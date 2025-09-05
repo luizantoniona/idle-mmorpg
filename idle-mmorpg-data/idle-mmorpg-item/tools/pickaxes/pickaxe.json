@@ -1,9 +1,0 @@
-{
-    "id": "pickaxe",
-    "name": "Pickaxe",
-    "description": "A normal pickaxe used to mine ores.",
-    "icon": "tools/pickaxes/pickaxe.png",
-    "rarity": "common",
-    "value": 10,
-    "modifiers": []
-}

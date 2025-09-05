@@ -20,11 +20,10 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
         &equipments.rightHand(),
         &equipments.amulet(),
         &equipments.ring(),
-        &equipments.pickaxe(),    // Review
-        &equipments.woodaxe(),    // Review
-        &equipments.fishingrod(), // Review
-        &equipments.shovel(),     // Review
-        &equipments.sickle() };   // Review
+        &equipments.pickaxe(),
+        &equipments.woodaxe(),
+        &equipments.fishingrod(),
+        &equipments.sickle() };
 
     for ( auto* slot : characterSlot ) {
         const auto* item = slot->item();
@@ -32,45 +31,29 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
             continue;
         }
 
-        for ( const Model::ItemModifier& modifier : item->modifiers() ) {
-            const std::string& type = modifier.type();
-            const std::string& targetId = modifier.id();
-            double value = modifier.value();
+        for ( const Model::ItemBonus& bonus : item->bonuses() ) {
+            const std::string& type = bonus.type();
+            const std::string& targetId = bonus.id();
+            double value = bonus.value();
 
             if ( type == "combat" ) {
                 if ( targetId == "attack" ) {
                     // character->combatAttributes().modifyAttack( value );
 
-                } else if ( targetId == "accuracy" ) {
+                } else if ( targetId == "attackSpeed" ) {
                     // character->combatAttributes().modifyAccuracy( value );
-
-                } else if ( targetId == "speed" ) {
-                    // character->combatAttributes().modifySpeed( value );
 
                 } else if ( targetId == "defense" ) {
                     // character->combatAttributes().modifyDefense( value );
-
-                } else if ( targetId == "criticalChance" ) {
-                    // character->combatAttributes().modifyCriticalChance( value );
-
-                } else if ( targetId == "criticalMultiplier" ) {
-                    // character->combatAttributes().modifyCriticalMultiplier( value );
 
                 } else {
                     std::cerr << "Unknown combat attribute: " << targetId << std::endl;
                 }
 
-            } else if ( type == "vital" ) {
-                if ( targetId == "health" ) {
-                    // character->vitals().setModifierMaxHealth( value );
-
-                } else if ( targetId == "mana" ) {
-                    // character->vitals().setModifierMaxMana( value );
-
-                } else if ( targetId == "stamina" ) {
-                    // character->vitals().setModifierMaxStamina( value );
-
-                } else {
+            } else if ( type == "skill" ) {
+                // Implement if character skill
+                if ( false ) {
+                    // Implement if character skill} else {
                     std::cerr << "Unknown vital: " << targetId << std::endl;
                 }
 
@@ -103,7 +86,6 @@ void EquipmentSystem::characterEquipItem( const std::string& sessionId, Model::C
         { "pickaxe", characterEquipments.pickaxe() },
         { "woodaxe", characterEquipments.woodaxe() },
         { "fishingrod", characterEquipments.fishingrod() },
-        { "shovel", characterEquipments.shovel() },
         { "sickle", characterEquipments.sickle() },
     };
 

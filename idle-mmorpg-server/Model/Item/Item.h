@@ -6,7 +6,7 @@
 
 #include <json/json.h>
 
-#include "ItemModifier.h"
+#include "ItemBonus.h"
 
 namespace Model {
 
@@ -37,12 +37,12 @@ public:
     std::string icon() const;
     void setIcon( const std::string& icon );
 
-    int value() const;
-    void setValue( int value );
+    int price() const;
+    void setPrice( int price );
 
-    std::vector<ItemModifier> modifiers() const;
-    void setModifiers( const std::vector<ItemModifier>& modifiers );
-    void addModifier( const ItemModifier& modifier );
+    std::vector<ItemBonus> bonuses() const;
+    void setBonuses( const std::vector<ItemBonus>& bonuses );
+    void addBonus( const ItemBonus& bonus );
 
 private:
     std::string _id;
@@ -52,8 +52,8 @@ private:
     std::string _description;
     std::string _rarity;
     std::string _icon;
-    int _value;
-    std::vector<ItemModifier> _modifiers;
+    int _price;
+    std::vector<ItemBonus> _bonuses;
 };
 
 } // namespace Model

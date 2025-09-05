@@ -1,0 +1,17 @@
+{
+    "id": "woodaxe",
+    "type": "tool",
+    "category": "woodaxe",
+    "name": "Woodaxe",
+    "description": "A normal woodaxe used to get wood.",
+    "icon": "tool/woodaxe.png",
+    "rarity": "common",
+    "price": 30,
+    "bonus": [
+        {
+            "type": "skill",
+            "id": "woodcutting",
+            "value": 1
+        }
+    ]
+}

@@ -40,7 +40,6 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
                 { "pickaxe", characterEquipments.pickaxe() },
                 { "woodaxe", characterEquipments.woodaxe() },
                 { "fishingrod", characterEquipments.fishingrod() },
-                { "shovel", characterEquipments.shovel() },
                 { "sickle", characterEquipments.sickle() },
             };
 
@@ -104,7 +103,6 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
                 { "pickaxe", characterEquipments.pickaxe() },
                 { "woodaxe", characterEquipments.woodaxe() },
                 { "fishingrod", characterEquipments.fishingrod() },
-                { "shovel", characterEquipments.shovel() },
                 { "sickle", characterEquipments.sickle() },
             };
 

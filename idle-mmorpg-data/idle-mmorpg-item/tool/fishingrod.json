@@ -1,0 +1,17 @@
+{
+    "id": "fishingrod",
+    "type": "tool",
+    "category": "fishingrod",
+    "name": "Fishingrod",
+    "description": "A normal fishrod used to catch fishes.",
+    "icon": "tool/fishingrod.png",
+    "rarity": "common",
+    "price": 30,
+    "bonus": [
+        {
+            "type": "skill",
+            "id": "fishing",
+            "value": 1
+        }
+    ]
+}

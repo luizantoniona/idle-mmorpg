@@ -1,0 +1,11 @@
+{
+    "id": "ore_iron",
+    "type": "diverse",
+    "category": "ore",
+    "name": "Iron Ore",
+    "description": "A basic metal ore commonly mined from rocks. Used for creating ingots.",
+    "icon": "miscellaneous/ore_iron.png",
+    "rarity": "common",
+    "price": 2,
+    "bonus": []
+}

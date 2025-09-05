@@ -1,0 +1,17 @@
+{
+    "id": "iron_dagger",
+    "type": "weapon",
+    "category": "dagger",
+    "name": "Iron Dagger",
+    "description": "A small dagger made of iron.",
+    "icon": "weapons/daggers/iron_dagger.png",
+    "rarity": "common",
+    "price": 5,
+    "bonus": [
+        {
+            "type": "combat",
+            "id": "attack",
+            "value": 1
+        }
+    ]
+}

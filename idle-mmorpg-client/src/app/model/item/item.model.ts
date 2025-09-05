@@ -1,4 +1,4 @@
-import { ItemModifier } from "./item.modifier.model";
+import { ItemBonus } from "./item-bonus.model";
 
 export type Item = {
     id: string;
@@ -9,6 +9,6 @@ export type Item = {
     description: string;
     rarity: string;
     icon: string;
-    value: number;
-    modifiers: ItemModifier[];
+    price: number;
+    bonuses: ItemBonus[];
 };

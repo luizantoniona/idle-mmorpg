@@ -13,32 +13,15 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
 
     Json::Value itemsConfig = Commons::JsonHelper::loadJsonFile( itemsPath + "items.json" );
 
-    for ( const auto& typeEntry : itemsConfig[ "types" ] ) {
+    for ( const auto& itemEntry : itemsConfig[ "items" ] ) {
+        std::string itemFilePath = itemsPath + itemEntry.asString() + ".json";
 
-        std::string type = typeEntry[ "type" ].asString();
-        std::string typesPath = itemsPath + typeEntry[ "path" ].asString() + "/";
-        Json::Value typesConfig = Commons::JsonHelper::loadJsonFile( typesPath + typeEntry[ "path" ].asString() + ".json" );
+        auto item = createItem( itemFilePath );
+        if ( item ) {
+            items[item->id()] = std::move( item );
 
-        for ( const auto& categoryEntry : typesConfig[ "categories" ] ) {
-
-            std::string category = categoryEntry[ "category" ].asString();
-            std::string categoryPath = categoryEntry[ "path" ].asString();
-            std::string itemPath = typesPath + categoryPath;
-
-            for ( const Json::Value& itemEntry : categoryEntry[ "items" ] ) {
-                std::string itemFile = itemEntry.asString();
-                std::string itemFilePath = itemPath + "/" + itemFile + ".json";
-
-                auto item = createItem( itemFilePath );
-                if ( item ) {
-                    item->setType( type );
-                    item->setCategory( category );
-                    items[item->id()] = std::move( item );
-
-                } else {
-                    std::cerr << "Failed to load item: " << itemFilePath << " from " << itemFilePath << std::endl;
-                }
-            }
+        } else {
+            std::cerr << "Failed to load item: " << itemFilePath << std::endl;
         }
     }
 
@@ -54,26 +37,28 @@ std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPat
 
     auto item = std::make_unique<Model::Item>();
     item->setId( itemJson[ "id" ].asString() );
+    item->setType( itemJson[ "type" ].asString() );
+    item->setCategory( itemJson[ "category" ].asString() );
     item->setName( itemJson[ "name" ].asString() );
     item->setDescription( itemJson[ "description" ].asString() );
     item->setRarity( itemJson[ "rarity" ].asString() );
-    item->setValue( itemJson[ "value" ].asInt() );
+    item->setPrice( itemJson[ "price" ].asInt() );
     item->setIcon( itemJson[ "icon" ].asString() );
 
-    if ( itemJson.isMember( "modifiers" ) && itemJson["modifiers"].isArray() ) {
-        const Json::Value& modifiersJson = itemJson["modifiers"];
-        std::vector<Model::ItemModifier> modifiers;
+    if ( itemJson.isMember( "bonus" ) && itemJson[ "bonus" ].isArray() ) {
+        const Json::Value& bonusesJson = itemJson[ "bonus" ];
+        std::vector<Model::ItemBonus> bonuses;
 
-        for ( const auto& modifierJson : modifiersJson ) {
-            Model::ItemModifier modifier;
-            modifier.setType( modifierJson[ "type" ].asString() );
-            modifier.setId( modifierJson[ "id" ].asString() );
-            modifier.setValue( modifierJson[ "value" ].asDouble() );
+        for ( const auto& bonusJson : bonusesJson ) {
+            Model::ItemBonus bonus;
+            bonus.setType( bonusJson[ "type" ].asString() );
+            bonus.setId( bonusJson[ "id" ].asString() );
+            bonus.setValue( bonusJson[ "value" ].asDouble() );
 
-            modifiers.push_back( modifier );
+            bonuses.push_back( bonus );
         }
 
-        item->setModifiers( modifiers );
+        item->setBonuses( bonuses );
     }
 
     return item;

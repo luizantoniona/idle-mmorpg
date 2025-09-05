@@ -25,7 +25,7 @@ export type { DenizenQuest } from "./denizen/denizen-quest.model";
 export type { DenizenTrade } from "./denizen/denizen-trade.model";
 
 export type { Item } from "./item/item.model";
-export type { ItemModifier } from "./item/item.modifier.model";
+export type { ItemBonus } from "./item/item-bonus.model";
 
 export type { Location } from "./location/location.model";
 export type { LocationAction } from "./location/location-action.model";

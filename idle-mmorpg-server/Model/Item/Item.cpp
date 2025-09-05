@@ -1,17 +1,5 @@
 #include "Item.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_TYPE = "type";
-constexpr const char* JSON_CATEGORY = "category";
-constexpr const char* JSON_NAME = "name";
-constexpr const char* JSON_DESCRIPTION = "description";
-constexpr const char* JSON_RARITY = "rarity";
-constexpr const char* JSON_ICON = "icon";
-constexpr const char* JSON_VALUE = "value";
-constexpr const char* JSON_MODIFIERS = "modifiers";
-} // namespace
-
 namespace Model {
 
 Item::Item() :
@@ -22,23 +10,23 @@ Item::Item() :
     _description( "" ),
     _rarity( "" ),
     _icon( "" ),
-    _value( 0 ),
-    _modifiers( {} ) {}
+    _price( 0 ),
+    _bonuses( {} ) {}
 
 Json::Value Item::toJson() const {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_TYPE ] = type();
-    root[ JSON_CATEGORY ] = category();
-    root[ JSON_NAME ] = name();
-    root[ JSON_DESCRIPTION ] = description();
-    root[ JSON_RARITY ] = rarity();
-    root[ JSON_ICON ] = icon();
-    root[ JSON_VALUE ] = value();
+    root[ "id" ] = id();
+    root[ "type" ] = type();
+    root[ "category" ] = category();
+    root[ "name" ] = name();
+    root[ "description" ] = description();
+    root[ "rarity" ] = rarity();
+    root[ "icon" ] = icon();
+    root[ "price" ] = price();
 
-    // for ( auto& modifier : modifiers() ) {
-    //     root[ JSON_MODIFIERS ].append( modifier.toJson() );
-    // }
+    for ( auto& bonus : bonuses() ) {
+        root[ "bonuses" ].append( bonus.toJson() );
+    }
 
     return root;
 }
@@ -99,24 +87,24 @@ void Item::setIcon( const std::string& icon ) {
     _icon = icon;
 }
 
-int Item::value() const {
-    return _value;
+int Item::price() const {
+    return _price;
 }
 
-void Item::setValue( int value ) {
-    _value = value;
+void Item::setPrice( int price ) {
+    _price = price;
 }
 
-std::vector<ItemModifier> Item::modifiers() const {
-    return _modifiers;
+std::vector<ItemBonus> Item::bonuses() const {
+    return _bonuses;
 }
 
-void Item::setModifiers( const std::vector<ItemModifier>& modifiers ) {
-    _modifiers = modifiers;
+void Item::setBonuses( const std::vector<ItemBonus>& bonuses ) {
+    _bonuses = bonuses;
 }
 
-void Item::addModifier( const ItemModifier& modifier ) {
-    _modifiers.push_back( modifier );
+void Item::addBonus( const ItemBonus& bonus ) {
+    _bonuses.push_back( bonus );
 }
 
 } // namespace Model

@@ -1,9 +1,0 @@
-{
-    "id": "rope",
-    "name": "Rope",
-    "description": "Used to get out of holes.",
-    "icon": "tools/ropes/rope.gif",
-    "rarity": "common",
-    "value": 10,
-    "modifiers": []
-}

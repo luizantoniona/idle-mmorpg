@@ -1,24 +1,14 @@
 {
-    "types": [
-        {
-            "type": "consumable",
-            "path": "consumables"
-        },
-        {
-            "type": "equipment",
-            "path": "equipments"
-        },
-        {
-            "type": "miscellaneous",
-            "path": "miscellaneous"
-        },
-        {
-            "type": "tool",
-            "path": "tools"
-        },
-        {
-            "type": "weapon",
-            "path": "weapons"
-        }
+    "items": [
+        "consumable/food_cheese",
+        "diverse/ore_iron",
+        "equipment/helmet_leather",
+        "tool/fishingrod",
+        "tool/pickaxe",
+        "tool/woodaxe",
+        "weapon/axe_iron",
+        "weapon/dagger_iron",
+        "weapon/shield_small",
+        "weapon/sword_iron"
     ]
 }

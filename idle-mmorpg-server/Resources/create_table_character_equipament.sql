@@ -12,9 +12,7 @@ CREATE TABLE character_equipment (
     pickaxe_item_id TEXT DEFAULT NULL,
     woodaxe_item_id TEXT DEFAULT NULL,
     fishingrod_item_id TEXT DEFAULT NULL,
-    shovel_item_id TEXT DEFAULT NULL,
     sickle_item_id TEXT DEFAULT NULL,
-    rope_item_id TEXT DEFAULT NULL,
 
     FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
 );
