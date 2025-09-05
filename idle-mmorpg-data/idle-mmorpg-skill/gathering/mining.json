@@ -1,0 +1,7 @@
+{
+    "id": "mining",
+    "name": "Mining",
+    "description": "Extract ores and minerals from the ground.",
+    "type": "gathering",
+    "milestones": []
+}

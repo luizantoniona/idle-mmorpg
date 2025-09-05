@@ -1,80 +1,20 @@
 {
     "skills": [
-        {
-            "id": "meditation",
-            "path": "skills/activity/meditation.json"
-        },
-        {
-            "id": "resting",
-            "path": "skills/activity/resting.json"
-        },
-        {
-            "id": "running",
-            "path": "skills/activity/running.json"
-        },
-        {
-            "id": "agility",
-            "path": "skills/combat/agility.json"
-        },
-        {
-            "id": "blocking",
-            "path": "skills/combat/blocking.json"
-        },
-        {
-            "id": "clarity",
-            "path": "skills/combat/clarity.json"
-        },
-        {
-            "id": "endurance",
-            "path": "skills/combat/endurance.json"
-        },
-        {
-            "id": "evasion",
-            "path": "skills/combat/evasion.json"
-        },
-        {
-            "id": "focus",
-            "path": "skills/combat/focus.json"
-        },
-        {
-            "id": "unarmed",
-            "path": "skills/combat/unarmed.json"
-        },
-        {
-            "id": "fishing",
-            "path": "skills/gathering/fishing.json"
-        },
-        {
-            "id": "foraging",
-            "path": "skills/gathering/foraging.json"
-        },
-        {
-            "id": "herbalism",
-            "path": "skills/gathering/herbalism.json"
-        },
-        {
-            "id": "mining",
-            "path": "skills/gathering/mining.json"
-        },
-        {
-            "id": "woodcutting",
-            "path": "skills/gathering/woodcutting.json"
-        },
-        {
-            "id": "axe_mastery",
-            "path": "skills/weapon/axe_mastery.json"
-        },
-        {
-            "id": "dagger_mastery",
-            "path": "skills/weapon/dagger_mastery.json"
-        },
-        {
-            "id": "shield_mastery",
-            "path": "skills/weapon/shield_mastery.json"
-        },
-        {
-            "id": "sword_mastery",
-            "path": "skills/weapon/sword_mastery.json"
-        }
+        "activity/meditation",
+        "activity/resting",
+        "activity/running",
+        "combat/agility",
+        "combat/endurance",
+        "combat/evasion",
+        "combat/unarmed",
+        "gathering/fishing",
+        "gathering/herbalism",
+        "gathering/mining",
+        "gathering/woodcutting",
+        "magic/focus",
+        "weapon/axe_mastery",
+        "weapon/dagger_mastery",
+        "weapon/shield_mastery",
+        "weapon/sword_mastery"
     ]
 }

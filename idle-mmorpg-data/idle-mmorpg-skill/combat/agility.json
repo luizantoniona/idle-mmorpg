@@ -1,0 +1,7 @@
+{
+    "id": "agility",
+    "name": "Agility",
+    "description": "Your skill in attacks, increasing your chance to hit creatures.",
+    "type": "combat",
+    "milestones": []
+}

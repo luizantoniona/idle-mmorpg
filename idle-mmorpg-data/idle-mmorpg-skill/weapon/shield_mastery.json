@@ -1,0 +1,7 @@
+{
+    "id": "shield_mastery",
+    "name": "Shield Mastery",
+    "description": "Your mastery using shields.",
+    "type": "weapon",
+    "milestones": []
+}

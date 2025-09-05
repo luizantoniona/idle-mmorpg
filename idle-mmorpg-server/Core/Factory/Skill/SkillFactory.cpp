@@ -8,19 +8,22 @@ namespace Core::Factory {
 
 // TODO REVIEW THIS, MAYBE REMOVE FROM JSONS AND MADE SKILLS HARD CODED
 
-std::unordered_map<std::string, std::unique_ptr<Model::Skill>> SkillFactory::createSkills( const std::string& skillsPath ) {
+std::unordered_map<std::string, std::unique_ptr<Model::Skill> > SkillFactory::createSkills( const std::string& skillsPath ) {
     std::cout << "SkillFactory::createSkills" << std::endl;
 
     std::unordered_map<std::string, std::unique_ptr<Model::Skill> > skills;
 
     Json::Value skillsConfig = Commons::JsonHelper::loadJsonFile( skillsPath + "skills.json" );
 
-    const Json::Value& skillsArray = skillsConfig["skills"];
-    for ( const auto& skillEntry : skillsArray ) {
-        std::string id = skillEntry["id"].asString();
-        std::string fullPath = skillsPath + skillEntry["path"].asString();
+    for ( const auto& skillEntry : skillsConfig["skills"] ) {
+        std::string skillPath = skillsPath + skillEntry.asString() + ".json";
 
-        skills[id] = createSkill( fullPath );
+        auto skill = createSkill( skillPath );
+        if ( skill ) {
+            skills[skill->id()] = std::move( skill );
+        } else {
+            std::cerr << "Failed to load skill: " << skillPath << std::endl;
+        }
     }
 
     std::cout << "SkillFactory::createSkills Number of skills loaded: " << skills.size() << std::endl;
@@ -35,17 +38,17 @@ std::unique_ptr<Model::Skill> SkillFactory::createSkill( const std::string& skil
 
     auto skill = std::make_unique<Model::Skill>();
 
-    skill->setId( skillJson["id"].asString() );
-    skill->setName( skillJson["name"].asString() );
-    skill->setDescription( skillJson["description"].asString() );
-    skill->setType( skillJson["type"].asString() );
+    skill->setId( skillJson[ "id" ].asString() );
+    skill->setName( skillJson[ "name" ].asString() );
+    skill->setDescription( skillJson[ "description" ].asString() );
+    skill->setType( skillJson[ "type" ].asString() );
 
-    const auto& milestonesJson = skillJson["milestones"];
+    const auto& milestonesJson = skillJson[ "milestones" ];
     for ( const auto& milestoneJson : milestonesJson ) {
         Model::SkillMilestone milestone;
-        milestone.setLevel( milestoneJson["level"].asInt() );
+        milestone.setLevel( milestoneJson[ "level" ].asInt() );
 
-        const auto& bonusesJson = milestoneJson["bonuses"];
+        const auto& bonusesJson = milestoneJson[ "bonuses" ];
         for ( const auto& bonusJson : bonusesJson ) {
             Model::SkillMilestoneBonus milestoneBonus;
 

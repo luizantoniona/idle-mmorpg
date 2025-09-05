@@ -1,0 +1,7 @@
+{
+    "id": "woodcutting",
+    "name": "Woodcutting",
+    "description": "Chop down trees to gather wood.",
+    "type": "gathering",
+    "milestones": []
+}
