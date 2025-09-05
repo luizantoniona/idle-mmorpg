@@ -1,12 +1,6 @@
 {
     "spells": [
-        {
-            "id": "minor_healing",
-            "path": "spells/healing/minor_healing.json"
-        },
-        {
-            "id": "lightning_bolt",
-            "path": "spells/attack/lightning_bolt.json"
-        }
+        "attack/lightning_bolt",
+        "healing/minor_healing"
     ]
 }

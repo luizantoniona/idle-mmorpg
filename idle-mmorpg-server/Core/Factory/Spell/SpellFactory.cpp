@@ -15,12 +15,16 @@ std::unordered_map<std::string, std::unique_ptr<Model::Spell> > SpellFactory::cr
 
     Json::Value spellsConfig = Commons::JsonHelper::loadJsonFile( spellsPath + "spells.json" );
 
-    const Json::Value& spellsArray = spellsConfig[ "spells" ];
-    for ( const auto& spellEntry : spellsArray ) {
-        std::string id = spellEntry[ "id" ].asString();
-        std::string fullPath = spellsPath + spellEntry[ "path" ].asString();
+    for ( const auto& spellEntry : spellsConfig[ "spells" ] ) {
+        std::string spellFilePath = spellsPath + spellEntry.asString() + ".json";
 
-        spells[ id ] = createSpell( fullPath );
+        auto spell = createSpell( spellFilePath );
+        if ( spell ) {
+            spells[spell->id()] = std::move( spell );
+
+        } else {
+            std::cerr << "Failed to load spell: " << spellFilePath << std::endl;
+        }
     }
 
     std::cout << "SpellFactory::createSpells Number of spells loaded: " << spells.size() << std::endl;
