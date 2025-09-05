@@ -74,6 +74,14 @@ void Character::setCombatAction( const CharacterCombatAction& combatAction ) {
     _combatAction = combatAction;
 }
 
+CharacterCombatAttributes& Character::combatAttributes() {
+    return _combatAttributes;
+}
+
+void Character::setCombatAttributes( const CharacterCombatAttributes& combatAttributes ) {
+    _combatAttributes = combatAttributes;
+}
+
 CharacterCoordinates& Character::coordinates() {
     return _coordinates;
 }

@@ -21,6 +21,9 @@ public:
     int level() const;
     void setLevel( int level );
 
+    int bonusLevel() const;
+    void setBonusLevel( int bonusLevel );
+
     int experience() const;
     void setExperience( int experience );
 
@@ -30,6 +33,7 @@ public:
 private:
     std::string _id;
     int _level;
+    int _bonusLevel;
     int _experience;
     Skill* _skill;
 };

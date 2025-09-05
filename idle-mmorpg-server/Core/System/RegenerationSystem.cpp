@@ -11,7 +11,7 @@ namespace Core::System {
 void RegenerationSystem::computeRegeneration( const std::string& sessionId, Model::Character* character ) {
     auto& characterVitals = character->vitals();
 
-    if ( characterVitals.health() >= characterVitals.fullHealth() && characterVitals.mana() >= characterVitals.fullMana() && characterVitals.stamina() >= characterVitals.fullStamina() ) {
+    if ( characterVitals.health() >= characterVitals.maxHealth() && characterVitals.mana() >= characterVitals.maxMana() && characterVitals.stamina() >= characterVitals.maxStamina() ) {
         return;
     }
 
@@ -22,25 +22,25 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
 
     characterVitals.setRegenCounter( 0 );
 
-    const double healthRegen = std::max( 1.0, characterVitals.healthRegen() + character->attributes().constitution() );
-    const double staminaRegen = std::max( 1.0, characterVitals.staminaRegen() + character->attributes().dexterity() );
-    const double manaRegen = std::max( 1.0, characterVitals.manaRegen() + character->attributes().intelligence() );
+    const double healthRegen = std::max( 1.0, character->attributes().constitution() );
+    const double staminaRegen = std::max( 1.0, character->attributes().dexterity() );
+    const double manaRegen = std::max( 1.0, character->attributes().intelligence() );
 
     double newHealth = characterVitals.health() + Commons::DecimalHelper::roundDecimals( healthRegen );
-    if ( newHealth > characterVitals.fullHealth() ) {
-        newHealth = characterVitals.fullHealth();
+    if ( newHealth > characterVitals.maxHealth() ) {
+        newHealth = characterVitals.maxHealth();
     }
     characterVitals.setHealth( newHealth );
 
     double newStamina = characterVitals.stamina() + Commons::DecimalHelper::roundDecimals( staminaRegen );
-    if ( newStamina > characterVitals.fullStamina() ) {
-        newStamina = characterVitals.fullStamina();
+    if ( newStamina > characterVitals.maxStamina() ) {
+        newStamina = characterVitals.maxStamina();
     }
     characterVitals.setStamina( newStamina );
 
     double newMana = characterVitals.mana() + Commons::DecimalHelper::roundDecimals( manaRegen );
-    if ( newMana > characterVitals.fullMana() ) {
-        newMana = characterVitals.fullMana();
+    if ( newMana > characterVitals.maxMana() ) {
+        newMana = characterVitals.maxMana();
     }
     characterVitals.setMana( newMana );
 
@@ -94,7 +94,7 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::
 
     double heal = spell->effect().value() + character->attributes().wisdom();
 
-    double newHealth = std::min( character->vitals().health() + heal, character->vitals().fullHealth() );
+    double newHealth = std::min( character->vitals().health() + heal, character->vitals().maxHealth() );
     character->vitals().setHealth( newHealth );
 
     ProgressionSystem().applyExperience( sessionId, character, "clarity", heal );

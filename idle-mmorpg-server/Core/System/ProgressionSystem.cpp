@@ -101,49 +101,16 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
             std::cerr << "[ProgressionSystem] Unknown attribute id: " << id << std::endl;
         }
 
-    } else if ( type == "combat" ) {
-
-        if ( id == "attack" ) {
-            // combat.setBaseAttack( combat.baseAttack() + value );
-
-        } else if ( id == "accuracy" ) {
-            // combat.setBaseAccuracy( combat.baseAccuracy() + value );
-
-        } else if ( id == "speed" ) {
-            // combat.setBaseSpeed( combat.baseSpeed() + value );
-
-        } else if ( id == "defense" ) {
-            // combat.setBaseDefense( combat.baseDefense() + value );
-
-        } else if ( id == "critical_chance" ) {
-            // combat.setBaseCriticalChance( combat.baseCriticalChance() + value );
-
-        } else if ( id == "critical_multiplier" ) {
-            // combat.setBaseCriticalMultiplier( combat.baseCriticalMultiplier() + value );
-
-        } else {
-            std::cerr << "[ProgressionSystem] Unknown combat attribute id: " << id << std::endl;
-        }
-
     } else if ( type == "vital" ) {
 
         if ( id == "health" ) {
             vitals.setMaxHealth( vitals.maxHealth() + static_cast<int>( value ) );
 
-        } else if ( id == "health_regen" ) {
-            vitals.setBaseHealthRegen( vitals.baseHealthRegen() + value );
-
         } else if ( id == "mana" ) {
             vitals.setMaxMana( vitals.maxMana() + static_cast<int>( value ) );
 
-        } else if ( id == "mana_regen" ) {
-            vitals.setBaseManaRegen( vitals.baseManaRegen() + value );
-
         } else if ( id == "stamina" ) {
             vitals.setMaxStamina( vitals.maxStamina() + static_cast<int>( value ) );
-
-        } else if ( id == "stamina_regen" ) {
-            vitals.setBaseStaminaRegen( vitals.baseStaminaRegen() + value );
 
         } else {
             std::cerr << "[ProgressionSystem] Unknown vital id: " << id << std::endl;

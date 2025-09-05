@@ -12,11 +12,11 @@ CharacterAttributes::CharacterAttributes() :
 
 Json::Value CharacterAttributes::toJson() const {
     Json::Value root;
-    root[ "strength" ] = _strength;
-    root[ "dexterity" ] = _dexterity;
-    root[ "constitution" ] = _constitution;
-    root[ "intelligence" ] = _intelligence;
-    root[ "wisdom" ] = _wisdom;
+    root[ "strength" ] = strength();
+    root[ "dexterity" ] = dexterity();
+    root[ "constitution" ] = constitution();
+    root[ "intelligence" ] = intelligence();
+    root[ "wisdom" ] = wisdom();
     return root;
 }
 

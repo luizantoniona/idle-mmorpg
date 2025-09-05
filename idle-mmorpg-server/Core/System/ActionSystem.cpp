@@ -127,25 +127,31 @@ void ActionSystem::regenerativeActionEffect( const std::string& sessionId, Model
         return;
     }
 
-    const double healthRegen = 5 + character->vitals().baseHealthRegen() + character->attributes().constitution();
-    const double staminaRegen = 2 + character->vitals().baseStaminaRegen() + character->attributes().constitution();
-    const double manaRegen = 1 + character->vitals().baseManaRegen() + +character->attributes().constitution();
+    auto& characterVitals = character->vitals();
+
+    if ( characterVitals.health() >= characterVitals.maxHealth() && characterVitals.mana() >= characterVitals.maxMana() && characterVitals.stamina() >= characterVitals.maxStamina() ) {
+        return;
+    }
+
+    const double healthRegen = 5 + character->attributes().constitution();
+    const double staminaRegen = 5 + character->attributes().constitution();
+    const double manaRegen = 5 + character->attributes().constitution();
 
     int newHealth = character->vitals().health() + healthRegen;
-    if ( newHealth > character->vitals().fullHealth() ) {
-        newHealth = character->vitals().fullHealth();
+    if ( newHealth > characterVitals.maxHealth() ) {
+        newHealth = characterVitals.maxHealth();
     }
     character->vitals().setHealth( newHealth );
 
     int newStamina = character->vitals().stamina() + staminaRegen;
-    if ( newStamina > character->vitals().fullStamina() ) {
-        newStamina = character->vitals().fullStamina();
+    if ( newStamina > characterVitals.maxStamina() ) {
+        newStamina = characterVitals.maxStamina();
     }
     character->vitals().setStamina( newStamina );
 
     int newMana = character->vitals().mana() + manaRegen;
-    if ( newMana > character->vitals().fullMana() ) {
-        newMana = character->vitals().fullMana();
+    if ( newMana > characterVitals.maxMana() ) {
+        newMana = characterVitals.maxMana();
     }
     character->vitals().setMana( newMana );
 

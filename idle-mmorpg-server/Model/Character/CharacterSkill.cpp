@@ -7,13 +7,16 @@ namespace Model {
 CharacterSkill::CharacterSkill() :
     _id( "" ),
     _level( 0 ),
+    _bonusLevel( 0 ),
     _experience( 0 ),
-    _skill( nullptr ) {}
+    _skill( nullptr ) {
+}
 
 Json::Value CharacterSkill::toJson() {
     Json::Value root;
     root[ "id" ] = id();
     root[ "level" ] = level();
+    root[ "bonusLevel" ] = bonusLevel();
     root[ "experience" ] = experience();
     root[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( level() );
     root[ "skill" ] = skill()->toJson();
@@ -34,6 +37,14 @@ int CharacterSkill::level() const {
 
 void CharacterSkill::setLevel( int level ) {
     _level = level;
+}
+
+int CharacterSkill::bonusLevel() const {
+    return _bonusLevel;
+}
+
+void CharacterSkill::setBonusLevel( int bonusLevel ) {
+    _bonusLevel = bonusLevel;
 }
 
 int CharacterSkill::experience() const {

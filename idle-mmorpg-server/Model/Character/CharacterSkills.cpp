@@ -38,7 +38,7 @@ void CharacterSkills::addSkill( CharacterSkill skill ) {
 
 int CharacterSkills::skillLevel( const std::string& idSkill ) {
     CharacterSkill* skillToSee = skill( idSkill );
-    return skillToSee ? skillToSee->level() : 0;
+    return skillToSee ? skillToSee->level() + skillToSee->bonusLevel() : 0;
 }
 
 } // namespace Model
