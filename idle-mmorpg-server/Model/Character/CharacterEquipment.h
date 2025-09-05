@@ -49,14 +49,8 @@ public:
     CharacterEquipmentItem& fishingrod();
     void setFishingrod( const CharacterEquipmentItem& fishingrod );
 
-    CharacterEquipmentItem& shovel();
-    void setShovel( const CharacterEquipmentItem& shovel );
-
     CharacterEquipmentItem& sickle();
     void setSickle( const CharacterEquipmentItem& sickle );
-
-    CharacterEquipmentItem rope() const;
-    void setRope( const CharacterEquipmentItem& rope );
 
 private:
     CharacterEquipmentItem _helmet;
@@ -74,9 +68,7 @@ private:
     CharacterEquipmentItem _pickaxe;
     CharacterEquipmentItem _woodaxe;
     CharacterEquipmentItem _fishingrod;
-    CharacterEquipmentItem _shovel;
     CharacterEquipmentItem _sickle;
-    CharacterEquipmentItem _rope;
 };
 
 } // namespace Model
