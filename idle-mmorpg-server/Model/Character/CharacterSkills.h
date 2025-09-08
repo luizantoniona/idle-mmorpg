@@ -22,6 +22,8 @@ public:
 
     int skillLevel( const std::string& idSkill );
 
+    void clear();
+
 private:
     std::vector<CharacterSkill> _skills;
 };

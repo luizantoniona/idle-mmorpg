@@ -1,16 +1,16 @@
 <app-panel>
-    <div class="attributes-row">
-
-        <div class="attribute-column">
-            @if (character.attributes) {
-            <app-card><strong>STR</strong>: {{ character.attributes.strength }}</app-card>
-            <app-card><strong>DEX</strong>: {{ character.attributes.dexterity }}</app-card>
-            <app-card><strong>CON</strong>: {{ character.attributes.constitution }}</app-card>
-            <app-card><strong>INT</strong>: {{ character.attributes.intelligence }}</app-card>
-            <app-card><strong>WIS</strong>: {{ character.attributes.wisdom }}</app-card>
-            } @else {
-            <app-loading></app-loading>
-            }
-        </div>
+    @if (character.attributes && character.combatAttributes) {
+    <div class="attributes-column">
+        <strong>STR</strong>: {{ character.attributes.strength }}
+        <strong>DEX</strong>: {{ character.attributes.dexterity }}
+        <strong>CON</strong>: {{ character.attributes.constitution }}
+        <strong>INT</strong>: {{ character.attributes.intelligence }}
+        <strong>WIS</strong>: {{ character.attributes.wisdom }}
+        <strong>ATK</strong>: {{ character.combatAttributes.attack }}
+        <strong>SPD</strong>: {{ character.combatAttributes.attackSpeed }}
+        <strong>DEF</strong>: {{ character.combatAttributes.defense }}
     </div>
+    } @else {
+    <app-loading></app-loading>
+    }
 </app-panel>

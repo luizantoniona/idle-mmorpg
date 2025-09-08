@@ -4,7 +4,7 @@
     "category": "shield",
     "name": "Small Shield",
     "description": "A small shield made of wood.",
-    "icon": "weapons/shields/small_shield.png",
+    "icon": "weapon/shields/small_shield.png",
     "rarity": "common",
     "price": 5,
     "bonus": [

@@ -47,12 +47,20 @@ void CharacterSkill::setBonusLevel( int bonusLevel ) {
     _bonusLevel = bonusLevel;
 }
 
+void CharacterSkill::modifyBonusLevel( int modifier ) {
+    _bonusLevel += modifier;
+}
+
 int CharacterSkill::experience() const {
     return _experience;
 }
 
 void CharacterSkill::setExperience( int experience ) {
     _experience = experience;
+}
+
+void CharacterSkill::clear() {
+    _bonusLevel = 0;
 }
 
 Skill* CharacterSkill::skill() const {

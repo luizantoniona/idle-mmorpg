@@ -23,9 +23,12 @@ public:
 
     int bonusLevel() const;
     void setBonusLevel( int bonusLevel );
+    void modifyBonusLevel( int modifier );
 
     int experience() const;
     void setExperience( int experience );
+
+    void clear();
 
     Skill* skill() const;
     void setSkill( Skill* skill );

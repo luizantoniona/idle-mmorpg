@@ -9,6 +9,7 @@ Character::Character() :
     _action(),
     _attributes(),
     _combatAction(),
+    _combatAttributes(),
     _coordinates(),
     _equipment(),
     _inventory(),

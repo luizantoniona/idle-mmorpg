@@ -10,6 +10,9 @@ namespace Core::System {
 void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, Model::Character* character ) {
     auto& equipments = character->equipment();
 
+    character->combatAttributes().clear();
+    character->skills().clear();
+
     std::vector<Model::CharacterEquipmentItem*> characterSlot = {
         &equipments.helmet(),
         &equipments.armor(),
@@ -38,23 +41,26 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
 
             if ( type == "combat" ) {
                 if ( targetId == "attack" ) {
-                    // character->combatAttributes().modifyAttack( value );
+                    character->combatAttributes().modifyAttack( value );
 
                 } else if ( targetId == "attackSpeed" ) {
-                    // character->combatAttributes().modifyAccuracy( value );
+                    character->combatAttributes().modifyAttackSpeed( value );
 
                 } else if ( targetId == "defense" ) {
-                    // character->combatAttributes().modifyDefense( value );
+                    character->combatAttributes().modifyDefense( value );
 
                 } else {
-                    std::cerr << "Unknown combat attribute: " << targetId << std::endl;
+                    std::cerr << "EquipmentSystem::computeEquipmentModifiers Unknown combat attribute: " << targetId << std::endl;
                 }
 
             } else if ( type == "skill" ) {
-                // Implement if character skill
-                if ( false ) {
-                    // Implement if character skill} else {
-                    std::cerr << "Unknown vital: " << targetId << std::endl;
+                auto* skill = character->skills().skill( targetId );
+
+                if ( skill ) {
+                    skill->modifyBonusLevel( static_cast<int>( value ) );
+
+                } else {
+                    std::cerr << "EquipmentSystem::computeEquipmentModifiers Unknown skill: " << targetId << std::endl;
                 }
 
             } else {

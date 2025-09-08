@@ -28,6 +28,7 @@ void NotificationSystem::notifyDeadCharacter( const std::string& sessionId ) {
 void NotificationSystem::notifyCharacterAttributes( const std::string& sessionId, Model::Character* character ) {
     Json::Value payload;
     payload[ "attributes" ] = character->attributes().toJson();
+    payload[ "combatAttributes" ] = character->combatAttributes().toJson();
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE, payload );
 }
 

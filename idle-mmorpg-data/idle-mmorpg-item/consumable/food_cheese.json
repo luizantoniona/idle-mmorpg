@@ -4,7 +4,7 @@
     "category": "food",
     "name": "Cheese",
     "description": "A simple chunk of cheese. Smells... questionable.",
-    "icon": "consumables/food_cheese.gif",
+    "icon": "consumable/food_cheese.gif",
     "rarity": "common",
     "price": 1,
     "modifiers": []

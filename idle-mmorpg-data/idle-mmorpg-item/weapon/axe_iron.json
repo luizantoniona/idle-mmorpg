@@ -4,7 +4,7 @@
     "category": "axe",
     "name": "Iron Axe",
     "description": "A simple axe made of iron.",
-    "icon": "weapons/axes/iron_axe.png",
+    "icon": "weapon/axes/iron_axe.png",
     "rarity": "common",
     "price": 5,
     "bonus": [

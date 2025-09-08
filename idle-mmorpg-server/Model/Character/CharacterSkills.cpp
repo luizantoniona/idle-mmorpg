@@ -41,4 +41,10 @@ int CharacterSkills::skillLevel( const std::string& idSkill ) {
     return skillToSee ? skillToSee->level() + skillToSee->bonusLevel() : 0;
 }
 
+void CharacterSkills::clear() {
+    for ( auto& skill : _skills ) {
+        skill.clear();
+    }
+}
+
 } // namespace Model

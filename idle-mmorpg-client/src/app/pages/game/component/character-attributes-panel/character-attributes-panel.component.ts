@@ -1,7 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { CardComponent } from "../../../../component";
 import { LoadingComponent } from "../../../../component";
 import { PanelComponent } from "../../../../component";
 
@@ -13,7 +12,6 @@ import { Character } from "../../../../model";
     styleUrl: "./character-attributes-panel.component.scss",
     imports: [
         CommonModule,
-        CardComponent,
         LoadingComponent,
         PanelComponent,
     ],
