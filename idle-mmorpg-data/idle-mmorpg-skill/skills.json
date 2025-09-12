@@ -1,20 +1,18 @@
 {
     "skills": [
-        "activity/meditation",
-        "activity/resting",
-        "activity/running",
-        "combat/agility",
-        "combat/endurance",
-        "combat/evasion",
-        "combat/unarmed",
+        "combat/style/axe_mastery",
+        "combat/style/dagger_mastery",
+        "combat/style/fist_mastery",
+        "combat/style/shield_mastery",
+        "combat/style/sword_mastery",
+        "combat/resistance",
         "gathering/fishing",
         "gathering/herbalism",
         "gathering/mining",
         "gathering/woodcutting",
         "magic/focus",
-        "weapon/axe_mastery",
-        "weapon/dagger_mastery",
-        "weapon/shield_mastery",
-        "weapon/sword_mastery"
+        "vitals/endurance",
+        "vitals/meditation",
+        "vitals/vitality"
     ]
 }

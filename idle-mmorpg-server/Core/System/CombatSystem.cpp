@@ -46,10 +46,6 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
 
     auto skills = CombatSystem::combatSkill( character );
 
-    if ( skills.empty() ) {
-        skills.push_back( "unarmed" );
-    }
-
     int masteryLevel = 0;
     for ( const auto& skill : skills ) {
         masteryLevel = std::max( masteryLevel, character->skills().skillLevel( skill ) );
@@ -62,7 +58,6 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
     if ( !rollChance( hitChance ) ) {
         return;
     }
-    _progressionSystem.applyExperience( sessionId, character, "agility", creature->evasion() );
 
     double minDamage = ( character->combatAttributes().attack() + character->attributes().strength() ) / 2;
     double maxDamage = character->combatAttributes().attack() + character->attributes().strength();
@@ -95,9 +90,11 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     bool hasShieldEquipped = ( character->equipment().leftHand().item() && character->equipment().leftHand().item()->category() == "shield" ) ||
                              ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
 
-    int minCreatureAttack = static_cast<int>( creature->minAttack() );
-    int maxCreatureAttack = static_cast<int>( creature->maxAttack() );
-    double damage = rollRange( minCreatureAttack, maxCreatureAttack );
+    double maxCreatureAttack = creature->attack();
+    double damage = rollRange( 0, maxCreatureAttack );
+
+    damage -= character->combatAttributes().defense();
+    damage = std::max( 0, damage );
 
     if ( hasShieldEquipped ) {
         int shieldLevel = character->skills().skillLevel( "shield_mastery" );
@@ -114,12 +111,10 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         }
 
     } else {
-        int evasionLevel = character->skills().skillLevel( "evasion" );
-        double evasionChance = ( 0.5 + 0.005 * ( evasionLevel - creature->accuracy() ) );
+        double evasionChance = ( 0.5 + 0.005 * ( character->attributes().dexterity() - creature->accuracy() ) );
         evasionChance = std::clamp( evasionChance, 0.05, 0.95 );
 
         if ( rollChance( evasionChance ) ) {
-            _progressionSystem.applyExperience( sessionId, character, "evasion", creature->accuracy() );
             return;
         }
     }
@@ -128,8 +123,8 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newHealth = std::max( 0.0, newHealth );
     character->vitals().setHealth( newHealth );
 
-    int xpEndurance = std::max( 1, static_cast<int>( damage * 0.5 ) );
-    _progressionSystem.applyExperience( sessionId, character, "endurance", xpEndurance );
+    int xpResistance = std::max( 1, static_cast<int>( damage * 0.5 ) );
+    _progressionSystem.applyExperience( sessionId, character, "resistance", xpResistance );
 
     NotificationSystem::notifyCharacterVitals( sessionId, character );
 
@@ -233,7 +228,8 @@ std::vector<std::string> CombatSystem::combatSkill( Model::Character* character 
     std::vector<std::string> skills = {};
 
     if ( !leftHand && !rightHand ) {
-        return { "unarmed" };
+        skills.push_back( "fist_mastery" );
+        return skills;
     }
 
     std::string leftSkill = combatSkillByWeapon( leftHand );
@@ -243,11 +239,13 @@ std::vector<std::string> CombatSystem::combatSkill( Model::Character* character 
         skills.push_back( leftSkill );
     }
 
-    if ( !rightSkill.empty() && rightSkill != leftSkill ) {
+    if ( !rightSkill.empty() ) {
         skills.push_back( rightSkill );
     }
 
-    // TODO Add dual-wielding
+    if ( skills.empty() ) {
+        skills.push_back( "fist_mastery" );
+    }
 
     return skills;
 }

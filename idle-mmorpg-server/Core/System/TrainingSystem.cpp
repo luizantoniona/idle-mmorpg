@@ -61,7 +61,7 @@ std::vector<std::string> TrainingSystem::combatSkill( Model::Character* characte
     std::vector<std::string> skills = {};
 
     if ( !leftHand && !rightHand ) {
-        return { "unarmed" };
+        return { "fist_mastery" };
     }
 
     auto getSkillForWeapon = []( const Model::Item* weapon ) -> std::string {

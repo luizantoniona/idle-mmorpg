@@ -9,7 +9,7 @@
             "requirements": [],
             "experience": [
                 {
-                    "skill": "resting",
+                    "skill": "vitality",
                     "amount": 2
                 }
             ]
@@ -21,7 +21,7 @@
             "requirements": [],
             "experience": [
                 {
-                    "skill": "running",
+                    "skill": "endurance",
                     "amount": 2
                 }
             ]

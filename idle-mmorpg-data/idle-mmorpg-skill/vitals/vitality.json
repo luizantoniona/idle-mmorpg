@@ -1,16 +1,16 @@
 {
-    "id": "meditation",
-    "name": "Meditation",
-    "description": "Meditate to increase your maximum mana.",
-    "type": "activity",
+    "id": "vitality",
+    "name": "Vitality",
+    "description": "Through rest and recovery, your body becomes more resilient, increasing your maximum health.",
+    "type": "vitals",
     "milestones": [
         {
             "level": 1,
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -19,8 +19,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -29,8 +29,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -39,8 +39,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -49,8 +49,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -59,8 +59,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -69,8 +69,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         },
@@ -79,8 +79,8 @@
             "bonuses": [
                 {
                     "type": "vital",
-                    "id": "mana",
-                    "value": 5
+                    "id": "health",
+                    "value": 10
                 }
             ]
         }

@@ -1,7 +1,0 @@
-{
-    "id": "unarmed",
-    "name": "Unarmed",
-    "description": "Your skill in fighting without weapons, using your fists and body.",
-    "type": "combat",
-    "milestones": []
-}
