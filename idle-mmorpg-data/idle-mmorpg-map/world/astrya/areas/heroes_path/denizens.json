@@ -47,8 +47,8 @@
                     "id": "heroes_path_talk_cleric",
                     "title": "Talk to the Cleric",
                     "description": "The Guardian suggests you meet the Cleric at the Altar of Light. She may guide you in the ways of magic and teach you how to restore your strength.",
-                    "type": "item",
-                    "objectiveId": "food_cheese",
+                    "type": "talk",
+                    "objectiveId": "cleric_altar_of_light",
                     "amount": 1,
                     "requirements": [
                         {
