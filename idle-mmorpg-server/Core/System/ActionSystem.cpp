@@ -67,10 +67,6 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
     Model::CharacterAction& characterAction = character->action();
 
-    if ( characterAction.counter() % _tickRate == 0 ) {
-        Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
-    }
-
     if ( characterAction.counter() >= characterAction.duration() ) {
 
         const auto& actions = _location->actions();
@@ -101,6 +97,8 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
     } else {
         characterAction.setCounter( characterAction.counter() + 1 );
     }
+
+    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {

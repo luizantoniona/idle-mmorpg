@@ -19,7 +19,7 @@
             ],
             "loot": [
                 {
-                    "id": "copper_ore",
+                    "id": "ore_iron",
                     "baseAmount": 1,
                     "modifierAmount": 0.05,
                     "baseChance": 0.5,

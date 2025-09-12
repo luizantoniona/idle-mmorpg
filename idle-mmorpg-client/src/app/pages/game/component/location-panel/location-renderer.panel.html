@@ -13,8 +13,7 @@
                 {{ tile.content.description }}
                 }
                 @if(tile.type === 'connection') {
-                <strong>Connection</strong><br />
-                Leads to: {{ tile.content.destination }}
+                <strong>{{ tile.content.label }}</strong>
                 }
             </div>
             }

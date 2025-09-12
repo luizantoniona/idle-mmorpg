@@ -4,7 +4,7 @@
             "id": "lumberjack_heroes_path_forest",
             "name": "Lumberjack",
             "structure": "",
-            "icon": "lumberjack_heroes_path_forest.png",
+            "icon": "hunter.png",
             "quests": [
                 {
                     "id": "heroes_path_forest_wolf",
