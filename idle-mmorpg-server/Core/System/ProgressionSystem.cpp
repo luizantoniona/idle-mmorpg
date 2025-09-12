@@ -45,7 +45,6 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
 
         NotificationSystem::notifyCharacterAttributes( sessionId, character );
         NotificationSystem::notifyCharacterVitals( sessionId, character );
-        NotificationSystem::notifyCharacterProgression( sessionId, character );
 
     } else {
         characterSkill->setExperience( newXp );
@@ -139,13 +138,12 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
 
         NotificationSystem::notifyCharacterAttributes( sessionId, character );
         NotificationSystem::notifyCharacterVitals( sessionId, character );
-        NotificationSystem::notifyCharacterProgression( sessionId, character );
 
     } else {
         progression.setExperience( newXp );
     }
 
-    NotificationSystem::notifyCharacterSkills( sessionId, character );
+    NotificationSystem::notifyCharacterProgression( sessionId, character );
 }
 
 void ProgressionSystem::applyLevelUp( Model::Character* character ) {
