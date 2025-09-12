@@ -57,8 +57,7 @@ std::unique_ptr<Model::Creature> CreatureFactory::createCreature( const std::str
     creature->vitals().setMaxStamina( creatureJson[ "stamina" ].asDouble() );
     creature->vitals().setStamina( creatureJson[ "stamina" ].asDouble() );
 
-    creature->setMinAttack( creatureJson[ "minAttack" ].asDouble() );
-    creature->setMaxAttack( creatureJson[ "maxAttack" ].asDouble() );
+    creature->setAttack( creatureJson[ "attack" ].asDouble() );
     creature->setAttackSpeed( creatureJson[ "attackSpeed" ].asDouble() );
     creature->setAccuracy( creatureJson[ "accuracy" ].asDouble() );
 

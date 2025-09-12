@@ -47,11 +47,8 @@ public:
     double mana() const;
     void setMana( double mana );
 
-    double maxAttack() const;
-    void setMaxAttack( double maxAttack );
-
-    double minAttack() const;
-    void setMinAttack( double minAttack );
+    double attack() const;
+    void setAttack( double attack );
 
     double attackSpeed() const;
     void setAttackSpeed( double attackSpeed );
@@ -81,8 +78,7 @@ private:
     CreatureCombatAction _combatAction;
     CreatureVitals _vitals;
 
-    double _maxAttack;
-    double _minAttack;
+    double _attack;
     double _attackSpeed;
     double _accuracy;
     double _defense;

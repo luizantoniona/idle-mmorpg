@@ -12,8 +12,7 @@ Creature::Creature() :
     _experience( 0 ),
     _vitals(),
     _combatAction(),
-    _maxAttack( 0.0 ),
-    _minAttack( 0.0 ),
+    _attack( 0.0 ),
     _attackSpeed( 0.0 ),
     _accuracy( 0.0 ),
     _defense( 0.0 ),
@@ -92,20 +91,12 @@ void Creature::setVitals( const CreatureVitals& vitals ) {
     _vitals = vitals;
 }
 
-double Creature::maxAttack() const {
-    return _maxAttack;
+double Creature::attack() const {
+    return _attack;
 }
 
-void Creature::setMaxAttack( double maxAttack ) {
-    _maxAttack = maxAttack;
-}
-
-double Creature::minAttack() const {
-    return _minAttack;
-}
-
-void Creature::setMinAttack( double minAttack ) {
-    _minAttack = minAttack;
+void Creature::setAttack( double attack ) {
+    _attack = attack;
 }
 
 double Creature::attackSpeed() const {
