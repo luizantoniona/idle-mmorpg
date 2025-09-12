@@ -4,14 +4,14 @@
     width: 100%;
     gap: 8px;
     padding-right: 8px;
-    max-height: 400px;
-    min-height: 200px;
     overflow-y: auto;
 }
 
 .category-title {
-    display: flex;
-    justify-content: center;
-    color: var(--color-text);
+    padding: 8px;
+    text-align: center;
     text-transform: uppercase;
+    background: var(--color-bg);
+    border-radius: var(--border-radius);
+    box-shadow: inset var(--box-shadow);
 }
