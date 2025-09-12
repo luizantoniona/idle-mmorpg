@@ -14,7 +14,7 @@
             "requirements": [
                 {
                     "type": "quest",
-                    "id": "guardian_heroes_path_01"
+                    "id": "heroes_path_cleaning"
                 }
             ]
         },
@@ -27,7 +27,7 @@
             "requirements": [
                 {
                     "type": "quest",
-                    "id": "guardian_heroes_path_01"
+                    "id": "heroes_path_cleaning"
                 }
             ]
         }
