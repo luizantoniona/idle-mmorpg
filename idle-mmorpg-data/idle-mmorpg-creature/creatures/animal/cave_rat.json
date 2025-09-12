@@ -9,7 +9,7 @@
     "stamina": 10,
     "minAttack": 0,
     "maxAttack": 10,
-    "attackSpeed": 1.5,
+    "attackSpeed": 1.0,
     "accuracy": 3,
     "defense": 1,
     "evasion": 3,
