@@ -7,7 +7,7 @@
             "icon": "cave_man_heroes_path_cave.png",
             "quests": [
                 {
-                    "id": "cave_man_heroes_path_cave_00",
+                    "id": "heroes_path_cave_rats",
                     "title": "Killing bigger rats",
                     "description": "The Cave Man warns you that the cave is infested with larger, more aggressive rats. He asks you to eliminate five of them to make the area safer. This will test your combat skills in a confined and dangerous environment.",
                     "type": "kill",
@@ -23,16 +23,16 @@
                     ]
                 },
                 {
-                    "id": "cave_man_heroes_path_cave_01",
+                    "id": "heroes_path_cave_mining",
                     "title": "Learning the mining basics",
                     "description": "Having dealt with the rats, the Cave Man offers to teach you the basics of mining. He asks you to collect five pieces of copper ore, showing you where to strike and how to extract resources efficiently. This will be your first step toward becoming a skilled miner.",
                     "type": "item",
-                    "objectiveId": "copper_ore",
+                    "objectiveId": "ore_iron",
                     "amount": 5,
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "cave_man_heroes_path_cave_00"
+                            "id": "heroes_path_cave_rats"
                         }
                     ],
                     "rewards": [
@@ -45,7 +45,9 @@
                 }
             ],
             "sell": [],
-            "buy": []
+            "buy": [
+                "ore_iron"
+            ]
         }
     ]
 }

@@ -1,10 +1,10 @@
 {
-    "id": "iron_sword",
+    "id": "sword_iron",
     "type": "weapon",
     "category": "sword",
     "name": "Iron Sword",
     "description": "A basic sword made of iron.",
-    "icon": "weapon/swords/iron_sword.png",
+    "icon": "weapon/sword_iron.png",
     "rarity": "common",
     "price": 5,
     "bonus": [

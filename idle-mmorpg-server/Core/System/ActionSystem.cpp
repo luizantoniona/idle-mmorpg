@@ -67,7 +67,7 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 
     Model::CharacterAction& characterAction = character->action();
 
-    if ( character->action().counter() == 0 || characterAction.counter() == characterAction.duration() || characterAction.counter() == characterAction.duration() / 2 ) {
+    if ( characterAction.counter() % _tickRate == 0 ) {
         Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
     }
 

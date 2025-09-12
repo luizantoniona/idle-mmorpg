@@ -14,10 +14,16 @@
     "evasion": 3,
     "loot": [
         {
-            "id": "cheese",
+            "id": "food_cheese",
             "chance": 0.15,
             "minAmount": 1,
             "maxAmount": 1
+        },
+        {
+            "id": "coin_copper",
+            "chance": 0.35,
+            "minAmount": 1,
+            "maxAmount": 3
         }
     ]
 }

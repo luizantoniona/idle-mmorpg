@@ -7,7 +7,7 @@
             "icon": "guardian_heroes_path.png",
             "quests": [
                 {
-                    "id": "guardian_heroes_path_00",
+                    "id": "heroes_path_welcome",
                     "title": "Welcome",
                     "description": "The Guardian warmly welcomes you around the campfire. He explains that the Hero's Path is full of dangers and that you must always stay alert. This is your first step in getting to know the world you are about to explore.",
                     "type": "talk",
@@ -17,13 +17,13 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "iron_sword",
+                            "id": "sword_iron",
                             "amount": 1
                         }
                     ]
                 },
                 {
-                    "id": "guardian_heroes_path_01",
+                    "id": "heroes_path_cleaning",
                     "title": "Cleaning the place",
                     "description": "The Guardian has noticed that the camp has been overrun by rats. He asks you to take care of five of them to keep the area safe and clean. A small test of your combat skills and courage.",
                     "type": "kill",
@@ -32,91 +32,108 @@
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "guardian_heroes_path_00"
+                            "id": "heroes_path_welcome"
                         }
                     ],
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "copper_coin",
+                            "id": "coin_copper",
                             "amount": 10
                         }
                     ]
                 },
                 {
-                    "id": "guardian_heroes_path_02",
-                    "title": "Sharing a meal",
-                    "description": "After cleaning, the Guardian feels hungry and suggests sharing a meal by the fire. He asks you to bring a piece of cheese so you can eat together, strengthening friendship and trust.",
+                    "id": "heroes_path_talk_cleric",
+                    "title": "Talk to the Cleric",
+                    "description": "The Guardian suggests you meet the Cleric at the Altar of Light. She may guide you in the ways of magic and teach you how to restore your strength.",
                     "type": "item",
-                    "objectiveId": "cheese",
+                    "objectiveId": "food_cheese",
                     "amount": 1,
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "guardian_heroes_path_01"
+                            "id": "heroes_path_cleaning"
                         }
                     ],
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "copper_coin",
+                            "id": "coin_copper",
                             "amount": 5
                         }
                     ]
                 },
                 {
-                    "id": "guardian_heroes_path_03",
-                    "title": "Speak with the cave man",
-                    "description": "The Guardian mentions a man working in the nearby cave who might have useful information. Your task is to visit the cave and talk to him, learning more about the world and possible challenges ahead.",
+                    "id": "heroes_path_talk_cave_man",
+                    "title": "Speak with the Cave Man",
+                    "description": "The Guardian tells you of a strange man living in the nearby cave. Perhaps he holds knowledge—or secrets—that could aid you on your journey.",
                     "type": "talk",
                     "objectiveId": "cave_man_heroes_path_cave",
                     "amount": 1,
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "guardian_heroes_path_01"
+                            "id": "heroes_path_cleaning"
                         }
                     ],
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "copper_coin",
+                            "id": "coin_copper",
                             "amount": 5
                         }
                     ]
                 },
                 {
-                    "id": "guardian_heroes_path_04",
-                    "title": "Speak with the lumberjack",
-                    "description": "The Guardian tells you about a lumberjack working in the nearby forest. He asks you to go and talk to him. The lumberjack might have resources or valuable tips for your journey along the Hero's Path.",
+                    "id": "heroes_path_talk_lumberjack",
+                    "title": "Speak with the Lumberjack",
+                    "description": "The Guardian asks you to visit the Lumberjack in the forest. He is a hardy man who knows the land well and might offer useful advice or tools.",
                     "type": "talk",
                     "objectiveId": "lumberjack_heroes_path_forest",
                     "amount": 1,
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "guardian_heroes_path_01"
+                            "id": "heroes_path_cleaning"
                         }
                     ],
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "copper_coin",
+                            "id": "coin_copper",
                             "amount": 5
                         }
                     ]
-                },
+                }
+            ],
+            "sell": [
+                "axe_iron",
+                "dagger_iron",
+                "sword_iron",
+                "shield_small"
+            ],
+            "buy": [
+                "food_cheese"
+            ]
+        },
+        {
+            "id": "cleric_altar_of_light",
+            "name": "Cleric",
+            "structure": "altar_of_light",
+            "icon": "cleric_altar_of_light.png",
+            "quests": [
                 {
-                    "id": "guardian_heroes_path_05",
+                    "id": "cleric_altar_of_light_healing",
                     "title": "Spell - Healing",
-                    "description": "The Guardian teaches you the basics of healing magic, a spell to recover your vitality during your journey.",
+                    "description": "The Cleric greets you warmly and offers to teach you the Minor Healing spell, a gift of light to restore your wounds.",
                     "type": "talk",
                     "objectiveId": "guardian_heroes_path",
                     "amount": 1,
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "guardian_heroes_path_01"
+                            "id": "heroes_path_cleaning"
                         }
                     ],
                     "rewards": [
@@ -127,16 +144,16 @@
                     ]
                 },
                 {
-                    "id": "guardian_heroes_path_06",
+                    "id": "cleric_altar_of_light_attack",
                     "title": "Spell - Lightning Bolt",
-                    "description": "Impressed by your growing courage, the Guardian decides to share with you the secrets of elemental power. He teaches you the basics of channeling energy into a focused Lightning Bolt — a spell capable of striking your foes with the raw force of the storm.",
+                    "description": "The Cleric tests your resolve and, seeing your determination, entrusts you with the Lightning Bolt spell.",
                     "type": "talk",
                     "objectiveId": "guardian_heroes_path",
                     "amount": 1,
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "guardian_heroes_path_01"
+                            "id": "heroes_path_cleaning"
                         }
                     ],
                     "rewards": [
@@ -147,16 +164,8 @@
                     ]
                 }
             ],
-            "sell": [
-                "iron_axe",
-                "iron_dagger",
-                "iron_sword",
-                "small_shield"
-            ],
-            "buy": [
-                "cheese",
-                "worm"
-            ]
+            "sell": [],
+            "buy": []
         }
     ]
 }

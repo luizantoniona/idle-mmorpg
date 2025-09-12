@@ -14,7 +14,7 @@
     "evasion": 5,
     "loot": [
         {
-            "id": "copper_coin",
+            "id": "coin_copper",
             "chance": 0.35,
             "minAmount": 1,
             "maxAmount": 5

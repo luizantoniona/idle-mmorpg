@@ -1,14 +1,87 @@
 <app-panel>
     @if (character.attributes && character.combatAttributes) {
     <div class="attributes-column">
-        <strong>STR</strong>: {{ character.attributes.strength }}
-        <strong>DEX</strong>: {{ character.attributes.dexterity }}
-        <strong>CON</strong>: {{ character.attributes.constitution }}
-        <strong>INT</strong>: {{ character.attributes.intelligence }}
-        <strong>WIS</strong>: {{ character.attributes.wisdom }}
-        <strong>ATK</strong>: {{ character.combatAttributes.attack }}
-        <strong>SPD</strong>: {{ character.combatAttributes.attackSpeed }}
-        <strong>DEF</strong>: {{ character.combatAttributes.defense }}
+
+        <strong>Core</strong>
+        <div class="attributes-row">
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>STR</strong>: {{ character.attributes.strength }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>DEX</strong>: {{ character.attributes.dexterity }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>CON</strong>: {{ character.attributes.constitution }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+        </div>
+
+        <strong>Magic</strong>
+        <div class="attributes-row">
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>INT</strong>: {{ character.attributes.intelligence }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>WIS</strong>: {{ character.attributes.wisdom }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+        </div>
+
+        <strong>Combat</strong>
+        <div class="attributes-row">
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>ATK</strong>: {{ character.combatAttributes.attack }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>SPD</strong>: {{ character.combatAttributes.attackSpeed }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+
+            <app-tooltip>
+                <div tooltip-target class="attribute">
+                    <strong>DEF</strong>: {{ character.combatAttributes.defense }}
+                </div>
+
+                <div tooltip-content>
+                </div>
+            </app-tooltip>
+
+        </div>
     </div>
     } @else {
     <app-loading></app-loading>

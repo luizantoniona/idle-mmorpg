@@ -7,7 +7,7 @@
             "icon": "lumberjack_heroes_path_forest.png",
             "quests": [
                 {
-                    "id": "lumberjack_heroes_path_forest_00",
+                    "id": "heroes_path_forest_wolf",
                     "title": "Animals and they diversity",
                     "description": "The Lumberjack explains that the forest is home to many creatures, some harmless, others dangerous. He asks you to hunt five wolves to protect the area and observe the variety of wildlife. This task will test your combat skills and help you understand the ecosystem of the forest.",
                     "type": "kill",
@@ -23,7 +23,7 @@
                     ]
                 },
                 {
-                    "id": "lumberjack_heroes_path_forest_01",
+                    "id": "heroes_path_forest_wood",
                     "title": "Learning the woodcutting basics",
                     "description": "After dealing with the wolves, the Lumberjack offers to teach you the basics of woodcutting. He shows you the proper way to chop down trees and collect timber safely. Your task is to practice and gather five logs, gaining valuable experience in forest survival and resource gathering.",
                     "type": "item",
@@ -32,7 +32,7 @@
                     "requirements": [
                         {
                             "type": "quest",
-                            "id": "lumberjack_heroes_path_forest_00"
+                            "id": "heroes_path_forest_wolf"
                         }
                     ],
                     "rewards": [

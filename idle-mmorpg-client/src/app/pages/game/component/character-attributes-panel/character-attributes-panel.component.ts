@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { LoadingComponent } from "../../../../component";
 import { PanelComponent } from "../../../../component";
+import { TooltipComponent } from "../../../../component";
 
 import { Character } from "../../../../model";
 
@@ -14,6 +15,7 @@ import { Character } from "../../../../model";
         CommonModule,
         LoadingComponent,
         PanelComponent,
+        TooltipComponent,
     ],
 })
 

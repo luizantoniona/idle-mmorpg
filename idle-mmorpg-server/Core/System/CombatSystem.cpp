@@ -81,8 +81,6 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
 }
 
 void CombatSystem::computeHitDamage( Model::Creature* creature, const std::string& sessionId, Model::Character* character ) {
-    std::cout << "CombatSystem::computeHitDamage [CREATURE] " << creature->name() << " [CHARACTER] " << character->name() << std::endl;
-
     double newStamina = creature->vitals().stamina() - 1;
     newStamina = std::max( 0.0, newStamina );
     creature->vitals().setStamina( newStamina );
@@ -94,7 +92,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     double damage = rollRange( 0, maxCreatureAttack );
 
     damage -= character->combatAttributes().defense();
-    damage = std::max( 0, damage );
+    damage = std::max( 0.0, damage );
 
     if ( hasShieldEquipped ) {
         int shieldLevel = character->skills().skillLevel( "shield_mastery" );
@@ -123,7 +121,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newHealth = std::max( 0.0, newHealth );
     character->vitals().setHealth( newHealth );
 
-    int xpResistance = std::max( 1, static_cast<int>( damage * 0.5 ) );
+    int xpResistance = std::max( 1, static_cast<int>( damage ) );
     _progressionSystem.applyExperience( sessionId, character, "resistance", xpResistance );
 
     NotificationSystem::notifyCharacterVitals( sessionId, character );
