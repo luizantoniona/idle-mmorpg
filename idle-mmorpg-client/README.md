@@ -5,3 +5,9 @@
 
 ### 📖 **Documentation**:  
 TODO
+
+### **GH Deploy**
+```
+ng build --configuration production
+ng deploy
+```

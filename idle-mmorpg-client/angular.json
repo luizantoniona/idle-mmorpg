@@ -17,6 +17,8 @@
                 "build": {
                     "builder": "@angular/build:application",
                     "options": {
+                        "outputPath": "dist/idle-mmorpg-client",
+                        "baseHref": "/idle-mmorpg/",
                         "browser": "src/main.ts",
                         "polyfills": [
                             "zone.js"
@@ -93,6 +95,9 @@
                             "src/styles.scss"
                         ]
                     }
+                },
+                "deploy": {
+                  "builder": "angular-cli-ghpages:deploy"
                 }
             }
         }
