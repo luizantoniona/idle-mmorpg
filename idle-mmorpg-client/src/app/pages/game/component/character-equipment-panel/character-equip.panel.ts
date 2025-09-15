@@ -51,7 +51,7 @@ export class CharacterEquipPanel {
         }
 
         return this.character.inventory.items.filter(item => {
-            if (!["equipament", "weapon", "tool"].includes(item.type)) {
+            if (!["equipment", "weapon", "tool"].includes(item.type)) {
                 return false;
             }
 
