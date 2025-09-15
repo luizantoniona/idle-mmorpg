@@ -4,8 +4,9 @@
 
 #include <Commons/LocationHelper.h>
 #include <Commons/Singleton.h>
-#include <Core/Manager/SkillManager.h>
 #include <Core/Manager/ServerConfigurationManager.h>
+#include <Core/Manager/SkillManager.h>
+#include <Core/System/QuestSystem.h>
 
 #include "NotificationSystem.h"
 
@@ -175,6 +176,7 @@ void ActionSystem::gatheringActionEffect( const std::string& sessionId, Model::C
         }
     }
 
+    QuestSystem::updateItemQuest( sessionId, character );
     NotificationSystem::notifyCharacterInventory( sessionId, character );
 }
 
