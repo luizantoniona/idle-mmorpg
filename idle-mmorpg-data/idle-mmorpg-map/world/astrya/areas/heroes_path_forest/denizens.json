@@ -38,7 +38,7 @@
                     "rewards": [
                         {
                             "type": "item",
-                            "id": "",
+                            "id": "armor_iron",
                             "amount": 1
                         }
                     ]

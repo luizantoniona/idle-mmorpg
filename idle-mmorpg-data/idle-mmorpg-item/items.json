@@ -1,7 +1,11 @@
 {
     "items": [
         "consumable/food_cheese",
+        "consumable/food_meat",
         "diverse/ore_iron",
+        "diverse/wood",
+        "equipment/armor_iron",
+        "equipment/helmet_iron",
         "equipment/helmet_leather",
         "tool/fishingrod",
         "tool/pickaxe",

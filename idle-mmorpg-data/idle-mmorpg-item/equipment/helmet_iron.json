@@ -1,0 +1,17 @@
+{
+    "id": "helmet_iron",
+    "type": "equipment",
+    "category": "helmet",
+    "name": "Iron Helmet",
+    "description": "A simple helmet made of iron.",
+    "icon": "equipment/helmet_iron.png",
+    "rarity": "common",
+    "price": 35,
+    "bonus": [
+        {
+            "type": "combat",
+            "id": "defense",
+            "value": 2
+        }
+    ]
+}

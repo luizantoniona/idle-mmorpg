@@ -2,7 +2,7 @@
     "id": "wolf",
     "name": "Wolf",
     "description": "A larger and tougher rat that dwells in dark caves.",
-    "icon": "animal/wolf.png",
+    "icon": "animal/wolf.gif",
     "experience": 18,
     "health": 25,
     "mana": 0,
@@ -12,5 +12,12 @@
     "accuracy": 5,
     "defense": 1,
     "evasion": 5,
-    "loot": []
+    "loot": [
+        {
+            "id": "food_meat",
+            "chance": 0.4,
+            "minAmount": 1,
+            "maxAmount": 3
+        }
+    ]
 }

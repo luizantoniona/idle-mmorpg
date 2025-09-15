@@ -1,0 +1,17 @@
+{
+    "id": "armor_iron",
+    "type": "equipment",
+    "category": "armor",
+    "name": "Iron Armor",
+    "description": "A simple armor made of iron.",
+    "icon": "equipment/armor_iron.png",
+    "rarity": "common",
+    "price": 50,
+    "bonus": [
+        {
+            "type": "combat",
+            "id": "defense",
+            "value": 5
+        }
+    ]
+}

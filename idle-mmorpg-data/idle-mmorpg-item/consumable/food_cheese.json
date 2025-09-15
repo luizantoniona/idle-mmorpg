@@ -6,6 +6,6 @@
     "description": "A simple chunk of cheese. Smells... questionable.",
     "icon": "consumable/food_cheese.gif",
     "rarity": "common",
-    "price": 1,
+    "price": 5,
     "modifiers": []
 }

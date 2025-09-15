@@ -1,0 +1,11 @@
+{
+    "id": "food_meat",
+    "type": "consumable",
+    "category": "food",
+    "name": "Meat",
+    "description": "A simple meat.",
+    "icon": "consumable/food_meat.gif",
+    "rarity": "common",
+    "price": 5,
+    "modifiers": []
+}
