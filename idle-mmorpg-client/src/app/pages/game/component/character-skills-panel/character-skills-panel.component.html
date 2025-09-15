@@ -10,7 +10,8 @@
         @for (characterSkill of category.value; track characterSkill.id) {
         <app-tooltip>
             <div tooltip-target>
-                <app-bar [label]="characterSkill.skill.name + ' (LVL ' + characterSkill.level + ')'"
+                <app-bar
+                    [label]="characterSkill.skill.name + ' (LVL ' + characterSkill.level + ')' + (characterSkill.bonusLevel ? ' [+' + characterSkill.bonusLevel + ']' : '')"
                     [value]="characterSkill.experience" [max]="characterSkill.experienceNextLevel" color="#8e51ff">
                 </app-bar>
             </div>

@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+#include <Commons/Singleton.h>
+#include <Core/Manager/SkillManager.h>
+
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
 
@@ -54,10 +57,27 @@ void EquipmentSystem::computeEquipmentModifiers( const std::string& sessionId, M
                 }
 
             } else if ( type == "skill" ) {
-                auto* skill = character->skills().skill( targetId );
 
-                if ( skill ) {
-                    skill->modifyBonusLevel( static_cast<int>( value ) );
+                Model::CharacterSkill* characterSkill = character->skills().skill( targetId );
+
+                if ( !characterSkill ) {
+                    Model::CharacterSkill newSkill;
+                    newSkill.setId( targetId );
+                    newSkill.setExperience( 0 );
+                    newSkill.setLevel( 0 );
+                    newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( targetId ) );
+
+                    if ( !newSkill.skill() ) {
+                        std::cerr << "EquipmentSystem::computeEquipmentModifiers Unknown skill id: " << targetId << std::endl;
+                        return;
+                    }
+
+                    character->skills().addSkill( newSkill );
+                    characterSkill = character->skills().skill( targetId );
+                }
+
+                if ( characterSkill ) {
+                    characterSkill->modifyBonusLevel( static_cast<int>( value ) );
 
                 } else {
                     std::cerr << "EquipmentSystem::computeEquipmentModifiers Unknown skill: " << targetId << std::endl;
