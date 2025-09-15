@@ -105,7 +105,6 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
             double reduction = 0.5 + ( 0.005 * shieldLevel );
             reduction = std::clamp( reduction, 0.05, 1.0 );
             damage *= ( 1.0 - reduction );
-            _progressionSystem.applyExperience( sessionId, character, "shield_mastery", damage );
         }
 
     } else {
