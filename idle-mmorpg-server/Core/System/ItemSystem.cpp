@@ -45,7 +45,7 @@ void ItemSystem::characterUseItem( const std::string& sessionId, Model::Characte
 
     QuestSystem::updateItemQuest( sessionId, character );
     NotificationSystem::notifyCharacterInventory( sessionId, character );
-    // NotificationSystem::notifyCharacterEffects( sessionId, character );
+    NotificationSystem::notifyCharacterEffects( sessionId, character );
 }
 
 void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {

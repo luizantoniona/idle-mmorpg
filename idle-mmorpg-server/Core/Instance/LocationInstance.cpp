@@ -6,6 +6,7 @@
 
 #include <Core/Message/MessageSenderType.h>
 #include <Core/System/ActionSystem.h>
+#include <Core/System/EffectSystem.h>
 #include <Core/System/ItemSystem.h>
 #include <Core/System/NotificationSystem.h>
 #include <Core/System/QuestSystem.h>
@@ -135,6 +136,7 @@ void LocationInstance::tick() {
     for ( const auto& [ sessionId, character ] : _characters ) {
 
         Core::System::RegenerationSystem::computeSpellsCooldown( sessionId, character );
+        Core::System::EffectSystem::computeEffects( sessionId, character );
 
         if ( character->action().id() == "combat" ) {
             continue;
