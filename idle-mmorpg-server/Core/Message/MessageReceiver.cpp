@@ -57,6 +57,7 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         case MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
         case MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
         case MessageReceiverType::CHARACTER_EQUIP_ITEM:
+        case MessageReceiverType::CHARACTER_USE_ITEM:
         case MessageReceiverType::CHARACTER_CAST_SPELL:
         case MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
         case MessageReceiverType::CHARACTER_ACTION_UPDATE:

@@ -3,6 +3,8 @@
 #include <iostream>
 
 #include <Commons/JsonHelper.h>
+#include <Commons/Singleton.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 
 namespace Core::Factory {
 
@@ -52,13 +54,30 @@ std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPat
         for ( const auto& bonusJson : bonusesJson ) {
             Model::ItemBonus bonus;
             bonus.setType( bonusJson[ "type" ].asString() );
-            bonus.setId( bonusJson[ "id" ].asString() );
+            bonus.setCategory( bonusJson[ "category" ].asString() );
             bonus.setValue( bonusJson[ "value" ].asDouble() );
 
             bonuses.push_back( bonus );
         }
 
         item->setBonuses( bonuses );
+    }
+
+    if ( itemJson.isMember( "effects" ) && itemJson[ "effects" ].isArray() ) {
+        const Json::Value& effectsJson = itemJson[ "effects" ];
+        std::vector<Model::ItemEffect> effects;
+
+        for ( const auto& effectJson : effectsJson ) {
+            Model::ItemEffect effect;
+            effect.setType( effectJson[ "type" ].asString() );
+            effect.setCategory( effectJson[ "category" ].asString() );
+            effect.setValue( effectJson[ "value" ].asDouble() );
+            effect.setDuration( effectJson[ "duration" ].asInt() * Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() );
+
+            effects.push_back( effect );
+        }
+
+        item->setEffects( effects );
     }
 
     return item;

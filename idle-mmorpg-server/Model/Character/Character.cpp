@@ -91,6 +91,14 @@ void Character::setCoordinates( const CharacterCoordinates& coordinates ) {
     _coordinates = coordinates;
 }
 
+CharacterEffects& Character::effects() {
+    return _effects;
+}
+
+void Character::setEffects( const CharacterEffects& effects ) {
+    _effects = effects;
+}
+
 CharacterEquipment& Character::equipment() {
     return _equipment;
 }

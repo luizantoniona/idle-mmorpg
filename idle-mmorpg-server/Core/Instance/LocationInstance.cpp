@@ -6,7 +6,7 @@
 
 #include <Core/Message/MessageSenderType.h>
 #include <Core/System/ActionSystem.h>
-#include <Core/System/EquipmentSystem.h>
+#include <Core/System/ItemSystem.h>
 #include <Core/System/NotificationSystem.h>
 #include <Core/System/QuestSystem.h>
 #include <Core/System/RegenerationSystem.h>
@@ -42,7 +42,7 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Model::Charac
     Core::System::NotificationSystem::notifyLocationConnections( sessionId, character, _location );
     Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
 
-    Core::System::EquipmentSystem::computeEquipmentModifiers( sessionId, character );
+    Core::System::ItemSystem::computeEquipmentModifiers( sessionId, character );
 
     return true;
 }
@@ -208,7 +208,10 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
             break;
 
         case Message::MessageReceiverType::CHARACTER_EQUIP_ITEM:
-            Core::System::EquipmentSystem::characterEquipItem( sessionId, character, payload );
+            Core::System::ItemSystem::characterEquipItem( sessionId, character, payload );
+            break;
+        case Message::MessageReceiverType::CHARACTER_USE_ITEM:
+            Core::System::ItemSystem::characterUseItem( sessionId, character, payload );
             break;
         case Message::MessageReceiverType::CHARACTER_CAST_SPELL: {
             std::string spellType = payload["type"].asString();

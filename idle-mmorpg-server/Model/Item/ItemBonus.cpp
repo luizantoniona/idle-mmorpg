@@ -3,14 +3,16 @@
 namespace Model {
 
 ItemBonus::ItemBonus() :
-    _id( "" ),
-    _value( 0.0 ) {}
+    _type( "" ),
+    _category( "" ),
+    _value( 0.0 ) {
+}
 
 Json::Value ItemBonus::toJson() {
     Json::Value root;
-    root[ "id" ] = id();
+    root[ "type" ] = type();
+    root[ "category" ] = category();
     root[ "value" ] = value();
-
     return root;
 }
 
@@ -22,12 +24,12 @@ void ItemBonus::setType( const std::string& type ) {
     _type = type;
 }
 
-std::string ItemBonus::id() const {
-    return _id;
+std::string ItemBonus::category() const {
+    return _category;
 }
 
-void ItemBonus::setId( const std::string& id ) {
-    _id = id;
+void ItemBonus::setCategory( const std::string& category ) {
+    _category = category;
 }
 
 double ItemBonus::value() const {

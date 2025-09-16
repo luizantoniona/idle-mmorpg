@@ -7,6 +7,7 @@
 #include <json/json.h>
 
 #include "ItemBonus.h"
+#include "ItemEffect.h"
 
 namespace Model {
 
@@ -44,6 +45,10 @@ public:
     void setBonuses( const std::vector<ItemBonus>& bonuses );
     void addBonus( const ItemBonus& bonus );
 
+    std::vector<ItemEffect> effects() const;
+    void setEffects( const std::vector<ItemEffect>& effects );
+    void addEffect( const ItemEffect& effect );
+
 private:
     std::string _id;
     std::string _type;
@@ -54,6 +59,7 @@ private:
     std::string _icon;
     int _price;
     std::vector<ItemBonus> _bonuses;
+    std::vector<ItemEffect> _effects;
 };
 
 } // namespace Model

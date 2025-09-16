@@ -11,7 +11,9 @@ Item::Item() :
     _rarity( "" ),
     _icon( "" ),
     _price( 0 ),
-    _bonuses( {} ) {}
+    _bonuses( {} ),
+    _effects( {} ) {
+}
 
 Json::Value Item::toJson() const {
     Json::Value root;
@@ -24,8 +26,12 @@ Json::Value Item::toJson() const {
     root[ "icon" ] = icon();
     root[ "price" ] = price();
 
-    for ( auto& bonus : bonuses() ) {
+    for ( ItemBonus& bonus : bonuses() ) {
         root[ "bonuses" ].append( bonus.toJson() );
+    }
+
+    for ( ItemEffect& effect : effects() ) {
+        root[ "effects" ].append( effect.toJson() );
     }
 
     return root;
@@ -105,6 +111,18 @@ void Item::setBonuses( const std::vector<ItemBonus>& bonuses ) {
 
 void Item::addBonus( const ItemBonus& bonus ) {
     _bonuses.push_back( bonus );
+}
+
+std::vector<ItemEffect> Item::effects() const {
+    return _effects;
+}
+
+void Item::setEffects( const std::vector<ItemEffect>& effects ) {
+    _effects = effects;
+}
+
+void Item::addEffect( const ItemEffect& effect ) {
+    _effects.push_back( effect );
 }
 
 } // namespace Model

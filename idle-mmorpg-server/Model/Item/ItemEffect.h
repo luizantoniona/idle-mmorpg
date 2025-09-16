@@ -1,17 +1,15 @@
-#ifndef ITEMBONUS_H
-#define ITEMBONUS_H
-
-#include <string>
+#ifndef ITEMEFFECT_H
+#define ITEMEFFECT_H
 
 #include <json/json.h>
 
 namespace Model {
 
-class ItemBonus {
+class ItemEffect {
 public:
-    ItemBonus();
+    ItemEffect();
 
-    Json::Value toJson();
+    Json::Value toJson() const;
 
     std::string type() const;
     void setType( const std::string& type );
@@ -22,12 +20,16 @@ public:
     double value() const;
     void setValue( double value );
 
+    int duration() const;
+    void setDuration( int duration );
+
 private:
     std::string _type;
     std::string _category;
     double _value;
+    int _duration;
 };
 
 } // namespace Model
 
-#endif // ITEMBONUS_H
+#endif // ITEMEFFECT_H
