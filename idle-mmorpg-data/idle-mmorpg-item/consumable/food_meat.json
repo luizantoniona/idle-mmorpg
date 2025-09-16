@@ -7,5 +7,18 @@
     "icon": "consumable/food_meat.gif",
     "rarity": "common",
     "price": 5,
-    "modifiers": []
+    "effects": [
+        {
+            "type": "vital",
+            "category": "health",
+            "value": 2,
+            "duration": 10
+        },
+        {
+            "type": "vital",
+            "category": "stamina",
+            "value": 2,
+            "duration": 10
+        }
+    ]
 }

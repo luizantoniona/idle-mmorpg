@@ -6,6 +6,5 @@
     "description": "Simple log of wood. Used in crafting.",
     "icon": "diverse/wood.gif",
     "rarity": "common",
-    "price": 2,
-    "bonus": []
+    "price": 2
 }

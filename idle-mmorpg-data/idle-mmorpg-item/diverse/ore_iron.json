@@ -6,6 +6,5 @@
     "description": "A basic metal ore commonly mined from rocks. Used for creating ingots.",
     "icon": "diverse/ore_iron.gif",
     "rarity": "common",
-    "price": 2,
-    "bonus": []
+    "price": 2
 }

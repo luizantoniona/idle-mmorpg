@@ -7,5 +7,18 @@
     "icon": "consumable/food_cheese.gif",
     "rarity": "common",
     "price": 5,
-    "modifiers": []
+    "effects": [
+        {
+            "type": "vital",
+            "category": "health",
+            "value": 1,
+            "duration": 10
+        },
+        {
+            "type": "vital",
+            "category": "stamina",
+            "value": 1,
+            "duration": 10
+        }
+    ]
 }

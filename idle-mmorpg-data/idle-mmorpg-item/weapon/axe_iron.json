@@ -10,7 +10,7 @@
     "bonus": [
         {
             "type": "combat",
-            "id": "attack",
+            "category": "attack",
             "value": 1
         }
     ]

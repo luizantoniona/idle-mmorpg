@@ -10,7 +10,7 @@
     "bonus": [
         {
             "type": "skill",
-            "id": "woodcutting",
+            "category": "woodcutting",
             "value": 1
         }
     ]
