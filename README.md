@@ -93,7 +93,7 @@ Game Page:
 
 Combat:
 <p align="left">
-  <img src="documentation/images/05_combat.png" alt="Game" height="500"/>
+  <img src="documentation/images/04_combat.png" alt="Game" height="500"/>
 </p>
 
 # 🚀 Running

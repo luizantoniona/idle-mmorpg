@@ -19,6 +19,12 @@
             "category": "stamina",
             "value": 1,
             "duration": 10
+        },
+        {
+            "type": "vital",
+            "category": "mana",
+            "value": 1,
+            "duration": 10
         }
     ]
 }
