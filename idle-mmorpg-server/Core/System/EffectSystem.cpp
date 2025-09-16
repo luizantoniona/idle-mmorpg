@@ -11,6 +11,11 @@ namespace Core::System {
 
 void EffectSystem::computeEffects( const std::string& sessionId, Model::Character* character ) {
     auto& effects = character->effects().effects();
+
+    if ( effects.empty() ) {
+        return;
+    }
+
     auto& vitals = character->vitals();
 
     const int tickRate = Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate();
@@ -67,9 +72,7 @@ void EffectSystem::computeEffects( const std::string& sessionId, Model::Characte
         NotificationSystem::notifyCharacterVitals( sessionId, character );
     }
 
-    // if ( !expiredEffects.empty() ) {
-    //     NotificationSystem::notifyCharacterEffects( sessionId, character );
-    // }
+    NotificationSystem::notifyCharacterEffects( sessionId, character );
 }
 
 } // namespace Core::System
