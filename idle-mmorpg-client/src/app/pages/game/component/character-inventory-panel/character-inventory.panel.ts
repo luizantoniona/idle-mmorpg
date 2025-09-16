@@ -1,15 +1,20 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, inject } from "@angular/core";
 
+import { ButtonComponent } from "../../../../component";
 import { PanelComponent } from "../../../../component";
 import { TooltipComponent } from "../../../../component";
 
 import { Character } from "../../../../model";
+import { Item } from "../../../../model";
+
+import { WebsocketService } from "../../../../service/websocket.service";
 
 @Component({
     selector: "app-character-inventory-panel",
     templateUrl: "./character-inventory.panel.html",
     styleUrls: ["./character-inventory.panel.scss"],
     imports: [
+        ButtonComponent,
         PanelComponent,
         TooltipComponent
     ],
@@ -17,4 +22,19 @@ import { Character } from "../../../../model";
 
 export class CharacterInventoryPanel {
     @Input() character!: Character;
+
+    private websocketService = inject(WebsocketService);
+
+    sendMessage(data: any): void {
+        this.websocketService.send(data);
+    }
+
+    useItem(item: Item | null) {
+        this.sendMessage({
+            type: "CHARACTER_USE_ITEM",
+            payload: {
+                itemId: item ? item.id : ""
+            }
+        });
+    }
 }
