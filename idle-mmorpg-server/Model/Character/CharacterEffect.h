@@ -11,8 +11,11 @@ public:
 
     Json::Value toJson();
 
-    std::string id() const;
-    void setId( const std::string& id );
+    std::string source() const;
+    void setSource( const std::string& source );
+
+    std::string sourceName() const;
+    void setSourceName( const std::string& sourceName );
 
     std::string type() const;
     void setType( const std::string& type );
@@ -30,7 +33,8 @@ public:
     void setCounter( int counter );
 
 private:
-    std::string _id;
+    std::string _source;
+    std::string _sourceName;
     std::string _type;
     std::string _category;
     double _value;

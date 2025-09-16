@@ -3,7 +3,8 @@
 namespace Model {
 
 CharacterEffect::CharacterEffect() :
-    _id( "" ),
+    _source( "" ),
+    _sourceName( "" ),
     _type( "" ),
     _category( "" ),
     _value( 0.0 ),
@@ -13,15 +14,30 @@ CharacterEffect::CharacterEffect() :
 
 Json::Value Model::CharacterEffect::toJson() {
     Json::Value root;
+    root[ "source" ] = source();
+    root[ "sourceName" ] = sourceName();
+    root[ "type" ] = type();
+    root[ "category" ] = category();
+    root[ "value" ] = value();
+    root[ "duration" ] = duration();
+    root[ "counter" ] = counter();
     return root;
 }
 
-std::string CharacterEffect::id() const {
-    return _id;
+std::string CharacterEffect::source() const {
+    return _source;
 }
 
-void CharacterEffect::setId( const std::string& id ) {
-    _id = id;
+void CharacterEffect::setSource( const std::string& source ) {
+    _source = source;
+}
+
+std::string CharacterEffect::sourceName() const {
+    return _sourceName;
+}
+
+void CharacterEffect::setSourceName( const std::string& sourceName ) {
+    _sourceName = sourceName;
 }
 
 std::string CharacterEffect::type() const {

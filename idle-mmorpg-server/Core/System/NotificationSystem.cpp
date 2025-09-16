@@ -12,6 +12,7 @@ void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Mode
     characterJson[ "coordinates" ] = character->coordinates().toJson();
     characterJson[ "inventory" ] = character->inventory().toJson();
     characterJson[ "equipment" ] = character->equipment().toJson();
+    characterJson[ "effects" ] = character->effects().toJson();
     characterJson[ "progression" ] = character->progression().toJson();
     characterJson[ "quests" ] = character->quests().toJson();
     characterJson[ "skills" ] = character->skills().toJson();

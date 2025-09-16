@@ -113,6 +113,15 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'CHARACTER_EFFECTS_UPDATE':
+                if (Array.isArray(data.payload?.effects)) {
+                    this.character = {
+                        ...this.character!,
+                        effects: data.payload.effects,
+                    };
+                }
+                break;
+
             case 'CHARACTER_EQUIPMENT_UPDATE':
                 if (data.payload?.equipment) {
                     this.character = {

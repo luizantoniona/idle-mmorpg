@@ -3,6 +3,7 @@ export type { CharacterAction } from "./character/character-action.model";
 export type { CharacterAttributes } from "./character/character-attributes.model";
 export type { CharacterCombatAction } from "./character/character-combat-action.model";
 export type { CharacterCoordinates } from "./character/character-coordinates.model"
+export type { CharacterEffect } from "./character/character-effect.model";
 export type { CharacterEquipment } from "./character/character-equipment.model";
 export type { CharacterInventory } from "./character/character-inventory.model";
 export type { CharacterProgression } from "./character/character-progression.model";

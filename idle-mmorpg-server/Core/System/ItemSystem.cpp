@@ -31,7 +31,8 @@ void ItemSystem::characterUseItem( const std::string& sessionId, Model::Characte
 
         for ( const Model::ItemEffect& itemEffect : itemToUse->item()->effects() ) {
             Model::CharacterEffect effect;
-            effect.setId( itemToUse->id() );
+            effect.setSource( itemToUse->id() );
+            effect.setSourceName( itemToUse->item()->name() );
             effect.setType( itemEffect.type() );
             effect.setCategory( itemEffect.category() );
             effect.setValue( itemEffect.value() );
