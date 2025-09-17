@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
+#include <Helper/JsonHelper.h>
 
 namespace Core::Factory {
 
@@ -11,7 +11,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Creature> > CreatureFacto
 
     std::unordered_map<std::string, std::unique_ptr<Model::Creature> > creatures;
 
-    Json::Value creaturesConfig = Commons::JsonHelper::loadJsonFile( creaturesPath + "creatures.json" );
+    Json::Value creaturesConfig = Helper::JsonHelper::loadJsonFile( creaturesPath + "creatures.json" );
 
     for ( const auto& typeEntry : creaturesConfig[ "types" ] ) {
 
@@ -42,7 +42,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Creature> > CreatureFacto
 std::unique_ptr<Model::Creature> CreatureFactory::createCreature( const std::string& creaturePath ) {
     std::cout << "CreatureFactory::createCreature: " << creaturePath << std::endl;
 
-    Json::Value creatureJson = Commons::JsonHelper::loadJsonFile( creaturePath );
+    Json::Value creatureJson = Helper::JsonHelper::loadJsonFile( creaturePath );
 
     auto creature = std::make_unique<Model::Creature>();
     creature->setName( creatureJson[ "name" ].asString() );

@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include <Commons/LocationHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/QuestManager.h>
+#include <Helper/LocationHelper.h>
 
 #include "LootSystem.h"
 #include "NotificationSystem.h"
@@ -18,7 +18,7 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
     bool found = false;
     Model::Denizen denizenToAccept;
     for ( auto& denizen : location->denizens() ) {
-        if ( denizenId == denizen.id() && Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             denizenToAccept = denizen;
             found = true;
             break;
@@ -81,7 +81,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
     bool found = false;
     Model::Denizen denizenToFinish;
     for ( auto& denizen : location->denizens() ) {
-        if ( denizenId == denizen.id() && Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             denizenToFinish = denizen;
             found = true;
             break;

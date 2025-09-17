@@ -4,7 +4,7 @@
 #include <Model/Character/Character.h>
 #include <Model/World/Location/Location.h>
 
-namespace Commons {
+namespace Helper {
 
 class LocationHelper {
 public:
@@ -14,6 +14,6 @@ public:
     static bool canCharacterSeeDenizenQuest( Model::Character* character, const Model::DenizenQuest& quest );
 };
 
-} // namespace Commons
+} // namespace Helper
 
 #endif // LOCATIONHELPER_H

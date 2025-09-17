@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-#include <Commons/LevelExperienceHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 #include <Core/System/NotificationSystem.h>
+#include <Helper/LevelExperienceHelper.h>
 
 namespace Core::System {
 
@@ -35,7 +35,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
     }
 
     int newXp = characterSkill->experience() + xpGained;
-    int xpNeeded = Commons::LevelExperienceHelper::experienceForNextLevel( characterSkill->level() );
+    int xpNeeded = Helper::LevelExperienceHelper::experienceForNextLevel( characterSkill->level() );
 
     if ( newXp >= xpNeeded ) {
         characterSkill->setLevel( characterSkill->level() + 1 );
@@ -128,7 +128,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
     auto& progression = character->progression();
 
     int newXp = progression.experience() + xpGained;
-    int xpNeeded = Commons::LevelExperienceHelper::experienceForNextLevel( progression.level() );
+    int xpNeeded = Helper::LevelExperienceHelper::experienceForNextLevel( progression.level() );
 
     if ( newXp >= xpNeeded ) {
         progression.setLevel( progression.level() + 1 );

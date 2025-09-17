@@ -2,11 +2,11 @@
 
 #include <algorithm>
 
-#include <Commons/LocationHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/ServerConfigurationManager.h>
 #include <Core/Manager/SkillManager.h>
 #include <Core/System/QuestSystem.h>
+#include <Helper/LocationHelper.h>
 
 #include "NotificationSystem.h"
 
@@ -50,7 +50,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
 
     const Model::LocationAction& selectedAction = *it;
 
-    if ( !Commons::LocationHelper::canCharacterPerformAction( character, selectedAction ) ) {
+    if ( !Helper::LocationHelper::canCharacterPerformAction( character, selectedAction ) ) {
         return;
     }
 

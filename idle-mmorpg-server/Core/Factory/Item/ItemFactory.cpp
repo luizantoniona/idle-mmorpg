@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/ServerConfigurationManager.h>
+#include <Helper/JsonHelper.h>
 
 namespace Core::Factory {
 
@@ -13,7 +13,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
 
     std::unordered_map<std::string, std::unique_ptr<Model::Item> > items;
 
-    Json::Value itemsConfig = Commons::JsonHelper::loadJsonFile( itemsPath + "items.json" );
+    Json::Value itemsConfig = Helper::JsonHelper::loadJsonFile( itemsPath + "items.json" );
 
     for ( const auto& itemEntry : itemsConfig[ "items" ] ) {
         std::string itemFilePath = itemsPath + itemEntry.asString() + ".json";
@@ -35,7 +35,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Item> > ItemFactory::crea
 std::unique_ptr<Model::Item> ItemFactory::createItem( const std::string& itemPath ) {
     std::cout << "ItemFactory::createItem: " << itemPath << std::endl;
 
-    Json::Value itemJson = Commons::JsonHelper::loadJsonFile( itemPath );
+    Json::Value itemJson = Helper::JsonHelper::loadJsonFile( itemPath );
 
     auto item = std::make_unique<Model::Item>();
     item->setId( itemJson[ "id" ].asString() );

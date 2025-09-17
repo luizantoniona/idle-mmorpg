@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/ServerConfigurationManager.h>
+#include <Helper/JsonHelper.h>
 
 namespace Core::Factory {
 
@@ -13,7 +13,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Spell> > SpellFactory::cr
 
     std::unordered_map<std::string, std::unique_ptr<Model::Spell> > spells;
 
-    Json::Value spellsConfig = Commons::JsonHelper::loadJsonFile( spellsPath + "spells.json" );
+    Json::Value spellsConfig = Helper::JsonHelper::loadJsonFile( spellsPath + "spells.json" );
 
     for ( const auto& spellEntry : spellsConfig[ "spells" ] ) {
         std::string spellFilePath = spellsPath + spellEntry.asString() + ".json";
@@ -35,7 +35,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Spell> > SpellFactory::cr
 std::unique_ptr<Model::Spell> SpellFactory::createSpell( const std::string& spellPath ) {
     std::cout << "SpellFactory::createSpell Spell: " << spellPath << std::endl;
 
-    Json::Value spellJson = Commons::JsonHelper::loadJsonFile( spellPath );
+    Json::Value spellJson = Helper::JsonHelper::loadJsonFile( spellPath );
 
     auto spell = std::make_unique<Model::Spell>();
 

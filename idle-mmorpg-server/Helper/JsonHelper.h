@@ -5,7 +5,7 @@
 
 #include <json/json.h>
 
-namespace Commons {
+namespace Helper {
 
 class JsonHelper {
 public:
@@ -13,6 +13,6 @@ public:
     static Json::Value parseJsonString( const std::string& content );
 };
 
-} // namespace Commons
+} // namespace Helper
 
 #endif // JSONHELPER_H

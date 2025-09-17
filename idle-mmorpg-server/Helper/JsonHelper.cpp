@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 
-namespace Commons {
+namespace Helper {
 
-Json::Value Commons::JsonHelper::loadJsonFile( const std::string& path ) {
+Json::Value JsonHelper::loadJsonFile( const std::string& path ) {
     std::ifstream file( path );
     if ( !file.is_open() ) {
         std::cerr << "JsonHelper::loadJsonFile Could not open file: " << path << std::endl;
@@ -31,4 +31,4 @@ Json::Value JsonHelper::parseJsonString( const std::string& content ) {
     return jsonData;
 }
 
-} // namespace Commons
+} // namespace Helper

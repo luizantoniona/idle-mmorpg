@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include <Commons/DecimalHelper.h>
 #include <Core/System/NotificationSystem.h>
 #include <Core/System/ProgressionSystem.h>
+#include <Helper/DecimalHelper.h>
 
 namespace Core::System {
 
@@ -26,19 +26,19 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
     const double staminaRegen = std::max( 1.0, character->attributes().dexterity() );
     const double manaRegen = std::max( 1.0, character->attributes().intelligence() );
 
-    double newHealth = characterVitals.health() + Commons::DecimalHelper::roundDecimals( healthRegen );
+    double newHealth = characterVitals.health() + Helper::DecimalHelper::roundDecimals( healthRegen );
     if ( newHealth > characterVitals.maxHealth() ) {
         newHealth = characterVitals.maxHealth();
     }
     characterVitals.setHealth( newHealth );
 
-    double newStamina = characterVitals.stamina() + Commons::DecimalHelper::roundDecimals( staminaRegen );
+    double newStamina = characterVitals.stamina() + Helper::DecimalHelper::roundDecimals( staminaRegen );
     if ( newStamina > characterVitals.maxStamina() ) {
         newStamina = characterVitals.maxStamina();
     }
     characterVitals.setStamina( newStamina );
 
-    double newMana = characterVitals.mana() + Commons::DecimalHelper::roundDecimals( manaRegen );
+    double newMana = characterVitals.mana() + Helper::DecimalHelper::roundDecimals( manaRegen );
     if ( newMana > characterVitals.maxMana() ) {
         newMana = characterVitals.maxMana();
     }

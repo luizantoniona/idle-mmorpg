@@ -1,10 +1,8 @@
 #include "CombatSystem.h"
 
 #include <algorithm>
-#include <cmath>
 #include <iostream>
 
-#include <Commons/DecimalHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/ServerConfigurationManager.h>
 

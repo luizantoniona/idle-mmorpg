@@ -1,6 +1,6 @@
 #include "CharacterProgression.h"
 
-#include <Commons/LevelExperienceHelper.h>
+#include <Helper/LevelExperienceHelper.h>
 
 namespace Model {
 
@@ -12,7 +12,7 @@ Json::Value CharacterProgression::toJson() {
     Json::Value root;
     root[ "level" ] = level();
     root[ "experience" ] = experience();
-    root[ "experienceNextLevel" ] = Commons::LevelExperienceHelper::experienceForNextLevel( level() );
+    root[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
     return root;
 }
 

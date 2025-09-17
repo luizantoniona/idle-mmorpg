@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
+#include <Helper/JsonHelper.h>
 
 #include "LocationFactory.h"
 
@@ -14,7 +14,7 @@ std::unique_ptr<Model::Region> RegionFactory::createRegion( const std::string& r
     auto region = std::make_unique<Model::Region>();
     region->setId( regionName );
 
-    Json::Value regionConfig = Commons::JsonHelper::loadJsonFile( regionPath + "region.json" );
+    Json::Value regionConfig = Helper::JsonHelper::loadJsonFile( regionPath + "region.json" );
 
     if ( regionConfig.isMember( "name" ) ) {
         region->setName( regionConfig["name"].asString() );

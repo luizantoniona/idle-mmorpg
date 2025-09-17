@@ -1,6 +1,6 @@
 #include "TradeSystem.h"
 
-#include <Commons/LocationHelper.h>
+#include <Helper/LocationHelper.h>
 
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
@@ -13,7 +13,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
     bool found = false;
     Model::Denizen denizenToTrade;
     for ( auto& denizen : location->denizens() ) {
-        if ( denizenId == denizen.id() && Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             denizenToTrade = denizen;
             found = true;
             break;

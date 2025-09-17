@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
+#include <Helper/JsonHelper.h>
 
 namespace Core::Factory {
 
@@ -13,7 +13,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Skill> > SkillFactory::cr
 
     std::unordered_map<std::string, std::unique_ptr<Model::Skill> > skills;
 
-    Json::Value skillsConfig = Commons::JsonHelper::loadJsonFile( skillsPath + "skills.json" );
+    Json::Value skillsConfig = Helper::JsonHelper::loadJsonFile( skillsPath + "skills.json" );
 
     for ( const auto& skillEntry : skillsConfig["skills"] ) {
         std::string skillPath = skillsPath + skillEntry.asString() + ".json";
@@ -34,7 +34,7 @@ std::unordered_map<std::string, std::unique_ptr<Model::Skill> > SkillFactory::cr
 std::unique_ptr<Model::Skill> SkillFactory::createSkill( const std::string& skillPath ) {
     std::cout << "SkillFactory::createSkill Skill: " << skillPath << std::endl;
 
-    Json::Value skillJson = Commons::JsonHelper::loadJsonFile( skillPath );
+    Json::Value skillJson = Helper::JsonHelper::loadJsonFile( skillPath );
 
     auto skill = std::make_unique<Model::Skill>();
 

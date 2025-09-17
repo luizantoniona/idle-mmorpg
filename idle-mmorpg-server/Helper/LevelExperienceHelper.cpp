@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-namespace Commons {
+namespace Helper {
 
 int LevelExperienceHelper::experienceForNextLevel( int currentLevel ) {
     const double baseXp = 100.0;
@@ -10,4 +10,4 @@ int LevelExperienceHelper::experienceForNextLevel( int currentLevel ) {
     return baseXp * std::pow( growthRate, currentLevel );
 }
 
-} // namespace Commons
+} // namespace Helper

@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Instance/LocationInstance.h>
 #include <Core/Instance/RegionInstance.h>
 #include <Core/Instance/WorldInstance.h>
 #include <Core/Manager/WorldManager.h>
+#include <Helper/JsonHelper.h>
 
 #include "MessageHelper.h"
 
@@ -41,7 +41,7 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
 
     std::cout << "Message received from: " << sessionId << " Message: " << message << std::endl;
 
-    Json::Value root = Commons::JsonHelper::parseJsonString( message );
+    Json::Value root = Helper::JsonHelper::parseJsonString( message );
     if ( root.isNull() || !root.isObject() ) {
         return;
     }

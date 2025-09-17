@@ -1,13 +1,13 @@
 #ifndef LEVELEXPERIENCEHELPER_H
 #define LEVELEXPERIENCEHELPER_H
 
-namespace Commons {
+namespace Helper {
 
 class LevelExperienceHelper {
 public:
     static int experienceForNextLevel( int currentLevel );
 };
 
-} // namespace Commons
+} // namespace Helper
 
 #endif // LEVELEXPERIENCEHELPER_H

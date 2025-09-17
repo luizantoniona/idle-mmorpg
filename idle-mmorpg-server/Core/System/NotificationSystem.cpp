@@ -1,7 +1,7 @@
 #include "NotificationSystem.h"
 
-#include <Commons/LocationHelper.h>
 #include <Core/Message/MessageSender.h>
+#include <Helper/LocationHelper.h>
 
 namespace Core::System {
 
@@ -110,7 +110,7 @@ void NotificationSystem::notifyLocationActions( const std::string& sessionId, Mo
     Json::Value availableActions;
 
     for ( auto action : location->actions() ) {
-        if ( Commons::LocationHelper::canCharacterPerformAction( character, action ) ) {
+        if ( Helper::LocationHelper::canCharacterPerformAction( character, action ) ) {
             availableActions.append( action.toJson() );
         }
     }
@@ -124,7 +124,7 @@ void NotificationSystem::notifyLocationConnections( const std::string& sessionId
     Json::Value availableConnections;
 
     for ( auto connection : location->connections() ) {
-        if ( Commons::LocationHelper::canCharacterUseConnections( character, connection ) ) {
+        if ( Helper::LocationHelper::canCharacterUseConnections( character, connection ) ) {
             availableConnections.append( connection.toJson() );
         }
     }
@@ -138,12 +138,12 @@ void NotificationSystem::notifyLocationDenizens( const std::string& sessionId, M
     Json::Value availableDenizens;
 
     for ( auto denizen : location->denizens() ) {
-        if ( Commons::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             Json::Value denizenJson = denizen.toJson();
 
             Json::Value availableQuests;
             for ( const auto& quest : denizen.quests() ) {
-                if ( Commons::LocationHelper::canCharacterSeeDenizenQuest( character, quest ) ) {
+                if ( Helper::LocationHelper::canCharacterSeeDenizenQuest( character, quest ) ) {
                     availableQuests.append( quest.toJson() );
                 }
             }

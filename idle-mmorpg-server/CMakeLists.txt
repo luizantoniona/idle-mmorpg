@@ -9,6 +9,7 @@ file(GLOB_RECURSE SOURCES
     Commons/*.cpp
     Core/*.cpp
     Database/*.cpp
+    Helper/*.cpp
     Model/*.cpp
     Network/*.cpp
     Repository/*.cpp
@@ -18,6 +19,7 @@ file(GLOB_RECURSE HEADERS
     Commons/*.h
     Core/*.h
     Database/*.h
+    Helper/*.h
     Model/*.h
     Network/*.h
     Repository/*.h

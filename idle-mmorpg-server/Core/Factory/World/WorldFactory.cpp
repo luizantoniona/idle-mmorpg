@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
+#include <Helper/JsonHelper.h>
 
 #include "RegionFactory.h"
 
@@ -13,7 +13,7 @@ std::unique_ptr<Model::World> WorldFactory::createWorld( const std::string& mapP
 
     std::unique_ptr<Model::World> world = std::make_unique<Model::World>();
 
-    Json::Value worldConfig = Commons::JsonHelper::loadJsonFile( mapPath + "world.json" );
+    Json::Value worldConfig = Helper::JsonHelper::loadJsonFile( mapPath + "world.json" );
 
     if ( !worldConfig.isMember( "regions" ) || !worldConfig[ "regions" ].isArray() ) {
         return nullptr;
