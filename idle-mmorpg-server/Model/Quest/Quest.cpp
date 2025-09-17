@@ -70,15 +70,15 @@ void Quest::setAmount( int amount ) {
     _amount = amount;
 }
 
-std::vector<QuestRequirement> Quest::requirements() const {
+std::vector<Requirement> Quest::requirements() const {
     return _requirements;
 }
 
-void Quest::setRequirements( const std::vector<QuestRequirement>& requirements ) {
+void Quest::setRequirements( const std::vector<Requirement>& requirements ) {
     _requirements = requirements;
 }
 
-void Quest::addRequirement( const QuestRequirement& requirement ) {
+void Quest::addRequirement( const Requirement& requirement ) {
     _requirements.push_back( requirement );
 }
 

@@ -12,6 +12,12 @@ public:
     static bool canCharacterUseConnections( Model::Character* character, const Model::LocationConnection& connection );
     static bool canCharacterInteractDenizen( Model::Character* character, const Model::Denizen& denizen );
     static bool canCharacterSeeDenizenQuest( Model::Character* character, const Model::DenizenQuest& quest );
+
+private:
+    static bool checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement );
+    static bool checkItemRequirement( Model::Character* character, const Model::Requirement& requirement );
+    static bool checkEquipmentRequirement( Model::Character* character, const Model::Requirement& requirement );
+    static bool checkQuestRequirement( Model::Character* character, const Model::Requirement& requirement );
 };
 
 } // namespace Helper

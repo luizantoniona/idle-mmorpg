@@ -2,15 +2,15 @@
 
 #include <iostream>
 
-#include <Commons/JsonHelper.h>
 #include <Commons/Singleton.h>
 #include <Core/Manager/CreatureManager.h>
 #include <Core/Manager/ItemManager.h>
 #include <Core/Manager/QuestManager.h>
 #include <Core/Manager/ServerConfigurationManager.h>
+#include <Helper/JsonHelper.h>
+#include <Helper/RequirementHelper.h>
 #include <Model/World/Location/LocationAction.h>
 #include <Model/World/Location/LocationActionExperience.h>
-#include <Model/World/Location/LocationActionRequirement.h>
 
 namespace Core::Factory {
 
@@ -18,7 +18,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     std::cout << "LocationFactory::createLocation Creating Location: " << locationName << std::endl;
 
     std::string locationJsonPath = locationPath + "/location.json";
-    Json::Value locationJson = Commons::JsonHelper::loadJsonFile( locationJsonPath );
+    Json::Value locationJson = Helper::JsonHelper::loadJsonFile( locationJsonPath );
     auto location = std::make_unique<Model::Location>();
 
     location->setId( locationJson[ "id" ].asString() );
@@ -38,8 +38,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
 
         Json::Value requirementsJson = connectionJson["requirements"];
         for ( const Json::Value& reqJson : requirementsJson ) {
-            Model::LocationConnectionRequirement requirement;
-            requirement.setType( reqJson[ "type" ].asString() );
+            Model::Requirement requirement;
+            requirement.setType( Helper::RequirementHelper::stringToEnum( reqJson[ "type" ].asString() ) );
             requirement.setId( reqJson[ "id" ].asString() );
             connection.addRequirement( requirement );
         }
@@ -48,7 +48,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     }
 
     std::string actionsJsonPath = locationPath + "/actions.json";
-    Json::Value actionsJson = Commons::JsonHelper::loadJsonFile( actionsJsonPath );
+    Json::Value actionsJson = Helper::JsonHelper::loadJsonFile( actionsJsonPath );
     for ( const Json::Value& actionJson : actionsJson[ "actions" ] ) {
         Model::LocationAction action;
         action.setId( actionJson[ "id" ].asString() );
@@ -58,9 +58,9 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
         action.setDuration( actionJson[ "duration" ].asInt() * Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() );
 
         for ( const Json::Value& requirementJson : actionJson[ "requirements" ] ) {
-            Model::LocationActionRequirement requirement;
+            Model::Requirement requirement;
+            requirement.setType( Helper::RequirementHelper::stringToEnum( requirementJson[ "type" ].asString() ) );
             requirement.setId( requirementJson[ "id" ].asString() );
-            requirement.setType( requirementJson[ "type" ].asString() );
             requirement.setAmount( requirementJson[ "amount" ].asInt() );
             action.addRequirement( requirement );
         }
@@ -86,7 +86,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     }
 
     std::string structuresJsonPath = locationPath + "/structures.json";
-    Json::Value structuresJson = Commons::JsonHelper::loadJsonFile( structuresJsonPath );
+    Json::Value structuresJson = Helper::JsonHelper::loadJsonFile( structuresJsonPath );
     for ( const Json::Value& structureJson : structuresJson[ "structures" ] ) {
         Model::LocationStructure structure;
         structure.setId( structureJson[ "id" ].asString() );
@@ -99,7 +99,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     }
 
     std::string creaturesJsonPath = locationPath + "/creatures.json";
-    Json::Value creaturesJson = Commons::JsonHelper::loadJsonFile( creaturesJsonPath );
+    Json::Value creaturesJson = Helper::JsonHelper::loadJsonFile( creaturesJsonPath );
     for ( const Json::Value& creatureJson : creaturesJson[ "creatures" ] ) {
         Model::LocationCreature creature;
         creature.setId( creatureJson[ "id" ].asString() );
@@ -112,7 +112,7 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
     }
 
     std::string denizensJsonPath = locationPath + "/denizens.json";
-    Json::Value denizensJson = Commons::JsonHelper::loadJsonFile( denizensJsonPath );
+    Json::Value denizensJson = Helper::JsonHelper::loadJsonFile( denizensJsonPath );
     for ( const Json::Value& denizenJson : denizensJson[ "denizens" ] ) {
         Model::Denizen denizen;
         denizen.setId( denizenJson[ "id" ].asString() );
@@ -140,8 +140,8 @@ std::unique_ptr<Model::Location> LocationFactory::createLocation( const std::str
             quest->setAmount( questJson[ "amount" ].asInt() );
 
             for ( const Json::Value& requirementJson : questJson[ "requirements" ] ) {
-                Model::QuestRequirement requirement;
-                requirement.setType( requirementJson[ "type" ].asString() );
+                Model::Requirement requirement;
+                requirement.setType( Helper::RequirementHelper::stringToEnum( requirementJson[ "type" ].asString() ) );
                 requirement.setId( requirementJson[ "id" ].asString() );
                 requirement.setAmount( requirementJson.get( "amount", 0 ).asInt() );
                 quest->addRequirement( requirement );

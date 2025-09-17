@@ -174,16 +174,16 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
     return false;
 }
 
-bool checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement ) {
     Model::CharacterSkill* skill = character->skills().skill( requirement.id() );
     return skill && skill->level() >= requirement.amount();
 }
 
-bool checkItemRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkItemRequirement( Model::Character* character, const Model::Requirement& requirement ) {
     return character->inventory().hasItem( requirement.id(), requirement.amount() );
 }
 
-bool checkEquipmentRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkEquipmentRequirement( Model::Character* character, const Model::Requirement& requirement ) {
     auto& characterEquipments = character->equipment();
 
     std::unordered_map<std::string, Model::CharacterEquipmentItem&> slotMap = {
@@ -203,7 +203,7 @@ bool checkEquipmentRequirement( Model::Character* character, const Model::Requir
     return !targetSlot.id().empty();
 }
 
-bool checkQuestRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkQuestRequirement( Model::Character* character, const Model::Requirement& requirement ) {
     return character->quests().isQuestFinished( requirement.id() );
 }
 

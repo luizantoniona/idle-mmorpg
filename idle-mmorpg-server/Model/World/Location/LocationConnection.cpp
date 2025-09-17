@@ -60,15 +60,15 @@ void LocationConnection::setY( int y ) {
     _y = y;
 }
 
-std::vector<LocationConnectionRequirement> LocationConnection::requirements() const {
+std::vector<Requirement> LocationConnection::requirements() const {
     return _requirements;
 }
 
-void LocationConnection::setRequirements( const std::vector<LocationConnectionRequirement>& requirements ) {
+void LocationConnection::setRequirements( const std::vector<Requirement>& requirements ) {
     _requirements = requirements;
 }
 
-void LocationConnection::addRequirement( const LocationConnectionRequirement& requirement ) {
+void LocationConnection::addRequirement( const Requirement& requirement ) {
     _requirements.push_back( requirement );
 }
 

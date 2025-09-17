@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "LocationConnectionRequirement.h"
+#include <Model/Requirement.h>
 
 namespace Model {
 
@@ -30,9 +30,9 @@ public:
     int y() const;
     void setY( int y );
 
-    std::vector<LocationConnectionRequirement> requirements() const;
-    void setRequirements( const std::vector<LocationConnectionRequirement>& requirements );
-    void addRequirement( const LocationConnectionRequirement& requirement );
+    std::vector<Requirement> requirements() const;
+    void setRequirements( const std::vector<Requirement>& requirements );
+    void addRequirement( const Requirement& requirement );
 
 private:
     std::string _destination;
@@ -40,7 +40,7 @@ private:
     std::string _label;
     int _x;
     int _y;
-    std::vector<LocationConnectionRequirement> _requirements;
+    std::vector<Requirement> _requirements;
 };
 
 } // namespace Model

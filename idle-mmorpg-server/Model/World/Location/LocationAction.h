@@ -6,9 +6,10 @@
 
 #include <json/json.h>
 
+#include <Model/Requirement.h>
+
 #include "LocationActionExperience.h"
 #include "LocationActionLoot.h"
-#include "LocationActionRequirement.h"
 
 namespace Model {
 
@@ -33,9 +34,9 @@ public:
     int duration() const;
     void setDuration( int duration );
 
-    std::vector<LocationActionRequirement> requirements() const;
-    void setRequirements( const std::vector<LocationActionRequirement>& requirements );
-    void addRequirement( const LocationActionRequirement& requirement );
+    std::vector<Requirement> requirements() const;
+    void setRequirements( const std::vector<Requirement>& requirements );
+    void addRequirement( const Requirement& requirement );
 
     std::vector<LocationActionExperience> experience() const;
     void setExperience( const std::vector<LocationActionExperience>& experience );
@@ -51,7 +52,7 @@ private:
     std::string _label;
     std::string _structure;
     int _duration;
-    std::vector<LocationActionRequirement> _requirements;
+    std::vector<Requirement> _requirements;
     std::vector<LocationActionExperience> _experience;
     std::vector<LocationActionLoot> _loot;
 };

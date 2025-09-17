@@ -58,15 +58,15 @@ void LocationAction::setDuration( int duration ) {
     _duration = duration;
 }
 
-std::vector<LocationActionRequirement> LocationAction::requirements() const {
+std::vector<Requirement> LocationAction::requirements() const {
     return _requirements;
 }
 
-void LocationAction::setRequirements( const std::vector<LocationActionRequirement>& requirements ) {
+void LocationAction::setRequirements( const std::vector<Requirement>& requirements ) {
     _requirements = requirements;
 }
 
-void LocationAction::addRequirement( const LocationActionRequirement& requirement ) {
+void LocationAction::addRequirement( const Requirement& requirement ) {
     _requirements.push_back( requirement );
 }
 
