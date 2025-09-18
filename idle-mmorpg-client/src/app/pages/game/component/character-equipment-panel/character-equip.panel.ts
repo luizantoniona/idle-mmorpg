@@ -3,8 +3,9 @@ import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from "../../../../component";
 import { PopupComponent } from "../../../../component";
-
 import { TooltipComponent } from "../../../../component";
+
+import { ItemComponent } from "../item/item.component";
 
 import { Character } from "../../../../model";
 import { Item } from "../../../../model";
@@ -20,6 +21,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
         ButtonComponent,
         PopupComponent,
         TooltipComponent,
+        ItemComponent,
     ],
 })
 

@@ -12,45 +12,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+    box-shadow: inset var(--box-shadow);
 }
 
 .item-box img {
     width: 32px;
     height: 32px;
     border-radius: var(--border-radius);
-}
-
-.effects-list {
-    margin-top: 8px;
-    padding: 6px;
-    background: var(--color-panel);
-    border-radius: var(--border-radius);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 13px;
-}
-
-.effect-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3px 6px;
-    background: var(--color-bg);
-    border-radius: var(--border-radius);
-}
-
-.effect-category {
-    font-weight: bold;
-    text-transform: uppercase;
-    color: var(--color-accent);
-}
-
-.effect-value.positive {
-    color: var(--color-positive-highlight);
-}
-
-.effect-value.negative {
-    color: var(--color-negative-highlight);
 }
