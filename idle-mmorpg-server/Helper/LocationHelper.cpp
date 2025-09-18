@@ -19,11 +19,8 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
 
     for ( const Model::Requirement& requirement : action.requirements() ) {
         const Model::RequirementType type = requirement.type();
-        const std::string& id = requirement.id();
 
-        // New way
-
-        switch ( requirement.type() ) {
+        switch ( type ) {
         case Model::RequirementType::SKILL:
             if ( !checkSkillRequirement( character, requirement ) ) {
                 return false;
@@ -67,11 +64,8 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
 
     for ( const Model::Requirement& requirement : connection.requirements() ) {
         const Model::RequirementType type = requirement.type();
-        const std::string& id = requirement.id();
 
-        // New way
-
-        switch ( requirement.type() ) {
+        switch ( type ) {
         case Model::RequirementType::SKILL:
             if ( !checkSkillRequirement( character, requirement ) ) {
                 return false;
@@ -137,11 +131,8 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
 
         for ( const Model::Requirement& requirement : questPtr->requirements() ) {
             const Model::RequirementType type = requirement.type();
-            const std::string& id = requirement.id();
 
-            // New way
-
-            switch ( requirement.type() ) {
+            switch ( type ) {
             case Model::RequirementType::SKILL:
                 if ( !checkSkillRequirement( character, requirement ) ) {
                     return false;
