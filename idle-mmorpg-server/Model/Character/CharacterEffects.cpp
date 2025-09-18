@@ -1,5 +1,7 @@
 #include "CharacterEffects.h"
 
+#include <algorithm>
+
 namespace Model {
 
 CharacterEffects::CharacterEffects() {
