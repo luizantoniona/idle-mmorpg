@@ -8,6 +8,8 @@ export { CharacterWalletPanel } from './character-wallet-panel/character-wallet-
 
 export { CombatPanel } from './combat-panel/combat.panel'
 
+export { ItemComponent } from "./item/item.component";
+
 export { LocationPanel } from './location-panel/location.panel';
 
 export { MainPanel } from './main-panel/main.panel';

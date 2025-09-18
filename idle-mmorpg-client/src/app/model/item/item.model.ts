@@ -1,4 +1,5 @@
 import { ItemBonus } from "./item-bonus.model";
+import { ItemEffect } from "./item-effect.model";
 
 export type Item = {
     id: string;
@@ -11,4 +12,5 @@ export type Item = {
     icon: string;
     price: number;
     bonuses: ItemBonus[];
+    effects: ItemEffect[];
 };

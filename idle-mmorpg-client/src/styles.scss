@@ -1,5 +1,5 @@
 :root {
-    font-family: sans-serif;
+    font-family: system-ui;
 
     --color-text: #f0f0f0;
     --color-bg: #242424;
@@ -7,6 +7,9 @@
     --color-panel-shadow: rgba(0, 0, 0, 0.12);
     --color-accent: #747bff;
     --color-button: #8e51ff;
+    --color-positive-highlight: #4caf50;
+    --color-negative-highlight: #e53935;
+    --color-neutral-highlight: #fdd835;
 
     --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 

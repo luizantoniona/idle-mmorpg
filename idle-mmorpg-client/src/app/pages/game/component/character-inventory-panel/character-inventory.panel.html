@@ -4,21 +4,7 @@
     @if(character && character.inventory && character.inventory.items.length){
     <div class="inventory-grid">
         @for(item of character.inventory.items; track item.id){
-        <app-tooltip>
-            <div tooltip-target class="item-box">
-                <img [src]="'assets/items/' + item.icon" alt="{{ item.name }}" />
-                <span class="amount">{{ item.amount }}</span>
-            </div>
-
-            <div tooltip-content>
-                <strong>{{ item.name }}</strong><br />
-                {{ item.description }}<br />
-                <em>Value: {{ item.price }}</em>
-                @if(item.type === "consumable"){
-                <br /><app-button text="Use" (clickEvent)="useItem(item)"></app-button>
-                }
-            </div>
-        </app-tooltip>
+        <app-item [item]="item!" (use)="useItem($event)"></app-item>
         }
     </div>
 

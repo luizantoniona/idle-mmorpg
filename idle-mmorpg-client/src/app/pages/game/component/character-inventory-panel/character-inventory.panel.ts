@@ -1,8 +1,9 @@
 import { Component, Input, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { ButtonComponent } from "../../../../component";
 import { PanelComponent } from "../../../../component";
-import { TooltipComponent } from "../../../../component";
+
+import { ItemComponent } from "../item/item.component";
 
 import { Character } from "../../../../model";
 import { Item } from "../../../../model";
@@ -14,9 +15,9 @@ import { WebsocketService } from "../../../../service/websocket.service";
     templateUrl: "./character-inventory.panel.html",
     styleUrls: ["./character-inventory.panel.scss"],
     imports: [
-        ButtonComponent,
+        CommonModule,
         PanelComponent,
-        TooltipComponent
+        ItemComponent,
     ],
 })
 

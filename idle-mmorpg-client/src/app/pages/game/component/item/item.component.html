@@ -1,0 +1,56 @@
+<app-tooltip>
+
+    <div tooltip-target [class.item-box]="mode === 'inventory'" [class.slot]="mode === 'slot'" (click)="onClick()">
+        @if(item && item.id){
+        <img [class.slot-icon]="mode === 'slot'" [src]="'assets/items/' + item.icon" alt="{{ item.name }}" />
+        } @else if(mode === 'slot') {
+        <img class="slot-icon" [src]="'assets/slots/' + slot + '.png'" />
+        }
+
+        @if(mode === 'inventory' && item && item.amount > 0){
+        <span class="amount">{{ item.amount }}</span>
+        }
+    </div>
+
+    @if(item && item.id){
+    <div tooltip-content>
+        <strong>{{ item.name }}</strong><br />
+        {{ item.description }}<br />
+        <em>Value: {{ item.price }}</em>
+
+        @if(item.bonuses && item.bonuses.length){
+        <div class="effects-list">
+            @for(bonus of item.bonuses; track bonus.category){
+            <div class="effect-row">
+                <span class="effect-category">{{ bonus.category }}</span>
+                <span class="effect-value" [ngClass]="{
+                    'positive': bonus.value > 0,
+                    'negative': bonus.value < 0
+                  }">
+                    {{ bonus.value > 0 ? '+' : '' }}{{ bonus.value }}
+                </span>
+            </div>
+            }
+        </div>
+        }
+
+        @if(item.type === "consumable" && item.effects && item.effects.length){
+        <div class="effects-list">
+            @for(effect of item.effects; track effect.category){
+            <div class="effect-row">
+                <span class="effect-category">{{ effect.category }}</span>
+                <span class="effect-value" [ngClass]="{
+                    'positive': effect.value > 0,
+                    'negative': effect.value < 0
+                  }">
+                    {{ effect.value > 0 ? '+' : '' }}{{ effect.value }}/s
+                </span>
+                <span class="effect-duration">{{ effect.duration / 20 }}s</span>
+            </div>
+            }
+            <app-button text="Use" (clickEvent)="use.emit(item)"></app-button>
+        </div>
+        }
+    </div>
+    }
+</app-tooltip>

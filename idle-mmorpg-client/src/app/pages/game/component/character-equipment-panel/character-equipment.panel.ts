@@ -1,10 +1,11 @@
 import { Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from "../../../../component";
 import { PanelComponent } from "../../../../component";
 
 import { CharacterEquipPanel } from "./character-equip.panel";
-import { EquipmentSlotComponent } from "./equipment-slot.component";
+import { ItemComponent } from "../item/item.component";
 
 import { Character } from "../../../../model";
 
@@ -13,10 +14,11 @@ import { Character } from "../../../../model";
     templateUrl: "./character-equipment.panel.html",
     styleUrls: ["./character-equipment.panel.scss"],
     imports: [
+        CommonModule,
         ButtonComponent,
         PanelComponent,
         CharacterEquipPanel,
-        EquipmentSlotComponent,
+        ItemComponent,
     ],
 })
 

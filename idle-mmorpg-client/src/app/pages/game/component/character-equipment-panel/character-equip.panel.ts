@@ -1,4 +1,5 @@
 import { Component, Input, inject, EventEmitter, Output } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from "../../../../component";
 import { PopupComponent } from "../../../../component";
@@ -15,6 +16,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
     templateUrl: "./character-equip.panel.html",
     styleUrls: ["./character-equip.panel.scss"],
     imports: [
+        CommonModule,
         ButtonComponent,
         PopupComponent,
         TooltipComponent,

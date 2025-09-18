@@ -1,9 +1,3 @@
-.inventory-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
 .item-box {
     width: 40px;
     height: 40px;
@@ -12,10 +6,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+    box-shadow: inset var(--box-shadow);
 }
 
 .item-box img {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius);
+}
+
+.amount {
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    background: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 12px;
+    padding: 1px 5px;
+    border-radius: var(--border-radius);
+}
+
+.slot {
+    width: 40px;
+    height: 40px;
+    background: var(--color-bg);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset var(--box-shadow);
+    cursor: pointer;
+}
+
+.slot-icon {
     width: 32px;
     height: 32px;
     border-radius: var(--border-radius);
@@ -53,4 +76,8 @@
 
 .effect-value.negative {
     color: var(--color-negative-highlight);
+}
+
+.effect-duration {
+    font-style: italic;
 }

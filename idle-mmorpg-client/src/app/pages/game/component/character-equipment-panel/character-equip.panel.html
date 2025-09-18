@@ -13,6 +13,23 @@
                 <strong>{{ item.name }}</strong><br />
                 {{ item.description }}<br />
                 <em>Value: {{ item.price }}</em>
+
+                @if( item.bonuses && item.bonuses.length){
+                <div class="effects-list">
+                    @for(bonus of item.bonuses; track bonus.category){
+                    <div class="effect-row">
+                        <span class="effect-category">{{ bonus.category }}</span>
+                        <span class="effect-value" [ngClass]="{
+                                'positive': bonus.value > 0,
+                                'negative': bonus.value < 0
+                                }">
+                            {{ bonus.value > 0 ? '+' : '' }}{{ bonus.value }}
+                        </span>
+                    </div>
+                    }
+                </div>
+                }
+
             </div>
         </app-tooltip>
         }

@@ -11,7 +11,19 @@
         "leftHand armor rightHand"
         ". leg glove"
         ". boot .";
-    grid-template-columns: 40px 40px 40px;
+    grid-template-columns: repeat(3, 40px);
+    gap: 12px;
+    justify-items: center;
+    align-items: center;
+    padding: 12px;
+}
+
+.tools-layout {
+    display: grid;
+    grid-template-areas:
+        "pickaxe woodaxe fishingrod"
+        "shovel rope sickle";
+    grid-template-columns: repeat(3, 40px);
     gap: 12px;
     justify-items: center;
     align-items: center;
@@ -54,18 +66,6 @@
     grid-area: rightHand;
 }
 
-.tools-layout {
-    display: grid;
-    grid-template-areas:
-        "pickaxe woodaxe fishrod"
-        "shovel rope sickle";
-    grid-template-columns: 40px 40px 40px;
-    gap: 12px;
-    justify-items: center;
-    align-items: center;
-    padding: 12px;
-}
-
 .pickaxe {
     grid-area: pickaxe;
 }
@@ -74,8 +74,8 @@
     grid-area: woodaxe;
 }
 
-.fishrod {
-    grid-area: fishrod;
+.fishingrod {
+    grid-area: fishingrod;
 }
 
 .shovel {
@@ -88,4 +88,12 @@
 
 .rope {
     grid-area: rope;
+}
+
+.slot {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
