@@ -29,7 +29,7 @@ export class ItemComponent {
 
     onClick() {
         if (this.mode === "slot") {
-            this.equip.emit(this.item?.id ? this.item : null);
+            this.equip.emit(this.slot ?? null);
         }
     }
 }
