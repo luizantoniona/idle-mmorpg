@@ -18,31 +18,7 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
     }
 
     for ( const Model::Requirement& requirement : action.requirements() ) {
-        const Model::RequirementType type = requirement.type();
-
-        switch ( type ) {
-        case Model::RequirementType::SKILL:
-            if ( !checkSkillRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        case Model::RequirementType::ITEM:
-            if ( !checkItemRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        case Model::RequirementType::EQUIPMENT:
-            if ( !checkEquipmentRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        case Model::RequirementType::QUEST:
-            if ( !checkQuestRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        default:
-            std::cerr << "LocationHelper::canCharacterPerformAction Unknown requirement type" << std::endl;
+        if ( !checkRequirement( character, requirement ) ) {
             return false;
         }
     }
@@ -63,31 +39,7 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
     }
 
     for ( const Model::Requirement& requirement : connection.requirements() ) {
-        const Model::RequirementType type = requirement.type();
-
-        switch ( type ) {
-        case Model::RequirementType::SKILL:
-            if ( !checkSkillRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        case Model::RequirementType::ITEM:
-            if ( !checkItemRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        case Model::RequirementType::EQUIPMENT:
-            if ( !checkEquipmentRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        case Model::RequirementType::QUEST:
-            if ( !checkQuestRequirement( character, requirement ) ) {
-                return false;
-            }
-            break;
-        default:
-            std::cerr << "LocationHelper::canCharacterUseConnections Unknown requirement type" << std::endl;
+        if ( !checkRequirement( character, requirement ) ) {
             return false;
         }
     }
@@ -130,31 +82,7 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
     if ( questPtr ) {
 
         for ( const Model::Requirement& requirement : questPtr->requirements() ) {
-            const Model::RequirementType type = requirement.type();
-
-            switch ( type ) {
-            case Model::RequirementType::SKILL:
-                if ( !checkSkillRequirement( character, requirement ) ) {
-                    return false;
-                }
-                break;
-            case Model::RequirementType::ITEM:
-                if ( !checkItemRequirement( character, requirement ) ) {
-                    return false;
-                }
-                break;
-            case Model::RequirementType::EQUIPMENT:
-                if ( !checkEquipmentRequirement( character, requirement ) ) {
-                    return false;
-                }
-                break;
-            case Model::RequirementType::QUEST:
-                if ( !checkQuestRequirement( character, requirement ) ) {
-                    return false;
-                }
-                break;
-            default:
-                std::cerr << "LocationHelper::canCharacterUseConnections Unknown requirement type" << std::endl;
+            if ( !checkRequirement( character, requirement ) ) {
                 return false;
             }
         }
@@ -163,6 +91,38 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
     }
 
     return false;
+}
+
+bool LocationHelper::checkRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+    const Model::RequirementType type = requirement.type();
+
+    switch ( type ) {
+    case Model::RequirementType::SKILL:
+        if ( !checkSkillRequirement( character, requirement ) ) {
+            return false;
+        }
+        break;
+    case Model::RequirementType::ITEM:
+        if ( !checkItemRequirement( character, requirement ) ) {
+            return false;
+        }
+        break;
+    case Model::RequirementType::EQUIPMENT:
+        if ( !checkEquipmentRequirement( character, requirement ) ) {
+            return false;
+        }
+        break;
+    case Model::RequirementType::QUEST:
+        if ( !checkQuestRequirement( character, requirement ) ) {
+            return false;
+        }
+        break;
+    default:
+        std::cerr << "LocationHelper::checkRequirement Unknown requirement type" << std::endl;
+        return false;
+    }
+
+    return true;
 }
 
 bool LocationHelper::checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement ) {

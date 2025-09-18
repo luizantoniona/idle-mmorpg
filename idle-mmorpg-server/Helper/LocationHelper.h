@@ -14,6 +14,7 @@ public:
     static bool canCharacterSeeDenizenQuest( Model::Character* character, const Model::DenizenQuest& quest );
 
 private:
+    static bool checkRequirement( Model::Character* character, const Model::Requirement& requirement );
     static bool checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement );
     static bool checkItemRequirement( Model::Character* character, const Model::Requirement& requirement );
     static bool checkEquipmentRequirement( Model::Character* character, const Model::Requirement& requirement );
