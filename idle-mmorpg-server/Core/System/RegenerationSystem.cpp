@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <Commons/Singleton.h>
+#include <Core/Manager/ServerConfigurationManager.h>
 #include <Core/System/NotificationSystem.h>
 #include <Core/System/ProgressionSystem.h>
 #include <Helper/DecimalHelper.h>
@@ -49,20 +51,34 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
 
 void RegenerationSystem::computeSpellsCooldown( const std::string& sessionId, Model::Character* character ) {
     auto& characterSpells = character->spells();
-
+    const int tickRate = Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate();
     bool changed = false;
 
     for ( auto& spell : characterSpells.healingSpells() ) {
         if ( spell.count() < spell.spell()->cooldown() ) {
+            if ( spell.count() % tickRate == 0 ) {
+                changed = true;
+            }
+
             spell.setCount( spell.count() + 1 );
-            changed = true;
+
+            if ( spell.count() == spell.spell()->cooldown() ) {
+                changed = true;
+            }
         }
     }
 
     for ( auto& spell : characterSpells.attackSpells() ) {
         if ( spell.count() < spell.spell()->cooldown() ) {
+            if ( spell.count() % tickRate == 0 ) {
+                changed = true;
+            }
+
             spell.setCount( spell.count() + 1 );
-            changed = true;
+
+            if ( spell.count() == spell.spell()->cooldown() ) {
+                changed = true;
+            }
         }
     }
 
