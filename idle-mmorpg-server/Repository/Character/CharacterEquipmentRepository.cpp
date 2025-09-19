@@ -27,7 +27,6 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
             armor_item_id = ?,
             leg_item_id = ?,
             boot_item_id = ?,
-            glove_item_id = ?,
             left_hand_item_id = ?,
             right_hand_item_id = ?,
             amulet_item_id = ?,
@@ -44,16 +43,15 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
     query.bindText( 2, equipment.armor().id() );
     query.bindText( 3, equipment.leg().id() );
     query.bindText( 4, equipment.boot().id() );
-    query.bindText( 5, equipment.glove().id() );
-    query.bindText( 6, equipment.leftHand().id() );
-    query.bindText( 7, equipment.rightHand().id() );
-    query.bindText( 8, equipment.amulet().id() );
-    query.bindText( 9, equipment.ring().id() );
-    query.bindText( 10, equipment.pickaxe().id() );
-    query.bindText( 11, equipment.woodaxe().id() );
-    query.bindText( 12, equipment.fishingrod().id() );
-    query.bindText( 13, equipment.sickle().id() );
-    query.bindInt( 14, idCharacter );
+    query.bindText( 5, equipment.leftHand().id() );
+    query.bindText( 6, equipment.rightHand().id() );
+    query.bindText( 7, equipment.amulet().id() );
+    query.bindText( 8, equipment.ring().id() );
+    query.bindText( 9, equipment.pickaxe().id() );
+    query.bindText( 10, equipment.woodaxe().id() );
+    query.bindText( 11, equipment.fishingrod().id() );
+    query.bindText( 12, equipment.sickle().id() );
+    query.bindInt( 13, idCharacter );
 
     return query.exec();
 }
@@ -65,7 +63,6 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
             armor_item_id,
             leg_item_id,
             boot_item_id,
-            glove_item_id,
             left_hand_item_id,
             right_hand_item_id,
             amulet_item_id,
@@ -99,15 +96,14 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
     equipment->setArmor( makeItem( query.getColumnText( 1 ) ) );
     equipment->setLeg( makeItem( query.getColumnText( 2 ) ) );
     equipment->setBoot( makeItem( query.getColumnText( 3 ) ) );
-    equipment->setGlove( makeItem( query.getColumnText( 4 ) ) );
-    equipment->setLeftHand( makeItem( query.getColumnText( 5 ) ) );
-    equipment->setRightHand( makeItem( query.getColumnText( 6 ) ) );
-    equipment->setAmulet( makeItem( query.getColumnText( 7 ) ) );
-    equipment->setRing( makeItem( query.getColumnText( 8 ) ) );
-    equipment->setPickaxe( makeItem( query.getColumnText( 9 ) ) );
-    equipment->setWoodaxe( makeItem( query.getColumnText( 10 ) ) );
-    equipment->setFishingrod( makeItem( query.getColumnText( 11 ) ) );
-    equipment->setSickle( makeItem( query.getColumnText( 12 ) ) );
+    equipment->setLeftHand( makeItem( query.getColumnText( 4 ) ) );
+    equipment->setRightHand( makeItem( query.getColumnText( 5 ) ) );
+    equipment->setAmulet( makeItem( query.getColumnText( 6 ) ) );
+    equipment->setRing( makeItem( query.getColumnText( 7 ) ) );
+    equipment->setPickaxe( makeItem( query.getColumnText( 8 ) ) );
+    equipment->setWoodaxe( makeItem( query.getColumnText( 9 ) ) );
+    equipment->setFishingrod( makeItem( query.getColumnText( 10 ) ) );
+    equipment->setSickle( makeItem( query.getColumnText( 11 ) ) );
 
     return equipment;
 }

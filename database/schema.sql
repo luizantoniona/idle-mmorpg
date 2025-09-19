@@ -39,7 +39,6 @@ CREATE TABLE character_equipment (
     armor_item_id TEXT DEFAULT NULL,
     leg_item_id TEXT DEFAULT NULL,
     boot_item_id TEXT DEFAULT NULL,
-    glove_item_id TEXT DEFAULT NULL,
     left_hand_item_id TEXT DEFAULT NULL,
     right_hand_item_id TEXT DEFAULT NULL,
     amulet_item_id TEXT DEFAULT NULL,

@@ -7,7 +7,6 @@ CharacterEquipment::CharacterEquipment() :
     _armor(),
     _leg(),
     _boot(),
-    _glove(),
     _leftHand(),
     _rightHand(),
     _amulet(),
@@ -23,7 +22,6 @@ Json::Value CharacterEquipment::toJson() {
     root[ "armor" ] = armor().toJson();
     root[ "leg" ] = leg().toJson();
     root[ "boot" ] = boot().toJson();
-    root[ "glove" ] = glove().toJson();
     root[ "leftHand" ] = leftHand().toJson();
     root[ "rightHand" ] = rightHand().toJson();
     root[ "amulet" ] = amulet().toJson();
@@ -65,14 +63,6 @@ CharacterEquipmentItem& CharacterEquipment::boot() {
 
 void CharacterEquipment::setBoot( const CharacterEquipmentItem& boot ) {
     _boot = boot;
-}
-
-CharacterEquipmentItem& CharacterEquipment::glove() {
-    return _glove;
-}
-
-void CharacterEquipment::setGlove( const CharacterEquipmentItem& glove ) {
-    _glove = glove;
 }
 
 CharacterEquipmentItem& CharacterEquipment::leftHand() {

@@ -25,9 +25,6 @@ public:
     CharacterEquipmentItem& boot();
     void setBoot( const CharacterEquipmentItem& boot );
 
-    CharacterEquipmentItem& glove();
-    void setGlove( const CharacterEquipmentItem& glove );
-
     CharacterEquipmentItem& leftHand();
     void setLeftHand( const CharacterEquipmentItem& leftHand );
 
@@ -57,7 +54,6 @@ private:
     CharacterEquipmentItem _armor;
     CharacterEquipmentItem _leg;
     CharacterEquipmentItem _boot;
-    CharacterEquipmentItem _glove;
 
     CharacterEquipmentItem _leftHand;
     CharacterEquipmentItem _rightHand;
