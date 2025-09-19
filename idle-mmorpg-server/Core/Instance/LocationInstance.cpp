@@ -93,13 +93,17 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
     _characterCombatCache[sessionId] = combatInstancePtr;
     _combatInstances.push_back( std::move( combatInstance ) );
 
-    std::vector<CombatInstance*> allInstances;
-    for ( auto& ci : _combatInstances ) {
-        allInstances.push_back( ci.get() );
-    }
-
     for ( const auto& [otherSessionId, otherChar] : _characters ) {
         if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
+            std::vector<CombatInstance*> allInstances;
+            std::string otherStructure = otherChar->coordinates().structureId();
+
+            for ( auto& ci : _combatInstances ) {
+                if ( ci->structureId() == otherStructure ) {
+                    allInstances.push_back( ci.get() );
+                }
+            }
+
             Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
         }
     }
@@ -169,14 +173,20 @@ void LocationInstance::tick() {
 
             it = _combatInstances.erase( it );
 
-            std::vector<CombatInstance*> allInstances;
-            for ( auto& ci : _combatInstances ) {
-                allInstances.push_back( ci.get() );
-            }
-
             for ( const auto& [ otherSessionId, otherChar ] : _characters ) {
                 if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
-                    Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
+                    if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
+                        std::vector<CombatInstance*> allInstances;
+                        std::string otherStructure = otherChar->coordinates().structureId();
+
+                        for ( auto& ci : _combatInstances ) {
+                            if ( ci->structureId() == otherStructure ) {
+                                allInstances.push_back( ci.get() );
+                            }
+                        }
+
+                        Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
+                    }
                 }
             }
 
@@ -205,9 +215,23 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
         case Message::MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
             changeStructure( sessionId, character, payload );
             break;
-        case Message::MessageReceiverType::CHARACTER_ACTION_UPDATE:
+        case Message::MessageReceiverType::CHARACTER_ACTION_UPDATE: {
             _actionSystem.changeAction( sessionId, character, payload );
+
+            if ( character->action().id() == "combat" ) {
+                std::vector<CombatInstance*> allInstances;
+                std::string charStructure = character->coordinates().structureId();
+
+                for ( auto& ci : _combatInstances ) {
+                    if ( ci->structureId() == charStructure ) {
+                        allInstances.push_back( ci.get() );
+                    }
+                }
+
+                Core::System::NotificationSystem::notifyCombatInstances( sessionId, allInstances );
+            }
             break;
+        }
 
         case Message::MessageReceiverType::CHARACTER_EQUIP_ITEM:
             Core::System::ItemSystem::characterEquipItem( sessionId, character, payload );
