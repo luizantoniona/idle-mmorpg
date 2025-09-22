@@ -137,12 +137,13 @@ void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Char
 
     characterSpell->setCount( 0 );
 
-    int focusLevel = character->skills().skillLevel( "focus" );
+    int invocationLevel = character->skills().skillLevel( "invocation" );
 
-    double hitChance = 0.5 + 0.005 * ( focusLevel - creature->evasion() );
+    _progressionSystem.applyExperience( sessionId, character, "invocation", characterSpell->spell()->manaCost() );
+
+    double hitChance = 0.5 + 0.005 * ( invocationLevel - creature->evasion() );
     hitChance = std::clamp( hitChance, 0.05, 0.95 );
     if ( !rollChance( hitChance ) ) {
-        std::cout << character->name() << " missed spell " << characterSpell->spell()->name() << " on " << creature->name() << std::endl;
         return;
     }
 
@@ -153,8 +154,6 @@ void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Char
     double newHealth = creature->vitals().health() - damage;
     newHealth = std::max( 0.0, newHealth );
     creature->vitals().setHealth( newHealth );
-
-    _progressionSystem.applyExperience( sessionId, character, "focus", damage );
 
     std::cout << character->name() << " casts " << characterSpell->spell()->name() << " dealing " << damage << " damage to " << creature->name() << std::endl;
 }

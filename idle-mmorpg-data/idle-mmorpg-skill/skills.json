@@ -10,7 +10,8 @@
         "gathering/herbalism",
         "gathering/mining",
         "gathering/woodcutting",
-        "magic/focus",
+        "magic/invocation",
+        "magic/restoration",
         "vitals/endurance",
         "vitals/meditation",
         "vitals/vitality"

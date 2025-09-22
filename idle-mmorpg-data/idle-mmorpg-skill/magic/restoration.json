@@ -1,0 +1,88 @@
+{
+    "id": "restoration",
+    "name": "Restoration",
+    "description": "Your ability to channel restorative magic and mend wounds effectively.",
+    "type": "magic",
+    "milestones": [
+        {
+            "level": 1,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 3,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 5,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 7,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 9,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 11,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 13,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "level": 15,
+            "bonuses": [
+                {
+                    "type": "attribute",
+                    "id": "wisdom",
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}
