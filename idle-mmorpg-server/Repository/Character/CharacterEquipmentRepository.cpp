@@ -27,8 +27,8 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
             armor_item_id = ?,
             leg_item_id = ?,
             boot_item_id = ?,
-            left_hand_item_id = ?,
-            right_hand_item_id = ?,
+            weapon_item_id = ?,
+            offhand_item_id = ?,
             amulet_item_id = ?,
             ring_item_id = ?,
             pickaxe_item_id = ?,
@@ -43,8 +43,8 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
     query.bindText( 2, equipment.armor().id() );
     query.bindText( 3, equipment.leg().id() );
     query.bindText( 4, equipment.boot().id() );
-    query.bindText( 5, equipment.leftHand().id() );
-    query.bindText( 6, equipment.rightHand().id() );
+    query.bindText( 5, equipment.weapon().id() );
+    query.bindText( 6, equipment.offhand().id() );
     query.bindText( 7, equipment.amulet().id() );
     query.bindText( 8, equipment.ring().id() );
     query.bindText( 9, equipment.pickaxe().id() );
@@ -63,8 +63,8 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
             armor_item_id,
             leg_item_id,
             boot_item_id,
-            left_hand_item_id,
-            right_hand_item_id,
+            weapon_item_id,
+            offhand_item_id,
             amulet_item_id,
             ring_item_id,
             pickaxe_item_id,
@@ -96,8 +96,8 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
     equipment->setArmor( makeItem( query.getColumnText( 1 ) ) );
     equipment->setLeg( makeItem( query.getColumnText( 2 ) ) );
     equipment->setBoot( makeItem( query.getColumnText( 3 ) ) );
-    equipment->setLeftHand( makeItem( query.getColumnText( 4 ) ) );
-    equipment->setRightHand( makeItem( query.getColumnText( 5 ) ) );
+    equipment->setWeapon( makeItem( query.getColumnText( 4 ) ) );
+    equipment->setOffhand( makeItem( query.getColumnText( 5 ) ) );
     equipment->setAmulet( makeItem( query.getColumnText( 6 ) ) );
     equipment->setRing( makeItem( query.getColumnText( 7 ) ) );
     equipment->setPickaxe( makeItem( query.getColumnText( 8 ) ) );

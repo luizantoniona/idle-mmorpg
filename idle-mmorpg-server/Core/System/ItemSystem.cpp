@@ -61,8 +61,8 @@ void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Charac
         { "armor", characterEquipments.armor() },
         { "leg", characterEquipments.leg() },
         { "boot", characterEquipments.boot() },
-        { "leftHand", characterEquipments.leftHand() },
-        { "rightHand", characterEquipments.rightHand() },
+        { "weapon", characterEquipments.weapon() },
+        { "offhand", characterEquipments.offhand() },
         { "amulet", characterEquipments.amulet() },
         { "ring", characterEquipments.ring() },
         { "pickaxe", characterEquipments.pickaxe() },
@@ -95,7 +95,8 @@ void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Charac
         const Model::CharacterInventoryItem* itemToEquip = characterInventory.itemById( itemId );
 
         bool canEquip = ( slot == itemToEquip->item()->category() ) ||
-                        ( ( slot == "leftHand" || slot == "rightHand" ) && itemToEquip->item()->type() == "weapon" );
+                        ( ( slot == "weapon" && itemToEquip->item()->type() == "weapon" ) ) ||
+                        ( ( slot == "offhand" ) && itemToEquip->item()->type() == "offhand" );
 
         if ( !canEquip ) {
             std::cerr << "ItemSystem::characterEquipItem Item cannot be equipped in this slot: " << slot << std::endl;
@@ -125,8 +126,8 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model:
         &equipments.armor(),
         &equipments.leg(),
         &equipments.boot(),
-        &equipments.leftHand(),
-        &equipments.rightHand(),
+        &equipments.weapon(),
+        &equipments.offhand(),
         &equipments.amulet(),
         &equipments.ring(),
         &equipments.pickaxe(),

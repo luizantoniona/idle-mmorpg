@@ -83,8 +83,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newStamina = std::max( 0.0, newStamina );
     creature->vitals().setStamina( newStamina );
 
-    bool hasShieldEquipped = ( character->equipment().leftHand().item() && character->equipment().leftHand().item()->category() == "shield" ) ||
-                             ( character->equipment().rightHand().item() && character->equipment().rightHand().item()->category() == "shield" );
+    bool hasShieldEquipped = ( character->equipment().offhand().item() && character->equipment().offhand().item()->category() == "shield" );
 
     double maxCreatureAttack = creature->attack();
     double damage = rollRange( 0, maxCreatureAttack );
@@ -216,29 +215,19 @@ double CombatSystem::rollRange( double min, double max ) {
 }
 
 std::vector<std::string> CombatSystem::combatSkill( Model::Character* character ) {
-    const Model::Item* leftHand = character->equipment().leftHand().item();
-    const Model::Item* rightHand = character->equipment().rightHand().item();
+    const Model::Item* weapon = character->equipment().weapon().item();
 
     std::vector<std::string> skills = {};
 
-    if ( !leftHand && !rightHand ) {
+    if ( !weapon ) {
         skills.push_back( "fist_mastery" );
         return skills;
     }
 
-    std::string leftSkill = combatSkillByWeapon( leftHand );
-    std::string rightSkill = combatSkillByWeapon( rightHand );
+    std::string weaponSkill = combatSkillByWeapon( weapon );
 
-    if ( !leftSkill.empty() ) {
-        skills.push_back( leftSkill );
-    }
-
-    if ( !rightSkill.empty() ) {
-        skills.push_back( rightSkill );
-    }
-
-    if ( skills.empty() ) {
-        skills.push_back( "fist_mastery" );
+    if ( !weaponSkill.empty() ) {
+        skills.push_back( weaponSkill );
     }
 
     return skills;

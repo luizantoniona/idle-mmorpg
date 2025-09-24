@@ -25,11 +25,11 @@ public:
     CharacterEquipmentItem& boot();
     void setBoot( const CharacterEquipmentItem& boot );
 
-    CharacterEquipmentItem& leftHand();
-    void setLeftHand( const CharacterEquipmentItem& leftHand );
+    CharacterEquipmentItem& weapon();
+    void setWeapon( const CharacterEquipmentItem& weapon );
 
-    CharacterEquipmentItem& rightHand();
-    void setRightHand( const CharacterEquipmentItem& rightHand );
+    CharacterEquipmentItem& offhand();
+    void setOffhand( const CharacterEquipmentItem& offhand );
 
     CharacterEquipmentItem& amulet();
     void setAmulet( const CharacterEquipmentItem& amulet );
@@ -55,8 +55,8 @@ private:
     CharacterEquipmentItem _leg;
     CharacterEquipmentItem _boot;
 
-    CharacterEquipmentItem _leftHand;
-    CharacterEquipmentItem _rightHand;
+    CharacterEquipmentItem _weapon;
+    CharacterEquipmentItem _offhand;
 
     CharacterEquipmentItem _amulet;
     CharacterEquipmentItem _ring;

@@ -6,8 +6,8 @@ export type CharacterEquipment = {
     leg: Item;
     boot: Item;
 
-    leftHand: Item;
-    rightHand: Item;
+    weapon: Item;
+    offhand: Item;
 
     amulet: Item;
     ring: Item;

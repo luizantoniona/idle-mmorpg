@@ -7,7 +7,7 @@
     display: grid;
     grid-template-areas:
         "amulet helmet ring"
-        "leftHand armor rightHand"
+        "weapon armor offhand"
         ". leg ."
         ". boot .";
     grid-template-columns: repeat(3, 40px);
@@ -53,12 +53,12 @@
     grid-area: boot;
 }
 
-.leftHand {
-    grid-area: leftHand;
+.weapon {
+    grid-area: weapon;
 }
 
-.rightHand {
-    grid-area: rightHand;
+.offhand {
+    grid-area: offhand;
 }
 
 .pickaxe {

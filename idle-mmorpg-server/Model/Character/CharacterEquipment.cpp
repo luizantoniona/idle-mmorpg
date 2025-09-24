@@ -7,14 +7,15 @@ CharacterEquipment::CharacterEquipment() :
     _armor(),
     _leg(),
     _boot(),
-    _leftHand(),
-    _rightHand(),
+    _weapon(),
+    _offhand(),
     _amulet(),
     _ring(),
     _pickaxe(),
     _woodaxe(),
     _fishingrod(),
-    _sickle() {}
+    _sickle() {
+}
 
 Json::Value CharacterEquipment::toJson() {
     Json::Value root;
@@ -22,8 +23,8 @@ Json::Value CharacterEquipment::toJson() {
     root[ "armor" ] = armor().toJson();
     root[ "leg" ] = leg().toJson();
     root[ "boot" ] = boot().toJson();
-    root[ "leftHand" ] = leftHand().toJson();
-    root[ "rightHand" ] = rightHand().toJson();
+    root[ "weapon" ] = weapon().toJson();
+    root[ "offhand" ] = offhand().toJson();
     root[ "amulet" ] = amulet().toJson();
     root[ "ring" ] = ring().toJson();
     root[ "pickaxe" ] = pickaxe().toJson();
@@ -65,20 +66,20 @@ void CharacterEquipment::setBoot( const CharacterEquipmentItem& boot ) {
     _boot = boot;
 }
 
-CharacterEquipmentItem& CharacterEquipment::leftHand() {
-    return _leftHand;
+CharacterEquipmentItem& CharacterEquipment::weapon() {
+    return _weapon;
 }
 
-void CharacterEquipment::setLeftHand( const CharacterEquipmentItem& leftHand ) {
-    _leftHand = leftHand;
+void CharacterEquipment::setWeapon( const CharacterEquipmentItem& weapon ) {
+    _weapon = weapon;
 }
 
-CharacterEquipmentItem& CharacterEquipment::rightHand() {
-    return _rightHand;
+CharacterEquipmentItem& CharacterEquipment::offhand() {
+    return _offhand;
 }
 
-void CharacterEquipment::setRightHand( const CharacterEquipmentItem& rightHand ) {
-    _rightHand = rightHand;
+void CharacterEquipment::setOffhand( const CharacterEquipmentItem& offhand ) {
+    _offhand = offhand;
 }
 
 CharacterEquipmentItem& CharacterEquipment::amulet() {

@@ -63,7 +63,11 @@ export class CharacterEquipPanel {
                 return true;
             }
 
-            if (["leftHand", "rightHand"].includes(this.slot) && item.type === "weapon") {
+            if (["offhand"].includes(this.slot) && item.type === "offhand") {
+                return true;
+            }
+
+            if (["weapon"].includes(this.slot) && item.type === "weapon") {
                 return true;
             }
 

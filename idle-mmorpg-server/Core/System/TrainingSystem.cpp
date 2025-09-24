@@ -55,12 +55,12 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
 }
 
 std::vector<std::string> TrainingSystem::combatSkill( Model::Character* character ) {
-    const Model::Item* leftHand = character->equipment().leftHand().item();
-    const Model::Item* rightHand = character->equipment().rightHand().item();
+    const Model::Item* weapon = character->equipment().weapon().item();
+    const Model::Item* offhand = character->equipment().offhand().item();
 
     std::vector<std::string> skills = {};
 
-    if ( !leftHand && !rightHand ) {
+    if ( !weapon && !offhand ) {
         return { "fist_mastery" };
     }
 
@@ -89,8 +89,8 @@ std::vector<std::string> TrainingSystem::combatSkill( Model::Character* characte
         return "";
     };
 
-    std::string leftSkill = getSkillForWeapon( leftHand );
-    std::string rightSkill = getSkillForWeapon( rightHand );
+    std::string leftSkill = getSkillForWeapon( weapon );
+    std::string rightSkill = getSkillForWeapon( offhand );
 
     if ( !leftSkill.empty() ) {
         skills.push_back( leftSkill );
@@ -99,8 +99,6 @@ std::vector<std::string> TrainingSystem::combatSkill( Model::Character* characte
     if ( !rightSkill.empty() && rightSkill != leftSkill ) {
         skills.push_back( rightSkill );
     }
-
-    // TODO Add dual-wielding
 
     return skills;
 }

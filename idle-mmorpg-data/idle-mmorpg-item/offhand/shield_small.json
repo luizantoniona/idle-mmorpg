@@ -1,6 +1,6 @@
 {
     "id": "shield_small",
-    "type": "weapon",
+    "type": "offhand",
     "category": "shield",
     "name": "Small Shield",
     "description": "A small shield made of wood.",

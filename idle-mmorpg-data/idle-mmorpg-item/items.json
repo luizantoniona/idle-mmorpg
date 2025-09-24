@@ -7,12 +7,12 @@
         "equipment/armor_iron",
         "equipment/helmet_iron",
         "equipment/helmet_leather",
+        "offhand/shield_small",
         "tool/fishingrod",
         "tool/pickaxe",
         "tool/woodaxe",
         "weapon/axe_iron",
         "weapon/dagger_iron",
-        "weapon/shield_small",
         "weapon/sword_iron"
     ]
 }
