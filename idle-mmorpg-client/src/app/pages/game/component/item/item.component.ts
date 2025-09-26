@@ -28,6 +28,7 @@ export class ItemComponent {
     @Output() equip = new EventEmitter<any>();
 
     onClick() {
+        // TODO AJUSTAR ON CLICK
         if (this.mode === "slot") {
             this.equip.emit(this.slot ?? null);
 
