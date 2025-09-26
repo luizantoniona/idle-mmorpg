@@ -37,6 +37,9 @@ public:
     std::string name() const;
     void setName( const std::string& name );
 
+    std::string sessionId() const;
+    void setSessionId( const std::string& sessionId );
+
     CharacterAction& action();
     void setAction( const CharacterAction& action );
 
@@ -83,6 +86,7 @@ private:
     int _idCharacter;
     int _idUser;
     std::string _name;
+    std::string _sessionId;
     CharacterAction _action;
     CharacterAttributes _attributes;
     CharacterCombatAction _combatAction;

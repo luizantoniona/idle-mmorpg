@@ -67,7 +67,7 @@ void WorldManager::stop() {
     }
 }
 
-bool WorldManager::addCharacter( const std::string& uuid, int idUser, int idCharacter ) {
+bool WorldManager::addCharacter( const std::string& sessionId, int idUser, int idCharacter ) {
     auto character = Repository::CharacterRepository().findByIdUserAndIdCharacter( idUser, idCharacter );
 
     if ( !character ) {
@@ -78,7 +78,7 @@ bool WorldManager::addCharacter( const std::string& uuid, int idUser, int idChar
         return false;
     }
 
-    return _worldInstance->addCharacter( uuid, std::move( character ) );
+    return _worldInstance->addCharacter( sessionId, std::move( character ) );
 }
 
 void WorldManager::removeCharacter( const std::string& uuid ) {

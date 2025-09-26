@@ -16,6 +16,8 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
         return false;
     }
 
+    character->setSessionId( sessionId );
+
     Model::CharacterCoordinates& coordinates = character->coordinates();
 
     for ( auto& regionModel : _world->regions() ) {

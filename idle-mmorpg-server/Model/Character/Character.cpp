@@ -6,6 +6,7 @@ Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
     _name( "" ),
+    _sessionId( "" ),
     _action(),
     _attributes(),
     _combatAction(),
@@ -49,6 +50,14 @@ std::string Character::name() const {
 
 void Character::setName( const std::string& name ) {
     _name = name;
+}
+
+std::string Character::sessionId() const {
+    return _sessionId;
+}
+
+void Character::setSessionId( const std::string& sessionId ) {
+    _sessionId = sessionId;
 }
 
 CharacterAction& Character::action() {

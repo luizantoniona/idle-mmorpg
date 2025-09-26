@@ -21,7 +21,7 @@ public:
     void start();
     void stop();
 
-    bool addCharacter( const std::string& uuid, int idUser, int idCharacter );
+    bool addCharacter( const std::string& sessionId, int idUser, int idCharacter );
     void removeCharacter( const std::string& uuid );
 
 private:
