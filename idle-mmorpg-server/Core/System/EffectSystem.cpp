@@ -9,7 +9,7 @@
 
 namespace Core::System {
 
-void EffectSystem::computeEffects( const std::string& sessionId, Model::Character* character ) {
+void EffectSystem::processEffects( const std::string& sessionId, Model::Character* character ) {
     auto& effects = character->effects().effects();
 
     if ( effects.empty() ) {

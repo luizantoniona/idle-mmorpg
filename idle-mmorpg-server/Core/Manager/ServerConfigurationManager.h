@@ -13,6 +13,8 @@ public:
     int threadPool() const;
     void setThreadPool( int threadPool );
 
+    static constexpr double REGENERATION_SKILL_MULTIPLIER = 0.25;
+
 private:
     int _tickRate;
     int _threadPool;

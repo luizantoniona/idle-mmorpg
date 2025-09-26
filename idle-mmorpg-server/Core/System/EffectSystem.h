@@ -7,7 +7,7 @@ namespace Core::System {
 
 class EffectSystem {
 public:
-    static void computeEffects( const std::string& sessionId, Model::Character* character );
+    static void processEffects( const std::string& sessionId, Model::Character* character );
 };
 
 } // namespace Core::System

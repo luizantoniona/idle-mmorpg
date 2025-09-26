@@ -9,6 +9,7 @@
 #include <Helper/LocationHelper.h>
 
 #include "NotificationSystem.h"
+#include "RegenerationSystem.h"
 
 namespace Core::System {
 
@@ -132,29 +133,7 @@ void ActionSystem::regenerativeActionEffect( const std::string& sessionId, Model
         return;
     }
 
-    const double healthRegen = 5 + character->attributes().constitution();
-    const double staminaRegen = 5 + character->attributes().constitution();
-    const double manaRegen = 5 + character->attributes().constitution();
-
-    int newHealth = character->vitals().health() + healthRegen;
-    if ( newHealth > characterVitals.maxHealth() ) {
-        newHealth = characterVitals.maxHealth();
-    }
-    character->vitals().setHealth( newHealth );
-
-    int newStamina = character->vitals().stamina() + staminaRegen;
-    if ( newStamina > characterVitals.maxStamina() ) {
-        newStamina = characterVitals.maxStamina();
-    }
-    character->vitals().setStamina( newStamina );
-
-    int newMana = character->vitals().mana() + manaRegen;
-    if ( newMana > characterVitals.maxMana() ) {
-        newMana = characterVitals.maxMana();
-    }
-    character->vitals().setMana( newMana );
-
-    NotificationSystem::notifyCharacterVitals( sessionId, character );
+    RegenerationSystem::computeRegeneration( sessionId, character, 5.0 );
 }
 
 void ActionSystem::gatheringActionEffect( const std::string& sessionId, Model::Character* character, const Model::LocationAction& action ) {

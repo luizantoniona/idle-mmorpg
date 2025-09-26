@@ -139,14 +139,14 @@ void LocationInstance::tick() {
 
     for ( const auto& [ sessionId, character ] : _characters ) {
 
-        Core::System::RegenerationSystem::computeSpellsCooldown( sessionId, character );
-        Core::System::EffectSystem::computeEffects( sessionId, character );
+        Core::System::RegenerationSystem::processSpellsCooldown( sessionId, character );
+        Core::System::EffectSystem::processEffects( sessionId, character );
 
         if ( character->action().id() == "combat" ) {
             continue;
         }
 
-        Core::System::RegenerationSystem::computeRegeneration( sessionId, character );
+        Core::System::RegenerationSystem::processRegeneration( sessionId, character );
 
         if ( character->action().id() == "idle" ) {
             continue;

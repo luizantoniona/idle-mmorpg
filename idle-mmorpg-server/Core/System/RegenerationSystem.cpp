@@ -10,7 +10,7 @@
 
 namespace Core::System {
 
-void RegenerationSystem::computeRegeneration( const std::string& sessionId, Model::Character* character ) {
+void RegenerationSystem::processRegeneration( const std::string& sessionId, Model::Character* character ) {
     auto& characterVitals = character->vitals();
 
     if ( characterVitals.health() >= characterVitals.maxHealth() && characterVitals.mana() >= characterVitals.maxMana() && characterVitals.stamina() >= characterVitals.maxStamina() ) {
@@ -24,9 +24,19 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
 
     characterVitals.setRegenCounter( 0 );
 
-    const double healthRegen = std::max( 1.0, character->attributes().constitution() );
-    const double staminaRegen = std::max( 1.0, character->attributes().dexterity() );
-    const double manaRegen = std::max( 1.0, character->attributes().intelligence() );
+    computeRegeneration( sessionId, character );
+}
+
+void RegenerationSystem::computeRegeneration( const std::string& sessionId, Model::Character* character, double baseRegenerationValue ) {
+    auto& characterVitals = character->vitals();
+
+    const double vitalityLevel = character->skills().skillLevel( "vitality" );
+    const double enduranceLevel = character->skills().skillLevel( "endurance" );
+    const double meditationLevel = character->skills().skillLevel( "meditation" );
+
+    const double healthRegen = baseRegenerationValue + ( vitalityLevel * Core::Manager::ServerConfigurationManager::REGENERATION_SKILL_MULTIPLIER );
+    const double staminaRegen = baseRegenerationValue + ( enduranceLevel * Core::Manager::ServerConfigurationManager::REGENERATION_SKILL_MULTIPLIER );
+    const double manaRegen = baseRegenerationValue + ( meditationLevel * Core::Manager::ServerConfigurationManager::REGENERATION_SKILL_MULTIPLIER );
 
     double newHealth = characterVitals.health() + Helper::DecimalHelper::roundDecimals( healthRegen );
     if ( newHealth > characterVitals.maxHealth() ) {
@@ -49,7 +59,7 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
     NotificationSystem::notifyCharacterVitals( sessionId, character );
 }
 
-void RegenerationSystem::computeSpellsCooldown( const std::string& sessionId, Model::Character* character ) {
+void RegenerationSystem::processSpellsCooldown( const std::string& sessionId, Model::Character* character ) {
     auto& characterSpells = character->spells();
     const int tickRate = Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate();
     bool changed = false;
