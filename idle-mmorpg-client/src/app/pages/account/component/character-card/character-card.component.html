@@ -2,17 +2,4 @@
     <div class="character-header">
         <h3>{{ character.name }}</h3>
     </div>
-
-    <div class="character-attributes">
-        @if(character && character.attributes){
-        <div><strong>STR</strong>: {{ character.attributes.strength }}</div>
-        <div><strong>DEX</strong>: {{ character.attributes.dexterity }}</div>
-        <div><strong>CON</strong>: {{ character.attributes.constitution }}</div>
-        <div><strong>INT</strong>: {{ character.attributes.intelligence }}</div>
-        <div><strong>WIS</strong>: {{ character.attributes.wisdom }}</div>
-        } @else {
-        <div class="character-header">No attributes.</div>
-        }
-    </div>
-
 </app-card>

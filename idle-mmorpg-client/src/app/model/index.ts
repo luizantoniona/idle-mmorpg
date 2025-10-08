@@ -1,6 +1,5 @@
 export type { Character } from "./character/character.model";
 export type { CharacterAction } from "./character/character-action.model";
-export type { CharacterAttributes } from "./character/character-attributes.model";
 export type { CharacterCombatAction } from "./character/character-combat-action.model";
 export type { CharacterCoordinates } from "./character/character-coordinates.model"
 export type { CharacterEffect } from "./character/character-effect.model";

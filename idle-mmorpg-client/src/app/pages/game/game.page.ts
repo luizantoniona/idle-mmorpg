@@ -99,12 +99,6 @@ export class GamePage implements OnInit, OnDestroy {
                 break;
 
             case 'CHARACTER_ATTRIBUTES_UPDATE':
-                if (data.payload?.attributes) {
-                    this.character = {
-                        ...this.character!,
-                        attributes: data.payload.attributes,
-                    };
-                }
                 if (data.payload?.combatAttributes) {
                     this.character = {
                         ...this.character!,

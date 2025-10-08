@@ -1,48 +1,6 @@
 <app-panel>
-    @if (character.attributes && character.combatAttributes) {
+    @if (character.combatAttributes) {
     <div class="attributes-column">
-
-        <strong>Core</strong>
-        <div class="attributes-row">
-            <app-tooltip>
-                <div tooltip-target class="attribute">
-                    <strong>STR</strong>: {{ character.attributes.strength }}
-                </div>
-                <div tooltip-content>
-                </div>
-            </app-tooltip>
-            <app-tooltip>
-                <div tooltip-target class="attribute">
-                    <strong>DEX</strong>: {{ character.attributes.dexterity }}
-                </div>
-                <div tooltip-content>
-                </div>
-            </app-tooltip>
-            <app-tooltip>
-                <div tooltip-target class="attribute">
-                    <strong>CON</strong>: {{ character.attributes.constitution }}
-                </div>
-                <div tooltip-content>
-                </div>
-            </app-tooltip>
-        </div>
-
-        <div class="attributes-row">
-            <app-tooltip>
-                <div tooltip-target class="attribute">
-                    <strong>INT</strong>: {{ character.attributes.intelligence }}
-                </div>
-                <div tooltip-content>
-                </div>
-            </app-tooltip>
-            <app-tooltip>
-                <div tooltip-target class="attribute">
-                    <strong>WIS</strong>: {{ character.attributes.wisdom }}
-                </div>
-                <div tooltip-content>
-                </div>
-            </app-tooltip>
-        </div>
 
         <strong>Combat</strong>
         <div class="attributes-row">
