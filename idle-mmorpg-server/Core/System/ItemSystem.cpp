@@ -193,6 +193,7 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model:
         }
     }
 
+    NotificationSystem::notifyCharacterAttributes( sessionId, character );
     NotificationSystem::notifyCharacterSkills( sessionId, character );
 }
 

@@ -119,7 +119,7 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::
     characterSpell->setCount( 0 );
 
     const double restorationLevel = character->skills().skillLevel( "restoration" );
-    double heal = spell->effect().value();
+    double heal = spell->effect().value() + ( restorationLevel * Manager::ServerConfigurationManager::MAGIC_SKILL_HEAL_MULTIPLIER );
 
     double newHealth = std::min( character->vitals().health() + heal, character->vitals().maxHealth() );
     character->vitals().setHealth( newHealth );
