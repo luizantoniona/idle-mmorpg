@@ -43,7 +43,6 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
 
         applyMilestone( character, characterSkill );
 
-        NotificationSystem::notifyCharacterAttributes( sessionId, character );
         NotificationSystem::notifyCharacterVitals( sessionId, character );
 
     } else {
@@ -76,31 +75,9 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
     const std::string& id = milestoneBonus.id();
     double value = milestoneBonus.value();
 
-    Model::CharacterAttributes& attributes = character->attributes();
     Model::CharacterVitals& vitals = character->vitals();
 
-    if ( type == "attribute" ) {
-
-        if ( id == "strength" ) {
-            attributes.setStrength( attributes.strength() + static_cast<int>( value ) );
-
-        } else if ( id == "constitution" ) {
-            attributes.setConstitution( attributes.constitution() + static_cast<int>( value ) );
-
-        } else if ( id == "dexterity" ) {
-            attributes.setDexterity( attributes.dexterity() + static_cast<int>( value ) );
-
-        } else if ( id == "intelligence" ) {
-            attributes.setIntelligence( attributes.intelligence() + static_cast<int>( value ) );
-
-        } else if ( id == "wisdom" ) {
-            attributes.setWisdom( attributes.wisdom() + static_cast<int>( value ) );
-
-        } else {
-            std::cerr << "[ProgressionSystem] Unknown attribute id: " << id << std::endl;
-        }
-
-    } else if ( type == "vital" ) {
+    if ( type == "vital" ) {
 
         if ( id == "health" ) {
             vitals.setMaxHealth( vitals.maxHealth() + static_cast<int>( value ) );
@@ -136,7 +113,6 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
 
         applyLevelUp( character );
 
-        NotificationSystem::notifyCharacterAttributes( sessionId, character );
         NotificationSystem::notifyCharacterVitals( sessionId, character );
 
     } else {
@@ -151,29 +127,6 @@ void ProgressionSystem::applyLevelUp( Model::Character* character ) {
     vitals.setMaxHealth( vitals.maxHealth() + 10 );
     vitals.setMaxMana( vitals.maxMana() + 5 );
     vitals.setMaxStamina( vitals.maxStamina() + 5 );
-
-    auto& attributes = character->attributes();
-    int level = character->progression().level();
-
-    if ( level % 10 == 1 || level % 10 == 6 ) {
-        attributes.setStrength( attributes.strength() + 1 );
-    }
-
-    if ( level % 10 == 2 || level % 10 == 7 ) {
-        attributes.setConstitution( attributes.constitution() + 1 );
-    }
-
-    if ( level % 10 == 3 || level % 10 == 8 ) {
-        attributes.setDexterity( attributes.dexterity() + 1 );
-    }
-
-    if ( level % 10 == 4 || level % 10 == 9 ) {
-        attributes.setIntelligence( attributes.intelligence() + 1 );
-    }
-
-    if ( level % 10 == 5 || level % 10 == 0 ) {
-        attributes.setWisdom( attributes.wisdom() + 1 );
-    }
 }
 
 } // namespace Core::System

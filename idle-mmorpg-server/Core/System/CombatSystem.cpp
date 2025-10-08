@@ -42,14 +42,10 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
 
     NotificationSystem::notifyCharacterVitals( sessionId, character );
 
-    auto skills = CombatSystem::combatSkill( character );
+    auto weaponSkill = CombatSystem::combatSkill( character );
+    int weaponSkillLevel = character->skills().skillLevel( weaponSkill );
 
-    int masteryLevel = 0;
-    for ( const auto& skill : skills ) {
-        masteryLevel = std::max( masteryLevel, character->skills().skillLevel( skill ) );
-    }
-
-    double chanceDiff = masteryLevel + character->attributes().dexterity() - creature->evasion();
+    double chanceDiff = weaponSkillLevel - creature->evasion();
     double hitChance = 0.5 + ( 0.005 * chanceDiff );
     hitChance = std::clamp( hitChance, 0.05, 0.95 );
 
@@ -57,8 +53,8 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
         return;
     }
 
-    double minDamage = ( character->combatAttributes().attack() + character->attributes().strength() ) / 2;
-    double maxDamage = character->combatAttributes().attack() + character->attributes().strength();
+    double maxDamage = character->combatAttributes().attack() + ( weaponSkillLevel * Manager::ServerConfigurationManager::WEAPON_SKILL_DAMAGE_MULTIPLIER );
+    double minDamage = ( character->combatAttributes().attack() );
     double damage = rollRange( minDamage, maxDamage ) - creature->defense();
     damage = std::max( 1.0, damage );
 
@@ -66,10 +62,8 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
     newHealth = std::max( 0.0, newHealth );
     creature->vitals().setHealth( newHealth );
 
-    double xpShare = damage / std::max( 1, static_cast<int>( skills.size() ) );
-    for ( const auto& skill : skills ) {
-        _progressionSystem.applyExperience( sessionId, character, skill, xpShare );
-    }
+    double xpWeaponSkill = damage;
+    _progressionSystem.applyExperience( sessionId, character, weaponSkill, xpWeaponSkill );
 
     std::cout << "CombatSystem::computeHitDamage"
               << " [CHARACTER] " << character->name()
@@ -105,7 +99,7 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
         }
 
     } else {
-        double evasionChance = ( 0.5 + 0.005 * ( character->attributes().dexterity() - creature->accuracy() ) );
+        double evasionChance = ( 0.5 - ( 0.005 * creature->accuracy() ) );
         evasionChance = std::clamp( evasionChance, 0.05, 0.95 );
 
         if ( rollChance( evasionChance ) ) {
@@ -146,8 +140,8 @@ void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Char
         return;
     }
 
+    double maxDamage = characterSpell->spell()->effect().value() + ( invocationLevel * Manager::ServerConfigurationManager::MAGIC_SKILL_DAMAGE_MULTIPLIER );
     double minDamage = characterSpell->spell()->effect().value();
-    double maxDamage = minDamage + character->attributes().intelligence();
     double damage = rollRange( minDamage, maxDamage );
 
     double newHealth = creature->vitals().health() - damage;
@@ -214,44 +208,34 @@ double CombatSystem::rollRange( double min, double max ) {
     return min + roll * ( max - min );
 }
 
-std::vector<std::string> CombatSystem::combatSkill( Model::Character* character ) {
+std::string CombatSystem::combatSkill( Model::Character* character ) {
     const Model::Item* weapon = character->equipment().weapon().item();
 
-    std::vector<std::string> skills = {};
+    std::string skill = combatSkillByWeapon( weapon );
 
-    if ( !weapon ) {
-        skills.push_back( "fist_mastery" );
-        return skills;
-    }
-
-    std::string weaponSkill = combatSkillByWeapon( weapon );
-
-    if ( !weaponSkill.empty() ) {
-        skills.push_back( weaponSkill );
-    }
-
-    return skills;
+    return skill;
 }
 
 std::string CombatSystem::combatSkillByWeapon( const Model::Item* weapon ) {
     if ( !weapon ) {
-        return "";
+        return "fist_mastery";
     }
 
     const std::string& category = weapon->category();
     if ( category == "sword" ) {
         return "sword_mastery";
-    }
 
-    if ( category == "axe" ) {
+    } else if ( category == "axe" ) {
         return "axe_mastery";
-    }
 
-    if ( category == "dagger" ) {
+    } else if ( category == "dagger" ) {
         return "dagger_mastery";
+
+    } else {
+        std::cerr << "CombatSystem::combatSkillByWeapon Unknow weapon category: " << category << std::endl;
     }
 
-    return "";
+    return "fist_mastery";
 }
 
 } // namespace Core::System

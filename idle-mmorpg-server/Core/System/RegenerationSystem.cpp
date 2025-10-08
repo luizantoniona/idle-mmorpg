@@ -34,9 +34,9 @@ void RegenerationSystem::computeRegeneration( const std::string& sessionId, Mode
     const double enduranceLevel = character->skills().skillLevel( "endurance" );
     const double meditationLevel = character->skills().skillLevel( "meditation" );
 
-    const double healthRegen = baseRegenerationValue + ( vitalityLevel * Core::Manager::ServerConfigurationManager::REGENERATION_SKILL_MULTIPLIER );
-    const double staminaRegen = baseRegenerationValue + ( enduranceLevel * Core::Manager::ServerConfigurationManager::REGENERATION_SKILL_MULTIPLIER );
-    const double manaRegen = baseRegenerationValue + ( meditationLevel * Core::Manager::ServerConfigurationManager::REGENERATION_SKILL_MULTIPLIER );
+    const double healthRegen = baseRegenerationValue + ( vitalityLevel * Core::Manager::ServerConfigurationManager::VITAL_SKILL_REGENERATION_MULTIPLIER );
+    const double staminaRegen = baseRegenerationValue + ( enduranceLevel * Core::Manager::ServerConfigurationManager::VITAL_SKILL_REGENERATION_MULTIPLIER );
+    const double manaRegen = baseRegenerationValue + ( meditationLevel * Core::Manager::ServerConfigurationManager::VITAL_SKILL_REGENERATION_MULTIPLIER );
 
     double newHealth = characterVitals.health() + Helper::DecimalHelper::roundDecimals( healthRegen );
     if ( newHealth > characterVitals.maxHealth() ) {
@@ -118,7 +118,8 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::
 
     characterSpell->setCount( 0 );
 
-    double heal = spell->effect().value() + character->attributes().wisdom();
+    const double restorationLevel = character->skills().skillLevel( "restoration" );
+    double heal = spell->effect().value();
 
     double newHealth = std::min( character->vitals().health() + heal, character->vitals().maxHealth() );
     character->vitals().setHealth( newHealth );

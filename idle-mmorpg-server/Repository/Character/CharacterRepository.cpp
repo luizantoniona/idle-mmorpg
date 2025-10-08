@@ -2,7 +2,6 @@
 
 #include <Database/Query.h>
 
-#include "CharacterAttributesRepository.h"
 #include "CharacterCoordinateRepository.h"
 #include "CharacterEquipmentRepository.h"
 #include "CharacterInventoryRepository.h"
@@ -38,7 +37,6 @@ int CharacterRepository::createCharacter( const int idUser, const std::string& d
 
     bool success = true;
 
-    success &= CharacterAttributesRepository().createAttributes( idCharacter );
     success &= CharacterCoordinateRepository().createCoordinates( idCharacter );
     success &= CharacterEquipmentRepository().createEquipment( idCharacter );
     success &= CharacterInventoryRepository().createInventory( idCharacter );
@@ -57,7 +55,6 @@ bool CharacterRepository::updateCharacter( Model::Character character ) {
 
     bool success = true;
 
-    success &= CharacterAttributesRepository().updateAttributes( idCharacter, character.attributes() );
     success &= CharacterCoordinateRepository().updateCoordinates( idCharacter, character.coordinates() );
     success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipment() );
     success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
@@ -105,11 +102,6 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );
-
-        auto attributes = CharacterAttributesRepository().findByCharacterId( character->idCharacter() );
-        if ( attributes ) {
-            character->setAttributes( *attributes );
-        }
 
         auto coordinates = CharacterCoordinateRepository().findByCharacterId( character->idCharacter() );
         if ( coordinates ) {
@@ -181,11 +173,6 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );
-
-        auto attributes = CharacterAttributesRepository().findByCharacterId( character->idCharacter() );
-        if ( attributes ) {
-            character->setAttributes( *attributes );
-        }
 
         auto coordinates = CharacterCoordinateRepository().findByCharacterId( character->idCharacter() );
         if ( coordinates ) {

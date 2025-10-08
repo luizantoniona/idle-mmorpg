@@ -13,7 +13,10 @@ public:
     int threadPool() const;
     void setThreadPool( int threadPool );
 
-    static constexpr double REGENERATION_SKILL_MULTIPLIER = 0.25;
+    static constexpr double VITAL_SKILL_REGENERATION_MULTIPLIER = 0.25;
+    static constexpr double MAGIC_SKILL_HEAL_MULTIPLIER = 0.01;
+    static constexpr double MAGIC_SKILL_DAMAGE_MULTIPLIER = 0.01;
+    static constexpr double WEAPON_SKILL_DAMAGE_MULTIPLIER = 0.01;
 
 private:
     int _tickRate;

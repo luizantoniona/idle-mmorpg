@@ -1,10 +1,5 @@
 {
     "skills": [
-        "combat/style/axe_mastery",
-        "combat/style/dagger_mastery",
-        "combat/style/fist_mastery",
-        "combat/style/shield_mastery",
-        "combat/style/sword_mastery",
         "combat/resistance",
         "gathering/fishing",
         "gathering/herbalism",
@@ -14,6 +9,11 @@
         "magic/restoration",
         "vitals/endurance",
         "vitals/meditation",
-        "vitals/vitality"
+        "vitals/vitality",
+        "weapon/axe_mastery",
+        "weapon/dagger_mastery",
+        "weapon/fist_mastery",
+        "weapon/shield_mastery",
+        "weapon/sword_mastery"
     ]
 }

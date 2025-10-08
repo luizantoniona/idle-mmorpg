@@ -8,7 +8,6 @@ Character::Character() :
     _name( "" ),
     _sessionId( "" ),
     _action(),
-    _attributes(),
     _combatAction(),
     _combatAttributes(),
     _coordinates(),
@@ -66,14 +65,6 @@ CharacterAction& Character::action() {
 
 void Character::setAction( const CharacterAction& action ) {
     _action = action;
-}
-
-CharacterAttributes& Character::attributes() {
-    return _attributes;
-}
-
-void Character::setAttributes( const CharacterAttributes& attributes ) {
-    _attributes = attributes;
 }
 
 CharacterCombatAction& Character::combatAction() {

@@ -13,7 +13,6 @@ class NotificationSystem {
 public:
     static void notifyFullCharacter( const std::string& sessionId, Model::Character* character );
     static void notifyDeadCharacter( const std::string& sessionId );
-    static void notifyCharacterAttributes( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterEffects( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterEquipment( const std::string& sessionId, Model::Character* character );
     static void notifyCharacterInventory( const std::string& sessionId, Model::Character* character );

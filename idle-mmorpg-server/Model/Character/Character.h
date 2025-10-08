@@ -6,7 +6,6 @@
 #include <json/json.h>
 
 #include "CharacterAction.h"
-#include "CharacterAttributes.h"
 #include "CharacterCombatAction.h"
 #include "CharacterCombatAttributes.h"
 #include "CharacterCoordinates.h"
@@ -42,9 +41,6 @@ public:
 
     CharacterAction& action();
     void setAction( const CharacterAction& action );
-
-    CharacterAttributes& attributes();
-    void setAttributes( const CharacterAttributes& attributes );
 
     CharacterCombatAction& combatAction();
     void setCombatAction( const CharacterCombatAction& combatAction );
@@ -88,7 +84,6 @@ private:
     std::string _name;
     std::string _sessionId;
     CharacterAction _action;
-    CharacterAttributes _attributes;
     CharacterCombatAction _combatAction;
     CharacterCombatAttributes _combatAttributes;
     CharacterCoordinates _coordinates;

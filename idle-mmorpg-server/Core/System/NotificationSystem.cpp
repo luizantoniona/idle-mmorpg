@@ -8,7 +8,6 @@ namespace Core::System {
 void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Model::Character* character ) {
     Json::Value characterJson = character->toJson();
     characterJson[ "action" ] = character->action().toJson();
-    characterJson[ "attributes" ] = character->attributes().toJson();
     characterJson[ "coordinates" ] = character->coordinates().toJson();
     characterJson[ "inventory" ] = character->inventory().toJson();
     characterJson[ "equipment" ] = character->equipment().toJson();
@@ -24,13 +23,6 @@ void NotificationSystem::notifyFullCharacter( const std::string& sessionId, Mode
 
 void NotificationSystem::notifyDeadCharacter( const std::string& sessionId ) {
     Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_DEAD, "" );
-}
-
-void NotificationSystem::notifyCharacterAttributes( const std::string& sessionId, Model::Character* character ) {
-    Json::Value payload;
-    payload[ "attributes" ] = character->attributes().toJson();
-    payload[ "combatAttributes" ] = character->combatAttributes().toJson();
-    Core::Message::MessageSender::send( sessionId, Message::MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE, payload );
 }
 
 void NotificationSystem::notifyCharacterEffects( const std::string& sessionId, Model::Character* character ) {
