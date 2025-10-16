@@ -111,9 +111,6 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     newHealth = std::max( 0.0, newHealth );
     character->vitals().setHealth( newHealth );
 
-    int xpResistance = std::max( 1, static_cast<int>( damage ) );
-    _progressionSystem.applyExperience( sessionId, character, "resistance", xpResistance );
-
     NotificationSystem::notifyCharacterVitals( sessionId, character );
 
     std::cout << "CombatSystem::computeHitDamage"

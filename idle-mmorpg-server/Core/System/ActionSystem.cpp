@@ -113,6 +113,12 @@ int ActionSystem::computeActionDuration( Model::Character* character, const Mode
     } else if ( action.id() == "woodcut" ) {
         skill = "woodcutting";
 
+    } else if ( action.id() == "fish" ) {
+        skill = "fishing";
+
+    } else if ( action.id() == "gather" ) {
+        skill = "herbalism";
+
     } else {
         return baseDuration;
     }
@@ -144,6 +150,12 @@ void ActionSystem::gatheringActionEffect( const std::string& sessionId, Model::C
 
     } else if ( action.id() == "woodcut" ) {
         skillLevel = character->skills().skillLevel( "woodcutting" );
+
+    } else if ( action.id() == "fish" ) {
+        skillLevel = character->skills().skillLevel( "fishing" );
+
+    } else if ( action.id() == "gather" ) {
+        skillLevel = character->skills().skillLevel( "herbalism" );
     }
 
     for ( const auto& loot : action.loot() ) {
