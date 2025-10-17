@@ -24,6 +24,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         const std::string skillId = Helper::SkillHelper::enumToString( skillType );
 
         Model::CharacterSkill newSkill;
+        newSkill.setType( skillType );
         newSkill.setId( skillId );
         newSkill.setExperience( 0 );
         newSkill.setLevel( 0 );

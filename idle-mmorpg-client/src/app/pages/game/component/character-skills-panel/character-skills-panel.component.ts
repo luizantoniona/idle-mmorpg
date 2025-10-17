@@ -34,7 +34,7 @@ export class CharacterSkillsPanel {
         const groups = new Map<string, any[]>();
 
         for (const skill of skills) {
-            const category = skill.skill.type || 'Uncategorized';
+            const category = skill.skill.category || 'Uncategorized';
             if (!groups.has(category)) {
                 groups.set(category, []);
             }
