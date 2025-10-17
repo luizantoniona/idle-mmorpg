@@ -10,7 +10,7 @@
     "bonus": [
         {
             "type": "skill",
-            "category": "fishing",
+            "category": "FISHING",
             "value": 1
         }
     ]

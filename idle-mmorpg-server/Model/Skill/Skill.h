@@ -7,6 +7,7 @@
 #include <json/json.h>
 
 #include "SkillMilestone.h"
+#include "SkillType.h"
 
 namespace Model {
 
@@ -25,18 +26,22 @@ public:
     std::string description() const;
     void setDescription( const std::string& description );
 
-    std::string type() const;
-    void setType( const std::string& type );
+    std::string category() const;
+    void setCategory( const std::string& category );
 
     std::vector<SkillMilestone> millestones() const;
     void setMillestones( const std::vector<SkillMilestone>& millestones );
     void addMilestone( const SkillMilestone& milestone );
 
+    SkillType type() const;
+    void setType( SkillType type );
+
 private:
+    SkillType _type;
     std::string _id;
     std::string _name;
     std::string _description;
-    std::string _type;
+    std::string _category;
     std::vector<SkillMilestone> _millestones;
 };
 

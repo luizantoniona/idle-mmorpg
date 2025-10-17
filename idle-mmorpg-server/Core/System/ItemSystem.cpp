@@ -4,6 +4,7 @@
 
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
+#include <Helper/SkillHelper.h>
 
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
@@ -161,15 +162,16 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model:
                 }
 
             } else if ( type == "skill" ) {
+                const Model::SkillType targetSkill = Helper::SkillHelper::stringToEnum( targetCategory );
 
-                Model::CharacterSkill* characterSkill = character->skills().skill( targetCategory );
+                Model::CharacterSkill* characterSkill = character->skills().skill( targetSkill );
 
                 if ( !characterSkill ) {
                     Model::CharacterSkill newSkill;
                     newSkill.setId( targetCategory );
                     newSkill.setExperience( 0 );
                     newSkill.setLevel( 0 );
-                    newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( targetCategory ) );
+                    newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( targetSkill ) );
 
                     if ( !newSkill.skill() ) {
                         std::cerr << "ItemSystem::computeEquipmentModifiers Unknown skill id: " << targetCategory << std::endl;
@@ -177,7 +179,7 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model:
                     }
 
                     character->skills().addSkill( newSkill );
-                    characterSkill = character->skills().skill( targetCategory );
+                    characterSkill = character->skills().skill( targetSkill );
                 }
 
                 if ( characterSkill ) {

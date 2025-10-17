@@ -1,7 +1,7 @@
 {
-    "id": "sword_mastery",
+    "id": "SWORD_MASTERY",
     "name": "Sword Mastery",
     "description": "Increase your accuracy with swords.",
-    "type": "weapon",
+    "category": "weapon",
     "milestones": []
 }

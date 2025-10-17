@@ -1,7 +1,7 @@
 {
-    "id": "restoration",
+    "id": "RESTORATION",
     "name": "Restoration",
     "description": "Your ability to channel restorative magic and mend wounds effectively.",
-    "type": "magic",
+    "category": "magic",
     "milestones": []
 }

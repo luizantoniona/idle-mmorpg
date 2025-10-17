@@ -1,8 +1,11 @@
 #include "CharacterSkillsRepository.h"
 
+#include <iostream>
+
 #include <Commons/Singleton.h>
 #include <Core/Manager/SkillManager.h>
 #include <Database/Query.h>
+#include <Helper/SkillHelper.h>
 
 namespace Repository {
 
@@ -56,11 +59,15 @@ std::unique_ptr<Model::CharacterSkills> CharacterSkillsRepository::findByCharact
         auto skill = Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId );
         if ( skill ) {
             Model::CharacterSkill characterSkill;
+            characterSkill.setType( Helper::SkillHelper::stringToEnum( skillId ) );
             characterSkill.setId( skillId );
             characterSkill.setExperience( experience );
             characterSkill.setLevel( level );
             characterSkill.setSkill( skill );
             skills->addSkill( characterSkill );
+
+        } else {
+            std::cerr << "Unknown skill: " << skillId << std::endl;
         }
     }
 

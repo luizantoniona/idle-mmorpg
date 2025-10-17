@@ -10,7 +10,7 @@
     "bonus": [
         {
             "type": "skill",
-            "category": "mining",
+            "category": "MINING",
             "value": 1
         }
     ]

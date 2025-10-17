@@ -31,17 +31,11 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
         const Model::LocationAction& trainAction = *it;
 
         for ( const auto& experienceEntry : trainAction.experience() ) {
-            std::string skillId = experienceEntry.idSkill();
             int xpGranted = experienceEntry.amount();
 
-            if ( skillId == "combat" ) {
-                auto combatSkillToTrain = combatSkill( character );
-                for ( const auto& skill : combatSkillToTrain ) {
-                    _progressionSystem.applyExperience( sessionId, character, skill, xpGranted );
-                }
-
-            } else {
-                _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
+            std::vector<Model::SkillType> combatSkillToTrain = combatSkill( character );
+            for ( const auto& skill : combatSkillToTrain ) {
+                _progressionSystem.applyExperience( sessionId, character, skill, xpGranted );
             }
         }
 
@@ -54,49 +48,50 @@ void TrainingSystem::process( const std::string& sessionId, Model::Character* ch
     Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
-std::vector<std::string> TrainingSystem::combatSkill( Model::Character* character ) {
+std::vector<Model::SkillType> TrainingSystem::combatSkill( Model::Character* character ) {
     const Model::Item* weapon = character->equipment().weapon().item();
     const Model::Item* offhand = character->equipment().offhand().item();
 
-    std::vector<std::string> skills = {};
+    std::vector<Model::SkillType> skills = {};
 
     if ( !weapon && !offhand ) {
-        return { "fist_mastery" };
+        return { Model::SkillType::FIST_MASTERY };
     }
 
-    auto getSkillForWeapon = []( const Model::Item* weapon ) -> std::string {
-        if ( !weapon ) {
-            return "";
+    auto getSkillForWeapon = []( const Model::Item* item ) -> Model::SkillType {
+        if ( !item ) {
+            return Model::SkillType::FIST_MASTERY;
         }
 
-        const std::string& category = weapon->category();
+        const std::string& category = item->category();
+
         if ( category == "sword" ) {
-            return "sword_mastery";
+            return Model::SkillType::SWORD_MASTERY;
         }
 
         if ( category == "axe" ) {
-            return "axe_mastery";
+            return Model::SkillType::AXE_MASTERY;
         }
 
         if ( category == "dagger" ) {
-            return "dagger_mastery";
+            return Model::SkillType::DAGGER_MASTERY;
         }
 
         if ( category == "shield" ) {
-            return "shield_mastery";
+            return Model::SkillType::SHIELD_MASTERY;
         }
 
-        return "";
+        return Model::SkillType::UNKNOWN;
     };
 
-    std::string leftSkill = getSkillForWeapon( weapon );
-    std::string rightSkill = getSkillForWeapon( offhand );
+    Model::SkillType leftSkill = getSkillForWeapon( weapon );
+    Model::SkillType rightSkill = getSkillForWeapon( offhand );
 
-    if ( !leftSkill.empty() ) {
+    if ( leftSkill != Model::SkillType::UNKNOWN ) {
         skills.push_back( leftSkill );
     }
 
-    if ( !rightSkill.empty() && rightSkill != leftSkill ) {
+    if ( rightSkill != Model::SkillType::UNKNOWN ) {
         skills.push_back( rightSkill );
     }
 

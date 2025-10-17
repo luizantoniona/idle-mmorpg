@@ -1,8 +1,8 @@
 {
-    "id": "vitality",
+    "id": "VITALITY",
     "name": "Vitality",
     "description": "Through rest and recovery, your body becomes more resilient, increasing your maximum health.",
-    "type": "vitals",
+    "category": "vitals",
     "milestones": [
         {
             "level": 1,

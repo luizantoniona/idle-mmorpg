@@ -1,8 +1,8 @@
 {
-    "id": "meditation",
+    "id": "MEDITATION",
     "name": "Meditation",
     "description": "Through focus and inner calm, you expand your mind, increasing your maximum mana.",
-    "type": "vitals",
+    "category": "vitals",
     "milestones": [
         {
             "level": 1,

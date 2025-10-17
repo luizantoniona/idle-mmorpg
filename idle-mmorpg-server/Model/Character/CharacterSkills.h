@@ -1,8 +1,6 @@
 #ifndef CHARACTERSKILLS_H
 #define CHARACTERSKILLS_H
 
-#include <string>
-
 #include <json/json.h>
 
 #include "CharacterSkill.h"
@@ -17,10 +15,10 @@ public:
 
     std::vector<CharacterSkill>& skills();
 
-    CharacterSkill* skill( const std::string& idSkill );
+    CharacterSkill* skill( SkillType type );
     void addSkill( CharacterSkill skill );
 
-    int skillLevel( const std::string& idSkill );
+    int skillLevel( SkillType type );
 
     void clear();
 

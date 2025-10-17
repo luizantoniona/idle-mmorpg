@@ -1,7 +1,7 @@
 {
-    "id": "dagger_mastery",
+    "id": "DAGGER_MASTERY",
     "name": "Dagger Mastery",
     "description": "Improve your speed with daggers.",
-    "type": "weapon",
+    "category": "weapon",
     "milestones": []
 }

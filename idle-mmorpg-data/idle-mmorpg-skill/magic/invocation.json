@@ -1,7 +1,7 @@
 {
-    "id": "invocation",
+    "id": "INVOCATION",
     "name": "Invocation",
     "description": "Your ability to concentrate and channel magical energy effectively.",
-    "type": "magic",
+    "category": "magic",
     "milestones": []
 }

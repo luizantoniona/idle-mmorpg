@@ -7,6 +7,7 @@
 #include <Core/Manager/SkillManager.h>
 #include <Core/System/QuestSystem.h>
 #include <Helper/LocationHelper.h>
+#include <Helper/SkillHelper.h>
 
 #include "NotificationSystem.h"
 #include "RegenerationSystem.h"
@@ -80,10 +81,10 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
             const Model::LocationAction& completedAction = *it;
 
             for ( const auto& experienceEntry : completedAction.experience() ) {
-                std::string skillId = experienceEntry.idSkill();
+                Model::SkillType skillType = Helper::SkillHelper::stringToEnum( experienceEntry.idSkill() );
                 int xpGranted = experienceEntry.amount();
 
-                _progressionSystem.applyExperience( sessionId, character, skillId, xpGranted );
+                _progressionSystem.applyExperience( sessionId, character, skillType, xpGranted );
             }
 
             if ( completedAction.type() == "gathering" ) {
@@ -106,18 +107,18 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
 int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
     int baseDuration = action.duration();
 
-    std::string skill;
+    Model::SkillType skill;
     if ( action.id() == "mine" ) {
-        skill = "mining";
+        skill = Model::SkillType::MINING;
 
     } else if ( action.id() == "woodcut" ) {
-        skill = "woodcutting";
+        skill = Model::SkillType::WOODCUTTING;
 
     } else if ( action.id() == "fish" ) {
-        skill = "fishing";
+        skill = Model::SkillType::FISHING;
 
     } else if ( action.id() == "gather" ) {
-        skill = "herbalism";
+        skill = Model::SkillType::HERBALISM;
 
     } else {
         return baseDuration;
@@ -146,16 +147,16 @@ void ActionSystem::gatheringActionEffect( const std::string& sessionId, Model::C
     int skillLevel = 0;
 
     if ( action.id() == "mine" ) {
-        skillLevel = character->skills().skillLevel( "mining" );
+        skillLevel = character->skills().skillLevel( Model::SkillType::MINING );
 
     } else if ( action.id() == "woodcut" ) {
-        skillLevel = character->skills().skillLevel( "woodcutting" );
+        skillLevel = character->skills().skillLevel( Model::SkillType::WOODCUTTING );
 
     } else if ( action.id() == "fish" ) {
-        skillLevel = character->skills().skillLevel( "fishing" );
+        skillLevel = character->skills().skillLevel( Model::SkillType::FISHING );
 
     } else if ( action.id() == "gather" ) {
-        skillLevel = character->skills().skillLevel( "herbalism" );
+        skillLevel = character->skills().skillLevel( Model::SkillType::HERBALISM );
     }
 
     for ( const auto& loot : action.loot() ) {

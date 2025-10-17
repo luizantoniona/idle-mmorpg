@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Helper/JsonHelper.h>
+#include <Helper/SkillHelper.h>
 
 namespace Core::Factory {
 
@@ -36,12 +37,20 @@ std::unique_ptr<Model::Skill> SkillFactory::createSkill( const std::string& skil
 
     Json::Value skillJson = Helper::JsonHelper::loadJsonFile( skillPath );
 
+    const std::string skillId = skillJson[ "id" ].asString();
+
+    if ( Helper::SkillHelper::stringToEnum( skillId ) == Model::SkillType::UNKNOWN ) {
+        std::cerr << "Unmaped skill: " << skillId << std::endl;
+        return nullptr;
+    }
+
     auto skill = std::make_unique<Model::Skill>();
 
-    skill->setId( skillJson[ "id" ].asString() );
+    skill->setType( Helper::SkillHelper::stringToEnum( skillId ) );
+    skill->setId( skillId );
     skill->setName( skillJson[ "name" ].asString() );
     skill->setDescription( skillJson[ "description" ].asString() );
-    skill->setType( skillJson[ "type" ].asString() );
+    skill->setCategory( skillJson[ "category" ].asString() );
 
     const auto& milestonesJson = skillJson[ "milestones" ];
     for ( const auto& milestoneJson : milestonesJson ) {

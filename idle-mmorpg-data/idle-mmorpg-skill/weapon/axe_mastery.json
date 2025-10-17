@@ -1,7 +1,7 @@
 {
-    "id": "axe_mastery",
+    "id": "AXE_MASTERY",
     "name": "Axe Mastery",
     "description": "Improve your skill with axes, increasing attack power.",
-    "type": "weapon",
+    "category": "weapon",
     "milestones": []
 }

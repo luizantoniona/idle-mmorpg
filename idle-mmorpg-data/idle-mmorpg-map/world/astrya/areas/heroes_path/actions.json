@@ -9,7 +9,7 @@
             "requirements": [],
             "experience": [
                 {
-                    "skill": "vitality",
+                    "skill": "VITALITY",
                     "amount": 2
                 }
             ]
@@ -21,7 +21,7 @@
             "requirements": [],
             "experience": [
                 {
-                    "skill": "endurance",
+                    "skill": "ENDURANCE",
                     "amount": 2
                 }
             ]
@@ -33,7 +33,7 @@
             "requirements": [],
             "experience": [
                 {
-                    "skill": "meditation",
+                    "skill": "MEDITATION",
                     "amount": 2
                 }
             ]
@@ -57,7 +57,6 @@
             "requirements": [],
             "experience": [
                 {
-                    "skill": "combat",
                     "amount": 2
                 }
             ]

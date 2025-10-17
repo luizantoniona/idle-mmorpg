@@ -22,9 +22,9 @@ std::vector<CharacterSkill>& CharacterSkills::skills() {
     return _skills;
 }
 
-CharacterSkill* CharacterSkills::skill( const std::string& idSkill ) {
+CharacterSkill* CharacterSkills::skill( SkillType type ) {
     for ( auto& skill : _skills ) {
-        if ( skill.id() == idSkill ) {
+        if ( skill.type() == type ) {
             return &skill;
         }
     }
@@ -36,8 +36,8 @@ void CharacterSkills::addSkill( CharacterSkill skill ) {
     _skills.push_back( skill );
 }
 
-int CharacterSkills::skillLevel( const std::string& idSkill ) {
-    CharacterSkill* skillToSee = skill( idSkill );
+int CharacterSkills::skillLevel( SkillType type ) {
+    CharacterSkill* skillToSee = skill( type );
     return skillToSee ? skillToSee->level() + skillToSee->bonusLevel() : 0;
 }
 

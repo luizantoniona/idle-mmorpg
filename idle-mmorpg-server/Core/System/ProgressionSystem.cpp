@@ -6,19 +6,23 @@
 #include <Core/Manager/SkillManager.h>
 #include <Core/System/NotificationSystem.h>
 #include <Helper/LevelExperienceHelper.h>
+#include <Helper/SkillHelper.h>
 
 namespace Core::System {
 
 ProgressionSystem::ProgressionSystem() {}
 
-void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained ) {
+void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const Model::SkillType& skillType, int xpGained ) {
     if ( !character ) {
         return;
     }
 
-    Model::CharacterSkill* characterSkill = character->skills().skill( skillId );
+    Model::CharacterSkill* characterSkill = character->skills().skill( skillType );
 
     if ( !characterSkill ) {
+
+        const std::string skillId = Helper::SkillHelper::enumToString( skillType );
+
         Model::CharacterSkill newSkill;
         newSkill.setId( skillId );
         newSkill.setExperience( 0 );
@@ -31,7 +35,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
         }
 
         character->skills().addSkill( newSkill );
-        characterSkill = character->skills().skill( skillId );
+        characterSkill = character->skills().skill( skillType );
     }
 
     int newXp = characterSkill->experience() + xpGained;

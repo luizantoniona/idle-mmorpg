@@ -1,7 +1,7 @@
 {
-    "id": "fist_mastery",
+    "id": "FIST_MASTERY",
     "name": "Fist Mastery",
     "description": "Your skill in fighting without weapons, using your fists and body.",
-    "type": "weapon",
+    "category": "weapon",
     "milestones": []
 }

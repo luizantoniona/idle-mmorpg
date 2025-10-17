@@ -16,6 +16,7 @@ public:
     void initialize( const std::string& skillsPath );
 
     Model::Skill* skill( const std::string& idSkill );
+    Model::Skill* skill( Model::SkillType typeSkill );
 
 private:
     std::unordered_map<std::string, std::unique_ptr<Model::Skill> > _skills;

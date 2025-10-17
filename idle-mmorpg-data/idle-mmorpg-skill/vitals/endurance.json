@@ -1,8 +1,8 @@
 {
-    "id": "endurance",
+    "id": "ENDURANCE",
     "name": "Endurance",
     "description": "Training your body through constant movement builds endurance, increasing your maximum stamina.",
-    "type": "vitals",
+    "category": "vitals",
     "milestones": [
         {
             "level": 1,

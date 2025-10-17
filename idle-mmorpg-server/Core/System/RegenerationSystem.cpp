@@ -30,9 +30,9 @@ void RegenerationSystem::processRegeneration( const std::string& sessionId, Mode
 void RegenerationSystem::computeRegeneration( const std::string& sessionId, Model::Character* character, double baseRegenerationValue ) {
     auto& characterVitals = character->vitals();
 
-    const double vitalityLevel = character->skills().skillLevel( "vitality" );
-    const double enduranceLevel = character->skills().skillLevel( "endurance" );
-    const double meditationLevel = character->skills().skillLevel( "meditation" );
+    const double vitalityLevel = character->skills().skillLevel( Model::SkillType::VITALITY );
+    const double enduranceLevel = character->skills().skillLevel( Model::SkillType::ENDURANCE );
+    const double meditationLevel = character->skills().skillLevel( Model::SkillType::MEDITATION );
 
     const double healthRegen = baseRegenerationValue + ( vitalityLevel * Core::Manager::ServerConfigurationManager::VITAL_SKILL_REGENERATION_MULTIPLIER );
     const double staminaRegen = baseRegenerationValue + ( enduranceLevel * Core::Manager::ServerConfigurationManager::VITAL_SKILL_REGENERATION_MULTIPLIER );
@@ -118,13 +118,13 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Model::
 
     characterSpell->setCount( 0 );
 
-    const double restorationLevel = character->skills().skillLevel( "restoration" );
+    const double restorationLevel = character->skills().skillLevel( Model::SkillType::RESTORATION );
     double heal = spell->effect().value() + ( restorationLevel * Manager::ServerConfigurationManager::MAGIC_SKILL_HEAL_MULTIPLIER );
 
     double newHealth = std::min( character->vitals().health() + heal, character->vitals().maxHealth() );
     character->vitals().setHealth( newHealth );
 
-    ProgressionSystem().applyExperience( sessionId, character, "restoration", spell->manaCost() );
+    ProgressionSystem().applyExperience( sessionId, character, Model::SkillType::RESTORATION, spell->manaCost() );
     NotificationSystem::notifyCharacterVitals( sessionId, character );
 
     std::cout << character->name() << " casts " << spell->name() << " healing " << heal << " health." << std::endl;

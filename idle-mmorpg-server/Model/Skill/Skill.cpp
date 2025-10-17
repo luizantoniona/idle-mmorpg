@@ -1,29 +1,31 @@
 #include "Skill.h"
 
-namespace {
-constexpr const char* JSON_ID = "id";
-constexpr const char* JSON_NAME = "name";
-constexpr const char* JSON_DESCRIPTION = "description";
-constexpr const char* JSON_TYPE = "type";
-} // namespace
-
 namespace Model {
 
 Skill::Skill() :
+    _type( SkillType::UNKNOWN ),
     _id( "" ),
     _name( "" ),
     _description( "" ),
-    _type( "" ),
+    _category( "" ),
     _millestones( {} ) {
 }
 
 Json::Value Skill::toJson() {
     Json::Value root;
-    root[ JSON_ID ] = id();
-    root[ JSON_NAME ] = name();
-    root[ JSON_DESCRIPTION ] = description();
-    root[ JSON_TYPE ] = type();
+    root[ "id" ] = id();
+    root[ "name" ] = name();
+    root[ "description" ] = description();
+    root[ "category" ] = category();
     return root;
+}
+
+SkillType Skill::type() const {
+    return _type;
+}
+
+void Skill::setType( SkillType type ) {
+    _type = type;
 }
 
 std::string Skill::id() const {
@@ -50,12 +52,12 @@ void Skill::setDescription( const std::string& description ) {
     _description = description;
 }
 
-std::string Skill::type() const {
-    return _type;
+std::string Skill::category() const {
+    return _category;
 }
 
-void Skill::setType( const std::string& type ) {
-    _type = type;
+void Skill::setCategory( const std::string& category ) {
+    _category = category;
 }
 
 std::vector<SkillMilestone> Skill::millestones() const {

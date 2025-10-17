@@ -1,7 +1,7 @@
 {
-    "id": "fishing",
+    "id": "FISHING",
     "name": "Fishing",
     "description": "Your proeficiency in catching fishes.",
-    "type": "gathering",
+    "category": "gathering",
     "milestones": []
 }

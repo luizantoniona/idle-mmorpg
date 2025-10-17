@@ -1,7 +1,7 @@
 {
-    "id": "woodcutting",
+    "id": "WOODCUTTING",
     "name": "Woodcutting",
     "description": "Chop down trees to gather wood.",
-    "type": "gathering",
+    "category": "gathering",
     "milestones": []
 }

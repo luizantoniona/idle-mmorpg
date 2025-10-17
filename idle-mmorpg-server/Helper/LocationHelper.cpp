@@ -3,6 +3,8 @@
 #include <iostream>
 #include <unordered_map>
 
+#include <Helper/SkillHelper.h>
+
 namespace Helper {
 
 bool LocationHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
@@ -126,7 +128,10 @@ bool LocationHelper::checkRequirement( Model::Character* character, const Model:
 }
 
 bool LocationHelper::checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement ) {
-    Model::CharacterSkill* skill = character->skills().skill( requirement.id() );
+    const Model::SkillType skillType = Helper::SkillHelper::stringToEnum( requirement.id() );
+
+    Model::CharacterSkill* skill = character->skills().skill( skillType );
+
     return skill && skill->level() >= requirement.amount();
 }
 

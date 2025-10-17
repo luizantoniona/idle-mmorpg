@@ -13,7 +13,7 @@ class ProgressionSystem {
 public:
     ProgressionSystem();
 
-    void applyExperience( const std::string& sessionId, Model::Character* character, const std::string& skillId, int xpGained );
+    void applyExperience( const std::string& sessionId, Model::Character* character, const Model::SkillType& skillType, int xpGained );
     void applyMilestone( Model::Character* character, Model::CharacterSkill* characterSkill );
     void applyMilestoneBonus( Model::Character* character, const Model::SkillMilestoneBonus milestoneBonus );
 

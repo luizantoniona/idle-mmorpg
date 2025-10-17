@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 #include <Model/Skill/Skill.h>
+#include <Model/Skill/SkillType.h>
 
 namespace Model {
 
@@ -14,6 +15,9 @@ public:
     CharacterSkill();
 
     Json::Value toJson();
+
+    SkillType type() const;
+    void setType( SkillType type );
 
     std::string id() const;
     void setId( const std::string& id );
@@ -34,6 +38,7 @@ public:
     void setSkill( Skill* skill );
 
 private:
+    SkillType _type;
     std::string _id;
     int _level;
     int _bonusLevel;

@@ -1,7 +1,7 @@
 {
-    "id": "herbalism",
+    "id": "HERBALISM",
     "name": "Herbalism",
     "description": "Identify and harvest herbs for potions, remedies, or magical uses.",
-    "type": "gathering",
+    "category": "gathering",
     "milestones": []
 }

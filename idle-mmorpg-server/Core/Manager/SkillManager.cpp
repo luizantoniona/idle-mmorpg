@@ -1,6 +1,7 @@
 #include "SkillManager.h"
 
 #include <Core/Factory/Skill/SkillFactory.h>
+#include <Helper/SkillHelper.h>
 
 namespace Core::Manager {
 
@@ -18,6 +19,11 @@ Model::Skill* SkillManager::skill( const std::string& idSkill ) {
     }
 
     return nullptr;
+}
+
+Model::Skill* SkillManager::skill( Model::SkillType typeSkill ) {
+    std::string skillId = Helper::SkillHelper::enumToString( typeSkill );
+    return skill( skillId );
 }
 
 } // namespace Core::Manager

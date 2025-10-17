@@ -5,6 +5,7 @@
 namespace Model {
 
 CharacterSkill::CharacterSkill() :
+    _type( SkillType::UNKNOWN ),
     _id( "" ),
     _level( 0 ),
     _bonusLevel( 0 ),
@@ -21,6 +22,14 @@ Json::Value CharacterSkill::toJson() {
     root[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
     root[ "skill" ] = skill()->toJson();
     return root;
+}
+
+SkillType CharacterSkill::type() const {
+    return _type;
+}
+
+void CharacterSkill::setType( SkillType type ) {
+    _type = type;
 }
 
 std::string CharacterSkill::id() const {
