@@ -20,8 +20,18 @@ idle-mmorpg-client/node_modules
 #Files
 idle-mmorpg-client/package-lock.json
 
+#--------------------------------
+#idle-mmorpg-editor
+#Folders
+idle-mmorpg-editor/.angular
+idle-mmorpg-editor/.vscode
+idle-mmorpg-editor/dist
+idle-mmorpg-editor/src-tauri/target/
+idle-mmorpg-editor/src-tauri/gen/schemas
+idle-mmorpg-editor/node_modules
 #Files
-package-lock.json
+idle-mmorpg-editor/src-tauri/Cargo.lock
+idle-mmorpg-editor/package-lock.json
 
 #--------------------------------
 #idle-mmorpg-data
