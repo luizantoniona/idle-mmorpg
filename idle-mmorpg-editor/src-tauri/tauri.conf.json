@@ -1,0 +1,33 @@
+{
+	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+	"productName": "idle-mmorpg-editor",
+	"version": "0.1.0",
+	"identifier": "com.tauri.dev",
+	"build": {
+		"frontendDist": "../dist/idle-mmorpg-editor/browser",
+		"devUrl": "http://localhost:4200",
+		"beforeDevCommand": "npm start",
+		"beforeBuildCommand": "npm run build"
+	},
+	"app": {
+		"windows": [
+			{
+				"title": "Iddle MMORPG Editor",
+				"width": 1280,
+				"height": 768,
+				"resizable": true,
+				"fullscreen": false
+			}
+		],
+		"security": {
+			"csp": null
+		}
+	},
+	"bundle": {
+		"active": true,
+		"targets": "all",
+		"icon": [
+			"icons/icon.ico"
+		]
+	}
+}
