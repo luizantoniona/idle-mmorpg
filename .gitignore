@@ -2,22 +2,26 @@
 .vscode/
 database/server_data
 
+#--------------------------------
 #idle-mmorpg-server
 #Folders
 idle-mmorpg-server/build/
 idle-mmorpg-server/.vs/
-
 #Files
 idle-mmorpg-server/*.txt.user
 
+#--------------------------------
 #idle-mmorpg-client
 #Folders
 idle-mmorpg-client/.angular
 idle-mmorpg-client/.vscode
 idle-mmorpg-client/dist
 idle-mmorpg-client/node_modules
+#Files
+idle-mmorpg-client/package-lock.json
 
 #Files
 package-lock.json
 
+#--------------------------------
 #idle-mmorpg-data
