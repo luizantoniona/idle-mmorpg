@@ -19,39 +19,6 @@ This project was envisioned, created, and is maintained by:
 
 # 📦 Project Organization:
 
-## ⚙️ [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
-- **Data Project**
-  - Tools and scripts to generate, validate, and maintain game content.
-  - Outputs JSON files that are consumed by the server.
-  - Easily expandable to support balancing, batch editing, or procedural generation.
-
-### 🐾 **idle-mmorpg-creature**:  
-Modular creature data.  
-This folder defines the structure and attributes of all creatures used by the game server.
-
-### 🗡️ **idle-mmorpg-item**:  
-Modular item data.  
-This folder defines the items structure used by the game server.
-
-### 🗺️ **idle-mmorpg-map**:  
-Modular map data.  
-This folder defines the world structure, continents, areas, enemies, NPCs, and navigation logic used by the game server.
-
-### 🤺 **idle-mmorpg-skill**:  
-Modular skills data.  
-This folder defines all the skills in game.
-
-### 🔮 idle-mmorpg-spell
-Modular spell data.  
-This folder defines all the magical spells available in the game.
-
-### ⚙️ **utility**:  
-Tools and scripts.  
-This folder has the tools and scripts to visualize and generate the data information.
-
-### 📖 **Documentation**:  
-TODO
-
 ## 🛡️ [`idle-mmorpg-server`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-server)
 - **C++ Server**
   - Central game logic and state management.
@@ -67,13 +34,25 @@ TODO
 - **For now, you need to run the schema manually.**
 - **Once all tables are defined and only minor changes are needed, we will create the migration steps.**
 
+## 🎨 [`idle-mmorpg-editor`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-editor)
+- **Data Editor**
+  - TODO
+
+## 🧩 [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
+- **Data Project**
+  - Game content.
+  - Outputs JSON files that are consumed by the server.
+  - Easily expandable to support balancing, batch editing, or procedural generation.
+  - 🐾 **idle-mmorpg-creature**: Defines the structure and attributes of all creatures.
+  - 🗡️ **idle-mmorpg-item**: Defines the items structure.
+  - 🗺️ **idle-mmorpg-map**: Defines the world structure, continents, areas, enemies, NPCs, and navigation logic.
+  - 🤺 **idle-mmorpg-skill**: Defines all the skills in game.
+  - 🔮 **idle-mmorpg-spell**: Defines all the magical spells available in the game.
+
 ## ⚔️ [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client)
 - **Web Client**
   - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.
   - Built with **Angular** and **Typescript**.
-
-### 📖 **Documentation**:  
-TODO
 
 ### 🖼️ **Images**:  
 Login Page:
@@ -103,12 +82,11 @@ These instructions will help you set up the project locally for development and 
 Each part of the project has its own dependencies. Make sure you have the following tools installed:
 - **CMake** (version 3.16 or higher)
 - **C++** compiler compatible with C++20 (e.g. GCC, Clang, MSVC)
-- **Node.js** (required for running the web client)
-- **Python 3.x** (used for data generation and tooling)
+- **Node.js** (required for running the web client and build editor)
 
 ### 🔧 Dependency management:
 - The server uses **vcpkg** for C++ dependencies
-- The client uses package.json (via **npm**)
+- The client and editor uses package.json (via **npm**)
 - The data project uses **requirements.txt**
 
 ## 📁 Clone the Repository
@@ -125,6 +103,22 @@ cd ./idle-mmorpg-server
 
 TODO: Add server building process
 
+## 💡 Running the Editor
+1 - Navigate to the editor folder:
+```bash
+cd ./idle-mmorpg-editor
+```
+
+2 - Install dependencies:
+```bash
+npm install
+```
+
+3 - Start the editor:
+```bash
+npm run tauri dev
+```
+
 ## 🌐 Running the Client (Web)
 1 - Navigate to the client folder:
 ```bash
@@ -135,23 +129,8 @@ cd ./idle-mmorpg-client
 ```bash
 npm install
 ```
-Start the development server:
+
+3 - Start the development server:
 ```bash
 ng serve
-```
-
-## 🧾 Running the Data Tools (Python)
-1 - Navigate to the data folder:
-```bash
-cd ./idle-mmorpg-data
-```
-
-2 - Install required Python packages:
-```bash
-pip install -r requirements.txt
-```
-
-3 - Run data scripts as needed. For example:
-```bash
-python3 ./utility/plot_map.py
 ```

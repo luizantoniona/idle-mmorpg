@@ -1,6 +1,6 @@
-## ⚙️ [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
+## 🧩 [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
 - **Data Project**
-  - Tools and scripts to generate, validate, and maintain game content.
+  - Game content.
   - Outputs JSON files that are consumed by the server.
   - Easily expandable to support balancing, batch editing, or procedural generation.
 
@@ -23,10 +23,3 @@ This folder defines all the skills in game.
 ### 🔮 idle-mmorpg-spell
 Modular spell data.  
 This folder defines all the magical spells available in the game.
-
-### ⚙️ **utility**:  
-Tools and scripts.  
-This folder has the tools and scripts to visualize and generate the data information.
-
-### 📖 **Documentation**:  
-TODO
