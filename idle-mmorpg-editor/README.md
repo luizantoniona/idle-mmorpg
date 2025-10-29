@@ -7,13 +7,3 @@
 ```bash
 cd ./idle-mmorpg-editor
 ```
-
-2 - Install dependencies:
-```bash
-npm install
-```
-
-3 - Start the editor:
-```bash
-npm run tauri dev
-```
