@@ -8,6 +8,16 @@
 	"permissions": [
 		"core:default",
 		"opener:default",
-		"fs:default"
+		"fs:default",
+		"fs:read-all",
+		"fs:allow-read",
+		"fs:allow-read-dir",
+		"fs:allow-read-file",
+		"fs:allow-write",
+		"fs:allow-write-file",
+		"fs:allow-create",
+		"fs:allow-remove",
+		"fs:allow-rename",
+		"fs:scope-home-recursive"
 	]
 }
