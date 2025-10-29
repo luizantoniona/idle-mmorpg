@@ -109,15 +109,7 @@ TODO: Add server building process
 cd ./idle-mmorpg-editor
 ```
 
-2 - Install dependencies:
-```bash
-npm install
-```
-
-3 - Start the editor:
-```bash
-npm run tauri dev
-```
+TODO: Add editor building process
 
 ## 🌐 Running the Client (Web)
 1 - Navigate to the client folder:
