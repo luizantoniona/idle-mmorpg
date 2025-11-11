@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 
 Window {
     height: 768
@@ -8,6 +9,20 @@ Window {
 
     Rectangle {
         anchors.fill: parent
-        color: 'black'
+        color: "black"
+
+        RowLayout {
+            anchors.fill: parent
+
+            LeftBar {
+                Layout.preferredWidth: 240
+                Layout.fillHeight: true
+            }
+
+            Editor {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
     }
 }

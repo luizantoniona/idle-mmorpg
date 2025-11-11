@@ -13,7 +13,12 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 set(SOURCES main.cpp)
 
-set(QML_FILES qml/Main.qml)
+set(QML_FILES
+  qml/Main.qml
+  qml/components/Editor.qml
+  qml/components/LeftBar.qml
+  qml/components/NavBar.qml
+)
 
 qt_add_executable(${PROJECT_NAME} ${SOURCES})
 
