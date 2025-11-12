@@ -5,7 +5,8 @@
 namespace Repository {
 
 CharacterProgressionRepository::CharacterProgressionRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterProgressionRepository::createProgression( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -21,7 +22,7 @@ bool CharacterProgressionRepository::createProgression( int idCharacter ) {
     return query.exec();
 }
 
-bool CharacterProgressionRepository::updateProgression( int idCharacter, const Model::CharacterProgression& progression ) {
+bool CharacterProgressionRepository::updateProgression( int idCharacter, const Domain::CharacterProgression& progression ) {
     const std::string sql = R"SQL(
         UPDATE character_progression SET
             level = ?,
@@ -37,7 +38,7 @@ bool CharacterProgressionRepository::updateProgression( int idCharacter, const M
     return query.exec();
 }
 
-std::unique_ptr<Model::CharacterProgression> CharacterProgressionRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterProgression> CharacterProgressionRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT
             level,
@@ -53,7 +54,7 @@ std::unique_ptr<Model::CharacterProgression> CharacterProgressionRepository::fin
         return nullptr;
     }
 
-    auto progression = std::make_unique<Model::CharacterProgression>();
+    auto progression = std::make_unique<Domain::CharacterProgression>();
     progression->setLevel( query.getColumnInt( 0 ) );
     progression->setExperience( query.getColumnInt( 1 ) );
 

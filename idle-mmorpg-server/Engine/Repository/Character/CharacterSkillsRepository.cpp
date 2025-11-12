@@ -10,13 +10,14 @@
 namespace Repository {
 
 CharacterSkillsRepository::CharacterSkillsRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterSkillsRepository::createSkills( int idCharacter ) {
     return true;
 }
 
-bool CharacterSkillsRepository::updateSkills( int idCharacter, Model::CharacterSkills& characterSkills ) {
+bool CharacterSkillsRepository::updateSkills( int idCharacter, Domain::CharacterSkills& characterSkills ) {
     const std::string upsertSql = R"SQL(
         INSERT INTO character_skills (id_character, id_skill, experience, level)
         VALUES (?, ?, ?, ?)
@@ -41,7 +42,7 @@ bool CharacterSkillsRepository::updateSkills( int idCharacter, Model::CharacterS
     return true;
 }
 
-std::unique_ptr<Model::CharacterSkills> CharacterSkillsRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterSkills> CharacterSkillsRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT id_skill, experience, level FROM character_skills WHERE id_character = ?
     )SQL";
@@ -49,16 +50,16 @@ std::unique_ptr<Model::CharacterSkills> CharacterSkillsRepository::findByCharact
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
 
-    auto skills = std::make_unique<Model::CharacterSkills>();
+    auto skills = std::make_unique<Domain::CharacterSkills>();
 
     while ( query.step() ) {
         std::string skillId = query.getColumnText( 0 );
         int experience = query.getColumnInt( 1 );
         int level = query.getColumnInt( 2 );
 
-        auto skill = Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId );
+        auto skill = Commons::Singleton<Engine::SkillManager>::instance().skill( skillId );
         if ( skill ) {
-            Model::CharacterSkill characterSkill;
+            Domain::CharacterSkill characterSkill;
             characterSkill.setType( Helper::SkillHelper::stringToEnum( skillId ) );
             characterSkill.setId( skillId );
             characterSkill.setExperience( experience );

@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Model/Character/CharacterProgression.h>
+#include <Domain/Character/CharacterProgression.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -13,9 +13,9 @@ public:
     explicit CharacterProgressionRepository();
 
     bool createProgression( int idCharacter );
-    bool updateProgression( int idCharacter, const Model::CharacterProgression& progression );
+    bool updateProgression( int idCharacter, const Domain::CharacterProgression& progression );
 
-    std::unique_ptr<Model::CharacterProgression> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterProgression> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

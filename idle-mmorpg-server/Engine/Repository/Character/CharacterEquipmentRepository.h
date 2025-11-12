@@ -1,7 +1,7 @@
 #ifndef CHARACTEREQUIPMENTREPOSITORY_H
 #define CHARACTEREQUIPMENTREPOSITORY_H
 
-#include <Model/Character/CharacterEquipment.h>
+#include <Domain/Character/CharacterEquipment.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -11,9 +11,9 @@ public:
     explicit CharacterEquipmentRepository();
 
     bool createEquipment( int idCharacter );
-    bool updateEquipment( int idCharacter, Model::CharacterEquipment& equipment );
+    bool updateEquipment( int idCharacter, Domain::CharacterEquipment& equipment );
 
-    std::unique_ptr<Model::CharacterEquipment> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterEquipment> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

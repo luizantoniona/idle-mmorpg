@@ -14,7 +14,7 @@ bool CharacterQuestsRepository::createQuests( int idCharacter ) {
     return true;
 }
 
-bool CharacterQuestsRepository::updateQuests( int idCharacter, Model::CharacterQuests& characterQuests ) {
+bool CharacterQuestsRepository::updateQuests( int idCharacter, Domain::CharacterQuests& characterQuests ) {
     const std::string upsertSql = R"SQL(
         INSERT INTO character_quests (id_character, id_quest, type, objective_id, current_amount, objective_amount, finished, claimed)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -60,7 +60,7 @@ bool CharacterQuestsRepository::updateQuests( int idCharacter, Model::CharacterQ
     return true;
 }
 
-std::unique_ptr<Model::CharacterQuests> CharacterQuestsRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterQuests> CharacterQuestsRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT id_quest, type, objective_id, current_amount, objective_amount, finished, claimed
         FROM character_quests
@@ -70,17 +70,17 @@ std::unique_ptr<Model::CharacterQuests> CharacterQuestsRepository::findByCharact
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
 
-    auto characterQuests = std::make_unique<Model::CharacterQuests>();
+    auto characterQuests = std::make_unique<Domain::CharacterQuests>();
 
     while ( query.step() ) {
-        Model::CharacterQuest quest;
+        Domain::CharacterQuest quest;
         quest.setId( query.getColumnText( 0 ) );
         quest.setType( query.getColumnText( 1 ) );
         quest.setObjectiveId( query.getColumnText( 2 ) );
         quest.setCurrentAmount( query.getColumnInt( 3 ) );
         quest.setObjectiveAmount( query.getColumnInt( 4 ) );
         quest.setFinished( query.getColumnInt( 5 ) != 0 );
-        quest.setQuest( Commons::Singleton<Core::Manager::QuestManager>::instance().questById( quest.id() ) );
+        quest.setQuest( Commons::Singleton<Engine::QuestManager>::instance().questById( quest.id() ) );
 
         bool claimed = query.getColumnInt( 6 ) != 0;
         if ( quest.finished() ) {

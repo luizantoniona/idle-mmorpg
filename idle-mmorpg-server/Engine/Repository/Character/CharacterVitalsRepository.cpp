@@ -1,6 +1,8 @@
 #include "CharacterVitalsRepository.h"
 
-#include <Database/Query.h>
+#include <Engine/Manager/ServerConfigurationManager.h>
+#include <Infrastructure/Database/Query.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
@@ -25,7 +27,7 @@ bool CharacterVitalsRepository::createVitals( int idCharacter ) {
     return query.exec();
 }
 
-bool CharacterVitalsRepository::updateVitals( int idCharacter, const Model::CharacterVitals& vitals ) {
+bool CharacterVitalsRepository::updateVitals( int idCharacter, const Domain::CharacterVitals& vitals ) {
     const std::string sql = R"SQL(
         UPDATE character_vitals SET
             health = ?,
@@ -49,7 +51,7 @@ bool CharacterVitalsRepository::updateVitals( int idCharacter, const Model::Char
     return query.exec();
 }
 
-std::unique_ptr<Model::CharacterVitals> CharacterVitalsRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterVitals> CharacterVitalsRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT
             health,
@@ -69,7 +71,8 @@ std::unique_ptr<Model::CharacterVitals> CharacterVitalsRepository::findByCharact
         return nullptr;
     }
 
-    auto vitals = std::make_unique<Model::CharacterVitals>();
+    auto vitals = std::make_unique<Domain::CharacterVitals>();
+    vitals->setRegenDuration( Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
     vitals->setHealth( query.getColumnDouble( 0 ) );
     vitals->setMaxHealth( query.getColumnDouble( 1 ) );
     vitals->setMana( query.getColumnDouble( 2 ) );

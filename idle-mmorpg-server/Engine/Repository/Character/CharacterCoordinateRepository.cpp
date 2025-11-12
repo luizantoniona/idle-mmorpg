@@ -5,7 +5,8 @@
 namespace Repository {
 
 CharacterCoordinateRepository::CharacterCoordinateRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -24,7 +25,7 @@ bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
 }
 
 bool CharacterCoordinateRepository::updateCoordinates(
-    int idCharacter, const Model::CharacterCoordinates& coordinates ) {
+    int idCharacter, const Domain::CharacterCoordinates& coordinates ) {
     const std::string sql = R"SQL(
         UPDATE character_coordinates SET
             location_id = ?,
@@ -44,7 +45,7 @@ bool CharacterCoordinateRepository::updateCoordinates(
     return query.exec();
 }
 
-std::unique_ptr<Model::CharacterCoordinates> CharacterCoordinateRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterCoordinates> CharacterCoordinateRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT
             location_id,
@@ -62,7 +63,7 @@ std::unique_ptr<Model::CharacterCoordinates> CharacterCoordinateRepository::find
         return nullptr;
     }
 
-    auto coordinates = std::make_unique<Model::CharacterCoordinates>();
+    auto coordinates = std::make_unique<Domain::CharacterCoordinates>();
     coordinates->setLocationId( query.getColumnText( 0 ) );
     coordinates->setStructureId( query.getColumnText( 1 ) );
     coordinates->setSpawnLocationId( query.getColumnText( 2 ) );

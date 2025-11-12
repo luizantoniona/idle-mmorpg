@@ -15,7 +15,8 @@
 namespace Repository {
 
 CharacterRepository::CharacterRepository() :
-    Repository() {}
+    Repository() {
+}
 
 int CharacterRepository::createCharacter( const int idUser, const std::string& dsName ) {
     const std::string sql = R"SQL(
@@ -50,7 +51,7 @@ int CharacterRepository::createCharacter( const int idUser, const std::string& d
     return success ? idCharacter : 0;
 }
 
-bool CharacterRepository::updateCharacter( Model::Character character ) {
+bool CharacterRepository::updateCharacter( Domain::Character character ) {
     const int idCharacter = character.idCharacter();
 
     bool success = true;
@@ -80,7 +81,7 @@ bool CharacterRepository::deleteCharacter( int idCharacter ) {
     return query.exec();
 }
 
-std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllByIdUser( const int idUser ) {
+std::vector<std::unique_ptr<Domain::Character>> CharacterRepository::findAllByIdUser( const int idUser ) {
     const std::string sql = R"SQL(
         SELECT
             id_character,
@@ -93,12 +94,12 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
 
     query.bindInt( 1, idUser );
 
-    std::vector<std::unique_ptr<Model::Character> > characters;
+    std::vector<std::unique_ptr<Domain::Character>> characters;
 
     // TODO: Review this method, as it is only for the account page. So we don't need to load all data from character;
 
     while ( query.step() ) {
-        auto character = std::make_unique<Model::Character>();
+        auto character = std::make_unique<Domain::Character>();
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );
@@ -154,7 +155,7 @@ std::vector<std::unique_ptr<Model::Character> > CharacterRepository::findAllById
     return characters;
 }
 
-std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacter( const int idUser, const int idCharacter ) {
+std::unique_ptr<Domain::Character> CharacterRepository::findByIdUserAndIdCharacter( const int idUser, const int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT
             id_character,
@@ -169,7 +170,7 @@ std::unique_ptr<Model::Character> CharacterRepository::findByIdUserAndIdCharacte
     query.bindInt( 2, idCharacter );
 
     if ( query.step() ) {
-        auto character = std::make_unique<Model::Character>();
+        auto character = std::make_unique<Domain::Character>();
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );

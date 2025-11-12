@@ -7,13 +7,14 @@
 namespace Repository {
 
 CharacterInventoryRepository::CharacterInventoryRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterInventoryRepository::createInventory( int idCharacter ) {
     return true;
 }
 
-bool CharacterInventoryRepository::updateInventory( int idCharacter, Model::CharacterInventory& inventory ) {
+bool CharacterInventoryRepository::updateInventory( int idCharacter, Domain::CharacterInventory& inventory ) {
     const std::string deleteSql = R"SQL(
         DELETE FROM character_inventory WHERE id_character = ?
     )SQL";
@@ -29,7 +30,7 @@ bool CharacterInventoryRepository::updateInventory( int idCharacter, Model::Char
         INSERT INTO character_inventory (id_character, id_item, amount) VALUES (?, ?, ?)
     )SQL";
 
-    for ( Model::CharacterInventoryItem& item : inventory.items() ) {
+    for ( Domain::CharacterInventoryItem& item : inventory.items() ) {
         Database::Query insertQuery( _db, insertSql );
         insertQuery.bindInt( 1, idCharacter );
         insertQuery.bindText( 2, item.id() );
@@ -43,7 +44,7 @@ bool CharacterInventoryRepository::updateInventory( int idCharacter, Model::Char
     return true;
 }
 
-std::unique_ptr<Model::CharacterInventory> CharacterInventoryRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterInventory> CharacterInventoryRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT id_item, amount FROM character_inventory WHERE id_character = ?
     )SQL";
@@ -51,9 +52,9 @@ std::unique_ptr<Model::CharacterInventory> CharacterInventoryRepository::findByC
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
 
-    auto inventory = std::make_unique<Model::CharacterInventory>();
+    auto inventory = std::make_unique<Domain::CharacterInventory>();
 
-    auto& itemManager = Commons::Singleton<Core::Manager::ItemManager>::instance();
+    auto& itemManager = Commons::Singleton<Engine::ItemManager>::instance();
 
     while ( query.step() ) {
         std::string idItem = query.getColumnText( 0 );
@@ -61,7 +62,7 @@ std::unique_ptr<Model::CharacterInventory> CharacterInventoryRepository::findByC
 
         auto item = itemManager.itemById( idItem );
         if ( item ) {
-            Model::CharacterInventoryItem inventoryItem;
+            Domain::CharacterInventoryItem inventoryItem;
             inventoryItem.setId( idItem );
             inventoryItem.setAmount( amount );
             inventoryItem.setItem( item );

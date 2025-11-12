@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Model/Character/CharacterWallet.h>
+#include <Domain/Character/CharacterWallet.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -13,9 +13,9 @@ public:
     explicit CharacterWalletRepository();
 
     bool createWallet( int idCharacter );
-    bool updateWallet( int idCharacter, const Model::CharacterWallet& wallet );
+    bool updateWallet( int idCharacter, const Domain::CharacterWallet& wallet );
 
-    std::unique_ptr<Model::CharacterWallet> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterWallet> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

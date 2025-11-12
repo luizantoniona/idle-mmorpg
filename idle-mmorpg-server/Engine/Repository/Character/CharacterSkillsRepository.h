@@ -3,8 +3,8 @@
 
 #include <memory>
 
+#include <Domain/Character/CharacterSkills.h>
 #include <Repository/Repository.h>
-#include <Model/Character/CharacterSkills.h>
 
 namespace Repository {
 
@@ -13,9 +13,9 @@ public:
     CharacterSkillsRepository();
 
     bool createSkills( int idCharacter );
-    bool updateSkills( int idCharacter, Model::CharacterSkills& characterSkills );
+    bool updateSkills( int idCharacter, Domain::CharacterSkills& characterSkills );
 
-    std::unique_ptr<Model::CharacterSkills> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterSkills> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

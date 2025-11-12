@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include <Model/Character/Character.h>
+#include <Domain/Character/Character.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -14,12 +14,12 @@ public:
     explicit CharacterRepository();
 
     int createCharacter( const int idUser, const std::string& dsName );
-    bool updateCharacter( Model::Character character );
+    bool updateCharacter( Domain::Character character );
     bool deleteCharacter( int idCharacter );
 
-    std::vector<std::unique_ptr<Model::Character> > findAllByIdUser( const int idUser );
+    std::vector<std::unique_ptr<Domain::Character>> findAllByIdUser( const int idUser );
 
-    std::unique_ptr<Model::Character> findByIdUserAndIdCharacter( const int idUser, const int idCharacter );
+    std::unique_ptr<Domain::Character> findByIdUserAndIdCharacter( const int idUser, const int idCharacter );
 };
 
 } // namespace Repository

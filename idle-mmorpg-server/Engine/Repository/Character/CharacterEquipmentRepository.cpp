@@ -3,12 +3,13 @@
 #include <Commons/Singleton.h>
 #include <Core/Manager/ItemManager.h>
 #include <Database/Query.h>
-#include <Model/Character/CharacterEquipmentItem.h>
+#include <Domain/Character/CharacterEquipmentItem.h>
 
 namespace Repository {
 
 CharacterEquipmentRepository::CharacterEquipmentRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -20,7 +21,7 @@ bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
     return query.exec();
 }
 
-bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::CharacterEquipment& equipment ) {
+bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Domain::CharacterEquipment& equipment ) {
     const std::string sql = R"SQL(
         UPDATE character_equipment SET
             helmet_item_id = ?,
@@ -56,7 +57,7 @@ bool CharacterEquipmentRepository::updateEquipment( int idCharacter, Model::Char
     return query.exec();
 }
 
-std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterEquipment> CharacterEquipmentRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT
             helmet_item_id,
@@ -82,15 +83,15 @@ std::unique_ptr<Model::CharacterEquipment> CharacterEquipmentRepository::findByC
         return nullptr;
     }
 
-    auto& manager = Commons::Singleton<Core::Manager::ItemManager>::instance();
-    auto equipment = std::make_unique<Model::CharacterEquipment>();
+    auto& manager = Commons::Singleton<Engine::ItemManager>::instance();
+    auto equipment = std::make_unique<Domain::CharacterEquipment>();
 
-    auto makeItem = [&]( const std::string& id ) {
-                        Model::CharacterEquipmentItem item;
-                        item.setId( id );
-                        item.setItem( manager.itemById( id ) );
-                        return item;
-                    };
+    auto makeItem = [ & ]( const std::string& id ) {
+        Domain::CharacterEquipmentItem item;
+        item.setId( id );
+        item.setItem( manager.itemById( id ) );
+        return item;
+    };
 
     equipment->setHelmet( makeItem( query.getColumnText( 0 ) ) );
     equipment->setArmor( makeItem( query.getColumnText( 1 ) ) );

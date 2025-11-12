@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Model/Character/CharacterInventory.h>
+#include <Domain/Character/CharacterInventory.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -13,9 +13,9 @@ public:
     explicit CharacterInventoryRepository();
 
     bool createInventory( int idCharacter );
-    bool updateInventory( int idCharacter, Model::CharacterInventory& inventory );
+    bool updateInventory( int idCharacter, Domain::CharacterInventory& inventory );
 
-    std::unique_ptr<Model::CharacterInventory> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterInventory> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

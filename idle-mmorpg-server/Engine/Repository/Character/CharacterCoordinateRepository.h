@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Model/Character/CharacterCoordinates.h>
+#include <Domain/Character/CharacterCoordinates.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -13,9 +13,9 @@ public:
     explicit CharacterCoordinateRepository();
 
     bool createCoordinates( int idCharacter );
-    bool updateCoordinates( int idCharacter, const Model::CharacterCoordinates& coordinates );
+    bool updateCoordinates( int idCharacter, const Domain::CharacterCoordinates& coordinates );
 
-    std::unique_ptr<Model::CharacterCoordinates> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterCoordinates> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

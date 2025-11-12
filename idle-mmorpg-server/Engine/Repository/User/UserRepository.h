@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Model/User/User.h>
+#include <Domain/User/User.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -14,7 +14,7 @@ public:
 
     bool createUser( std::string& username, std::string& password );
 
-    std::unique_ptr<Model::User> findByUsernameAndPassword( const std::string& username, const std::string& password );
+    std::unique_ptr<Domain::User> findByUsernameAndPassword( const std::string& username, const std::string& password );
 };
 
 } // namespace Repository

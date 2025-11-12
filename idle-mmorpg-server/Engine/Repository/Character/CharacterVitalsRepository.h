@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include <Model/Character/CharacterVitals.h>
-#include <Repository/Repository.h>
+#include <Domain/Character/CharacterVitals.h>
+#include <Engine/Repository/Repository.h>
 
 namespace Repository {
 
@@ -13,9 +13,9 @@ public:
     explicit CharacterVitalsRepository();
 
     bool createVitals( int idCharacter );
-    bool updateVitals( int idCharacter, const Model::CharacterVitals& vitals );
+    bool updateVitals( int idCharacter, const Domain::CharacterVitals& vitals );
 
-    std::unique_ptr<Model::CharacterVitals> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterVitals> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository

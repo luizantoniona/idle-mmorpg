@@ -5,7 +5,8 @@
 namespace Repository {
 
 CharacterWalletRepository::CharacterWalletRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterWalletRepository::createWallet( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -21,7 +22,7 @@ bool CharacterWalletRepository::createWallet( int idCharacter ) {
     return query.exec();
 }
 
-bool CharacterWalletRepository::updateWallet( int idCharacter, const Model::CharacterWallet& wallet ) {
+bool CharacterWalletRepository::updateWallet( int idCharacter, const Domain::CharacterWallet& wallet ) {
     const std::string sql = R"SQL(
         UPDATE character_wallet SET
             copper = ?,
@@ -37,7 +38,7 @@ bool CharacterWalletRepository::updateWallet( int idCharacter, const Model::Char
     return query.exec();
 }
 
-std::unique_ptr<Model::CharacterWallet> CharacterWalletRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterWallet> CharacterWalletRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT copper, silver, gold
         FROM character_wallet
@@ -50,7 +51,7 @@ std::unique_ptr<Model::CharacterWallet> CharacterWalletRepository::findByCharact
         return nullptr;
     }
 
-    auto wallet = std::make_unique<Model::CharacterWallet>();
+    auto wallet = std::make_unique<Domain::CharacterWallet>();
     wallet->setCopper( query.getColumnInt( 0 ) );
     wallet->setSilver( query.getColumnInt( 1 ) );
     wallet->setGold( query.getColumnInt( 2 ) );

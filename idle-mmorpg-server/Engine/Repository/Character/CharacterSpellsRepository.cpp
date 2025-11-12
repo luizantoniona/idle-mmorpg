@@ -7,13 +7,14 @@
 namespace Repository {
 
 CharacterSpellsRepository::CharacterSpellsRepository() :
-    Repository() {}
+    Repository() {
+}
 
 bool CharacterSpellsRepository::createSpells( int idCharacter ) {
     return true;
 }
 
-bool CharacterSpellsRepository::updateSpells( int idCharacter, Model::CharacterSpells& characterSpells ) {
+bool CharacterSpellsRepository::updateSpells( int idCharacter, Domain::CharacterSpells& characterSpells ) {
     const std::string upsertSql = R"SQL(
         INSERT INTO character_spells (id_character, id_spell)
         VALUES (?, ?)
@@ -43,7 +44,7 @@ bool CharacterSpellsRepository::updateSpells( int idCharacter, Model::CharacterS
     return true;
 }
 
-std::unique_ptr<Model::CharacterSpells> CharacterSpellsRepository::findByCharacterId( int idCharacter ) {
+std::unique_ptr<Domain::CharacterSpells> CharacterSpellsRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
         SELECT id_spell
         FROM character_spells
@@ -53,14 +54,14 @@ std::unique_ptr<Model::CharacterSpells> CharacterSpellsRepository::findByCharact
     Database::Query query( _db, sql );
     query.bindInt( 1, idCharacter );
 
-    auto characterSpells = std::make_unique<Model::CharacterSpells>();
+    auto characterSpells = std::make_unique<Domain::CharacterSpells>();
 
     while ( query.step() ) {
         std::string spellId = query.getColumnText( 0 );
 
-        auto spell = Commons::Singleton<Core::Manager::SpellManager>::instance().spellById( spellId );
+        auto spell = Commons::Singleton<Engine::SpellManager>::instance().spellById( spellId );
         if ( spell ) {
-            Model::CharacterSpell characterSpell;
+            Domain::CharacterSpell characterSpell;
             characterSpell.setId( spellId );
             characterSpell.setSpell( spell );
             characterSpell.setCount( spell->cooldown() );

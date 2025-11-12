@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Model/Character/CharacterQuests.h>
+#include <Domain/Character/CharacterQuests.h>
 #include <Repository/Repository.h>
 
 namespace Repository {
@@ -13,9 +13,9 @@ public:
     CharacterQuestsRepository();
 
     bool createQuests( int idCharacter );
-    bool updateQuests( int idCharacter, Model::CharacterQuests& characterQuests );
+    bool updateQuests( int idCharacter, Domain::CharacterQuests& characterQuests );
 
-    std::unique_ptr<Model::CharacterQuests> findByCharacterId( int idCharacter );
+    std::unique_ptr<Domain::CharacterQuests> findByCharacterId( int idCharacter );
 };
 
 } // namespace Repository
