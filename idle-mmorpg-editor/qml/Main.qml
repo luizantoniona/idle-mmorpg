@@ -14,7 +14,7 @@ Window {
         RowLayout {
             anchors.fill: parent
 
-            LeftBar {
+            FilesBar {
                 Layout.preferredWidth: 240
                 Layout.fillHeight: true
             }

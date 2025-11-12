@@ -24,14 +24,15 @@ file(
   src/*.h
 )
 
+qt_add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
 set(QML_FILES
   qml/Main.qml
   qml/components/Editor.qml
-  qml/components/LeftBar.qml
+  qml/components/FilesBar.qml
+  qml/components/FilesBarDesign.ui.qml
   qml/components/NavBar.qml
 )
-
-qt_add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 qt_add_qml_module(
   ${PROJECT_NAME}
@@ -40,7 +41,8 @@ qt_add_qml_module(
   VERSION
   1.0
   QML_FILES
-  ${QML_FILES})
+  ${QML_FILES}
+)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
