@@ -4,7 +4,7 @@
     "category": "helmet",
     "name": "Iron Helmet",
     "description": "A simple helmet made of iron.",
-    "icon": "equipment/helmet_iron.png",
+    "icon": "helmet_iron.png",
     "rarity": "common",
     "price": 35,
     "bonus": [

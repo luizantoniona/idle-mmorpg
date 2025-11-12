@@ -1,0 +1,49 @@
+{
+    "id": "cleric_altar_of_light",
+    "name": "Cleric",
+    "icon": "cleric.png",
+    "quests": [
+        {
+            "id": "cleric_altar_of_light_healing",
+            "title": "Spell - Healing",
+            "description": "The Cleric greets you warmly and offers to teach you the Minor Healing spell, a gift of light to restore your wounds.",
+            "type": "talk",
+            "objectiveId": "cleric_altar_of_light",
+            "amount": 1,
+            "requirements": [
+                {
+                    "type": "quest",
+                    "id": "heroes_path_cleaning"
+                }
+            ],
+            "rewards": [
+                {
+                    "type": "spell",
+                    "id": "minor_healing"
+                }
+            ]
+        },
+        {
+            "id": "cleric_altar_of_light_attack",
+            "title": "Spell - Lightning Bolt",
+            "description": "The Cleric tests your resolve and, seeing your determination, entrusts you with the Lightning Bolt spell.",
+            "type": "talk",
+            "objectiveId": "cleric_altar_of_light",
+            "amount": 1,
+            "requirements": [
+                {
+                    "type": "quest",
+                    "id": "heroes_path_cleaning"
+                }
+            ],
+            "rewards": [
+                {
+                    "type": "spell",
+                    "id": "lightning_bolt"
+                }
+            ]
+        }
+    ],
+    "sell": [],
+    "buy": []
+}

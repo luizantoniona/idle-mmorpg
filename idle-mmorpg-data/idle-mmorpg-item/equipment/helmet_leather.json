@@ -4,7 +4,7 @@
     "category": "helmet",
     "name": "Leather Helmet",
     "description": "A simple helmet made of leather.",
-    "icon": "equipment/helmet_leather.png",
+    "icon": "helmet_leather.png",
     "rarity": "common",
     "price": 15,
     "bonus": [
