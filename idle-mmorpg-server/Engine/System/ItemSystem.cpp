@@ -11,7 +11,7 @@
 
 namespace Core::System {
 
-void ItemSystem::characterUseItem( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
+void ItemSystem::characterUseItem( const std::string& sessionId, Domain::Character* character, const Json::Value& payload ) {
     const std::string itemId = payload[ "itemId" ].asString();
 
     if ( !itemId.empty() ) {
@@ -23,15 +23,15 @@ void ItemSystem::characterUseItem( const std::string& sessionId, Model::Characte
             return;
         }
 
-        const Model::CharacterInventoryItem* itemToUse = inventory.itemById( itemId );
+        const Domain::CharacterInventoryItem* itemToUse = inventory.itemById( itemId );
 
         if ( itemToUse->item()->type() != "consumable" ) {
             std::cerr << "ItemSystem::characterUseItem item is not consumable: " << itemId << std::endl;
             return;
         }
 
-        for ( const Model::ItemEffect& itemEffect : itemToUse->item()->effects() ) {
-            Model::CharacterEffect effect;
+        for ( const Domain::ItemEffect& itemEffect : itemToUse->item()->effects() ) {
+            Domain::CharacterEffect effect;
             effect.setSource( itemToUse->id() );
             effect.setSourceName( itemToUse->item()->name() );
             effect.setType( itemEffect.type() );
@@ -50,14 +50,14 @@ void ItemSystem::characterUseItem( const std::string& sessionId, Model::Characte
     NotificationSystem::notifyCharacterEffects( sessionId, character );
 }
 
-void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
+void ItemSystem::characterEquipItem( const std::string& sessionId, Domain::Character* character, const Json::Value& payload ) {
     const std::string itemId = payload[ "itemId" ].asString();
     const std::string slot = payload[ "slot" ].asString();
 
     auto& characterInventory = character->inventory();
     auto& characterEquipments = character->equipment();
 
-    std::unordered_map<std::string, Model::CharacterEquipmentItem&> slotMap = {
+    std::unordered_map<std::string, Domain::CharacterEquipmentItem&> slotMap = {
         { "helmet", characterEquipments.helmet() },
         { "armor", characterEquipments.armor() },
         { "leg", characterEquipments.leg() },
@@ -78,7 +78,7 @@ void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Charac
         return;
     }
 
-    Model::CharacterEquipmentItem& targetSlot = it->second;
+    Domain::CharacterEquipmentItem& targetSlot = it->second;
 
     if ( !targetSlot.id().empty() ) {
         character->inventory().addItem( targetSlot.id(), 1 );
@@ -93,7 +93,7 @@ void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Charac
             return;
         }
 
-        const Model::CharacterInventoryItem* itemToEquip = characterInventory.itemById( itemId );
+        const Domain::CharacterInventoryItem* itemToEquip = characterInventory.itemById( itemId );
 
         bool canEquip = ( slot == itemToEquip->item()->category() ) ||
                         ( ( slot == "weapon" && itemToEquip->item()->type() == "weapon" ) ) ||
@@ -116,13 +116,13 @@ void ItemSystem::characterEquipItem( const std::string& sessionId, Model::Charac
     NotificationSystem::notifyCharacterEquipment( sessionId, character );
 }
 
-void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model::Character* character ) {
+void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Domain::Character* character ) {
     auto& equipments = character->equipment();
 
     character->combatAttributes().clear();
     character->skills().clear();
 
-    std::vector<Model::CharacterEquipmentItem*> characterSlot = {
+    std::vector<Domain::CharacterEquipmentItem*> characterSlot = {
         &equipments.helmet(),
         &equipments.armor(),
         &equipments.leg(),
@@ -142,7 +142,7 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model:
             continue;
         }
 
-        for ( const Model::ItemBonus& bonus : item->bonuses() ) {
+        for ( const Domain::ItemBonus& bonus : item->bonuses() ) {
             const std::string& type = bonus.type();
             const std::string& targetCategory = bonus.category();
             double value = bonus.value();
@@ -162,16 +162,16 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Model:
                 }
 
             } else if ( type == "skill" ) {
-                const Model::SkillType targetSkill = Helper::SkillHelper::stringToEnum( targetCategory );
+                const Domain::SkillType targetSkill = Helper::SkillHelper::stringToEnum( targetCategory );
 
-                Model::CharacterSkill* characterSkill = character->skills().skill( targetSkill );
+                Domain::CharacterSkill* characterSkill = character->skills().skill( targetSkill );
 
                 if ( !characterSkill ) {
-                    Model::CharacterSkill newSkill;
+                    Domain::CharacterSkill newSkill;
                     newSkill.setId( targetCategory );
                     newSkill.setExperience( 0 );
                     newSkill.setLevel( 0 );
-                    newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( targetSkill ) );
+                    newSkill.setSkill( Commons::Singleton<Engine::SkillManager>::instance().skill( targetSkill ) );
 
                     if ( !newSkill.skill() ) {
                         std::cerr << "ItemSystem::computeEquipmentModifiers Unknown skill id: " << targetCategory << std::endl;

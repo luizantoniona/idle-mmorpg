@@ -9,8 +9,8 @@
 
 namespace Core::System {
 
-void SpellSystem::learnSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId ) {
-    auto spell = Commons::Singleton<Core::Manager::SpellManager>::instance().spellById( spellId );
+void SpellSystem::learnSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId ) {
+    auto spell = Commons::Singleton<Engine::SpellManager>::instance().spellById( spellId );
     if ( !spell ) {
         std::cerr << "SpellSystem::learnSpell Unknow [SPELL] " << spellId << std::endl;
         return;
@@ -22,7 +22,7 @@ void SpellSystem::learnSpell( const std::string& sessionId, Model::Character* ch
         return;
     }
 
-    Model::CharacterSpell characterSpell;
+    Domain::CharacterSpell characterSpell;
     characterSpell.setId( spellId );
     characterSpell.setSpell( spell );
     characterSpell.setCount( spell->cooldown() );

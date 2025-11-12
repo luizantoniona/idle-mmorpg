@@ -2,12 +2,11 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Instance/LocationInstance.h>
-#include <Core/Instance/RegionInstance.h>
-#include <Core/Instance/WorldInstance.h>
-#include <Core/Manager/WorldManager.h>
-#include <Helper/JsonHelper.h>
+#include <Engine/Instance/LocationInstance.h>
+#include <Engine/Instance/WorldInstance.h>
+#include <Engine/Manager/World/WorldManager.h>
+#include <Shared/Commons/Singleton.h>
+#include <Shared/Helper/JsonHelper.h>
 
 #include "MessageHelper.h"
 
@@ -21,15 +20,9 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         return;
     }
 
-    Core::Instance::WorldInstance* worldInstance = Commons::Singleton<Core::Manager::WorldManager>::instance().worldInstance();
+    Core::Instance::WorldInstance* worldInstance = Commons::Singleton<Engine::WorldManager>::instance().worldInstance();
 
     if ( !worldInstance ) {
-        return;
-    }
-
-    Core::Instance::RegionInstance* regionInstance = worldInstance->characterRegionInstance( sessionId );
-
-    if ( !regionInstance ) {
         return;
     }
 
@@ -65,7 +58,7 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
             break;
 
         case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
-            regionInstance->handleCharacterMessage( sessionId, type, payload );
+            worldInstance->handleCharacterMessage( sessionId, type, payload );
             break;
 
         default:

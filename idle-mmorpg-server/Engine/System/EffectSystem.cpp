@@ -9,7 +9,7 @@
 
 namespace Core::System {
 
-void EffectSystem::processEffects( const std::string& sessionId, Model::Character* character ) {
+void EffectSystem::processEffects( const std::string& sessionId, Domain::Character* character ) {
     auto& effects = character->effects().effects();
 
     if ( effects.empty() ) {
@@ -18,9 +18,9 @@ void EffectSystem::processEffects( const std::string& sessionId, Model::Characte
 
     auto& vitals = character->vitals();
 
-    const int tickRate = Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate();
+    const int tickRate = Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate();
     bool vitalsChanged = false;
-    std::vector<Model::CharacterEffect> expiredEffects = {};
+    std::vector<Domain::CharacterEffect> expiredEffects = {};
 
     for ( auto& effect : effects ) {
 

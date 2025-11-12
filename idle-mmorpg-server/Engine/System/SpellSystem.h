@@ -3,13 +3,13 @@
 
 #include <string>
 
-#include <Model/Character/Character.h>
+#include <Domain/Character/Character.h>
 
 namespace Core::System {
 
 class SpellSystem {
 public:
-    static void learnSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId );
+    static void learnSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId );
 };
 
 } // namespace Core::System

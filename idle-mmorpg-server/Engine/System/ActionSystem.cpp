@@ -14,12 +14,13 @@
 
 namespace Core::System {
 
-ActionSystem::ActionSystem( Model::Location* location ) :
+ActionSystem::ActionSystem( Domain::Location* location ) :
     _location( location ),
     _progressionSystem(),
-    _tickRate( Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() ) {}
+    _tickRate( Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate() ) {
+}
 
-void ActionSystem::changeAction( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
+void ActionSystem::changeAction( const std::string& sessionId, Domain::Character* character, const Json::Value& payload ) {
     if ( !character || !payload.isObject() || !payload.isMember( "action" ) ) {
         return;
     }
@@ -34,54 +35,54 @@ void ActionSystem::changeAction( const std::string& sessionId, Model::Character*
     }
 
     const auto& actions = _location->actions();
-    auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-            if ( action.id() != actionId ) {
-                return false;
-            }
+    auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Domain::LocationAction& action ) {
+        if ( action.id() != actionId ) {
+            return false;
+        }
 
-            if ( action.structure() != structureId ) {
-                return false;
-            }
+        if ( action.structure() != structureId ) {
+            return false;
+        }
 
-            return true;
-        } );
+        return true;
+    } );
 
     if ( it == actions.end() ) {
         return;
     }
 
-    const Model::LocationAction& selectedAction = *it;
+    const Domain::LocationAction& selectedAction = *it;
 
     if ( !Helper::LocationHelper::canCharacterPerformAction( character, selectedAction ) ) {
         return;
     }
 
-    Model::CharacterAction& action = character->action();
+    Domain::CharacterAction& action = character->action();
     action.setId( actionId );
     action.setDuration( computeActionDuration( character, selectedAction ) );
     action.setCounter( 0 );
     Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
-void ActionSystem::process( const std::string& sessionId, Model::Character* character ) {
+void ActionSystem::process( const std::string& sessionId, Domain::Character* character ) {
     if ( !character ) {
         return;
     }
 
-    Model::CharacterAction& characterAction = character->action();
+    Domain::CharacterAction& characterAction = character->action();
 
     if ( characterAction.counter() >= characterAction.duration() ) {
 
         const auto& actions = _location->actions();
-        auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Model::LocationAction& action ) {
-                return action.id() == characterAction.id();
-            } );
+        auto it = std::find_if( actions.begin(), actions.end(), [ & ]( const Domain::LocationAction& action ) {
+            return action.id() == characterAction.id();
+        } );
 
         if ( it != actions.end() ) {
-            const Model::LocationAction& completedAction = *it;
+            const Domain::LocationAction& completedAction = *it;
 
             for ( const auto& experienceEntry : completedAction.experience() ) {
-                Model::SkillType skillType = Helper::SkillHelper::stringToEnum( experienceEntry.idSkill() );
+                Domain::SkillType skillType = Helper::SkillHelper::stringToEnum( experienceEntry.idSkill() );
                 int xpGranted = experienceEntry.amount();
 
                 _progressionSystem.applyExperience( sessionId, character, skillType, xpGranted );
@@ -104,21 +105,21 @@ void ActionSystem::process( const std::string& sessionId, Model::Character* char
     Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
-int ActionSystem::computeActionDuration( Model::Character* character, const Model::LocationAction& action ) {
+int ActionSystem::computeActionDuration( Domain::Character* character, const Domain::LocationAction& action ) {
     int baseDuration = action.duration();
 
-    Model::SkillType skill;
+    Domain::SkillType skill;
     if ( action.id() == "mine" ) {
-        skill = Model::SkillType::MINING;
+        skill = Domain::SkillType::MINING;
 
     } else if ( action.id() == "woodcut" ) {
-        skill = Model::SkillType::WOODCUTTING;
+        skill = Domain::SkillType::WOODCUTTING;
 
     } else if ( action.id() == "fish" ) {
-        skill = Model::SkillType::FISHING;
+        skill = Domain::SkillType::FISHING;
 
     } else if ( action.id() == "gather" ) {
-        skill = Model::SkillType::HERBALISM;
+        skill = Domain::SkillType::HERBALISM;
 
     } else {
         return baseDuration;
@@ -129,7 +130,7 @@ int ActionSystem::computeActionDuration( Model::Character* character, const Mode
     return static_cast<int>( baseDuration * modifier );
 }
 
-void ActionSystem::regenerativeActionEffect( const std::string& sessionId, Model::Character* character ) {
+void ActionSystem::regenerativeActionEffect( const std::string& sessionId, Domain::Character* character ) {
     if ( !character ) {
         return;
     }
@@ -143,26 +144,26 @@ void ActionSystem::regenerativeActionEffect( const std::string& sessionId, Model
     RegenerationSystem::computeRegeneration( sessionId, character, 5.0 );
 }
 
-void ActionSystem::gatheringActionEffect( const std::string& sessionId, Model::Character* character, const Model::LocationAction& action ) {
+void ActionSystem::gatheringActionEffect( const std::string& sessionId, Domain::Character* character, const Domain::LocationAction& action ) {
     int skillLevel = 0;
 
     if ( action.id() == "mine" ) {
-        skillLevel = character->skills().skillLevel( Model::SkillType::MINING );
+        skillLevel = character->skills().skillLevel( Domain::SkillType::MINING );
 
     } else if ( action.id() == "woodcut" ) {
-        skillLevel = character->skills().skillLevel( Model::SkillType::WOODCUTTING );
+        skillLevel = character->skills().skillLevel( Domain::SkillType::WOODCUTTING );
 
     } else if ( action.id() == "fish" ) {
-        skillLevel = character->skills().skillLevel( Model::SkillType::FISHING );
+        skillLevel = character->skills().skillLevel( Domain::SkillType::FISHING );
 
     } else if ( action.id() == "gather" ) {
-        skillLevel = character->skills().skillLevel( Model::SkillType::HERBALISM );
+        skillLevel = character->skills().skillLevel( Domain::SkillType::HERBALISM );
     }
 
     for ( const auto& loot : action.loot() ) {
         double amount = loot.realAmountByLevel( skillLevel );
         double chance = std::min( 1.0, loot.realChanceByLevel( skillLevel ) );
-        if ( ( rand() / double(RAND_MAX) ) <= chance ) {
+        if ( ( rand() / double( RAND_MAX ) ) <= chance ) {
             int finalAmount = static_cast<int>( amount );
             character->inventory().addItem( loot.id(), finalAmount );
         }

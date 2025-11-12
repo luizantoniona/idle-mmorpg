@@ -12,12 +12,13 @@
 
 namespace Core::System {
 
-CombatSystem::CombatSystem( Model::Location* location ) :
-    _tickRate( Commons::Singleton<Core::Manager::ServerConfigurationManager>::instance().tickRate() ),
+CombatSystem::CombatSystem( Domain::Location* location ) :
+    _tickRate( Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate() ),
     _location( location ),
-    _progressionSystem() {}
+    _progressionSystem() {
+}
 
-void CombatSystem::computeCombatActionDuration( Model::Character* character ) {
+void CombatSystem::computeCombatActionDuration( Domain::Character* character ) {
     double attackSpeed = character->combatAttributes().attackSpeed();
 
     int duration = _tickRate / attackSpeed;
@@ -26,7 +27,7 @@ void CombatSystem::computeCombatActionDuration( Model::Character* character ) {
     character->combatAction().setDuration( duration );
 }
 
-void CombatSystem::computeCombatActionDuration( Model::Creature* creature ) {
+void CombatSystem::computeCombatActionDuration( Domain::Creature* creature ) {
     double attackSpeed = creature->attackSpeed();
 
     int duration = _tickRate / attackSpeed;
@@ -35,7 +36,7 @@ void CombatSystem::computeCombatActionDuration( Model::Creature* creature ) {
     creature->combatAction().setDuration( duration );
 }
 
-void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature ) {
+void CombatSystem::computeHitDamage( const std::string& sessionId, Domain::Character* character, Domain::Creature* creature ) {
     double newStamina = character->vitals().stamina() - 1;
     newStamina = std::max( 0.0, newStamina );
     character->vitals().setStamina( newStamina );
@@ -72,7 +73,7 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Model::Charac
               << " [HP LEFT]: " << creature->vitals().health() << std::endl;
 }
 
-void CombatSystem::computeHitDamage( Model::Creature* creature, const std::string& sessionId, Model::Character* character ) {
+void CombatSystem::computeHitDamage( Domain::Creature* creature, const std::string& sessionId, Domain::Character* character ) {
     double newStamina = creature->vitals().stamina() - 1;
     newStamina = std::max( 0.0, newStamina );
     creature->vitals().setStamina( newStamina );
@@ -86,12 +87,12 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
     damage = std::max( 0.0, damage );
 
     if ( hasShieldEquipped ) {
-        int shieldLevel = character->skills().skillLevel( Model::SkillType::SHIELD_MASTERY );
+        int shieldLevel = character->skills().skillLevel( Domain::SkillType::SHIELD_MASTERY );
         double blockChance = 0.5 + ( 0.005 * ( shieldLevel - creature->accuracy() ) );
         blockChance = std::clamp( blockChance, 0.05, 0.95 );
 
         if ( rollChance( blockChance ) ) {
-            _progressionSystem.applyExperience( sessionId, character, Model::SkillType::SHIELD_MASTERY, creature->accuracy() );
+            _progressionSystem.applyExperience( sessionId, character, Domain::SkillType::SHIELD_MASTERY, creature->accuracy() );
 
             double reduction = 0.5 + ( 0.005 * shieldLevel );
             reduction = std::clamp( reduction, 0.05, 1.0 );
@@ -120,16 +121,16 @@ void CombatSystem::computeHitDamage( Model::Creature* creature, const std::strin
               << " [HP LEFT]: " << character->vitals().health() << std::endl;
 }
 
-void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Character* character, Model::Creature* creature, Model::CharacterSpell* characterSpell ) {
+void CombatSystem::computeSpellDamage( const std::string& sessionId, Domain::Character* character, Domain::Creature* creature, Domain::CharacterSpell* characterSpell ) {
     double newMana = character->vitals().mana() - characterSpell->spell()->manaCost();
     newMana = std::max( 0.0, newMana );
     character->vitals().setMana( newMana );
 
     characterSpell->setCount( 0 );
 
-    int invocationLevel = character->skills().skillLevel( Model::SkillType::INVOCATION );
+    int invocationLevel = character->skills().skillLevel( Domain::SkillType::INVOCATION );
 
-    _progressionSystem.applyExperience( sessionId, character, Model::SkillType::INVOCATION, characterSpell->spell()->manaCost() );
+    _progressionSystem.applyExperience( sessionId, character, Domain::SkillType::INVOCATION, characterSpell->spell()->manaCost() );
 
     double hitChance = 0.5 + 0.005 * ( invocationLevel - creature->evasion() );
     hitChance = std::clamp( hitChance, 0.05, 0.95 );
@@ -148,7 +149,7 @@ void CombatSystem::computeSpellDamage( const std::string& sessionId, Model::Char
     std::cout << character->name() << " casts " << characterSpell->spell()->name() << " dealing " << damage << " damage to " << creature->name() << std::endl;
 }
 
-void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {
+void CombatSystem::computeLoot( std::unordered_map<std::string, Domain::Character*> characters, std::vector<Domain::Creature*> creatures ) {
     if ( characters.empty() ) {
         return;
     }
@@ -160,7 +161,7 @@ void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character
             if ( roll <= lootEntry.chance() ) {
                 auto it = characters.begin();
                 std::advance( it, rand() % characters.size() );
-                Model::Character* receiver = it->second;
+                Domain::Character* receiver = it->second;
 
                 int amount = lootEntry.minAmount() + ( rand() % ( lootEntry.maxAmount() - lootEntry.minAmount() + 1 ) );
                 std::cout << "[CHARACTER] " << receiver->name() << " [QUANTITY] " << amount << " [ITEM] " << lootEntry.id() << std::endl;
@@ -170,7 +171,7 @@ void CombatSystem::computeLoot( std::unordered_map<std::string, Model::Character
     }
 }
 
-void CombatSystem::computeExperience( std::unordered_map<std::string, Model::Character*> characters, std::vector<Model::Creature*> creatures ) {
+void CombatSystem::computeExperience( std::unordered_map<std::string, Domain::Character*> characters, std::vector<Domain::Creature*> creatures ) {
     double totalXP = 0.0;
     for ( const auto& creature : creatures ) {
         totalXP += creature->experience();
@@ -205,34 +206,34 @@ double CombatSystem::rollRange( double min, double max ) {
     return min + roll * ( max - min );
 }
 
-Model::SkillType CombatSystem::combatSkill( Model::Character* character ) {
-    const Model::Item* weapon = character->equipment().weapon().item();
+Domain::SkillType CombatSystem::combatSkill( Domain::Character* character ) {
+    const Domain::Item* weapon = character->equipment().weapon().item();
 
-    Model::SkillType skill = combatSkillByWeapon( weapon );
+    Domain::SkillType skill = combatSkillByWeapon( weapon );
 
     return skill;
 }
 
-Model::SkillType CombatSystem::combatSkillByWeapon( const Model::Item* weapon ) {
+Domain::SkillType CombatSystem::combatSkillByWeapon( const Domain::Item* weapon ) {
     if ( !weapon ) {
-        return Model::SkillType::FIST_MASTERY;
+        return Domain::SkillType::FIST_MASTERY;
     }
 
     const std::string& category = weapon->category();
     if ( category == "sword" ) {
-        return Model::SkillType::SWORD_MASTERY;
+        return Domain::SkillType::SWORD_MASTERY;
 
     } else if ( category == "axe" ) {
-        return Model::SkillType::AXE_MASTERY;
+        return Domain::SkillType::AXE_MASTERY;
 
     } else if ( category == "dagger" ) {
-        return Model::SkillType::DAGGER_MASTERY;
+        return Domain::SkillType::DAGGER_MASTERY;
 
     } else {
         std::cerr << "CombatSystem::combatSkillByWeapon Unknow weapon category: " << category << std::endl;
     }
 
-    return Model::SkillType::FIST_MASTERY;
+    return Domain::SkillType::FIST_MASTERY;
 }
 
 } // namespace Core::System

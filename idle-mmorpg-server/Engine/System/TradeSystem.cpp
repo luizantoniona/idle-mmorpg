@@ -7,11 +7,11 @@
 
 namespace Core::System {
 
-void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Character* character, const Model::Location* location, const Json::Value& payload ) {
-    const std::string denizenId = payload["denizenId"].asString();
+void TradeSystem::characterTradeDenizen( const std::string& sessionId, Domain::Character* character, const Domain::Location* location, const Json::Value& payload ) {
+    const std::string denizenId = payload[ "denizenId" ].asString();
 
     bool found = false;
-    Model::Denizen denizenToTrade;
+    Domain::Denizen denizenToTrade;
     for ( auto& denizen : location->denizens() ) {
         if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             denizenToTrade = denizen;
@@ -24,22 +24,22 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
         return;
     }
 
-    Model::CharacterWallet& wallet = character->wallet();
-    Model::CharacterInventory& inventory = character->inventory();
+    Domain::CharacterWallet& wallet = character->wallet();
+    Domain::CharacterInventory& inventory = character->inventory();
 
     int totalCoins = wallet.copper() + ( wallet.silver() * 1000 ) + ( wallet.gold() * 1000000 );
 
-    if ( payload.isMember( "sell" ) && payload["sell"].isArray() ) {
+    if ( payload.isMember( "sell" ) && payload[ "sell" ].isArray() ) {
 
-        for ( const auto& entry : payload["sell"] ) {
-            std::string itemId = entry["itemId"].asString();
-            int quantity = entry["quantity"].asInt();
+        for ( const auto& entry : payload[ "sell" ] ) {
+            std::string itemId = entry[ "itemId" ].asString();
+            int quantity = entry[ "quantity" ].asInt();
 
             if ( quantity <= 0 ) {
                 continue;
             }
 
-            const Model::Item* itemToSell = nullptr;
+            const Domain::Item* itemToSell = nullptr;
             for ( const auto& item : denizenToTrade.trade().buyItems() ) {
                 if ( item.id() == itemId ) {
                     itemToSell = item.item();
@@ -61,17 +61,17 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Model::Ch
         }
     }
 
-    if ( payload.isMember( "buy" ) && payload["buy"].isArray() ) {
+    if ( payload.isMember( "buy" ) && payload[ "buy" ].isArray() ) {
 
-        for ( const auto& entry : payload["buy"] ) {
-            std::string itemId = entry["itemId"].asString();
-            int quantity = entry["quantity"].asInt();
+        for ( const auto& entry : payload[ "buy" ] ) {
+            std::string itemId = entry[ "itemId" ].asString();
+            int quantity = entry[ "quantity" ].asInt();
 
             if ( quantity <= 0 ) {
                 continue;
             }
 
-            const Model::Item* itemToBuy = nullptr;
+            const Domain::Item* itemToBuy = nullptr;
             for ( const auto& item : denizenToTrade.trade().sellItems() ) {
                 if ( item.id() == itemId ) {
                     itemToBuy = item.item();

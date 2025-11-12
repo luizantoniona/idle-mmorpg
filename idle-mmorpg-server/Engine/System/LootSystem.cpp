@@ -7,7 +7,7 @@
 
 namespace Core::System {
 
-void LootSystem::addItem( const std::string& sessionId, Model::Character* character, const std::string& itemId, int amount ) {
+void LootSystem::addItem( const std::string& sessionId, Domain::Character* character, const std::string& itemId, int amount ) {
     if ( itemId == "coin_copper" || itemId == "coin_silver" || itemId == "coin_gold" ) {
         addCoin( sessionId, character, itemId, amount );
         return;
@@ -21,16 +21,16 @@ void LootSystem::addItem( const std::string& sessionId, Model::Character* charac
     NotificationSystem::notifyCharacterInventory( sessionId, character );
 }
 
-void LootSystem::addCoin( const std::string& sessionId, Model::Character* character, const std::string& itemId, int amount ) {
+void LootSystem::addCoin( const std::string& sessionId, Domain::Character* character, const std::string& itemId, int amount ) {
     auto& characterWallet = character->wallet();
 
     if ( itemId == "coin_copper" ) {
         characterWallet.setCopper( characterWallet.copper() + amount );
 
-    }else if ( itemId == "coin_silver" ) {
+    } else if ( itemId == "coin_silver" ) {
         characterWallet.setSilver( characterWallet.silver() + amount );
 
-    }else if ( itemId == "coin_gold" ) {
+    } else if ( itemId == "coin_gold" ) {
         characterWallet.setGold( characterWallet.gold() + amount );
     }
 

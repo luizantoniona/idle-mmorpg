@@ -10,25 +10,26 @@
 
 namespace Core::System {
 
-ProgressionSystem::ProgressionSystem() {}
+ProgressionSystem::ProgressionSystem() {
+}
 
-void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, const Model::SkillType& skillType, int xpGained ) {
+void ProgressionSystem::applyExperience( const std::string& sessionId, Domain::Character* character, const Domain::SkillType& skillType, int xpGained ) {
     if ( !character ) {
         return;
     }
 
-    Model::CharacterSkill* characterSkill = character->skills().skill( skillType );
+    Domain::CharacterSkill* characterSkill = character->skills().skill( skillType );
 
     if ( !characterSkill ) {
 
         const std::string skillId = Helper::SkillHelper::enumToString( skillType );
 
-        Model::CharacterSkill newSkill;
+        Domain::CharacterSkill newSkill;
         newSkill.setType( skillType );
         newSkill.setId( skillId );
         newSkill.setExperience( 0 );
         newSkill.setLevel( 0 );
-        newSkill.setSkill( Commons::Singleton<Core::Manager::SkillManager>::instance().skill( skillId ) );
+        newSkill.setSkill( Commons::Singleton<Engine::SkillManager>::instance().skill( skillId ) );
 
         if ( !newSkill.skill() ) {
             std::cerr << "ProgressionSystem::applyExperience Unknown skill id: " << skillId << std::endl;
@@ -57,7 +58,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
     NotificationSystem::notifyCharacterSkills( sessionId, character );
 }
 
-void ProgressionSystem::applyMilestone( Model::Character* character, Model::CharacterSkill* characterSkill ) {
+void ProgressionSystem::applyMilestone( Domain::Character* character, Domain::CharacterSkill* characterSkill ) {
     const auto& skillData = characterSkill->skill();
 
     if ( !skillData ) {
@@ -75,12 +76,12 @@ void ProgressionSystem::applyMilestone( Model::Character* character, Model::Char
     }
 }
 
-void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const Model::SkillMilestoneBonus milestoneBonus ) {
+void ProgressionSystem::applyMilestoneBonus( Domain::Character* character, const Domain::SkillMilestoneBonus milestoneBonus ) {
     const std::string& type = milestoneBonus.type();
     const std::string& id = milestoneBonus.id();
     double value = milestoneBonus.value();
 
-    Model::CharacterVitals& vitals = character->vitals();
+    Domain::CharacterVitals& vitals = character->vitals();
 
     if ( type == "vital" ) {
 
@@ -102,7 +103,7 @@ void ProgressionSystem::applyMilestoneBonus( Model::Character* character, const 
     }
 }
 
-void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Character* character, int xpGained ) {
+void ProgressionSystem::applyExperience( const std::string& sessionId, Domain::Character* character, int xpGained ) {
     if ( !character ) {
         return;
     }
@@ -127,7 +128,7 @@ void ProgressionSystem::applyExperience( const std::string& sessionId, Model::Ch
     NotificationSystem::notifyCharacterProgression( sessionId, character );
 }
 
-void ProgressionSystem::applyLevelUp( Model::Character* character ) {
+void ProgressionSystem::applyLevelUp( Domain::Character* character ) {
     auto& vitals = character->vitals();
     vitals.setMaxHealth( vitals.maxHealth() + 10 );
     vitals.setMaxMana( vitals.maxMana() + 5 );

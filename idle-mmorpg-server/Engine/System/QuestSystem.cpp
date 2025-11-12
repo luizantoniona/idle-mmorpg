@@ -12,11 +12,11 @@
 
 namespace Core::System {
 
-void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Character* character, const Model::Location* location, const Json::Value& payload ) {
-    const std::string denizenId = payload["denizenId"].asString();
+void QuestSystem::characterAcceptQuest( const std::string& sessionId, Domain::Character* character, const Domain::Location* location, const Json::Value& payload ) {
+    const std::string denizenId = payload[ "denizenId" ].asString();
 
     bool found = false;
-    Model::Denizen denizenToAccept;
+    Domain::Denizen denizenToAccept;
     for ( auto& denizen : location->denizens() ) {
         if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             denizenToAccept = denizen;
@@ -29,23 +29,23 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
         return;
     }
 
-    const std::string questId = payload["questId"].asString();
+    const std::string questId = payload[ "questId" ].asString();
     if ( !denizenToAccept.hasQuestById( questId ) ) {
         return;
     }
 
-    Model::CharacterQuests& characterQuests = character->quests();
+    Domain::CharacterQuests& characterQuests = character->quests();
     if ( characterQuests.isQuestProceeding( questId ) || characterQuests.isQuestFinished( questId ) ) {
         return;
     }
 
-    const Model::Quest* quest = Commons::Singleton<Core::Manager::QuestManager>::instance().questById( questId );
+    const Domain::Quest* quest = Commons::Singleton<Engine::QuestManager>::instance().questById( questId );
     if ( !quest ) {
         return;
     }
 
     if ( quest->type() == "talk" && quest->objectiveId() == denizenId ) {
-        Model::CharacterQuest questToAdd;
+        Domain::CharacterQuest questToAdd;
         questToAdd.setId( questId );
         questToAdd.setType( quest->type() );
         questToAdd.setObjectiveId( quest->objectiveId() );
@@ -57,7 +57,7 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
         characterQuests.addProceeding( questToAdd );
 
     } else {
-        Model::CharacterQuest questToAdd;
+        Domain::CharacterQuest questToAdd;
         questToAdd.setId( questId );
         questToAdd.setType( quest->type() );
         questToAdd.setObjectiveId( quest->objectiveId() );
@@ -75,11 +75,11 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Model::Cha
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 
-void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Character* character, const Model::Location* location, const Json::Value& payload ) {
-    const std::string denizenId = payload["denizenId"].asString();
+void QuestSystem::characterFinishQuest( const std::string& sessionId, Domain::Character* character, const Domain::Location* location, const Json::Value& payload ) {
+    const std::string denizenId = payload[ "denizenId" ].asString();
 
     bool found = false;
-    Model::Denizen denizenToFinish;
+    Domain::Denizen denizenToFinish;
     for ( auto& denizen : location->denizens() ) {
         if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
             denizenToFinish = denizen;
@@ -92,12 +92,12 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
         return;
     }
 
-    const std::string questId = payload["questId"].asString();
+    const std::string questId = payload[ "questId" ].asString();
     if ( !denizenToFinish.hasQuestById( questId ) ) {
         return;
     }
 
-    Model::CharacterQuests& characterQuests = character->quests();
+    Domain::CharacterQuests& characterQuests = character->quests();
     if ( !characterQuests.isQuestProceeding( questId ) ) {
         return;
     }
@@ -110,7 +110,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
         quest->setFinished( true );
 
         if ( quest->quest() ) {
-            const Model::Quest* baseQuest = quest->quest();
+            const Domain::Quest* baseQuest = quest->quest();
 
             if ( baseQuest->type() == "item" ) {
                 character->inventory().removeItem( baseQuest->objectiveId(), baseQuest->amount() );
@@ -138,7 +138,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Model::Cha
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 
-void QuestSystem::updateKillQuest( const std::string& sessionId, Model::Character* character, const std::string& creatureId ) {
+void QuestSystem::updateKillQuest( const std::string& sessionId, Domain::Character* character, const std::string& creatureId ) {
     for ( auto& quest : character->quests().proceeding() ) {
 
         if ( quest.type() == "kill" && !quest.finished() ) {
@@ -155,7 +155,7 @@ void QuestSystem::updateKillQuest( const std::string& sessionId, Model::Characte
     }
 }
 
-void QuestSystem::updateItemQuest( const std::string& sessionId, Model::Character* character ) {
+void QuestSystem::updateItemQuest( const std::string& sessionId, Domain::Character* character ) {
     for ( auto& quest : character->quests().proceeding() ) {
         if ( quest.type() == "item" ) {
             int count = 0;
@@ -179,7 +179,7 @@ void QuestSystem::updateItemQuest( const std::string& sessionId, Model::Characte
     }
 }
 
-void QuestSystem::updateTalkQuest( const std::string& sessionId, Model::Character* character, const std::string& denizenId ) {
+void QuestSystem::updateTalkQuest( const std::string& sessionId, Domain::Character* character, const std::string& denizenId ) {
     for ( auto& quest : character->quests().proceeding() ) {
 
         if ( quest.type() == "talk" && !quest.finished() ) {
