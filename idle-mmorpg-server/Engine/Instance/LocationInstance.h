@@ -8,26 +8,26 @@
 #include <Core/Message/MessageReceiverType.h>
 #include <Core/System/ActionSystem.h>
 #include <Core/System/TrainingSystem.h>
-#include <Model/Character/Character.h>
-#include <Model/World/Location/Location.h>
+#include <Domain/Character/Character.h>
+#include <Domain/World/Location/Location.h>
 
 #include "CombatInstance.h"
 
-namespace Core::Instance {
+namespace Engine {
 
 class LocationInstance {
 public:
-    explicit LocationInstance( Model::Location* location );
+    explicit LocationInstance( Domain::Location* location );
 
-    Model::Location* location();
+    Domain::Location* location();
 
-    bool addCharacter( const std::string& sessionId, Model::Character* character );
+    bool addCharacter( const std::string& sessionId, Domain::Character* character );
     void removeCharacter( const std::string& sessionId );
 
-    void changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload );
+    void changeStructure( const std::string& sessionId, Domain::Character* character, const Json::Value& payload );
 
-    void createCombat( const std::string& sessionId, Model::Character* character );
-    void enterCombat( const std::string& sessionId, Model::Character* character, const std::string& roomId );
+    void createCombat( const std::string& sessionId, Domain::Character* character );
+    void enterCombat( const std::string& sessionId, Domain::Character* character, const std::string& roomId );
     void exitCombat( const std::string& sessionId );
 
     void tick();
@@ -36,8 +36,8 @@ public:
 
 private:
     mutable std::mutex _mutex;
-    Model::Location* _location;
-    std::unordered_map<std::string, Model::Character*> _characters;
+    Domain::Location* _location;
+    std::unordered_map<std::string, Domain::Character*> _characters;
     Core::System::ActionSystem _actionSystem;
     Core::System::TrainingSystem _trainingSystem;
 
@@ -45,6 +45,6 @@ private:
     std::unordered_map<std::string, CombatInstance*> _characterCombatCache;
 };
 
-} // namespace Core::Instance
+} // namespace Engine
 
 #endif // LOCATIONINSTANCE_H

@@ -4,9 +4,9 @@
 
 #include <Core/System/NotificationSystem.h>
 
-namespace Core::Instance {
+namespace Engine {
 
-CombatInstance::CombatInstance( Model::Location* location, const std::string& id, const std::string& name, const std::string& structureId ) :
+CombatInstance::CombatInstance( Domain::Location* location, const std::string& id, const std::string& name, const std::string& structureId ) :
     _id( id ),
     _name( name ),
     _structureId( structureId ),
@@ -27,13 +27,13 @@ Json::Value CombatInstance::instanceToJson() const {
 Json::Value CombatInstance::combatToJson() const {
     Json::Value root;
     Json::Value charactersJson;
-    for ( const auto& [sessionId, character] : _characters ) {
+    for ( const auto& [ sessionId, character ] : _characters ) {
         Json::Value characterJson = character->toJson();
         characterJson[ "combatAction" ] = character->combatAction().toJson();
         characterJson[ "vitals" ] = character->vitals().toJson();
         charactersJson.append( characterJson );
     }
-    root["characters"] = charactersJson;
+    root[ "characters" ] = charactersJson;
 
     Json::Value creaturesJson;
     for ( const auto& creature : _creatures ) {
@@ -50,16 +50,16 @@ Json::Value CombatInstance::combatToJson() const {
     return root;
 }
 
-void CombatInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
+void CombatInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
     _combatSystem.computeCombatActionDuration( character );
-    _characters[sessionId] = character;
+    _characters[ sessionId ] = character;
 }
 
 void CombatInstance::removeCharacter( const std::string& sessionId ) {
     _characters.erase( sessionId );
 }
 
-void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, Model::Character* character, const std::string& spellId ) {
+void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId ) {
     if ( character->vitals().health() <= 0 ) {
         return;
     }
@@ -78,7 +78,7 @@ void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, M
         return;
     }
 
-    Model::Creature* target = nullptr;
+    Domain::Creature* target = nullptr;
     for ( auto& creature : _creatures ) {
         if ( creature->vitals().health() > 0 ) {
             target = creature.get();
@@ -106,7 +106,7 @@ std::string CombatInstance::structureId() const {
     return _structureId;
 }
 
-const std::unordered_map<std::string, Model::Character*>& CombatInstance::characters() const {
+const std::unordered_map<std::string, Domain::Character*>& CombatInstance::characters() const {
     return _characters;
 }
 
@@ -126,7 +126,7 @@ void CombatInstance::spawnCreatures() {
         }
 
         for ( int i = 0; i < spawnCount; ++i ) {
-            auto creatureInstance = std::make_unique<Model::Creature>( *locCreature.creature() );
+            auto creatureInstance = std::make_unique<Domain::Creature>( *locCreature.creature() );
 
             creatureInstance->setCombatId( _creatures.size() );
             _combatSystem.computeCombatActionDuration( creatureInstance.get() );
@@ -147,7 +147,7 @@ void CombatInstance::process() {
         auto& action = character->combatAction();
         if ( action.counter() >= action.duration() ) {
 
-            Model::Creature* target = nullptr;
+            Domain::Creature* target = nullptr;
             for ( const auto& creature : _creatures ) {
                 if ( creature->vitals().health() > 0 ) {
                     target = creature.get();
@@ -179,7 +179,7 @@ void CombatInstance::process() {
 
         if ( action.counter() >= action.duration() ) {
 
-            std::vector<std::pair<std::string, Model::Character*> > aliveCharacters;
+            std::vector<std::pair<std::string, Domain::Character*> > aliveCharacters;
             aliveCharacters.reserve( _characters.size() );
 
             for ( const auto& [ sessionId, character ] : _characters ) {
@@ -217,7 +217,7 @@ void CombatInstance::process() {
     if ( allCreaturesDead ) {
         std::cout << "[Combat] All creatures dead, rewarding characters" << std::endl;
 
-        std::vector<Model::Creature*> creatures;
+        std::vector<Domain::Creature*> creatures;
 
         for ( auto& creature : _creatures ) {
             creatures.push_back( creature.get() );
@@ -236,4 +236,4 @@ void CombatInstance::process() {
     }
 }
 
-} // namespace Core::Instance
+} // namespace Engine

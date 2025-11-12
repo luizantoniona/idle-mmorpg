@@ -13,9 +13,9 @@
 #include <Core/System/RegenerationSystem.h>
 #include <Core/System/TradeSystem.h>
 
-namespace Core::Instance {
+namespace Engine {
 
-LocationInstance::LocationInstance( Model::Location* location ) :
+LocationInstance::LocationInstance( Domain::Location* location ) :
     _mutex(),
     _location( location ),
     _characters( {} ),
@@ -24,13 +24,13 @@ LocationInstance::LocationInstance( Model::Location* location ) :
     _combatInstances(),
     _characterCombatCache() {}
 
-Model::Location* LocationInstance::location() {
+Domain::Location* LocationInstance::location() {
     return _location;
 }
 
-bool LocationInstance::addCharacter( const std::string& sessionId, Model::Character* character ) {
+bool LocationInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
     std::lock_guard lock( _mutex );
-    _characters[sessionId] = character;
+    _characters[ sessionId ] = character;
 
     std::cout << "LocationInstance::addCharacter"
               << " [Character] " << character->name()
@@ -55,7 +55,7 @@ void LocationInstance::removeCharacter( const std::string& sessionId ) {
     _characters.erase( sessionId );
 }
 
-void LocationInstance::changeStructure( const std::string& sessionId, Model::Character* character, const Json::Value& payload ) {
+void LocationInstance::changeStructure( const std::string& sessionId, Domain::Character* character, const Json::Value& payload ) {
     if ( !character || !payload.isObject() || !payload.isMember( "structure" ) ) {
         return;
     }
@@ -79,7 +79,7 @@ void LocationInstance::changeStructure( const std::string& sessionId, Model::Cha
     Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
 }
 
-void LocationInstance::createCombat( const std::string& sessionId, Model::Character* character ) {
+void LocationInstance::createCombat( const std::string& sessionId, Domain::Character* character ) {
     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
         return;
     }
@@ -90,10 +90,10 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
     CombatInstance* combatInstancePtr = combatInstance.get();
 
     combatInstancePtr->addCharacter( sessionId, character );
-    _characterCombatCache[sessionId] = combatInstancePtr;
+    _characterCombatCache[ sessionId ] = combatInstancePtr;
     _combatInstances.push_back( std::move( combatInstance ) );
 
-    for ( const auto& [otherSessionId, otherChar] : _characters ) {
+    for ( const auto& [ otherSessionId, otherChar ] : _characters ) {
         if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
             std::vector<CombatInstance*> allInstances;
             std::string otherStructure = otherChar->coordinates().structureId();
@@ -109,7 +109,7 @@ void LocationInstance::createCombat( const std::string& sessionId, Model::Charac
     }
 }
 
-void LocationInstance::enterCombat( const std::string& sessionId, Model::Character* character, const std::string& roomId ) {
+void LocationInstance::enterCombat( const std::string& sessionId, Domain::Character* character, const std::string& roomId ) {
     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
         return;
     }
@@ -117,7 +117,7 @@ void LocationInstance::enterCombat( const std::string& sessionId, Model::Charact
     for ( const auto& combatInstance : _combatInstances ) {
         if ( combatInstance->id() == roomId ) {
             combatInstance->addCharacter( sessionId, character );
-            _characterCombatCache[sessionId] = combatInstance.get();
+            _characterCombatCache[ sessionId ] = combatInstance.get();
             return;
         }
     }
@@ -203,7 +203,7 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     if ( it == _characters.end() ) {
         return;
     }
-    Model::Character* character = it->second;
+    Domain::Character* character = it->second;
 
     CombatInstance* combat = nullptr;
     auto itCombat = _characterCombatCache.find( sessionId );
@@ -240,8 +240,8 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
             Core::System::ItemSystem::characterUseItem( sessionId, character, payload );
             break;
         case Message::MessageReceiverType::CHARACTER_CAST_SPELL: {
-            std::string spellType = payload["type"].asString();
-            std::string spellId = payload["id"].asString();
+            std::string spellType = payload[ "type" ].asString();
+            std::string spellId = payload[ "id" ].asString();
 
             if ( spellType == "healing" ) {
                 Core::System::RegenerationSystem::castHealingSpell( sessionId, character, spellId );
@@ -284,4 +284,4 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     }
 }
 
-} // namespace Core::Instance
+} // namespace Engine
