@@ -2,7 +2,7 @@
     "id": "wolf",
     "name": "Wolf",
     "description": "A larger and tougher rat that dwells in dark caves.",
-    "icon": "animal/wolf.gif",
+    "icon": "wolf.gif",
     "experience": 18,
     "health": 25,
     "mana": 0,

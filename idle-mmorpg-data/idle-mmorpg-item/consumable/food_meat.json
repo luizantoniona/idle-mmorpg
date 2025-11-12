@@ -4,7 +4,7 @@
     "category": "food",
     "name": "Meat",
     "description": "A simple meat.",
-    "icon": "consumable/food_meat.gif",
+    "icon": "food_meat.gif",
     "rarity": "common",
     "price": 5,
     "effects": [

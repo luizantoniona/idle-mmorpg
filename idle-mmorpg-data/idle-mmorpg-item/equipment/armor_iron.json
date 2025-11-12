@@ -4,7 +4,7 @@
     "category": "armor",
     "name": "Iron Armor",
     "description": "A simple armor made of iron.",
-    "icon": "equipment/armor_iron.png",
+    "icon": "armor_iron.png",
     "rarity": "common",
     "price": 50,
     "bonus": [

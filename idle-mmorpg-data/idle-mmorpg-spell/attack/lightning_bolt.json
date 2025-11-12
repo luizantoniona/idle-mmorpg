@@ -2,7 +2,7 @@
     "id": "lightning_bolt",
     "name": "Lightning Bolt",
     "description": "Strikes the target with a bolt of lightning, dealing electrical damage.",
-    "icon": "attack/lightning_bolt.gif",
+    "icon": "lightning_bolt.gif",
     "type": "attack",
     "manaCost": 10,
     "cooldown": 5,

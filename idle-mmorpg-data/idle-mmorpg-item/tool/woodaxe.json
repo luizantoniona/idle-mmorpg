@@ -4,7 +4,7 @@
     "category": "woodaxe",
     "name": "Woodaxe",
     "description": "A normal woodaxe used to get wood.",
-    "icon": "tool/woodaxe.png",
+    "icon": "woodaxe.png",
     "rarity": "common",
     "price": 30,
     "bonus": [

@@ -4,7 +4,7 @@
     "category": "sword",
     "name": "Iron Sword",
     "description": "A basic sword made of iron.",
-    "icon": "weapon/sword_iron.png",
+    "icon": "sword_iron.png",
     "rarity": "common",
     "price": 5,
     "bonus": [

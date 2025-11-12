@@ -4,7 +4,7 @@
     "category": "pickaxe",
     "name": "Pickaxe",
     "description": "A normal pickaxe used to mine ores.",
-    "icon": "tool/pickaxe.png",
+    "icon": "pickaxe.png",
     "rarity": "common",
     "price": 30,
     "bonus": [
