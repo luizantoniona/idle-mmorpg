@@ -11,7 +11,18 @@ find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
-set(SOURCES main.cpp)
+file(
+  GLOB_RECURSE
+  SOURCES
+  main.cpp
+  src/*.cpp
+)
+
+file(
+  GLOB_RECURSE
+  HEADERS
+  src/*.h
+)
 
 set(QML_FILES
   qml/Main.qml
@@ -20,7 +31,7 @@ set(QML_FILES
   qml/components/NavBar.qml
 )
 
-qt_add_executable(${PROJECT_NAME} ${SOURCES})
+qt_add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 qt_add_qml_module(
   ${PROJECT_NAME}
@@ -31,6 +42,10 @@ qt_add_qml_module(
   QML_FILES
   ${QML_FILES})
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Quick Qt6::Qml)
+
 set_target_properties(
   ${PROJECT_NAME}
   PROPERTIES MACOSX_BUNDLE TRUE
@@ -38,8 +53,6 @@ set_target_properties(
              MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
              MACOSX_BUNDLE_SHORT_VERSION_STRING
              "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
-
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Quick)
 
 include(GNUInstallDirs)
 install(

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import IdleMMO 1.0
 
 Rectangle {
     color: "#151515"
@@ -32,4 +33,6 @@ Rectangle {
             text: "World"
         }
     }
+
+    CreatureControl {}
 }
