@@ -1,7 +1,6 @@
 {
     "id": "lumberjack",
     "name": "Lumberjack",
-    "structure": "",
     "icon": "hunter.png",
     "quests": [
         {

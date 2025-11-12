@@ -1,7 +1,6 @@
 {
     "id": "miner",
     "name": "Miner",
-    "structure": "",
     "icon": "miner.png",
     "quests": [
         {

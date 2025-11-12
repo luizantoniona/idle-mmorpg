@@ -2,6 +2,28 @@
     "id": "heroes_path",
     "name": "Heroes Path",
     "description": "Where all heroes are born.",
+    "creatures": [
+        {
+            "id": "rat",
+            "min": 1,
+            "max": 1
+        },
+        {
+            "id": "skeleton",
+            "min": 1,
+            "max": 1,
+            "structure": "altar_of_light"
+        }
+    ],
+    "denizens": [
+        {
+            "id": "guardian"
+        },
+        {
+            "id": "cleric",
+            "structure": "altar_of_light"
+        }
+    ],
     "sizeX": 10,
     "sizeY": 10,
     "connections": [
@@ -28,6 +50,85 @@
                 {
                     "type": "quest",
                     "id": "heroes_path_cleaning"
+                }
+            ]
+        }
+    ],
+    "structures": [
+        {
+            "id": "training_fields",
+            "label": "Training Fields",
+            "description": "A training field used by novice adventurers.",
+            "x": 8,
+            "y": 8
+        },
+        {
+            "id": "altar_of_light",
+            "label": "Altar of Light",
+            "description": "A mysterious altar that glows faintly.",
+            "x": 2,
+            "y": 5
+        }
+    ],
+    "actions": [
+        {
+            "id": "rest",
+            "type": "regenerative",
+            "label": "Rest and recover energy at the heroes camp",
+            "duration": 3,
+            "structure": "",
+            "requirements": [],
+            "experience": [
+                {
+                    "skill": "VITALITY",
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "id": "run",
+            "label": "Run training laps to improve stamina",
+            "duration": 3,
+            "requirements": [],
+            "experience": [
+                {
+                    "skill": "ENDURANCE",
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "id": "meditate",
+            "label": "Meditate to increase mana",
+            "duration": 3,
+            "requirements": [],
+            "experience": [
+                {
+                    "skill": "MEDITATION",
+                    "amount": 2
+                }
+            ]
+        },
+        {
+            "id": "combat",
+            "label": "Engage in battle against local enemies",
+            "requirements": []
+        },
+        {
+            "id": "combat",
+            "label": "Fight for the altar",
+            "structure": "altar_of_light",
+            "requirements": []
+        },
+        {
+            "id": "train",
+            "label": "Practice combat techniques with a wooden dummy",
+            "duration": 3,
+            "structure": "training_fields",
+            "requirements": [],
+            "experience": [
+                {
+                    "amount": 2
                 }
             ]
         }

@@ -1,7 +1,6 @@
 {
     "id": "guardian",
     "name": "Guardian",
-    "structure": "",
     "icon": "guardian.png",
     "quests": [
         {

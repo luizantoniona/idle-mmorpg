@@ -1,7 +1,6 @@
 {
     "id": "cleric_altar_of_light",
     "name": "Cleric",
-    "structure": "altar_of_light",
     "icon": "cleric.png",
     "quests": [
         {

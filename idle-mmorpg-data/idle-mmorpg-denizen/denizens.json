@@ -1,5 +1,8 @@
 {
     "denizens": [
-        "guardian"
+        "guardian",
+        "cleric",
+        "lumberjack",
+        "miner"
     ]
 }
