@@ -2,16 +2,15 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/SkillManager.h>
-#include <Database/Query.h>
-#include <Helper/SkillHelper.h>
+#include <Domain/Skill/SkillHelper.h>
+#include <Engine/Manager/Skill/SkillManager.h>
+#include <Infrastructure/Database/Query.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
 CharacterSkillsRepository::CharacterSkillsRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterSkillsRepository::createSkills( int idCharacter ) {
     return true;

@@ -1,6 +1,6 @@
 #include "CharacterSkill.h"
 
-#include <Shared/Helper/LevelExperienceHelper.h>
+#include <Domain/Shared/LevelExperienceHelper.h>
 
 namespace Domain {
 

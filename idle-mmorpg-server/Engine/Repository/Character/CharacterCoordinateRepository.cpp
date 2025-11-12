@@ -1,12 +1,11 @@
 #include "CharacterCoordinateRepository.h"
 
-#include <Database/Query.h>
+#include <Infrastructure/Database/Query.h>
 
 namespace Repository {
 
 CharacterCoordinateRepository::CharacterCoordinateRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterCoordinateRepository::createCoordinates( int idCharacter ) {
     const std::string sql = R"SQL(

@@ -3,13 +3,13 @@
 
 #include <string>
 
-#include <Model/RequirementType.h>
+#include <Domain/Shared/RequirementType.h>
 
 namespace Helper {
 
 class RequirementHelper {
 public:
-    static Model::RequirementType stringToEnum( const std::string& type );
+    static Domain::RequirementType stringToEnum( const std::string& type );
 };
 
 } // namespace Helper

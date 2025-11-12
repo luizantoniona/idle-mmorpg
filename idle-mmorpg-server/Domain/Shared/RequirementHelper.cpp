@@ -4,22 +4,22 @@
 
 namespace Helper {
 
-Model::RequirementType RequirementHelper::stringToEnum( const std::string& type ) {
+Domain::RequirementType RequirementHelper::stringToEnum( const std::string& type ) {
     if ( type == "skill" ) {
-        return Model::RequirementType::SKILL;
+        return Domain::RequirementType::SKILL;
 
     } else if ( type == "item" ) {
-        return Model::RequirementType::ITEM;
+        return Domain::RequirementType::ITEM;
 
     } else if ( type == "equipment" ) {
-        return Model::RequirementType::EQUIPMENT;
+        return Domain::RequirementType::EQUIPMENT;
 
     } else if ( type == "quest" ) {
-        return Model::RequirementType::QUEST;
+        return Domain::RequirementType::QUEST;
     }
 
     std::cerr << "RequirementHelper::stringToEnum Unknow type: " << type << std::endl;
-    return Model::RequirementType::UNKNOWN;
+    return Domain::RequirementType::UNKNOWN;
 }
 
 } // namespace Helper

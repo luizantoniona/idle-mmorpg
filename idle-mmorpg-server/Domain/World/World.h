@@ -20,7 +20,7 @@ public:
     bool hasLocationById( const std::string& locationId ) const;
 
 private:
-    std::vector<std::unique_ptr<Location> > _location;
+    std::vector<std::unique_ptr<Location> > _locations;
 };
 
 } // namespace Domain

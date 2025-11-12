@@ -1,14 +1,13 @@
 #include "CharacterQuestsRepository.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/QuestManager.h>
-#include <Database/Query.h>
+#include <Engine/Manager/Quest/QuestManager.h>
+#include <Infrastructure/Database/Query.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
 CharacterQuestsRepository::CharacterQuestsRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterQuestsRepository::createQuests( int idCharacter ) {
     return true;

@@ -1,12 +1,11 @@
 #include "UserRepository.h"
 
-#include <Database/Query.h>
+#include <Infrastructure/Database/Query.h>
 
 namespace Repository {
 
 UserRepository::UserRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool UserRepository::createUser( std::string& username, std::string& password ) {
     const std::string sql = R"SQL(INSERT INTO user (ds_username, ds_password) VALUES (?, ?))SQL";

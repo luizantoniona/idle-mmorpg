@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <Domain/Character/CharacterInventory.h>
-#include <Repository/Repository.h>
+#include <Engine/Repository/Repository.h>
 
 namespace Repository {
 

@@ -3,11 +3,11 @@
 #include <iostream>
 #include <unordered_map>
 
-#include <Helper/SkillHelper.h>
+#include <Domain/Skill/SkillHelper.h>
 
 namespace Helper {
 
-bool LocationHelper::canCharacterPerformAction( Model::Character* character, const Model::LocationAction& action ) {
+bool LocationHelper::canCharacterPerformAction( Domain::Character* character, const Domain::LocationAction& action ) {
     const std::string& characterStructure = character->coordinates().structureId();
     const std::string& actionStructure = action.structure();
 
@@ -19,7 +19,7 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
         return false;
     }
 
-    for ( const Model::Requirement& requirement : action.requirements() ) {
+    for ( const Domain::Requirement& requirement : action.requirements() ) {
         if ( !checkRequirement( character, requirement ) ) {
             return false;
         }
@@ -28,7 +28,7 @@ bool LocationHelper::canCharacterPerformAction( Model::Character* character, con
     return true;
 }
 
-bool LocationHelper::canCharacterUseConnections( Model::Character* character, const Model::LocationConnection& connection ) {
+bool LocationHelper::canCharacterUseConnections( Domain::Character* character, const Domain::LocationConnection& connection ) {
     const std::string& characterStructure = character->coordinates().structureId();
     const std::string& connectionStructure = connection.structure();
 
@@ -40,7 +40,7 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
         return false;
     }
 
-    for ( const Model::Requirement& requirement : connection.requirements() ) {
+    for ( const Domain::Requirement& requirement : connection.requirements() ) {
         if ( !checkRequirement( character, requirement ) ) {
             return false;
         }
@@ -49,7 +49,7 @@ bool LocationHelper::canCharacterUseConnections( Model::Character* character, co
     return true;
 }
 
-bool LocationHelper::canCharacterInteractDenizen( Model::Character* character, const Model::Denizen& denizen ) {
+bool LocationHelper::canCharacterInteractDenizen( Domain::Character* character, const Domain::Denizen& denizen ) {
     const std::string& characterStructure = character->coordinates().structureId();
     const std::string& denizenStructure = denizen.structure();
 
@@ -64,7 +64,7 @@ bool LocationHelper::canCharacterInteractDenizen( Model::Character* character, c
     return true;
 }
 
-bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, const Model::DenizenQuest& quest ) {
+bool LocationHelper::canCharacterSeeDenizenQuest( Domain::Character* character, const Domain::DenizenQuest& quest ) {
     auto& quests = character->quests();
     const std::string& questId = quest.id();
 
@@ -80,10 +80,10 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
         return false;
     }
 
-    const Model::Quest* questPtr = quest.quest();
+    const Domain::Quest* questPtr = quest.quest();
     if ( questPtr ) {
 
-        for ( const Model::Requirement& requirement : questPtr->requirements() ) {
+        for ( const Domain::Requirement& requirement : questPtr->requirements() ) {
             if ( !checkRequirement( character, requirement ) ) {
                 return false;
             }
@@ -95,54 +95,54 @@ bool LocationHelper::canCharacterSeeDenizenQuest( Model::Character* character, c
     return false;
 }
 
-bool LocationHelper::checkRequirement( Model::Character* character, const Model::Requirement& requirement ) {
-    const Model::RequirementType type = requirement.type();
+bool LocationHelper::checkRequirement( Domain::Character* character, const Domain::Requirement& requirement ) {
+    const Domain::RequirementType type = requirement.type();
 
     switch ( type ) {
-    case Model::RequirementType::SKILL:
-        if ( !checkSkillRequirement( character, requirement ) ) {
+        case Domain::RequirementType::SKILL:
+            if ( !checkSkillRequirement( character, requirement ) ) {
+                return false;
+            }
+            break;
+        case Domain::RequirementType::ITEM:
+            if ( !checkItemRequirement( character, requirement ) ) {
+                return false;
+            }
+            break;
+        case Domain::RequirementType::EQUIPMENT:
+            if ( !checkEquipmentRequirement( character, requirement ) ) {
+                return false;
+            }
+            break;
+        case Domain::RequirementType::QUEST:
+            if ( !checkQuestRequirement( character, requirement ) ) {
+                return false;
+            }
+            break;
+        default:
+            std::cerr << "LocationHelper::checkRequirement Unknown requirement type" << std::endl;
             return false;
-        }
-        break;
-    case Model::RequirementType::ITEM:
-        if ( !checkItemRequirement( character, requirement ) ) {
-            return false;
-        }
-        break;
-    case Model::RequirementType::EQUIPMENT:
-        if ( !checkEquipmentRequirement( character, requirement ) ) {
-            return false;
-        }
-        break;
-    case Model::RequirementType::QUEST:
-        if ( !checkQuestRequirement( character, requirement ) ) {
-            return false;
-        }
-        break;
-    default:
-        std::cerr << "LocationHelper::checkRequirement Unknown requirement type" << std::endl;
-        return false;
     }
 
     return true;
 }
 
-bool LocationHelper::checkSkillRequirement( Model::Character* character, const Model::Requirement& requirement ) {
-    const Model::SkillType skillType = Helper::SkillHelper::stringToEnum( requirement.id() );
+bool LocationHelper::checkSkillRequirement( Domain::Character* character, const Domain::Requirement& requirement ) {
+    const Domain::SkillType skillType = Helper::SkillHelper::stringToEnum( requirement.id() );
 
-    Model::CharacterSkill* skill = character->skills().skill( skillType );
+    Domain::CharacterSkill* skill = character->skills().skill( skillType );
 
     return skill && skill->level() >= requirement.amount();
 }
 
-bool LocationHelper::checkItemRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkItemRequirement( Domain::Character* character, const Domain::Requirement& requirement ) {
     return character->inventory().hasItem( requirement.id(), requirement.amount() );
 }
 
-bool LocationHelper::checkEquipmentRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkEquipmentRequirement( Domain::Character* character, const Domain::Requirement& requirement ) {
     auto& characterEquipments = character->equipment();
 
-    std::unordered_map<std::string, Model::CharacterEquipmentItem&> slotMap = {
+    std::unordered_map<std::string, Domain::CharacterEquipmentItem&> slotMap = {
         { "pickaxe", characterEquipments.pickaxe() },
         { "woodaxe", characterEquipments.woodaxe() },
         { "fishingrod", characterEquipments.fishingrod() },
@@ -155,11 +155,11 @@ bool LocationHelper::checkEquipmentRequirement( Model::Character* character, con
         return false;
     }
 
-    Model::CharacterEquipmentItem& targetSlot = it->second;
+    Domain::CharacterEquipmentItem& targetSlot = it->second;
     return !targetSlot.id().empty();
 }
 
-bool LocationHelper::checkQuestRequirement( Model::Character* character, const Model::Requirement& requirement ) {
+bool LocationHelper::checkQuestRequirement( Domain::Character* character, const Domain::Requirement& requirement ) {
     return character->quests().isQuestFinished( requirement.id() );
 }
 

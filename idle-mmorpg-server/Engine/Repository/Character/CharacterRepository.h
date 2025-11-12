@@ -5,7 +5,7 @@
 #include <vector>
 
 #include <Domain/Character/Character.h>
-#include <Repository/Repository.h>
+#include <Engine/Repository/Repository.h>
 
 namespace Repository {
 
@@ -17,7 +17,7 @@ public:
     bool updateCharacter( Domain::Character character );
     bool deleteCharacter( int idCharacter );
 
-    std::vector<std::unique_ptr<Domain::Character>> findAllByIdUser( const int idUser );
+    std::vector<std::unique_ptr<Domain::Character> > findAllByIdUser( const int idUser );
 
     std::unique_ptr<Domain::Character> findByIdUserAndIdCharacter( const int idUser, const int idCharacter );
 };

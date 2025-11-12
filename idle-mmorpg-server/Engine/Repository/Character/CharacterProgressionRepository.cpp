@@ -1,12 +1,11 @@
 #include "CharacterProgressionRepository.h"
 
-#include <Database/Query.h>
+#include <Infrastructure/Database/Query.h>
 
 namespace Repository {
 
 CharacterProgressionRepository::CharacterProgressionRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterProgressionRepository::createProgression( int idCharacter ) {
     const std::string sql = R"SQL(

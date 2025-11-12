@@ -1,6 +1,6 @@
 #include "SkillManager.h"
 
-#include <Shared/Helper/SkillHelper.h>
+#include <Domain/Skill/SkillHelper.h>
 
 #include "SkillFactory.h"
 

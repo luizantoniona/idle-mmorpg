@@ -1,14 +1,13 @@
 #include "CharacterSpellsRepository.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/SpellManager.h>
-#include <Database/Query.h>
+#include <Engine/Manager/Spell/SpellManager.h>
+#include <Infrastructure/Database/Query.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
 CharacterSpellsRepository::CharacterSpellsRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterSpellsRepository::createSpells( int idCharacter ) {
     return true;

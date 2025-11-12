@@ -5,27 +5,10 @@ project(idle-mmorpg-server LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(
-  GLOB_RECURSE
-  SOURCES
-  Commons/*.cpp
-  Core/*.cpp
-  Database/*.cpp
-  Helper/*.cpp
-  Model/*.cpp
-  Network/*.cpp
-  Repository/*.cpp)
+file(GLOB_RECURSE SOURCES Domain/*.cpp Engine/*.cpp Infrastructure/*.cpp
+     Shared/*.cpp)
 
-file(
-  GLOB_RECURSE
-  HEADERS
-  Commons/*.h
-  Core/*.h
-  Database/*.h
-  Helper/*.h
-  Model/*.h
-  Network/*.h
-  Repository/*.h)
+file(GLOB_RECURSE HEADERS Domain/*.h Engine/*.h Infrastructure/*.h Shared/*.h)
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
 

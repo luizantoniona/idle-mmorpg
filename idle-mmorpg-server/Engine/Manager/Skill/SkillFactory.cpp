@@ -2,8 +2,8 @@
 
 #include <iostream>
 
+#include <Domain/Skill/SkillHelper.h>
 #include <Shared/Helper/JsonHelper.h>
-#include <Shared/Helper/SkillHelper.h>
 
 namespace Engine {
 

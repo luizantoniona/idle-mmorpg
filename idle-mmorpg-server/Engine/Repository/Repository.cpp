@@ -1,7 +1,7 @@
 #include "Repository.h"
 
-#include <Commons/Singleton.h>
-#include <Database/Database.h>
+#include <Infrastructure/Database/Database.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 

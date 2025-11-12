@@ -1,14 +1,13 @@
 #include "CharacterInventoryRepository.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ItemManager.h>
-#include <Database/Query.h>
+#include <Engine/Manager/Item/ItemManager.h>
+#include <Infrastructure/Database/Query.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
 CharacterInventoryRepository::CharacterInventoryRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterInventoryRepository::createInventory( int idCharacter ) {
     return true;

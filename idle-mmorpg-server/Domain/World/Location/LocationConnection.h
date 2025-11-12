@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include <Domain/Requirement.h>
+#include <Domain/Shared/Requirement.h>
 
 namespace Domain {
 

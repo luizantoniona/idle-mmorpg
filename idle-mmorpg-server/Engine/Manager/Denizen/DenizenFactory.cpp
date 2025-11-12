@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <Domain/Shared/RequirementHelper.h>
 #include <Engine/Manager/Item/ItemManager.h>
 #include <Engine/Manager/Quest/QuestManager.h>
 #include <Shared/Commons/Singleton.h>
@@ -44,7 +45,7 @@ std::unique_ptr<Domain::Denizen> DenizenFactory::createDenizen( const std::strin
     Json::Value denizenJson = Helper::JsonHelper::loadJsonFile( denizenPath );
 
     if ( denizenJson.isNull() ) {
-        std::cerr << "DenizenFactory::createDenizen failed to load: " << denizenJsonPath << std::endl;
+        std::cerr << "DenizenFactory::createDenizen failed to load: " << denizenPath << std::endl;
         return nullptr;
     }
 
@@ -106,7 +107,7 @@ std::unique_ptr<Domain::Denizen> DenizenFactory::createDenizen( const std::strin
         trade.addBuyItem( item );
     }
 
-    denizen.setTrade( trade );
+    denizen->setTrade( trade );
 
     std::cout << "DenizenFactory::createDenizen Loaded: " << denizen->name()
               << " (quests=" << denizen->quests().size()

@@ -1,6 +1,6 @@
 #include "CharacterVitalsRepository.h"
 
-#include <Engine/Manager/ServerConfigurationManager.h>
+#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
 #include <Infrastructure/Database/Query.h>
 #include <Shared/Commons/Singleton.h>
 
@@ -72,7 +72,7 @@ std::unique_ptr<Domain::CharacterVitals> CharacterVitalsRepository::findByCharac
     }
 
     auto vitals = std::make_unique<Domain::CharacterVitals>();
-    vitals->setRegenDuration( Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
+    vitals->setRegenDuration( Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate() );
     vitals->setHealth( query.getColumnDouble( 0 ) );
     vitals->setMaxHealth( query.getColumnDouble( 1 ) );
     vitals->setMana( query.getColumnDouble( 2 ) );

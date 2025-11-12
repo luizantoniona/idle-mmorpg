@@ -1,15 +1,14 @@
 #include "CharacterEquipmentRepository.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ItemManager.h>
-#include <Database/Query.h>
 #include <Domain/Character/CharacterEquipmentItem.h>
+#include <Engine/Manager/Item/ItemManager.h>
+#include <Infrastructure/Database/Query.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
 CharacterEquipmentRepository::CharacterEquipmentRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
     const std::string sql = R"SQL(
@@ -87,11 +86,11 @@ std::unique_ptr<Domain::CharacterEquipment> CharacterEquipmentRepository::findBy
     auto equipment = std::make_unique<Domain::CharacterEquipment>();
 
     auto makeItem = [ & ]( const std::string& id ) {
-        Domain::CharacterEquipmentItem item;
-        item.setId( id );
-        item.setItem( manager.itemById( id ) );
-        return item;
-    };
+                        Domain::CharacterEquipmentItem item;
+                        item.setId( id );
+                        item.setItem( manager.itemById( id ) );
+                        return item;
+                    };
 
     equipment->setHelmet( makeItem( query.getColumnText( 0 ) ) );
     equipment->setArmor( makeItem( query.getColumnText( 1 ) ) );

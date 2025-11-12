@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <Domain/Shared/RequirementHelper.h>
 #include <Domain/World/Location/LocationAction.h>
 #include <Domain/World/Location/LocationActionExperience.h>
 #include <Engine/Manager/Creature/CreatureManager.h>
@@ -10,7 +11,6 @@
 #include <Engine/Manager/Configuration/ServerConfigurationManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
-#include <Shared/Helper/RequirementHelper.h>
 
 namespace Engine {
 
@@ -110,7 +110,7 @@ std::unique_ptr<Domain::Location> LocationFactory::createLocation( const std::st
         std::string denizenId = denizenJson["id"].asString();
         std::string structure = denizenJson.get( "structure", "" ).asString();
 
-        const Domain::Denizen* denizen = Commons::Singleton<Engine::DenizenManager>::instance().denizenById( denizenId );
+        Domain::Denizen* denizen = Commons::Singleton<Engine::DenizenManager>::instance().denizenById( denizenId );
 
         if ( !denizen ) {
             std::cerr << "Warning: Denizen with id '" << denizenId << "' not found in DenizenManager." << std::endl;

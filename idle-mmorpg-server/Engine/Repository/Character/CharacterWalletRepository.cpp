@@ -1,12 +1,11 @@
 #include "CharacterWalletRepository.h"
 
-#include <Database/Query.h>
+#include <Infrastructure/Database/Query.h>
 
 namespace Repository {
 
 CharacterWalletRepository::CharacterWalletRepository() :
-    Repository() {
-}
+    Repository() {}
 
 bool CharacterWalletRepository::createWallet( int idCharacter ) {
     const std::string sql = R"SQL(

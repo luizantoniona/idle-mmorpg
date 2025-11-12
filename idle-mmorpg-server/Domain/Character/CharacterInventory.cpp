@@ -1,12 +1,11 @@
 #include "CharacterInventory.h"
 
-#include <Engine/Manager/ItemManager.h>
+#include <Engine/Manager/Item/ItemManager.h>
 #include <Shared/Commons/Singleton.h>
 
 namespace Domain {
 
-CharacterInventory::CharacterInventory() {
-}
+CharacterInventory::CharacterInventory() {}
 
 Json::Value CharacterInventory::toJson() {
     Json::Value root;

@@ -2,7 +2,7 @@
 #define CHARACTEREQUIPMENTREPOSITORY_H
 
 #include <Domain/Character/CharacterEquipment.h>
-#include <Repository/Repository.h>
+#include <Engine/Repository/Repository.h>
 
 namespace Repository {
 

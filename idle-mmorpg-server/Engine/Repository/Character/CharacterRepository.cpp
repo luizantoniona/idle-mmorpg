@@ -1,6 +1,6 @@
 #include "CharacterRepository.h"
 
-#include <Database/Query.h>
+#include <Infrastructure/Database/Query.h>
 
 #include "CharacterCoordinateRepository.h"
 #include "CharacterEquipmentRepository.h"
@@ -15,8 +15,7 @@
 namespace Repository {
 
 CharacterRepository::CharacterRepository() :
-    Repository() {
-}
+    Repository() {}
 
 int CharacterRepository::createCharacter( const int idUser, const std::string& dsName ) {
     const std::string sql = R"SQL(
@@ -81,7 +80,7 @@ bool CharacterRepository::deleteCharacter( int idCharacter ) {
     return query.exec();
 }
 
-std::vector<std::unique_ptr<Domain::Character>> CharacterRepository::findAllByIdUser( const int idUser ) {
+std::vector<std::unique_ptr<Domain::Character> > CharacterRepository::findAllByIdUser( const int idUser ) {
     const std::string sql = R"SQL(
         SELECT
             id_character,
@@ -94,7 +93,7 @@ std::vector<std::unique_ptr<Domain::Character>> CharacterRepository::findAllById
 
     query.bindInt( 1, idUser );
 
-    std::vector<std::unique_ptr<Domain::Character>> characters;
+    std::vector<std::unique_ptr<Domain::Character> > characters;
 
     // TODO: Review this method, as it is only for the account page. So we don't need to load all data from character;
 
