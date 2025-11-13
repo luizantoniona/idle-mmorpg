@@ -4,7 +4,7 @@
     "category": "wood",
     "name": "Wood",
     "description": "Simple log of wood. Used in crafting.",
-    "icon": "diverse/wood.gif",
+    "icon": "wood.gif",
     "rarity": "common",
     "price": 2
 }

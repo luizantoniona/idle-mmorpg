@@ -2,7 +2,7 @@
     "id": "rat",
     "name": "Rat",
     "description": "A aggressive rat with sharp teeth.",
-    "icon": "animal/rat.gif",
+    "icon": "rat.gif",
     "experience": 5,
     "health": 20,
     "mana": 0,
