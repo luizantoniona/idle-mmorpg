@@ -25,11 +25,13 @@ public:
 
     void tick();
 
+    void handleCharacterMessage( const std::string& sessionId, Engine::MessageReceiverType type, const Json::Value& payload );
+
 private:
     mutable std::mutex _mutex;
     Domain::World* _world;
     std::unordered_map<std::string, std::unique_ptr<LocationInstance> > _locations;
-    std::unordered_map<std::string, Domain::Character*> _characters;
+    std::unordered_map<std::string, std::unique_ptr<Domain::Character>> _characters;
     std::unordered_map<std::string, LocationInstance*> _characterToLocation;
 };
 

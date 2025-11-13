@@ -69,16 +69,18 @@ void Location::setTileSizeY( int tileSizeY ) {
     _tileSizeY = tileSizeY;
 }
 
-std::vector<Denizen> Location::denizens() const {
+const std::vector<Denizen*>& Location::denizens() const {
     return _denizens;
 }
 
-void Location::setDenizens( const std::vector<Denizen>& denizens ) {
+void Location::setDenizens( const std::vector<Denizen*>& denizens ) {
     _denizens = denizens;
 }
 
-void Location::addDenizen( const Denizen& denizen ) {
-    _denizens.push_back( denizen );
+void Location::addDenizen( Denizen* denizen ) {
+    if ( denizen ) {
+        _denizens.push_back( denizen );
+    }
 }
 
 const std::vector<LocationAction>& Location::actions() const {

@@ -10,7 +10,7 @@
 
 #include "MessageHelper.h"
 
-namespace Core::Message {
+namespace Engine {
 
 MessageReceiver::MessageReceiver() {}
 
@@ -20,13 +20,13 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         return;
     }
 
-    Core::Instance::WorldInstance* worldInstance = Commons::Singleton<Engine::WorldManager>::instance().worldInstance();
+    Engine::WorldInstance* worldInstance = Commons::Singleton<Engine::WorldManager>::instance().worldInstance();
 
     if ( !worldInstance ) {
         return;
     }
 
-    Core::Instance::LocationInstance* locationInstance = worldInstance->characterLocationInstance( sessionId );
+    Engine::LocationInstance* locationInstance = worldInstance->characterLocationInstance( sessionId );
 
     if ( !locationInstance ) {
         return;
@@ -66,4 +66,4 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
     }
 }
 
-} // namespace Core::Message
+} // namespace Engine

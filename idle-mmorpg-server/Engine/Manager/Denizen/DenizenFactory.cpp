@@ -25,7 +25,7 @@ std::unordered_map<std::string, std::unique_ptr<Domain::Denizen> > DenizenFactor
 
     for ( const Json::Value& denizenIdJson : denizensJson["denizens"] ) {
         std::string denizenId = denizenIdJson.asString();
-        std::string denizenPath = denizensPath + "/denizens/" + denizenId + ".json";
+        std::string denizenPath = denizensPath + "denizens/" + denizenId + ".json";
 
         std::unique_ptr<Domain::Denizen> denizen = createDenizen( denizenPath );
         if ( denizen ) {
@@ -35,6 +35,8 @@ std::unordered_map<std::string, std::unique_ptr<Domain::Denizen> > DenizenFactor
             std::cerr << "DenizenFactory::createDenizens failed to load denizen: " << denizenId << std::endl;
         }
     }
+
+    std::cout << "DenizenFactory::createDenizens Number of denizens loaded: " << denizens.size() << std::endl;
 
     return denizens;
 }
@@ -110,9 +112,9 @@ std::unique_ptr<Domain::Denizen> DenizenFactory::createDenizen( const std::strin
     denizen->setTrade( trade );
 
     std::cout << "DenizenFactory::createDenizen Loaded: " << denizen->name()
-              << " (quests=" << denizen->quests().size()
-              << ", sells=" << trade.sellItems().size()
-              << ", buys=" << trade.buyItems().size() << ")" << std::endl;
+              << " Quests:" << denizen->quests().size()
+              << " Sells:" << trade.sellItems().size()
+              << " Buy:" << trade.buyItems().size() << std::endl;
 
     return denizen;
 }

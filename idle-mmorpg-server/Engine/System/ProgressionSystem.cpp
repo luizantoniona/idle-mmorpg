@@ -2,13 +2,13 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/SkillManager.h>
-#include <Core/System/NotificationSystem.h>
-#include <Helper/LevelExperienceHelper.h>
-#include <Helper/SkillHelper.h>
+#include <Domain/Shared/LevelExperienceHelper.h>
+#include <Domain/Skill/SkillHelper.h>
+#include <Engine/Manager/Skill/SkillManager.h>
+#include <Engine/System/NotificationSystem.h>
+#include <Shared/Commons/Singleton.h>
 
-namespace Core::System {
+namespace Engine {
 
 ProgressionSystem::ProgressionSystem() {
 }
@@ -135,4 +135,4 @@ void ProgressionSystem::applyLevelUp( Domain::Character* character ) {
     vitals.setMaxStamina( vitals.maxStamina() + 5 );
 }
 
-} // namespace Core::System
+} // namespace Engine

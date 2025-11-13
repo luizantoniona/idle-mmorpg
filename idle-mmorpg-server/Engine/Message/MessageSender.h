@@ -7,7 +7,7 @@
 
 #include "MessageSenderType.h"
 
-namespace Core::Message {
+namespace Engine {
 
 class MessageSender {
 public:
@@ -15,6 +15,6 @@ public:
     static void send( const std::string& sessionId, const std::string& message );
 };
 
-} // namespace Core::Message
+} // namespace Engine
 
 #endif // MESSAGESENDER_H

@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/SpellManager.h>
+#include <Engine/Manager/Spell/SpellManager.h>
+#include <Shared/Commons/Singleton.h>
 
 #include "NotificationSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 void SpellSystem::learnSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId ) {
     auto spell = Commons::Singleton<Engine::SpellManager>::instance().spellById( spellId );
@@ -40,4 +40,4 @@ void SpellSystem::learnSpell( const std::string& sessionId, Domain::Character* c
     NotificationSystem::notifyCharacterSpells( sessionId, character );
 }
 
-} // namespace Core::System
+} // namespace Engine

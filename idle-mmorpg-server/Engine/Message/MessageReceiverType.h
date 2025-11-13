@@ -1,7 +1,7 @@
 #ifndef MESSAGERECEIVERTYPE_H
 #define MESSAGERECEIVERTYPE_H
 
-namespace Core::Message {
+namespace Engine {
 
 enum class MessageReceiverType {
     UNKNOWN,
@@ -24,6 +24,6 @@ enum class MessageReceiverType {
     COMBAT_ROOM_EXIT,
 };
 
-} // namespace Core::Message
+} // namespace Engine
 
 #endif // MESSAGERECEIVERTYPE_H

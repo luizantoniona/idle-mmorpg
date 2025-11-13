@@ -8,7 +8,7 @@
 
 #include "ProgressionSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 class TrainingSystem {
 public:
@@ -24,6 +24,6 @@ private:
     ProgressionSystem _progressionSystem;
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // TRAININGSYSTEM_H

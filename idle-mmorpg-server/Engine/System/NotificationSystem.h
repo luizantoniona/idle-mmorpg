@@ -3,11 +3,11 @@
 
 #include <string>
 
-#include <Core/Instance/CombatInstance.h>
 #include <Domain/Character/Character.h>
 #include <Domain/World/Location/Location.h>
+#include <Engine/Instance/CombatInstance.h>
 
-namespace Core::System {
+namespace Engine {
 
 class NotificationSystem {
 public:
@@ -32,10 +32,10 @@ public:
     static void notifyLocationConnections( const std::string& sessionId, Domain::Character* character, const Domain::Location* location );
     static void notifyLocationDenizens( const std::string& sessionId, Domain::Character* character, const Domain::Location* location );
 
-    static void notifyCombatInstances( const std::string& sessionId, std::vector<Core::Instance::CombatInstance*> combatInstances );
-    static void notifyCombat( const Instance::CombatInstance* combatInstance );
+    static void notifyCombatInstances( const std::string& sessionId, std::vector<Engine::CombatInstance*> combatInstances );
+    static void notifyCombat( const Engine::CombatInstance* combatInstance );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // NOTIFICATIONSYSTEM_H

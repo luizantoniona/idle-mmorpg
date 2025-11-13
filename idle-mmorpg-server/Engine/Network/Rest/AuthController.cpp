@@ -1,9 +1,9 @@
 #include "AuthController.h"
 
-#include <Commons/Singleton.h>
-#include <Repository/User/UserRepository.h>
-#include <Database/Database.h>
-#include <Network/NetworkServer.h>
+#include <Engine/Repository/User/UserRepository.h>
+#include <Infrastructure/Database/Database.h>
+#include <Infrastructure/Network/NetworkServer.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Network {
 

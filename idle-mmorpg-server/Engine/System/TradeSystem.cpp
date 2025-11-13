@@ -1,19 +1,19 @@
 #include "TradeSystem.h"
 
-#include <Helper/LocationHelper.h>
+#include <Domain/World/Location/LocationHelper.h>
 
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 void TradeSystem::characterTradeDenizen( const std::string& sessionId, Domain::Character* character, const Domain::Location* location, const Json::Value& payload ) {
     const std::string denizenId = payload[ "denizenId" ].asString();
 
     bool found = false;
-    Domain::Denizen denizenToTrade;
+    Domain::Denizen* denizenToTrade;
     for ( auto& denizen : location->denizens() ) {
-        if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( denizenId == denizen->id() && Helper::LocationHelper::canCharacterInteractDenizen( character, *denizen ) ) {
             denizenToTrade = denizen;
             found = true;
             break;
@@ -40,7 +40,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Domain::C
             }
 
             const Domain::Item* itemToSell = nullptr;
-            for ( const auto& item : denizenToTrade.trade().buyItems() ) {
+            for ( const auto& item : denizenToTrade->trade().buyItems() ) {
                 if ( item.id() == itemId ) {
                     itemToSell = item.item();
                     break;
@@ -72,7 +72,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Domain::C
             }
 
             const Domain::Item* itemToBuy = nullptr;
-            for ( const auto& item : denizenToTrade.trade().sellItems() ) {
+            for ( const auto& item : denizenToTrade->trade().sellItems() ) {
                 if ( item.id() == itemId ) {
                     itemToBuy = item.item();
                     break;
@@ -102,11 +102,11 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Domain::C
 
     wallet.setCopper( totalCoins );
 
-    Core::System::QuestSystem::updateItemQuest( sessionId, character );
+    Engine::QuestSystem::updateItemQuest( sessionId, character );
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterWallet( sessionId, character );
     NotificationSystem::notifyLocationDenizens( sessionId, character, location );
 }
 
-} // namespace Core::System
+} // namespace Engine

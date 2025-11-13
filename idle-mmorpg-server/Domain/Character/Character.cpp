@@ -16,7 +16,8 @@ Character::Character() :
     _progression(),
     _skills(),
     _vitals(),
-    _wallet() {}
+    _wallet() {
+}
 
 Json::Value Character::toJson() {
     Json::Value root;

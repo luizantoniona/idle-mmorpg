@@ -3,7 +3,7 @@
 
 #include <Domain/Character/Character.h>
 
-namespace Core::System {
+namespace Engine {
 
 class ItemSystem {
 public:
@@ -13,6 +13,6 @@ public:
     static void computeEquipmentModifiers( const std::string& sessionId, Domain::Character* character );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // ITEMSYSTEM_H

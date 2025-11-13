@@ -2,11 +2,11 @@
 
 #include <optional>
 
-#include <Commons/Singleton.h>
-#include <Repository/Character/CharacterRepository.h>
-#include <Database/Database.h>
-#include <Network/NetworkServer.h>
-#include <Network/NetworkSession.h>
+#include <Engine/Repository/Character/CharacterRepository.h>
+#include <Infrastructure/Database/Database.h>
+#include <Infrastructure/Network/NetworkServer.h>
+#include <Infrastructure/Network/NetworkSession.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Network {
 

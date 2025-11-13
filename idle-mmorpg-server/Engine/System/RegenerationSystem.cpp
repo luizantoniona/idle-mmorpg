@@ -2,13 +2,13 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ServerConfigurationManager.h>
-#include <Core/System/NotificationSystem.h>
-#include <Core/System/ProgressionSystem.h>
-#include <Helper/DecimalHelper.h>
+#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Engine/System/NotificationSystem.h>
+#include <Engine/System/ProgressionSystem.h>
+#include <Shared/Commons/Singleton.h>
+#include <Shared/Helper/DecimalHelper.h>
 
-namespace Core::System {
+namespace Engine {
 
 void RegenerationSystem::processRegeneration( const std::string& sessionId, Domain::Character* character ) {
     auto& characterVitals = character->vitals();
@@ -119,7 +119,7 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Domain:
     characterSpell->setCount( 0 );
 
     const double restorationLevel = character->skills().skillLevel( Domain::SkillType::RESTORATION );
-    double heal = spell->effect().value() + ( restorationLevel * Manager::ServerConfigurationManager::MAGIC_SKILL_HEAL_MULTIPLIER );
+    double heal = spell->effect().value() + ( restorationLevel * Engine::ServerConfigurationManager::MAGIC_SKILL_HEAL_MULTIPLIER );
 
     double newHealth = std::min( character->vitals().health() + heal, character->vitals().maxHealth() );
     character->vitals().setHealth( newHealth );
@@ -130,4 +130,4 @@ void RegenerationSystem::castHealingSpell( const std::string& sessionId, Domain:
     std::cout << character->name() << " casts " << spell->name() << " healing " << heal << " health." << std::endl;
 }
 
-} // namespace Core::System
+} // namespace Engine

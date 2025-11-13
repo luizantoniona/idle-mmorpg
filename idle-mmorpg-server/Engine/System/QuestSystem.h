@@ -4,7 +4,7 @@
 #include <Domain/Character/Character.h>
 #include <Domain/World/Location/Location.h>
 
-namespace Core::System {
+namespace Engine {
 
 class QuestSystem {
 public:
@@ -16,6 +16,6 @@ public:
     static void updateTalkQuest( const std::string& sessionId, Domain::Character* character, const std::string& denizenId );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // QUESTSYSTEM_H

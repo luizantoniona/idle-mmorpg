@@ -1,14 +1,13 @@
 #ifndef ACTIONSYSTEM_H
 #define ACTIONSYSTEM_H
 
-#include <Core/Message/MessageSender.h>
 #include <Domain/Character/Character.h>
 #include <Domain/World/Location/Location.h>
 #include <Domain/World/Location/LocationAction.h>
 
 #include "ProgressionSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 class ActionSystem {
 public:
@@ -29,6 +28,6 @@ private:
     int _tickRate;
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // ACTIONSYSTEM_H

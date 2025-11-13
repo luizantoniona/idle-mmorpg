@@ -1,11 +1,11 @@
 #include "LootSystem.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ItemManager.h>
-#include <Core/System/NotificationSystem.h>
-#include <Core/System/QuestSystem.h>
+#include <Engine/Manager/Item/ItemManager.h>
+#include <Engine/System/NotificationSystem.h>
+#include <Engine/System/QuestSystem.h>
+#include <Shared/Commons/Singleton.h>
 
-namespace Core::System {
+namespace Engine {
 
 void LootSystem::addItem( const std::string& sessionId, Domain::Character* character, const std::string& itemId, int amount ) {
     if ( itemId == "coin_copper" || itemId == "coin_silver" || itemId == "coin_gold" ) {
@@ -37,4 +37,4 @@ void LootSystem::addCoin( const std::string& sessionId, Domain::Character* chara
     NotificationSystem::notifyCharacterWallet( sessionId, character );
 }
 
-} // namespace Core::System
+} // namespace Engine

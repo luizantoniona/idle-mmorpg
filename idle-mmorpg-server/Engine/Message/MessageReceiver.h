@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace Core::Message {
+namespace Engine {
 
 class MessageReceiver {
 public:
@@ -12,6 +12,6 @@ public:
     void receive( const std::string& sessionId, const std::string& message );
 };
 
-} // namespace Core::Message
+} // namespace Engine
 
 #endif // MESSAGERECEIVER_H

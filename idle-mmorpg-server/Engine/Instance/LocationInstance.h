@@ -5,11 +5,11 @@
 #include <string>
 #include <unordered_map>
 
-#include <Core/Message/MessageReceiverType.h>
-#include <Core/System/ActionSystem.h>
-#include <Core/System/TrainingSystem.h>
 #include <Domain/Character/Character.h>
 #include <Domain/World/Location/Location.h>
+#include <Engine/Message/MessageReceiverType.h>
+#include <Engine/System/ActionSystem.h>
+#include <Engine/System/TrainingSystem.h>
 
 #include "CombatInstance.h"
 
@@ -32,14 +32,14 @@ public:
 
     void tick();
 
-    void handleCharacterMessage( const std::string& sessionId, Message::MessageReceiverType type, const Json::Value& payload );
+    void handleCharacterMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
 
 private:
     mutable std::mutex _mutex;
     Domain::Location* _location;
     std::unordered_map<std::string, Domain::Character*> _characters;
-    Core::System::ActionSystem _actionSystem;
-    Core::System::TrainingSystem _trainingSystem;
+    Engine::ActionSystem _actionSystem;
+    Engine::TrainingSystem _trainingSystem;
 
     std::vector<std::unique_ptr<CombatInstance> > _combatInstances;
     std::unordered_map<std::string, CombatInstance*> _characterCombatCache;

@@ -1,8 +1,8 @@
 #include "CharacterWebSocket.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/WorldManager.h>
-#include <Network/NetworkServer.h>
+#include <Engine/Manager/World/WorldManager.h>
+#include <Infrastructure/Network/NetworkServer.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Network {
 

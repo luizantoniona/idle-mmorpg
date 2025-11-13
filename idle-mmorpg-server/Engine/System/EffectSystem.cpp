@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ServerConfigurationManager.h>
+#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Shared/Commons/Singleton.h>
 
 #include "NotificationSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 void EffectSystem::processEffects( const std::string& sessionId, Domain::Character* character ) {
     auto& effects = character->effects().effects();
@@ -75,4 +75,4 @@ void EffectSystem::processEffects( const std::string& sessionId, Domain::Charact
     NotificationSystem::notifyCharacterEffects( sessionId, character );
 }
 
-} // namespace Core::System
+} // namespace Engine

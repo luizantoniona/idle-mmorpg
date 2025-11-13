@@ -11,7 +11,7 @@ void DenizenManager::initialize( const std::string& denizensPath ) {
     _denizens = Engine::DenizenFactory::createDenizens( denizensPath );
 }
 
-const Domain::Denizen* DenizenManager::denizenById( const std::string& idDenizen ) const {
+Domain::Denizen* DenizenManager::denizenById( const std::string& idDenizen ) {
     auto it = _denizens.find( idDenizen );
 
     if ( it != _denizens.end() ) {

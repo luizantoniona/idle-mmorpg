@@ -5,7 +5,7 @@
 
 #include <Domain/Character/Character.h>
 
-namespace Core::System {
+namespace Engine {
 
 class LootSystem {
 public:
@@ -13,6 +13,6 @@ public:
     static void addCoin( const std::string& sessionId, Domain::Character* character, const std::string& itemId, int amount );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // LOOTSYSTEM_H

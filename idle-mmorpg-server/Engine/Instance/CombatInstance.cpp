@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Core/System/NotificationSystem.h>
+#include <Engine/System/NotificationSystem.h>
 
 namespace Engine {
 
@@ -13,7 +13,8 @@ CombatInstance::CombatInstance( Domain::Location* location, const std::string& i
     _location( location ),
     _characters(),
     _creatures(),
-    _combatSystem( location ) {}
+    _combatSystem( location ) {
+}
 
 Json::Value CombatInstance::instanceToJson() const {
     Json::Value root;
@@ -231,7 +232,7 @@ void CombatInstance::process() {
 
     for ( const auto& [ sessionId, character ] : _characters ) {
         if ( character->vitals().health() <= 0 ) {
-            Core::System::NotificationSystem::notifyDeadCharacter( sessionId );
+            Engine::NotificationSystem::notifyDeadCharacter( sessionId );
         }
     }
 }

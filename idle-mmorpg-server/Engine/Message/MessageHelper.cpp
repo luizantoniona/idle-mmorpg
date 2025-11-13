@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-namespace Core::Message {
+namespace Engine {
 
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
@@ -79,4 +79,4 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
     }
 }
 
-} // namespace Core::Message
+} // namespace Engine

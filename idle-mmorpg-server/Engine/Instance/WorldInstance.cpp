@@ -1,8 +1,17 @@
 #include "WorldInstance.h"
 
 #include <Domain/Character/CharacterCoordinates.h>
+#include <Engine/Repository/Character/CharacterRepository.h>
 
 namespace Engine {
+
+WorldInstance::WorldInstance( Domain::World* world ) :
+    _mutex(),
+    _world( world ),
+    _locations(),
+    _characters(),
+    _characterToLocation() {
+}
 
 bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<Domain::Character> character ) {
     if ( !character ) {
@@ -10,6 +19,7 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
     }
 
     character->setSessionId( sessionId );
+
     Domain::CharacterCoordinates& coordinates = character->coordinates();
 
     Domain::Location* location = _world->locationById( coordinates.locationId() );
@@ -129,8 +139,8 @@ void WorldInstance::tick() {
     }
 }
 
-void WorldInstance::handleCharacterMessage( const std::string& sessionId, Message::MessageReceiverType type, const Json::Value& payload ) {
-    if ( type == Message::MessageReceiverType::CHARACTER_LOCATION_UPDATE ) {
+void WorldInstance::handleCharacterMessage( const std::string& sessionId, Engine::MessageReceiverType type, const Json::Value& payload ) {
+    if ( type == Engine::MessageReceiverType::CHARACTER_LOCATION_UPDATE ) {
         std::string destination = payload[ "destination" ].asString();
         moveCharacter( sessionId, destination );
     }

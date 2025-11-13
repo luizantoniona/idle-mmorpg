@@ -3,14 +3,14 @@
 #include <algorithm>
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ServerConfigurationManager.h>
+#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Shared/Commons/Singleton.h>
 
 #include "LootSystem.h"
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 CombatSystem::CombatSystem( Domain::Location* location ) :
     _tickRate( Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate() ),
@@ -54,7 +54,7 @@ void CombatSystem::computeHitDamage( const std::string& sessionId, Domain::Chara
         return;
     }
 
-    double maxDamage = character->combatAttributes().attack() + ( weaponSkillLevel * Manager::ServerConfigurationManager::WEAPON_SKILL_DAMAGE_MULTIPLIER );
+    double maxDamage = character->combatAttributes().attack() + ( weaponSkillLevel * Engine::ServerConfigurationManager::WEAPON_SKILL_DAMAGE_MULTIPLIER );
     double minDamage = ( character->combatAttributes().attack() );
     double damage = rollRange( minDamage, maxDamage ) - creature->defense();
     damage = std::max( 1.0, damage );
@@ -138,7 +138,7 @@ void CombatSystem::computeSpellDamage( const std::string& sessionId, Domain::Cha
         return;
     }
 
-    double maxDamage = characterSpell->spell()->effect().value() + ( invocationLevel * Manager::ServerConfigurationManager::MAGIC_SKILL_DAMAGE_MULTIPLIER );
+    double maxDamage = characterSpell->spell()->effect().value() + ( invocationLevel * Engine::ServerConfigurationManager::MAGIC_SKILL_DAMAGE_MULTIPLIER );
     double minDamage = characterSpell->spell()->effect().value();
     double damage = rollRange( minDamage, maxDamage );
 
@@ -186,7 +186,7 @@ void CombatSystem::computeExperience( std::unordered_map<std::string, Domain::Ch
         if ( character->vitals().health() > 0 ) {
 
             for ( const auto& creature : creatures ) {
-                Core::System::QuestSystem::updateKillQuest( sessionId, character, creature->id() );
+                Engine::QuestSystem::updateKillQuest( sessionId, character, creature->id() );
             }
 
             _progressionSystem.applyExperience( sessionId, character, xpPerCharacter );
@@ -236,4 +236,4 @@ Domain::SkillType CombatSystem::combatSkillByWeapon( const Domain::Item* weapon 
     return Domain::SkillType::FIST_MASTERY;
 }
 
-} // namespace Core::System
+} // namespace Engine

@@ -15,7 +15,7 @@ public:
 
     void initialize( const std::string& denizensPath );
 
-    const Domain::Denizen* denizenById( const std::string& idDenizen ) const;
+    Domain::Denizen* denizenById( const std::string& idDenizen );
 
 private:
     std::unordered_map<std::string, std::unique_ptr<Domain::Denizen> > _denizens;

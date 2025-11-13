@@ -2,17 +2,17 @@
 
 #include <algorithm>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/ServerConfigurationManager.h>
-#include <Core/Manager/SkillManager.h>
-#include <Core/System/QuestSystem.h>
-#include <Helper/LocationHelper.h>
-#include <Helper/SkillHelper.h>
+#include <Domain/Skill/SkillHelper.h>
+#include <Domain/World/Location/LocationHelper.h>
+#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Engine/Manager/Skill/SkillManager.h>
+#include <Engine/System/QuestSystem.h>
+#include <Shared/Commons/Singleton.h>
 
 #include "NotificationSystem.h"
 #include "RegenerationSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 ActionSystem::ActionSystem( Domain::Location* location ) :
     _location( location ),
@@ -30,7 +30,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Domain::Character
 
     if ( actionId == "idle" ) {
         character->action().clear();
-        Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+        Engine::NotificationSystem::notifyCurrentAction( sessionId, character );
         return;
     }
 
@@ -61,7 +61,7 @@ void ActionSystem::changeAction( const std::string& sessionId, Domain::Character
     action.setId( actionId );
     action.setDuration( computeActionDuration( character, selectedAction ) );
     action.setCounter( 0 );
-    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+    Engine::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 void ActionSystem::process( const std::string& sessionId, Domain::Character* character ) {
@@ -102,7 +102,7 @@ void ActionSystem::process( const std::string& sessionId, Domain::Character* cha
         characterAction.setCounter( characterAction.counter() + 1 );
     }
 
-    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+    Engine::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 int ActionSystem::computeActionDuration( Domain::Character* character, const Domain::LocationAction& action ) {
@@ -173,4 +173,4 @@ void ActionSystem::gatheringActionEffect( const std::string& sessionId, Domain::
     NotificationSystem::notifyCharacterInventory( sessionId, character );
 }
 
-} // namespace Core::System
+} // namespace Engine

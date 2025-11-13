@@ -38,7 +38,7 @@ private:
     Domain::Location* _location;
     std::unordered_map<std::string, Domain::Character*> _characters;
     std::vector<std::unique_ptr<Domain::Creature> > _creatures;
-    Core::System::CombatSystem _combatSystem;
+    Engine::CombatSystem _combatSystem;
 };
 
 } // namespace Engine

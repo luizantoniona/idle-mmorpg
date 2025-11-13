@@ -6,7 +6,7 @@
 #include "MessageReceiverType.h"
 #include "MessageSenderType.h"
 
-namespace Core::Message {
+namespace Engine {
 
 class MessageHelper {
 public:
@@ -14,6 +14,6 @@ public:
     static std::string typeToString( const MessageSenderType type );
 };
 
-} // namespace Core::Message
+} // namespace Engine
 
 #endif // MESSAGEHELPER_H

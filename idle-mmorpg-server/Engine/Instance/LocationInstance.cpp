@@ -4,14 +4,14 @@
 
 #include <drogon/drogon.h>
 
-#include <Core/Message/MessageSenderType.h>
-#include <Core/System/ActionSystem.h>
-#include <Core/System/EffectSystem.h>
-#include <Core/System/ItemSystem.h>
-#include <Core/System/NotificationSystem.h>
-#include <Core/System/QuestSystem.h>
-#include <Core/System/RegenerationSystem.h>
-#include <Core/System/TradeSystem.h>
+#include <Engine/Message/MessageSenderType.h>
+#include <Engine/System/ActionSystem.h>
+#include <Engine/System/EffectSystem.h>
+#include <Engine/System/ItemSystem.h>
+#include <Engine/System/NotificationSystem.h>
+#include <Engine/System/QuestSystem.h>
+#include <Engine/System/RegenerationSystem.h>
+#include <Engine/System/TradeSystem.h>
 
 namespace Engine {
 
@@ -37,13 +37,13 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Domain::Chara
               << " [Entering] " << _location->name()
               << " [SessionID] " << sessionId << std::endl;
 
-    Core::System::NotificationSystem::notifyFullCharacter( sessionId, character );
-    Core::System::NotificationSystem::notifyFullLocation( sessionId, _location );
-    Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
-    Core::System::NotificationSystem::notifyLocationConnections( sessionId, character, _location );
-    Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
+    Engine::NotificationSystem::notifyFullCharacter( sessionId, character );
+    Engine::NotificationSystem::notifyFullLocation( sessionId, _location );
+    Engine::NotificationSystem::notifyLocationActions( sessionId, character, _location );
+    Engine::NotificationSystem::notifyLocationConnections( sessionId, character, _location );
+    Engine::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
 
-    Core::System::ItemSystem::computeEquipmentModifiers( sessionId, character );
+    Engine::ItemSystem::computeEquipmentModifiers( sessionId, character );
 
     return true;
 }
@@ -73,10 +73,10 @@ void LocationInstance::changeStructure( const std::string& sessionId, Domain::Ch
     character->coordinates().setStructureId( structureId );
     character->action().clear();
 
-    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
-    Core::System::NotificationSystem::notifyCurrentCoordinates( sessionId, character );
-    Core::System::NotificationSystem::notifyLocationActions( sessionId, character, _location );
-    Core::System::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
+    Engine::NotificationSystem::notifyCurrentAction( sessionId, character );
+    Engine::NotificationSystem::notifyCurrentCoordinates( sessionId, character );
+    Engine::NotificationSystem::notifyLocationActions( sessionId, character, _location );
+    Engine::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
 }
 
 void LocationInstance::createCombat( const std::string& sessionId, Domain::Character* character ) {
@@ -104,7 +104,7 @@ void LocationInstance::createCombat( const std::string& sessionId, Domain::Chara
                 }
             }
 
-            Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
+            Engine::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
         }
     }
 }
@@ -139,14 +139,14 @@ void LocationInstance::tick() {
 
     for ( const auto& [ sessionId, character ] : _characters ) {
 
-        Core::System::RegenerationSystem::processSpellsCooldown( sessionId, character );
-        Core::System::EffectSystem::processEffects( sessionId, character );
+        Engine::RegenerationSystem::processSpellsCooldown( sessionId, character );
+        Engine::EffectSystem::processEffects( sessionId, character );
 
         if ( character->action().id() == "combat" ) {
             continue;
         }
 
-        Core::System::RegenerationSystem::processRegeneration( sessionId, character );
+        Engine::RegenerationSystem::processRegeneration( sessionId, character );
 
         if ( character->action().id() == "idle" ) {
             continue;
@@ -164,7 +164,7 @@ void LocationInstance::tick() {
         CombatInstance* combatInstance = it->get();
         combatInstance->process();
 
-        Core::System::NotificationSystem::notifyCombat( combatInstance );
+        Engine::NotificationSystem::notifyCombat( combatInstance );
 
         if ( combatInstance->isFinished() ) {
             for ( const auto& [ sessionId, _ ] : combatInstance->characters() ) {
@@ -185,7 +185,7 @@ void LocationInstance::tick() {
                             }
                         }
 
-                        Core::System::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
+                        Engine::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
                     }
                 }
             }
@@ -196,7 +196,7 @@ void LocationInstance::tick() {
     }
 }
 
-void LocationInstance::handleCharacterMessage( const std::string& sessionId, Message::MessageReceiverType type, const Json::Value& payload ) {
+void LocationInstance::handleCharacterMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
     std::lock_guard lock( _mutex );
 
     auto it = _characters.find( sessionId );
@@ -212,75 +212,75 @@ void LocationInstance::handleCharacterMessage( const std::string& sessionId, Mes
     }
 
     switch ( type ) {
-        case Message::MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
-            changeStructure( sessionId, character, payload );
-            break;
-        case Message::MessageReceiverType::CHARACTER_ACTION_UPDATE: {
-            _actionSystem.changeAction( sessionId, character, payload );
+    case MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
+        changeStructure( sessionId, character, payload );
+        break;
+    case MessageReceiverType::CHARACTER_ACTION_UPDATE: {
+        _actionSystem.changeAction( sessionId, character, payload );
 
-            if ( character->action().id() == "combat" ) {
-                std::vector<CombatInstance*> allInstances;
-                std::string charStructure = character->coordinates().structureId();
+        if ( character->action().id() == "combat" ) {
+            std::vector<CombatInstance*> allInstances;
+            std::string charStructure = character->coordinates().structureId();
 
-                for ( auto& ci : _combatInstances ) {
-                    if ( ci->structureId() == charStructure ) {
-                        allInstances.push_back( ci.get() );
-                    }
+            for ( auto& ci : _combatInstances ) {
+                if ( ci->structureId() == charStructure ) {
+                    allInstances.push_back( ci.get() );
                 }
-
-                Core::System::NotificationSystem::notifyCombatInstances( sessionId, allInstances );
-            }
-            break;
-        }
-
-        case Message::MessageReceiverType::CHARACTER_EQUIP_ITEM:
-            Core::System::ItemSystem::characterEquipItem( sessionId, character, payload );
-            break;
-        case Message::MessageReceiverType::CHARACTER_USE_ITEM:
-            Core::System::ItemSystem::characterUseItem( sessionId, character, payload );
-            break;
-        case Message::MessageReceiverType::CHARACTER_CAST_SPELL: {
-            std::string spellType = payload[ "type" ].asString();
-            std::string spellId = payload[ "id" ].asString();
-
-            if ( spellType == "healing" ) {
-                Core::System::RegenerationSystem::castHealingSpell( sessionId, character, spellId );
-
-            } else if ( spellType == "attack" && combat ) {
-                combat->handleCharacterAttackSpell( sessionId, character, spellId );
             }
 
-            break;
+            Engine::NotificationSystem::notifyCombatInstances( sessionId, allInstances );
+        }
+        break;
+    }
+
+    case MessageReceiverType::CHARACTER_EQUIP_ITEM:
+        Engine::ItemSystem::characterEquipItem( sessionId, character, payload );
+        break;
+    case MessageReceiverType::CHARACTER_USE_ITEM:
+        Engine::ItemSystem::characterUseItem( sessionId, character, payload );
+        break;
+    case MessageReceiverType::CHARACTER_CAST_SPELL: {
+        std::string spellType = payload[ "type" ].asString();
+        std::string spellId = payload[ "id" ].asString();
+
+        if ( spellType == "healing" ) {
+            Engine::RegenerationSystem::castHealingSpell( sessionId, character, spellId );
+
+        } else if ( spellType == "attack" && combat ) {
+            combat->handleCharacterAttackSpell( sessionId, character, spellId );
         }
 
-        case Message::MessageReceiverType::CHARACTER_INTERACT_DENIZEM: {
-            std::string denizemId = payload[ "denizenId" ].asString();
-            Core::System::QuestSystem::updateTalkQuest( sessionId, character, denizemId );
-            break;
-        }
-        case Message::MessageReceiverType::CHARACTER_TRADE_DENIZEN:
-            Core::System::TradeSystem::characterTradeDenizen( sessionId, character, _location, payload );
-            break;
-        case Message::MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
-            Core::System::QuestSystem::characterAcceptQuest( sessionId, character, _location, payload );
-            break;
-        case Message::MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
-            Core::System::QuestSystem::characterFinishQuest( sessionId, character, _location, payload );
-            break;
+        break;
+    }
 
-        case Message::MessageReceiverType::COMBAT_ROOM_CREATE:
-            createCombat( sessionId, character );
-            break;
-        case Message::MessageReceiverType::COMBAT_ROOM_ENTER: {
-            std::string roomId = payload[ "id" ].asString();
-            enterCombat( sessionId, character, roomId );
-            break;
-        }
-        case Message::MessageReceiverType::COMBAT_ROOM_EXIT:
-            exitCombat( sessionId );
-            break;
-        default:
-            break;
+    case MessageReceiverType::CHARACTER_INTERACT_DENIZEM: {
+        std::string denizemId = payload[ "denizenId" ].asString();
+        Engine::QuestSystem::updateTalkQuest( sessionId, character, denizemId );
+        break;
+    }
+    case MessageReceiverType::CHARACTER_TRADE_DENIZEN:
+        Engine::TradeSystem::characterTradeDenizen( sessionId, character, _location, payload );
+        break;
+    case MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
+        Engine::QuestSystem::characterAcceptQuest( sessionId, character, _location, payload );
+        break;
+    case MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
+        Engine::QuestSystem::characterFinishQuest( sessionId, character, _location, payload );
+        break;
+
+    case MessageReceiverType::COMBAT_ROOM_CREATE:
+        createCombat( sessionId, character );
+        break;
+    case MessageReceiverType::COMBAT_ROOM_ENTER: {
+        std::string roomId = payload[ "id" ].asString();
+        enterCombat( sessionId, character, roomId );
+        break;
+    }
+    case MessageReceiverType::COMBAT_ROOM_EXIT:
+        exitCombat( sessionId );
+        break;
+    default:
+        break;
     }
 }
 

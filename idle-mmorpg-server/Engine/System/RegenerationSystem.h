@@ -3,7 +3,7 @@
 
 #include <Domain/Character/Character.h>
 
-namespace Core::System {
+namespace Engine {
 
 class RegenerationSystem {
 public:
@@ -15,6 +15,6 @@ public:
     static void castHealingSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // REGENERATIONSYSTEM_H

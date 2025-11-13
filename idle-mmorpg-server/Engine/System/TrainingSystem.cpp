@@ -4,7 +4,7 @@
 
 #include "NotificationSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 TrainingSystem::TrainingSystem( Domain::Location* location ) :
     _location( location ),
@@ -46,7 +46,7 @@ void TrainingSystem::process( const std::string& sessionId, Domain::Character* c
         characterAction.setCounter( characterAction.counter() + 1 );
     }
 
-    Core::System::NotificationSystem::notifyCurrentAction( sessionId, character );
+    Engine::NotificationSystem::notifyCurrentAction( sessionId, character );
 }
 
 std::vector<Domain::SkillType> TrainingSystem::combatSkill( Domain::Character* character ) {
@@ -99,4 +99,4 @@ std::vector<Domain::SkillType> TrainingSystem::combatSkill( Domain::Character* c
     return skills;
 }
 
-} // namespace Core::System
+} // namespace Engine

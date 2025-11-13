@@ -35,9 +35,9 @@ public:
     int tileSizeY() const;
     void setTileSizeY( int tileSizeY );
 
-    std::vector<Denizen> denizens() const;
-    void setDenizens( const std::vector<Denizen>& denizens );
-    void addDenizen( const Denizen& denizen );
+    const std::vector<Denizen*>& denizens() const;
+    void setDenizens( const std::vector<Denizen*>& denizens );
+    void addDenizen( Denizen* denizen );
 
     const std::vector<LocationAction>& actions() const;
     void setActions( const std::vector<LocationAction>& actions );
@@ -62,7 +62,7 @@ private:
     std::string _description;
     int _tileSizeX;
     int _tileSizeY;
-    std::vector<Denizen> _denizens;
+    std::vector<Domain::Denizen*> _denizens;
     std::vector<LocationAction> _actions;
     std::vector<LocationCreature> _creatures;
     std::vector<LocationStructure> _structures;

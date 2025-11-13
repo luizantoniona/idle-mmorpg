@@ -2,23 +2,23 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/QuestManager.h>
-#include <Helper/LocationHelper.h>
+#include <Domain/World/Location/LocationHelper.h>
+#include <Engine/Manager/Quest/QuestManager.h>
+#include <Shared/Commons/Singleton.h>
 
 #include "LootSystem.h"
 #include "NotificationSystem.h"
 #include "SpellSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 void QuestSystem::characterAcceptQuest( const std::string& sessionId, Domain::Character* character, const Domain::Location* location, const Json::Value& payload ) {
     const std::string denizenId = payload[ "denizenId" ].asString();
 
     bool found = false;
-    Domain::Denizen denizenToAccept;
+    Domain::Denizen* denizenToAccept;
     for ( auto& denizen : location->denizens() ) {
-        if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( denizenId == denizen->id() && Helper::LocationHelper::canCharacterInteractDenizen( character, *denizen ) ) {
             denizenToAccept = denizen;
             found = true;
             break;
@@ -30,7 +30,7 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Domain::Ch
     }
 
     const std::string questId = payload[ "questId" ].asString();
-    if ( !denizenToAccept.hasQuestById( questId ) ) {
+    if ( !denizenToAccept->hasQuestById( questId ) ) {
         return;
     }
 
@@ -79,9 +79,9 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Domain::Ch
     const std::string denizenId = payload[ "denizenId" ].asString();
 
     bool found = false;
-    Domain::Denizen denizenToFinish;
+    Domain::Denizen* denizenToFinish;
     for ( auto& denizen : location->denizens() ) {
-        if ( denizenId == denizen.id() && Helper::LocationHelper::canCharacterInteractDenizen( character, denizen ) ) {
+        if ( denizenId == denizen->id() && Helper::LocationHelper::canCharacterInteractDenizen( character, *denizen ) ) {
             denizenToFinish = denizen;
             found = true;
             break;
@@ -93,7 +93,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Domain::Ch
     }
 
     const std::string questId = payload[ "questId" ].asString();
-    if ( !denizenToFinish.hasQuestById( questId ) ) {
+    if ( !denizenToFinish->hasQuestById( questId ) ) {
         return;
     }
 
@@ -119,10 +119,10 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Domain::Ch
 
             for ( auto& reward : baseQuest->rewards() ) {
                 if ( reward.type() == "item" ) {
-                    Core::System::LootSystem::addItem( sessionId, character, reward.id(), reward.amount() );
+                    Engine::LootSystem::addItem( sessionId, character, reward.id(), reward.amount() );
 
                 } else if ( reward.type() == "spell" ) {
-                    Core::System::SpellSystem::learnSpell( sessionId, character, reward.id() );
+                    Engine::SpellSystem::learnSpell( sessionId, character, reward.id() );
 
                 } else {
                     std::cerr << "QuestSystem::characterFinishQuest Unknow reward type: " << reward.type() << std::endl;
@@ -193,4 +193,4 @@ void QuestSystem::updateTalkQuest( const std::string& sessionId, Domain::Charact
     }
 }
 
-} // namespace Core::System
+} // namespace Engine

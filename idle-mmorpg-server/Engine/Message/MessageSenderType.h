@@ -1,7 +1,7 @@
 #ifndef MESSAGESENDERTYPE_H
 #define MESSAGESENDERTYPE_H
 
-namespace Core::Message {
+namespace Engine {
 
 enum class MessageSenderType {
     UNKNOWN,
@@ -31,6 +31,6 @@ enum class MessageSenderType {
     COMBAT_UPDATE,
 };
 
-} // namespace Core::Message
+} // namespace Engine
 
 #endif // MESSAGESENDERTYPE_H

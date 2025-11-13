@@ -3,11 +3,10 @@
 
 #include <string>
 
-#include <Core/Message/MessageSender.h>
 #include <Domain/Character/Character.h>
 #include <Domain/Skill/Skill.h>
 
-namespace Core::System {
+namespace Engine {
 
 class ProgressionSystem {
 public:
@@ -21,6 +20,6 @@ public:
     void applyLevelUp( Domain::Character* character );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // PROGRESSIONSYSTEM_H

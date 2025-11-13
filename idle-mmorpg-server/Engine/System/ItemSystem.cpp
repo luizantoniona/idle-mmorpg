@@ -2,14 +2,14 @@
 
 #include <iostream>
 
-#include <Commons/Singleton.h>
-#include <Core/Manager/SkillManager.h>
-#include <Helper/SkillHelper.h>
+#include <Domain/Skill/SkillHelper.h>
+#include <Engine/Manager/Skill/SkillManager.h>
+#include <Shared/Commons/Singleton.h>
 
 #include "NotificationSystem.h"
 #include "QuestSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 void ItemSystem::characterUseItem( const std::string& sessionId, Domain::Character* character, const Json::Value& payload ) {
     const std::string itemId = payload[ "itemId" ].asString();
@@ -199,4 +199,4 @@ void ItemSystem::computeEquipmentModifiers( const std::string& sessionId, Domain
     NotificationSystem::notifyCharacterSkills( sessionId, character );
 }
 
-} // namespace Core::System
+} // namespace Engine

@@ -29,7 +29,7 @@ void WorldManager::initialize( const std::string& mapPath ) {
     }
 
     if ( !_worldInstance ) {
-        _worldInstance.reset( new Core::Instance::WorldInstance( _world.get() ) );
+        _worldInstance.reset( new Engine::WorldInstance( _world.get() ) );
     }
 
     start();

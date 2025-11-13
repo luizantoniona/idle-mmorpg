@@ -9,7 +9,7 @@
 
 #include "ProgressionSystem.h"
 
-namespace Core::System {
+namespace Engine {
 
 class CombatSystem {
 public:
@@ -38,6 +38,6 @@ private:
     ProgressionSystem _progressionSystem;
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // COMBATSYSTEM_H

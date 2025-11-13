@@ -15,7 +15,7 @@ public:
     WorldManager();
     ~WorldManager();
 
-    Core::Instance::WorldInstance* worldInstance();
+    Engine::WorldInstance* worldInstance();
 
     void initialize( const std::string& mapPath );
     void start();

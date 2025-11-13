@@ -3,13 +3,13 @@
 
 #include <Domain/Character/Character.h>
 
-namespace Core::System {
+namespace Engine {
 
 class EffectSystem {
 public:
     static void processEffects( const std::string& sessionId, Domain::Character* character );
 };
 
-} // namespace Core::System
+} // namespace Engine
 
 #endif // EFFECTSYSTEM_H

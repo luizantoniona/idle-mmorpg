@@ -1,8 +1,8 @@
 #include "AuthFilter.h"
 
-#include <Commons/Singleton.h>
-#include <Network/NetworkServer.h>
-#include <Network/NetworkSession.h>
+#include <Infrastructure/Network/NetworkServer.h>
+#include <Infrastructure/Network/NetworkSession.h>
+#include <Shared/Commons/Singleton.h>
 
 namespace Network {
 

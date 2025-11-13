@@ -1,10 +1,10 @@
 #include "MessageSender.h"
 
-#include <Commons/Singleton.h>
-#include <Core/Message/MessageHelper.h>
-#include <Network/NetworkServer.h>
+#include <Engine/Message/MessageHelper.h>
+#include <Infrastructure/Network/NetworkServer.h>
+#include <Shared/Commons/Singleton.h>
 
-namespace Core::Message {
+namespace Engine {
 
 void MessageSender::send( const std::string& sessionId, MessageSenderType type, const Json::Value& payload ) {
     Json::Value message;
@@ -27,4 +27,4 @@ void MessageSender::send( const std::string& sessionId, const std::string& messa
     sessionOpt->connection()->send( message );
 }
 
-} // namespace Core::Message
+} // namespace Engine
