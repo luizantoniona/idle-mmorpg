@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+#include <Domain/World/Location/Location.h>
+
 namespace Domain {
 
 class CharacterCoordinates {
@@ -25,11 +27,15 @@ public:
     std::string spawnStructureId() const;
     void setSpawnStructureId( const std::string& structureId );
 
+    Location* location() const;
+    void setLocation( Location* location );
+
 private:
     std::string _locationId;
     std::string _spawnLocationId;
     std::string _structureId;
     std::string _spawnStructureId;
+    Location* _location;
 };
 
 } // namespace Domain

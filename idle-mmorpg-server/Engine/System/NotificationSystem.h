@@ -27,10 +27,7 @@ public:
     static void notifyCurrentAction( const std::string& sessionId, Domain::Character* character );
     static void notifyCurrentCoordinates( const std::string& sessionId, Domain::Character* character );
 
-    static void notifyFullLocation( const std::string& sessionId, const Domain::Location* location );
-    static void notifyLocationActions( const std::string& sessionId, Domain::Character* character, const Domain::Location* location );
-    static void notifyLocationConnections( const std::string& sessionId, Domain::Character* character, const Domain::Location* location );
-    static void notifyLocationDenizens( const std::string& sessionId, Domain::Character* character, const Domain::Location* location );
+    static void notifyLocation( const std::string& sessionId, Domain::Character* character );
 
     static void notifyCombatInstances( const std::string& sessionId, std::vector<Engine::CombatInstance*> combatInstances );
     static void notifyCombat( const Engine::CombatInstance* combatInstance );

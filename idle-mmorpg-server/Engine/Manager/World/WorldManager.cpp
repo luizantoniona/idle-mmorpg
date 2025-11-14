@@ -82,8 +82,8 @@ bool WorldManager::addCharacter( const std::string& sessionId, int idUser, int i
     return _worldInstance->addCharacter( sessionId, std::move( character ) );
 }
 
-void WorldManager::removeCharacter( const std::string& uuid ) {
-    _worldInstance->removeCharacter( uuid );
+void WorldManager::removeCharacter( const std::string& sessionId ) {
+    _worldInstance->removeCharacter( sessionId );
 }
 
 } // namespace Engine

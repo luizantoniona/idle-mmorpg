@@ -6,7 +6,9 @@ CharacterCoordinates::CharacterCoordinates() :
     _locationId( "" ),
     _spawnLocationId( "" ),
     _structureId( "" ),
-    _spawnStructureId( "" ) {}
+    _spawnStructureId( "" ),
+    _location( nullptr ) {
+}
 
 Json::Value CharacterCoordinates::toJson() {
     Json::Value root;
@@ -45,6 +47,14 @@ std::string CharacterCoordinates::spawnStructureId() const {
 
 void CharacterCoordinates::setSpawnStructureId( const std::string& structureId ) {
     _spawnStructureId = structureId;
+}
+
+Location* CharacterCoordinates::location() const {
+    return _location;
+}
+
+void CharacterCoordinates::setLocation( Location* location ) {
+    _location = location;
 }
 
 } // namespace Domain

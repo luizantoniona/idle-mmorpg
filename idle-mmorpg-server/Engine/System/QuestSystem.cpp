@@ -72,7 +72,7 @@ void QuestSystem::characterAcceptQuest( const std::string& sessionId, Domain::Ch
     }
 
     NotificationSystem::notifyCharacterQuests( sessionId, character );
-    NotificationSystem::notifyLocationDenizens( sessionId, character, location );
+    NotificationSystem::notifyLocation( sessionId, character );
 }
 
 void QuestSystem::characterFinishQuest( const std::string& sessionId, Domain::Character* character, const Domain::Location* location, const Json::Value& payload ) {
@@ -134,8 +134,7 @@ void QuestSystem::characterFinishQuest( const std::string& sessionId, Domain::Ch
     }
 
     NotificationSystem::notifyCharacterQuests( sessionId, character );
-    NotificationSystem::notifyLocationConnections( sessionId, character, location );
-    NotificationSystem::notifyLocationDenizens( sessionId, character, location );
+    NotificationSystem::notifyLocation( sessionId, character );
 }
 
 void QuestSystem::updateKillQuest( const std::string& sessionId, Domain::Character* character, const std::string& creatureId ) {

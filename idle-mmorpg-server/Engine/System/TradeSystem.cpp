@@ -106,7 +106,7 @@ void TradeSystem::characterTradeDenizen( const std::string& sessionId, Domain::C
 
     NotificationSystem::notifyCharacterInventory( sessionId, character );
     NotificationSystem::notifyCharacterWallet( sessionId, character );
-    NotificationSystem::notifyLocationDenizens( sessionId, character, location );
+    NotificationSystem::notifyLocation( sessionId, character );
 }
 
 } // namespace Engine
