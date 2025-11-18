@@ -48,7 +48,8 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
     item->setPrice( itemJson[ "price" ].asInt() );
 
     item->setIcon( itemJson[ "icon" ].asString() );
-    // TODO: Add image to ServerImageManager
+    std::string baseDir = itemPath.substr( 0, itemPath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( item->icon(), baseDir + item->icon() );
 
     if ( itemJson.isMember( "bonus" ) && itemJson[ "bonus" ].isArray() ) {
         const Json::Value& bonusesJson = itemJson[ "bonus" ];

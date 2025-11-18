@@ -24,10 +24,12 @@ export class APIService {
         return `http://${server.address}:${server.port}`;
     }
 
-    private getHeaders(): HttpHeaders {
-        let headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-        });
+    private getHeaders(isBinary = false): HttpHeaders {
+        let headers = new HttpHeaders();
+
+        if (!isBinary) {
+            headers = headers.set('Content-Type', 'application/json');
+        }
 
         const token = this.authToken || this.authManager.get()?.sessionID;
         if (token) {
@@ -82,5 +84,17 @@ export class APIService {
 
     clearAuthToken(): void {
         this.authToken = null;
+    }
+
+    async getImage(imageId: string): Promise<Blob> {
+        const url = `${this.getBaseUrl()}/image/${encodeURIComponent(imageId)}`;
+
+        const options = {
+            headers: this.getHeaders(true),
+            responseType: 'blob' as const
+        };
+
+        const response$ = this.http.get(url, options);
+        return await firstValueFrom(response$);
     }
 }

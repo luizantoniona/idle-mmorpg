@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Engine/Manager/Configuration/ServerImageManager.h>
+#include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
 namespace Engine {
@@ -50,7 +51,8 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     creature->setDescription( creatureJson[ "description" ].asString() );
 
     creature->setIcon( creatureJson[ "icon" ].asString() );
-    // TODO: Add image to ServerImageManager
+    std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
 
     creature->setExperience( creatureJson[ "experience" ].asInt() );
     creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );

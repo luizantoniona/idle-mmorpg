@@ -56,8 +56,9 @@ std::unique_ptr<Domain::Denizen> DenizenFactory::createDenizen( const std::strin
     denizen->setId( denizenJson[ "id" ].asString() );
     denizen->setName( denizenJson[ "name" ].asString() );
 
-    denizen->setIcon( denizenJson.get( "icon", "" ).asString() );
-    // TODO: Add image to ServerImageManager
+    denizen->setIcon( denizenJson[ "icon" ].asString() );
+    std::string baseDir = denizenPath.substr( 0, denizenPath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( denizen->icon(), baseDir + denizen->icon() );
 
     // --- Quests ---
     for ( const Json::Value& questJson : denizenJson[ "quests" ] ) {
