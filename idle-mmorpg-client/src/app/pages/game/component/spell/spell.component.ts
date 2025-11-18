@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
+import { ImageComponent } from "../../../../component/image/image.component";
 import { TooltipComponent } from "../../../../component";
 
 import { Spell } from "../../../../model";
@@ -13,6 +14,7 @@ export type SpellType = "healing" | "attack";
     styleUrls: ["./spell.component.scss"],
     imports: [
         CommonModule,
+        ImageComponent,
         TooltipComponent,
     ]
 })

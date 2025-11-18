@@ -13,7 +13,7 @@
     @if(selectedDenizen && (selectedDenizen.quests || selectedDenizen.trade)) {
     <app-panel>
         <h3>{{selectedDenizen.name}}</h3>
-        <img [src]="'assets/denizens/' + selectedDenizen.icon" alt="{{ selectedDenizen.name }}" />
+        <app-image [src]="selectedDenizen.icon" alt="{{ selectedDenizen.name }}"></app-image>
 
         @if(selectedDenizen.trade && (selectedDenizen.trade.sell || selectedDenizen.trade.buy)){
         <app-button text="Trade" (clickEvent)="onTradeClick()"></app-button>

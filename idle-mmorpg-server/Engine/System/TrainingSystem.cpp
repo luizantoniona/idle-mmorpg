@@ -55,10 +55,6 @@ std::vector<Domain::SkillType> TrainingSystem::combatSkill( Domain::Character* c
 
     std::vector<Domain::SkillType> skills = {};
 
-    if ( !weapon && !offhand ) {
-        return { Domain::SkillType::FIST_MASTERY };
-    }
-
     auto getSkillForWeapon = []( const Domain::Item* item ) -> Domain::SkillType {
         if ( !item ) {
             return Domain::SkillType::FIST_MASTERY;
@@ -78,6 +74,16 @@ std::vector<Domain::SkillType> TrainingSystem::combatSkill( Domain::Character* c
             return Domain::SkillType::DAGGER_MASTERY;
         }
 
+        return Domain::SkillType::UNKNOWN;
+    };
+
+    auto getSkillForOffhand = []( const Domain::Item* item ) -> Domain::SkillType {
+        if ( !item ) {
+            return Domain::SkillType::UNKNOWN;
+        }
+
+        const std::string& category = item->category();
+
         if ( category == "shield" ) {
             return Domain::SkillType::SHIELD_MASTERY;
         }
@@ -85,15 +91,15 @@ std::vector<Domain::SkillType> TrainingSystem::combatSkill( Domain::Character* c
         return Domain::SkillType::UNKNOWN;
     };
 
-    Domain::SkillType leftSkill = getSkillForWeapon( weapon );
-    Domain::SkillType rightSkill = getSkillForWeapon( offhand );
+    Domain::SkillType weaponSkill = getSkillForWeapon( weapon );
+    Domain::SkillType offhandSkill = getSkillForOffhand( offhand );
 
-    if ( leftSkill != Domain::SkillType::UNKNOWN ) {
-        skills.push_back( leftSkill );
+    if ( weaponSkill != Domain::SkillType::UNKNOWN ) {
+        skills.push_back( weaponSkill );
     }
 
-    if ( rightSkill != Domain::SkillType::UNKNOWN ) {
-        skills.push_back( rightSkill );
+    if ( offhandSkill != Domain::SkillType::UNKNOWN ) {
+        skills.push_back( offhandSkill );
     }
 
     return skills;

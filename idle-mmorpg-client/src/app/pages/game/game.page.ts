@@ -211,22 +211,9 @@ export class GamePage implements OnInit, OnDestroy {
                 if (data.payload?.location) {
                     this.location = data.payload.location;
                 }
-                break;
-
-            case 'LOCATION_ACTIONS_UPDATE':
                 if (this.location) {
                     this.location.actions = data.payload?.actions ?? [];
-                }
-                break;
-
-            case 'LOCATION_CONNECTIONS_UPDATE':
-                if (this.location) {
                     this.location.connections = data.payload?.connections ?? [];
-                }
-                break;
-
-            case 'LOCATION_DENIZENS_UPDATE':
-                if (this.location) {
                     this.location.denizens = data.payload?.denizens ?? [];
                 }
                 break;

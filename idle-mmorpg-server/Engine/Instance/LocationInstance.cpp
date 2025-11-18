@@ -37,11 +37,10 @@ bool LocationInstance::addCharacter( const std::string& sessionId, Domain::Chara
               << " [Entering] " << _location->name()
               << " [SessionID] " << sessionId << std::endl;
 
+    character->coordinates().setLocation( _location );
+
     Engine::NotificationSystem::notifyFullCharacter( sessionId, character );
-    Engine::NotificationSystem::notifyFullLocation( sessionId, _location );
-    Engine::NotificationSystem::notifyLocationActions( sessionId, character, _location );
-    Engine::NotificationSystem::notifyLocationConnections( sessionId, character, _location );
-    Engine::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
+    Engine::NotificationSystem::notifyLocation( sessionId, character );
 
     Engine::ItemSystem::computeEquipmentModifiers( sessionId, character );
 
@@ -75,8 +74,7 @@ void LocationInstance::changeStructure( const std::string& sessionId, Domain::Ch
 
     Engine::NotificationSystem::notifyCurrentAction( sessionId, character );
     Engine::NotificationSystem::notifyCurrentCoordinates( sessionId, character );
-    Engine::NotificationSystem::notifyLocationActions( sessionId, character, _location );
-    Engine::NotificationSystem::notifyLocationDenizens( sessionId, character, _location );
+    Engine::NotificationSystem::notifyLocation( sessionId, character );
 }
 
 void LocationInstance::createCombat( const std::string& sessionId, Domain::Character* character ) {

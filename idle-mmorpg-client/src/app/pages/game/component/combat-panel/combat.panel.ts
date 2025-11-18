@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { BarComponent } from "../../../../component";
 import { ButtonComponent } from "../../../../component";
 import { CardComponent } from "../../../../component";
+import { ImageComponent } from "../../../../component/image/image.component";
 import { LoadingComponent } from "../../../../component";
 import { PanelComponent } from "../../../../component";
 
@@ -23,6 +24,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
         BarComponent,
         ButtonComponent,
         CardComponent,
+        ImageComponent,
         LoadingComponent,
         PanelComponent,
     ],

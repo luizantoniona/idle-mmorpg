@@ -97,44 +97,34 @@ void NotificationSystem::notifyCurrentCoordinates( const std::string& sessionId,
     Engine::MessageSender::send( sessionId, Engine::MessageSenderType::CHARACTER_CURRENT_COORDINATES_UPDATE, payloadCurrentCoordinates );
 }
 
-void NotificationSystem::notifyFullLocation( const std::string& sessionId, const Domain::Location* location ) {
+void NotificationSystem::notifyLocation( const std::string& sessionId, Domain::Character* character ) {
     Json::Value payloadLocation;
+
+    Domain::Location* location = character->coordinates().location();
+
+    if ( !location ) {
+        return;
+    }
+
     payloadLocation[ "location" ] = location->toJson();
-    Engine::MessageSender::send( sessionId, Engine::MessageSenderType::LOCATION_UPDATE, payloadLocation );
-}
 
-void NotificationSystem::notifyLocationActions( const std::string& sessionId, Domain::Character* character, const Domain::Location* location ) {
-    Json::Value payloadLocationActions;
     Json::Value availableActions;
-
     for ( auto action : location->actions() ) {
         if ( Helper::LocationHelper::canCharacterPerformAction( character, action ) ) {
             availableActions.append( action.toJson() );
         }
     }
+    payloadLocation[ "actions" ] = availableActions;
 
-    payloadLocationActions[ "actions" ] = availableActions;
-    Engine::MessageSender::send( sessionId, Engine::MessageSenderType::LOCATION_ACTIONS_UPDATE, payloadLocationActions );
-}
-
-void NotificationSystem::notifyLocationConnections( const std::string& sessionId, Domain::Character* character, const Domain::Location* location ) {
-    Json::Value payloadLocationConnections;
     Json::Value availableConnections;
-
     for ( auto connection : location->connections() ) {
         if ( Helper::LocationHelper::canCharacterUseConnections( character, connection ) ) {
             availableConnections.append( connection.toJson() );
         }
     }
+    payloadLocation[ "connections" ] = availableConnections;
 
-    payloadLocationConnections[ "connections" ] = availableConnections;
-    Engine::MessageSender::send( sessionId, Engine::MessageSenderType::LOCATION_CONNECTIONS_UPDATE, payloadLocationConnections );
-}
-
-void NotificationSystem::notifyLocationDenizens( const std::string& sessionId, Domain::Character* character, const Domain::Location* location ) {
-    Json::Value payloadLocationDenizens;
     Json::Value availableDenizens;
-
     for ( auto denizen : location->denizens() ) {
         if ( Helper::LocationHelper::canCharacterInteractDenizen( character, *denizen ) ) {
             Json::Value denizenJson = denizen->toJson();
@@ -150,9 +140,9 @@ void NotificationSystem::notifyLocationDenizens( const std::string& sessionId, D
             availableDenizens.append( denizenJson );
         }
     }
+    payloadLocation[ "denizens" ] = availableDenizens;
 
-    payloadLocationDenizens[ "denizens" ] = availableDenizens;
-    Engine::MessageSender::send( sessionId, Engine::MessageSenderType::LOCATION_DENIZENS_UPDATE, payloadLocationDenizens );
+    Engine::MessageSender::send( sessionId, Engine::MessageSenderType::LOCATION_UPDATE, payloadLocation );
 }
 
 void NotificationSystem::notifyCombatInstances( const std::string& sessionId, std::vector<Engine::CombatInstance*> combatInstances ) {

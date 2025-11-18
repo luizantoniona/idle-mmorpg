@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Engine/Manager/Configuration/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
@@ -42,8 +43,12 @@ std::unique_ptr<Domain::Spell> SpellFactory::createSpell( const std::string& spe
     spell->setId( spellJson[ "id" ].asString() );
     spell->setName( spellJson[ "name" ].asString() );
     spell->setDescription( spellJson[ "description" ].asString() );
-    spell->setIcon( spellJson[ "icon" ].asString() );
     spell->setType( spellJson[ "type" ].asString() );
+
+    spell->setIcon( spellJson[ "icon" ].asString() );
+    std::string baseDir = spellPath.substr( 0, spellPath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( spell->icon(), baseDir + spell->icon() );
+
     spell->setManaCost( spellJson[ "manaCost" ].asInt() );
     spell->setCooldown( spellJson[ "cooldown" ].asInt() * Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate() );
     spell->effect().setType( spellJson[ "effect" ][ "type" ].asString() );

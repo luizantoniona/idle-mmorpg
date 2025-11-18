@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Domain/Shared/RequirementHelper.h>
+#include <Engine/Manager/Configuration/ServerImageManager.h>
 #include <Engine/Manager/Item/ItemManager.h>
 #include <Engine/Manager/Quest/QuestManager.h>
 #include <Shared/Commons/Singleton.h>
@@ -54,7 +55,10 @@ std::unique_ptr<Domain::Denizen> DenizenFactory::createDenizen( const std::strin
     auto denizen = std::make_unique<Domain::Denizen>();
     denizen->setId( denizenJson[ "id" ].asString() );
     denizen->setName( denizenJson[ "name" ].asString() );
-    denizen->setIcon( denizenJson.get( "icon", "" ).asString() );
+
+    denizen->setIcon( denizenJson[ "icon" ].asString() );
+    std::string baseDir = denizenPath.substr( 0, denizenPath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( denizen->icon(), baseDir + denizen->icon() );
 
     // --- Quests ---
     for ( const Json::Value& questJson : denizenJson[ "quests" ] ) {

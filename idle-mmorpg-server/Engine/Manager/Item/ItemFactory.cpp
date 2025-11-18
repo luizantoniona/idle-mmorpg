@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Engine/Manager/Configuration/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
@@ -45,7 +46,10 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
     item->setDescription( itemJson[ "description" ].asString() );
     item->setRarity( itemJson[ "rarity" ].asString() );
     item->setPrice( itemJson[ "price" ].asInt() );
+
     item->setIcon( itemJson[ "icon" ].asString() );
+    std::string baseDir = itemPath.substr( 0, itemPath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( item->icon(), baseDir + item->icon() );
 
     if ( itemJson.isMember( "bonus" ) && itemJson[ "bonus" ].isArray() ) {
         const Json::Value& bonusesJson = itemJson[ "bonus" ];

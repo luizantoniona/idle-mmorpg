@@ -1,6 +1,6 @@
 <app-tooltip>
     <div tooltip-target class="spell-box" [ngClass]="type" (click)="onClick()">
-        <img [src]="'assets/spells/' + spell.icon" alt="{{ spell.name }}" />
+        <app-image [src]="spell.icon" alt="{{ spell.name }}"></app-image>
 
         @if (spell.count < spell.cooldown) { <span class="cooldown-overlay">
             {{ Math.ceil((spell.cooldown - spell.count) / 20) }}

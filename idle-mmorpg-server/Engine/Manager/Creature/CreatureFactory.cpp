@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <Engine/Manager/Configuration/ServerImageManager.h>
+#include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
 namespace Engine {
@@ -47,9 +49,12 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     auto creature = std::make_unique<Domain::Creature>();
     creature->setName( creatureJson[ "name" ].asString() );
     creature->setDescription( creatureJson[ "description" ].asString() );
-    creature->setIcon( creatureJson[ "icon" ].asString() );
-    creature->setExperience( creatureJson[ "experience" ].asInt() );
 
+    creature->setIcon( creatureJson[ "icon" ].asString() );
+    std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
+    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
+
+    creature->setExperience( creatureJson[ "experience" ].asInt() );
     creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );
     creature->vitals().setHealth( creatureJson[ "health" ].asDouble() );
     creature->vitals().setMaxMana( creatureJson[ "mana" ].asDouble() );

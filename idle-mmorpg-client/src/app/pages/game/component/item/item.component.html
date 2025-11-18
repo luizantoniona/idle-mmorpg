@@ -3,7 +3,7 @@
     <div tooltip-target [class.item-box]="mode === 'inventory' || mode === 'equip'" [class.slot]="mode === 'slot'"
         (click)="onClick()">
         @if(item && item.id){
-        <img [class.slot-icon]="mode === 'slot'" [src]="'assets/items/' + item.icon" alt="{{ item.name }}" />
+        <app-image [class.slot-icon]="mode === 'slot'" [src]="item.icon" [alt]="item.name"></app-image>
         } @else if(mode === 'slot') {
         <img class="slot-icon" [src]="'assets/slots/' + slot + '.png'" />
         }

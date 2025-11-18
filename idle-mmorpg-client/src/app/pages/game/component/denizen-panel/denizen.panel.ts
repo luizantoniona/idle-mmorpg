@@ -2,6 +2,7 @@ import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { ButtonComponent } from "../../../../component";
+import { ImageComponent } from "../../../../component/image/image.component";
 import { PanelComponent } from "../../../../component";
 import { PopupComponent } from "../../../../component";
 
@@ -19,6 +20,7 @@ import { WebsocketService } from "../../../../service/websocket.service";
     imports: [
         CommonModule,
         ButtonComponent,
+        ImageComponent,
         PanelComponent,
         PopupComponent,
         QuestPanel,

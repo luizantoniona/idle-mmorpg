@@ -22,7 +22,7 @@ public:
     void stop();
 
     bool addCharacter( const std::string& sessionId, int idUser, int idCharacter );
-    void removeCharacter( const std::string& uuid );
+    void removeCharacter( const std::string& sessionId );
 
 private:
     std::atomic<bool> _running;
