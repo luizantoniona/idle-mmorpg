@@ -1,12 +1,18 @@
 import QtQuick
-import IdleMMO 1.0
+import IdleMMOControls 1.0
 
 FilesBarDesign {
     id: root
 
-    CreatureControl {}
+    CreatureControl {
+        id: creatureControl
+    }
 
-    ItemControl {}
+    ItemControl {
+        id: itemControl
+    }
 
-    SpellControl {}
+    SpellControl {
+        id: spellControl
+    }
 }
