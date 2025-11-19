@@ -37,7 +37,7 @@ set(QML_FILES
 qt_add_qml_module(
   ${PROJECT_NAME}
   URI
-  editor
+  Editor
   VERSION
   1.0
   QML_FILES
