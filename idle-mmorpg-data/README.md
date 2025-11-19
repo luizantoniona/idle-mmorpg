@@ -8,6 +8,10 @@
 Modular creature data.  
 This folder defines the structure and attributes of all creatures used by the game server.
 
+### 🐾 **idle-mmorpg-denizen**:  
+Modular denizens data.  
+This folder defines the structure and attributes of all denizens used by the game server.
+
 ### 🗡️ **idle-mmorpg-item**:  
 Modular item data.  
 This folder defines the items structure used by the game server.

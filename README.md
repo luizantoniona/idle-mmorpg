@@ -44,6 +44,7 @@ This project was envisioned, created, and is maintained by:
   - Outputs JSON files that are consumed by the server.
   - Easily expandable to support balancing, batch editing, or procedural generation.
   - 🐾 **idle-mmorpg-creature**: Defines the structure and attributes of all creatures.
+  - 👲 **idle-mmorpg-denizen**: Structure and attributes of all denizens.
   - 🗡️ **idle-mmorpg-item**: Defines the items structure.
   - 🗺️ **idle-mmorpg-map**: Defines the world structure, continents, areas, enemies, NPCs, and navigation logic.
   - 🤺 **idle-mmorpg-skill**: Defines all the skills in game.

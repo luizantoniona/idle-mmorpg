@@ -8,7 +8,7 @@
             "title": "Welcome",
             "description": "The Guardian warmly welcomes you around the campfire. He explains that the Hero's Path is full of dangers and that you must always stay alert. This is your first step in getting to know the world you are about to explore.",
             "type": "talk",
-            "objectiveId": "guardian_heroes_path",
+            "objectiveId": "guardian",
             "amount": 1,
             "requirements": [],
             "rewards": [
@@ -45,7 +45,7 @@
             "title": "Talk to the Cleric",
             "description": "The Guardian suggests you meet the Cleric at the Altar of Light. She may guide you in the ways of magic and teach you how to restore your strength.",
             "type": "talk",
-            "objectiveId": "cleric_altar_of_light",
+            "objectiveId": "cleric",
             "amount": 1,
             "requirements": [
                 {
@@ -66,7 +66,7 @@
             "title": "Speak with the Cave Man",
             "description": "The Guardian tells you of a strange man living in the nearby cave. Perhaps he holds knowledge—or secrets—that could aid you on your journey.",
             "type": "talk",
-            "objectiveId": "cave_man_heroes_path_cave",
+            "objectiveId": "miner",
             "amount": 1,
             "requirements": [
                 {
@@ -87,7 +87,7 @@
             "title": "Speak with the Lumberjack",
             "description": "The Guardian asks you to visit the Lumberjack in the forest. He is a hardy man who knows the land well and might offer useful advice or tools.",
             "type": "talk",
-            "objectiveId": "lumberjack_heroes_path_forest",
+            "objectiveId": "lumberjack",
             "amount": 1,
             "requirements": [
                 {
