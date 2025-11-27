@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import Editor
+import Editor 1.0
 
 Window {
     height: 768
@@ -16,14 +16,14 @@ Window {
             anchors.fill: parent
 
             FilesBar {
-                Layout.preferredWidth: 240
-                Layout.fillHeight: true
+				Layout.fillHeight: true
+				Layout.preferredWidth: 240
             }
 
             Editor {
-                Layout.fillWidth: true
                 Layout.fillHeight: true
-            }
+				Layout.fillWidth: true
+			}
         }
     }
 }

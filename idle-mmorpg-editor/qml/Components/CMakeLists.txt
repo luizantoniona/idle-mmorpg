@@ -1,14 +1,9 @@
-set(MODULE_NAME Styles)
+set(MODULE_NAME Components)
 
 set(QML_FILES_LIST
-  Colors.qml
-  Spaces.qml
-)
-
-set_source_files_properties(
-  ${CMAKE_CURRENT_SOURCE_DIR}/Colors.qml
-  ${CMAKE_CURRENT_SOURCE_DIR}/Spaces.qml
-  PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+  CreatureList.qml
+  ItemList.qml
+  SpellList.qml
 )
 
 set(RESOURCES
