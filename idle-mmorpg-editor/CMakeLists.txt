@@ -32,6 +32,9 @@ set(QML_FILES
   qml/components/FilesBar.qml
   qml/components/FilesBarDesign.ui.qml
   qml/components/NavBar.qml
+  qml/components/molecules/CreatureList.qml
+  qml/components/molecules/ItemList.qml
+  qml/components/molecules/SpellList.qml
 )
 
 qt_add_qml_module(
@@ -46,7 +49,8 @@ qt_add_qml_module(
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-add_subdirectory(qml/styles)
+add_subdirectory(qml/Styles)
+target_link_libraries(${PROJECT_NAME} PRIVATE StylesPlugin)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Quick Qt6::Qml)
 
