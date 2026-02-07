@@ -4,20 +4,12 @@ namespace Domain {
 
 Creature::Creature() :
     _id( "" ),
-    _combatId( 0 ),
     _type( "" ),
     _name( "" ),
     _description( "" ),
     _icon( "" ),
-    _experience( 0 ),
-    _vitals(),
-    _combatAction(),
-    _attack( 0.0 ),
-    _attackSpeed( 0.0 ),
-    _accuracy( 0.0 ),
-    _defense( 0.0 ),
-    _evasion( 0.0 ),
-    _loot( {} ) {
+    _action(),
+    _vitals() {
 }
 
 std::string Creature::id() const {
@@ -26,14 +18,6 @@ std::string Creature::id() const {
 
 void Creature::setId( const std::string& id ) {
     _id = id;
-}
-
-int Creature::combatId() const {
-    return _combatId;
-}
-
-void Creature::setCombatId( int combatId ) {
-    _combatId = combatId;
 }
 
 std::string Creature::type() const {
@@ -68,20 +52,12 @@ void Creature::setIcon( const std::string& icon ) {
     _icon = icon;
 }
 
-int Creature::experience() const {
-    return _experience;
+CreatureAction& Creature::action() {
+    return _action;
 }
 
-void Creature::setExperience( int experience ) {
-    _experience = experience;
-}
-
-CreatureCombatAction& Creature::combatAction() {
-    return _combatAction;
-}
-
-void Creature::setCombatAction( const CreatureCombatAction& combatAction ) {
-    _combatAction = combatAction;
+void Creature::setAction( const CreatureAction& action ) {
+    _action = action;
 }
 
 CreatureVitals& Creature::vitals() {
@@ -90,46 +66,6 @@ CreatureVitals& Creature::vitals() {
 
 void Creature::setVitals( const CreatureVitals& vitals ) {
     _vitals = vitals;
-}
-
-double Creature::attack() const {
-    return _attack;
-}
-
-void Creature::setAttack( double attack ) {
-    _attack = attack;
-}
-
-double Creature::attackSpeed() const {
-    return _attackSpeed;
-}
-
-void Creature::setAttackSpeed( double attackSpeed ) {
-    _attackSpeed = attackSpeed;
-}
-
-double Creature::accuracy() const {
-    return _accuracy;
-}
-
-void Creature::setAccuracy( double accuracy ) {
-    _accuracy = accuracy;
-}
-
-double Creature::defense() const {
-    return _defense;
-}
-
-void Creature::setDefense( double defense ) {
-    _defense = defense;
-}
-
-double Creature::evasion() const {
-    return _evasion;
-}
-
-void Creature::setEvasion( double evasion ) {
-    _evasion = evasion;
 }
 
 std::vector<CreatureLoot> Creature::loot() const {

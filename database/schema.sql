@@ -7,17 +7,20 @@ CREATE TABLE user (
 CREATE TABLE 'character' (
     id_character INTEGER PRIMARY KEY AUTOINCREMENT,
     id_user INTEGER NOT NULL,
+    id_stage INTEGER NOT NULL,
     ds_name VARCHAR(20) NOT NULL,
 
     FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE
 );
 
-CREATE TABLE character_coordinates (
+CREATE TABLE character_vitals (
     id_character INTEGER PRIMARY KEY,
-    location_id TEXT,
-    structure_id TEXT,
-    spawn_location_id TEXT,
-    spawn_structure_id TEXT,
+    health NUMERIC DEFAULT 0.0,
+    max_health NUMERIC DEFAULT 0.0,
+    mana NUMERIC DEFAULT 0.0,
+    max_mana NUMERIC DEFAULT 0.0,
+    stamina NUMERIC DEFAULT 0.0,
+    max_stamina NUMERIC DEFAULT 0.0,
 
     FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );
@@ -88,18 +91,6 @@ CREATE TABLE character_spells (
     PRIMARY KEY (id_character, id_spell),
     FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
 ); 
-
-CREATE TABLE character_vitals (
-    id_character INTEGER PRIMARY KEY,
-    health NUMERIC DEFAULT 0.0,
-    max_health NUMERIC DEFAULT 0.0,
-    mana NUMERIC DEFAULT 0.0,
-    max_mana NUMERIC DEFAULT 0.0,
-    stamina NUMERIC DEFAULT 0.0,
-    max_stamina NUMERIC DEFAULT 0.0,
-
-    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
-);
 
 CREATE TABLE character_wallet (
     id_character INTEGER PRIMARY KEY,

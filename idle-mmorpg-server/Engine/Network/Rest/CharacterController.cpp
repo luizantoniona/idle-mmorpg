@@ -2,10 +2,10 @@
 
 #include <optional>
 
-#include <Engine/Repository/Character/CharacterRepository.h>
 #include <Infrastructure/Database/Database.h>
 #include <Infrastructure/Network/NetworkServer.h>
 #include <Infrastructure/Network/NetworkSession.h>
+#include <Repository/Character/CharacterRepository.h>
 #include <Shared/Commons/Singleton.h>
 
 namespace Network {
@@ -133,7 +133,6 @@ void CharacterController::list( const drogon::HttpRequestPtr& request, std::func
 
             for ( const auto& character : characters ) {
                 Json::Value characterJson = character->toJson();
-                characterJson[ "wallet" ] = character->wallet().toJson();
                 charactersJson.append( characterJson );
             }
 

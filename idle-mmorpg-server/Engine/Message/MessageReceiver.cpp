@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Engine/Instance/LocationInstance.h>
+#include <Engine/Instance/StageInstance.h>
 #include <Engine/Instance/WorldInstance.h>
 #include <Engine/Manager/World/WorldManager.h>
 #include <Shared/Commons/Singleton.h>
@@ -26,9 +26,9 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         return;
     }
 
-    Engine::LocationInstance* locationInstance = worldInstance->characterLocationInstance( sessionId );
+    Engine::StageInstance* stageInstance = worldInstance->characterStageInstance( sessionId );
 
-    if ( !locationInstance ) {
+    if ( !stageInstance ) {
         return;
     }
 
@@ -45,21 +45,16 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         case MessageReceiverType::COMBAT_ROOM_CREATE:
         case MessageReceiverType::COMBAT_ROOM_ENTER:
         case MessageReceiverType::COMBAT_ROOM_EXIT:
-        case MessageReceiverType::CHARACTER_INTERACT_DENIZEM:
-        case MessageReceiverType::CHARACTER_TRADE_DENIZEN:
-        case MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST:
-        case MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST:
         case MessageReceiverType::CHARACTER_EQUIP_ITEM:
         case MessageReceiverType::CHARACTER_USE_ITEM:
         case MessageReceiverType::CHARACTER_CAST_SPELL:
-        case MessageReceiverType::CHARACTER_STRUCTURE_UPDATE:
         case MessageReceiverType::CHARACTER_ACTION_UPDATE:
-            locationInstance->handleCharacterMessage( sessionId, type, payload );
+            stageInstance->handleCharacterMessage( sessionId, type, payload );
             break;
 
-        case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
-            worldInstance->handleCharacterMessage( sessionId, type, payload );
-            break;
+            // case MessageReceiverType::CHARACTER_LOCATION_UPDATE:
+            //     worldInstance->handleCharacterMessage( sessionId, type, payload );
+            //     break;
 
         default:
             break;

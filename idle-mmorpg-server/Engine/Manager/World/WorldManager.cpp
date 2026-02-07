@@ -3,8 +3,8 @@
 #include <chrono>
 
 #include <Domain/Character/Character.h>
-#include <Engine/Repository/Character/CharacterRepository.h>
-#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
+#include <Engine/Manager/Server/ServerConfigurationManager.h>
+#include <Repository/Character/CharacterRepository.h>
 #include <Shared/Commons/Singleton.h>
 
 #include "WorldFactory.h"

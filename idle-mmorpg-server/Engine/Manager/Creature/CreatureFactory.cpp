@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <Engine/Manager/Configuration/ServerImageManager.h>
+#include <Engine/Manager/Server/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
@@ -54,20 +54,12 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
     Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
 
-    creature->setExperience( creatureJson[ "experience" ].asInt() );
     creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );
     creature->vitals().setHealth( creatureJson[ "health" ].asDouble() );
     creature->vitals().setMaxMana( creatureJson[ "mana" ].asDouble() );
     creature->vitals().setMana( creatureJson[ "mana" ].asDouble() );
     creature->vitals().setMaxStamina( creatureJson[ "stamina" ].asDouble() );
     creature->vitals().setStamina( creatureJson[ "stamina" ].asDouble() );
-
-    creature->setAttack( creatureJson[ "attack" ].asDouble() );
-    creature->setAttackSpeed( creatureJson[ "attackSpeed" ].asDouble() );
-    creature->setAccuracy( creatureJson[ "accuracy" ].asDouble() );
-
-    creature->setDefense( creatureJson[ "defense" ].asDouble() );
-    creature->setEvasion( creatureJson[ "evasion" ].asDouble() );
 
     for ( const auto& lootJson : creatureJson[ "loot" ] ) {
         Domain::CreatureLoot loot;

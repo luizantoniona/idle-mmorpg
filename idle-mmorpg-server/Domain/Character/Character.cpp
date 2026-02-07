@@ -8,15 +8,17 @@ Character::Character() :
     _name( "" ),
     _sessionId( "" ),
     _action(),
-    _combatAction(),
-    _combatAttributes(),
-    _coordinates(),
-    _equipment(),
-    _inventory(),
-    _progression(),
-    _skills(),
-    _vitals(),
-    _wallet() {
+    _vitals()
+/*
+   _combatAction(),
+   _combatAttributes(),
+   _coordinates(),
+   _equipment(),
+   _inventory(),
+   _progression(),
+   _skills(),
+   _wallet()*/
+{
 }
 
 Json::Value Character::toJson() {
@@ -67,6 +69,15 @@ void Character::setAction( const CharacterAction& action ) {
     _action = action;
 }
 
+CharacterVitals& Character::vitals() {
+    return _vitals;
+}
+
+void Character::setVitals( const CharacterVitals& vitals ) {
+    _vitals = vitals;
+}
+
+/*
 CharacterCombatAction& Character::combatAction() {
     return _combatAction;
 }
@@ -147,20 +158,12 @@ void Character::setSpells( const CharacterSpells& spells ) {
     _spells = spells;
 }
 
-CharacterVitals& Character::vitals() {
-    return _vitals;
-}
-
-void Character::setVitals( const CharacterVitals& vitals ) {
-    _vitals = vitals;
-}
-
 CharacterWallet& Character::wallet() {
     return _wallet;
 }
 
 void Character::setWallet( const CharacterWallet& wallet ) {
     _wallet = wallet;
-}
+}*/
 
 } // namespace Domain

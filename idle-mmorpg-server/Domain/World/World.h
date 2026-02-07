@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "Location/Location.h"
+#include <Domain/Stage/Stage.h>
 
 namespace Domain {
 
@@ -12,15 +12,17 @@ class World {
 public:
     World();
 
-    std::vector<std::unique_ptr<Location> >& locations();
-    void setLocations( std::vector<std::unique_ptr<Location> > locations );
-    void addLocation( std::unique_ptr<Location> location );
+    std::vector<std::unique_ptr<Stage>>& stages();
+    const std::vector<std::unique_ptr<Stage>>& stages() const;
 
-    Location* locationById( const std::string& locationId );
-    bool hasLocationById( const std::string& locationId ) const;
+    void setStages( std::vector<std::unique_ptr<Stage>> stages );
+    void addStage( std::unique_ptr<Stage> stage );
+
+    Stage* stageById( const std::string& stageId );
+    bool hasStageById( const std::string& stageId ) const;
 
 private:
-    std::vector<std::unique_ptr<Location> > _locations;
+    std::vector<std::unique_ptr<Stage>> _stages;
 };
 
 } // namespace Domain

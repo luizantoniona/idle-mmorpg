@@ -3,32 +3,37 @@
 namespace Domain {
 
 World::World() :
-    _locations() {}
-
-std::vector<std::unique_ptr<Location> >& World::locations() {
-    return _locations;
+    _stages() {
 }
 
-void World::setLocations( std::vector<std::unique_ptr<Location> > locations ) {
-    _locations = std::move( locations );
+std::vector<std::unique_ptr<Stage>>& World::stages() {
+    return _stages;
 }
 
-void World::addLocation( std::unique_ptr<Location> location ) {
-    _locations.push_back( std::move( location ) );
+const std::vector<std::unique_ptr<Stage>>& World::stages() const {
+    return _stages;
 }
 
-Location* World::locationById( const std::string& locationId ) {
-    for ( const auto& locationPtr : _locations ) {
-        if ( locationPtr->id() == locationId ) {
-            return locationPtr.get();
+void World::setStages( std::vector<std::unique_ptr<Stage>> stages ) {
+    _stages = std::move( stages );
+}
+
+void World::addStage( std::unique_ptr<Stage> stage ) {
+    _stages.push_back( std::move( stage ) );
+}
+
+Stage* World::stageById( const std::string& stageId ) {
+    for ( const auto& stage : _stages ) {
+        if ( stage->id() == stageId ) {
+            return stage.get();
         }
     }
     return nullptr;
 }
 
-bool World::hasLocationById( const std::string& locationId ) const {
-    for ( const auto& locationPtr : _locations ) {
-        if ( locationPtr->id() == locationId ) {
+bool World::hasStageById( const std::string& stageId ) const {
+    for ( const auto& stage : _stages ) {
+        if ( stage->id() == stageId ) {
             return true;
         }
     }

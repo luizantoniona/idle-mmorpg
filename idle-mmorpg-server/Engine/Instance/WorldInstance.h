@@ -8,7 +8,7 @@
 
 #include <Domain/World/World.h>
 
-#include "LocationInstance.h"
+#include "StageInstance.h"
 
 namespace Engine {
 
@@ -21,7 +21,7 @@ public:
     void moveCharacter( const std::string& sessionId, const std::string& destination );
     bool hasCharacter( const int idCharacter );
 
-    LocationInstance* characterLocationInstance( const std::string& sessionId );
+    StageInstance* characterStageInstance( const std::string& sessionId );
 
     void tick();
 
@@ -30,9 +30,9 @@ public:
 private:
     mutable std::mutex _mutex;
     Domain::World* _world;
-    std::unordered_map<std::string, std::unique_ptr<LocationInstance> > _locations;
+    std::unordered_map<std::string, std::unique_ptr<StageInstance>> _stages;
     std::unordered_map<std::string, std::unique_ptr<Domain::Character>> _characters;
-    std::unordered_map<std::string, LocationInstance*> _characterToLocation;
+    std::unordered_map<std::string, StageInstance*> _characterToStage;
 };
 
 } // namespace Engine

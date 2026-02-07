@@ -1,16 +1,15 @@
 #include "WorldInstance.h"
 
-#include <Domain/Character/CharacterCoordinates.h>
-#include <Engine/Repository/Character/CharacterRepository.h>
+#include <Repository/Character/CharacterRepository.h>
 
 namespace Engine {
 
 WorldInstance::WorldInstance( Domain::World* world ) :
     _mutex(),
     _world( world ),
-    _locations(),
+    _stages(),
     _characters(),
-    _characterToLocation() {
+    _characterToStage() {
 }
 
 bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<Domain::Character> character ) {
@@ -20,52 +19,54 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
 
     character->setSessionId( sessionId );
 
-    Domain::CharacterCoordinates& coordinates = character->coordinates();
+    return true;
 
-    Domain::Location* location = _world->locationById( coordinates.locationId() );
-    if ( !location ) {
-        if ( _world->locations().empty() ) {
-            return false;
-        }
+    // Domain::CharacterCoordinates& coordinates = character->coordinates();
 
-        location = _world->locations().front().get();
-        coordinates.setLocationId( location->id() );
-        coordinates.setStructureId( "" );
-    }
+    // Domain::Location* location = _world->locationById( coordinates.locationId() );
+    // if ( !location ) {
+    //     if ( _world->locations().empty() ) {
+    //         return false;
+    //     }
 
-    std::lock_guard lock( _mutex );
+    //     location = _world->locations().front().get();
+    //     coordinates.setLocationId( location->id() );
+    //     coordinates.setStructureId( "" );
+    // }
 
-    auto& locInstance = _locations[ location->id() ];
-    if ( !locInstance ) {
-        locInstance = std::make_unique<LocationInstance>( location );
-    }
+    // std::lock_guard lock( _mutex );
 
-    if ( locInstance->addCharacter( sessionId, character.get() ) ) {
-        _characters[ sessionId ] = std::move( character );
-        _characterToLocation[ sessionId ] = locInstance.get();
-        return true;
-    }
+    // auto& locInstance = _locations[ location->id() ];
+    // if ( !locInstance ) {
+    //     locInstance = std::make_unique<LocationInstance>( location );
+    // }
 
-    return false;
+    // if ( locInstance->addCharacter( sessionId, character.get() ) ) {
+    //     _characters[ sessionId ] = std::move( character );
+    //     _characterToLocation[ sessionId ] = locInstance.get();
+    //     return true;
+    // }
+
+    // return false;
 }
 
 void WorldInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
 
-    auto itLoc = _characterToLocation.find( sessionId );
-    if ( itLoc != _characterToLocation.end() ) {
-        LocationInstance* locInstance = itLoc->second;
-        if ( locInstance ) {
-            locInstance->removeCharacter( sessionId );
-        }
-        _characterToLocation.erase( itLoc );
-    }
+    // auto itLoc = _characterToLocation.find( sessionId );
+    // if ( itLoc != _characterToLocation.end() ) {
+    //     LocationInstance* locInstance = itLoc->second;
+    //     if ( locInstance ) {
+    //         locInstance->removeCharacter( sessionId );
+    //     }
+    //     _characterToLocation.erase( itLoc );
+    // }
 
-    auto itChar = _characters.find( sessionId );
-    if ( itChar != _characters.end() ) {
-        Repository::CharacterRepository().updateCharacter( *itChar->second );
-        _characters.erase( itChar );
-    }
+    // auto itChar = _characters.find( sessionId );
+    // if ( itChar != _characters.end() ) {
+    //     Repository::CharacterRepository().updateCharacter( *itChar->second );
+    //     _characters.erase( itChar );
+    // }
 
     // TODO: apagar LocationInstance se vazio
 }
@@ -78,45 +79,27 @@ void WorldInstance::moveCharacter( const std::string& sessionId, const std::stri
         return;
     }
 
-    Domain::Character* character = charIt->second.get();
+    // Domain::Character* character = charIt->second.get();
 
-    auto locIt = _characterToLocation.find( sessionId );
-    if ( locIt == _characterToLocation.end() ) {
+    auto locIt = _characterToStage.find( sessionId );
+    if ( locIt == _characterToStage.end() ) {
         return;
     }
 
-    LocationInstance* currentInstance = locIt->second;
-    Domain::Location* currentLocation = currentInstance->location();
-
-    bool validConnection = false;
-    for ( const auto& connection : currentLocation->connections() ) {
-        if ( connection.destination() == destination ) {
-            validConnection = true;
-            break;
-        }
-    }
-    if ( !validConnection ) {
-        return;
-    }
-
-    Domain::Location* destinationLocation = _world->locationById( destination );
-    if ( !destinationLocation ) {
-        return;
-    }
+    // StageInstance* currentInstance = locIt->second;
+    // Domain::Stage* currentStage = currentInstance->stage();
 
     removeCharacter( sessionId );
 
-    character->coordinates().setLocationId( destinationLocation->id() );
-    character->coordinates().setStructureId( "" );
-    character->action().clear();
+    // Update Stage
 
     addCharacter( sessionId, std::move( _characters[ sessionId ] ) );
 }
 
-LocationInstance* WorldInstance::characterLocationInstance( const std::string& sessionId ) {
+StageInstance* WorldInstance::characterStageInstance( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
-    auto it = _characterToLocation.find( sessionId );
-    if ( it != _characterToLocation.end() ) {
+    auto it = _characterToStage.find( sessionId );
+    if ( it != _characterToStage.end() ) {
         return it->second;
     }
     return nullptr;
@@ -134,15 +117,17 @@ bool WorldInstance::hasCharacter( int idCharacter ) {
 
 void WorldInstance::tick() {
     std::lock_guard lock( _mutex );
-    for ( auto& [ _, location ] : _locations ) {
-        location->tick();
+    for ( auto& [ _, stage ] : _stages ) {
+        stage->tick();
     }
 }
 
 void WorldInstance::handleCharacterMessage( const std::string& sessionId, Engine::MessageReceiverType type, const Json::Value& payload ) {
-    if ( type == Engine::MessageReceiverType::CHARACTER_LOCATION_UPDATE ) {
-        std::string destination = payload[ "destination" ].asString();
-        moveCharacter( sessionId, destination );
+    switch ( type ) {
+    case Engine::MessageReceiverType::UNKNOWN:
+        break;
+    default:
+        break;
     }
 }
 

@@ -7,17 +7,10 @@ namespace Engine {
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
         { "CHARACTER_ACTION_UPDATE", MessageReceiverType::CHARACTER_ACTION_UPDATE },
-        { "CHARACTER_STRUCTURE_UPDATE", MessageReceiverType::CHARACTER_STRUCTURE_UPDATE },
-        { "CHARACTER_LOCATION_UPDATE", MessageReceiverType::CHARACTER_LOCATION_UPDATE },
 
         { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
         { "CHARACTER_USE_ITEM", MessageReceiverType::CHARACTER_USE_ITEM },
         { "CHARACTER_CAST_SPELL", MessageReceiverType::CHARACTER_CAST_SPELL },
-
-        { "CHARACTER_INTERACT_DENIZEM", MessageReceiverType::CHARACTER_INTERACT_DENIZEM },
-        { "CHARACTER_TRADE_DENIZEN", MessageReceiverType::CHARACTER_TRADE_DENIZEN },
-        { "CHARACTER_ACCEPT_DENIZEN_QUEST", MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST },
-        { "CHARACTER_FINISH_DENIZEN_QUEST", MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST },
 
         { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
         { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },

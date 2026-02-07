@@ -1,13 +1,13 @@
-#ifndef CHARACTERACTION_H
-#define CHARACTERACTION_H
+#ifndef CREATUREACTION_H
+#define CREATUREACTION_H
 
 #include <json/json.h>
 
 namespace Domain {
 
-class CharacterAction {
+class CreatureAction {
 public:
-    CharacterAction();
+    CreatureAction();
 
     Json::Value toJson();
 
@@ -24,4 +24,4 @@ private:
 
 } // namespace Domain
 
-#endif // CHARACTERACTION_H
+#endif // CREATUREACTION_H

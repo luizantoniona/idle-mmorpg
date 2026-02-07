@@ -1,32 +1,32 @@
-#include "CharacterAction.h"
+#include "CreatureAction.h"
 
 namespace Domain {
 
-CharacterAction::CharacterAction() :
+CreatureAction::CreatureAction() :
     _duration( 0 ),
     _counter( 0 ) {
 }
 
-Json::Value CharacterAction::toJson() {
+Json::Value CreatureAction::toJson() {
     Json::Value root;
     root[ "duration" ] = duration();
     root[ "counter" ] = counter();
     return root;
 }
 
-int CharacterAction::duration() const {
+int CreatureAction::duration() const {
     return _duration;
 }
 
-void CharacterAction::setDuration( int duration ) {
+void CreatureAction::setDuration( int duration ) {
     _duration = duration;
 }
 
-int CharacterAction::counter() const {
+int CreatureAction::counter() const {
     return _counter;
 }
 
-void CharacterAction::setCounter( int counter ) {
+void CreatureAction::setCounter( int counter ) {
     _counter = counter;
 }
 

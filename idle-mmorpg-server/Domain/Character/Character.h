@@ -6,18 +6,7 @@
 #include <json/json.h>
 
 #include "CharacterAction.h"
-#include "CharacterCombatAction.h"
-#include "CharacterCombatAttributes.h"
-#include "CharacterCoordinates.h"
-#include "CharacterEffects.h"
-#include "CharacterEquipment.h"
-#include "CharacterInventory.h"
-#include "CharacterProgression.h"
-#include "CharacterQuests.h"
-#include "CharacterSkills.h"
-#include "CharacterSpells.h"
 #include "CharacterVitals.h"
-#include "CharacterWallet.h"
 
 namespace Domain {
 
@@ -42,7 +31,10 @@ public:
     CharacterAction& action();
     void setAction( const CharacterAction& action );
 
-    CharacterCombatAction& combatAction();
+    CharacterVitals& vitals();
+    void setVitals( const CharacterVitals& vitals );
+
+    /*CharacterCombatAction& combatAction();
     void setCombatAction( const CharacterCombatAction& combatAction );
 
     CharacterCombatAttributes& combatAttributes();
@@ -76,7 +68,7 @@ public:
     void setVitals( const CharacterVitals& vitals );
 
     CharacterWallet& wallet();
-    void setWallet( const CharacterWallet& wallet );
+    void setWallet( const CharacterWallet& wallet );*/
 
 private:
     int _idCharacter;
@@ -84,7 +76,8 @@ private:
     std::string _name;
     std::string _sessionId;
     CharacterAction _action;
-    CharacterCombatAction _combatAction;
+    CharacterVitals _vitals;
+    /*CharacterCombatAction _combatAction;
     CharacterCombatAttributes _combatAttributes;
     CharacterCoordinates _coordinates;
     CharacterEffects _effects;
@@ -94,8 +87,7 @@ private:
     CharacterQuests _quests;
     CharacterSkills _skills;
     CharacterSpells _spells;
-    CharacterVitals _vitals;
-    CharacterWallet _wallet;
+    CharacterWallet _wallet;*/
 };
 
 } // namespace Domain

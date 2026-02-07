@@ -1,0 +1,40 @@
+{
+    "id": "4",
+    "name": "4",
+    "creatures": [
+        {
+            "id": "cave_rat",
+            "amount": 1
+        },
+        {
+            "id": "rat",
+            "amount": 1
+        }
+    ],
+    "objectives": [
+        {
+            "id": "4-1",
+            "target": "cave_rat",
+            "amount": 5,
+            "rewards": [
+                {
+                    "type": "item",
+                    "id": "coin_copper",
+                    "amount": 5
+                }
+            ]
+        },
+        {
+            "id": "4-2",
+            "target": "rat",
+            "amount": 5,
+            "rewards": [
+                {
+                    "type": "item",
+                    "id": "coin_copper",
+                    "amount": 5
+                }
+            ]
+        }
+    ]
+}

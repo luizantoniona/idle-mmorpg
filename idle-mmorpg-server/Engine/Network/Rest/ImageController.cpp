@@ -1,6 +1,6 @@
 #include "ImageController.h"
 
-#include <Engine/Manager/Configuration/ServerImageManager.h>
+#include <Engine/Manager/Server/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 
 namespace Network {
