@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include <Engine/Manager/Server/ServerConfigurationManager.h>
-#include <Engine/Manager/Server/ServerImageManager.h>
+#include <Manager/Server/ServerConfigurationManager.h>
+#include <Manager/Server/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 

@@ -1,7 +1,7 @@
 #include "CharacterVitalsRepository.h"
 
-#include <Engine/Manager/Server/ServerConfigurationManager.h>
 #include <Infrastructure/Database/Query.h>
+#include <Manager/Server/ServerConfigurationManager.h>
 #include <Shared/Commons/Singleton.h>
 
 namespace Repository {

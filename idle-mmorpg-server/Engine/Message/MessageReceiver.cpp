@@ -4,7 +4,7 @@
 
 #include <Engine/Instance/StageInstance.h>
 #include <Engine/Instance/WorldInstance.h>
-#include <Engine/Manager/World/WorldManager.h>
+#include <Manager/World/WorldManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
