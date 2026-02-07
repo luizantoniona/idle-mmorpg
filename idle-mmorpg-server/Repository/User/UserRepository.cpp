@@ -8,7 +8,12 @@ UserRepository::UserRepository() :
     Repository() {}
 
 bool UserRepository::createUser( std::string& username, std::string& password ) {
-    const std::string sql = R"SQL(INSERT INTO user (ds_username, ds_password) VALUES (?, ?))SQL";
+    const std::string sql = R"SQL(
+        INSERT INTO user (
+            ds_username,
+            ds_password
+        ) VALUES (?, ?)
+    )SQL";
     Database::Query query( _db, sql );
 
     query.bindText( 1, username );
@@ -16,8 +21,39 @@ bool UserRepository::createUser( std::string& username, std::string& password ) 
     return query.step();
 }
 
+std::unique_ptr<Domain::User> UserRepository::findByUsername( const std::string& username ) {
+    const std::string sql = R"SQL(
+        SELECT
+            id_user,
+            ds_username,
+            ds_password
+        FROM user
+        WHERE ds_username = ?
+    )SQL";
+    Database::Query query( _db, sql );
+
+    query.bindText( 1, username );
+
+    if ( query.step() ) {
+        auto user = std::make_unique<Domain::User>();
+        user->setIdUser( query.getColumnInt( 0 ) );
+        user->setDsUsername( query.getColumnText( 1 ) );
+        user->setDsPassword( query.getColumnText( 2 ) );
+        return user;
+    }
+
+    return nullptr;
+}
+
 std::unique_ptr<Domain::User> UserRepository::findByUsernameAndPassword( const std::string& username, const std::string& password ) {
-    const std::string sql = R"SQL(SELECT id_user, ds_username, ds_password FROM user WHERE ds_username = ? AND ds_password = ?)SQL";
+    const std::string sql = R"SQL(
+        SELECT
+            id_user,
+            ds_username,
+            ds_password
+        FROM user
+        WHERE ds_username = ? AND ds_password = ?
+    )SQL";
     Database::Query query( _db, sql );
 
     query.bindText( 1, username );
