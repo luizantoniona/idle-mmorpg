@@ -24,6 +24,8 @@ CREATE TABLE character_vitals (
     FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );
 
+------------------------------------
+
 CREATE TABLE character_equipment (
     id_character INTEGER PRIMARY KEY,
     helmet_item_id TEXT DEFAULT NULL,
@@ -51,6 +53,16 @@ CREATE TABLE character_inventory (
     FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
 );
 
+CREATE TABLE character_skills (
+    id_character INTEGER NOT NULL,
+    id_skill TEXT NOT NULL,
+    experience INTEGER DEFAULT 0,
+    level INTEGER DEFAULT 0,
+
+    PRIMARY KEY (id_character, id_skill),
+    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+);
+
 CREATE TABLE character_progression (
     id_character INTEGER PRIMARY KEY,
     'level' INTEGER NOT NULL DEFAULT 0,
@@ -70,16 +82,6 @@ CREATE TABLE character_quests (
     claimed INTEGER DEFAULT 0,
 
     PRIMARY KEY (id_character, id_quest),
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
-);
-
-CREATE TABLE character_skills (
-    id_character INTEGER NOT NULL,
-    id_skill TEXT NOT NULL,
-    experience INTEGER DEFAULT 0,
-    level INTEGER DEFAULT 0,
-
-    PRIMARY KEY (id_character, id_skill),
     FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
 );
 
