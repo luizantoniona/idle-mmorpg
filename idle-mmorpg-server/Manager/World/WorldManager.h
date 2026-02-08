@@ -8,7 +8,7 @@
 #include <Engine/Instance/WorldInstance.h>
 #include <Domain/World/World.h>
 
-namespace Engine {
+namespace Manager {
 
 class WorldManager {
 public:
@@ -31,6 +31,6 @@ private:
     std::unique_ptr<Engine::WorldInstance> _worldInstance;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // WORLDMANAGER_H

@@ -1,6 +1,6 @@
 #include "ServerConfigurationManager.h"
 
-namespace Engine {
+namespace Manager {
 
 ServerConfigurationManager::ServerConfigurationManager() :
     _tickRate( 20 ),
@@ -22,4 +22,4 @@ void ServerConfigurationManager::setThreadPool( int threadPool ) {
     _threadPool = threadPool;
 }
 
-} // namespace Engine
+} // namespace Manager

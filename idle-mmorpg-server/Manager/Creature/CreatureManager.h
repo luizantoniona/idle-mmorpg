@@ -7,7 +7,7 @@
 
 #include <Domain/Creature/Creature.h>
 
-namespace Engine {
+namespace Manager {
 
 class CreatureManager {
 public:
@@ -21,6 +21,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<Domain::Creature> > _creatures;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // CREATUREMANAGER_H

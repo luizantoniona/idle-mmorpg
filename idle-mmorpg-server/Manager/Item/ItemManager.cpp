@@ -2,14 +2,14 @@
 
 #include "ItemFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 ItemManager::ItemManager() :
     _items() {
 }
 
 void ItemManager::initialize( const std::string& itemPath ) {
-    _items = Engine::ItemFactory::createItems( itemPath );
+    _items = Manager::ItemFactory::createItems( itemPath );
 }
 
 const Domain::Item* ItemManager::itemById( const std::string& idItem ) const {
@@ -22,4 +22,4 @@ const Domain::Item* ItemManager::itemById( const std::string& idItem ) const {
     return nullptr;
 }
 
-} // namespace Engine
+} // namespace Manager

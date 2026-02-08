@@ -8,14 +8,15 @@ Character::Character() :
     _name( "" ),
     _sessionId( "" ),
     _action(),
+    _inventory(),
+    _progression(),
+    _stage(),
     _vitals()
 /*
    _combatAction(),
    _combatAttributes(),
    _coordinates(),
    _equipment(),
-   _inventory(),
-   _progression(),
    _skills(),
    _wallet()*/
 {
@@ -69,39 +70,6 @@ void Character::setAction( const CharacterAction& action ) {
     _action = action;
 }
 
-CharacterVitals& Character::vitals() {
-    return _vitals;
-}
-
-void Character::setVitals( const CharacterVitals& vitals ) {
-    _vitals = vitals;
-}
-
-/*
-CharacterCombatAction& Character::combatAction() {
-    return _combatAction;
-}
-
-void Character::setCombatAction( const CharacterCombatAction& combatAction ) {
-    _combatAction = combatAction;
-}
-
-CharacterCombatAttributes& Character::combatAttributes() {
-    return _combatAttributes;
-}
-
-void Character::setCombatAttributes( const CharacterCombatAttributes& combatAttributes ) {
-    _combatAttributes = combatAttributes;
-}
-
-CharacterCoordinates& Character::coordinates() {
-    return _coordinates;
-}
-
-void Character::setCoordinates( const CharacterCoordinates& coordinates ) {
-    _coordinates = coordinates;
-}
-
 CharacterEffects& Character::effects() {
     return _effects;
 }
@@ -134,14 +102,6 @@ void Character::setProgression( const CharacterProgression& progression ) {
     _progression = progression;
 }
 
-CharacterQuests& Character::quests() {
-    return _quests;
-}
-
-void Character::setQuests( const CharacterQuests& quests ) {
-    _quests = quests;
-}
-
 CharacterSkills& Character::skills() {
     return _skills;
 }
@@ -158,12 +118,40 @@ void Character::setSpells( const CharacterSpells& spells ) {
     _spells = spells;
 }
 
+CharacterStage& Character::stage() {
+    return _stage;
+}
+
+void Character::setStage( const CharacterStage& stage ) {
+    _stage = stage;
+}
+
+CharacterVitals& Character::vitals() {
+    return _vitals;
+}
+
+void Character::setVitals( const CharacterVitals& vitals ) {
+    _vitals = vitals;
+}
+
 CharacterWallet& Character::wallet() {
     return _wallet;
 }
 
 void Character::setWallet( const CharacterWallet& wallet ) {
     _wallet = wallet;
-}*/
+}
+
+/*
+
+CharacterCombatAttributes& Character::combatAttributes() {
+    return _combatAttributes;
+}
+
+void Character::setCombatAttributes( const CharacterCombatAttributes& combatAttributes ) {
+    _combatAttributes = combatAttributes;
+}
+
+*/
 
 } // namespace Domain

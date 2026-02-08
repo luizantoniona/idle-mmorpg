@@ -6,7 +6,7 @@
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
-namespace Engine {
+namespace Manager {
 
 std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& stageId, const std::string& stageFile ) {
     std::cout << "StageFactory::createStage Creating Stage: " << stageId << std::endl;
@@ -21,7 +21,7 @@ std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& sta
     for ( const Json::Value& creatureJson : stageJson[ "creatures" ] ) {
         Domain::StageCreature creature;
         creature.setId( creatureJson[ "id" ].asString() );
-        creature.setCreature( Commons::Singleton<Engine::CreatureManager>::instance().creatureById( creature.id() ) );
+        creature.setCreature( Commons::Singleton<Manager::CreatureManager>::instance().creatureById( creature.id() ) );
 
         stage->addCreature( creature );
     }
@@ -48,4 +48,4 @@ std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& sta
     return stage;
 }
 
-} // namespace Engine
+} // namespace Manager

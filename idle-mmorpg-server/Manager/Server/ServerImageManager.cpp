@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace Engine {
+namespace Manager {
 
 bool ServerImageManager::loadImage( const std::string& id, const std::string& filePath ) {
     if ( hasImage( id ) ) {
@@ -36,4 +36,4 @@ const std::vector<unsigned char>* ServerImageManager::imageById( const std::stri
     return &it->second;
 }
 
-} // namespace Engine
+} // namespace Manager

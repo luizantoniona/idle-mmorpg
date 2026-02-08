@@ -6,7 +6,11 @@
 
 namespace Engine {
 
-StageInstance::StageInstance( Domain::Stage* stage ) {
+StageInstance::StageInstance( Domain::Stage* stage ) :
+    _stage( stage ),
+    _characters( {} ),
+    _combatInstances( {} ),
+    _characterCombatCache( {} ) {
 }
 
 bool StageInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
@@ -17,8 +21,6 @@ bool StageInstance::addCharacter( const std::string& sessionId, Domain::Characte
               << " [Character] " << character->name()
               << " [Entering] " << _stage->name()
               << " [SessionID] " << sessionId << std::endl;
-
-    // character->coordinates().setLocation( _location );
 
     return true;
 }

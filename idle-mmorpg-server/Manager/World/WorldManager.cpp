@@ -9,7 +9,7 @@
 
 #include "WorldFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 WorldManager::WorldManager() :
     _running( false ),
@@ -19,13 +19,13 @@ WorldManager::WorldManager() :
 
 WorldManager::~WorldManager() {}
 
-WorldInstance* WorldManager::worldInstance() {
+Engine::WorldInstance* WorldManager::worldInstance() {
     return _worldInstance.get();
 }
 
 void WorldManager::initialize( const std::string& mapPath ) {
     if ( !_world ) {
-        _world = Engine::WorldFactory::createWorld( mapPath );
+        _world = Manager::WorldFactory::createWorld( mapPath );
     }
 
     if ( !_worldInstance ) {
@@ -42,7 +42,7 @@ void WorldManager::start() {
 
     // TODO: Make the localInstance running on a threadPool
 
-    const int tick = Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate();
+    const int tick = Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate();
     const int msPerTick = 1000 / tick;
 
     _running = true;
@@ -86,4 +86,4 @@ void WorldManager::removeCharacter( const std::string& sessionId ) {
     _worldInstance->removeCharacter( sessionId );
 }
 
-} // namespace Engine
+} // namespace Manager

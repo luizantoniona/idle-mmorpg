@@ -20,7 +20,7 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
         return;
     }
 
-    Engine::WorldInstance* worldInstance = Commons::Singleton<Engine::WorldManager>::instance().worldInstance();
+    Engine::WorldInstance* worldInstance = Commons::Singleton<Manager::WorldManager>::instance().worldInstance();
 
     if ( !worldInstance ) {
         return;

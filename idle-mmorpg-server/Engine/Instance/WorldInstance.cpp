@@ -19,35 +19,33 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
 
     character->setSessionId( sessionId );
 
-    return true;
+    Domain::CharacterStage& characterStage = character->stage();
 
-    // Domain::CharacterCoordinates& coordinates = character->coordinates();
+    Domain::Stage* stage = _world->stageById( characterStage.idStage() );
 
-    // Domain::Location* location = _world->locationById( coordinates.locationId() );
-    // if ( !location ) {
-    //     if ( _world->locations().empty() ) {
-    //         return false;
-    //     }
+    if ( !stage ) {
+        if ( _world->stages().empty() ) {
+            return false;
+        }
 
-    //     location = _world->locations().front().get();
-    //     coordinates.setLocationId( location->id() );
-    //     coordinates.setStructureId( "" );
-    // }
+        stage = _world->stages().front().get();
+        characterStage.setIdStage( stage->id() );
+    }
 
-    // std::lock_guard lock( _mutex );
+    std::lock_guard lock( _mutex );
 
-    // auto& locInstance = _locations[ location->id() ];
-    // if ( !locInstance ) {
-    //     locInstance = std::make_unique<LocationInstance>( location );
-    // }
+    auto& stageInstance = _stages[ stage->id() ];
+    if ( !stageInstance ) {
+        stageInstance = std::make_unique<StageInstance>( stage );
+    }
 
-    // if ( locInstance->addCharacter( sessionId, character.get() ) ) {
-    //     _characters[ sessionId ] = std::move( character );
-    //     _characterToLocation[ sessionId ] = locInstance.get();
-    //     return true;
-    // }
+    if ( stageInstance->addCharacter( sessionId, character.get() ) ) {
+        _characters[ sessionId ] = std::move( character );
+        _characterToStage[ sessionId ] = stageInstance.get();
+        return true;
+    }
 
-    // return false;
+    return false;
 }
 
 void WorldInstance::removeCharacter( const std::string& sessionId ) {

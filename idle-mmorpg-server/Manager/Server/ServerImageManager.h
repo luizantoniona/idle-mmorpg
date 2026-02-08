@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace Engine {
+namespace Manager {
 
 class ServerImageManager {
 public:
@@ -18,6 +18,6 @@ private:
     std::unordered_map<std::string, std::vector<unsigned char>> _images;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // SERVERIMAGEMANAGER_H

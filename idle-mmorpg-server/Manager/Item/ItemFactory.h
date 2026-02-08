@@ -6,7 +6,7 @@
 
 #include <Domain/Item/Item.h>
 
-namespace Engine {
+namespace Manager {
 
 class ItemFactory {
 public:
@@ -16,6 +16,6 @@ private:
     static std::unique_ptr<Domain::Item> createItem( const std::string& itemPath );
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // ITEMFACTORY_H

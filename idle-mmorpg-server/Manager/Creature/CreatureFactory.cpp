@@ -6,7 +6,7 @@
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
-namespace Engine {
+namespace Manager {
 
 std::unordered_map<std::string, std::unique_ptr<Domain::Creature> > CreatureFactory::createCreatures( const std::string& creaturesPath ) {
     std::cout << "CreatureFactory::createCreatures" << std::endl;
@@ -52,7 +52,7 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
 
     creature->setIcon( creatureJson[ "icon" ].asString() );
     std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
-    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
+    Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
 
     creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );
     creature->vitals().setHealth( creatureJson[ "health" ].asDouble() );
@@ -74,4 +74,4 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     return creature;
 }
 
-} // namespace Engine
+} // namespace Manager

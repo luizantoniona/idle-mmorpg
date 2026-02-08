@@ -10,7 +10,7 @@ namespace Repository {
 
 class CharacterVitalsRepository : public Repository {
 public:
-    explicit CharacterVitalsRepository();
+    CharacterVitalsRepository();
 
     bool createVitals( int idCharacter );
     bool updateVitals( int idCharacter, const Domain::CharacterVitals& vitals );

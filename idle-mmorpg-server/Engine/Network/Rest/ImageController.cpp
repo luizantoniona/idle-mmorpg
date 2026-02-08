@@ -6,7 +6,7 @@
 namespace Network {
 
 void ImageController::image( const drogon::HttpRequestPtr& request, std::function<void( const drogon::HttpResponsePtr& )>&& callback, std::string name ) const {
-    auto& imageManager = Commons::Singleton<Engine::ServerImageManager>::instance();
+    auto& imageManager = Commons::Singleton<Manager::ServerImageManager>::instance();
 
     const auto* imageBuffer = imageManager.imageById( name );
     if ( !imageBuffer ) {

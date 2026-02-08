@@ -7,7 +7,7 @@
 
 #include <Domain/Item/Item.h>
 
-namespace Engine {
+namespace Manager {
 
 class ItemManager {
 public:
@@ -21,6 +21,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<Domain::Item> > _items;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // ITEMMANAGER_H

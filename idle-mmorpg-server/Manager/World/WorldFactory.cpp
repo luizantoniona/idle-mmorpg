@@ -6,7 +6,7 @@
 
 #include "StageFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 std::unique_ptr<Domain::World> WorldFactory::createWorld( const std::string& mapPath ) {
     std::cout << "WorldFactory::createWorld" << std::endl;
@@ -37,4 +37,4 @@ std::unique_ptr<Domain::World> WorldFactory::createWorld( const std::string& map
     return world;
 }
 
-} // namespace Engine
+} // namespace Manager

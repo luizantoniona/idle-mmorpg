@@ -2,16 +2,14 @@
 
 #include <Infrastructure/Database/Query.h>
 
+#include "CharacterEquipmentRepository.h"
+#include "CharacterInventoryRepository.h"
+#include "CharacterProgressionRepository.h"
+#include "CharacterSkillsRepository.h"
+#include "CharacterSpellsRepository.h"
+#include "CharacterStageRepository.h"
 #include "CharacterVitalsRepository.h"
-
-// #include "CharacterCoordinateRepository.h"
-// #include "CharacterEquipmentRepository.h"
-// #include "CharacterInventoryRepository.h"
-// #include "CharacterProgressionRepository.h"
-// #include "CharacterQuestsRepository.h"
-// #include "CharacterSkillsRepository.h"
-// #include "CharacterSpellsRepository.h"
-// #include "CharacterWalletRepository.h"
+#include "CharacterWalletRepository.h"
 
 namespace Repository {
 
@@ -38,16 +36,14 @@ int CharacterRepository::createCharacter( const int idUser, const std::string& d
 
     bool success = true;
 
+    success &= CharacterEquipmentRepository().createEquipment( idCharacter );
+    success &= CharacterInventoryRepository().createInventory( idCharacter );
+    success &= CharacterProgressionRepository().createProgression( idCharacter );
+    success &= CharacterSkillsRepository().createSkills( idCharacter );
+    success &= CharacterSpellsRepository().createSpells( idCharacter );
+    success &= CharacterStageRepository().createStage( idCharacter );
     success &= CharacterVitalsRepository().createVitals( idCharacter );
-
-    // success &= CharacterCoordinateRepository().createCoordinates( idCharacter );
-    // success &= CharacterEquipmentRepository().createEquipment( idCharacter );
-    // success &= CharacterInventoryRepository().createInventory( idCharacter );
-    // success &= CharacterProgressionRepository().createProgression( idCharacter );
-    // success &= CharacterQuestsRepository().createQuests( idCharacter );
-    // success &= CharacterSkillsRepository().createSkills( idCharacter );
-    // success &= CharacterSpellsRepository().createSpells( idCharacter );
-    // success &= CharacterWalletRepository().createWallet( idCharacter );
+    success &= CharacterWalletRepository().createWallet( idCharacter );
 
     return success ? idCharacter : 0;
 }
@@ -57,16 +53,14 @@ bool CharacterRepository::updateCharacter( Domain::Character character ) {
 
     bool success = true;
 
+    success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipment() );
+    success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
+    success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
+    success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
+    success &= CharacterSpellsRepository().updateSpells( idCharacter, character.spells() );
+    success &= CharacterStageRepository().updateStage( idCharacter, character.stage() );
     success &= CharacterVitalsRepository().updateVitals( idCharacter, character.vitals() );
-
-    // success &= CharacterCoordinateRepository().updateCoordinates( idCharacter, character.coordinates() );
-    // success &= CharacterEquipmentRepository().updateEquipment( idCharacter, character.equipment() );
-    // success &= CharacterInventoryRepository().updateInventory( idCharacter, character.inventory() );
-    // success &= CharacterProgressionRepository().updateProgression( idCharacter, character.progression() );
-    // success &= CharacterQuestsRepository().updateQuests( idCharacter, character.quests() );
-    // success &= CharacterSkillsRepository().updateSkills( idCharacter, character.skills() );
-    // success &= CharacterSpellsRepository().updateSpells( idCharacter, character.spells() );
-    // success &= CharacterWalletRepository().updateWallet( idCharacter, character.wallet() );
+    success &= CharacterWalletRepository().updateWallet( idCharacter, character.wallet() );
 
     return success;
 }
@@ -106,11 +100,6 @@ std::vector<std::unique_ptr<Domain::Character> > CharacterRepository::findAllByI
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );
 
-        // auto coordinates = CharacterCoordinateRepository().findByCharacterId( character->idCharacter() );
-        // if ( coordinates ) {
-        //     character->setCoordinates( *coordinates );
-        // }
-
         // auto equipment = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
         // if ( equipment ) {
         //     character->setEquipment( *equipment );
@@ -121,15 +110,10 @@ std::vector<std::unique_ptr<Domain::Character> > CharacterRepository::findAllByI
         //     character->setInventory( *inventory );
         // }
 
-        // auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
-        // if ( progression ) {
-        //     character->setProgression( *progression );
-        // }
-
-        // auto quests = CharacterQuestsRepository().findByCharacterId( character->idCharacter() );
-        // if ( quests ) {
-        //     character->setQuests( *quests );
-        // }
+        auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
+        if ( progression ) {
+            character->setProgression( *progression );
+        }
 
         // auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
         // if ( skills ) {
@@ -146,10 +130,10 @@ std::vector<std::unique_ptr<Domain::Character> > CharacterRepository::findAllByI
         //     character->setVitals( *vitals );
         // }
 
-        // auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
-        // if ( wallet ) {
-        //     character->setWallet( *wallet );
-        // }
+        auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
+        if ( wallet ) {
+            character->setWallet( *wallet );
+        }
 
         characters.push_back( std::move( character ) );
     }
@@ -177,50 +161,45 @@ std::unique_ptr<Domain::Character> CharacterRepository::findByIdUserAndIdCharact
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );
 
+        auto equipment = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
+        if ( equipment ) {
+            character->setEquipment( *equipment );
+        }
+
+        auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
+        if ( inventory ) {
+            character->setInventory( *inventory );
+        }
+
+        auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
+        if ( progression ) {
+            character->setProgression( *progression );
+        }
+
+        auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
+        if ( skills ) {
+            character->setSkills( *skills );
+        }
+
+        auto spells = CharacterSpellsRepository().findByCharacterId( character->idCharacter() );
+        if ( spells ) {
+            character->setSpells( *spells );
+        }
+
+        auto stage = CharacterStageRepository().findByCharacterId( character->idCharacter() );
+        if ( stage ) {
+            character->setStage( *stage );
+        }
+
         auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
         if ( vitals ) {
             character->setVitals( *vitals );
         }
 
-        // auto coordinates = CharacterCoordinateRepository().findByCharacterId( character->idCharacter() );
-        // if ( coordinates ) {
-        //     character->setCoordinates( *coordinates );
-        // }
-
-        // auto equipment = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
-        // if ( equipment ) {
-        //     character->setEquipment( *equipment );
-        // }
-
-        // auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
-        // if ( inventory ) {
-        //     character->setInventory( *inventory );
-        // }
-
-        // auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
-        // if ( progression ) {
-        //     character->setProgression( *progression );
-        // }
-
-        // auto quests = CharacterQuestsRepository().findByCharacterId( character->idCharacter() );
-        // if ( quests ) {
-        //     character->setQuests( *quests );
-        // }
-
-        // auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
-        // if ( skills ) {
-        //     character->setSkills( *skills );
-        // }
-
-        // auto spells = CharacterSpellsRepository().findByCharacterId( character->idCharacter() );
-        // if ( spells ) {
-        //     character->setSpells( *spells );
-        // }
-
-        // auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
-        // if ( wallet ) {
-        //     character->setWallet( *wallet );
-        // }
+        auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
+        if ( wallet ) {
+            character->setWallet( *wallet );
+        }
 
         return character;
     }

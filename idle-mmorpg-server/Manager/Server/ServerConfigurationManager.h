@@ -1,7 +1,7 @@
 #ifndef SERVERCONFIGURATIONMANAGER_H
 #define SERVERCONFIGURATIONMANAGER_H
 
-namespace Engine {
+namespace Manager {
 
 class ServerConfigurationManager {
 public:
@@ -23,6 +23,6 @@ private:
     int _threadPool;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // SERVERCONFIGURATIONMANAGER_H
