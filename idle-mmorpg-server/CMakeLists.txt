@@ -43,14 +43,6 @@ endif(WIN32)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-file(GLOB_RECURSE SQL_FILES Resources/*.sql)
-
-source_group("SQL Files" FILES ${SQL_FILES})
-
-target_sources(${PROJECT_NAME} PRIVATE ${SQL_FILES})
-
-file(COPY Resources DESTINATION ${CMAKE_BINARY_DIR})
-
 include(GNUInstallDirs)
 install(
   TARGETS ${PROJECT_NAME}
