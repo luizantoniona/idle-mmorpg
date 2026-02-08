@@ -1,44 +1,49 @@
-<app-panel>
-    <form [formGroup]="formServer">
-        <div class="login-column">
-            <h2>Server:</h2>
-            <app-status-circle [status]="status" />
+<div class="login-column">
+    <app-panel>
+        <form [formGroup]="formServer">
+            <div class="login-column">
+                <h2>Server:</h2>
+                <app-status-circle [status]="status" />
 
-            <div class="login-row">
-                <app-input-field label="IP Address" type="text" formControlName="ip" placeholder="127.0.0.1" />
-                <app-input-field label="Port" type="text" formControlName="port" placeholder="8080" />
+                <div class="login-row">
+                    <app-input-field label="IP Address" type="text" formControlName="ip" placeholder="127.0.0.1" />
+                    <app-input-field label="Port" type="text" formControlName="port" placeholder="8080" />
+                </div>
+
+                <app-button text="Connect" type="button" [disabled]="formServer.invalid || status === 'loading'"
+                    (click)="handleServer()" />
+
+                @if(error){
+                <p style="color: red;">Error: {{ error }}</p>
+                }
             </div>
+        </form>
+    </app-panel>
 
-            <app-button text="Connect" type="button" [disabled]="formServer.invalid || status === 'loading'"
-                (click)="handleServer()" />
+    <app-panel>
+        <form [formGroup]="formLogin">
+            <div class="login-column">
+                <h2>Login</h2>
 
-            @if(error){
-            <p style="color: red;">Error: {{ error }}</p>
-            }
-        </div>
-    </form>
-    <form [formGroup]="formLogin">
-        <div class="login-column">
-            <h2>Login</h2>
+                <div class="login-row">
+                    <app-input-field label="Username" type="text" formControlName="username"
+                        placeholder="Enter your username" />
 
-            <div class="login-row">
-                <app-input-field label="Username" type="text" formControlName="username"
-                    placeholder="Enter your username" />
+                    <app-input-field label="Password" type="password" formControlName="password"
+                        placeholder="Enter your password" />
+                </div>
 
-                <app-input-field label="Password" type="password" formControlName="password"
-                    placeholder="Enter your password" />
+                <div class="login-row">
+                    <app-button text="Register" type="button" [disabled]="formLogin.invalid || status !== 'online'"
+                        (click)="handleRegister()" />
+                    <app-button text="Login" type="button" [disabled]="formLogin.invalid  || status !== 'online'"
+                        (click)="handleLogin()" />
+                </div>
+
+                @if(error){
+                <p style="color: red;">Error: {{ error }}</p>
+                }
             </div>
-
-            <div class="login-row">
-                <app-button text="Register" type="button" [disabled]="formLogin.invalid || status !== 'online'"
-                    (click)="handleRegister()" />
-                <app-button text="Login" type="button" [disabled]="formLogin.invalid  || status !== 'online'"
-                    (click)="handleLogin()" />
-            </div>
-
-            @if(error){
-            <p style="color: red;">Error: {{ error }}</p>
-            }
-        </div>
-    </form>
-</app-panel>
+        </form>
+    </app-panel>
+</div>

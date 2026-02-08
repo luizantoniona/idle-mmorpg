@@ -17,6 +17,7 @@
     border-radius: var(--border-radius);
     font-size: 20px;
     transition: border-color 0.2s ease;
+    box-shadow: inset var(--box-shadow);
 }
 
 .input-field input:focus {
