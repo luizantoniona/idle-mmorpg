@@ -1,7 +1,8 @@
 .input-field {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .input-field label {
@@ -14,11 +15,12 @@
     padding: 12px;
     border: 1px solid var(--color-text);
     border-radius: var(--border-radius);
-    font-size: 1rem;
+    font-size: 20px;
     transition: border-color 0.2s ease;
 }
 
 .input-field input:focus {
     outline: none;
     border-color: var(--color-accent);
+    border-width: 1px;
 }

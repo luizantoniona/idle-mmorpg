@@ -1,25 +1,25 @@
-.login-grid {
-    background-color: var(--color-bg);
+.login-layout {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    gap: 12px;
+    padding: 12px;
+}
+
+.left-panel {
     display: flex;
     flex-direction: column;
-    padding: 32px;
-    gap: 32px;
-    align-items: center;
+    gap: 12px;
+    flex: 0 0 50%;
+    max-width: 48%;
     justify-content: center;
 }
 
-.login-top {
-    grid-area: top;
+.right-panel {
+    flex: 1;
     display: flex;
-    flex-direction: row;
-    gap: 16px;
-    align-items: center;
-}
-
-.login-bottom {
-    grid-area: bottom;
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
 }

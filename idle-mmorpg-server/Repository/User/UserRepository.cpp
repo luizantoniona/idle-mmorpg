@@ -18,7 +18,7 @@ bool UserRepository::createUser( std::string& username, std::string& password ) 
 
     query.bindText( 1, username );
     query.bindText( 2, password );
-    return query.step();
+    return query.exec();
 }
 
 std::unique_ptr<Domain::User> UserRepository::findByUsername( const std::string& username ) {
