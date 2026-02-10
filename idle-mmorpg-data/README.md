@@ -8,17 +8,9 @@
 Modular creature data.  
 This folder defines the structure and attributes of all creatures used by the game server.
 
-### 👲 **idle-mmorpg-denizen**:  
-Modular denizens data.  
-This folder defines the structure and attributes of all denizens used by the game server.
-
 ### 🗡️ **idle-mmorpg-item**:  
 Modular item data.  
 This folder defines the items structure used by the game server.
-
-### 🗺️ **idle-mmorpg-map**:  
-Modular map data.  
-This folder defines the world structure, continents, areas, enemies, NPCs, and navigation logic used by the game server.
 
 ### 🤺 **idle-mmorpg-skill**:  
 Modular skills data.  
@@ -27,3 +19,7 @@ This folder defines all the skills in game.
 ### 🔮 idle-mmorpg-spell
 Modular spell data.  
 This folder defines all the magical spells available in the game.
+
+### 🗺️ **idle-mmorpg-world**:  
+Modular stages data.  
+This folder defines the world structure and stages used by the game server.
