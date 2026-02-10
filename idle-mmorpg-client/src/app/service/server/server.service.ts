@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ServerData, ServerManager } from '../manager/server.manager';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { ServerData, ServerManager } from "../../manager";
 
 @Injectable({
     providedIn: 'root',

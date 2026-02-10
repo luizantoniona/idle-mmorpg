@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
-import { ImageCacheService } from '../../service/image-cache.service';
+import { ImageCacheService } from "../../../service";
 
 @Component({
-    selector: 'app-image',
-    templateUrl: './image.component.html',
-    styleUrls: ['./image.component.scss']
+    selector: "app-image",
+    templateUrl: "./image.component.html",
+    styleUrls: ["./image.component.scss"]
 })
 
 export class ImageComponent implements OnInit {

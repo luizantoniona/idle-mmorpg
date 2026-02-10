@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { ButtonComponent } from "../../../../component";
-import { ImageComponent } from "../../../../component/image/image.component";
-import { TooltipComponent } from "../../../../component";
+import { ButtonComponent, ImageComponent, TooltipComponent } from "../../ui";
 
-import { Item } from "../../../../model";
+import { Item } from "../../../model";
 
 export type ItemMode = "inventory" | "slot" | "equip";
 

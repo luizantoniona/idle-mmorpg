@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
-import { StorageManager } from '../manager/storage.manager';
-import { ServerManager } from '../manager/server.manager';
+import { ServerManager, StorageManager } from '../../manager/';
 
 @Injectable({ providedIn: 'root' })
 export class ImageCacheService {

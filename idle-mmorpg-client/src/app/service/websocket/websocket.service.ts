@@ -1,7 +1,6 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { ServerManager } from '../manager/server.manager';
-import { AuthManager } from '../manager/auth.manager';
+import { Injectable, OnDestroy } from "@angular/core";
+import { Subject, Observable } from "rxjs";
+import { AuthManager, ServerManager } from "../../manager";
 
 type ConnectionStatus = 'connecting' | 'connected' | 'disconnected' | 'error';
 

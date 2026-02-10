@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthData, AuthManager } from '../manager/auth.manager';
-import { APIService } from './api.service';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+
+import { AuthData, AuthManager } from "../../manager";
+
+import { APIService } from "../";
 
 @Injectable({
     providedIn: 'root',

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { StorageManager } from "./storage.manager";
+import { StorageManager } from "../";
 
 export interface AuthData {
     userID: number;

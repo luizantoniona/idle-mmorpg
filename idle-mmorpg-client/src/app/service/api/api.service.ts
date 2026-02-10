@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
-import { ServerManager } from '../manager/server.manager';
-import { AuthManager } from '../manager/auth.manager';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { firstValueFrom } from "rxjs";
+
+import { AuthManager, ServerManager } from "../../manager/";
 
 @Injectable({
     providedIn: 'root',
