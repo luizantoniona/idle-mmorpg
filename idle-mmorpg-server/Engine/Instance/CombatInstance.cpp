@@ -14,6 +14,8 @@ CombatInstance::CombatInstance( Domain::Stage* stage, const std::string& id, con
     _creatures() {
 }
 
+CombatInstance::~CombatInstance() = default;
+
 Json::Value CombatInstance::instanceToJson() const {
     Json::Value root;
     root[ "id" ] = _id;

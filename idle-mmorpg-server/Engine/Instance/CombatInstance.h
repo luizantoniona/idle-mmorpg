@@ -11,6 +11,7 @@ namespace Engine {
 class CombatInstance {
 public:
     explicit CombatInstance( Domain::Stage* stage, const std::string& id, const std::string& name );
+    ~CombatInstance();
 
     Json::Value instanceToJson() const;
     Json::Value combatToJson() const;

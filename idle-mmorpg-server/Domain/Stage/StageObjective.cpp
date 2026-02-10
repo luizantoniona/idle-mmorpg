@@ -11,6 +11,15 @@ StageObjective::StageObjective() :
 
 StageObjective::~StageObjective() = default;
 
+Json::Value StageObjective::toJson() {
+    Json::Value root;
+    root[ "id" ] = id();
+    root[ "target" ] = target();
+    root[ "amount" ] = amount();
+
+    return root;
+}
+
 std::string StageObjective::id() const {
     return _id;
 }

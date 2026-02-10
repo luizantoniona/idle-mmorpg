@@ -51,29 +51,31 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
 void WorldInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
 
-    // auto itLoc = _characterToLocation.find( sessionId );
-    // if ( itLoc != _characterToLocation.end() ) {
-    //     LocationInstance* locInstance = itLoc->second;
-    //     if ( locInstance ) {
-    //         locInstance->removeCharacter( sessionId );
-    //     }
-    //     _characterToLocation.erase( itLoc );
-    // }
+    auto stageIterator = _characterToStage.find( sessionId );
 
-    // auto itChar = _characters.find( sessionId );
-    // if ( itChar != _characters.end() ) {
-    //     Repository::CharacterRepository().updateCharacter( *itChar->second );
-    //     _characters.erase( itChar );
-    // }
+    if ( stageIterator != _characterToStage.end() ) {
+        StageInstance* stageInstance = stageIterator->second;
 
-    // TODO: apagar LocationInstance se vazio
+        if ( stageInstance ) {
+            stageInstance->removeCharacter( sessionId );
+        }
+
+        _characterToStage.erase( stageIterator );
+    }
+
+    auto characterIterator = _characters.find( sessionId );
+
+    if ( characterIterator != _characters.end() ) {
+        Repository::CharacterRepository().updateCharacter( *characterIterator->second );
+        _characters.erase( characterIterator );
+    }
 }
 
 void WorldInstance::moveCharacter( const std::string& sessionId, const std::string& destination ) {
     std::lock_guard lock( _mutex );
 
-    auto charIt = _characters.find( sessionId );
-    if ( charIt == _characters.end() ) {
+    auto characterIterator = _characters.find( sessionId );
+    if ( characterIterator == _characters.end() ) {
         return;
     }
 

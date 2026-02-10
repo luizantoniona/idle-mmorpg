@@ -34,9 +34,8 @@ private:
     Domain::Stage* _stage;
 
     std::unordered_map<std::string, Domain::Character*> _characters;
-
-    std::vector<std::unique_ptr<CombatInstance>> _combatInstances;
     std::unordered_map<std::string, CombatInstance*> _characterCombatCache;
+    std::vector<std::unique_ptr<CombatInstance>> _combatInstances;
 };
 
 } // namespace Engine

@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <json/json.h>
+
 #include "StageObjectiveReward.h"
 
 namespace Domain {
@@ -12,6 +14,8 @@ class StageObjective {
 public:
     StageObjective();
     ~StageObjective();
+
+    Json::Value toJson();
 
     std::string id() const;
     void setId( const std::string& id );

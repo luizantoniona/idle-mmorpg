@@ -66,11 +66,6 @@ public:
     CharacterWallet& wallet();
     void setWallet( const CharacterWallet& wallet );
 
-    /*
-        CharacterCombatAttributes& combatAttributes();
-        void setCombatAttributes( const CharacterCombatAttributes& combatAttributes );
-    */
-
 private:
     int _idCharacter;
     int _idUser;
@@ -86,9 +81,6 @@ private:
     CharacterStage _stage;
     CharacterVitals _vitals;
     CharacterWallet _wallet;
-    /*
-        CharacterCombatAttributes _combatAttributes;
-    */
 };
 
 } // namespace Domain

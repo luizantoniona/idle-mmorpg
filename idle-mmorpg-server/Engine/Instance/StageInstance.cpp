@@ -9,8 +9,8 @@ namespace Engine {
 StageInstance::StageInstance( Domain::Stage* stage ) :
     _stage( stage ),
     _characters( {} ),
-    _combatInstances( {} ),
-    _characterCombatCache( {} ) {
+    _characterCombatCache( {} ),
+    _combatInstances() {
 }
 
 bool StageInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
@@ -28,7 +28,7 @@ bool StageInstance::addCharacter( const std::string& sessionId, Domain::Characte
 void StageInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
     std::cout << "StageInstance::removeCharacter" << " [SessionID] " << sessionId << std::endl;
-    exitCombat( sessionId );
+    // exitCombat( sessionId );
     _characters.erase( sessionId );
 }
 

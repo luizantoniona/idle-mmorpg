@@ -11,6 +11,18 @@ Stage::Stage() :
 
 Stage::~Stage() = default;
 
+Json::Value Stage::toJson() {
+    Json::Value root;
+    root[ "id" ] = id();
+    root[ "name" ] = name();
+
+    for ( auto& objective : objectives() ) {
+        root[ "objectives" ].append( objective.toJson() );
+    }
+
+    return root;
+}
+
 std::string Stage::id() const {
     return _id;
 }

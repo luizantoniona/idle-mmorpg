@@ -11,6 +11,8 @@ public:
     Stage();
     ~Stage();
 
+    Json::Value toJson();
+
     std::string id() const;
     void setId( const std::string& id );
 
