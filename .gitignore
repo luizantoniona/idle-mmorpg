@@ -33,7 +33,7 @@ idle-mmorpg-editor/.qtcreator/
 idle-mmorpg-editor/.vs/
 idle-mmorpg-editor/build/
 #-------------Files--------------#
-idle-mmorpg-editor/*.txt.user
+idle-mmorpg-editor/*.txt.user*
 #--------------------------------#
 
 
@@ -44,5 +44,5 @@ idle-mmorpg-server/.qtcreator/
 idle-mmorpg-server/.vs/
 idle-mmorpg-server/build/
 #-------------Files--------------#
-idle-mmorpg-server/*.txt.user
+idle-mmorpg-server/*.txt.user*
 #--------------------------------#
