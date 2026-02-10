@@ -1,6 +1,7 @@
 #include <drogon/drogon.h>
 
 #include <Infrastructure/Database/Database.h>
+#include <Manager/Action/ActionManager.h>
 #include <Manager/Creature/CreatureManager.h>
 #include <Manager/Item/ItemManager.h>
 #include <Manager/Skill/SkillManager.h>
@@ -12,6 +13,7 @@ namespace {
 // TODO See how to deploy
 constexpr const char* DATABASE_PATH = "../../../database/server_data";
 constexpr const char* ITEM_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-item/";
+constexpr const char* ACTION_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-action/";
 constexpr const char* CREATURE_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-creature/";
 constexpr const char* SKILL_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-skill/";
 constexpr const char* SPELL_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-spell/";
@@ -35,6 +37,9 @@ int main() {
 
     // --- Spells ---
     Commons::Singleton<Manager::SpellManager>::instance().initialize( SPELL_DATA_PATH );
+
+    // --- Actions ---
+    Commons::Singleton<Manager::ActionManager>::instance().initialize( ACTION_DATA_PATH );
 
     // --- World ---
     Commons::Singleton<Manager::WorldManager>::instance().initialize( WORLD_DATA_PATH );

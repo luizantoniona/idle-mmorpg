@@ -8,7 +8,7 @@ SpellManager::SpellManager() :
     _spells() {}
 
 void SpellManager::initialize( const std::string& spellsPath ) {
-    _spells = Manager::SpellFactory::createSpells( spellsPath );
+    _spells = SpellFactory::createSpells( spellsPath );
 }
 
 Domain::Spell* SpellManager::spellById( const std::string& spellId ) {
