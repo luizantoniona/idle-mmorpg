@@ -1,16 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { BarComponent } from '../../../../component';
-import { PanelComponent } from '../../../../component';
-import { TooltipComponent } from '../../../../component';
+import { BarComponent, PanelComponent, TooltipComponent } from "../../../../component/ui";
 
-import { Character, CharacterSkill } from '../../../../model';
+import { Character, CharacterSkill } from "../../../../model";
 
 @Component({
-    selector: 'app-character-skills-panel',
-    templateUrl: './character-skills-panel.component.html',
-    styleUrl: './character-skills-panel.component.scss',
+    selector: "app-character-skills-panel",
+    templateUrl: "./character-skills-panel.component.html",
+    styleUrls: ["./character-skills-panel.component.scss"],
     imports: [
         CommonModule,
         BarComponent,

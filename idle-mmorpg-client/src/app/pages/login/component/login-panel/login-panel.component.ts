@@ -3,15 +3,11 @@ import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 
-import { ButtonComponent } from "../../../../component";
-import { InputFieldComponent } from "../../../../component";
-import { PanelComponent } from "../../../../component";
+import { ButtonComponent, InputFieldComponent, PanelComponent } from "../../../../component/ui";
 
 import { StatusCircleComponent } from "../status-circle/status-circle.component";
 
-import { AuthService } from "../../../../service/auth.service";
-import { APIService } from "../../../../service/api.service";
-import { ServerService } from "../../../../service/server.service";
+import { AuthService, APIService, ServerService } from "../../../../service/";
 
 @Component({
     selector: "app-login-panel",

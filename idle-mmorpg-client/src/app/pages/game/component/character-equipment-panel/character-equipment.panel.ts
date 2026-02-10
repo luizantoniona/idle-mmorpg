@@ -1,11 +1,11 @@
 import { Component, Input } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { ButtonComponent } from "../../../../component";
-import { PanelComponent } from "../../../../component";
+import { ButtonComponent, PanelComponent } from "../../../../component/ui";
+
+import { ItemComponent } from "../../../../component/game";
 
 import { CharacterEquipPanel } from "./character-equip.panel";
-import { ItemComponent } from "../item/item.component";
 
 import { Character } from "../../../../model";
 

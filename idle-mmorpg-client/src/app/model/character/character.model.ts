@@ -1,12 +1,8 @@
 import { CharacterAction } from "./character-action.model";
-import { CharacterCombatAction } from "./character-combat-action.model";
-import { CharacterCombatAttributes } from "./character-combat-attributes.model";
-import { CharacterCoordinates } from "./character-coordinates.model";
 import { CharacterEffect } from "./character-effect.model";
 import { CharacterEquipment } from "./character-equipment.model";
 import { CharacterInventory } from "./character-inventory.model";
 import { CharacterProgression } from "./character-progression.model";
-import { CharacterQuests } from "./character-quests.model";
 import { CharacterSkill } from "./character-skill.model";
 import { CharacterSpells } from "./character-spells.model";
 import { CharacterVitals } from "./character-vitals.model";
@@ -17,14 +13,10 @@ export type Character = {
     idCharacter: number;
     name: string;
     action: CharacterAction;
-    combatAction: CharacterCombatAction;
-    combatAttributes: CharacterCombatAttributes;
-    coordinates: CharacterCoordinates;
     effects: CharacterEffect[];
     equipment: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;
-    quests: CharacterQuests;
     skills: CharacterSkill[];
     spells: CharacterSpells;
     vitals: CharacterVitals;

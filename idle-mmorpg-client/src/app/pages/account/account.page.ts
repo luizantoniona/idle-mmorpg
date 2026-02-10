@@ -2,9 +2,7 @@ import { Component, OnInit, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 
-import { ButtonComponent } from "../../component";
-import { LoadingComponent } from "../../component";
-import { PanelComponent } from "../../component";
+import { ButtonComponent, LoadingComponent, PanelComponent } from "../../component/ui";
 
 import { CharacterDeleteComponent } from "./component/character-delete/character-delete.component";
 import { CharacterFormComponent } from "./component/character-form/character-form.component";
@@ -12,8 +10,7 @@ import { CharacterListComponent } from "./component/character-list/character-lis
 
 import { Character } from "../../model";
 
-import { APIService } from "../../service/api.service";
-import { AuthService } from "../../service/auth.service";
+import { APIService, AuthService } from "../../service/";
 
 @Component({
     selector: "app-account-page",

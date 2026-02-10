@@ -3,11 +3,9 @@ import { CommonModule } from "@angular/common";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { ButtonComponent } from "../../../../component";
-import { PanelComponent } from "../../../../component";
-import { InputFieldComponent } from "../../../../component";
+import { ButtonComponent, PanelComponent, InputFieldComponent } from "../../../../component/ui";
 
-import { APIService } from "../../../../service/api.service";
+import { APIService } from "../../../../service";
 
 @Component({
     selector: "app-character-form",

@@ -4,16 +4,9 @@
     @if(!showCombat) {
     <div class="location-row">
         <div class="location-column">
-            <app-location-actions-panel (openCombat)="onOpenCombat()" [location]="location"
-                [character]="character"></app-location-actions-panel>
 
-            <app-character-action-panel [character]="character"></app-character-action-panel>
         </div>
-
-        <app-location-panel [character]="character!" [location]="location!"></app-location-panel>
     </div>
-
-    <app-denizen-panel [location]="location" [character]="character"></app-denizen-panel>
 
     }@else {
     <app-combat-panel [character]="character!" (closeCombat)="onCloseCombat()"></app-combat-panel>

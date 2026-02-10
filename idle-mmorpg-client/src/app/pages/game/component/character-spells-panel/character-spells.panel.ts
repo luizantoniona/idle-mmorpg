@@ -1,13 +1,13 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { PanelComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component/ui";
 
-import { SpellComponent } from "../spell/spell.component";
+import { SpellComponent } from "../../../../component/game";
 
 import { Character, Spell } from "../../../../model";
 
-import { WebsocketService } from "../../../../service/websocket.service";
+import { WebsocketService } from "../../../../service";
 
 @Component({
     selector: "app-character-spells-panel",

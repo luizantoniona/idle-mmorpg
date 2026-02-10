@@ -1,14 +1,14 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { PanelComponent } from "../../../../component";
+import { PanelComponent } from "../../../../component/ui";
 
-import { ItemComponent } from "../item/item.component";
+import { ItemComponent } from "../../../../component/game";
 
 import { Character } from "../../../../model";
 import { Item } from "../../../../model";
 
-import { WebsocketService } from "../../../../service/websocket.service";
+import { WebsocketService } from "../../../../service";
 
 @Component({
     selector: "app-character-inventory-panel",

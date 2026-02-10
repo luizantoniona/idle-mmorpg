@@ -2,18 +2,13 @@ import { Component, Input, Output, EventEmitter, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Subscription } from "rxjs";
 
-import { BarComponent } from "../../../../component";
-import { ButtonComponent } from "../../../../component";
-import { CardComponent } from "../../../../component";
-import { ImageComponent } from "../../../../component/image/image.component";
-import { LoadingComponent } from "../../../../component";
-import { PanelComponent } from "../../../../component";
+import { BarComponent, ButtonComponent, CardComponent, ImageComponent, LoadingComponent, PanelComponent } from "../../../../component/ui";
 
 import { Character } from "../../../../model";
 import { CombatInstance } from "../../../../model";
 import { Combat } from "../../../../model";
 
-import { WebsocketService } from "../../../../service/websocket.service";
+import { WebsocketService } from "../../../../service";
 
 @Component({
     selector: "app-combat-panel",

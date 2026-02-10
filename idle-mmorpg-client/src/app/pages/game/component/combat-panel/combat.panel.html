@@ -39,7 +39,7 @@
                     label="Stamina ( {{character.vitals.stamina | number:'1.2-2'}} / {{character.vitals.maxStamina | number:'1.2-2'}} )"
                     [value]="character.vitals.stamina" [max]="character.vitals.maxStamina" color="#4caf50" />
 
-                <app-bar label="Attack" [value]="character.combatAction.counter" [max]="character.combatAction.duration"
+                <app-bar label="Attack" [value]="character.action.counter" [max]="character.action.duration"
                     color="#fdd835" />
             </div>
             }

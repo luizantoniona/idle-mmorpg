@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter, Output, inject } from "@angular/core";
 
-import { PopupComponent } from "../../../../../component";
+import { PopupComponent } from "../../../../../component/ui";
 
 @Component({
     selector: "app-chat-panel",

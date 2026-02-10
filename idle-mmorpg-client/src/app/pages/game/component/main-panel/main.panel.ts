@@ -1,17 +1,13 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { CharacterActionPanel } from "../character-action-panel/character-action.panel";
 import { CharacterSpellsPanel } from "../character-spells-panel/character-spells.panel";
 import { CombatPanel } from "../combat-panel/combat.panel";
-import { DenizenPanel } from "../denizen-panel/denizen.panel";
-import { LocationPanel } from "../location-panel/location.panel";
-import { LocationActionsPanel } from "../location-actions-panel/location-actions.panel";
 
 import { Character } from "../../../../model";
-import { Location } from "../../../../model";
+import { Stage } from "../../../../model";
 
-import { WebsocketService } from "../../../../service/websocket.service";
+import { WebsocketService } from "../../../../service";
 
 @Component({
     selector: "app-main-panel",
@@ -19,18 +15,14 @@ import { WebsocketService } from "../../../../service/websocket.service";
     styleUrls: ["./main.panel.scss"],
     imports: [
         CommonModule,
-        CharacterActionPanel,
         CombatPanel,
-        DenizenPanel,
-        LocationPanel,
-        LocationActionsPanel,
         CharacterSpellsPanel,
     ],
 })
 
 export class MainPanel {
     @Input() character!: Character;
-    @Input() location!: Location;
+    @Input() stage!: Stage;
 
     showCombat = false;
 

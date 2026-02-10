@@ -1,13 +1,11 @@
 import { Component, Input } from "@angular/core";
 
-import { ButtonComponent } from "../../../../component";
-import { PanelComponent } from "../../../../component";
+import { ButtonComponent, PanelComponent } from "../../../../component/ui";
 
-import { CharacterQuestPanel } from "./character-quest-panel/character-quest.panel";
 import { ChatPanel } from "./chat-panel/chat-panel.component";
 
 import { Character } from "../../../../model";
-import { Location } from "../../../../model";
+import { Stage } from "../../../../model";
 
 @Component({
     selector: "app-options-panel",
@@ -16,7 +14,6 @@ import { Location } from "../../../../model";
     imports: [
         ButtonComponent,
         PanelComponent,
-        CharacterQuestPanel,
         ChatPanel,
     ],
 })
