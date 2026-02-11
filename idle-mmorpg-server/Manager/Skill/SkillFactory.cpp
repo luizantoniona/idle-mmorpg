@@ -39,14 +39,14 @@ std::unique_ptr<Domain::Skill> SkillFactory::createSkill( const std::string& ski
 
     const std::string skillId = skillJson[ "id" ].asString();
 
-    if ( Helper::SkillHelper::stringToEnum( skillId ) == Domain::SkillType::UNKNOWN ) {
+    if ( Domain::SkillHelper::stringToType( skillId ) == Domain::SkillType::UNKNOWN ) {
         std::cerr << "Unmaped skill: " << skillId << std::endl;
         return nullptr;
     }
 
     auto skill = std::make_unique<Domain::Skill>();
 
-    skill->setType( Helper::SkillHelper::stringToEnum( skillId ) );
+    skill->setType( Domain::SkillHelper::stringToType( skillId ) );
     skill->setId( skillId );
     skill->setName( skillJson[ "name" ].asString() );
     skill->setDescription( skillJson[ "description" ].asString() );

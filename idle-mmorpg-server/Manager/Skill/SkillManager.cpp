@@ -23,7 +23,7 @@ Domain::Skill* SkillManager::skill( const std::string& idSkill ) {
 }
 
 Domain::Skill* SkillManager::skill( Domain::SkillType typeSkill ) {
-    std::string skillId = Helper::SkillHelper::enumToString( typeSkill );
+    std::string skillId = Domain::SkillHelper::typeToString( typeSkill );
     return skill( skillId );
 }
 

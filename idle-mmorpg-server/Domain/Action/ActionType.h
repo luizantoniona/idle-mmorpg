@@ -3,7 +3,9 @@
 
 namespace Domain {
 
-enum class ActionType {};
+enum class ActionType {
+    UNKNOWN
+};
 
 } // namespace Domain
 

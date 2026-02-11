@@ -1,98 +1,98 @@
 #include "SkillHelper.h"
 
-namespace Helper {
+namespace Domain {
 
-Domain::SkillType SkillHelper::stringToEnum( const std::string& type ) {
-    Domain::SkillType enumType = Domain::SkillType::UNKNOWN;
+SkillType SkillHelper::stringToType( const std::string& type ) {
+    SkillType enumType = SkillType::UNKNOWN;
 
     if ( type == "AXE_MASTERY" ) {
-        enumType = Domain::SkillType::AXE_MASTERY;
+        enumType = SkillType::AXE_MASTERY;
 
     } else if ( type == "DAGGER_MASTERY" ) {
-        enumType = Domain::SkillType::DAGGER_MASTERY;
+        enumType = SkillType::DAGGER_MASTERY;
 
     } else if ( type == "SWORD_MASTERY" ) {
-        enumType = Domain::SkillType::SWORD_MASTERY;
+        enumType = SkillType::SWORD_MASTERY;
 
     } else if ( type == "FIST_MASTERY" ) {
-        enumType = Domain::SkillType::FIST_MASTERY;
+        enumType = SkillType::FIST_MASTERY;
 
     } else if ( type == "SHIELD_MASTERY" ) {
-        enumType = Domain::SkillType::SHIELD_MASTERY;
+        enumType = SkillType::SHIELD_MASTERY;
 
     } else if ( type == "INVOCATION" ) {
-        enumType = Domain::SkillType::INVOCATION;
+        enumType = SkillType::INVOCATION;
 
     } else if ( type == "RESTORATION" ) {
-        enumType = Domain::SkillType::RESTORATION;
+        enumType = SkillType::RESTORATION;
 
     } else if ( type == "ENDURANCE" ) {
-        enumType = Domain::SkillType::ENDURANCE;
+        enumType = SkillType::ENDURANCE;
 
     } else if ( type == "MEDITATION" ) {
-        enumType = Domain::SkillType::MEDITATION;
+        enumType = SkillType::MEDITATION;
 
     } else if ( type == "VITALITY" ) {
-        enumType = Domain::SkillType::VITALITY;
+        enumType = SkillType::VITALITY;
 
     } else if ( type == "FISHING" ) {
-        enumType = Domain::SkillType::FISHING;
+        enumType = SkillType::FISHING;
 
     } else if ( type == "HERBALISM" ) {
-        enumType = Domain::SkillType::HERBALISM;
+        enumType = SkillType::HERBALISM;
 
     } else if ( type == "MINING" ) {
-        enumType = Domain::SkillType::MINING;
+        enumType = SkillType::MINING;
 
     } else if ( type == "WOODCUTTING" ) {
-        enumType = Domain::SkillType::WOODCUTTING;
+        enumType = SkillType::WOODCUTTING;
     }
 
     return enumType;
 }
 
-std::string SkillHelper::enumToString( Domain::SkillType type ) {
+std::string SkillHelper::typeToString( SkillType type ) {
     switch ( type ) {
-    case Domain::SkillType::AXE_MASTERY:
+    case SkillType::AXE_MASTERY:
         return "AXE_MASTERY";
 
-    case Domain::SkillType::DAGGER_MASTERY:
+    case SkillType::DAGGER_MASTERY:
         return "DAGGER_MASTERY";
 
-    case Domain::SkillType::SWORD_MASTERY:
+    case SkillType::SWORD_MASTERY:
         return "SWORD_MASTERY";
 
-    case Domain::SkillType::FIST_MASTERY:
+    case SkillType::FIST_MASTERY:
         return "FIST_MASTERY";
 
-    case Domain::SkillType::SHIELD_MASTERY:
+    case SkillType::SHIELD_MASTERY:
         return "SHIELD_MASTERY";
 
-    case Domain::SkillType::INVOCATION:
+    case SkillType::INVOCATION:
         return "INVOCATION";
 
-    case Domain::SkillType::RESTORATION:
+    case SkillType::RESTORATION:
         return "RESTORATION";
 
-    case Domain::SkillType::ENDURANCE:
+    case SkillType::ENDURANCE:
         return "ENDURANCE";
 
-    case Domain::SkillType::MEDITATION:
+    case SkillType::MEDITATION:
         return "MEDITATION";
 
-    case Domain::SkillType::VITALITY:
+    case SkillType::VITALITY:
         return "VITALITY";
 
-    case Domain::SkillType::FISHING:
+    case SkillType::FISHING:
         return "FISHING";
 
-    case Domain::SkillType::HERBALISM:
+    case SkillType::HERBALISM:
         return "HERBALISM";
 
-    case Domain::SkillType::MINING:
+    case SkillType::MINING:
         return "MINING";
 
-    case Domain::SkillType::WOODCUTTING:
+    case SkillType::WOODCUTTING:
         return "WOODCUTTING";
 
     default:
@@ -100,4 +100,4 @@ std::string SkillHelper::enumToString( Domain::SkillType type ) {
     }
 }
 
-} // namespace Helper
+} // namespace Domain
