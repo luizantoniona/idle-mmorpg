@@ -3,7 +3,10 @@
 
 #include <Domain/Character/Character.h>
 
+#include "Controller/CharacterEquipmentController.h"
 #include "Controller/CharacterInventoryController.h"
+#include "Controller/CharacterSkillsController.h"
+#include "Controller/CharacterSpellsController.h"
 
 namespace Engine {
 
@@ -25,7 +28,13 @@ private:
     std::string _sessionId;
     std::unique_ptr<Domain::Character> _character;
 
+    std::unique_ptr<CharacterEquipmentController> _equipmentController;
     std::unique_ptr<CharacterInventoryController> _inventoryController;
+    // Progression
+    std::unique_ptr<CharacterSkillsController> _skillsController;
+    std::unique_ptr<CharacterSpellsController> _spellsController;
+    // Vitals
+    // Wallet
 
     // int _actionCounter;
     // int _actionDuration;
