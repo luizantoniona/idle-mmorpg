@@ -7,9 +7,8 @@
 #include <unordered_map>
 
 #include <Domain/World/World.h>
-
-#include "CharacterInstance.h"
-#include "StageInstance.h"
+#include <Engine/Instance/Character/CharacterInstance.h>
+#include <Engine/Instance/Stage/StageInstance.h>
 
 namespace Engine {
 

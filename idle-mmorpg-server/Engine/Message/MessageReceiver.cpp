@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include <Engine/Instance/StageInstance.h>
-#include <Engine/Instance/WorldInstance.h>
+#include <Engine/Instance/Stage/StageInstance.h>
+#include <Engine/Instance/World/WorldInstance.h>
 #include <Manager/World/WorldManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
@@ -15,8 +15,12 @@ namespace Engine {
 MessageReceiver::MessageReceiver() {}
 
 void MessageReceiver::receive( const std::string& sessionId, const std::string& message ) {
-
     if ( message.empty() ) {
+        return;
+    }
+
+    Json::Value root = Helper::JsonHelper::parseJsonString( message );
+    if ( root.isNull() || !root.isObject() ) {
         return;
     }
 
@@ -33,11 +37,6 @@ void MessageReceiver::receive( const std::string& sessionId, const std::string& 
     }
 
     std::cout << "Message received from: " << sessionId << " Message: " << message << std::endl;
-
-    Json::Value root = Helper::JsonHelper::parseJsonString( message );
-    if ( root.isNull() || !root.isObject() ) {
-        return;
-    }
 
     MessageReceiverType type = MessageHelper::stringToType( root[ "type" ].asString() );
     Json::Value payload = root[ "payload" ];

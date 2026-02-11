@@ -29,7 +29,7 @@ Json::Value CombatInstance::combatToJson() const {
     Json::Value charactersJson;
     for ( const auto& [ sessionId, character ] : _characters ) {
         Json::Value characterJson = character->toJson();
-        characterJson[ "action" ] = character->action().toJson();
+        // characterJson[ "action" ] = character->action().toJson();
         characterJson[ "vitals" ] = character->vitals().toJson();
         charactersJson.append( characterJson );
     }
@@ -96,68 +96,68 @@ void CombatInstance::process() {
         spawnCreatures();
     }
 
-    for ( auto& [ sessionId, character ] : _characters ) {
-        auto& action = character->action();
-        if ( action.counter() >= action.duration() ) {
+    // for ( auto& [ sessionId, character ] : _characters ) {
+    //     auto& action = character->action();
+    //     if ( action.counter() >= action.duration() ) {
 
-            Domain::Creature* target = nullptr;
-            for ( const auto& creature : _creatures ) {
-                if ( creature->vitals().health() > 0 ) {
-                    target = creature.get();
-                    break;
-                }
-            }
+    //         Domain::Creature* target = nullptr;
+    //         for ( const auto& creature : _creatures ) {
+    //             if ( creature->vitals().health() > 0 ) {
+    //                 target = creature.get();
+    //                 break;
+    //             }
+    //         }
 
-            if ( target ) {
-                // _combatSystem.computeHitDamage( sessionId, character, target );
-                action.setCounter( 0 );
-            }
+    //         if ( target ) {
+    //             // _combatSystem.computeHitDamage( sessionId, character, target );
+    //             action.setCounter( 0 );
+    //         }
 
-        } else {
+    //     } else {
 
-            if ( character->vitals().stamina() < 1 ) {
-                continue;
-            }
+    //         if ( character->vitals().stamina() < 1 ) {
+    //             continue;
+    //         }
 
-            action.setCounter( action.counter() + 1 );
-        }
-    }
+    //         action.setCounter( action.counter() + 1 );
+    //     }
+    // }
 
-    for ( auto& creature : _creatures ) {
-        auto& action = creature->action();
+    // for ( auto& creature : _creatures ) {
+    //     auto& action = creature->action();
 
-        if ( creature->vitals().health() <= 0 ) {
-            continue;
-        }
+    //     if ( creature->vitals().health() <= 0 ) {
+    //         continue;
+    //     }
 
-        if ( action.counter() >= action.duration() ) {
+    //     if ( action.counter() >= action.duration() ) {
 
-            std::vector<std::pair<std::string, Domain::Character*> > aliveCharacters;
-            aliveCharacters.reserve( _characters.size() );
+    //         std::vector<std::pair<std::string, Domain::Character*> > aliveCharacters;
+    //         aliveCharacters.reserve( _characters.size() );
 
-            for ( const auto& [ sessionId, character ] : _characters ) {
-                if ( character->vitals().health() > 0 ) {
-                    aliveCharacters.emplace_back( sessionId, character );
-                }
-            }
+    //         for ( const auto& [ sessionId, character ] : _characters ) {
+    //             if ( character->vitals().health() > 0 ) {
+    //                 aliveCharacters.emplace_back( sessionId, character );
+    //             }
+    //         }
 
-            if ( !aliveCharacters.empty() ) {
-                int idx = rand() % aliveCharacters.size();
-                const auto& [ targetSessionId, target ] = aliveCharacters[ idx ];
-                // _combatSystem.computeHitDamage( creature.get(), targetSessionId, target );
-            }
+    //         if ( !aliveCharacters.empty() ) {
+    //             int idx = rand() % aliveCharacters.size();
+    //             const auto& [ targetSessionId, target ] = aliveCharacters[ idx ];
+    //             // _combatSystem.computeHitDamage( creature.get(), targetSessionId, target );
+    //         }
 
-            action.setCounter( 0 );
+    //         action.setCounter( 0 );
 
-        } else {
+    //     } else {
 
-            // if ( creature->vitals().stamina() < 1 ) {
-            //     return;
-            // }
+    //         // if ( creature->vitals().stamina() < 1 ) {
+    //         //     return;
+    //         // }
 
-            action.setCounter( action.counter() + 1 );
-        }
-    }
+    //         action.setCounter( action.counter() + 1 );
+    //     }
+    // }
 
     bool allCreaturesDead = true;
     for ( const auto& creature : _creatures ) {

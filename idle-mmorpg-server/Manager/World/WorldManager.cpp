@@ -3,7 +3,7 @@
 #include <chrono>
 
 #include <Domain/Character/Character.h>
-#include <Engine/Instance/CharacterInstance.h>
+#include <Engine/Instance/Character/CharacterInstance.h>
 #include <Manager/Server/ServerConfigurationManager.h>
 #include <Repository/Character/CharacterRepository.h>
 #include <Shared/Commons/Singleton.h>

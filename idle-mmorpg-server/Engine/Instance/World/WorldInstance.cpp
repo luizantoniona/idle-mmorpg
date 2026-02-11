@@ -52,7 +52,7 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
         _characters[ sessionId ] = std::move( characterInstance );
         _characterToStage[ sessionId ] = stageInstance.get();
 
-        characterInstance->onEnterWorld();
+        _characters[ sessionId ]->onEnterWorld();
 
         return true;
     }

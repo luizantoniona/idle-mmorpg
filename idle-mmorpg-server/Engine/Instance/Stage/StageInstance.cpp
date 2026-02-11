@@ -13,12 +13,12 @@ StageInstance::StageInstance( Domain::Stage* stage ) :
     _combatInstances() {
 }
 
-bool StageInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
+bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstance* characterInstance ) {
     std::lock_guard lock( _mutex );
-    _characters[ sessionId ] = character;
+    _characters[ sessionId ] = characterInstance;
 
     std::cout << "StageInstance::addCharacter"
-              << " [Character] " << character->name()
+              << " [Character] " << characterInstance->character().name()
               << " [Entering] " << _stage->name()
               << " [SessionID] " << sessionId << std::endl;
 
@@ -32,19 +32,19 @@ void StageInstance::removeCharacter( const std::string& sessionId ) {
     _characters.erase( sessionId );
 }
 
-void StageInstance::createCombat( const std::string& sessionId, Domain::Character* character ) {
+void StageInstance::createCombat( const std::string& sessionId, CharacterInstance* characterInstance ) {
     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
         return;
     }
 
     std::string roomId = drogon::utils::getUuid();
 
-    auto combatInstance = std::make_unique<CombatInstance>( _stage, roomId, character->name() );
-    CombatInstance* combatInstancePtr = combatInstance.get();
+    // auto combatInstance = std::make_unique<CombatInstance>( _stage, roomId, character->name() );
+    // CombatInstance* combatInstancePtr = combatInstance.get();
 
-    combatInstancePtr->addCharacter( sessionId, character );
-    _characterCombatCache[ sessionId ] = combatInstancePtr;
-    _combatInstances.push_back( std::move( combatInstance ) );
+    // combatInstancePtr->addCharacter( sessionId, character );
+    // _characterCombatCache[ sessionId ] = combatInstancePtr;
+    // _combatInstances.push_back( std::move( combatInstance ) );
 
     for ( const auto& [ otherSessionId, otherChar ] : _characters ) {
         // if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
@@ -62,18 +62,18 @@ void StageInstance::createCombat( const std::string& sessionId, Domain::Characte
     }
 }
 
-void StageInstance::enterCombat( const std::string& sessionId, Domain::Character* character, const std::string& roomId ) {
+void StageInstance::enterCombat( const std::string& sessionId, CharacterInstance* characterInstance, const std::string& roomId ) {
     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
         return;
     }
 
-    for ( const auto& combatInstance : _combatInstances ) {
-        if ( combatInstance->id() == roomId ) {
-            combatInstance->addCharacter( sessionId, character );
-            _characterCombatCache[ sessionId ] = combatInstance.get();
-            return;
-        }
-    }
+    // for ( const auto& combatInstance : _combatInstances ) {
+    //     if ( combatInstance->id() == roomId ) {
+    //         combatInstance->addCharacter( sessionId, character );
+    //         _characterCombatCache[ sessionId ] = combatInstance.get();
+    //         return;
+    //     }
+    // }
 }
 
 void StageInstance::exitCombat( const std::string& sessionId ) {
@@ -156,7 +156,7 @@ void StageInstance::handleCharacterMessage( const std::string& sessionId, Messag
     if ( it == _characters.end() ) {
         return;
     }
-    Domain::Character* character = it->second;
+    CharacterInstance* character = it->second;
 
     CombatInstance* combat = nullptr;
     auto itCombat = _characterCombatCache.find( sessionId );
@@ -184,7 +184,7 @@ void StageInstance::handleCharacterMessage( const std::string& sessionId, Messag
             // Engine::RegenerationSystem::castHealingSpell( sessionId, character, spellId );
 
         } else if ( spellType == "attack" && combat ) {
-            combat->handleCharacterAttackSpell( sessionId, character, spellId );
+            // combat->handleCharacterAttackSpell( sessionId, character, spellId );
         }
 
         break;
