@@ -6,20 +6,14 @@ Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
     _name( "" ),
-    _sessionId( "" ),
-    _action(),
+    _equipment(),
     _inventory(),
     _progression(),
+    _skills(),
+    _spells(),
     _stage(),
-    _vitals()
-/*
-   _combatAction(),
-   _combatAttributes(),
-   _coordinates(),
-   _equipment(),
-   _skills(),
-   _wallet()*/
-{
+    _vitals(),
+    _wallet() {
 }
 
 Json::Value Character::toJson() {
@@ -52,30 +46,6 @@ std::string Character::name() const {
 
 void Character::setName( const std::string& name ) {
     _name = name;
-}
-
-std::string Character::sessionId() const {
-    return _sessionId;
-}
-
-void Character::setSessionId( const std::string& sessionId ) {
-    _sessionId = sessionId;
-}
-
-CharacterAction& Character::action() {
-    return _action;
-}
-
-void Character::setAction( const CharacterAction& action ) {
-    _action = action;
-}
-
-CharacterEffects& Character::effects() {
-    return _effects;
-}
-
-void Character::setEffects( const CharacterEffects& effects ) {
-    _effects = effects;
 }
 
 CharacterEquipment& Character::equipment() {
@@ -141,17 +111,5 @@ CharacterWallet& Character::wallet() {
 void Character::setWallet( const CharacterWallet& wallet ) {
     _wallet = wallet;
 }
-
-/*
-
-CharacterCombatAttributes& Character::combatAttributes() {
-    return _combatAttributes;
-}
-
-void Character::setCombatAttributes( const CharacterCombatAttributes& combatAttributes ) {
-    _combatAttributes = combatAttributes;
-}
-
-*/
 
 } // namespace Domain

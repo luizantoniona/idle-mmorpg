@@ -5,8 +5,6 @@
 
 #include <json/json.h>
 
-#include "CharacterAction.h"
-#include "CharacterEffects.h"
 #include "CharacterEquipment.h"
 #include "CharacterInventory.h"
 #include "CharacterProgression.h"
@@ -32,15 +30,6 @@ public:
 
     std::string name() const;
     void setName( const std::string& name );
-
-    std::string sessionId() const;
-    void setSessionId( const std::string& sessionId );
-
-    CharacterAction& action();
-    void setAction( const CharacterAction& action );
-
-    CharacterEffects& effects();
-    void setEffects( const CharacterEffects& effects );
 
     CharacterEquipment& equipment();
     void setEquipment( const CharacterEquipment& equipment );
@@ -70,9 +59,7 @@ private:
     int _idCharacter;
     int _idUser;
     std::string _name;
-    std::string _sessionId;
-    CharacterAction _action;
-    CharacterEffects _effects;
+
     CharacterEquipment _equipment;
     CharacterInventory _inventory;
     CharacterProgression _progression;

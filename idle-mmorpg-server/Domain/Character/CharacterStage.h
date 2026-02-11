@@ -2,9 +2,6 @@
 #define CHARACTERSTAGE_H
 
 #include <string>
-#include <vector>
-
-#include "CharacterStageObjective.h"
 
 namespace Domain {
 
@@ -18,15 +15,9 @@ public:
     bool completed() const;
     void setCompleted( bool completed );
 
-    std::vector<CharacterStageObjective>& objectives();
-    const std::vector<CharacterStageObjective>& objectives() const;
-
-    CharacterStageObjective* findObjective( const std::string& objectiveId );
-
 private:
     std::string _idStage;
-    bool _completed = false;
-    std::vector<CharacterStageObjective> _objectives;
+    bool _completed;
 };
 
 } // namespace Domain

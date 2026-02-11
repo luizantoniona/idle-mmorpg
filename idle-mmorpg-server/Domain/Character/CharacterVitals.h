@@ -29,12 +29,6 @@ public:
     double maxStamina() const;
     void setMaxStamina( double maxStamina );
 
-    int regenDuration() const;
-    void setRegenDuration( int regenDuration );
-
-    int regenCounter() const;
-    void setRegenCounter( int regenCounter );
-
 private:
     double _health;
     double _maxHealth;
@@ -42,8 +36,6 @@ private:
     double _maxMana;
     double _stamina;
     double _maxStamina;
-    int _regenDuration;
-    int _regenCounter;
 };
 
 } // namespace Domain

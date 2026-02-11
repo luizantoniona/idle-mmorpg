@@ -8,9 +8,8 @@ CharacterVitals::CharacterVitals() :
     _mana( 0.0 ),
     _maxMana( 0.0 ),
     _stamina( 0.0 ),
-    _maxStamina( 0.0 ),
-    _regenDuration( 0.0 ),
-    _regenCounter( 0 ) {}
+    _maxStamina( 0.0 ) {
+}
 
 Json::Value CharacterVitals::toJson() {
     Json::Value root;
@@ -69,22 +68,6 @@ double CharacterVitals::maxStamina() const {
 
 void CharacterVitals::setMaxStamina( double maxStamina ) {
     _maxStamina = maxStamina;
-}
-
-int CharacterVitals::regenDuration() const {
-    return _regenDuration;
-}
-
-void CharacterVitals::setRegenDuration( int regenDuration ) {
-    _regenDuration = regenDuration;
-}
-
-int CharacterVitals::regenCounter() const {
-    return _regenCounter;
-}
-
-void CharacterVitals::setRegenCounter( int regenCounter ) {
-    _regenCounter = regenCounter;
 }
 
 } // namespace Domain

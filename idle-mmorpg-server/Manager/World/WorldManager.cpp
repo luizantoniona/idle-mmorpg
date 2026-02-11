@@ -3,6 +3,7 @@
 #include <chrono>
 
 #include <Domain/Character/Character.h>
+#include <Engine/Instance/CharacterInstance.h>
 #include <Manager/Server/ServerConfigurationManager.h>
 #include <Repository/Character/CharacterRepository.h>
 #include <Shared/Commons/Singleton.h>
@@ -32,32 +33,26 @@ void WorldManager::initialize( const std::string& mapPath ) {
         _worldInstance.reset( new Engine::WorldInstance( _world.get() ) );
     }
 
-    start();
-}
-
-void WorldManager::start() {
     if ( _running ) {
         return;
     }
-
-    // TODO: Make the localInstance running on a threadPool
 
     const int tick = Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate();
     const int msPerTick = 1000 / tick;
 
     _running = true;
     _thread = std::thread( [ this, msPerTick ]() {
-            using clock = std::chrono::steady_clock;
-            auto nextTick = clock::now();
+        using clock = std::chrono::steady_clock;
+        auto nextTick = clock::now();
 
-            while ( _running ) {
-                nextTick += std::chrono::milliseconds( msPerTick );
+        while ( _running ) {
+            nextTick += std::chrono::milliseconds( msPerTick );
 
-                _worldInstance->tick();
+            _worldInstance->tick();
 
-                std::this_thread::sleep_until( nextTick );
-            }
-        } );
+            std::this_thread::sleep_until( nextTick );
+        }
+    } );
 }
 
 void WorldManager::stop() {
@@ -79,7 +74,9 @@ bool WorldManager::addCharacter( const std::string& sessionId, int idUser, int i
         return false;
     }
 
-    return _worldInstance->addCharacter( sessionId, std::move( character ) );
+    std::unique_ptr<Engine::CharacterInstance> characterInstance = std::make_unique<Engine::CharacterInstance>( std::move( character ) );
+
+    return _worldInstance->addCharacter( sessionId, std::move( characterInstance ) );
 }
 
 void WorldManager::removeCharacter( const std::string& sessionId ) {

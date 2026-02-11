@@ -1,25 +1,34 @@
 #include "WorldInstance.h"
 
-#include <Repository/Character/CharacterRepository.h>
-
 namespace Engine {
 
 WorldInstance::WorldInstance( Domain::World* world ) :
     _mutex(),
     _world( world ),
-    _stages(),
     _characters(),
+    _stages(),
     _characterToStage() {
 }
 
-bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<Domain::Character> character ) {
-    if ( !character ) {
+bool WorldInstance::hasCharacter( int idCharacter ) {
+    std::lock_guard lock( _mutex );
+    for ( const auto& [ sid, characterInstance ] : _characters ) {
+        if ( characterInstance && characterInstance->character().idCharacter() == idCharacter ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<CharacterInstance> characterInstance ) {
+    if ( !characterInstance ) {
         return false;
     }
 
-    character->setSessionId( sessionId );
+    characterInstance->setSessionId( sessionId );
 
-    Domain::CharacterStage& characterStage = character->stage();
+    Domain::Character& character = characterInstance->character();
+    Domain::CharacterStage& characterStage = character.stage();
 
     Domain::Stage* stage = _world->stageById( characterStage.idStage() );
 
@@ -39,9 +48,12 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
         stageInstance = std::make_unique<StageInstance>( stage );
     }
 
-    if ( stageInstance->addCharacter( sessionId, character.get() ) ) {
-        _characters[ sessionId ] = std::move( character );
+    if ( stageInstance->addCharacter( sessionId, characterInstance.get() ) ) {
+        _characters[ sessionId ] = std::move( characterInstance );
         _characterToStage[ sessionId ] = stageInstance.get();
+
+        characterInstance->onEnterWorld();
+
         return true;
     }
 
@@ -66,34 +78,11 @@ void WorldInstance::removeCharacter( const std::string& sessionId ) {
     auto characterIterator = _characters.find( sessionId );
 
     if ( characterIterator != _characters.end() ) {
-        Repository::CharacterRepository().updateCharacter( *characterIterator->second );
+
+        characterIterator->second->onLeaveWorld();
+
         _characters.erase( characterIterator );
     }
-}
-
-void WorldInstance::moveCharacter( const std::string& sessionId, const std::string& destination ) {
-    std::lock_guard lock( _mutex );
-
-    auto characterIterator = _characters.find( sessionId );
-    if ( characterIterator == _characters.end() ) {
-        return;
-    }
-
-    // Domain::Character* character = charIt->second.get();
-
-    auto locIt = _characterToStage.find( sessionId );
-    if ( locIt == _characterToStage.end() ) {
-        return;
-    }
-
-    // StageInstance* currentInstance = locIt->second;
-    // Domain::Stage* currentStage = currentInstance->stage();
-
-    removeCharacter( sessionId );
-
-    // Update Stage
-
-    addCharacter( sessionId, std::move( _characters[ sessionId ] ) );
 }
 
 StageInstance* WorldInstance::characterStageInstance( const std::string& sessionId ) {
@@ -103,16 +92,6 @@ StageInstance* WorldInstance::characterStageInstance( const std::string& session
         return it->second;
     }
     return nullptr;
-}
-
-bool WorldInstance::hasCharacter( int idCharacter ) {
-    std::lock_guard lock( _mutex );
-    for ( const auto& [ sid, character ] : _characters ) {
-        if ( character && character->idCharacter() == idCharacter ) {
-            return true;
-        }
-    }
-    return false;
 }
 
 void WorldInstance::tick() {
