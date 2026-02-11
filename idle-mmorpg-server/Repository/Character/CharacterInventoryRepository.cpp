@@ -1,8 +1,6 @@
 #include "CharacterInventoryRepository.h"
 
 #include <Infrastructure/Database/Query.h>
-#include <Manager/Item/ItemManager.h>
-#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
@@ -15,7 +13,8 @@ bool CharacterInventoryRepository::createInventory( int idCharacter ) {
 
 bool CharacterInventoryRepository::updateInventory( int idCharacter, Domain::CharacterInventory& inventory ) {
     const std::string deleteSql = R"SQL(
-        DELETE FROM character_inventory WHERE id_character = ?
+        DELETE FROM character_inventory
+        WHERE id_character = ?
     )SQL";
 
     Database::Query deleteQuery( _db, deleteSql );
@@ -26,7 +25,8 @@ bool CharacterInventoryRepository::updateInventory( int idCharacter, Domain::Cha
     }
 
     const std::string insertSql = R"SQL(
-        INSERT INTO character_inventory (id_character, id_item, amount) VALUES (?, ?, ?)
+        INSERT INTO character_inventory (id_character, id_item, amount)
+        VALUES (?, ?, ?)
     )SQL";
 
     for ( Domain::CharacterInventoryItem& item : inventory.items() ) {
@@ -45,7 +45,9 @@ bool CharacterInventoryRepository::updateInventory( int idCharacter, Domain::Cha
 
 std::unique_ptr<Domain::CharacterInventory> CharacterInventoryRepository::findByCharacterId( int idCharacter ) {
     const std::string sql = R"SQL(
-        SELECT id_item, amount FROM character_inventory WHERE id_character = ?
+        SELECT id_item, amount
+        FROM character_inventory
+        WHERE id_character = ?
     )SQL";
 
     Database::Query query( _db, sql );
@@ -53,20 +55,12 @@ std::unique_ptr<Domain::CharacterInventory> CharacterInventoryRepository::findBy
 
     auto inventory = std::make_unique<Domain::CharacterInventory>();
 
-    auto& itemManager = Commons::Singleton<Manager::ItemManager>::instance();
-
     while ( query.step() ) {
-        std::string idItem = query.getColumnText( 0 );
-        int amount = query.getColumnInt( 1 );
+        Domain::CharacterInventoryItem inventoryItem;
+        inventoryItem.setId( query.getColumnText( 0 ) );
+        inventoryItem.setAmount( query.getColumnInt( 1 ) );
 
-        auto item = itemManager.itemById( idItem );
-        if ( item ) {
-            Domain::CharacterInventoryItem inventoryItem;
-            inventoryItem.setId( idItem );
-            inventoryItem.setAmount( amount );
-            inventoryItem.setItem( item );
-            inventory->addItem( inventoryItem );
-        }
+        inventory->addItem( inventoryItem );
     }
 
     return inventory;

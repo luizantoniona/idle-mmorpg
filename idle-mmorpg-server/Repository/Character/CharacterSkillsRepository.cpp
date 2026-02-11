@@ -1,11 +1,6 @@
 #include "CharacterSkillsRepository.h"
 
-#include <iostream>
-
-#include <Domain/Skill/SkillHelper.h>
 #include <Infrastructure/Database/Query.h>
-#include <Manager/Skill/SkillManager.h>
-#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
@@ -27,13 +22,13 @@ bool CharacterSkillsRepository::updateSkills( int idCharacter, Domain::Character
 
     for ( auto& skill : characterSkills.skills() ) {
 
-        Database::Query upsertQuery( _db, upsertSql );
-        upsertQuery.bindInt( 1, idCharacter );
-        upsertQuery.bindText( 2, skill.id() );
-        upsertQuery.bindInt( 3, skill.experience() );
-        upsertQuery.bindInt( 4, skill.level() );
+        Database::Query query( _db, upsertSql );
+        query.bindInt( 1, idCharacter );
+        query.bindText( 2, skill.id() );
+        query.bindInt( 3, skill.experience() );
+        query.bindInt( 4, skill.level() );
 
-        if ( !upsertQuery.exec() ) {
+        if ( !query.exec() ) {
             return false;
         }
     }
@@ -52,23 +47,12 @@ std::unique_ptr<Domain::CharacterSkills> CharacterSkillsRepository::findByCharac
     auto skills = std::make_unique<Domain::CharacterSkills>();
 
     while ( query.step() ) {
-        std::string skillId = query.getColumnText( 0 );
-        int experience = query.getColumnInt( 1 );
-        int level = query.getColumnInt( 2 );
+        Domain::CharacterSkill characterSkill;
+        characterSkill.setId( query.getColumnText( 0 ) );
+        characterSkill.setExperience( query.getColumnInt( 1 ) );
+        characterSkill.setLevel( query.getColumnInt( 2 ) );
 
-        auto skill = Commons::Singleton<Manager::SkillManager>::instance().skill( skillId );
-        if ( skill ) {
-            Domain::CharacterSkill characterSkill;
-            characterSkill.setType( Helper::SkillHelper::stringToEnum( skillId ) );
-            characterSkill.setId( skillId );
-            characterSkill.setExperience( experience );
-            characterSkill.setLevel( level );
-            characterSkill.setSkill( skill );
-            skills->addSkill( characterSkill );
-
-        } else {
-            std::cerr << "Unknown skill: " << skillId << std::endl;
-        }
+        skills->addSkill( characterSkill );
     }
 
     return skills;

@@ -1,8 +1,5 @@
 #include "CharacterInventory.h"
 
-#include <Manager/Item/ItemManager.h>
-#include <Shared/Commons/Singleton.h>
-
 namespace Domain {
 
 CharacterInventory::CharacterInventory() {}
@@ -55,27 +52,19 @@ bool CharacterInventory::removeItem( const std::string& itemId, int amount ) {
     return false;
 }
 
-bool CharacterInventory::addItem( const std::string& itemId, int amount ) {
+void CharacterInventory::addItem( const std::string& itemId, int amount ) {
     for ( auto& item : _items ) {
         if ( item.id() == itemId ) {
             item.setAmount( item.amount() + amount );
-            return true;
+            return;
         }
     }
 
-    auto itemPtr = Commons::Singleton<Manager::ItemManager>::instance().itemById( itemId );
-    if ( !itemPtr ) {
-        return false;
-    }
-
-    Domain::CharacterInventoryItem newItem;
+    CharacterInventoryItem newItem;
     newItem.setId( itemId );
     newItem.setAmount( amount );
-    newItem.setItem( itemPtr );
 
     _items.push_back( newItem );
-
-    return true;
 }
 
 CharacterInventoryItem* CharacterInventory::itemById( const std::string& itemId ) {

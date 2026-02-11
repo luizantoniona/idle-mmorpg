@@ -20,7 +20,7 @@ public:
 
     bool hasItem( const std::string& itemId, int amount );
     bool removeItem( const std::string& itemId, int amount );
-    bool addItem( const std::string& itemId, int amount );
+    void addItem( const std::string& itemId, int amount );
 
     CharacterInventoryItem* itemById( const std::string& itemId );
 

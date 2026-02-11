@@ -2,8 +2,6 @@
 
 #include <Domain/Character/CharacterEquipmentItem.h>
 #include <Infrastructure/Database/Query.h>
-#include <Manager/Item/ItemManager.h>
-#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
@@ -12,7 +10,8 @@ CharacterEquipmentRepository::CharacterEquipmentRepository() :
 
 bool CharacterEquipmentRepository::createEquipment( int idCharacter ) {
     const std::string sql = R"SQL(
-        INSERT INTO character_equipment (id_character) VALUES (?)
+        INSERT INTO character_equipment (id_character)
+        VALUES (?)
     )SQL";
 
     Database::Query query( _db, sql );
@@ -82,28 +81,45 @@ std::unique_ptr<Domain::CharacterEquipment> CharacterEquipmentRepository::findBy
         return nullptr;
     }
 
-    auto& manager = Commons::Singleton<Manager::ItemManager>::instance();
     auto equipment = std::make_unique<Domain::CharacterEquipment>();
 
-    auto makeItem = [ & ]( const std::string& id ) {
-                        Domain::CharacterEquipmentItem item;
-                        item.setId( id );
-                        item.setItem( manager.itemById( id ) );
-                        return item;
-                    };
+    Domain::CharacterEquipmentItem item;
 
-    equipment->setHelmet( makeItem( query.getColumnText( 0 ) ) );
-    equipment->setArmor( makeItem( query.getColumnText( 1 ) ) );
-    equipment->setLeg( makeItem( query.getColumnText( 2 ) ) );
-    equipment->setBoot( makeItem( query.getColumnText( 3 ) ) );
-    equipment->setWeapon( makeItem( query.getColumnText( 4 ) ) );
-    equipment->setOffhand( makeItem( query.getColumnText( 5 ) ) );
-    equipment->setAmulet( makeItem( query.getColumnText( 6 ) ) );
-    equipment->setRing( makeItem( query.getColumnText( 7 ) ) );
-    equipment->setPickaxe( makeItem( query.getColumnText( 8 ) ) );
-    equipment->setWoodaxe( makeItem( query.getColumnText( 9 ) ) );
-    equipment->setFishingrod( makeItem( query.getColumnText( 10 ) ) );
-    equipment->setSickle( makeItem( query.getColumnText( 11 ) ) );
+    item.setId( query.getColumnText( 0 ) );
+    equipment->setHelmet( item );
+
+    item.setId( query.getColumnText( 1 ) );
+    equipment->setArmor( item );
+
+    item.setId( query.getColumnText( 2 ) );
+    equipment->setLeg( item );
+
+    item.setId( query.getColumnText( 3 ) );
+    equipment->setBoot( item );
+
+    item.setId( query.getColumnText( 4 ) );
+    equipment->setWeapon( item );
+
+    item.setId( query.getColumnText( 5 ) );
+    equipment->setOffhand( item );
+
+    item.setId( query.getColumnText( 6 ) );
+    equipment->setAmulet( item );
+
+    item.setId( query.getColumnText( 7 ) );
+    equipment->setRing( item );
+
+    item.setId( query.getColumnText( 8 ) );
+    equipment->setPickaxe( item );
+
+    item.setId( query.getColumnText( 9 ) );
+    equipment->setWoodaxe( item );
+
+    item.setId( query.getColumnText( 10 ) );
+    equipment->setFishingrod( item );
+
+    item.setId( query.getColumnText( 11 ) );
+    equipment->setSickle( item );
 
     return equipment;
 }

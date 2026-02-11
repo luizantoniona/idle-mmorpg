@@ -1,8 +1,6 @@
 #include "CharacterSpellsRepository.h"
 
 #include <Infrastructure/Database/Query.h>
-#include <Manager/Spell/SpellManager.h>
-#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
@@ -20,17 +18,7 @@ bool CharacterSpellsRepository::updateSpells( int idCharacter, Domain::Character
         ON CONFLICT(id_character, id_spell) DO NOTHING
     )SQL";
 
-    for ( auto& spell : characterSpells.healingSpells() ) {
-        Database::Query query( _db, upsertSql );
-        query.bindInt( 1, idCharacter );
-        query.bindText( 2, spell.id() );
-
-        if ( !query.exec() ) {
-            return false;
-        }
-    }
-
-    for ( auto& spell : characterSpells.attackSpells() ) {
+    for ( const auto& spell : characterSpells.spells() ) {
         Database::Query query( _db, upsertSql );
         query.bindInt( 1, idCharacter );
         query.bindText( 2, spell.id() );
@@ -56,22 +44,9 @@ std::unique_ptr<Domain::CharacterSpells> CharacterSpellsRepository::findByCharac
     auto characterSpells = std::make_unique<Domain::CharacterSpells>();
 
     while ( query.step() ) {
-        std::string spellId = query.getColumnText( 0 );
-
-        auto spell = Commons::Singleton<Manager::SpellManager>::instance().spellById( spellId );
-        if ( spell ) {
-            Domain::CharacterSpell characterSpell;
-            characterSpell.setId( spellId );
-            characterSpell.setSpell( spell );
-            characterSpell.setCount( spell->cooldown() );
-
-            if ( spell->type() == "healing" ) {
-                characterSpells->addHealingSpell( characterSpell );
-
-            } else if ( spell->type() == "attack" ) {
-                characterSpells->addAttackSpell( characterSpell );
-            }
-        }
+        Domain::CharacterSpell spell;
+        spell.setId( query.getColumnText( 0 ) );
+        characterSpells->addSpell( spell );
     }
 
     return characterSpells;

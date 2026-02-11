@@ -1,8 +1,6 @@
 #include "CharacterVitalsRepository.h"
 
 #include <Infrastructure/Database/Query.h>
-#include <Manager/Server/ServerConfigurationManager.h>
-#include <Shared/Commons/Singleton.h>
 
 namespace Repository {
 
@@ -73,7 +71,6 @@ std::unique_ptr<Domain::CharacterVitals> CharacterVitalsRepository::findByCharac
     }
 
     auto vitals = std::make_unique<Domain::CharacterVitals>();
-    vitals->setRegenDuration( Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
     vitals->setHealth( query.getColumnDouble( 0 ) );
     vitals->setMaxHealth( query.getColumnDouble( 1 ) );
     vitals->setMana( query.getColumnDouble( 2 ) );
