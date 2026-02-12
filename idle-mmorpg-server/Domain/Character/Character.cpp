@@ -6,6 +6,7 @@ Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
     _name( "" ),
+    // --- Persistent Data
     _equipment(),
     _inventory(),
     _progression(),
@@ -13,8 +14,8 @@ Character::Character() :
     _spells(),
     _stage(),
     _vitals(),
-    _wallet() {
-}
+    _wallet(),
+    // --- Runtime Data
 
 Json::Value Character::toJson() {
     Json::Value root;

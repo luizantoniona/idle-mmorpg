@@ -31,6 +31,7 @@ public:
     std::string name() const;
     void setName( const std::string& name );
 
+    // --- Persistent Data
     CharacterEquipment& equipment();
     void setEquipment( const CharacterEquipment& equipment );
 
@@ -55,11 +56,13 @@ public:
     CharacterWallet& wallet();
     void setWallet( const CharacterWallet& wallet );
 
+    // --- Runtime Data
 private:
     int _idCharacter;
     int _idUser;
     std::string _name;
 
+    // --- Persistent Data
     CharacterEquipment _equipment;
     CharacterInventory _inventory;
     CharacterProgression _progression;
@@ -68,6 +71,8 @@ private:
     CharacterStage _stage;
     CharacterVitals _vitals;
     CharacterWallet _wallet;
+
+    // --- Runtime Data
 };
 
 } // namespace Domain
