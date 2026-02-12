@@ -6,9 +6,9 @@
 
 #include <Domain/Stage/Stage.h>
 #include <Engine/Message/MessageReceiverType.h>
-
 #include <Engine/Instance/Character/CharacterInstance.h>
-#include <Engine/Instance/Combat/CombatInstance.h>
+
+#include "Controller/StageCombatController.h"
 
 namespace Engine {
 
@@ -16,14 +16,8 @@ class StageInstance {
 public:
     explicit StageInstance( Domain::Stage* stage );
 
-    Domain::Stage* stage();
-
     bool addCharacter( const std::string& sessionId, CharacterInstance* characterInstance );
     void removeCharacter( const std::string& sessionId );
-
-    void createCombat( const std::string& sessionId, CharacterInstance* characterInstance );
-    void enterCombat( const std::string& sessionId, CharacterInstance* characterInstance, const std::string& roomId );
-    void exitCombat( const std::string& sessionId );
 
     void tick();
 
@@ -32,10 +26,9 @@ public:
 private:
     mutable std::mutex _mutex;
     Domain::Stage* _stage;
-
     std::unordered_map<std::string, CharacterInstance*> _characters;
-    std::unordered_map<std::string, CombatInstance*> _characterCombatCache;
-    std::vector<std::unique_ptr<CombatInstance>> _combatInstances;
+
+    std::unique_ptr<StageCombatController> _combatController;
 };
 
 } // namespace Engine
