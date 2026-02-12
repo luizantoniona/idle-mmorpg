@@ -4,7 +4,12 @@
 namespace Domain {
 
 enum class ActionType {
-    UNKNOWN
+    IDLE,
+
+    TRAIN,
+    COMBAT,
+
+    UNKNOWN,
 };
 
 } // namespace Domain

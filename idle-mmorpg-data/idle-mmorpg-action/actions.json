@@ -1,5 +1,6 @@
 {
     "actions": [
+        "actions/idle",
         "actions/combat",
         "actions/train"
     ]

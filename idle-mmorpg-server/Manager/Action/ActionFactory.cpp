@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <Domain/Action/ActionHelper.h>
 #include <Manager/Server/ServerConfigurationManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
@@ -19,8 +20,8 @@ std::unordered_map<std::string, std::unique_ptr<Domain::Action> > ActionFactory:
         std::string actionFilePath = actionsPath + actionEntry.asString() + ".json";
 
         auto action = createAction( actionFilePath );
-        if ( action ) {
-            //actions[ action->id() ] = std::move( action );
+        if ( action && action->type() != Domain::ActionType::UNKNOWN ) {
+            actions[ action->id() ] = std::move( action );
 
         } else {
             std::cerr << "Failed to load action: " << actionFilePath << std::endl;
@@ -33,8 +34,15 @@ std::unordered_map<std::string, std::unique_ptr<Domain::Action> > ActionFactory:
 }
 
 std::unique_ptr<Domain::Action> ActionFactory::createAction( const std::string& actionPath ) {
+    std::cout << "ActionFactory::createAction: " << actionPath << std::endl;
 
-    return nullptr;
+    Json::Value actionJson = Helper::JsonHelper::loadJsonFile( actionPath );
+
+    auto action = std::make_unique<Domain::Action>();
+    action->setId( actionJson[ "id" ].asString() );
+    action->setType( Domain::ActionHelper::stringToType( actionJson[ "type" ].asString() ) );
+
+    return action;
 }
 
 } // namespace Manager
