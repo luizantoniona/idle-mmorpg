@@ -18,7 +18,7 @@ public:
     Engine::WorldInstance* worldInstance();
 
     void initialize( const std::string& mapPath );
-    void stop();
+    void finalize();
 
     bool addCharacter( const std::string& sessionId, int idUser, int idCharacter );
     void removeCharacter( const std::string& sessionId );

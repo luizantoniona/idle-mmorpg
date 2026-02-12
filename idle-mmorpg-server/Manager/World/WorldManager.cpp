@@ -55,7 +55,7 @@ void WorldManager::initialize( const std::string& mapPath ) {
     } );
 }
 
-void WorldManager::stop() {
+void WorldManager::finalize() {
     _running = false;
 
     if ( _thread.joinable() ) {
