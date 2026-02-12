@@ -20,7 +20,7 @@ std::unordered_map<std::string, std::unique_ptr<Domain::Action> > ActionFactory:
         std::string actionFilePath = actionsPath + actionEntry.asString() + ".json";
 
         auto action = createAction( actionFilePath );
-        if ( action && action->type() != Domain::ActionType::UNKNOWN ) {
+        if ( action ) {
             actions[ action->id() ] = std::move( action );
 
         } else {
@@ -38,9 +38,17 @@ std::unique_ptr<Domain::Action> ActionFactory::createAction( const std::string& 
 
     Json::Value actionJson = Helper::JsonHelper::loadJsonFile( actionPath );
 
+    const std::string actionId = actionJson[ "id" ].asString();
+
+    if ( Domain::ActionHelper::stringToType( actionId ) == Domain::ActionType::UNKNOWN ) {
+        std::cerr << "Unmaped action: " << actionId << std::endl;
+        return nullptr;
+    }
+
     auto action = std::make_unique<Domain::Action>();
-    action->setId( actionJson[ "id" ].asString() );
-    action->setType( Domain::ActionHelper::stringToType( actionJson[ "type" ].asString() ) );
+
+    action->setId( actionId );
+    action->setType( Domain::ActionHelper::stringToType( actionId ) );
 
     return action;
 }

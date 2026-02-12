@@ -1,103 +1,47 @@
 #include "SkillHelper.h"
 
+#include <algorithm>
+#include <array>
+#include <string_view>
+
 namespace Domain {
 
+namespace {
+constexpr std::array<std::pair<std::string_view, SkillType>, static_cast<int>( SkillType::UNKNOWN )> SKILL_TYPE_TABLE = { {
+    { "AXE_MASTERY", SkillType::AXE_MASTERY },
+    { "DAGGER_MASTERY", SkillType::DAGGER_MASTERY },
+    { "SWORD_MASTERY", SkillType::SWORD_MASTERY },
+    { "FIST_MASTERY", SkillType::FIST_MASTERY },
+    { "SHIELD_MASTERY", SkillType::SHIELD_MASTERY },
+
+    { "INVOCATION", SkillType::INVOCATION },
+    { "RESTORATION", SkillType::RESTORATION },
+
+    { "ENDURANCE", SkillType::ENDURANCE },
+    { "MEDITATION", SkillType::MEDITATION },
+    { "VITALITY", SkillType::VITALITY },
+
+    { "FISHING", SkillType::FISHING },
+    { "HERBALISM", SkillType::HERBALISM },
+    { "MINING", SkillType::MINING },
+    { "WOODCUTTING", SkillType::WOODCUTTING },
+} };
+}
+
 SkillType SkillHelper::stringToType( const std::string& type ) {
-    SkillType enumType = SkillType::UNKNOWN;
+    auto it = std::find_if( SKILL_TYPE_TABLE.begin(), SKILL_TYPE_TABLE.end(), [&]( const auto& pair ) {
+            return pair.first == type;
+        } );
 
-    if ( type == "AXE_MASTERY" ) {
-        enumType = SkillType::AXE_MASTERY;
-
-    } else if ( type == "DAGGER_MASTERY" ) {
-        enumType = SkillType::DAGGER_MASTERY;
-
-    } else if ( type == "SWORD_MASTERY" ) {
-        enumType = SkillType::SWORD_MASTERY;
-
-    } else if ( type == "FIST_MASTERY" ) {
-        enumType = SkillType::FIST_MASTERY;
-
-    } else if ( type == "SHIELD_MASTERY" ) {
-        enumType = SkillType::SHIELD_MASTERY;
-
-    } else if ( type == "INVOCATION" ) {
-        enumType = SkillType::INVOCATION;
-
-    } else if ( type == "RESTORATION" ) {
-        enumType = SkillType::RESTORATION;
-
-    } else if ( type == "ENDURANCE" ) {
-        enumType = SkillType::ENDURANCE;
-
-    } else if ( type == "MEDITATION" ) {
-        enumType = SkillType::MEDITATION;
-
-    } else if ( type == "VITALITY" ) {
-        enumType = SkillType::VITALITY;
-
-    } else if ( type == "FISHING" ) {
-        enumType = SkillType::FISHING;
-
-    } else if ( type == "HERBALISM" ) {
-        enumType = SkillType::HERBALISM;
-
-    } else if ( type == "MINING" ) {
-        enumType = SkillType::MINING;
-
-    } else if ( type == "WOODCUTTING" ) {
-        enumType = SkillType::WOODCUTTING;
-    }
-
-    return enumType;
+    return it != SKILL_TYPE_TABLE.end() ? it->second : SkillType::UNKNOWN;
 }
 
 std::string SkillHelper::typeToString( SkillType type ) {
-    switch ( type ) {
-    case SkillType::AXE_MASTERY:
-        return "AXE_MASTERY";
+    auto it = std::find_if( SKILL_TYPE_TABLE.begin(), SKILL_TYPE_TABLE.end(), [&]( const auto& pair ) {
+            return pair.second == type;
+        } );
 
-    case SkillType::DAGGER_MASTERY:
-        return "DAGGER_MASTERY";
-
-    case SkillType::SWORD_MASTERY:
-        return "SWORD_MASTERY";
-
-    case SkillType::FIST_MASTERY:
-        return "FIST_MASTERY";
-
-    case SkillType::SHIELD_MASTERY:
-        return "SHIELD_MASTERY";
-
-    case SkillType::INVOCATION:
-        return "INVOCATION";
-
-    case SkillType::RESTORATION:
-        return "RESTORATION";
-
-    case SkillType::ENDURANCE:
-        return "ENDURANCE";
-
-    case SkillType::MEDITATION:
-        return "MEDITATION";
-
-    case SkillType::VITALITY:
-        return "VITALITY";
-
-    case SkillType::FISHING:
-        return "FISHING";
-
-    case SkillType::HERBALISM:
-        return "HERBALISM";
-
-    case SkillType::MINING:
-        return "MINING";
-
-    case SkillType::WOODCUTTING:
-        return "WOODCUTTING";
-
-    default:
-        return "";
-    }
+    return it != SKILL_TYPE_TABLE.end() ? std::string( it->first ) : "";
 }
 
 } // namespace Domain

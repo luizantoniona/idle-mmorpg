@@ -7,8 +7,6 @@
 
 namespace Manager {
 
-// TODO REVIEW THIS, MAYBE REMOVE FROM JSONS AND MADE SKILLS HARD CODED
-
 std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > SkillFactory::createSkills( const std::string& skillsPath ) {
     std::cout << "SkillFactory::createSkills" << std::endl;
 
@@ -46,8 +44,8 @@ std::unique_ptr<Domain::Skill> SkillFactory::createSkill( const std::string& ski
 
     auto skill = std::make_unique<Domain::Skill>();
 
-    skill->setType( Domain::SkillHelper::stringToType( skillId ) );
     skill->setId( skillId );
+    skill->setType( Domain::SkillHelper::stringToType( skillId ) );
     skill->setName( skillJson[ "name" ].asString() );
     skill->setDescription( skillJson[ "description" ].asString() );
     skill->setCategory( skillJson[ "category" ].asString() );
