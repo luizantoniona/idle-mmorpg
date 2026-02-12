@@ -22,4 +22,7 @@ void CharacterSpellsController::onEnterWorld() {
 void CharacterSpellsController::onExitWorld() {
 }
 
+void CharacterSpellsController::tick() {
+}
+
 } // namespace Engine

@@ -24,6 +24,9 @@ void CharacterInventoryController::onExitWorld() {
     }
 }
 
+void CharacterInventoryController::tick() {
+}
+
 bool CharacterInventoryController::addItem( const std::string& itemId, int amount ) {
     // TODO, ajustar quando precisar
     return true;

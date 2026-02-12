@@ -24,4 +24,7 @@ void CharacterSkillsController::onEnterWorld() {
 void CharacterSkillsController::onExitWorld() {
 }
 
+void CharacterSkillsController::tick() {
+}
+
 } // namespace Engine

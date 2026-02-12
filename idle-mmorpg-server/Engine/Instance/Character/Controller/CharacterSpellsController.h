@@ -13,6 +13,8 @@ public:
     void onEnterWorld();
     void onExitWorld();
 
+    void tick();
+
 private:
     Domain::CharacterSpells& _spells;
     Manager::SpellManager& _spellManager;

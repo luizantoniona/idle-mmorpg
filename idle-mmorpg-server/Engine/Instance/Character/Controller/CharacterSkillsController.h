@@ -13,6 +13,8 @@ public:
     void onEnterWorld();
     void onExitWorld();
 
+    void tick();
+
 private:
     Domain::CharacterSkills& _skills;
     Manager::SkillManager& _skillManager;

@@ -13,6 +13,8 @@ public:
     void onEnterWorld();
     void onExitWorld();
 
+    void tick();
+
 private:
     Domain::CharacterEquipment& _equipment;
     Manager::ItemManager& _itemManager;

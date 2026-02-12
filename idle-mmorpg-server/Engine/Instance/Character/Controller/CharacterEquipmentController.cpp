@@ -36,4 +36,7 @@ void CharacterEquipmentController::onEnterWorld() {
 void CharacterEquipmentController::onExitWorld() {
 }
 
+void CharacterEquipmentController::tick() {
+}
+
 } // namespace Engine

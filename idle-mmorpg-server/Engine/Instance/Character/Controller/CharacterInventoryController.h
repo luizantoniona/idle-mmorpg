@@ -13,6 +13,8 @@ public:
     void onEnterWorld();
     void onExitWorld();
 
+    void tick();
+
     bool addItem( const std::string& itemId, int amount );
     bool removeItem( const std::string& itemId, int amount );
 
