@@ -14,6 +14,9 @@
 #include "CharacterVitals.h"
 #include "CharacterWallet.h"
 
+#include "CharacterActions.h"
+#include "CharacterEffects.h"
+
 namespace Domain {
 
 class Character {
@@ -57,6 +60,12 @@ public:
     void setWallet( const CharacterWallet& wallet );
 
     // --- Runtime Data
+    CharacterActions& actions();
+    void setActions( const CharacterActions& actions );
+
+    CharacterEffects& effects();
+    void setEffects( const CharacterEffects& effects );
+
 private:
     int _idCharacter;
     int _idUser;
@@ -73,6 +82,8 @@ private:
     CharacterWallet _wallet;
 
     // --- Runtime Data
+    CharacterActions _actions;
+    CharacterEffects _effects;
 };
 
 } // namespace Domain

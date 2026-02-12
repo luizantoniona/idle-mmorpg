@@ -2,16 +2,13 @@
 
 namespace Engine {
 
-CharacterEffectsController::CharacterEffectsController() {
-}
+CharacterEffectsController::CharacterEffectsController( Domain::CharacterEffects& effects ) :
+    _effects( effects ) {}
 
-void CharacterEffectsController::onEnterWorld() {
-}
+void CharacterEffectsController::onEnterWorld() {}
 
-void CharacterEffectsController::onExitWorld() {
-}
+void CharacterEffectsController::onExitWorld() {}
 
-void CharacterEffectsController::tick() {
-}
+void CharacterEffectsController::tick() {}
 
 } // namespace Engine

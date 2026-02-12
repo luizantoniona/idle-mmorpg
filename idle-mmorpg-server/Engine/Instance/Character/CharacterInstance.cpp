@@ -1,5 +1,6 @@
 #include "CharacterInstance.h"
 
+#include <Manager/Action/ActionManager.h>
 #include <Manager/Item/ItemManager.h>
 #include <Manager/Server/ServerConfigurationManager.h>
 #include <Manager/Skill/SkillManager.h>
@@ -12,6 +13,12 @@ namespace Engine {
 CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> character ) :
     _sessionId( "" ),
     _character( std::move( character ) ) {
+
+    // --- Actions ---
+    _actionsController = std::make_unique<CharacterActionsController>( _character->actions(), Commons::Singleton<Manager::ActionManager>::instance() );
+
+    // --- Effects ---
+    _effectsController = std::make_unique<CharacterEffectsController>( _character->effects() );
 
     // --- Equipment ---
     _equipmentController = std::make_unique<CharacterEquipmentController>( _character->equipment(), Commons::Singleton<Manager::ItemManager>::instance() );
@@ -43,6 +50,8 @@ void CharacterInstance::onEnterWorld() {
         return;
     }
 
+    _actionsController->onEnterWorld();
+    _effectsController->onEnterWorld();
     _equipmentController->onEnterWorld();
     _inventoryController->onEnterWorld();
     _skillsController->onEnterWorld();
@@ -57,6 +66,8 @@ void CharacterInstance::onLeaveWorld() {
         return;
     }
 
+    _actionsController->onExitWorld();
+    _effectsController->onExitWorld();
     _equipmentController->onExitWorld();
     _inventoryController->onExitWorld();
     _skillsController->onExitWorld();
@@ -69,16 +80,8 @@ void CharacterInstance::tick() {
     if ( !_character ) {
         return;
     }
-
-    // NÃO salvar aqui por enquanto
-    // Esse tick é puramente gameplay
-
-    // Exemplo futuro:
-    // _character->vitals().tick();
-    // _character->buffs().tick();
 }
 
-void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
-}
+void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {}
 
 } // namespace Engine

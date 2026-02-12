@@ -16,6 +16,8 @@ Character::Character() :
     _vitals(),
     _wallet(),
     // --- Runtime Data
+    _actions(),
+    _effects() {}
 
 Json::Value Character::toJson() {
     Json::Value root;
@@ -111,6 +113,22 @@ CharacterWallet& Character::wallet() {
 
 void Character::setWallet( const CharacterWallet& wallet ) {
     _wallet = wallet;
+}
+
+CharacterActions& Character::actions() {
+    return _actions;
+}
+
+void Character::setActions( const CharacterActions& actions ) {
+    _actions = actions;
+}
+
+CharacterEffects& Character::effects() {
+    return _effects;
+}
+
+void Character::setEffects( const CharacterEffects& effects ) {
+    _effects = effects;
 }
 
 } // namespace Domain
