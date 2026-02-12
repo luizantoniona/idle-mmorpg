@@ -16,40 +16,6 @@ CombatInstance::CombatInstance( Domain::Stage* stage, const std::string& id, con
 
 CombatInstance::~CombatInstance() = default;
 
-Json::Value CombatInstance::instanceToJson() const {
-    Json::Value root;
-    root[ "id" ] = _id;
-    root[ "name" ] = _name;
-    root[ "characters" ] = static_cast<int>( _characters.size() );
-    return root;
-}
-
-Json::Value CombatInstance::combatToJson() const {
-    Json::Value root;
-    Json::Value charactersJson;
-    for ( const auto& [ sessionId, character ] : _characters ) {
-        Json::Value characterJson = character->toJson();
-        // characterJson[ "action" ] = character->action().toJson();
-        characterJson[ "vitals" ] = character->vitals().toJson();
-        charactersJson.append( characterJson );
-    }
-    root[ "characters" ] = charactersJson;
-
-    Json::Value creaturesJson;
-    for ( const auto& creature : _creatures ) {
-        Json::Value creatureJson;
-        creatureJson[ "name" ] = creature->name();
-        // creatureJson[ "id" ] = creature->combatId();
-        creatureJson[ "icon" ] = creature->icon();
-        creatureJson[ "action" ] = creature->action().toJson();
-        creatureJson[ "vitals" ] = creature->vitals().toJson();
-        creaturesJson.append( creatureJson );
-    }
-    root[ "creatures" ] = creaturesJson;
-
-    return root;
-}
-
 void CombatInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
     // _combatSystem.computeCombatActionDuration( character );
     _characters[ sessionId ] = character;
@@ -57,38 +23,6 @@ void CombatInstance::addCharacter( const std::string& sessionId, Domain::Charact
 
 void CombatInstance::removeCharacter( const std::string& sessionId ) {
     _characters.erase( sessionId );
-}
-
-bool CombatInstance::isFinished() const {
-    return _characters.empty();
-}
-
-std::string CombatInstance::id() const {
-    return _id;
-}
-
-const std::unordered_map<std::string, Domain::Character*>& CombatInstance::characters() const {
-    return _characters;
-}
-
-void CombatInstance::spawnCreatures() {
-    _creatures.clear();
-
-    const auto& stageCreatures = _stage->creatures();
-
-    for ( const auto& stageCreature : stageCreatures ) {
-
-        for ( int i = 0; i < stageCreature.amount(); ++i ) {
-            auto creatureInstance = std::make_unique<Domain::Creature>( *stageCreature.creature() );
-
-            // creatureInstance->setCombatId( _creatures.size() );
-            // _combatSystem.computeCombatActionDuration( creatureInstance.get() );
-
-            _creatures.push_back( std::move( creatureInstance ) );
-        }
-    }
-
-    std::cout << "CombatInstance::spawnCreatures [ID]" << _id << " Spawned creatures: " << _creatures.size() << std::endl;
 }
 
 void CombatInstance::tick() {
@@ -189,40 +123,108 @@ void CombatInstance::tick() {
     }
 }
 
-void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId ) {
-    if ( character->vitals().health() <= 0 ) {
-        return;
+void CombatInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+}
+
+Json::Value CombatInstance::instanceToJson() const {
+    Json::Value root;
+    root[ "id" ] = _id;
+    root[ "name" ] = _name;
+    root[ "characters" ] = static_cast<int>( _characters.size() );
+    return root;
+}
+
+Json::Value CombatInstance::combatToJson() const {
+    Json::Value root;
+    Json::Value charactersJson;
+    for ( const auto& [ sessionId, character ] : _characters ) {
+        Json::Value characterJson = character->toJson();
+        // characterJson[ "action" ] = character->action().toJson();
+        characterJson[ "vitals" ] = character->vitals().toJson();
+        charactersJson.append( characterJson );
     }
+    root[ "characters" ] = charactersJson;
 
-    // auto characterSpell = character->spells().attackSpell( spellId );
-    // if ( !characterSpell ) {
-    //     return;
-    // }
+    Json::Value creaturesJson;
+    for ( const auto& creature : _creatures ) {
+        Json::Value creatureJson;
+        creatureJson[ "name" ] = creature->name();
+        // creatureJson[ "id" ] = creature->combatId();
+        creatureJson[ "icon" ] = creature->icon();
+        creatureJson[ "action" ] = creature->action().toJson();
+        creatureJson[ "vitals" ] = creature->vitals().toJson();
+        creaturesJson.append( creatureJson );
+    }
+    root[ "creatures" ] = creaturesJson;
 
-    // auto spell = characterSpell->spell();
-    // if ( characterSpell->count() < spell->cooldown() ) {
-    //     return;
-    // }
+    return root;
+}
 
-    // if ( character->vitals().mana() < spell->manaCost() ) {
-    //     return;
-    // }
+bool CombatInstance::isFinished() const {
+    return _characters.empty();
+}
 
-    Domain::Creature* target = nullptr;
-    for ( auto& creature : _creatures ) {
-        if ( creature->vitals().health() > 0 ) {
-            target = creature.get();
-            break;
+std::string CombatInstance::id() const {
+    return _id;
+}
+
+const std::unordered_map<std::string, Domain::Character*>& CombatInstance::characters() const {
+    return _characters;
+}
+
+void CombatInstance::spawnCreatures() {
+    _creatures.clear();
+
+    const auto& stageCreatures = _stage->creatures();
+
+    for ( const auto& stageCreature : stageCreatures ) {
+
+        for ( int i = 0; i < stageCreature.amount(); ++i ) {
+            auto creatureInstance = std::make_unique<Domain::Creature>( *stageCreature.creature() );
+
+            // creatureInstance->setCombatId( _creatures.size() );
+            // _combatSystem.computeCombatActionDuration( creatureInstance.get() );
+
+            _creatures.push_back( std::move( creatureInstance ) );
         }
     }
 
-    if ( !target ) {
-        std::cout << "No valid target for attack spell" << std::endl;
-        return;
-    }
-
-    // _combatSystem.computeSpellDamage( sessionId, character, target, characterSpell );
-void CombatInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+    std::cout << "CombatInstance::spawnCreatures [ID]" << _id << " Spawned creatures: " << _creatures.size() << std::endl;
 }
+
+// void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId ) {
+//     if ( character->vitals().health() <= 0 ) {
+//         return;
+//     }
+
+//     // auto characterSpell = character->spells().attackSpell( spellId );
+//     // if ( !characterSpell ) {
+//     //     return;
+//     // }
+
+//     // auto spell = characterSpell->spell();
+//     // if ( characterSpell->count() < spell->cooldown() ) {
+//     //     return;
+//     // }
+
+//     // if ( character->vitals().mana() < spell->manaCost() ) {
+//     //     return;
+//     // }
+
+//     Domain::Creature* target = nullptr;
+//     for ( auto& creature : _creatures ) {
+//         if ( creature->vitals().health() > 0 ) {
+//             target = creature.get();
+//             break;
+//         }
+//     }
+
+//     if ( !target ) {
+//         std::cout << "No valid target for attack spell" << std::endl;
+//         return;
+//     }
+
+//     // _combatSystem.computeSpellDamage( sessionId, character, target, characterSpell );
+// }
 
 } // namespace Engine
