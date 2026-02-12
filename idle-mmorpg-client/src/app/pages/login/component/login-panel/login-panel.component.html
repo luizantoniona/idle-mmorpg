@@ -33,11 +33,11 @@
                         placeholder="Enter your password" />
                 </div>
 
-                <div class="login-row">
-                    <app-button text="Register" type="button" [disabled]="formLogin.invalid || status !== 'online'"
-                        (click)="handleRegister()" />
+                <div class="login-column">
                     <app-button text="Login" type="button" [disabled]="formLogin.invalid  || status !== 'online'"
                         (click)="handleLogin()" />
+                    <app-button text="Register" type="button" [disabled]="formLogin.invalid || status !== 'online'"
+                        (click)="handleRegister()" />
                 </div>
 
                 @if(error){
