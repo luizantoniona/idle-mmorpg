@@ -1,5 +1,10 @@
 #include "WorldInstance.h"
 
+#include <iostream>
+
+#include <Engine/Message/MessageHelper.h>
+#include <Engine/Message/MessageReceiverType.h>
+
 namespace Engine {
 
 WorldInstance::WorldInstance( Domain::World* world ) :
@@ -101,9 +106,14 @@ void WorldInstance::tick() {
     }
 }
 
-void WorldInstance::handleCharacterMessage( const std::string& sessionId, Engine::MessageReceiverType type, const Json::Value& payload ) {
+void WorldInstance::handleMessage( const std::string& sessionId, const Json::Value& messageJson ) {
+    std::cout << "Message received from: " << sessionId << " Message: " << messageJson << std::endl;
+
+    const MessageReceiverType type = MessageHelper::stringToType( messageJson[ "type" ].asString() );
+    const Json::Value& payload = messageJson[ "payload" ];
+
     switch ( type ) {
-    case Engine::MessageReceiverType::UNKNOWN:
+    case MessageReceiverType::UNKNOWN:
         break;
     default:
         break;

@@ -83,4 +83,8 @@ void WorldManager::removeCharacter( const std::string& sessionId ) {
     _worldInstance->removeCharacter( sessionId );
 }
 
+void WorldManager::handleMessage( const std::string& sessionId, const Json::Value& messageJson ) {
+    _worldInstance->handleMessage( sessionId, messageJson );
+}
+
 } // namespace Manager

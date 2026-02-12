@@ -17,7 +17,6 @@ public:
     explicit WorldInstance( Domain::World* world );
 
     bool hasCharacter( const int idCharacter );
-
     bool addCharacter( const std::string& sessionId, std::unique_ptr<CharacterInstance> characterInstance );
     void removeCharacter( const std::string& sessionId );
 
@@ -25,7 +24,7 @@ public:
 
     void tick();
 
-    void handleCharacterMessage( const std::string& sessionId, Engine::MessageReceiverType type, const Json::Value& payload );
+    void handleMessage( const std::string& sessionId, const Json::Value& messageJson );
 
 private:
     mutable std::mutex _mutex;

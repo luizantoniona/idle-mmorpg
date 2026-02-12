@@ -2,6 +2,7 @@
 #define CHARACTERINSTANCE_H
 
 #include <Domain/Character/Character.h>
+#include <Engine/Message/MessageReceiverType.h>
 
 #include "Controller/CharacterEquipmentController.h"
 #include "Controller/CharacterInventoryController.h"
@@ -23,6 +24,8 @@ public:
     void onLeaveWorld();
 
     void tick();
+
+    void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
 
 private:
     std::string _sessionId;

@@ -5,7 +5,7 @@
 
 #include <json/json.h>
 
-#include "MessageSenderType.h"
+#include <Engine/Message/MessageSenderType.h>
 
 namespace Engine {
 

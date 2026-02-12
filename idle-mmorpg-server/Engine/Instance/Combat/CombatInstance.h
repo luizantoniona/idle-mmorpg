@@ -5,6 +5,7 @@
 
 #include <Domain/Character/Character.h>
 #include <Domain/Stage/Stage.h>
+#include <Engine/Message/MessageReceiverType.h>
 
 namespace Engine {
 
@@ -13,11 +14,15 @@ public:
     explicit CombatInstance( Domain::Stage* stage, const std::string& id, const std::string& name );
     ~CombatInstance();
 
-    Json::Value instanceToJson() const;
-    Json::Value combatToJson() const;
-
     void addCharacter( const std::string& sessionId, Domain::Character* character );
     void removeCharacter( const std::string& sessionId );
+
+    void tick();
+
+    void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
+
+    Json::Value instanceToJson() const;
+    Json::Value combatToJson() const;
 
     bool isFinished() const;
 
@@ -26,10 +31,6 @@ public:
     const std::unordered_map<std::string, Domain::Character*>& characters() const;
 
     void spawnCreatures();
-
-    void process();
-
-    void handleCharacterAttackSpell( const std::string& sessionId, Domain::Character* character, const std::string& spellId );
 
 private:
     std::string _id;

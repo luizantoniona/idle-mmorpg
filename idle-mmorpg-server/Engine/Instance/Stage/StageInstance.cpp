@@ -204,6 +204,8 @@ void StageInstance::handleCharacterMessage( const std::string& sessionId, Messag
     default:
         break;
     }
+void StageInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+    // std::lock_guard lock( _mutex );
 }
 
 } // namespace Engine

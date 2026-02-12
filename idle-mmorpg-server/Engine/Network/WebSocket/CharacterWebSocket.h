@@ -4,7 +4,7 @@
 #include <drogon/WebSocketController.h>
 #include <drogon/drogon.h>
 
-#include <Engine/Message/MessageReceiver.h>
+#include "MessageReceiver.h"
 
 namespace Network {
 

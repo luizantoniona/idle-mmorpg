@@ -91,7 +91,7 @@ void CombatInstance::spawnCreatures() {
     std::cout << "CombatInstance::spawnCreatures [ID]" << _id << " Spawned creatures: " << _creatures.size() << std::endl;
 }
 
-void CombatInstance::process() {
+void CombatInstance::tick() {
     if ( _creatures.empty() ) {
         spawnCreatures();
     }
@@ -222,6 +222,7 @@ void CombatInstance::handleCharacterAttackSpell( const std::string& sessionId, D
     }
 
     // _combatSystem.computeSpellDamage( sessionId, character, target, characterSpell );
+void CombatInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
 }
 
 } // namespace Engine

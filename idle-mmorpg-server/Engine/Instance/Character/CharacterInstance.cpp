@@ -78,4 +78,7 @@ void CharacterInstance::tick() {
     // _character->buffs().tick();
 }
 
+void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+}
+
 } // namespace Engine

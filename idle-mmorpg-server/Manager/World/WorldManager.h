@@ -23,6 +23,8 @@ public:
     bool addCharacter( const std::string& sessionId, int idUser, int idCharacter );
     void removeCharacter( const std::string& sessionId );
 
+    void handleMessage( const std::string& sessionId, const Json::Value& messageJson );
+
 private:
     std::atomic<bool> _running;
     std::thread _thread;
