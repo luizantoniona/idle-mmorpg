@@ -31,6 +31,9 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
 
     // --- Spells ---
     _spellsController = std::make_unique<CharacterSpellsController>( _character->spells(), Commons::Singleton<Manager::SpellManager>::instance() );
+
+    // --- Vitals ---
+    _vitalsController =  std::make_unique<CharacterVitalsController>( _character->vitals() );
 }
 
 std::string CharacterInstance::sessionId() const {
@@ -56,9 +59,7 @@ void CharacterInstance::onEnterWorld() {
     _inventoryController->onEnterWorld();
     _skillsController->onEnterWorld();
     _spellsController->onEnterWorld();
-
-    // --- Vitals ---
-    // vitals->setRegenDuration( Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
+    _vitalsController->onEnterWorld();
 }
 
 void CharacterInstance::onLeaveWorld() {
@@ -72,6 +73,7 @@ void CharacterInstance::onLeaveWorld() {
     _inventoryController->onExitWorld();
     _skillsController->onExitWorld();
     _spellsController->onExitWorld();
+    _vitalsController->onExitWorld();
 
     Repository::CharacterRepository().updateCharacter( *_character );
 }
@@ -80,8 +82,23 @@ void CharacterInstance::tick() {
     if ( !_character ) {
         return;
     }
+
+    _actionsController->tick();
+    _effectsController->tick();
+    _equipmentController->tick();
+    _inventoryController->tick();
+    _skillsController->tick();
+    _spellsController->tick();
+    _vitalsController->tick();
 }
 
-void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {}
+void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+    switch ( type ) {
+        case MessageReceiverType::UNKNOWN:
+            break;
+        default:
+            break;
+    }
+}
 
 } // namespace Engine

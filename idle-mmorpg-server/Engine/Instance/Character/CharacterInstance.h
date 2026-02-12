@@ -10,6 +10,7 @@
 #include "Controller/CharacterInventoryController.h"
 #include "Controller/CharacterSkillsController.h"
 #include "Controller/CharacterSpellsController.h"
+#include "Controller/CharacterVitalsController.h"
 
 namespace Engine {
 
@@ -40,24 +41,8 @@ private:
     // Progression
     std::unique_ptr<CharacterSkillsController> _skillsController;
     std::unique_ptr<CharacterSpellsController> _spellsController;
-    // Vitals
+    std::unique_ptr<CharacterVitalsController> _vitalsController;
     // Wallet
-
-    // int _regenCounter;
-    // int _regenDuration;
-
-    /*
-
-        Character.CharacterVitals:
-        int _regenDuration;
-        int _regenCounter;
-
-        int regenDuration() const;
-        void setRegenDuration( int regenDuration );
-
-        int regenCounter() const;
-        void setRegenCounter( int regenCounter );
-     */
 };
 
 } // namespace Engine

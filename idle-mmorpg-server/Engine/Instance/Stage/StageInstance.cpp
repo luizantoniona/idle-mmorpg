@@ -49,6 +49,12 @@ void StageInstance::tick() {
 
 void StageInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
     // std::lock_guard lock( _mutex );
+    switch ( type ) {
+        case MessageReceiverType::UNKNOWN:
+            break;
+        default:
+            break;
+    }
 }
 
 } // namespace Engine
