@@ -19,7 +19,7 @@ void CharacterWebSocket::handleNewMessage( const drogon::WebSocketConnectionPtr&
 }
 
 void CharacterWebSocket::handleNewConnection( const drogon::HttpRequestPtr& request, const drogon::WebSocketConnectionPtr& connection ) {
-    std::cout << "[WebSocket] Nova conexão: " << connection->peerAddr().toIp() << std::endl;
+    std::cout << "[WebSocket] New connection: " << connection->peerAddr().toIp() << std::endl;
 
     std::string sessionId;
     const auto token = request->getHeader( "Authorization" );
@@ -55,16 +55,9 @@ void CharacterWebSocket::handleNewConnection( const drogon::HttpRequestPtr& requ
         return;
     }
 
-    if ( server.isSessionConnected( sessionId ) ) {
-        connection->send( R"({"error":"already_connected"})" );
-        connection->shutdown();
-        return;
-    }
-
-    server.bindConnectionToSession( sessionId, connection );
     connection->setContext( std::make_shared<std::string>( sessionId ) );
 
-    if ( !Commons::Singleton<Manager::WorldManager>::instance().addCharacter( sessionId, session->idUser(), idCharacter ) ) {
+    if ( !Commons::Singleton<Manager::WorldManager>::instance().addCharacter( sessionId, session->idUser(), idCharacter, connection ) ) {
         connection->send( R"({"error":"invalid_character"})" );
         connection->shutdown();
         return;
@@ -81,7 +74,6 @@ void CharacterWebSocket::handleConnectionClosed( const drogon::WebSocketConnecti
     }
 
     Commons::Singleton<Manager::WorldManager>::instance().removeCharacter( *uuidPtr );
-    Commons::Singleton<NetworkServer>::instance().unbindConnectionFromSession( *uuidPtr );
 }
 
 } // namespace Network

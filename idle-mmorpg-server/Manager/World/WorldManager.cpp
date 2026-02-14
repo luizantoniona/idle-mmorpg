@@ -63,7 +63,7 @@ void WorldManager::finalize() {
     }
 }
 
-bool WorldManager::addCharacter( const std::string& sessionId, int idUser, int idCharacter ) {
+bool WorldManager::addCharacter( const std::string& sessionId, int idUser, int idCharacter, drogon::WebSocketConnectionPtr connection ) {
     auto character = Repository::CharacterRepository().findByIdUserAndIdCharacter( idUser, idCharacter );
 
     if ( !character ) {
@@ -74,7 +74,7 @@ bool WorldManager::addCharacter( const std::string& sessionId, int idUser, int i
         return false;
     }
 
-    std::unique_ptr<Engine::CharacterInstance> characterInstance = std::make_unique<Engine::CharacterInstance>( std::move( character ) );
+    std::unique_ptr<Engine::CharacterInstance> characterInstance = std::make_unique<Engine::CharacterInstance>( std::move( character ), connection );
 
     return _worldInstance->addCharacter( sessionId, std::move( characterInstance ) );
 }

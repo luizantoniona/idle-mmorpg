@@ -1,6 +1,8 @@
 #ifndef CHARACTERINSTANCE_H
 #define CHARACTERINSTANCE_H
 
+#include <drogon/WebSocketConnection.h>
+
 #include <Domain/Character/Character.h>
 #include <Engine/Message/MessageReceiverType.h>
 
@@ -16,7 +18,7 @@ namespace Engine {
 
 class CharacterInstance {
 public:
-    explicit CharacterInstance( std::unique_ptr<Domain::Character> );
+    explicit CharacterInstance( std::unique_ptr<Domain::Character> character, drogon::WebSocketConnectionPtr connection );
 
     std::string sessionId() const;
     void setSessionId( const std::string& sessionId );
@@ -32,6 +34,8 @@ public:
 private:
     std::string _sessionId;
     std::unique_ptr<Domain::Character> _character;
+
+    drogon::WebSocketConnectionPtr _connection;
 
     std::unique_ptr<CharacterActionsController> _actionsController;
     std::unique_ptr<CharacterEffectsController> _effectsController;

@@ -40,20 +40,4 @@ void NetworkSession::setCreatedAt( std::chrono::system_clock::time_point created
     _createdAt = createdAt;
 }
 
-drogon::WebSocketConnectionPtr NetworkSession::connection() const {
-    return _wsConnection;
-}
-
-void NetworkSession::setConnection( const drogon::WebSocketConnectionPtr& connection ) {
-    _wsConnection = connection;
-}
-
-bool NetworkSession::hasActiveConnection() const {
-    if ( !_wsConnection ) {
-        return false;
-    }
-
-    return _wsConnection->connected();
-}
-
 } // namespace Network

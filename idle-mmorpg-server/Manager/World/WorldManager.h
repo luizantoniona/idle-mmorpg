@@ -20,7 +20,7 @@ public:
     void initialize( const std::string& mapPath );
     void finalize();
 
-    bool addCharacter( const std::string& sessionId, int idUser, int idCharacter );
+    bool addCharacter( const std::string& sessionId, int idUser, int idCharacter, drogon::WebSocketConnectionPtr connection );
     void removeCharacter( const std::string& sessionId );
 
     void handleMessage( const std::string& sessionId, const Json::Value& messageJson );

@@ -10,9 +10,10 @@
 
 namespace Engine {
 
-CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> character ) :
+CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> character, drogon::WebSocketConnectionPtr connection ) :
     _sessionId( "" ),
-    _character( std::move( character ) ) {
+    _character( std::move( character ) ),
+    _connection( connection ) {
 
     // --- Actions ---
     _actionsController = std::make_unique<CharacterActionsController>( _character->actions(), Commons::Singleton<Manager::ActionManager>::instance() );
