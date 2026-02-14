@@ -3,16 +3,17 @@
 
 #include <Domain/Character/CharacterEffects.h>
 
+#include "CharacterController.h"
+
 namespace Engine {
 
-class CharacterEffectsController {
+class CharacterEffectsController : public CharacterController {
 public:
     explicit CharacterEffectsController( Domain::CharacterEffects& effects );
 
-    void onEnterWorld();
-    void onExitWorld();
-
-    void tick();
+    void onEnterWorld() override;
+    void onTickWorld() override;
+    void onExitWorld() override;
 
 private:
     Domain::CharacterEffects& _effects;

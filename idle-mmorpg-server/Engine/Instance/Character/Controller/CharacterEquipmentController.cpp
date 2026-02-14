@@ -33,10 +33,10 @@ void CharacterEquipmentController::onEnterWorld() {
     resolve( _equipment.sickle() );
 }
 
-void CharacterEquipmentController::onExitWorld() {
+void CharacterEquipmentController::onTickWorld() {
 }
 
-void CharacterEquipmentController::tick() {
+void CharacterEquipmentController::onExitWorld() {
 }
 
 } // namespace Engine

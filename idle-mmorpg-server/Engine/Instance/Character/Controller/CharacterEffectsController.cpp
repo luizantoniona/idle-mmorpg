@@ -7,8 +7,9 @@ CharacterEffectsController::CharacterEffectsController( Domain::CharacterEffects
 
 void CharacterEffectsController::onEnterWorld() {}
 
-void CharacterEffectsController::onExitWorld() {}
+void CharacterEffectsController::onTickWorld() {
+}
 
-void CharacterEffectsController::tick() {}
+void CharacterEffectsController::onExitWorld() {}
 
 } // namespace Engine

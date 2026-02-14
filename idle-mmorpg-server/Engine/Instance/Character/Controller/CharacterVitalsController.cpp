@@ -3,12 +3,16 @@
 namespace Engine {
 
 CharacterVitalsController::CharacterVitalsController( Domain::CharacterVitals& vitals ) :
-    _vitals( vitals ) {}
+    _vitals( vitals ) {
+}
 
-void CharacterVitalsController::onEnterWorld() {}
+void CharacterVitalsController::onEnterWorld() {
+}
 
-void CharacterVitalsController::onExitWorld() {}
+void CharacterVitalsController::onTickWorld() {
+}
 
-void CharacterVitalsController::tick() {}
+void CharacterVitalsController::onExitWorld() {
+}
 
 } // namespace Engine

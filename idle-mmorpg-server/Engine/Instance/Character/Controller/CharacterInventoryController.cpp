@@ -18,13 +18,13 @@ void CharacterInventoryController::onEnterWorld() {
     }
 }
 
+void CharacterInventoryController::onTickWorld() {
+}
+
 void CharacterInventoryController::onExitWorld() {
     for ( auto& item : _inventory.items() ) {
         item.setItem( nullptr );
     }
-}
-
-void CharacterInventoryController::tick() {
 }
 
 bool CharacterInventoryController::addItem( const std::string& itemId, int amount ) {

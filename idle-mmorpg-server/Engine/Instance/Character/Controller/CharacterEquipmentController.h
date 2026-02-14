@@ -4,16 +4,17 @@
 #include <Domain/Character/CharacterEquipment.h>
 #include <Manager/Item/ItemManager.h>
 
+#include "CharacterController.h"
+
 namespace Engine {
 
-class CharacterEquipmentController {
+class CharacterEquipmentController : public CharacterController {
 public:
     explicit CharacterEquipmentController( Domain::CharacterEquipment& equipment, Manager::ItemManager& itemManager );
 
-    void onEnterWorld();
-    void onExitWorld();
-
-    void tick();
+    void onEnterWorld() override;
+    void onTickWorld() override;
+    void onExitWorld() override;
 
 private:
     Domain::CharacterEquipment& _equipment;

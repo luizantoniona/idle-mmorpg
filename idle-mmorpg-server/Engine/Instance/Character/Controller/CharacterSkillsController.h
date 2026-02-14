@@ -4,16 +4,17 @@
 #include <Domain/Character/CharacterSkills.h>
 #include <Manager/Skill/SkillManager.h>
 
+#include "CharacterController.h"
+
 namespace Engine {
 
-class CharacterSkillsController {
+class CharacterSkillsController : public CharacterController {
 public:
     explicit CharacterSkillsController( Domain::CharacterSkills& skills, Manager::SkillManager& skillManager );
 
-    void onEnterWorld();
-    void onExitWorld();
-
-    void tick();
+    void onEnterWorld() override;
+    void onTickWorld() override;
+    void onExitWorld() override;
 
 private:
     Domain::CharacterSkills& _skills;

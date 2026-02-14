@@ -62,6 +62,20 @@ void CharacterInstance::onEnterWorld() {
     _vitalsController->onEnterWorld();
 }
 
+void CharacterInstance::onTickWorld() {
+    if ( !_character ) {
+        return;
+    }
+
+    _actionsController->onTickWorld();
+    _effectsController->onTickWorld();
+    _equipmentController->onTickWorld();
+    _inventoryController->onTickWorld();
+    _skillsController->onTickWorld();
+    _spellsController->onTickWorld();
+    _vitalsController->onTickWorld();
+}
+
 void CharacterInstance::onLeaveWorld() {
     if ( !_character ) {
         return;
@@ -76,20 +90,6 @@ void CharacterInstance::onLeaveWorld() {
     _vitalsController->onExitWorld();
 
     Repository::CharacterRepository().updateCharacter( *_character );
-}
-
-void CharacterInstance::tick() {
-    if ( !_character ) {
-        return;
-    }
-
-    _actionsController->tick();
-    _effectsController->tick();
-    _equipmentController->tick();
-    _inventoryController->tick();
-    _skillsController->tick();
-    _spellsController->tick();
-    _vitalsController->tick();
 }
 
 void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {

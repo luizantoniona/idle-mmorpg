@@ -4,16 +4,17 @@
 #include <Domain/Character/CharacterInventory.h>
 #include <Manager/Item/ItemManager.h>
 
+#include "CharacterController.h"
+
 namespace Engine {
 
-class CharacterInventoryController {
+class CharacterInventoryController : public CharacterController {
 public:
     explicit CharacterInventoryController( Domain::CharacterInventory& inventory, Manager::ItemManager& itemManager );
 
-    void onEnterWorld();
-    void onExitWorld();
-
-    void tick();
+    void onEnterWorld() override;
+    void onTickWorld() override;
+    void onExitWorld() override;
 
     bool addItem( const std::string& itemId, int amount );
     bool removeItem( const std::string& itemId, int amount );

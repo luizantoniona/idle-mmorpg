@@ -3,16 +3,17 @@
 
 #include <Domain/Character/CharacterVitals.h>
 
+#include "CharacterController.h"
+
 namespace Engine {
 
-class CharacterVitalsController {
+class CharacterVitalsController : public CharacterController {
 public:
     explicit CharacterVitalsController( Domain::CharacterVitals& vitals );
 
-    void onEnterWorld();
-    void onExitWorld();
-
-    void tick();
+    void onEnterWorld() override;
+    void onTickWorld() override;
+    void onExitWorld() override;
 
 private:
     Domain::CharacterVitals& _vitals;

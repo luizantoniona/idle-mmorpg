@@ -24,9 +24,8 @@ public:
     Domain::Character& character();
 
     void onEnterWorld();
+    void onTickWorld();
     void onLeaveWorld();
-
-    void tick();
 
     void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
 

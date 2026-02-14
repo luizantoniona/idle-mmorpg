@@ -4,12 +4,16 @@ namespace Engine {
 
 CharacterActionsController::CharacterActionsController( Domain::CharacterActions& actions, Manager::ActionManager& actionManager ) :
     _actions( actions ),
-    _actionManager( actionManager ) {}
+    _actionManager( actionManager ) {
+}
 
-void CharacterActionsController::onEnterWorld() {}
+void CharacterActionsController::onEnterWorld() {
+}
 
-void CharacterActionsController::onExitWorld() {}
+void CharacterActionsController::onTickWorld() {
+}
 
-void CharacterActionsController::tick() {}
+void CharacterActionsController::onExitWorld() {
+}
 
 } // namespace Engine

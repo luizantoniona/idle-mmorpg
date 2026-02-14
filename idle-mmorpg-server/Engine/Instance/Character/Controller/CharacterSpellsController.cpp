@@ -19,10 +19,10 @@ void CharacterSpellsController::onEnterWorld() {
     }
 }
 
-void CharacterSpellsController::onExitWorld() {
+void CharacterSpellsController::onTickWorld() {
 }
 
-void CharacterSpellsController::tick() {
+void CharacterSpellsController::onExitWorld() {
 }
 
 } // namespace Engine

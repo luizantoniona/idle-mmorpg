@@ -21,10 +21,10 @@ void CharacterSkillsController::onEnterWorld() {
     }
 }
 
-void CharacterSkillsController::onExitWorld() {
+void CharacterSkillsController::onTickWorld() {
 }
 
-void CharacterSkillsController::tick() {
+void CharacterSkillsController::onExitWorld() {
 }
 
 } // namespace Engine

@@ -4,16 +4,17 @@
 #include <Domain/Character/CharacterActions.h>
 #include <Manager/Action/ActionManager.h>
 
+#include "CharacterController.h"
+
 namespace Engine {
 
-class CharacterActionsController {
+class CharacterActionsController : public CharacterController {
 public:
     explicit CharacterActionsController( Domain::CharacterActions& actions, Manager::ActionManager& actionManager );
 
-    void onEnterWorld();
-    void onExitWorld();
-
-    void tick();
+    void onEnterWorld() override;
+    void onTickWorld() override;
+    void onExitWorld() override;
 
 private:
     Domain::CharacterActions& _actions;
