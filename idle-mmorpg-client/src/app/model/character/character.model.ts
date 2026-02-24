@@ -9,11 +9,11 @@ import { CharacterVitals } from "./character-vitals.model";
 import { CharacterWallet } from "./character-wallet.model";
 
 export type Character = {
-    idUser: number;
     idCharacter: number;
+    idUser: number;
     name: string;
-    action: CharacterAction;
-    effects: CharacterEffect[];
+
+    // --- Persistent Data
     equipment: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;
@@ -21,4 +21,8 @@ export type Character = {
     spells: CharacterSpells;
     vitals: CharacterVitals;
     wallet: CharacterWallet;
+
+    // --- Runtime Data
+    action: CharacterAction;
+    effects: CharacterEffect[];
 };

@@ -1,31 +1,28 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
-import { CharacterPanel } from './component';
+import { CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel, CharacterSkillsPanel, CharacterSpellsPanel, CharacterWalletPanel } from "./component";
 // import { CharacterAttributesPanel } from './component';
-import { CharacterEquipmentPanel } from './component';
-import { CharacterInventoryPanel } from './component';
-import { CharacterSkillsPanel } from './component';
-import { CharacterWalletPanel } from './component';
 // import { MainPanel } from './component';
 // import { OptionsPanel } from './component';
 
-import { Character } from '../../model';
-import { Stage } from '../../model';
+import { Character } from "../../model";
+import { Stage } from "../../model";
 
-import { WebsocketService } from '../../service/';
+import { WebsocketService } from "../../service";
 
 @Component({
-    selector: 'app-game-page',
-    templateUrl: './game.page.html',
-    styleUrl: './game.page.scss',
+    selector: "app-game-page",
+    templateUrl: "./game.page.html",
+    styleUrls: ["./game.page.scss"],
     imports: [
-        CharacterPanel,
+        CharacterDataPanel,
         // CharacterAttributesPanel,
         CharacterEquipmentPanel,
         CharacterInventoryPanel,
         CharacterSkillsPanel,
+        CharacterSpellsPanel,
         CharacterWalletPanel,
         // MainPanel,
         // OptionsPanel,
@@ -98,7 +95,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_ACTION':
+            case 'CHARACTER_ACTIONS':
                 if (data.payload?.action) {
                     this.character = {
                         ...this.character!,
@@ -161,7 +158,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_VITALS_UPDATE':
+            case 'CHARACTER_VITALS':
                 if (data.payload?.vitals) {
                     this.character = {
                         ...this.character!,
@@ -170,7 +167,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_WALLET_UPDATE':
+            case 'CHARACTER_WALLET':
                 if (data.payload?.wallet) {
                     this.character = {
                         ...this.character!,

@@ -1,7 +1,6 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { CharacterSpellsPanel } from "../character-spells-panel/character-spells.panel";
 import { CombatPanel } from "../combat-panel/combat.panel";
 
 import { Character } from "../../../../model";
@@ -16,7 +15,6 @@ import { WebsocketService } from "../../../../service";
     imports: [
         CommonModule,
         CombatPanel,
-        CharacterSpellsPanel,
     ],
 })
 

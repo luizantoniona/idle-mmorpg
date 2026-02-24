@@ -1,9 +1,10 @@
 
-export { CharacterPanel } from './character-panel/character-panel.component';
-export { CharacterEquipmentPanel } from './character-equipment-panel/character-equipment.panel';
-export { CharacterInventoryPanel } from './character-inventory-panel/character-inventory.panel';
-export { CharacterSkillsPanel } from './character-skills-panel/character-skills-panel.component';
-export { CharacterWalletPanel } from './character-wallet-panel/character-wallet-panel.component';
+export { CharacterDataPanel } from "./panel-character-data/character-data.panel";
+export { CharacterEquipmentPanel } from "./panel-character-equipment/character-equipment.panel";
+export { CharacterInventoryPanel } from "./panel-character-inventory/character-inventory.panel";
+export { CharacterSkillsPanel } from "./panel-character-skills/character-skills.panel";
+export { CharacterSpellsPanel } from "./panel-character-spells/character-spells.panel"
+export { CharacterWalletPanel } from "./panel-character-wallet/character-wallet.panel";
 
 export { CombatPanel } from './combat-panel/combat.panel'
 

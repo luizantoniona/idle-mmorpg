@@ -7,9 +7,9 @@ import { BarComponent, ButtonComponent, LoadingComponent, PanelComponent } from 
 import { Character } from "../../../../model";
 
 @Component({
-    selector: "app-character-panel",
-    templateUrl: "./character-panel.component.html",
-    styleUrls: ["./character-panel.component.scss"],
+    selector: "app-character-data-panel",
+    templateUrl: "./character-data.panel.html",
+    styleUrls: ["./character-data.panel.scss"],
     imports: [
         CommonModule,
         BarComponent,
@@ -19,7 +19,7 @@ import { Character } from "../../../../model";
     ],
 })
 
-export class CharacterPanel {
+export class CharacterDataPanel {
     @Input() character!: Character;
 
     private router = inject(Router);

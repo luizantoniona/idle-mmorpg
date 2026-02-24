@@ -7,8 +7,8 @@ import { Character, CharacterSkill } from "../../../../model";
 
 @Component({
     selector: "app-character-skills-panel",
-    templateUrl: "./character-skills-panel.component.html",
-    styleUrls: ["./character-skills-panel.component.scss"],
+    templateUrl: "./character-skills.panel.html",
+    styleUrls: ["./character-skills.panel.scss"],
     imports: [
         CommonModule,
         BarComponent,

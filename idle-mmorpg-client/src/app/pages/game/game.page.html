@@ -1,11 +1,12 @@
 <div class="game-layout">
     <div class="left-panel">
-        <app-character-panel [character]="character!"></app-character-panel>
-        <!-- <app-character-attributes-panel [character]="character!"></app-character-attributes-panel> -->
+        <app-character-data-panel [character]="character!"></app-character-data-panel>
         <app-character-skills-panel [character]="character!"></app-character-skills-panel>
     </div>
 
     <div class="main-panel">
+        <app-character-spells-panel [character]="character!"></app-character-spells-panel>
+
         <!-- <app-main-panel [character]="character!" [location]="location!"></app-main-panel> -->
     </div>
 
