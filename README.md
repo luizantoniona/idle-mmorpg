@@ -124,5 +124,5 @@ npm install
 
 3 - Start the development server:
 ```bash
-ng serve
+npm start
 ```
