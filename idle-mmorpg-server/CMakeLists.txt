@@ -17,7 +17,6 @@ file(GLOB_RECURSE SOURCES
   Domain/*.cpp
   Engine/*.cpp
   Infrastructure/*.cpp
-  Manager/*.cpp
   Repository/*.cpp
   Shared/*.cpp
 )
@@ -26,7 +25,6 @@ file(GLOB_RECURSE HEADERS
   Domain/*.h
   Engine/*.h
   Infrastructure/*.h
-  Manager/*.h
   Repository/*.h
   Shared/*.h
 )
