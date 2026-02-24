@@ -8,12 +8,14 @@ CharacterActions::CharacterActions() :
     _counter( 0 ) {}
 
 Json::Value CharacterActions::toJson() {
-    Json::Value root;
-    root[ "id" ] = id();
-    root[ "duration" ] = duration();
-    root[ "counter" ] = counter();
+    Json::Value values;
+    values[ "id" ] = id();
+    values[ "duration" ] = duration();
+    values[ "counter" ] = counter();
 
-    return root;
+    Json::Value actions;
+    actions[ "actions" ] = values;
+    return actions;
 }
 
 std::string CharacterActions::id() const {

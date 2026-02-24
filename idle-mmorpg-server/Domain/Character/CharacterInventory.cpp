@@ -5,11 +5,14 @@ namespace Domain {
 CharacterInventory::CharacterInventory() {}
 
 Json::Value CharacterInventory::toJson() {
-    Json::Value root;
+    Json::Value values;
     for ( auto& item : items() ) {
-        root[ "items" ].append( item.toJson() );
+        values.append( item.toJson() );
     }
-    return root;
+
+    Json::Value inventory;
+    inventory[ "inventory" ] = values;
+    return inventory;
 }
 
 std::vector<CharacterInventoryItem>& CharacterInventory::items() {

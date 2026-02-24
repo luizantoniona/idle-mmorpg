@@ -5,14 +5,17 @@
 
 #include <Domain/Character/Character.h>
 #include <Engine/Message/MessageReceiverType.h>
+#include <Engine/Message/MessageSenderType.h>
 
 #include "Controller/CharacterActionsController.h"
 #include "Controller/CharacterEffectsController.h"
 #include "Controller/CharacterEquipmentController.h"
 #include "Controller/CharacterInventoryController.h"
+#include "Controller/CharacterProgressionController.h"
 #include "Controller/CharacterSkillsController.h"
 #include "Controller/CharacterSpellsController.h"
 #include "Controller/CharacterVitalsController.h"
+#include "Controller/CharacterWalletController.h"
 
 namespace Engine {
 
@@ -30,6 +33,7 @@ public:
     void onLeaveWorld();
 
     void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
+    void sendMessage( MessageSenderType type, const Json::Value& payload );
 
 private:
     std::string _sessionId;
@@ -37,15 +41,17 @@ private:
 
     drogon::WebSocketConnectionPtr _connection;
 
+    std::vector<CharacterController*> _controllers;
+
     std::unique_ptr<CharacterActionsController> _actionsController;
     std::unique_ptr<CharacterEffectsController> _effectsController;
     std::unique_ptr<CharacterEquipmentController> _equipmentController;
     std::unique_ptr<CharacterInventoryController> _inventoryController;
-    // Progression
+    std::unique_ptr<CharacterProgressionController> _progressionController;
     std::unique_ptr<CharacterSkillsController> _skillsController;
     std::unique_ptr<CharacterSpellsController> _spellsController;
     std::unique_ptr<CharacterVitalsController> _vitalsController;
-    // Wallet
+    std::unique_ptr<CharacterWalletController> _walletControler;
 };
 
 } // namespace Engine

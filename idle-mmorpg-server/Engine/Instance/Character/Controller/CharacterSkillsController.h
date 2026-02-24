@@ -2,7 +2,7 @@
 #define CHARACTERSKILLSCONTROLLER_H
 
 #include <Domain/Character/CharacterSkills.h>
-#include <Manager/Skill/SkillManager.h>
+#include <Engine/Manager/Skill/SkillManager.h>
 
 #include "CharacterController.h"
 
@@ -10,7 +10,9 @@ namespace Engine {
 
 class CharacterSkillsController : public CharacterController {
 public:
-    explicit CharacterSkillsController( Domain::CharacterSkills& skills, Manager::SkillManager& skillManager );
+    explicit CharacterSkillsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+                                        Domain::CharacterSkills& skills,
+                                        Manager::SkillManager& skillManager );
 
     void onEnterWorld() override;
     void onTickWorld() override;

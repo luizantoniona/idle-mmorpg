@@ -6,13 +6,14 @@ CharacterSkills::CharacterSkills() :
     _skills() {}
 
 Json::Value CharacterSkills::toJson() {
-    Json::Value root;
-
+    Json::Value values;
     for ( auto& skill : _skills ) {
-        root.append( skill.toJson() );
+        values.append( skill.toJson() );
     }
 
-    return root;
+    Json::Value skills;
+    skills[ "skills" ] = values;
+    return skills;
 }
 
 std::vector<CharacterSkill>& CharacterSkills::skills() {

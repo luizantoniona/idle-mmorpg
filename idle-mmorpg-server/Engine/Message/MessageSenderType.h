@@ -8,7 +8,7 @@ enum class MessageSenderType {
 
     // --- Character Updates ---
     CHARACTER,
-    CHARACTER_ACTION,
+    CHARACTER_ACTIONS,
     CHARACTER_EFFECTS,
     CHARACTER_EQUIPMENT,
     CHARACTER_INVENTORY,
@@ -27,7 +27,6 @@ enum class MessageSenderType {
     COMBAT_ROOMS,
 
     // --- OLD: Need Review
-
     CHARACTER_CURRENT_ACTION_UPDATE,
     CHARACTER_CURRENT_COORDINATES_UPDATE,
 };

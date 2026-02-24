@@ -2,7 +2,7 @@
 #define CHARACTERACTIONSCONTROLLER_H
 
 #include <Domain/Character/CharacterActions.h>
-#include <Manager/Action/ActionManager.h>
+#include <Engine/Manager/Action/ActionManager.h>
 
 #include "CharacterController.h"
 
@@ -10,7 +10,9 @@ namespace Engine {
 
 class CharacterActionsController : public CharacterController {
 public:
-    explicit CharacterActionsController( Domain::CharacterActions& actions, Manager::ActionManager& actionManager );
+    explicit CharacterActionsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+                                         Domain::CharacterActions& actions,
+                                         Manager::ActionManager& actionManager );
 
     void onEnterWorld() override;
     void onTickWorld() override;

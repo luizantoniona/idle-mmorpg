@@ -9,7 +9,8 @@ namespace Engine {
 
 class CharacterEffectsController : public CharacterController {
 public:
-    explicit CharacterEffectsController( Domain::CharacterEffects& effects );
+    explicit CharacterEffectsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+                                         Domain::CharacterEffects& effects );
 
     void onEnterWorld() override;
     void onTickWorld() override;

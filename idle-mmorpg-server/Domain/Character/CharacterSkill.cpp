@@ -13,14 +13,14 @@ CharacterSkill::CharacterSkill() :
     _skill( nullptr ) {}
 
 Json::Value CharacterSkill::toJson() {
-    Json::Value root;
-    root[ "id" ] = id();
-    root[ "level" ] = level();
-    root[ "bonusLevel" ] = bonusLevel();
-    root[ "experience" ] = experience();
-    root[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
-    root[ "skill" ] = skill()->toJson();
-    return root;
+    Json::Value values;
+    values[ "id" ] = id();
+    values[ "level" ] = level();
+    values[ "bonusLevel" ] = bonusLevel();
+    values[ "experience" ] = experience();
+    values[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
+    values[ "skill" ] = skill()->toJson();
+    return values;
 }
 
 SkillType CharacterSkill::type() const {

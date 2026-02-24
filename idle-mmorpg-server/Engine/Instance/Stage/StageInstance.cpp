@@ -41,10 +41,10 @@ void StageInstance::tick() {
     std::lock_guard lock( _mutex );
 
     for ( const auto& [ sessionId, character ] : _characters ) {
-        character->tick();
+        character->onTickWorld();
     }
 
-    // --- Controllers.tick();
+    // --- Controllers.onTickWorld();
 }
 
 void StageInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {

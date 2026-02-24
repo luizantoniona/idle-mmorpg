@@ -2,7 +2,7 @@
 #define CHARACTERINVENTORYCONTROLLER_H
 
 #include <Domain/Character/CharacterInventory.h>
-#include <Manager/Item/ItemManager.h>
+#include <Engine/Manager/Item/ItemManager.h>
 
 #include "CharacterController.h"
 
@@ -10,7 +10,9 @@ namespace Engine {
 
 class CharacterInventoryController : public CharacterController {
 public:
-    explicit CharacterInventoryController( Domain::CharacterInventory& inventory, Manager::ItemManager& itemManager );
+    explicit CharacterInventoryController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+                                           Domain::CharacterInventory& inventory,
+                                           Manager::ItemManager& itemManager );
 
     void onEnterWorld() override;
     void onTickWorld() override;

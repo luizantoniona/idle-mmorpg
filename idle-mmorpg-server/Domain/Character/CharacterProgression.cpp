@@ -9,11 +9,14 @@ CharacterProgression::CharacterProgression() :
     _experience( 0 ) {}
 
 Json::Value CharacterProgression::toJson() {
-    Json::Value root;
-    root[ "level" ] = level();
-    root[ "experience" ] = experience();
-    root[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
-    return root;
+    Json::Value values;
+    values[ "level" ] = level();
+    values[ "experience" ] = experience();
+    values[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
+
+    Json::Value progression;
+    progression[ "progression" ] = values;
+    return progression;
 }
 
 int CharacterProgression::level() const {

@@ -8,11 +8,11 @@ CharacterEquipmentItem::CharacterEquipmentItem() :
 }
 
 Json::Value CharacterEquipmentItem::toJson() {
-    Json::Value root;
+    Json::Value values;
     if ( _item ) {
-        root = item()->toJson();
+        values = item()->toJson();
     }
-    return root;
+    return values;
 }
 
 std::string CharacterEquipmentItem::id() const {

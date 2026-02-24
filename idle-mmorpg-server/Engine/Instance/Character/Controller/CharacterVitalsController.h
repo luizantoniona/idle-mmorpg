@@ -9,7 +9,8 @@ namespace Engine {
 
 class CharacterVitalsController : public CharacterController {
 public:
-    explicit CharacterVitalsController( Domain::CharacterVitals& vitals );
+    explicit CharacterVitalsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+                                        Domain::CharacterVitals& vitals );
 
     void onEnterWorld() override;
     void onTickWorld() override;

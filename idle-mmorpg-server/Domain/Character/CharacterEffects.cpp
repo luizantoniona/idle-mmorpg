@@ -7,11 +7,14 @@ namespace Domain {
 CharacterEffects::CharacterEffects() {}
 
 Json::Value CharacterEffects::toJson() {
-    Json::Value root;
+    Json::Value values;
     for ( auto& effect : effects() ) {
-        root[ "effects" ].append( effect.toJson() );
+        values.append( effect.toJson() );
     }
-    return root;
+
+    Json::Value effects;
+    effects[ "effects" ] = values;
+    return effects;
 }
 
 std::vector<CharacterEffect>& CharacterEffects::effects() {

@@ -4,7 +4,10 @@
 
 namespace Engine {
 
-CharacterSkillsController::CharacterSkillsController( Domain::CharacterSkills& skills, Manager::SkillManager& skillManager ) :
+CharacterSkillsController::CharacterSkillsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+                                                      Domain::CharacterSkills& skills,
+                                                      Manager::SkillManager& skillManager ) :
+    CharacterController( sendMessage ),
     _skills( skills ),
     _skillManager( skillManager ) {
 }
@@ -19,6 +22,8 @@ void CharacterSkillsController::onEnterWorld() {
         skill.setSkill( resolved );
         skill.setType( Domain::SkillHelper::stringToType( skill.id() ) );
     }
+
+    sendMessage( MessageSenderType::CHARACTER_SKILLS, _skills.toJson() );
 }
 
 void CharacterSkillsController::onTickWorld() {

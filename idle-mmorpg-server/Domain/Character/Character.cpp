@@ -20,11 +20,11 @@ Character::Character() :
     _effects() {}
 
 Json::Value Character::toJson() {
-    Json::Value root;
-    root[ "idUser" ] = idUser();
-    root[ "idCharacter" ] = idCharacter();
-    root[ "name" ] = name();
-    return root;
+    Json::Value values;
+    values[ "idUser" ] = idUser();
+    values[ "idCharacter" ] = idCharacter();
+    values[ "name" ] = name();
+    return values;
 }
 
 int Character::idCharacter() const {

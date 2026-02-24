@@ -1,7 +1,7 @@
 #include "CharacterWebSocket.h"
 
+#include <Engine/Manager/World/WorldManager.h>
 #include <Infrastructure/Network/NetworkServer.h>
-#include <Manager/World/WorldManager.h>
 #include <Shared/Commons/Singleton.h>
 
 namespace Network {

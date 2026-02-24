@@ -13,14 +13,17 @@ CharacterVitals::CharacterVitals() :
     _regenCounter( 0 ) {}
 
 Json::Value CharacterVitals::toJson() {
-    Json::Value root;
-    root[ "health" ] = health();
-    root[ "maxHealth" ] = maxHealth();
-    root[ "mana" ] = mana();
-    root[ "maxMana" ] = maxMana();
-    root[ "stamina" ] = stamina();
-    root[ "maxStamina" ] = maxStamina();
-    return root;
+    Json::Value values;
+    values[ "health" ] = health();
+    values[ "maxHealth" ] = maxHealth();
+    values[ "mana" ] = mana();
+    values[ "maxMana" ] = maxMana();
+    values[ "stamina" ] = stamina();
+    values[ "maxStamina" ] = maxStamina();
+
+    Json::Value vitals;
+    vitals[ "vitals" ] = values;
+    return vitals;
 }
 
 double CharacterVitals::health() const {

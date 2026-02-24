@@ -5,15 +5,14 @@ namespace Domain {
 CharacterSpells::CharacterSpells() {}
 
 Json::Value CharacterSpells::toJson() {
-    Json::Value root;
-
-    Json::Value spells( Json::arrayValue );
+    Json::Value values( Json::arrayValue );
     for ( const auto& spell : _spells ) {
-        spells.append( spell.toJson() );
+        values.append( spell.toJson() );
     }
-    root[ "spells" ] = spells;
 
-    return root;
+    Json::Value spells;
+    spells[ "spells" ] = values;
+    return spells;
 }
 
 std::vector<CharacterSpell>& CharacterSpells::spells() {

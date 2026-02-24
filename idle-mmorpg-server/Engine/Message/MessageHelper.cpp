@@ -27,8 +27,8 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
         // --- Character Updates ---
     case MessageSenderType::CHARACTER:
         return "CHARACTER";
-    case MessageSenderType::CHARACTER_ACTION:
-        return "CHARACTER_ACTION";
+    case MessageSenderType::CHARACTER_ACTIONS:
+        return "CHARACTER_ACTIONS";
     case MessageSenderType::CHARACTER_EFFECTS:
         return "CHARACTER_EFFECTS";
     case MessageSenderType::CHARACTER_EQUIPMENT:
