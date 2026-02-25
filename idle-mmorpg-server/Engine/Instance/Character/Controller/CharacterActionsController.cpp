@@ -14,10 +14,10 @@ void CharacterActionsController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_ACTIONS, _actions.toJson() );
 }
 
-void CharacterActionsController::onTickWorld() {
+void CharacterActionsController::onLeaveWorld() {
 }
 
-void CharacterActionsController::onExitWorld() {
+void CharacterActionsController::onTick() {
 }
 
 } // namespace Engine

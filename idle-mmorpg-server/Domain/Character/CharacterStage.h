@@ -3,11 +3,15 @@
 
 #include <string>
 
+#include <json/json.h>
+
 namespace Domain {
 
 class CharacterStage {
 public:
     CharacterStage();
+
+    Json::Value toJson() const;
 
     std::string idStage() const;
     void setIdStage( const std::string& idStage );

@@ -38,10 +38,10 @@ void CharacterEquipmentController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _equipment.toJson() );
 }
 
-void CharacterEquipmentController::onTickWorld() {
+void CharacterEquipmentController::onLeaveWorld() {
 }
 
-void CharacterEquipmentController::onExitWorld() {
+void CharacterEquipmentController::onTick() {
 }
 
 } // namespace Engine

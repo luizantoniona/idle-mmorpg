@@ -13,8 +13,9 @@ public:
                                          Domain::CharacterEffects& effects );
 
     void onEnterWorld() override;
-    void onTickWorld() override;
-    void onExitWorld() override;
+    void onLeaveWorld() override;
+
+    void onTick() override;
 
 private:
     Domain::CharacterEffects& _effects;

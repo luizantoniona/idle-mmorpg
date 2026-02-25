@@ -13,8 +13,9 @@ public:
                                         Domain::CharacterVitals& vitals );
 
     void onEnterWorld() override;
-    void onTickWorld() override;
-    void onExitWorld() override;
+    void onLeaveWorld() override;
+
+    void onTick() override;
 
 private:
     Domain::CharacterVitals& _vitals;

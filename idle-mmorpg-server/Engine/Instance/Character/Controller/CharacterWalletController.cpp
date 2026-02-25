@@ -12,10 +12,10 @@ void CharacterWalletController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_WALLET, _wallet.toJson() );
 }
 
-void CharacterWalletController::onTickWorld() {
+void CharacterWalletController::onLeaveWorld() {
 }
 
-void CharacterWalletController::onExitWorld() {
+void CharacterWalletController::onTick() {
 }
 
 } // namespace Engine

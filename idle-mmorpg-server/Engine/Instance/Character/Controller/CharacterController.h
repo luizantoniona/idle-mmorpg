@@ -17,8 +17,9 @@ public:
     virtual ~CharacterController();
 
     virtual void onEnterWorld() = 0;
-    virtual void onTickWorld() = 0;
-    virtual void onExitWorld() = 0;
+    virtual void onLeaveWorld() = 0;
+
+    virtual void onTick() = 0;
 
     virtual void handleMessage( MessageReceiverType type, const Json::Value& payload );
 

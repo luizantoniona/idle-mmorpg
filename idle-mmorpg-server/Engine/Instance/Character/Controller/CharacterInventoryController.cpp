@@ -23,13 +23,13 @@ void CharacterInventoryController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_INVENTORY, _inventory.toJson() );
 }
 
-void CharacterInventoryController::onTickWorld() {
-}
-
-void CharacterInventoryController::onExitWorld() {
+void CharacterInventoryController::onLeaveWorld() {
     for ( auto& item : _inventory.items() ) {
         item.setItem( nullptr );
     }
+}
+
+void CharacterInventoryController::onTick() {
 }
 
 bool CharacterInventoryController::addItem( const std::string& itemId, int amount ) {

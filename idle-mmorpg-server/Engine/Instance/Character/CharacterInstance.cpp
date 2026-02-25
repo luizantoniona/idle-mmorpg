@@ -84,26 +84,26 @@ void CharacterInstance::onEnterWorld() {
     }
 }
 
-void CharacterInstance::onTickWorld() {
-    if ( !_character ) {
-        return;
-    }
-
-    for ( auto* controller : _controllers ) {
-        controller->onTickWorld();
-    }
-}
-
 void CharacterInstance::onLeaveWorld() {
     if ( !_character ) {
         return;
     }
 
     for ( auto* controller : _controllers ) {
-        controller->onExitWorld();
+        controller->onLeaveWorld();
     }
 
     Repository::CharacterRepository().updateCharacter( *_character );
+}
+
+void CharacterInstance::onTick() {
+    if ( !_character ) {
+        return;
+    }
+
+    for ( auto* controller : _controllers ) {
+        controller->onTick();
+    }
 }
 
 void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {

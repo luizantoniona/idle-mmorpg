@@ -7,6 +7,16 @@ CharacterStage::CharacterStage() :
     _completed( false ) {
 }
 
+Json::Value CharacterStage::toJson() const {
+    Json::Value values;
+    values[ "idStage" ] = idStage();
+    values[ "completed" ] = completed();
+
+    Json::Value stage;
+    stage[ "stage" ] = values;
+    return values;
+}
+
 std::string CharacterStage::idStage() const {
     return _idStage;
 }

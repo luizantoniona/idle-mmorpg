@@ -12,10 +12,10 @@ void CharacterProgressionController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _progression.toJson() );
 }
 
-void CharacterProgressionController::onTickWorld() {
+void CharacterProgressionController::onLeaveWorld() {
 }
 
-void CharacterProgressionController::onExitWorld() {
+void CharacterProgressionController::onTick() {
 }
 
 } // namespace Engine

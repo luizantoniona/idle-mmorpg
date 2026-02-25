@@ -15,8 +15,9 @@ public:
                                            Manager::ItemManager& itemManager );
 
     void onEnterWorld() override;
-    void onTickWorld() override;
-    void onExitWorld() override;
+    void onLeaveWorld() override;
+
+    void onTick() override;
 
     bool addItem( const std::string& itemId, int amount );
     bool removeItem( const std::string& itemId, int amount );

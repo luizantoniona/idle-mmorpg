@@ -12,10 +12,10 @@ void CharacterEffectsController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_EFFECTS, _effects.toJson() );
 }
 
-void CharacterEffectsController::onTickWorld() {
+void CharacterEffectsController::onLeaveWorld() {
 }
 
-void CharacterEffectsController::onExitWorld() {
+void CharacterEffectsController::onTick() {
 }
 
 } // namespace Engine

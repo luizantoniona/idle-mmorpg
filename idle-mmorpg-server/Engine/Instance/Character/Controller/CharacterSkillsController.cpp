@@ -26,10 +26,10 @@ void CharacterSkillsController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_SKILLS, _skills.toJson() );
 }
 
-void CharacterSkillsController::onTickWorld() {
+void CharacterSkillsController::onLeaveWorld() {
 }
 
-void CharacterSkillsController::onExitWorld() {
+void CharacterSkillsController::onTick() {
 }
 
 } // namespace Engine

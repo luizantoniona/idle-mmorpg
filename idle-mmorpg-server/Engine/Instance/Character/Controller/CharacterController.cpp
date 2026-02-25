@@ -8,14 +8,13 @@ CharacterController::CharacterController( std::function<void( MessageSenderType,
 
 CharacterController::~CharacterController() = default;
 
+void CharacterController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
+}
+
 void CharacterController::sendMessage( MessageSenderType type, const Json::Value& payload ) {
     if ( _sendMessage ) {
         _sendMessage( type, payload );
     }
-}
-
-void CharacterController::handleMessage( MessageReceiverType, const Json::Value& ) {
-    return;
 }
 
 } // namespace Engine

@@ -29,8 +29,15 @@ public:
     Domain::Character& character();
 
     void onEnterWorld();
-    void onTickWorld();
     void onLeaveWorld();
+
+    void onEnterStage();
+    void onLeaveStage();
+
+    void onEnterCombat();
+    void onLeaveCombat();
+
+    void onTick();
 
     void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
     void sendMessage( MessageSenderType type, const Json::Value& payload );

@@ -12,10 +12,10 @@ void CharacterVitalsController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_VITALS, _vitals.toJson() );
 }
 
-void CharacterVitalsController::onTickWorld() {
+void CharacterVitalsController::onLeaveWorld() {
 }
 
-void CharacterVitalsController::onExitWorld() {
+void CharacterVitalsController::onTick() {
 }
 
 } // namespace Engine

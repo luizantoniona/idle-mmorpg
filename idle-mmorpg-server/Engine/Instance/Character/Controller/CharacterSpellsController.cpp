@@ -24,10 +24,10 @@ void CharacterSpellsController::onEnterWorld() {
     sendMessage( MessageSenderType::CHARACTER_SPELLS, _spells.toJson() );
 }
 
-void CharacterSpellsController::onTickWorld() {
+void CharacterSpellsController::onLeaveWorld() {
 }
 
-void CharacterSpellsController::onExitWorld() {
+void CharacterSpellsController::onTick() {
 }
 
 } // namespace Engine
