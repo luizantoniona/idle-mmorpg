@@ -8,10 +8,16 @@ namespace Engine {
 
 StageInstance::StageInstance( Domain::Stage* stage ) :
     _stage( stage ),
-    _characters( {} ) {
+    _characters( {} ),
+    _controllers( {} ) {
+
+    // --- Action ---
+    _actionController = std::make_unique<StageActionController>( stage );
+    _controllers.push_back( _actionController.get() );
 
     // --- Combat ---
     _combatController = std::make_unique<StageCombatController>( stage );
+    _controllers.push_back( _combatController.get() );
 }
 
 bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstance* characterInstance ) {
@@ -24,6 +30,8 @@ bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstanc
               << " [SessionID] " << sessionId << std::endl;
 
     // --- Controllers: Add CharacterInstances on necessary controllers
+
+    characterInstance->sendMessage( MessageSenderType::STAGE, _stage->toJson() );
 
     return true;
 }
@@ -41,10 +49,12 @@ void StageInstance::tick() {
     std::lock_guard lock( _mutex );
 
     for ( const auto& [ sessionId, character ] : _characters ) {
-        character->onTickWorld();
+        character->onTick();
     }
 
-    // --- Controllers.onTickWorld();
+    for ( auto* controller : _controllers ) {
+        controller->onTick();
+    }
 }
 
 void StageInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {

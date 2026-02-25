@@ -28,6 +28,7 @@ public:
 
 private:
     std::string _id;
+
     int _duration;
     int _counter;
 };

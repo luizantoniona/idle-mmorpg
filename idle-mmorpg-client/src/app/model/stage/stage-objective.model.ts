@@ -1,5 +1,5 @@
 export type StageObjectives = {
     id: string;
-    name: string;
+    target: string;
     amount: number;
 };

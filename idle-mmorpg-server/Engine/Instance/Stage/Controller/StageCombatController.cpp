@@ -3,10 +3,17 @@
 namespace Engine {
 
 StageCombatController::StageCombatController( Domain::Stage* stage ) :
-    _stage( stage ) {
+    StageController( stage ) {
 }
 
-void StageCombatController::tick() {
+void StageCombatController::onCharacterEnter() {
+}
+
+void StageCombatController::onCharacterExit() {
+}
+
+void StageCombatController::onTick() {
+
     // for ( auto it = _combatInstances.begin(); it != _combatInstances.end(); ) {
     //     CombatInstance* combatInstance = it->get();
     //     combatInstance->process();
