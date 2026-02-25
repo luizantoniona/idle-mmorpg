@@ -2,10 +2,9 @@ import { Component, Input } from "@angular/core";
 
 import { ButtonComponent, PanelComponent } from "../../../../component/ui";
 
-import { ChatPanel } from "./chat-panel/chat-panel.component";
+import { ChatPopup } from "./popup-chat/chat.popup";
 
-import { Character } from "../../../../model";
-import { Stage } from "../../../../model";
+import { Character, Stage } from "../../../../model";
 
 @Component({
     selector: "app-options-panel",
@@ -14,27 +13,21 @@ import { Stage } from "../../../../model";
     imports: [
         ButtonComponent,
         PanelComponent,
-        ChatPanel,
+        ChatPopup,
     ],
 })
 
 export class OptionsPanel {
     @Input() character!: Character;
-    @Input() location!: Location;
+    @Input() stage!: Stage;
 
     showChat = false;
-    showQuests = false;
 
     onChatClick() {
         this.showChat = true;
     }
 
-    OnQuestsClick() {
-        this.showQuests = true;
-    }
-
     onClose() {
         this.showChat = false;
-        this.showQuests = false;
     }
 }

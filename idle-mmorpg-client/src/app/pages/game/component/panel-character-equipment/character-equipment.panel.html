@@ -1,7 +1,8 @@
 <app-panel>
     <nav class="tabs">
-        <app-button text="Equipment" (click)="setTab('equipment')"></app-button>
-        <app-button text="Tools" (click)="setTab('tools')"></app-button>
+        <app-button text="Equip" (click)="setTab('equipment')" [disabled]="activeTab === 'equipment'"></app-button>
+        <app-button text="Tools" (click)="setTab('tools')" [disabled]="activeTab === 'tools'"></app-button>
+        <app-button text="Wallet" (click)="setTab('wallet')" [disabled]="activeTab === 'wallet'"></app-button>
     </nav>
 
     @if(activeTab == 'equipment'){
@@ -48,6 +49,25 @@
 
         <app-item [item]="character.equipment.sickle!" [slot]="'sickle'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
+    </div>
+    }
+    }
+
+    @if(activeTab == 'wallet'){
+    @if(character.wallet){
+    <div class="wallet-layout">
+        <div class="copper">
+            <img [src]="'assets/coins/copper.gif'" alt="Copper" />
+            <strong>Copper:</strong> {{ character.wallet.copper }}
+        </div>
+        <div class="silver">
+            <img [src]="'assets/coins/silver.gif'" alt="Silver" />
+            <strong>Silver:</strong> {{ character.wallet.silver }}
+        </div>
+        <div class="gold">
+            <img [src]="'assets/coins/gold.gif'" alt="Gold" />
+            <strong>Gold:</strong> {{ character.wallet.gold }}
+        </div>
     </div>
     }
     }

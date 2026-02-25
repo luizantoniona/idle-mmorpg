@@ -1,7 +1,9 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { CombatPanel } from "../combat-panel/combat.panel";
+import { ButtonComponent, PanelComponent } from "../../../../component/ui";
+
+import { CombatPanel } from "../panel-combat/combat.panel";
 
 import { Character } from "../../../../model";
 import { Stage } from "../../../../model";
@@ -9,22 +11,26 @@ import { Stage } from "../../../../model";
 import { WebsocketService } from "../../../../service";
 
 @Component({
-    selector: "app-main-panel",
-    templateUrl: "./main.panel.html",
-    styleUrls: ["./main.panel.scss"],
+    selector: "app-stage-panel",
+    templateUrl: "./stage.panel.html",
+    styleUrls: ["./stage.panel.scss"],
     imports: [
         CommonModule,
+        ButtonComponent,
+        PanelComponent,
         CombatPanel,
     ],
 })
 
-export class MainPanel {
+export class StagePanel {
     @Input() character!: Character;
     @Input() stage!: Stage;
 
     showCombat = false;
 
     private websocketService = inject(WebsocketService);
+
+    onNextStage() { }
 
     sendMessage(data: any): void {
         this.websocketService.send(data);

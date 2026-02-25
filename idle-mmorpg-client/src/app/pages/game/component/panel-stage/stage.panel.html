@@ -1,0 +1,12 @@
+<div class="stage-column">
+    @if(!showCombat) {
+    <app-panel>
+        <div class="stage-row">
+            <app-button text="Stage: {{ stage.id }}" (clickEvent)="onNextStage()"></app-button>
+        </div>
+    </app-panel>
+
+    }@else {
+    <app-combat-panel [character]="character!" (closeCombat)="onCloseCombat()"></app-combat-panel>
+    }
+</div>

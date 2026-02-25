@@ -3,6 +3,14 @@
     gap: 8px;
 }
 
+.slot {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .equipment-layout {
     display: grid;
     grid-template-areas:
@@ -15,18 +23,6 @@
     justify-items: center;
     align-items: center;
     padding: 8px;
-}
-
-.tools-layout {
-    display: grid;
-    grid-template-areas:
-        "pickaxe woodaxe fishingrod"
-        "shovel rope sickle";
-    grid-template-columns: repeat(3, 40px);
-    gap: 12px;
-    justify-items: center;
-    align-items: center;
-    padding: 12px;
 }
 
 .amulet {
@@ -61,6 +57,18 @@
     grid-area: offhand;
 }
 
+.tools-layout {
+    display: grid;
+    grid-template-areas:
+        "pickaxe woodaxe fishingrod"
+        "shovel rope sickle";
+    grid-template-columns: repeat(3, 40px);
+    gap: 12px;
+    justify-items: center;
+    align-items: center;
+    padding: 12px;
+}
+
 .pickaxe {
     grid-area: pickaxe;
 }
@@ -85,10 +93,16 @@
     grid-area: rope;
 }
 
-.slot {
-    width: 40px;
-    height: 40px;
+.wallet-layout {
+    width: 100%;
+}
+
+.copper,
+.silver,
+.gold {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    width: 100%;
+    gap: 4px;
 }

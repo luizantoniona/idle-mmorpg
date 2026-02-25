@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
-import { CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel, CharacterSkillsPanel, CharacterSpellsPanel, CharacterWalletPanel } from "./component";
-// import { CharacterAttributesPanel } from './component';
-// import { MainPanel } from './component';
-// import { OptionsPanel } from './component';
+import {
+    CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel,
+    CharacterSkillsPanel, CharacterSpellsPanel,
+    OptionsPanel, StagePanel
+} from "./component";
 
-import { Character } from "../../model";
-import { Stage } from "../../model";
+import { Character, Stage } from "../../model";
 
 import { WebsocketService } from "../../service";
 
@@ -18,14 +18,12 @@ import { WebsocketService } from "../../service";
     styleUrls: ["./game.page.scss"],
     imports: [
         CharacterDataPanel,
-        // CharacterAttributesPanel,
         CharacterEquipmentPanel,
         CharacterInventoryPanel,
         CharacterSkillsPanel,
         CharacterSpellsPanel,
-        CharacterWalletPanel,
-        // MainPanel,
-        // OptionsPanel,
+        OptionsPanel,
+        StagePanel
     ],
 })
 
@@ -178,7 +176,7 @@ export class GamePage implements OnInit, OnDestroy {
 
             case 'STAGE':
                 if (data.payload?.stage) {
-                    this.stage = data.payload.location;
+                    this.stage = data.payload.stage;
                 }
                 if (this.stage) {
                     this.stage.objectives = data.payload?.objectives ?? [];

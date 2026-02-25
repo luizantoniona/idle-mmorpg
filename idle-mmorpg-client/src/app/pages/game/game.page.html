@@ -7,13 +7,12 @@
     <div class="main-panel">
         <app-character-spells-panel [character]="character!"></app-character-spells-panel>
 
-        <!-- <app-main-panel [character]="character!" [location]="location!"></app-main-panel> -->
+        <app-stage-panel [character]="character!" [stage]="stage!"></app-stage-panel>
     </div>
 
     <div class="right-panel">
-        <!-- <app-options-panel [character]="character!" [location]="location!"></app-options-panel> -->
-        <app-character-wallet-panel [character]=" character!"></app-character-wallet-panel>
         <app-character-equipment-panel [character]="character!"></app-character-equipment-panel>
         <app-character-inventory-panel [character]="character!"></app-character-inventory-panel>
+        <app-options-panel [character]="character!" [stage]="stage!"></app-options-panel>
     </div>
 </div>
