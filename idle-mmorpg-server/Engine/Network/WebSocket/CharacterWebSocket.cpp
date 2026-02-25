@@ -65,7 +65,7 @@ void CharacterWebSocket::handleNewConnection( const drogon::HttpRequestPtr& requ
 }
 
 void CharacterWebSocket::handleConnectionClosed( const drogon::WebSocketConnectionPtr& connection ) {
-    std::cout << "[WebSocket] Conexão encerrada: " << connection->peerAddr().toIp() << std::endl;
+    std::cout << "[WebSocket] Connection closed: " << connection->peerAddr().toIp() << std::endl;
 
     auto uuidPtr = connection->getContext<std::string>();
 
