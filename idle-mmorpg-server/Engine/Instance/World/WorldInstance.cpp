@@ -107,14 +107,54 @@ void WorldInstance::tick() {
 }
 
 void WorldInstance::handleMessage( const std::string& sessionId, const Json::Value& messageJson ) {
-    std::cout << "Message received from: " << sessionId << " Message: " << messageJson << std::endl;
-
     const MessageReceiverType type = MessageHelper::stringToType( messageJson[ "type" ].asString() );
+
+    if ( type == MessageReceiverType::UNKNOWN ) {
+        return;
+    }
+
     const Json::Value& payload = messageJson[ "payload" ];
 
+    std::cout << "Message received from: " << sessionId << " MessageType: " << static_cast<int>( type ) << " Payload: " << payload << std::endl;
+
+    CharacterInstance* character = nullptr;
+    StageInstance* stage = nullptr;
+
+    {
+        std::lock_guard<std::mutex> lock( _mutex );
+
+        auto itChar = _characters.find( sessionId );
+        if ( itChar != _characters.end() ) {
+            character = itChar->second.get();
+        }
+
+        auto itStage = _characterToStage.find( sessionId );
+        if ( itStage != _characterToStage.end() ) {
+            stage = itStage->second;
+        }
+    }
+
+    if ( !character ) {
+        return;
+    }
+
     switch ( type ) {
-    case MessageReceiverType::UNKNOWN:
+    // --- World ---
+
+    // --- Stage ---
+    case Engine::MessageReceiverType::COMBAT_ROOM_CREATE:
+    case Engine::MessageReceiverType::COMBAT_ROOM_ENTER:
+    case Engine::MessageReceiverType::COMBAT_ROOM_EXIT:
+        if ( stage ) {
+            stage->handleMessage( character, type, payload );
+        }
         break;
+
+    // --- Character ---
+    case MessageReceiverType::CHARACTER_SET_ACTION:
+        character->handleMessage( type, payload );
+        break;
+
     default:
         break;
     }

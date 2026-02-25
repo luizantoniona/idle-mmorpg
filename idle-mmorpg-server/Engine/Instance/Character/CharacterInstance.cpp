@@ -106,7 +106,7 @@ void CharacterInstance::onTick() {
     }
 }
 
-void CharacterInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+void CharacterInstance::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
         case MessageReceiverType::UNKNOWN:
             break;

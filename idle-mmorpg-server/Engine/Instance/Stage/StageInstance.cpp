@@ -61,7 +61,7 @@ void StageInstance::tick() {
     }
 }
 
-void StageInstance::handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload ) {
+void StageInstance::handleMessage( CharacterInstance* character, MessageReceiverType type, const Json::Value& payload ) {
     // std::lock_guard lock( _mutex );
     switch ( type ) {
         case MessageReceiverType::UNKNOWN:

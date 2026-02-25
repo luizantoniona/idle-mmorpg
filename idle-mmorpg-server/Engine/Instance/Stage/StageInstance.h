@@ -22,7 +22,7 @@ public:
 
     void tick();
 
-    void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
+    void handleMessage( CharacterInstance* character, MessageReceiverType type, const Json::Value& payload );
 
 private:
     mutable std::mutex _mutex;

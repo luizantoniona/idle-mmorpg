@@ -6,8 +6,10 @@ namespace Engine {
 enum class MessageReceiverType {
     UNKNOWN,
 
-    CHARACTER_ACTION_UPDATE,
+    // --- Character Updates ---
+    CHARACTER_SET_ACTION,
 
+    // --- OLD: Need Review
     CHARACTER_EQUIP_ITEM,
     CHARACTER_USE_ITEM,
     CHARACTER_CAST_SPELL,

@@ -6,8 +6,9 @@ namespace Engine {
 
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
-        { "CHARACTER_ACTION_UPDATE", MessageReceiverType::CHARACTER_ACTION_UPDATE },
+        { "CHARACTER_SET_ACTION", MessageReceiverType::CHARACTER_SET_ACTION },
 
+        // REVIEW
         { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
         { "CHARACTER_USE_ITEM", MessageReceiverType::CHARACTER_USE_ITEM },
         { "CHARACTER_CAST_SPELL", MessageReceiverType::CHARACTER_CAST_SPELL },
@@ -57,12 +58,6 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
         return "COMBAT";
     case MessageSenderType::COMBAT_ROOMS:
         return "COMBAT_ROOMS";
-
-        // --- OLD: Need Review
-    case MessageSenderType::CHARACTER_CURRENT_ACTION_UPDATE:
-        return "CHARACTER_CURRENT_ACTION_UPDATE";
-    case MessageSenderType::CHARACTER_CURRENT_COORDINATES_UPDATE:
-        return "CHARACTER_CURRENT_COORDINATES_UPDATE";
 
     default:
         return "UNKNOWN";

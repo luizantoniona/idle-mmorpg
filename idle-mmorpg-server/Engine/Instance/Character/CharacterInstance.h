@@ -39,7 +39,7 @@ public:
 
     void onTick();
 
-    void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );
+    void handleMessage( MessageReceiverType type, const Json::Value& payload );
     void sendMessage( MessageSenderType type, const Json::Value& payload );
 
 private:

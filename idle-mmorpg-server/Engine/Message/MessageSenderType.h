@@ -25,10 +25,6 @@ enum class MessageSenderType {
     // --- Combat Updates ---
     COMBAT,
     COMBAT_ROOMS,
-
-    // --- OLD: Need Review
-    CHARACTER_CURRENT_ACTION_UPDATE,
-    CHARACTER_CURRENT_COORDINATES_UPDATE,
 };
 
 } // namespace Engine
