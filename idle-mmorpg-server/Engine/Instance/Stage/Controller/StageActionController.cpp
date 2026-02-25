@@ -6,10 +6,10 @@ StageActionController::StageActionController( Domain::Stage* stage ) :
     StageController( stage ) {
 }
 
-void StageActionController::onCharacterEnter() {
+void StageActionController::onCharacterEnter( CharacterInstance* characterInstance ) {
 }
 
-void StageActionController::onCharacterExit() {
+void StageActionController::onCharacterExit( const std::string& sessionId ) {
 }
 
 void StageActionController::onTick() {

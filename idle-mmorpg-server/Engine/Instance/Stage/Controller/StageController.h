@@ -13,8 +13,8 @@ class StageController {
 public:
     StageController( Domain::Stage* stage );
 
-    virtual void onCharacterEnter() = 0;
-    virtual void onCharacterExit() = 0;
+    virtual void onCharacterEnter( CharacterInstance* characterInstance ) = 0;
+    virtual void onCharacterExit( const std::string& sessionId ) = 0;
 
     virtual void onTick() = 0;
 

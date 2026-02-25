@@ -11,8 +11,8 @@ class StageActionController : public StageController {
 public:
     explicit StageActionController( Domain::Stage* stage );
 
-    void onCharacterEnter() override;
-    void onCharacterExit() override;
+    void onCharacterEnter( CharacterInstance* characterInstance ) override;
+    void onCharacterExit( const std::string& sessionId ) override;
 
     void onTick() override;
 };

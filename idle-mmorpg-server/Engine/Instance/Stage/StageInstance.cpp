@@ -29,9 +29,11 @@ bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstanc
               << " [Entering] " << _stage->name()
               << " [SessionID] " << sessionId << std::endl;
 
-    // --- Controllers: Add CharacterInstances on necessary controllers
-
     characterInstance->sendMessage( MessageSenderType::STAGE, _stage->toJson() );
+
+    for ( auto* controller : _controllers ) {
+        controller->onCharacterEnter( characterInstance );
+    }
 
     return true;
 }
@@ -40,7 +42,9 @@ void StageInstance::removeCharacter( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
     std::cout << "StageInstance::removeCharacter" << " [SessionID] " << sessionId << std::endl;
 
-    // --- Controllers: Remove CharacterInstances from necessary controllers
+    for ( auto* controller : _controllers ) {
+        controller->onCharacterExit( sessionId );
+    }
 
     _characters.erase( sessionId );
 }

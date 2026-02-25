@@ -12,8 +12,8 @@ class StageCombatController : public StageController {
 public:
     explicit StageCombatController( Domain::Stage* stage );
 
-    void onCharacterEnter() override;
-    void onCharacterExit() override;
+    void onCharacterEnter( CharacterInstance* characterInstance ) override;
+    void onCharacterExit( const std::string& sessionId ) override;
 
     void onTick() override;
 
