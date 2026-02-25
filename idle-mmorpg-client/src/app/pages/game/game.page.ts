@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import {
+    CharacterActionPanel,
     CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel,
     CharacterSkillsPanel, CharacterSpellsPanel,
     OptionsPanel, StagePanel
@@ -17,6 +18,7 @@ import { WebsocketService } from "../../service";
     templateUrl: "./game.page.html",
     styleUrls: ["./game.page.scss"],
     imports: [
+        CharacterActionPanel,
         CharacterDataPanel,
         CharacterEquipmentPanel,
         CharacterInventoryPanel,
@@ -94,10 +96,10 @@ export class GamePage implements OnInit, OnDestroy {
                 break;
 
             case 'CHARACTER_ACTIONS':
-                if (data.payload?.action) {
+                if (data.payload?.actions) {
                     this.character = {
                         ...this.character!,
-                        action: data.payload.action,
+                        action: data.payload.actions,
                     };
                 }
                 break;

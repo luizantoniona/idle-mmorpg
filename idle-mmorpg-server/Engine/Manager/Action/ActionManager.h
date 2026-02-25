@@ -15,10 +15,12 @@ public:
 
     void initialize( const std::string& actionsPath );
 
-    Domain::Action* actionById( const std::string& actionId );
+    const std::unordered_map<Domain::ActionType, std::unique_ptr<Domain::Action>>& actions() const;
+
+    Domain::Action* actionById( Domain::ActionType actionType );
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<Domain::Action> > _actions;
+    std::unordered_map<Domain::ActionType, std::unique_ptr<Domain::Action>> _actions;
 };
 
 } //namespace Manager

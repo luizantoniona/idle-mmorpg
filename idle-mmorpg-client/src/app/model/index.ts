@@ -1,3 +1,5 @@
+export type { Action } from "./action/action.model";
+
 export type { Character } from "./character/character.model";
 export type { CharacterAction } from "./character/character-action.model";
 export type { CharacterEffect } from "./character/character-effect.model";

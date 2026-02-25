@@ -1,11 +1,11 @@
 #ifndef CHARACTERACTIONS_H
 #define CHARACTERACTIONS_H
 
-#include <string>
+#include <vector>
 
 #include <json/json.h>
 
-#include <Domain/Action/ActionType.h>
+#include "CharacterAction.h"
 
 namespace Domain {
 
@@ -13,21 +13,18 @@ class CharacterActions {
 public:
     CharacterActions();
 
-    Json::Value toJson();
+    Json::Value toJson() const;
 
-    std::string id() const;
-    void setId( const std::string& id );
+    CharacterAction currentAction() const;
+    void setCurrentAction( CharacterAction currentAction );
 
-    int duration() const;
-    void setDuration( int duration );
-
-    int counter() const;
-    void setCounter( int counter );
-
-    void clear();
+    std::vector<CharacterAction>& actions();
+    void setActions( const std::vector<CharacterAction>& actions );
+    void addAction( const CharacterAction& action );
 
 private:
-    std::string _id;
+    CharacterAction _currentAction;
+    std::vector<CharacterAction> _actions;
 
     int _duration;
     int _counter;

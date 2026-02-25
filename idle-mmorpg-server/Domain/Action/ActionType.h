@@ -9,6 +9,8 @@ enum class ActionType {
     TRAIN,
     COMBAT,
 
+    MINING,
+
     UNKNOWN,
 };
 

@@ -3,49 +3,43 @@
 namespace Domain {
 
 CharacterActions::CharacterActions() :
-    _id( "idle" ),
+    _currentAction(),
+    _actions(),
     _duration( 0 ),
-    _counter( 0 ) {}
+    _counter( 0 ) {
+}
 
-Json::Value CharacterActions::toJson() {
+Json::Value CharacterActions::toJson() const {
     Json::Value values;
-    values[ "id" ] = id();
-    values[ "duration" ] = duration();
-    values[ "counter" ] = counter();
+    values[ "currentAction" ] = _currentAction.toJson();
+    for ( const auto& action : _actions ) {
+        values[ "availableActions" ].append( action.toJson() );
+    }
 
     Json::Value actions;
     actions[ "actions" ] = values;
+
     return actions;
 }
 
-std::string CharacterActions::id() const {
-    return _id;
+CharacterAction CharacterActions::currentAction() const {
+    return _currentAction;
 }
 
-void CharacterActions::setId( const std::string& id ) {
-    _id = id;
+void CharacterActions::setCurrentAction( CharacterAction currentAction ) {
+    _currentAction = currentAction;
 }
 
-int CharacterActions::duration() const {
-    return _duration;
+std::vector<CharacterAction>& CharacterActions::actions() {
+    return _actions;
 }
 
-void CharacterActions::setDuration( int duration ) {
-    _duration = duration;
+void CharacterActions::setActions( const std::vector<CharacterAction>& actions ) {
+    _actions = actions;
 }
 
-int CharacterActions::counter() const {
-    return _counter;
-}
-
-void CharacterActions::setCounter( int counter ) {
-    _counter = counter;
-}
-
-void CharacterActions::clear() {
-    setId( "idle" );
-    setDuration( 0 );
-    setCounter( 0 );
+void CharacterActions::addAction( const CharacterAction& action ) {
+    _actions.push_back( action );
 }
 
 } // namespace Domain

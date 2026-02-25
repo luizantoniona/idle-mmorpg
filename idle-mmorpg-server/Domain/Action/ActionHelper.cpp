@@ -11,6 +11,8 @@ constexpr std::array<std::pair<std::string_view, ActionType>, static_cast<int>( 
     { "IDLE", ActionType::IDLE },
     { "COMBAT", ActionType::COMBAT },
     { "TRAIN", ActionType::TRAIN },
+
+    { "MINING", ActionType::MINING },
 } };
 }
 

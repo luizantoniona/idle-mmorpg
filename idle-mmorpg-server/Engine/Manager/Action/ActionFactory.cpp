@@ -9,10 +9,10 @@
 
 namespace Manager {
 
-std::unordered_map<std::string, std::unique_ptr<Domain::Action> > ActionFactory::createActions( const std::string& actionsPath ) {
+std::unordered_map<Domain::ActionType, std::unique_ptr<Domain::Action>> ActionFactory::createActions( const std::string& actionsPath ) {
     std::cout << "ActionFactory::createActions" << std::endl;
 
-    std::unordered_map<std::string, std::unique_ptr<Domain::Action> > actions;
+    std::unordered_map<Domain::ActionType, std::unique_ptr<Domain::Action>> actions;
 
     Json::Value actionsJson = Helper::JsonHelper::loadJsonFile( actionsPath + "actions.json" );
 
@@ -21,7 +21,7 @@ std::unordered_map<std::string, std::unique_ptr<Domain::Action> > ActionFactory:
 
         auto action = createAction( actionFilePath );
         if ( action ) {
-            actions[ action->id() ] = std::move( action );
+            actions[ action->type() ] = std::move( action );
 
         } else {
             std::cerr << "Failed to load action: " << actionFilePath << std::endl;
@@ -39,16 +39,38 @@ std::unique_ptr<Domain::Action> ActionFactory::createAction( const std::string& 
     Json::Value actionJson = Helper::JsonHelper::loadJsonFile( actionPath );
 
     const std::string actionId = actionJson[ "id" ].asString();
+    Domain::ActionType type = Domain::ActionHelper::stringToType( actionId );
 
-    if ( Domain::ActionHelper::stringToType( actionId ) == Domain::ActionType::UNKNOWN ) {
-        std::cerr << "Unmaped action: " << actionId << std::endl;
+    if ( type == Domain::ActionType::UNKNOWN ) {
+        std::cerr << "Unmapped action: " << actionId << std::endl;
         return nullptr;
     }
 
     auto action = std::make_unique<Domain::Action>();
+    action->setType( type );
+    action->setDescription( actionJson[ "description" ].asString() );
 
-    action->setId( actionId );
-    action->setType( Domain::ActionHelper::stringToType( actionId ) );
+    // --- Requirement ---
+    if ( actionJson.isMember( "requirement" ) ) {
+        Domain::ActionRequirement requirement;
+
+        requirement.setStage( actionJson[ "requirement" ][ "stage" ].asInt() );
+        requirement.setLevel( actionJson[ "requirement" ][ "level" ].asInt() );
+
+        action->setRequirement( requirement );
+    }
+
+    // --- Options ---
+    if ( actionJson.isMember( "options" ) ) {
+        for ( const auto& optionJson : actionJson[ "options" ] ) {
+            Domain::ActionOption option;
+
+            option.setStage( optionJson[ "stage" ].asInt() );
+            option.setItemId( optionJson[ "item" ].asString() );
+
+            action->addOption( option );
+        }
+    }
 
     return action;
 }

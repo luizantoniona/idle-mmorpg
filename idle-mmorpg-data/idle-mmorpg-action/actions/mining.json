@@ -1,0 +1,18 @@
+{
+    "id": "MINING",
+    "description": "Mine for minerals ore",
+    "requirement": {
+        "stage": 5,
+        "level": 0
+    },
+    "options": [
+        {
+            "stage": 5,
+            "item": "copper_ore"
+        },
+        {
+            "stage": 10,
+            "item": "iron_ore"
+        }
+    ]
+}

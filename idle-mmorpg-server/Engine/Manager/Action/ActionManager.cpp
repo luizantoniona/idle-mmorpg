@@ -11,8 +11,12 @@ void ActionManager::initialize( const std::string& actionsPath ) {
     _actions = ActionFactory::createActions( actionsPath );
 }
 
-Domain::Action* ActionManager::actionById( const std::string& actionId ) {
-    auto it = _actions.find( actionId );
+const std::unordered_map<Domain::ActionType, std::unique_ptr<Domain::Action>>& ActionManager::actions() const {
+    return _actions;
+}
+
+Domain::Action* ActionManager::actionById( Domain::ActionType actionType ) {
+    auto it = _actions.find( actionType );
     if ( it != _actions.end() ) {
         return it->second.get();
     }

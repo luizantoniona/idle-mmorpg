@@ -1,4 +1,5 @@
 
+export { CharacterActionPanel } from "./panel-character-action/character-action.panel";
 export { CharacterDataPanel } from "./panel-character-data/character-data.panel";
 export { CharacterEquipmentPanel } from "./panel-character-equipment/character-equipment.panel";
 export { CharacterInventoryPanel } from "./panel-character-inventory/character-inventory.panel";
