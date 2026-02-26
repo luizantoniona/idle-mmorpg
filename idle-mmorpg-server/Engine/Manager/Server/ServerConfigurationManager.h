@@ -1,22 +1,21 @@
 #ifndef SERVERCONFIGURATIONMANAGER_H
 #define SERVERCONFIGURATIONMANAGER_H
 
+#include <string>
+
 namespace Manager {
 
 class ServerConfigurationManager {
 public:
     ServerConfigurationManager();
 
+    void initialize( const std::string& configurationPath );
+
     int tickRate() const;
     void setTickRate( int tickRate );
 
     int threadPool() const;
     void setThreadPool( int threadPool );
-
-    static constexpr double VITAL_SKILL_REGENERATION_MULTIPLIER = 0.25;
-    static constexpr double MAGIC_SKILL_HEAL_MULTIPLIER = 0.01;
-    static constexpr double MAGIC_SKILL_DAMAGE_MULTIPLIER = 0.01;
-    static constexpr double WEAPON_SKILL_DAMAGE_MULTIPLIER = 0.01;
 
 private:
     int _tickRate;

@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
+import { ImageComponent } from "../../component/ui";
+
 import { LoginPanel } from "./component/login-panel/login-panel.component";
 
 @Component({
@@ -9,6 +11,7 @@ import { LoginPanel } from "./component/login-panel/login-panel.component";
     styleUrls: ["./login.page.scss"],
     imports: [
         CommonModule,
+        ImageComponent,
         LoginPanel,
     ],
 })

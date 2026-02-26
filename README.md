@@ -1,7 +1,7 @@
 # 🛡️🧙 iMMO — Idle-MMORPG
 
 <p align="center">
-  <img src="documentation/images/icon.512.png" alt="iMMO Logo" height="300"/>
+  <img src="idle-mmorpg-data/idle-mmorpg-configuration/logo/logo.png" alt="iMMO Logo" height="300"/>
 </p>
 
 # 💡 Motivation

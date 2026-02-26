@@ -3,6 +3,7 @@
 #include <Engine/Manager/Action/ActionManager.h>
 #include <Engine/Manager/Creature/CreatureManager.h>
 #include <Engine/Manager/Item/ItemManager.h>
+#include <Engine/Manager/Server/ServerConfigurationManager.h>
 #include <Engine/Manager/Skill/SkillManager.h>
 #include <Engine/Manager/Spell/SpellManager.h>
 #include <Engine/Manager/World/WorldManager.h>
@@ -12,6 +13,7 @@
 namespace {
 // TODO See how to deploy
 constexpr const char* DATABASE_PATH = "../../../database/server_data";
+constexpr const char* CONFIGURATION_PATH = "../../../idle-mmorpg-data/idle-mmorpg-configuration/";
 constexpr const char* ITEM_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-item/";
 constexpr const char* ACTION_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-action/";
 constexpr const char* CREATURE_DATA_PATH = "../../../idle-mmorpg-data/idle-mmorpg-creature/";
@@ -25,6 +27,9 @@ int main() {
 
     // --- Database ---
     Commons::Singleton<Database::Database>::instance().initialize( DATABASE_PATH );
+
+    // --- Server Configuration ---
+    Commons::Singleton<Manager::ServerConfigurationManager>::instance().initialize( CONFIGURATION_PATH );
 
     // --- Items ---
     Commons::Singleton<Manager::ItemManager>::instance().initialize( ITEM_DATA_PATH );
