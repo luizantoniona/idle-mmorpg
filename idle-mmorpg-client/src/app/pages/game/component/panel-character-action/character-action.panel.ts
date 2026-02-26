@@ -29,11 +29,14 @@ export class CharacterActionPanel {
         this.websocketService.send(data);
     }
 
-    onActionClicked(actionType: number): void {
+    onActionClicked(type: number): void {
+
+        // TODO: If Action has options, it should open a new tab/popup with the options before sending the message
+
         this.sendMessage({
             type: 'CHARACTER_SET_ACTION',
             payload: {
-                actionType: actionType,
+                type: type,
             },
         });
     }

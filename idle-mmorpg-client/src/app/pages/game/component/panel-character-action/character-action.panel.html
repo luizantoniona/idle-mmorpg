@@ -5,7 +5,6 @@
     }
 
     @if(character.action.currentAction){
-    <strong>character.action.currentAction.description</strong>
     <app-bar [label]="character.action.currentAction.description" [value]="character.action.counter"
         [max]="character.action.duration" color="#2196f3"></app-bar>
     }

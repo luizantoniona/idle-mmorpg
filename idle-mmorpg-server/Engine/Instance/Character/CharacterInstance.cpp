@@ -108,10 +108,11 @@ void CharacterInstance::onTick() {
 
 void CharacterInstance::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
-        case MessageReceiverType::UNKNOWN:
-            break;
-        default:
-            break;
+    case MessageReceiverType::CHARACTER_SET_ACTION:
+        _actionsController->handleMessage( type, payload );
+        break;
+    default:
+        break;
     }
 }
 

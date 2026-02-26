@@ -134,24 +134,22 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
         }
     }
 
-    if ( !character ) {
+    if ( !character || !stage ) {
         return;
     }
 
     switch ( type ) {
-    // --- World ---
 
-    // --- Stage ---
+        // --- Stage ---
     case Engine::MessageReceiverType::COMBAT_ROOM_CREATE:
     case Engine::MessageReceiverType::COMBAT_ROOM_ENTER:
     case Engine::MessageReceiverType::COMBAT_ROOM_EXIT:
-        if ( stage ) {
-            stage->handleMessage( character, type, payload );
-        }
+        stage->handleMessage( character, type, payload );
         break;
 
-    // --- Character ---
+        // --- Stage and Character ---
     case MessageReceiverType::CHARACTER_SET_ACTION:
+        stage->handleMessage( character, type, payload );
         character->handleMessage( type, payload );
         break;
 

@@ -22,6 +22,12 @@ public:
     void setActions( const std::vector<CharacterAction>& actions );
     void addAction( const CharacterAction& action );
 
+    int duration() const;
+    void setDuration( int duration );
+
+    int counter() const;
+    void setCounter( int counter );
+
 private:
     CharacterAction _currentAction;
     std::vector<CharacterAction> _actions;

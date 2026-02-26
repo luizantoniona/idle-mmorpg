@@ -8,14 +8,14 @@
 
 namespace Manager {
 
-std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& stageId, const std::string& stageFile ) {
-    std::cout << "StageFactory::createStage Creating Stage: " << stageId << std::endl;
+std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& stageFile ) {
+    std::cout << "StageFactory::createStage Creating Stage: " << stageFile << std::endl;
 
     Json::Value stageJson = Helper::JsonHelper::loadJsonFile( stageFile );
 
     auto stage = std::make_unique<Domain::Stage>();
     stage->setId( stageJson[ "id" ].asString() );
-    stage->setName( stageJson[ "name" ].asString() );
+    stage->setLevel( stageJson[ "level" ].asInt() );
 
     // --- Creatures ---
     for ( const Json::Value& creatureJson : stageJson[ "creatures" ] ) {

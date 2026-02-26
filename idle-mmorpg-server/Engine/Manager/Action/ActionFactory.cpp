@@ -66,6 +66,7 @@ std::unique_ptr<Domain::Action> ActionFactory::createAction( const std::string& 
             Domain::ActionOption option;
 
             option.setStage( optionJson[ "stage" ].asInt() );
+            option.setDuration( optionJson[ "duration" ].asInt() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
             option.setItemId( optionJson[ "item" ].asString() );
 
             action->addOption( option );

@@ -21,18 +21,19 @@ std::unique_ptr<Domain::World> WorldFactory::createWorld( const std::string& map
     }
 
     for ( const Json::Value& stageJson : worldJson[ "stages" ] ) {
-        std::string stageId = stageJson.asString();
-        std::string stageFile = mapPath + "stages/" + stageId + ".json";
+        std::string stageFile = mapPath + stageJson.asString() + ".json";
 
-        auto stage = StageFactory::createStage( stageId, stageFile );
+        auto stage = StageFactory::createStage( stageFile );
 
         if ( !stage ) {
-            std::cerr << "WorldFactory::createWorld failed to load stage: " << stageId << std::endl;
+            std::cerr << "WorldFactory::createWorld failed to load stage: " << stageFile << std::endl;
             continue;
         }
 
         world->addStage( std::move( stage ) );
     }
+
+    std::cout << "WorldFactory::createWorld Number of stages loaded: " << world->stages().size() << std::endl;
 
     return world;
 }

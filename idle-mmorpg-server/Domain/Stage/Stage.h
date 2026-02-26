@@ -16,8 +16,8 @@ public:
     std::string id() const;
     void setId( const std::string& id );
 
-    std::string name() const;
-    void setName( const std::string& name );
+    int level() const;
+    void setLevel( int level );
 
     std::vector<StageCreature> creatures() const;
     void setCreatures( const std::vector<StageCreature>& creatures );
@@ -29,7 +29,7 @@ public:
 
 private:
     std::string _id;
-    std::string _name;
+    int _level;
     std::vector<StageCreature> _creatures;
     std::vector<StageObjective> _objectives;
 };

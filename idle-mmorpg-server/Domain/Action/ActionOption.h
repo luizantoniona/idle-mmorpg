@@ -12,11 +12,15 @@ public:
     int stage() const;
     void setStage( int stage );
 
+    int duration() const;
+    void setDuration( int duration );
+
     const std::string& itemId() const;
     void setItemId( const std::string& id );
 
 private:
     int _stage;
+    int _duration;
     std::string _itemId;
 };
 

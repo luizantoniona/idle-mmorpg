@@ -8,10 +8,12 @@
     "options": [
         {
             "stage": 5,
+            "duration": 5,
             "item": "copper_ore"
         },
         {
             "stage": 10,
+            "duration": 15,
             "item": "iron_ore"
         }
     ]

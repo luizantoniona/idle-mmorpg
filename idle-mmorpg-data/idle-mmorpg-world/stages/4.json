@@ -1,6 +1,6 @@
 {
     "id": "4",
-    "name": "4",
+    "level": 4,
     "creatures": [
         {
             "id": "cave_rat",

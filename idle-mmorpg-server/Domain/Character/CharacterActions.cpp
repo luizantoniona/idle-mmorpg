@@ -42,4 +42,20 @@ void CharacterActions::addAction( const CharacterAction& action ) {
     _actions.push_back( action );
 }
 
+int CharacterActions::duration() const {
+    return _duration;
+}
+
+void CharacterActions::setDuration( int duration ) {
+    _duration = duration;
+}
+
+int CharacterActions::counter() const {
+    return _counter;
+}
+
+void CharacterActions::setCounter( int counter ) {
+    _counter = counter;
+}
+
 } // namespace Domain

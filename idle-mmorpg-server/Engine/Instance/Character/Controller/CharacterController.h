@@ -12,8 +12,7 @@ namespace Engine {
 
 class CharacterController {
 public:
-    CharacterController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage );
-
+    explicit CharacterController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage );
     virtual ~CharacterController();
 
     virtual void onEnterWorld() = 0;

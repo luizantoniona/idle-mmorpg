@@ -1,8 +1,6 @@
 #ifndef STAGECONTROLLER_H
 #define STAGECONTROLLER_H
 
-#include <unordered_map>
-
 #include <Engine/Instance/Character/CharacterInstance.h>
 
 #include <Domain/Stage/Stage.h>
@@ -11,16 +9,18 @@ namespace Engine {
 
 class StageController {
 public:
-    StageController( Domain::Stage* stage );
+    explicit StageController( Domain::Stage* stage );
+    virtual ~StageController();
 
     virtual void onCharacterEnter( CharacterInstance* characterInstance ) = 0;
     virtual void onCharacterExit( const std::string& sessionId ) = 0;
 
     virtual void onTick() = 0;
 
-private:
+    virtual void handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload );
+
+protected:
     Domain::Stage* _stage;
-    std::unordered_map<std::string, CharacterInstance*> _characters;
 };
 
 } // namespace Engine

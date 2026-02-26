@@ -1,8 +1,8 @@
 {
     "stages": [
-        "1",
-        "2",
-        "3",
-        "4"
+        "stages/1",
+        "stages/2",
+        "stages/3",
+        "stages/4"
     ]
 }
