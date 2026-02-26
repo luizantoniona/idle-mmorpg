@@ -18,7 +18,7 @@ void ServerConfigurationManager::initialize( const std::string& configurationPat
     _tickRate = configurationJson[ "tickRate" ].asInt();
 
     std::string logoFile = configurationJson[ "logo" ].asString();
-    Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( "logo", configurationPath + logoFile );
+    Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( "logo.png", configurationPath + logoFile );
 }
 
 int ServerConfigurationManager::tickRate() const {

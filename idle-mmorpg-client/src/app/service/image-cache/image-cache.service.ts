@@ -50,4 +50,17 @@ export class ImageCacheService {
             reader.readAsDataURL(blob);
         });
     }
+
+    async loadImageBlob(path: string): Promise<Blob> {
+        const serverData = this.server.get();
+        if (!serverData) {
+            throw new Error("Server not configured.");
+        }
+
+        const url = `http://${serverData.address}:${serverData.port}/image/${path}`;
+
+        return await firstValueFrom(
+            this.http.get(url, { responseType: 'blob' })
+        );
+    }
 }
