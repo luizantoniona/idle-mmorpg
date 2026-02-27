@@ -2,14 +2,14 @@
 
 namespace Engine {
 
-CharacterWalletController::CharacterWalletController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterWalletController::CharacterWalletController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                       Domain::CharacterWallet& wallet ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _wallet( wallet ) {
 }
 
 void CharacterWalletController::onEnterWorld() {
-    sendMessage( MessageSenderType::CHARACTER_WALLET, _wallet.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_WALLET, _wallet.toJson() );
 }
 
 void CharacterWalletController::onLeaveWorld() {

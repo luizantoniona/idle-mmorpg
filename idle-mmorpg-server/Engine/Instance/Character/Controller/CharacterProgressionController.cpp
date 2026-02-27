@@ -2,14 +2,14 @@
 
 namespace Engine {
 
-CharacterProgressionController::CharacterProgressionController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterProgressionController::CharacterProgressionController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                                 Domain::CharacterProgression& progression ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _progression( progression ) {
 }
 
 void CharacterProgressionController::onEnterWorld() {
-    sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _progression.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _progression.toJson() );
 }
 
 void CharacterProgressionController::onLeaveWorld() {

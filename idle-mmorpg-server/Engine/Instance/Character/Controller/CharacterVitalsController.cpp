@@ -2,14 +2,14 @@
 
 namespace Engine {
 
-CharacterVitalsController::CharacterVitalsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterVitalsController::CharacterVitalsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                       Domain::CharacterVitals& vitals ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _vitals( vitals ) {
 }
 
 void CharacterVitalsController::onEnterWorld() {
-    sendMessage( MessageSenderType::CHARACTER_VITALS, _vitals.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_VITALS, _vitals.toJson() );
 }
 
 void CharacterVitalsController::onLeaveWorld() {

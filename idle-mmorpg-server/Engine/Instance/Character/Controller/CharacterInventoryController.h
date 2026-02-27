@@ -10,7 +10,7 @@ namespace Engine {
 
 class CharacterInventoryController : public CharacterController {
 public:
-    explicit CharacterInventoryController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+    explicit CharacterInventoryController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                            Domain::CharacterInventory& inventory,
                                            Manager::ItemManager& itemManager );
 

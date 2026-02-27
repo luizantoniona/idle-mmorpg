@@ -10,7 +10,7 @@ namespace Engine {
 
 class CharacterSkillsController : public CharacterController {
 public:
-    explicit CharacterSkillsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+    explicit CharacterSkillsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                         Domain::CharacterSkills& skills,
                                         Manager::SkillManager& skillManager );
 

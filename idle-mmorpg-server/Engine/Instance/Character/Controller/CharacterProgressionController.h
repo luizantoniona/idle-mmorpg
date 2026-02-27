@@ -9,7 +9,7 @@ namespace Engine {
 
 class CharacterProgressionController : public CharacterController {
 public:
-    explicit CharacterProgressionController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+    explicit CharacterProgressionController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                              Domain::CharacterProgression& progression );
 
     void onEnterWorld() override;

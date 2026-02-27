@@ -9,7 +9,7 @@ namespace Engine {
 
 class CharacterVitalsController : public CharacterController {
 public:
-    explicit CharacterVitalsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+    explicit CharacterVitalsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                         Domain::CharacterVitals& vitals );
 
     void onEnterWorld() override;

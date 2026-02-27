@@ -2,10 +2,10 @@
 
 namespace Engine {
 
-CharacterEquipmentController::CharacterEquipmentController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterEquipmentController::CharacterEquipmentController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                             Domain::CharacterEquipment& equipment,
                                                             Manager::ItemManager& itemManager ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _equipment( equipment ),
     _itemManager( itemManager ) {
 }
@@ -35,7 +35,7 @@ void CharacterEquipmentController::onEnterWorld() {
     resolve( _equipment.fishingrod() );
     resolve( _equipment.sickle() );
 
-    sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _equipment.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _equipment.toJson() );
 }
 
 void CharacterEquipmentController::onLeaveWorld() {

@@ -10,7 +10,7 @@ namespace Engine {
 
 class CharacterSpellsController : public CharacterController {
 public:
-    explicit CharacterSpellsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+    explicit CharacterSpellsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                         Domain::CharacterSpells& spells,
                                         Manager::SpellManager& spellManager );
 

@@ -2,14 +2,14 @@
 
 namespace Engine {
 
-CharacterEffectsController::CharacterEffectsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterEffectsController::CharacterEffectsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                         Domain::CharacterEffects& effects ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _effects( effects ) {
 }
 
 void CharacterEffectsController::onEnterWorld() {
-    sendMessage( MessageSenderType::CHARACTER_EFFECTS, _effects.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_EFFECTS, _effects.toJson() );
 }
 
 void CharacterEffectsController::onLeaveWorld() {

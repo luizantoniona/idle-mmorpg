@@ -1,7 +1,7 @@
 #ifndef CHARACTERACTIONSCONTROLLER_H
 #define CHARACTERACTIONSCONTROLLER_H
 
-#include <Domain/Character/Character.h>
+#include <Domain/Character/CharacterActions.h>
 #include <Engine/Manager/Action/ActionManager.h>
 
 #include "CharacterController.h"
@@ -10,8 +10,8 @@ namespace Engine {
 
 class CharacterActionsController : public CharacterController {
 public:
-    explicit CharacterActionsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
-                                         Domain::Character& character,
+    explicit CharacterActionsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
+                                         Domain::CharacterActions& actions,
                                          Manager::ActionManager& actionManager );
 
     void onEnterWorld() override;
@@ -25,14 +25,14 @@ public:
     void handleActionMessage( const Json::Value& payload, int stageLevel );
 
 private:
-    Domain::Character& _character;
+    Domain::CharacterActions& _actions;
     Manager::ActionManager& _actionManager;
 
     void executeCurrentAction();
 
     void executeTraining( const Domain::CharacterActionOption& option );
 
-    std::vector<Domain::SkillType> combatSkill( Domain::Character* character );
+    // std::vector<Domain::SkillType> combatSkill( Domain::Character* character );
 };
 
 } // namespace Engine

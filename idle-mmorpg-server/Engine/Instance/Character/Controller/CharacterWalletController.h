@@ -9,7 +9,7 @@ namespace Engine {
 
 class CharacterWalletController : public CharacterController {
 public:
-    explicit CharacterWalletController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+    explicit CharacterWalletController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                         Domain::CharacterWallet& wallet );
 
     void onEnterWorld() override;

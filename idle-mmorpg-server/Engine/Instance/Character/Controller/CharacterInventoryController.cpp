@@ -2,10 +2,10 @@
 
 namespace Engine {
 
-CharacterInventoryController::CharacterInventoryController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterInventoryController::CharacterInventoryController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                             Domain::CharacterInventory& inventory,
                                                             Manager::ItemManager& itemManager ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _inventory( inventory ),
     _itemManager( itemManager ) {
 }
@@ -20,7 +20,7 @@ void CharacterInventoryController::onEnterWorld() {
         item.setItem( itemPointer );
     }
 
-    sendMessage( MessageSenderType::CHARACTER_INVENTORY, _inventory.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _inventory.toJson() );
 }
 
 void CharacterInventoryController::onLeaveWorld() {

@@ -2,10 +2,10 @@
 
 namespace Engine {
 
-CharacterSpellsController::CharacterSpellsController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage,
+CharacterSpellsController::CharacterSpellsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
                                                       Domain::CharacterSpells& spells,
                                                       Manager::SpellManager& spellManager ) :
-    CharacterController( sendMessage ),
+    CharacterController( eventBus, messageSender ),
     _spells( spells ),
     _spellManager( spellManager ) {
 }
@@ -21,7 +21,7 @@ void CharacterSpellsController::onEnterWorld() {
         spell.setCount( resolved->cooldown() );
     }
 
-    sendMessage( MessageSenderType::CHARACTER_SPELLS, _spells.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_SPELLS, _spells.toJson() );
 }
 
 void CharacterSpellsController::onLeaveWorld() {
