@@ -4,8 +4,6 @@
 namespace Engine {
 
 enum class MessageSenderType {
-    UNKNOWN,
-
     // --- Character Updates ---
     CHARACTER,
     CHARACTER_ACTIONS,
@@ -22,9 +20,13 @@ enum class MessageSenderType {
     // --- Stage Updates ---
     STAGE,
 
-    // --- Combat Updates ---
-    COMBAT,
+    // --- Combat Rooms Updates ---
     COMBAT_ROOMS,
+
+    // --- Combat ---
+    COMBAT,
+
+    UNKNOWN,
 };
 
 } // namespace Engine

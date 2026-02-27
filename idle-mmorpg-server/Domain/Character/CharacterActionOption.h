@@ -1,30 +1,29 @@
-#ifndef ACTIONOPTION_H
-#define ACTIONOPTION_H
+#ifndef CHARACTERACTIONOPTION_H
+#define CHARACTERACTIONOPTION_H
 
 #include <string>
-
 #include <Domain/Skill/SkillType.h>
 
 namespace Domain {
 
-class ActionOption {
+class CharacterActionOption {
 public:
-    ActionOption();
+    CharacterActionOption();
 
     int stage() const;
-    void setStage( int stage );
+    void setStage(int stage);
 
     int duration() const;
-    void setDuration( int duration );
+    void setDuration(int duration);
 
     int experience() const;
-    void setExperience( int experience );
+    void setExperience(int experience);
 
     SkillType skill() const;
-    void setSkill( SkillType skill );
+    void setSkill(SkillType skill);
 
     const std::string& itemId() const;
-    void setItemId( const std::string& id );
+    void setItemId(const std::string& id);
 
 private:
     int _stage;
@@ -36,4 +35,4 @@ private:
 
 } // namespace Domain
 
-#endif // ACTIONOPTION_H
+#endif // CHARACTERACTIONOPTION_H

@@ -11,6 +11,8 @@ CharacterActions::CharacterActions() :
 
 Json::Value CharacterActions::toJson() const {
     Json::Value values;
+    values[ "duration" ] = duration();
+    values[ "counter" ] = counter();
     values[ "currentAction" ] = _currentAction.toJson();
     for ( const auto& action : _actions ) {
         values[ "availableActions" ].append( action.toJson() );

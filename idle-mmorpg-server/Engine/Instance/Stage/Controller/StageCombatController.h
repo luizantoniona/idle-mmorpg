@@ -17,13 +17,18 @@ public:
 
     void onTick() override;
 
-    // void createCombat( const std::string& sessionId, CharacterInstance* characterInstance );
-    // void enterCombat( const std::string& sessionId, CharacterInstance* characterInstance, const std::string& roomId );
-    // void exitCombat( const std::string& sessionId );
+    void handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
-    std::vector<std::unique_ptr<CombatInstance>> _combats;
-    std::unordered_map<std::string, CombatInstance*> _characterCombatCache;
+    std::unordered_map<std::string, std::unique_ptr<CombatInstance>> _combats;
+    std::unordered_map<std::string, CharacterInstance*> _characters;
+    std::unordered_map<std::string, CombatInstance*> _characterToCombatCache;
+
+    void notifyCombatRooms();
+
+    void createCombat( CharacterInstance* characterInstance );
+    void enterCombat( CharacterInstance* characterInstance, const std::string& roomId );
+    void exitCombat( CharacterInstance* characterInstance );
 };
 
 } // namespace Engine

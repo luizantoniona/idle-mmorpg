@@ -22,14 +22,6 @@ void Action::setDescription( const std::string& description ) {
     _description = description;
 }
 
-const ActionRequirement& Action::requirement() const {
-    return _requirement;
-}
-
-void Action::setRequirement( const ActionRequirement& requirement ) {
-    _requirement = requirement;
-}
-
 const std::vector<ActionOption>& Action::options() const {
     return _options;
 }

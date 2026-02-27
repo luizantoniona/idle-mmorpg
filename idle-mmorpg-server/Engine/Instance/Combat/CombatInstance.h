@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 
-#include <Domain/Character/Character.h>
 #include <Domain/Stage/Stage.h>
+#include <Engine/Instance/Character/CharacterInstance.h>
 #include <Engine/Message/MessageReceiverType.h>
 
 namespace Engine {
@@ -14,7 +14,7 @@ public:
     explicit CombatInstance( Domain::Stage* stage, const std::string& id, const std::string& name );
     ~CombatInstance();
 
-    void addCharacter( const std::string& sessionId, Domain::Character* character );
+    void addCharacter( const std::string& sessionId, CharacterInstance* characterInstance );
     void removeCharacter( const std::string& sessionId );
 
     void tick();
@@ -28,7 +28,7 @@ public:
 
     std::string id() const;
 
-    const std::unordered_map<std::string, Domain::Character*>& characters() const;
+    const std::unordered_map<std::string, CharacterInstance*>& characters() const;
 
     void spawnCreatures();
 
@@ -36,7 +36,7 @@ private:
     std::string _id;
     std::string _name;
     Domain::Stage* _stage;
-    std::unordered_map<std::string, Domain::Character*> _characters;
+    std::unordered_map<std::string, CharacterInstance*> _characters;
     std::vector<std::unique_ptr<Domain::Creature> > _creatures;
 };
 

@@ -110,12 +110,11 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
     const MessageReceiverType type = MessageHelper::stringToType( messageJson[ "type" ].asString() );
 
     if ( type == MessageReceiverType::UNKNOWN ) {
+        std::cout << "Unknow message: received from: " << sessionId << " json: " << messageJson << std::endl;
         return;
     }
 
     const Json::Value& payload = messageJson[ "payload" ];
-
-    std::cout << "Message received from: " << sessionId << " MessageType: " << static_cast<int>( type ) << " Payload: " << payload << std::endl;
 
     CharacterInstance* character = nullptr;
     StageInstance* stage = nullptr;

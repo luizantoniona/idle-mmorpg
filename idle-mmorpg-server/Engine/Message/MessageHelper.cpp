@@ -8,14 +8,14 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
         { "CHARACTER_SET_ACTION", MessageReceiverType::CHARACTER_SET_ACTION },
 
+        { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
+        { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },
+        { "COMBAT_ROOM_EXIT", MessageReceiverType::COMBAT_ROOM_EXIT },
+
         // REVIEW
         { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
         { "CHARACTER_USE_ITEM", MessageReceiverType::CHARACTER_USE_ITEM },
         { "CHARACTER_CAST_SPELL", MessageReceiverType::CHARACTER_CAST_SPELL },
-
-        { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
-        { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },
-        { "COMBAT_ROOM_EXIT", MessageReceiverType::COMBAT_ROOM_EXIT },
     };
 
     auto it = map.find( type );
@@ -53,11 +53,13 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
     case MessageSenderType::STAGE:
         return "STAGE";
 
+        // --- Combat Rooms Updates ---
+    case MessageSenderType::COMBAT_ROOMS:
+        return "COMBAT_ROOMS";
+
         // --- Combat Updates ---
     case MessageSenderType::COMBAT:
         return "COMBAT";
-    case MessageSenderType::COMBAT_ROOMS:
-        return "COMBAT_ROOMS";
 
     default:
         return "UNKNOWN";

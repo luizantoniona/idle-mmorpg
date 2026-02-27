@@ -3,13 +3,12 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import {
-    CharacterActionPanel,
-    CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel,
+    CharacterActionPanel, CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel,
     CharacterSkillsPanel, CharacterSpellsPanel,
-    OptionsPanel, StagePanel
+    CombatPanel, OptionsPanel, StagePanel
 } from "./component";
 
-import { Character, Stage } from "../../model";
+import { Character, CombatInstance, Stage } from "../../model";
 
 import { WebsocketService } from "../../service";
 
@@ -24,6 +23,7 @@ import { WebsocketService } from "../../service";
         CharacterInventoryPanel,
         CharacterSkillsPanel,
         CharacterSpellsPanel,
+        CombatPanel,
         OptionsPanel,
         StagePanel
     ],
@@ -35,6 +35,8 @@ export class GamePage implements OnInit, OnDestroy {
 
     character: Character | null = null;
     stage: Stage | null = null;
+    combatInstances: CombatInstance[] = [];
+
     connectionStatus = 'Desconectado';
 
     private subscriptions = new Subscription();
@@ -46,6 +48,7 @@ export class GamePage implements OnInit, OnDestroy {
         if (passedCharacter) {
             this.character = passedCharacter;
             localStorage.setItem('selectedCharacter', JSON.stringify(passedCharacter));
+
         } else {
             const stored = localStorage.getItem('selectedCharacter');
             if (stored) {
@@ -83,11 +86,7 @@ export class GamePage implements OnInit, OnDestroy {
     }
 
     handleMessage(data: any): void {
-        if (data && (data.type === 'COMBAT_ROOMS_UPDATE' || data.type === 'COMBAT_UPDATE' || data.type === 'CHARACTER_DEAD')) {
-            return;
-        }
-
-        console.log(data)
+        console.log('Message:', data);
         switch (data.type) {
             case 'CHARACTER':
                 if (data.payload) {
@@ -99,7 +98,7 @@ export class GamePage implements OnInit, OnDestroy {
                 if (data.payload?.actions) {
                     this.character = {
                         ...this.character!,
-                        action: data.payload.actions,
+                        actions: data.payload.actions,
                     };
                 }
                 break;
@@ -185,8 +184,15 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
+            case 'COMBAT_ROOMS':
+                if (data.payload?.combatInstances) {
+                    this.combatInstances = data.payload.combatInstances;
+                }
+                break;
+
             default:
-                console.warn('Unkown message:', data.type);
+                console.warn('Unhandled message type:', data.type);
+                break;
         }
     }
 

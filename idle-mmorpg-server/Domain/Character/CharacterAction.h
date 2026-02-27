@@ -3,7 +3,10 @@
 
 #include <json/json.h>
 
-#include <Domain/Action/Action.h>
+#include <string>
+
+#include "CharacterActionOption.h"
+#include <Domain/Action/ActionType.h>
 
 namespace Domain {
 
@@ -16,12 +19,20 @@ public:
     ActionType type() const;
     void setType( ActionType type );
 
-    Action* action() const;
-    void setAction( Action* action );
+    std::string description() const;
+    void setDescription( const std::string& description );
+
+    CharacterActionOption selectedOption() const;
+    void setSelectedOption( const CharacterActionOption& selectedOption );
+
+    std::vector<CharacterActionOption> options() const;
+    void setOptions( const std::vector<CharacterActionOption>& options );
 
 private:
     ActionType _type;
-    Action* _action;
+    std::string _description;
+    CharacterActionOption _selectedOption;
+    std::vector<CharacterActionOption> _options;
 };
 
 } // namespace Domain

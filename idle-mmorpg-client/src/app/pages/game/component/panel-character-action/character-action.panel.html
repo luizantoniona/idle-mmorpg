@@ -1,12 +1,21 @@
 <app-panel>
-    @if(character && character.action){
-    @for(action of character.action.availableActions; track action.type){
-    <app-button text="{{action.description}}" (clickEvent)="onActionClicked(action.type)"></app-button>
+    @if(character && character.actions){
+    @for(action of character.actions.availableActions; track action.type){
+    <app-button text="{{action.description}}" (clickEvent)="onActionClicked(action)"></app-button>
     }
 
-    @if(character.action.currentAction){
-    <app-bar [label]="character.action.currentAction.description" [value]="character.action.counter"
-        [max]="character.action.duration" color="#2196f3"></app-bar>
+    @if(selectedOptions && selectedOptions.length){
+    <div class="options-list">
+        <p>Select option:</p>
+        @for(opt of selectedOptions; track opt.stage){
+        <app-button text="Duration {{opt.duration}}" (clickEvent)="onOptionClicked(opt)"></app-button>
+        }
+    </div>
+    }
+
+    @if(character.actions.currentAction){
+    <app-bar [label]="character.actions.currentAction.description" [value]="character.actions.counter"
+        [max]="character.actions.duration" color="#2196f3"></app-bar>
     }
     }
     @else {

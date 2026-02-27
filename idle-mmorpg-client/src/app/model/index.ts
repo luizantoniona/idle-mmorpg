@@ -1,7 +1,7 @@
-export type { Action } from "./action/action.model";
+export type { Action, ActionOption } from "./action/action.model";
 
 export type { Character } from "./character/character.model";
-export type { CharacterAction } from "./character/character-action.model";
+export type { CharacterActions } from "./character/character-action.model";
 export type { CharacterEffect } from "./character/character-effect.model";
 export type { CharacterEquipment } from "./character/character-equipment.model";
 export type { CharacterInventory } from "./character/character-inventory.model";

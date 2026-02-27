@@ -1,4 +1,12 @@
 {
     "id": "COMBAT",
-    "description": "Fight with local creatures"
+    "description": "Fight with local creatures",
+    "options": [
+        {
+            "stage": 0,
+            "duration": 0,
+            "skill": "UNKNOWN",
+            "experience": 0
+        }
+    ]
 }

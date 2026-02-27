@@ -1,5 +1,7 @@
 #include "ServerConfigurationManager.h"
 
+#include <iostream>
+
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
@@ -13,12 +15,16 @@ ServerConfigurationManager::ServerConfigurationManager() :
 }
 
 void ServerConfigurationManager::initialize( const std::string& configurationPath ) {
+    std::cout << "ServerConfigurationManager::initialize" << std::endl;
+
     Json::Value configurationJson = Helper::JsonHelper::loadJsonFile( configurationPath + "configuration.json" );
 
     _tickRate = configurationJson[ "tickRate" ].asInt();
 
     std::string logoFile = configurationJson[ "logo" ].asString();
     Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( "logo.png", configurationPath + logoFile );
+
+    std::cout << "ServerConfigurationManager::initialize [TICK_RATE] " << _tickRate << std::endl;
 }
 
 int ServerConfigurationManager::tickRate() const {

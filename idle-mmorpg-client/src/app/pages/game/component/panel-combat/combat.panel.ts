@@ -4,9 +4,7 @@ import { Subscription } from "rxjs";
 
 import { BarComponent, ButtonComponent, CardComponent, ImageComponent, LoadingComponent, PanelComponent } from "../../../../component/ui";
 
-import { Character } from "../../../../model";
-import { CombatInstance } from "../../../../model";
-import { Combat } from "../../../../model";
+import { Character, Combat, CombatInstance } from "../../../../model";
 
 import { WebsocketService } from "../../../../service";
 
@@ -27,12 +25,11 @@ import { WebsocketService } from "../../../../service";
 
 export class CombatPanel {
     @Input() character!: Character;
-    @Output() closeCombat = new EventEmitter<void>();
+    @Input() combatInstances: CombatInstance[] | null = null;
 
     private websocketService = inject(WebsocketService);
     private subscriptions = new Subscription();
 
-    combatInstances: CombatInstance[] | null = null;
     combat: Combat | null = null;
 
     private pendingExit = false;
@@ -52,16 +49,7 @@ export class CombatPanel {
     }
 
     handleMessage(data: any): void {
-        if (data.type !== 'COMBAT_ROOMS_UPDATE' && data.type !== 'COMBAT_UPDATE' && data.type !== 'CHARACTER_DEAD') {
-            return;
-        }
-
-        console.log(data)
         switch (data.type) {
-            case 'COMBAT_ROOMS_UPDATE':
-                this.combatInstances = data.payload.combatInstances
-                this.pendingExit = false;
-                break;
             case 'COMBAT_UPDATE':
                 if (!this.pendingExit) {
                     if (data.payload.combat) {
@@ -69,9 +57,7 @@ export class CombatPanel {
                     }
                 }
                 break;
-            case 'CHARACTER_DEAD':
-                this.onExitCombatClicked();
-                this.onExitClicked();
+            default:
                 break;
         }
     }
@@ -98,9 +84,5 @@ export class CombatPanel {
         });
 
         this.combat = null;
-    }
-
-    onExitClicked(): void {
-        this.closeCombat.emit();
     }
 }

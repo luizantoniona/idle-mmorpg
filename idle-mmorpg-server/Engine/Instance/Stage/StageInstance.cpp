@@ -15,7 +15,7 @@ StageInstance::StageInstance( Domain::Stage* stage ) :
     _controllers( {} ) {
 
     // --- Action ---
-    _actionController = std::make_unique<StageActionController>( stage, Commons::Singleton<Manager::ActionManager>::instance() );
+    _actionController = std::make_unique<StageActionController>( stage );
     _controllers.push_back( _actionController.get() );
 
     // --- Combat ---
@@ -67,11 +67,17 @@ void StageInstance::tick() {
 void StageInstance::handleMessage( CharacterInstance* character, MessageReceiverType type, const Json::Value& payload ) {
     std::lock_guard lock( _mutex );
     switch ( type ) {
+
     case MessageReceiverType::CHARACTER_SET_ACTION:
         _actionController->handleMessage( character, type, payload );
         break;
-    case MessageReceiverType::UNKNOWN:
+
+    case MessageReceiverType::COMBAT_ROOM_CREATE:
+    case MessageReceiverType::COMBAT_ROOM_ENTER:
+    case MessageReceiverType::COMBAT_ROOM_EXIT:
+        _combatController->handleMessage( character, type, payload );
         break;
+
     default:
         break;
     }

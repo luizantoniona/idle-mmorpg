@@ -16,9 +16,9 @@ CombatInstance::CombatInstance( Domain::Stage* stage, const std::string& id, con
 
 CombatInstance::~CombatInstance() = default;
 
-void CombatInstance::addCharacter( const std::string& sessionId, Domain::Character* character ) {
+void CombatInstance::addCharacter( const std::string& sessionId, CharacterInstance* characterInstance ) {
     // _combatSystem.computeCombatActionDuration( character );
-    _characters[ sessionId ] = character;
+    _characters[ sessionId ] = characterInstance;
 }
 
 void CombatInstance::removeCharacter( const std::string& sessionId ) {
@@ -117,9 +117,9 @@ void CombatInstance::tick() {
     }
 
     for ( const auto& [ sessionId, character ] : _characters ) {
-        if ( character->vitals().health() <= 0 ) {
-            // Engine::NotificationSystem::notifyDeadCharacter( sessionId );
-        }
+        // if ( character->vitals().health() <= 0 ) {
+        // Engine::NotificationSystem::notifyDeadCharacter( sessionId );
+        // }
     }
 }
 
@@ -138,10 +138,10 @@ Json::Value CombatInstance::combatToJson() const {
     Json::Value root;
     Json::Value charactersJson;
     for ( const auto& [ sessionId, character ] : _characters ) {
-        Json::Value characterJson = character->toJson();
+        // Json::Value characterJson = character->toJson();
         // characterJson[ "action" ] = character->action().toJson();
-        characterJson[ "vitals" ] = character->vitals().toJson();
-        charactersJson.append( characterJson );
+        // characterJson[ "vitals" ] = character->vitals().toJson();
+        // charactersJson.append( characterJson );
     }
     root[ "characters" ] = charactersJson;
 
@@ -168,7 +168,7 @@ std::string CombatInstance::id() const {
     return _id;
 }
 
-const std::unordered_map<std::string, Domain::Character*>& CombatInstance::characters() const {
+const std::unordered_map<std::string, CharacterInstance*>& CombatInstance::characters() const {
     return _characters;
 }
 

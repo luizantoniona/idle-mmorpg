@@ -3,106 +3,150 @@
 namespace Engine {
 
 StageCombatController::StageCombatController( Domain::Stage* stage ) :
-    StageController( stage ) {
+    StageController( stage ),
+    _combats(),
+    _characters(),
+    _characterToCombatCache() {
 }
 
 void StageCombatController::onCharacterEnter( CharacterInstance* characterInstance ) {
+    const std::string sessionId = characterInstance->sessionId();
+    _characters[ sessionId ] = characterInstance;
+
+    notifyCombatRooms();
 }
 
 void StageCombatController::onCharacterExit( const std::string& sessionId ) {
+    auto it = _characterToCombatCache.find( sessionId );
+    if ( it != _characterToCombatCache.end() ) {
+
+        CombatInstance* combat = it->second;
+        combat->removeCharacter( sessionId );
+        _characterToCombatCache.erase( it );
+
+        if ( combat->characters().empty() ) {
+            _combats.erase( combat->id() );
+        }
+
+        notifyCombatRooms();
+    }
+
+    _characters.erase( sessionId );
 }
 
 void StageCombatController::onTick() {
+    for ( auto it = _combats.begin(); it != _combats.end(); ) {
+        CombatInstance* combat = it->second.get();
+        combat->tick();
 
-    // for ( auto it = _combatInstances.begin(); it != _combatInstances.end(); ) {
-    //     CombatInstance* combatInstance = it->get();
-    //     combatInstance->process();
+        if ( combat->isFinished() ) {
 
-    //            // Engine::NotificationSystem::notifyCombat( combatInstance );
+            for ( const auto& [ sessionId, _ ] : combat->characters() ) {
+                _characterToCombatCache.erase( sessionId );
+            }
 
-    //     if ( combatInstance->isFinished() ) {
-    //         for ( const auto& [ sessionId, _ ] : combatInstance->characters() ) {
-    //             _characterCombatCache.erase( sessionId );
-    //         }
+            it = _combats.erase( it );
 
-    //         it = _combatInstances.erase( it );
+            notifyCombatRooms();
 
-    //         for ( const auto& [ otherSessionId, otherChar ] : _characters ) {
-    //             if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
-    //                 if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
-    //                     std::vector<CombatInstance*> allInstances;
-    //                     // std::string otherStructure = otherChar->coordinates().structureId();
-
-    //                            // for ( auto& ci : _combatInstances ) {
-    //                            //     if ( ci->structureId() == otherStructure ) {
-    //                            //         allInstances.push_back( ci.get() );
-    //                            //     }
-    //                            // }
-
-    //                            // Engine::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
-    //                 }
-    //             }
-    //         }
-
-    //     } else {
-    //         ++it;
-    //     }
-    // }
+        } else {
+            ++it;
+        }
+    }
 }
 
-// void StageInstance::createCombat( const std::string& sessionId, CharacterInstance* characterInstance ) {
-//     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
-//         return;
-//     }
+void StageCombatController::handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload ) {
+    switch ( type ) {
+    case MessageReceiverType::COMBAT_ROOM_CREATE:
+        createCombat( characterInstance );
+        break;
+    case MessageReceiverType::COMBAT_ROOM_ENTER:
+        if ( payload.isMember( "roomId" ) ) {
+            enterCombat( characterInstance, payload[ "roomId" ].asString() );
+        }
+        break;
+    case MessageReceiverType::COMBAT_ROOM_EXIT:
+        exitCombat( characterInstance );
+        break;
+    default:
+        break;
+    }
+}
 
-//     std::string roomId = drogon::utils::getUuid();
+void StageCombatController::notifyCombatRooms() {
+    Json::Value payload;
+    Json::Value combatArray;
 
-//     // auto combatInstance = std::make_unique<CombatInstance>( _stage, roomId, character->name() );
-//     // CombatInstance* combatInstancePtr = combatInstance.get();
+    for ( const auto& [ id, combat ] : _combats ) {
+        combatArray.append( combat->instanceToJson() );
+    }
 
-//     // combatInstancePtr->addCharacter( sessionId, character );
-//     // _characterCombatCache[ sessionId ] = combatInstancePtr;
-//     // _combatInstances.push_back( std::move( combatInstance ) );
+    payload[ "combatInstances" ] = combatArray;
 
-//     for ( const auto& [ otherSessionId, otherChar ] : _characters ) {
-//         // if ( _characterCombatCache.find( otherSessionId ) == _characterCombatCache.end() ) {
-//         //     std::vector<CombatInstance*> allInstances;
-//         //     std::string otherStructure = otherChar->coordinates().structureId();
+    for ( const auto& [ sessionId, character ] : _characters ) {
+        if ( _characterToCombatCache.find( sessionId ) != _characterToCombatCache.end() ) {
+            continue;
+        }
 
-//         //     for ( auto& ci : _combatInstances ) {
-//         //         if ( ci->structureId() == otherStructure ) {
-//         //             allInstances.push_back( ci.get() );
-//         //         }
-//         //     }
+        character->sendMessage( MessageSenderType::COMBAT_ROOMS, payload );
+    }
+}
 
-//         //     // Engine::NotificationSystem::notifyCombatInstances( otherSessionId, allInstances );
-//         // }
-//     }
-// }
+void StageCombatController::createCombat( CharacterInstance* characterInstance ) {
+    const std::string sessionId = characterInstance->sessionId();
 
-// void StageInstance::enterCombat( const std::string& sessionId, CharacterInstance* characterInstance, const std::string& roomId ) {
-//     if ( _characterCombatCache.find( sessionId ) != _characterCombatCache.end() ) {
-//         return;
-//     }
+    if ( _characterToCombatCache.find( sessionId ) != _characterToCombatCache.end() ) {
+        return;
+    }
 
-//     // for ( const auto& combatInstance : _combatInstances ) {
-//     //     if ( combatInstance->id() == roomId ) {
-//     //         combatInstance->addCharacter( sessionId, character );
-//     //         _characterCombatCache[ sessionId ] = combatInstance.get();
-//     //         return;
-//     //     }
-//     // }
-// }
+    std::string roomId = drogon::utils::getUuid();
 
-// void StageInstance::exitCombat( const std::string& sessionId ) {
-//     auto it = _characterCombatCache.find( sessionId );
-//     if ( it == _characterCombatCache.end() ) {
-//         return;
-//     }
+    auto combatInstance = std::make_unique<CombatInstance>( _stage, roomId, characterInstance->character().name() );
+    CombatInstance* combatInstancePtr = combatInstance.get();
 
-//     CombatInstance* combatInstance = it->second;
-//     combatInstance->removeCharacter( sessionId );
-//     _characterCombatCache.erase( it );
-// }
+    combatInstancePtr->addCharacter( sessionId, characterInstance );
+    _characterToCombatCache[ sessionId ] = combatInstancePtr;
+    _combats.emplace( roomId, std::move( combatInstance ) );
+
+    notifyCombatRooms();
+}
+
+void StageCombatController::enterCombat( CharacterInstance* characterInstance, const std::string& roomId ) {
+    const std::string sessionId = characterInstance->sessionId();
+
+    if ( _characterToCombatCache.find( sessionId ) != _characterToCombatCache.end() ) {
+        return;
+    }
+
+    auto it = _combats.find( roomId );
+    if ( it == _combats.end() ) {
+        return;
+    }
+
+    CombatInstance* combat = it->second.get();
+    combat->addCharacter( sessionId, characterInstance );
+    _characterToCombatCache[ sessionId ] = combat;
+
+    notifyCombatRooms();
+}
+
+void StageCombatController::exitCombat( CharacterInstance* characterInstance ) {
+    const std::string sessionId = characterInstance->sessionId();
+
+    auto it = _characterToCombatCache.find( sessionId );
+    if ( it == _characterToCombatCache.end() ) {
+        return;
+    }
+
+    CombatInstance* combat = it->second;
+    combat->removeCharacter( sessionId );
+    _characterToCombatCache.erase( it );
+
+    if ( combat->characters().empty() ) {
+        _combats.erase( combat->id() );
+    }
+
+    notifyCombatRooms();
+}
 
 } // namespace Engine

@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Domain/Action/ActionHelper.h>
+#include <Domain/Skill/SkillHelper.h>
 #include <Engine/Manager/Server/ServerConfigurationManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
@@ -50,16 +51,6 @@ std::unique_ptr<Domain::Action> ActionFactory::createAction( const std::string& 
     action->setType( type );
     action->setDescription( actionJson[ "description" ].asString() );
 
-    // --- Requirement ---
-    if ( actionJson.isMember( "requirement" ) ) {
-        Domain::ActionRequirement requirement;
-
-        requirement.setStage( actionJson[ "requirement" ][ "stage" ].asInt() );
-        requirement.setLevel( actionJson[ "requirement" ][ "level" ].asInt() );
-
-        action->setRequirement( requirement );
-    }
-
     // --- Options ---
     if ( actionJson.isMember( "options" ) ) {
         for ( const auto& optionJson : actionJson[ "options" ] ) {
@@ -68,6 +59,8 @@ std::unique_ptr<Domain::Action> ActionFactory::createAction( const std::string& 
             option.setStage( optionJson[ "stage" ].asInt() );
             option.setDuration( optionJson[ "duration" ].asInt() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
             option.setItemId( optionJson[ "item" ].asString() );
+            option.setExperience( optionJson[ "experience" ].asInt() );
+            option.setSkill( Domain::SkillHelper::stringToType( optionJson[ "skill" ].asString() ) );
 
             action->addOption( option );
         }

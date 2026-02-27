@@ -1,4 +1,4 @@
-import { CharacterAction } from "./character-action.model";
+import { CharacterActions } from "./character-action.model";
 import { CharacterEffect } from "./character-effect.model";
 import { CharacterEquipment } from "./character-equipment.model";
 import { CharacterInventory } from "./character-inventory.model";
@@ -23,6 +23,6 @@ export type Character = {
     wallet: CharacterWallet;
 
     // --- Runtime Data
-    action: CharacterAction;
+    actions: CharacterActions;
     effects: CharacterEffect[];
 };

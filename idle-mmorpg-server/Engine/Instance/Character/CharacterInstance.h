@@ -42,6 +42,8 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload );
     void sendMessage( MessageSenderType type, const Json::Value& payload );
 
+    CharacterActionsController* actionsController();
+
 private:
     std::string _sessionId;
     std::unique_ptr<Domain::Character> _character;

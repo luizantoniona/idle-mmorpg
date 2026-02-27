@@ -1,9 +1,7 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { ButtonComponent, PanelComponent } from "../../../../component/ui";
-
-import { CombatPanel } from "../panel-combat/combat.panel";
+import { ButtonComponent, LoadingComponent, PanelComponent } from "../../../../component/ui";
 
 import { Character } from "../../../../model";
 import { Stage } from "../../../../model";
@@ -17,8 +15,8 @@ import { WebsocketService } from "../../../../service";
     imports: [
         CommonModule,
         ButtonComponent,
+        LoadingComponent,
         PanelComponent,
-        CombatPanel,
     ],
 })
 
@@ -30,24 +28,14 @@ export class StagePanel {
 
     private websocketService = inject(WebsocketService);
 
-    onNextStage() { }
-
     sendMessage(data: any): void {
         this.websocketService.send(data);
     }
 
-    onOpenCombat(): void {
-        this.showCombat = true;
-    }
-
-    onCloseCombat(): void {
+    onNextStage() {
         this.sendMessage({
-            type: 'CHARACTER_ACTION_UPDATE',
-            payload: {
-                action: 'idle',
-            },
+            type: '',
+            payload: '',
         });
-
-        this.showCombat = false;
     }
 }

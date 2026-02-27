@@ -1,6 +1,6 @@
 import { Action } from "../";
 
-export type CharacterAction = {
+export type CharacterActions = {
     currentAction: Action;
     availableActions: Action[];
 

@@ -24,7 +24,7 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     };
 
     // --- Actions ---
-    _actionsController = std::make_unique<CharacterActionsController>( sendFunction, _character->actions(), Commons::Singleton<Manager::ActionManager>::instance() );
+    _actionsController = std::make_unique<CharacterActionsController>( sendFunction, *_character, Commons::Singleton<Manager::ActionManager>::instance() );
     _controllers.push_back( _actionsController.get() );
 
     // --- Effects ---
@@ -128,6 +128,10 @@ void CharacterInstance::sendMessage( MessageSenderType type, const Json::Value& 
     const std::string serialized = Json::writeString( writer, message );
 
     _connection->send( serialized );
+}
+
+CharacterActionsController* CharacterInstance::actionsController() {
+    return _actionsController.get();
 }
 
 } // namespace Engine

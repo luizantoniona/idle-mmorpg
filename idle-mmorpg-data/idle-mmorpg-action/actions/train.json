@@ -1,4 +1,18 @@
 {
     "id": "TRAIN",
-    "description": "Train your combat skills"
+    "description": "Train your combat skills",
+    "options": [
+        {
+            "stage": 0,
+            "duration": 2,
+            "skill": "COMBAT",
+            "experience": 1
+        },
+        {
+            "stage": 1,
+            "duration": 5,
+            "skill": "COMBAT",
+            "experience": 2
+        }
+    ]
 }

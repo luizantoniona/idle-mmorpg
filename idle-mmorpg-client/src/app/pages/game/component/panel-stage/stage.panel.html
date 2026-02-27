@@ -1,5 +1,5 @@
 <div class="stage-column">
-    @if(!showCombat) {
+    @if(stage && stage.level) {
     <app-panel>
         <div class="stage-row">
             <app-button text="Stage: {{ stage.level }}" (clickEvent)="onNextStage()"></app-button>
@@ -7,6 +7,6 @@
     </app-panel>
 
     }@else {
-    <app-combat-panel [character]="character!" (closeCombat)="onCloseCombat()"></app-combat-panel>
+    <app-loading></app-loading>
     }
 </div>
