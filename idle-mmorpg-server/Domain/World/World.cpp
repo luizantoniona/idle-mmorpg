@@ -22,18 +22,18 @@ void World::addStage( std::unique_ptr<Stage> stage ) {
     _stages.push_back( std::move( stage ) );
 }
 
-Stage* World::stageById( const std::string& stageId ) {
+Stage* World::stageByLevel( int stageLevel ) {
     for ( const auto& stage : _stages ) {
-        if ( stage->id() == stageId ) {
+        if ( stage->level() == stageLevel ) {
             return stage.get();
         }
     }
     return nullptr;
 }
 
-bool World::hasStageById( const std::string& stageId ) const {
+bool World::hasStageByLevel( int stageLevel ) const {
     for ( const auto& stage : _stages ) {
-        if ( stage->id() == stageId ) {
+        if ( stage->level() == stageLevel ) {
             return true;
         }
     }

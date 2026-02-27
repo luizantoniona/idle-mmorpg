@@ -19,6 +19,9 @@ public:
 
 private:
     Domain::CharacterVitals& _characterVitals;
+
+    // --- EventBus methods ---
+    void onVitalMaxGained( const CharacterEvent& event );
 };
 
 } // namespace Engine

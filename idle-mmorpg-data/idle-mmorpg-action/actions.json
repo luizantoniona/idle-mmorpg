@@ -2,7 +2,6 @@
     "actions": [
         "actions/idle",
         "actions/train",
-        "actions/combat",
         "actions/mining"
     ]
 }

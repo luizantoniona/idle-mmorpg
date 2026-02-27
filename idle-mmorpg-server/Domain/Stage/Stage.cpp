@@ -3,7 +3,6 @@
 namespace Domain {
 
 Stage::Stage() :
-    _id( "" ),
     _level( 0 ),
     _creatures( {} ),
     _objectives( {} ) {
@@ -13,7 +12,6 @@ Stage::~Stage() = default;
 
 Json::Value Stage::toJson() {
     Json::Value values;
-    values[ "id" ] = id();
     values[ "level" ] = level();
 
     for ( auto& objective : objectives() ) {
@@ -23,14 +21,6 @@ Json::Value Stage::toJson() {
     Json::Value stage;
     stage[ "stage" ] = values;
     return stage;
-}
-
-std::string Stage::id() const {
-    return _id;
-}
-
-void Stage::setId( const std::string& id ) {
-    _id = id;
 }
 
 int Stage::level() const {

@@ -3,6 +3,8 @@
 
 #include <Domain/Character/Character.h>
 #include <Engine/Manager/Action/ActionManager.h>
+#include <Engine/Instance/Character/EventBus/CharacterEvent.h>
+#include <Engine/Instance/Character/EventBus/CharacterEventType.h>
 
 #include "CharacterController.h"
 
@@ -20,9 +22,6 @@ public:
     void onTick() override;
 
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
-
-    void refreshAvailableActions( int stageLevel );
-    void handleActionMessage( const Json::Value& payload, int stageLevel );
 
 private:
     Domain::Character& _character;

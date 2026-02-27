@@ -18,8 +18,8 @@ public:
     void setStages( std::vector<std::unique_ptr<Stage>> stages );
     void addStage( std::unique_ptr<Stage> stage );
 
-    Stage* stageById( const std::string& stageId );
-    bool hasStageById( const std::string& stageId ) const;
+    Stage* stageByLevel( int stageLevel );
+    bool hasStageByLevel( int stageLevel ) const;
 
 private:
     std::vector<std::unique_ptr<Stage>> _stages;

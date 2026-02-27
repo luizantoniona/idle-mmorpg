@@ -30,7 +30,7 @@ private:
     mutable std::mutex _mutex;
     Domain::World* _world;
     std::unordered_map<std::string, std::unique_ptr<CharacterInstance>> _characters;
-    std::unordered_map<std::string, std::unique_ptr<StageInstance>> _stages;
+    std::unordered_map<int, std::unique_ptr<StageInstance>> _stages;
     std::unordered_map<std::string, StageInstance*> _characterToStage;
 };
 

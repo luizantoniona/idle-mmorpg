@@ -3,13 +3,13 @@
 namespace Domain {
 
 CharacterStage::CharacterStage() :
-    _idStage( "" ),
+    _stageLevel( 0 ),
     _completed( false ) {
 }
 
 Json::Value CharacterStage::toJson() const {
     Json::Value values;
-    values[ "idStage" ] = idStage();
+    values[ "stageLevel" ] = stageLevel();
     values[ "completed" ] = completed();
 
     Json::Value stage;
@@ -17,12 +17,12 @@ Json::Value CharacterStage::toJson() const {
     return values;
 }
 
-std::string CharacterStage::idStage() const {
-    return _idStage;
+int CharacterStage::stageLevel() const {
+    return _stageLevel;
 }
 
-void CharacterStage::setIdStage( const std::string& idStage ) {
-    _idStage = idStage;
+void CharacterStage::setStageLevel( int stageLevel ) {
+    _stageLevel = stageLevel;
 }
 
 bool CharacterStage::completed() const {

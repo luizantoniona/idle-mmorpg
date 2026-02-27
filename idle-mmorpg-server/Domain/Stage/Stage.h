@@ -13,9 +13,6 @@ public:
 
     Json::Value toJson();
 
-    std::string id() const;
-    void setId( const std::string& id );
-
     int level() const;
     void setLevel( int level );
 
@@ -28,7 +25,6 @@ public:
     void addObjective( const StageObjective& objective );
 
 private:
-    std::string _id;
     int _level;
     std::vector<StageCreature> _creatures;
     std::vector<StageObjective> _objectives;

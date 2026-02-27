@@ -14,7 +14,7 @@ bool CharacterStageRepository::createStage( int idCharacter ) {
             id_character,
             id_stage,
             completed
-        ) VALUES (?, 1, 0)
+        ) VALUES (?, 0, 0)
     )SQL";
 
     Database::Query query( _db, sql );
@@ -32,7 +32,7 @@ bool CharacterStageRepository::updateStage( int idCharacter, const Domain::Chara
     )SQL";
 
     Database::Query query( _db, sql );
-    query.bindText( 1, stage.idStage() );
+    query.bindInt( 1, stage.stageLevel() );
     query.bindInt( 2, stage.completed() ? 1 : 0 );
     query.bindInt( 3, idCharacter );
 
@@ -56,7 +56,7 @@ std::unique_ptr<Domain::CharacterStage> CharacterStageRepository::findByCharacte
     }
 
     auto stage = std::make_unique<Domain::CharacterStage>();
-    stage->setIdStage( query.getColumnText( 0 ) );
+    stage->setStageLevel( query.getColumnInt( 0 ) );
     stage->setCompleted( query.getColumnInt( 1 ) != 0 );
 
     return stage;

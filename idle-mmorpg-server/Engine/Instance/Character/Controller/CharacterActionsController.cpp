@@ -12,29 +12,23 @@ CharacterActionsController::CharacterActionsController( CharacterEventBus& event
 }
 
 void CharacterActionsController::onEnterWorld() {
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
-}
-
-void CharacterActionsController::refreshAvailableActions( int stageLevel ) {
-    _characterActions.actions().clear();
-
     const auto& allActions = _actionManager.actions();
 
-    for ( const auto& [type, actionPtr] : allActions ) {
+    for ( const auto& [ type, actionPtr ] : allActions ) {
         if ( !actionPtr ) {
             continue;
         }
 
         std::vector<Domain::CharacterActionOption> filtered;
         for ( const auto& option : actionPtr->options() ) {
-            if ( stageLevel >= option.stage() ) {
+            if ( _character.stage().stageLevel() >= option.stage() ) {
                 Domain::CharacterActionOption charOpt;
-                charOpt.setStage(option.stage());
-                charOpt.setDuration(option.duration());
-                charOpt.setExperience(option.experience());
-                charOpt.setSkill(option.skill());
-                charOpt.setItemId(option.itemId());
-                filtered.push_back(charOpt);
+                charOpt.setStage( option.stage() );
+                charOpt.setDuration( option.duration() );
+                charOpt.setExperience( option.experience() );
+                charOpt.setSkill( option.skill() );
+                charOpt.setItemId( option.itemId() );
+                filtered.push_back( charOpt );
             }
         }
 
@@ -45,60 +39,12 @@ void CharacterActionsController::refreshAvailableActions( int stageLevel ) {
         Domain::CharacterAction characterAction;
         characterAction.setType( type );
         characterAction.setDescription( actionPtr->description() );
-        characterAction.setOptions(filtered);
+        characterAction.setOptions( filtered );
 
         _characterActions.addAction( characterAction );
     }
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
-}
-
-void CharacterActionsController::handleActionMessage( const Json::Value& payload, int stageLevel ) {
-    if ( !payload.isMember( "type" ) ) {
-        return;
-    }
-
-    const Domain::ActionType actionType = static_cast<Domain::ActionType>( payload[ "type" ].asInt() );
-    if ( actionType == Domain::ActionType::UNKNOWN ) {
-        return;
-    }
-
-    auto& available = _characterActions.actions();
-    auto it = std::find_if( available.begin(), available.end(), [ & ]( const Domain::CharacterAction& action ) {
-        return action.type() == actionType;
-    } );
-    if ( it == available.end() ) {
-        return;
-    }
-
-    const auto& options = it->options();
-    if ( options.empty() ) {
-        return;
-    }
-
-    if ( !payload.isMember( "optionStage" ) ) {
-        return;
-    }
-    int optionStage = payload[ "optionStage" ].asInt();
-
-    const Domain::CharacterActionOption* selectedOption = nullptr;
-    for ( const auto& option : options ) {
-        if ( option.stage() == optionStage ) {
-            selectedOption = &option;
-            break;
-        }
-    }
-
-    if ( !selectedOption ) {
-        return;
-    }
-
-    Domain::CharacterAction runtimeAction = *it;
-    runtimeAction.setSelectedOption( *selectedOption );
-
-    _characterActions.setCurrentAction( runtimeAction );
-    _characterActions.setDuration( selectedOption->duration() );
-    _characterActions.setCounter( 0 );
 }
 
 void CharacterActionsController::onLeaveWorld() {
@@ -132,8 +78,56 @@ void CharacterActionsController::onTick() {
 
 void CharacterActionsController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
-    case MessageReceiverType::CHARACTER_SET_ACTION:
+    case MessageReceiverType::CHARACTER_SET_ACTION: {
+
+        if ( !payload.isMember( "type" ) ) {
+            return;
+        }
+
+        const Domain::ActionType actionType = static_cast<Domain::ActionType>( payload[ "type" ].asInt() );
+        if ( actionType == Domain::ActionType::UNKNOWN ) {
+            return;
+        }
+
+        auto& available = _characterActions.actions();
+        auto it = std::find_if( available.begin(), available.end(), [ & ]( const Domain::CharacterAction& action ) {
+            return action.type() == actionType;
+        } );
+        if ( it == available.end() ) {
+            return;
+        }
+
+        const auto& options = it->options();
+        if ( options.empty() ) {
+            return;
+        }
+
+        if ( !payload.isMember( "optionStage" ) ) {
+            return;
+        }
+        int optionStage = payload[ "optionStage" ].asInt();
+
+        const Domain::CharacterActionOption* selectedOption = nullptr;
+        for ( const auto& option : options ) {
+            if ( option.stage() == optionStage ) {
+                selectedOption = &option;
+                break;
+            }
+        }
+
+        if ( !selectedOption ) {
+            return;
+        }
+
+        Domain::CharacterAction runtimeAction = *it;
+        runtimeAction.setSelectedOption( *selectedOption );
+
+        _characterActions.setCurrentAction( runtimeAction );
+        _characterActions.setDuration( selectedOption->duration() );
+        _characterActions.setCounter( 0 );
+
         _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
+    }
     default:
         break;
     }
@@ -154,13 +148,13 @@ void CharacterActionsController::executeCurrentAction() {
 }
 
 void CharacterActionsController::executeTraining( const Domain::CharacterActionOption& option ) {
-    int xpGranted = option.experience();
-
     auto skills = combatSkill( &_character );
-
     for ( const auto& skill : skills ) {
-        // Need a way to add experience and notify player.Pass CharacterSkillController ?
-        // _character.addExperience( skill, xpGranted );
+        Json::Value payload;
+        payload[ "skill" ] = static_cast<int>( skill );
+        payload[ "experience" ] = option.experience();
+
+        _eventBus.publish( CharacterEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, payload ) );
     }
 }
 

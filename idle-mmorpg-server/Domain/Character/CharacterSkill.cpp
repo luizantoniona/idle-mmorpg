@@ -1,7 +1,5 @@
 #include "CharacterSkill.h"
 
-#include <Domain/Shared/LevelExperienceHelper.h>
-
 namespace Domain {
 
 CharacterSkill::CharacterSkill() :
@@ -18,7 +16,7 @@ Json::Value CharacterSkill::toJson() {
     values[ "level" ] = level();
     values[ "bonusLevel" ] = bonusLevel();
     values[ "experience" ] = experience();
-    values[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
+    values[ "experienceNextLevel" ] = skill()->experienceForNextLevel( level() );
     values[ "skill" ] = skill()->toJson();
     return values;
 }

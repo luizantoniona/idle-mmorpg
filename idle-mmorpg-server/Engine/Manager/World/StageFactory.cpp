@@ -14,7 +14,6 @@ std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& sta
     Json::Value stageJson = Helper::JsonHelper::loadJsonFile( stageFile );
 
     auto stage = std::make_unique<Domain::Stage>();
-    stage->setId( stageJson[ "id" ].asString() );
     stage->setLevel( stageJson[ "level" ].asInt() );
 
     // --- Creatures ---

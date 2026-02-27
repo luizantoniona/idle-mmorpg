@@ -1,5 +1,7 @@
 #include "Skill.h"
 
+#include <cmath>
+
 namespace Domain {
 
 Skill::Skill() :
@@ -8,7 +10,9 @@ Skill::Skill() :
     _name( "" ),
     _description( "" ),
     _category( "" ),
-    _millestones( {} ) {
+    _millestones( {} ),
+    _baseExperience( 0.00 ),
+    _growthRate( 0.00 ) {
 }
 
 Json::Value Skill::toJson() {
@@ -70,6 +74,26 @@ void Skill::setMillestones( const std::vector<SkillMilestone>& millestones ) {
 
 void Skill::addMilestone( const SkillMilestone& milestone ) {
     _millestones.push_back( milestone );
+}
+
+int Skill::experienceForNextLevel( int currentLevel ) const {
+    return static_cast<int>( _baseExperience * std::pow( _growthRate, currentLevel ) );
+}
+
+double Skill::baseExperience() const {
+    return _baseExperience;
+}
+
+void Skill::setBaseExperience( double baseExperience ) {
+    _baseExperience = baseExperience;
+}
+
+double Skill::growthRate() const {
+    return _growthRate;
+}
+
+void Skill::setGrowthRate( double growthRate ) {
+    _growthRate = growthRate;
 }
 
 } // namespace Domain

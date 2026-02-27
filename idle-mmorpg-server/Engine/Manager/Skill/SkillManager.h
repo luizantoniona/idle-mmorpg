@@ -15,8 +15,8 @@ public:
 
     void initialize( const std::string& skillsPath );
 
-    Domain::Skill* skill( const std::string& idSkill );
-    Domain::Skill* skill( Domain::SkillType typeSkill );
+    Domain::Skill* skill( const std::string& skillId );
+    Domain::Skill* skill( Domain::SkillType skillType );
 
 private:
     std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > _skills;

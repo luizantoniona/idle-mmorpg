@@ -8,7 +8,6 @@
 #include <Engine/Message/MessageReceiverType.h>
 #include <Engine/Instance/Character/CharacterInstance.h>
 
-#include "Controller/StageActionController.h"
 #include "Controller/StageCombatController.h"
 
 namespace Engine {
@@ -30,8 +29,6 @@ private:
     std::unordered_map<std::string, CharacterInstance*> _characters;
 
     std::vector<StageController*> _controllers;
-
-    std::unique_ptr<StageActionController> _actionController;
     std::unique_ptr<StageCombatController> _combatController;
 };
 

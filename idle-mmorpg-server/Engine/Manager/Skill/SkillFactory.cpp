@@ -50,6 +50,10 @@ std::unique_ptr<Domain::Skill> SkillFactory::createSkill( const std::string& ski
     skill->setDescription( skillJson[ "description" ].asString() );
     skill->setCategory( skillJson[ "category" ].asString() );
 
+    // TODO: We need to review this later - global or by skill
+    skill->setBaseExperience( 100.00 );
+    skill->setGrowthRate( 1.05 );
+
     const auto& milestonesJson = skillJson[ "milestones" ];
     for ( const auto& milestoneJson : milestonesJson ) {
         Domain::SkillMilestone milestone;

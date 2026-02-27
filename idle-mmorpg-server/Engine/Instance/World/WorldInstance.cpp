@@ -35,7 +35,7 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
     Domain::Character& character = characterInstance->character();
     Domain::CharacterStage& characterStage = character.stage();
 
-    Domain::Stage* stage = _world->stageById( characterStage.idStage() );
+    Domain::Stage* stage = _world->stageByLevel( characterStage.stageLevel() );
 
     if ( !stage ) {
         if ( _world->stages().empty() ) {
@@ -43,12 +43,12 @@ bool WorldInstance::addCharacter( const std::string& sessionId, std::unique_ptr<
         }
 
         stage = _world->stages().front().get();
-        characterStage.setIdStage( stage->id() );
+        characterStage.setStageLevel( stage->level() );
     }
 
     std::lock_guard lock( _mutex );
 
-    auto& stageInstance = _stages[ stage->id() ];
+    auto& stageInstance = _stages[ stage->level() ];
     if ( !stageInstance ) {
         stageInstance = std::make_unique<StageInstance>( stage );
     }
@@ -146,9 +146,8 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
         stage->handleMessage( character, type, payload );
         break;
 
-        // --- Stage and Character ---
+        // --- Character ---
     case MessageReceiverType::CHARACTER_SET_ACTION:
-        stage->handleMessage( character, type, payload );
         character->handleMessage( type, payload );
         break;
 

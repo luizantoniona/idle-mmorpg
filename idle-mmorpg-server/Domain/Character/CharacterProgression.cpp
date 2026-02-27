@@ -1,18 +1,19 @@
 #include "CharacterProgression.h"
 
-#include <Domain/Shared/LevelExperienceHelper.h>
-
 namespace Domain {
 
 CharacterProgression::CharacterProgression() :
     _level( 0 ),
-    _experience( 0 ) {}
+    _experience( 0 ),
+    _baseExperience(),
+    _growthRate() {
+}
 
 Json::Value CharacterProgression::toJson() {
     Json::Value values;
     values[ "level" ] = level();
     values[ "experience" ] = experience();
-    values[ "experienceNextLevel" ] = Helper::LevelExperienceHelper::experienceForNextLevel( level() );
+    values[ "experienceNextLevel" ] = experienceForNextLevel( level() );
 
     Json::Value progression;
     progression[ "progression" ] = values;
@@ -33,6 +34,26 @@ int CharacterProgression::experience() const {
 
 void CharacterProgression::setExperience( int experience ) {
     _experience = experience;
+}
+
+int CharacterProgression::experienceForNextLevel( int currentLevel ) const {
+    return static_cast<int>( _baseExperience * std::pow( _growthRate, currentLevel ) );
+}
+
+double CharacterProgression::baseExperience() const {
+    return _baseExperience;
+}
+
+void CharacterProgression::setBaseExperience( double baseExperience ) {
+    _baseExperience = baseExperience;
+}
+
+double CharacterProgression::growthRate() const {
+    return _growthRate;
+}
+
+void CharacterProgression::setGrowthRate( double growthRate ) {
+    _growthRate = growthRate;
 }
 
 } // namespace Domain

@@ -17,9 +17,18 @@ public:
     int threadPool() const;
     void setThreadPool( int threadPool );
 
+    double baseExperience() const;
+    void setBaseExperience( double baseExperience );
+
+    double growthRate() const;
+    void setGrowthRate( double growthRate );
+
 private:
     int _tickRate;
     int _threadPool;
+
+    double _baseExperience;
+    double _growthRate;
 };
 
 } // namespace Manager

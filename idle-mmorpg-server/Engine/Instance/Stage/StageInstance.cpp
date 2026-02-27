@@ -14,10 +14,6 @@ StageInstance::StageInstance( Domain::Stage* stage ) :
     _characters( {} ),
     _controllers( {} ) {
 
-    // --- Action ---
-    _actionController = std::make_unique<StageActionController>( stage );
-    _controllers.push_back( _actionController.get() );
-
     // --- Combat ---
     _combatController = std::make_unique<StageCombatController>( stage );
     _controllers.push_back( _combatController.get() );
@@ -29,7 +25,7 @@ bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstanc
 
     std::cout << "StageInstance::addCharacter"
               << " [Character] " << characterInstance->character().name()
-              << " [Entering] " << _stage->id()
+              << " [Entering] " << _stage->level()
               << " [SessionID] " << sessionId << std::endl;
 
     characterInstance->sendMessage( MessageSenderType::STAGE, _stage->toJson() );
@@ -67,10 +63,6 @@ void StageInstance::tick() {
 void StageInstance::handleMessage( CharacterInstance* character, MessageReceiverType type, const Json::Value& payload ) {
     std::lock_guard lock( _mutex );
     switch ( type ) {
-
-    case MessageReceiverType::CHARACTER_SET_ACTION:
-        _actionController->handleMessage( character, type, payload );
-        break;
 
     case MessageReceiverType::COMBAT_ROOM_CREATE:
     case MessageReceiverType::COMBAT_ROOM_ENTER:

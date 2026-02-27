@@ -1,8 +1,6 @@
 #ifndef CHARACTERSTAGE_H
 #define CHARACTERSTAGE_H
 
-#include <string>
-
 #include <json/json.h>
 
 namespace Domain {
@@ -13,14 +11,14 @@ public:
 
     Json::Value toJson() const;
 
-    std::string idStage() const;
-    void setIdStage( const std::string& idStage );
+    int stageLevel() const;
+    void setStageLevel( int stageLevel );
 
     bool completed() const;
     void setCompleted( bool completed );
 
 private:
-    std::string _idStage;
+    int _stageLevel;
     bool _completed;
 };
 
