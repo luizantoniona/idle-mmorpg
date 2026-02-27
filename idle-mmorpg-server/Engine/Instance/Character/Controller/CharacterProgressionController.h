@@ -1,7 +1,7 @@
 #ifndef CHARACTERPROGRESSIONCONTROLLER_H
 #define CHARACTERPROGRESSIONCONTROLLER_H
 
-#include <Domain/Character/CharacterProgression.h>
+#include <Domain/Character/Character.h>
 
 #include "CharacterController.h"
 
@@ -10,7 +10,7 @@ namespace Engine {
 class CharacterProgressionController : public CharacterController {
 public:
     explicit CharacterProgressionController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                             Domain::CharacterProgression& progression );
+                                             Domain::Character& character );
 
     void onEnterWorld() override;
     void onLeaveWorld() override;
@@ -18,7 +18,7 @@ public:
     void onTick() override;
 
 private:
-    Domain::CharacterProgression& _progression;
+    Domain::CharacterProgression& _characterProgression;
 };
 
 } // namespace Engine

@@ -3,19 +3,20 @@
 namespace Engine {
 
 CharacterActionsController::CharacterActionsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                        Domain::CharacterActions& actions,
+                                                        Domain::Character& character,
                                                         Manager::ActionManager& actionManager ) :
     CharacterController( eventBus, messageSender ),
-    _actions( actions ),
+    _character( character ),
+    _characterActions( character.actions() ),
     _actionManager( actionManager ) {
 }
 
 void CharacterActionsController::onEnterWorld() {
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _actions.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
 }
 
 void CharacterActionsController::refreshAvailableActions( int stageLevel ) {
-    _actions.actions().clear();
+    _characterActions.actions().clear();
 
     const auto& allActions = _actionManager.actions();
 
@@ -46,14 +47,13 @@ void CharacterActionsController::refreshAvailableActions( int stageLevel ) {
         characterAction.setDescription( actionPtr->description() );
         characterAction.setOptions(filtered);
 
-        _actions.addAction( characterAction );
+        _characterActions.addAction( characterAction );
     }
 
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _actions.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
 }
 
 void CharacterActionsController::handleActionMessage( const Json::Value& payload, int stageLevel ) {
-
     if ( !payload.isMember( "type" ) ) {
         return;
     }
@@ -63,7 +63,7 @@ void CharacterActionsController::handleActionMessage( const Json::Value& payload
         return;
     }
 
-    auto& available = _actions.actions();
+    auto& available = _characterActions.actions();
     auto it = std::find_if( available.begin(), available.end(), [ & ]( const Domain::CharacterAction& action ) {
         return action.type() == actionType;
     } );
@@ -88,6 +88,7 @@ void CharacterActionsController::handleActionMessage( const Json::Value& payload
             break;
         }
     }
+
     if ( !selectedOption ) {
         return;
     }
@@ -95,16 +96,16 @@ void CharacterActionsController::handleActionMessage( const Json::Value& payload
     Domain::CharacterAction runtimeAction = *it;
     runtimeAction.setSelectedOption( *selectedOption );
 
-    _actions.setCurrentAction( runtimeAction );
-    _actions.setDuration( selectedOption->duration() );
-    _actions.setCounter( 0 );
+    _characterActions.setCurrentAction( runtimeAction );
+    _characterActions.setDuration( selectedOption->duration() );
+    _characterActions.setCounter( 0 );
 }
 
 void CharacterActionsController::onLeaveWorld() {
 }
 
 void CharacterActionsController::onTick() {
-    const Domain::CharacterAction& currentAction = _actions.currentAction();
+    const Domain::CharacterAction& currentAction = _characterActions.currentAction();
 
     if ( currentAction.type() == Domain::ActionType::UNKNOWN || currentAction.type() == Domain::ActionType::IDLE ) {
         return;
@@ -115,31 +116,31 @@ void CharacterActionsController::onTick() {
         return;
     }
 
-    _actions.setCounter( _actions.counter() + 1 );
+    _characterActions.setCounter( _characterActions.counter() + 1 );
 
-    if ( _actions.counter() < option.duration() ) {
-        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _actions.toJson() );
+    if ( _characterActions.counter() < option.duration() ) {
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
         return;
     }
 
     executeCurrentAction();
 
-    _actions.setCounter( 0 );
+    _characterActions.setCounter( 0 );
 
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _actions.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
 }
 
 void CharacterActionsController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
     case MessageReceiverType::CHARACTER_SET_ACTION:
-        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _actions.toJson() );
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
     default:
         break;
     }
 }
 
 void CharacterActionsController::executeCurrentAction() {
-    const Domain::CharacterAction& currentAction = _actions.currentAction();
+    const Domain::CharacterAction& currentAction = _characterActions.currentAction();
     const auto option = currentAction.selectedOption();
 
     switch ( currentAction.type() ) {
@@ -155,68 +156,68 @@ void CharacterActionsController::executeCurrentAction() {
 void CharacterActionsController::executeTraining( const Domain::CharacterActionOption& option ) {
     int xpGranted = option.experience();
 
-    // auto skills = combatSkill( &_character );
+    auto skills = combatSkill( &_character );
 
-    // for ( const auto& skill : skills ) {
-    // Need a way to add experience and notify player. Pass CharacterSkillController?
-    // _character.addExperience( skill, xpGranted );
-    // }
+    for ( const auto& skill : skills ) {
+        // Need a way to add experience and notify player.Pass CharacterSkillController ?
+        // _character.addExperience( skill, xpGranted );
+    }
 }
 
-// std::vector<Domain::SkillType> CharacterActionsController::combatSkill( Domain::Character* character ) {
-//     const Domain::Item* weapon = character->equipment().weapon().item();
-//     const Domain::Item* offhand = character->equipment().offhand().item();
+std::vector<Domain::SkillType> CharacterActionsController::combatSkill( Domain::Character* character ) {
+    const Domain::Item* weapon = character->equipment().weapon().item();
+    const Domain::Item* offhand = character->equipment().offhand().item();
 
-//     std::vector<Domain::SkillType> skills = {};
+    std::vector<Domain::SkillType> skills = {};
 
-//     auto getSkillForWeapon = []( const Domain::Item* item ) -> Domain::SkillType {
-//         if ( !item ) {
-//             return Domain::SkillType::FIST_MASTERY;
-//         }
+    auto getSkillForWeapon = []( const Domain::Item* item ) -> Domain::SkillType {
+        if ( !item ) {
+            return Domain::SkillType::FIST_MASTERY;
+        }
 
-//         const std::string& category = item->category();
+        const std::string& category = item->category();
 
-//         if ( category == "sword" ) {
-//             return Domain::SkillType::SWORD_MASTERY;
-//         }
+        if ( category == "sword" ) {
+            return Domain::SkillType::SWORD_MASTERY;
+        }
 
-//         if ( category == "axe" ) {
-//             return Domain::SkillType::AXE_MASTERY;
-//         }
+        if ( category == "axe" ) {
+            return Domain::SkillType::AXE_MASTERY;
+        }
 
-//         if ( category == "dagger" ) {
-//             return Domain::SkillType::DAGGER_MASTERY;
-//         }
+        if ( category == "dagger" ) {
+            return Domain::SkillType::DAGGER_MASTERY;
+        }
 
-//         return Domain::SkillType::UNKNOWN;
-//     };
+        return Domain::SkillType::UNKNOWN;
+    };
 
-//     auto getSkillForOffhand = []( const Domain::Item* item ) -> Domain::SkillType {
-//         if ( !item ) {
-//             return Domain::SkillType::UNKNOWN;
-//         }
+    auto getSkillForOffhand = []( const Domain::Item* item ) -> Domain::SkillType {
+        if ( !item ) {
+            return Domain::SkillType::UNKNOWN;
+        }
 
-//         const std::string& category = item->category();
+        const std::string& category = item->category();
 
-//         if ( category == "shield" ) {
-//             return Domain::SkillType::SHIELD_MASTERY;
-//         }
+        if ( category == "shield" ) {
+            return Domain::SkillType::SHIELD_MASTERY;
+        }
 
-//         return Domain::SkillType::UNKNOWN;
-//     };
+        return Domain::SkillType::UNKNOWN;
+    };
 
-//     Domain::SkillType weaponSkill = getSkillForWeapon( weapon );
-//     Domain::SkillType offhandSkill = getSkillForOffhand( offhand );
+    Domain::SkillType weaponSkill = getSkillForWeapon( weapon );
+    Domain::SkillType offhandSkill = getSkillForOffhand( offhand );
 
-//     if ( weaponSkill != Domain::SkillType::UNKNOWN ) {
-//         skills.push_back( weaponSkill );
-//     }
+    if ( weaponSkill != Domain::SkillType::UNKNOWN ) {
+        skills.push_back( weaponSkill );
+    }
 
-//     if ( offhandSkill != Domain::SkillType::UNKNOWN ) {
-//         skills.push_back( offhandSkill );
-//     }
+    if ( offhandSkill != Domain::SkillType::UNKNOWN ) {
+        skills.push_back( offhandSkill );
+    }
 
-//     return skills;
-// }
+    return skills;
+}
 
 } // namespace Engine

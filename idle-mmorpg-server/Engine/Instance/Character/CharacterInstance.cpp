@@ -20,39 +20,39 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     _controllers() {
 
     // --- Actions ---
-    _actionsController = std::make_unique<CharacterActionsController>( _eventBus, _messageSender, _character->actions(), Commons::Singleton<Manager::ActionManager>::instance() );
+    _actionsController = std::make_unique<CharacterActionsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ActionManager>::instance() );
     _controllers.push_back( _actionsController.get() );
 
     // --- Effects ---
-    _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, _character->effects() );
+    _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, *_character );
     _controllers.push_back( _effectsController.get() );
 
     // --- Equipment ---
-    _equipmentController = std::make_unique<CharacterEquipmentController>( _eventBus, _messageSender, _character->equipment(), Commons::Singleton<Manager::ItemManager>::instance() );
+    _equipmentController = std::make_unique<CharacterEquipmentController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance() );
     _controllers.push_back( _equipmentController.get() );
 
     // --- Inventory ---
-    _inventoryController = std::make_unique<CharacterInventoryController>( _eventBus, _messageSender, _character->inventory(), Commons::Singleton<Manager::ItemManager>::instance() );
+    _inventoryController = std::make_unique<CharacterInventoryController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance() );
     _controllers.push_back( _inventoryController.get() );
 
     // --- Progression ---
-    _progressionController = std::make_unique<CharacterProgressionController>( _eventBus, _messageSender, _character->progression() );
+    _progressionController = std::make_unique<CharacterProgressionController>( _eventBus, _messageSender, *_character );
     _controllers.push_back( _progressionController.get() );
 
     // --- Skills ---
-    _skillsController = std::make_unique<CharacterSkillsController>( _eventBus, _messageSender, _character->skills(), Commons::Singleton<Manager::SkillManager>::instance() );
+    _skillsController = std::make_unique<CharacterSkillsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::SkillManager>::instance() );
     _controllers.push_back( _skillsController.get() );
 
     // --- Spells ---
-    _spellsController = std::make_unique<CharacterSpellsController>( _eventBus, _messageSender, _character->spells(), Commons::Singleton<Manager::SpellManager>::instance() );
+    _spellsController = std::make_unique<CharacterSpellsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::SpellManager>::instance() );
     _controllers.push_back( _spellsController.get() );
 
     // --- Vitals ---
-    _vitalsController = std::make_unique<CharacterVitalsController>( _eventBus, _messageSender, _character->vitals() );
+    _vitalsController = std::make_unique<CharacterVitalsController>( _eventBus, _messageSender, *_character );
     _controllers.push_back( _vitalsController.get() );
 
     // --- Wallet ---
-    _walletControler = std::make_unique<CharacterWalletController>( _eventBus, _messageSender, _character->wallet() );
+    _walletControler = std::make_unique<CharacterWalletController>( _eventBus, _messageSender, *_character );
     _controllers.push_back( _walletControler.get() );
 }
 

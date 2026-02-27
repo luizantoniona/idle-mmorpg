@@ -3,13 +3,13 @@
 namespace Engine {
 
 CharacterWalletController::CharacterWalletController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                      Domain::CharacterWallet& wallet ) :
+                                                      Domain::Character& character ) :
     CharacterController( eventBus, messageSender ),
-    _wallet( wallet ) {
+    _characterWallet( character.wallet() ) {
 }
 
 void CharacterWalletController::onEnterWorld() {
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_WALLET, _wallet.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_WALLET, _characterWallet.toJson() );
 }
 
 void CharacterWalletController::onLeaveWorld() {

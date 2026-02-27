@@ -3,13 +3,13 @@
 namespace Engine {
 
 CharacterProgressionController::CharacterProgressionController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                                Domain::CharacterProgression& progression ) :
+                                                                Domain::Character& character ) :
     CharacterController( eventBus, messageSender ),
-    _progression( progression ) {
+    _characterProgression( character.progression() ) {
 }
 
 void CharacterProgressionController::onEnterWorld() {
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _progression.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _characterProgression.toJson() );
 }
 
 void CharacterProgressionController::onLeaveWorld() {

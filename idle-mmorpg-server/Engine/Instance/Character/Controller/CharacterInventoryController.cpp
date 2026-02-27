@@ -3,15 +3,15 @@
 namespace Engine {
 
 CharacterInventoryController::CharacterInventoryController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                            Domain::CharacterInventory& inventory,
+                                                            Domain::Character& character,
                                                             Manager::ItemManager& itemManager ) :
     CharacterController( eventBus, messageSender ),
-    _inventory( inventory ),
+    _characterInventory( character.inventory() ),
     _itemManager( itemManager ) {
 }
 
 void CharacterInventoryController::onEnterWorld() {
-    for ( auto& item : _inventory.items() ) {
+    for ( auto& item : _characterInventory.items() ) {
         const Domain::Item* itemPointer = _itemManager.itemById( item.id() );
         if ( !itemPointer ) {
             continue;
@@ -20,11 +20,11 @@ void CharacterInventoryController::onEnterWorld() {
         item.setItem( itemPointer );
     }
 
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _inventory.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _characterInventory.toJson() );
 }
 
 void CharacterInventoryController::onLeaveWorld() {
-    for ( auto& item : _inventory.items() ) {
+    for ( auto& item : _characterInventory.items() ) {
         item.setItem( nullptr );
     }
 }

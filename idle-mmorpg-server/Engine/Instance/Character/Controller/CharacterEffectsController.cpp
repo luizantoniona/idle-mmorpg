@@ -3,13 +3,13 @@
 namespace Engine {
 
 CharacterEffectsController::CharacterEffectsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                        Domain::CharacterEffects& effects ) :
+                                                        Domain::Character& character ) :
     CharacterController( eventBus, messageSender ),
-    _effects( effects ) {
+    _characterEffects( character.effects() ) {
 }
 
 void CharacterEffectsController::onEnterWorld() {
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_EFFECTS, _effects.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_EFFECTS, _characterEffects.toJson() );
 }
 
 void CharacterEffectsController::onLeaveWorld() {

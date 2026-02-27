@@ -1,7 +1,7 @@
 #ifndef CHARACTEREQUIPMENTCONTROLLER_H
 #define CHARACTEREQUIPMENTCONTROLLER_H
 
-#include <Domain/Character/CharacterEquipment.h>
+#include <Domain/Character/Character.h>
 #include <Engine/Manager/Item/ItemManager.h>
 
 #include "CharacterController.h"
@@ -11,7 +11,7 @@ namespace Engine {
 class CharacterEquipmentController : public CharacterController {
 public:
     explicit CharacterEquipmentController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                           Domain::CharacterEquipment& equipment,
+                                           Domain::Character& character,
                                            Manager::ItemManager& itemManager );
 
     void onEnterWorld() override;
@@ -20,7 +20,7 @@ public:
     void onTick() override;
 
 private:
-    Domain::CharacterEquipment& _equipment;
+    Domain::CharacterEquipment& _characterEquipment;
     Manager::ItemManager& _itemManager;
 };
 

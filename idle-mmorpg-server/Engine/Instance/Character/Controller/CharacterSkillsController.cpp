@@ -5,15 +5,15 @@
 namespace Engine {
 
 CharacterSkillsController::CharacterSkillsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                      Domain::CharacterSkills& skills,
+                                                      Domain::Character& character,
                                                       Manager::SkillManager& skillManager ) :
     CharacterController( eventBus, messageSender ),
-    _skills( skills ),
+    _characterSkills( character.skills() ),
     _skillManager( skillManager ) {
 }
 
 void CharacterSkillsController::onEnterWorld() {
-    for ( auto& skill : _skills.skills() ) {
+    for ( auto& skill : _characterSkills.skills() ) {
         Domain::Skill* resolved = _skillManager.skill( skill.id() );
         if ( !resolved ) {
             continue;
@@ -23,7 +23,7 @@ void CharacterSkillsController::onEnterWorld() {
         skill.setType( Domain::SkillHelper::stringToType( skill.id() ) );
     }
 
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_SKILLS, _skills.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_SKILLS, _characterSkills.toJson() );
 }
 
 void CharacterSkillsController::onLeaveWorld() {

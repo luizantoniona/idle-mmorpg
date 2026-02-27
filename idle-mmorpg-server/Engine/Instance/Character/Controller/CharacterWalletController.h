@@ -1,7 +1,7 @@
 #ifndef CHARACTERWALLETCONTROLLER_H
 #define CHARACTERWALLETCONTROLLER_H
 
-#include <Domain/Character/CharacterWallet.h>
+#include <Domain/Character/Character.h>
 
 #include "CharacterController.h"
 
@@ -10,7 +10,7 @@ namespace Engine {
 class CharacterWalletController : public CharacterController {
 public:
     explicit CharacterWalletController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                        Domain::CharacterWallet& wallet );
+                                        Domain::Character& character );
 
     void onEnterWorld() override;
     void onLeaveWorld() override;
@@ -18,7 +18,7 @@ public:
     void onTick() override;
 
 private:
-    Domain::CharacterWallet& _wallet;
+    Domain::CharacterWallet& _characterWallet;
 };
 
 } // namespace Engine

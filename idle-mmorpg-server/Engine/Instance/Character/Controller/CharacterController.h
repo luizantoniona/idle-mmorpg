@@ -3,7 +3,6 @@
 
 #include <json/json.h>
 
-#include <Domain/Character/Character.h>
 #include <Engine/Instance/Character/EventBus/CharacterEventBus.h>
 #include <Engine/Instance/Character/Message/CharacterMessageSender.h>
 #include <Engine/Message/MessageReceiverType.h>

@@ -1,7 +1,7 @@
 #ifndef CHARACTERSKILLSCONTROLLER_H
 #define CHARACTERSKILLSCONTROLLER_H
 
-#include <Domain/Character/CharacterSkills.h>
+#include <Domain/Character/Character.h>
 #include <Engine/Manager/Skill/SkillManager.h>
 
 #include "CharacterController.h"
@@ -11,7 +11,7 @@ namespace Engine {
 class CharacterSkillsController : public CharacterController {
 public:
     explicit CharacterSkillsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                        Domain::CharacterSkills& skills,
+                                        Domain::Character& character,
                                         Manager::SkillManager& skillManager );
 
     void onEnterWorld() override;
@@ -20,7 +20,7 @@ public:
     void onTick() override;
 
 private:
-    Domain::CharacterSkills& _skills;
+    Domain::CharacterSkills& _characterSkills;
     Manager::SkillManager& _skillManager;
 };
 

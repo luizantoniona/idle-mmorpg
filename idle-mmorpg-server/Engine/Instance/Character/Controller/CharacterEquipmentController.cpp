@@ -3,10 +3,10 @@
 namespace Engine {
 
 CharacterEquipmentController::CharacterEquipmentController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                            Domain::CharacterEquipment& equipment,
+                                                            Domain::Character& character,
                                                             Manager::ItemManager& itemManager ) :
     CharacterController( eventBus, messageSender ),
-    _equipment( equipment ),
+    _characterEquipment( character.equipment() ),
     _itemManager( itemManager ) {
 }
 
@@ -22,20 +22,20 @@ void CharacterEquipmentController::onEnterWorld() {
         }
     };
 
-    resolve( _equipment.helmet() );
-    resolve( _equipment.armor() );
-    resolve( _equipment.leg() );
-    resolve( _equipment.boot() );
-    resolve( _equipment.weapon() );
-    resolve( _equipment.offhand() );
-    resolve( _equipment.amulet() );
-    resolve( _equipment.ring() );
-    resolve( _equipment.pickaxe() );
-    resolve( _equipment.woodaxe() );
-    resolve( _equipment.fishingrod() );
-    resolve( _equipment.sickle() );
+    resolve( _characterEquipment.helmet() );
+    resolve( _characterEquipment.armor() );
+    resolve( _characterEquipment.leg() );
+    resolve( _characterEquipment.boot() );
+    resolve( _characterEquipment.weapon() );
+    resolve( _characterEquipment.offhand() );
+    resolve( _characterEquipment.amulet() );
+    resolve( _characterEquipment.ring() );
+    resolve( _characterEquipment.pickaxe() );
+    resolve( _characterEquipment.woodaxe() );
+    resolve( _characterEquipment.fishingrod() );
+    resolve( _characterEquipment.sickle() );
 
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _equipment.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _characterEquipment.toJson() );
 }
 
 void CharacterEquipmentController::onLeaveWorld() {

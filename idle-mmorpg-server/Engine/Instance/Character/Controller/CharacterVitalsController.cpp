@@ -3,13 +3,13 @@
 namespace Engine {
 
 CharacterVitalsController::CharacterVitalsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                      Domain::CharacterVitals& vitals ) :
+                                                      Domain::Character& character ) :
     CharacterController( eventBus, messageSender ),
-    _vitals( vitals ) {
+    _characterVitals( character.vitals() ) {
 }
 
 void CharacterVitalsController::onEnterWorld() {
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_VITALS, _vitals.toJson() );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_VITALS, _characterVitals.toJson() );
 }
 
 void CharacterVitalsController::onLeaveWorld() {
