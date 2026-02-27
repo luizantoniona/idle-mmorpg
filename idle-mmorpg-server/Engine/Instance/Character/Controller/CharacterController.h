@@ -1,10 +1,11 @@
 #ifndef CHARACTERCONTROLLER_H
 #define CHARACTERCONTROLLER_H
 
-#include <functional>
-
 #include <json/json.h>
 
+#include <Domain/Character/Character.h>
+#include <Engine/Instance/Character/EventBus/CharacterEventBus.h>
+#include <Engine/Instance/Character/Message/CharacterMessageSender.h>
 #include <Engine/Message/MessageReceiverType.h>
 #include <Engine/Message/MessageSenderType.h>
 
@@ -12,7 +13,7 @@ namespace Engine {
 
 class CharacterController {
 public:
-    explicit CharacterController( std::function<void( MessageSenderType, const Json::Value& )> sendMessage );
+    explicit CharacterController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender );
     virtual ~CharacterController();
 
     virtual void onEnterWorld() = 0;
@@ -23,10 +24,8 @@ public:
     virtual void handleMessage( MessageReceiverType type, const Json::Value& payload );
 
 protected:
-    void sendMessage( MessageSenderType type, const Json::Value& payload );
-
-private:
-    std::function<void( MessageSenderType, const Json::Value& )> _sendMessage;
+    CharacterEventBus& _eventBus;
+    CharacterMessageSender& _messageSender;
 };
 
 } // namespace Engine

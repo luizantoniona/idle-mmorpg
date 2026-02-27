@@ -1,8 +1,6 @@
 #ifndef CHARACTERINSTANCE_H
 #define CHARACTERINSTANCE_H
 
-#include <drogon/WebSocketConnection.h>
-
 #include <Domain/Character/Character.h>
 #include <Engine/Message/MessageReceiverType.h>
 #include <Engine/Message/MessageSenderType.h>
@@ -16,6 +14,8 @@
 #include "Controller/CharacterSpellsController.h"
 #include "Controller/CharacterVitalsController.h"
 #include "Controller/CharacterWalletController.h"
+#include "EventBus/CharacterEventBus.h"
+#include "Message/CharacterMessageSender.h"
 
 namespace Engine {
 
@@ -48,10 +48,10 @@ private:
     std::string _sessionId;
     std::unique_ptr<Domain::Character> _character;
 
-    drogon::WebSocketConnectionPtr _connection;
+    CharacterEventBus _eventBus;
+    CharacterMessageSender _messageSender;
 
     std::vector<CharacterController*> _controllers;
-
     std::unique_ptr<CharacterActionsController> _actionsController;
     std::unique_ptr<CharacterEffectsController> _effectsController;
     std::unique_ptr<CharacterEquipmentController> _equipmentController;
