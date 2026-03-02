@@ -184,14 +184,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'COMBAT_ROOMS':
-                if (data.payload?.combatInstances) {
-                    this.combatInstances = data.payload.combatInstances;
-                }
-                break;
-
             default:
-                console.warn('Unhandled message type:', data.type);
                 break;
         }
     }

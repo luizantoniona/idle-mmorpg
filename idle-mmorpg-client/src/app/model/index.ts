@@ -15,7 +15,7 @@ export type { CombatInstance } from "./combat/combat-instance.model";
 export type { Combat } from "./combat/combat.model";
 
 export type { Creature } from "./creature/creature.model";
-export type { CreatureCombatAction } from "./creature/creature-combat-action.model";
+export type { CreatureAction } from "./creature/creature-action.model";
 export type { CreatureVitals } from "./creature/creature-vitals.model";
 
 export type { Item } from "./item/item.model";

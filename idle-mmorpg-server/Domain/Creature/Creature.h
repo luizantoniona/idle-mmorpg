@@ -39,6 +39,9 @@ public:
     void setLoot( const std::vector<CreatureLoot>& loot );
     void addLoot( const CreatureLoot& loot );
 
+    int combatId() const;
+    void setCombatId( int combatId );
+
 private:
     std::string _id;
     std::string _type;
@@ -50,6 +53,8 @@ private:
     CreatureVitals _vitals;
 
     std::vector<CreatureLoot> _loot;
+
+    int _combatId;
 };
 
 } // namespace Domain

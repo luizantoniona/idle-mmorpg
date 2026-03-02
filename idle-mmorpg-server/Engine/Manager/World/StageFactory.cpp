@@ -20,6 +20,7 @@ std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& sta
     for ( const Json::Value& creatureJson : stageJson[ "creatures" ] ) {
         Domain::StageCreature creature;
         creature.setId( creatureJson[ "id" ].asString() );
+        creature.setAmount( creatureJson[ "amount" ].asInt() );
         creature.setCreature( Commons::Singleton<Manager::CreatureManager>::instance().creatureById( creature.id() ) );
 
         stage->addCreature( creature );

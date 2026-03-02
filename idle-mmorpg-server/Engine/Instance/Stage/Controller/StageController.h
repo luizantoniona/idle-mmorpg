@@ -1,9 +1,8 @@
 #ifndef STAGECONTROLLER_H
 #define STAGECONTROLLER_H
 
-#include <Engine/Instance/Character/CharacterInstance.h>
-
 #include <Domain/Stage/Stage.h>
+#include <Engine/Instance/Character/CharacterInstance.h>
 
 namespace Engine {
 

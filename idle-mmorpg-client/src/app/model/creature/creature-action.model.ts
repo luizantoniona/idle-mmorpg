@@ -1,4 +1,4 @@
-export type CreatureCombatAction = {
+export type CreatureAction = {
     duration: number;
     counter: number;
 };

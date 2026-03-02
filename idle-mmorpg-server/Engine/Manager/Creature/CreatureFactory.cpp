@@ -54,12 +54,13 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
     Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
 
-    creature->vitals().setMaxHealth( creatureJson[ "health" ].asDouble() );
-    creature->vitals().setHealth( creatureJson[ "health" ].asDouble() );
-    creature->vitals().setMaxMana( creatureJson[ "mana" ].asDouble() );
-    creature->vitals().setMana( creatureJson[ "mana" ].asDouble() );
-    creature->vitals().setMaxStamina( creatureJson[ "stamina" ].asDouble() );
-    creature->vitals().setStamina( creatureJson[ "stamina" ].asDouble() );
+    const Json::Value& vitalsJson = creatureJson[ "vitals" ];
+    creature->vitals().setMaxHealth( vitalsJson[ "health" ].asDouble() );
+    creature->vitals().setHealth( vitalsJson[ "health" ].asDouble() );
+    creature->vitals().setMaxMana( vitalsJson[ "mana" ].asDouble() );
+    creature->vitals().setMana( vitalsJson[ "mana" ].asDouble() );
+    creature->vitals().setMaxStamina( vitalsJson[ "stamina" ].asDouble() );
+    creature->vitals().setStamina( vitalsJson[ "stamina" ].asDouble() );
 
     for ( const auto& lootJson : creatureJson[ "loot" ] ) {
         Domain::CreatureLoot loot;

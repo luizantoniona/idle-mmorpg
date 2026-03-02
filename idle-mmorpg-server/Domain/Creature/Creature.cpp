@@ -80,4 +80,12 @@ void Creature::addLoot( const CreatureLoot& loot ) {
     _loot.push_back( loot );
 }
 
+int Creature::combatId() const {
+    return _combatId;
+}
+
+void Creature::setCombatId( int combatId ) {
+    _combatId = combatId;
+}
+
 } // namespace Domain

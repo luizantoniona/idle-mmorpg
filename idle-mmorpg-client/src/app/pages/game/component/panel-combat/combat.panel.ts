@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Subscription } from "rxjs";
 
-import { BarComponent, ButtonComponent, CardComponent, ImageComponent, LoadingComponent, PanelComponent } from "../../../../component/ui";
+import { BarComponent, ButtonComponent, CardComponent, ImageComponent, PanelComponent } from "../../../../component/ui";
 
-import { Character, Combat, CombatInstance } from "../../../../model";
+import { Combat, CombatInstance } from "../../../../model";
 
 import { WebsocketService } from "../../../../service";
 
@@ -18,21 +18,16 @@ import { WebsocketService } from "../../../../service";
         ButtonComponent,
         CardComponent,
         ImageComponent,
-        LoadingComponent,
         PanelComponent,
     ],
 })
 
 export class CombatPanel {
-    @Input() character!: Character;
-    @Input() combatInstances: CombatInstance[] | null = null;
-
     private websocketService = inject(WebsocketService);
     private subscriptions = new Subscription();
 
+    combatInstances: CombatInstance[] | null = null;
     combat: Combat | null = null;
-
-    private pendingExit = false;
 
     ngOnInit(): void {
         this.subscriptions.add(
@@ -50,13 +45,16 @@ export class CombatPanel {
 
     handleMessage(data: any): void {
         switch (data.type) {
-            case 'COMBAT_UPDATE':
-                if (!this.pendingExit) {
-                    if (data.payload.combat) {
-                        this.combat = data.payload.combat
-                    }
+            case 'COMBAT':
+                if (data.payload.combat) {
+                    this.combat = data.payload.combat
                 }
                 break;
+
+            case 'COMBAT_ROOMS':
+                this.combatInstances = data.payload.combatInstances;
+                break;
+
             default:
                 break;
         }
@@ -77,7 +75,6 @@ export class CombatPanel {
     }
 
     onExitCombatClicked(): void {
-        this.pendingExit = true;
         this.sendMessage({
             type: 'COMBAT_ROOM_EXIT',
             payload: {},

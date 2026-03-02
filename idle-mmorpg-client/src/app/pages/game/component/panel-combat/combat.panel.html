@@ -7,9 +7,6 @@
         <app-card (click)="onJoinClicked(combat.id)"><strong>{{combat.name}}</strong>: {{combat.characters}}</app-card>
         }
         }
-        @else {
-        <app-loading></app-loading>
-        }
         <app-button text="Create new" (clickEvent)="onCreateClicked()"></app-button>
         <!-- <app-button text="Exit" (clickEvent)="onExitClicked()"></app-button> -->
     </div>
@@ -39,7 +36,7 @@
                     label="Stamina ( {{character.vitals.stamina | number:'1.2-2'}} / {{character.vitals.maxStamina | number:'1.2-2'}} )"
                     [value]="character.vitals.stamina" [max]="character.vitals.maxStamina" color="#4caf50" />
 
-                <app-bar label="Attack" [value]="character.action.counter" [max]="character.action.duration"
+                <app-bar label="Attack" [value]="character.actions.counter" [max]="character.actions.duration"
                     color="#fdd835" />
             </div>
             }
@@ -69,8 +66,8 @@
                         label="Stamina ( {{creature.vitals.stamina | number:'1.2-2'}} / {{creature.vitals.maxStamina | number:'1.2-2'}} )"
                         [value]="creature.vitals.stamina" [max]="creature.vitals.maxStamina" color="#4caf50" /> -->
 
-                    <app-bar label="Attack" [value]="creature.combatAction.counter"
-                        [max]="creature.combatAction.duration" color="#fdd835" />
+                    <app-bar label="Attack" [value]="creature.actions.counter" [max]="creature.actions.duration"
+                        color="#fdd835" />
                 </div>
             </div>
             }
