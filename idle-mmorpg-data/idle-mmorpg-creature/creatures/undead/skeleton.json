@@ -3,6 +3,7 @@
     "name": "Skeleton",
     "description": "A reanimated skeleton held together by dark magic.",
     "icon": "skeleton.gif",
+    "experience": 10,
     "vitals": {
         "health": 10,
         "mana": 10,

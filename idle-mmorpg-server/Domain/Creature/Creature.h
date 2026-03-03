@@ -30,6 +30,9 @@ public:
     std::string icon() const;
     void setIcon( const std::string& icon );
 
+    int experience() const;
+    void setExperience( int experience );
+
     CreatureVitals& vitals();
     void setVitals( const CreatureVitals& vitals );
 
@@ -50,6 +53,7 @@ private:
     std::string _name;
     std::string _description;
     std::string _icon;
+    int _experience;
 
     CreatureVitals _vitals;
     std::vector<CreatureLoot> _loot;

@@ -8,6 +8,10 @@ CharacterProgressionController::CharacterProgressionController( CharacterEventBu
     CharacterController( eventBus, messageSender ),
     _characterProgression( character.progression() ),
     _configurationManager( configurationManager ) {
+
+    _eventBus.subscribe( CharacterEventType::PROGRESSION_EXPERIENCE_GAINED, [ this ]( const CharacterEvent& event ) {
+        onProgressionExperienceGained( event );
+    } );
 }
 
 void CharacterProgressionController::onEnterWorld() {
@@ -21,6 +25,19 @@ void CharacterProgressionController::onLeaveWorld() {
 }
 
 void CharacterProgressionController::onTick() {
+}
+
+void CharacterProgressionController::onProgressionExperienceGained( const CharacterEvent& event ) {
+    const Json::Value& payload = event.payload();
+    if ( !payload.isMember( "value" ) ) {
+        return;
+    }
+
+    const double value = payload[ "value" ].asInt();
+
+    // TODO: Apply experience and level up if needed, and maxStats improvement;
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _characterProgression.toJson() );
 }
 
 } // namespace Engine

@@ -15,8 +15,8 @@ public:
     void resolveCharacterAttack( CharacterInstance& attacker, Domain::Creature& target );
     void resolveCreatureAttack( Domain::Creature& attacker, CharacterInstance& target );
 
-    void computeCharactersLoot( std::unordered_map<std::string, CharacterInstance*> characters, std::vector<Domain::Creature*> creatures );
-    void computeCharactersExperience( std::unordered_map<std::string, CharacterInstance*> characters, std::vector<Domain::Creature*> creatures );
+    void computeCharactersLoot( std::unordered_map<std::string, CharacterInstance*>& characters, std::vector<Domain::Creature*>& creatures );
+    void computeCharactersExperience( std::unordered_map<std::string, CharacterInstance*>& characters, std::vector<Domain::Creature*>& creatures );
 
 private:
     Manager::ServerConfigurationManager& _serverManager;

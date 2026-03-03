@@ -3,6 +3,7 @@
     "name": "Rat",
     "description": "Rat.",
     "icon": "rat.gif",
+    "experience": 3,
     "vitals": {
         "health": 3,
         "mana": 3,

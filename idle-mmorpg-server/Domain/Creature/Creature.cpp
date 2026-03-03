@@ -8,6 +8,7 @@ Creature::Creature() :
     _name( "" ),
     _description( "" ),
     _icon( "" ),
+    _experience( 0 ),
     _vitals(),
     _loot(),
     // --- Runtime Data
@@ -53,6 +54,14 @@ std::string Creature::icon() const {
 
 void Creature::setIcon( const std::string& icon ) {
     _icon = icon;
+}
+
+int Creature::experience() const {
+    return _experience;
+}
+
+void Creature::setExperience( int experience ) {
+    _experience = experience;
 }
 
 CreatureVitals& Creature::vitals() {

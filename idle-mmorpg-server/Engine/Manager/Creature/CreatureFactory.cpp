@@ -50,6 +50,7 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     auto creature = std::make_unique<Domain::Creature>();
     creature->setName( creatureJson[ "name" ].asString() );
     creature->setDescription( creatureJson[ "description" ].asString() );
+    creature->setExperience( creatureJson[ "experience" ].asInt() );
 
     creature->setIcon( creatureJson[ "icon" ].asString() );
     std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
