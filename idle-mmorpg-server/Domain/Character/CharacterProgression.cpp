@@ -5,8 +5,8 @@ namespace Domain {
 CharacterProgression::CharacterProgression() :
     _level( 0 ),
     _experience( 0 ),
-    _baseExperience(),
-    _growthRate() {
+    _baseExperience( 0.0 ),
+    _growthRate( 0.0 ) {
 }
 
 Json::Value CharacterProgression::toJson() {

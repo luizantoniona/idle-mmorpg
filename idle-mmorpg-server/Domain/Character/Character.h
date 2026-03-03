@@ -15,6 +15,7 @@
 #include "CharacterWallet.h"
 
 #include "CharacterActions.h"
+#include "CharacterCombat.h"
 #include "CharacterEffects.h"
 
 namespace Domain {
@@ -63,6 +64,9 @@ public:
     CharacterActions& actions();
     void setActions( const CharacterActions& actions );
 
+    CharacterCombat& combat();
+    void setCombat( const CharacterCombat& combat );
+
     CharacterEffects& effects();
     void setEffects( const CharacterEffects& effects );
 
@@ -83,6 +87,7 @@ private:
 
     // --- Runtime Data
     CharacterActions _actions;
+    CharacterCombat _combat;
     CharacterEffects _effects;
 };
 

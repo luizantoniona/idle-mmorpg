@@ -23,6 +23,10 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     _actionsController = std::make_unique<CharacterActionsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ActionManager>::instance() );
     _controllers.push_back( _actionsController.get() );
 
+    // --- Combat ---
+    _combatController = std::make_unique<CharacterCombatController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
+    _controllers.push_back( _combatController.get() );
+
     // --- Effects ---
     _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, *_character );
     _controllers.push_back( _effectsController.get() );
@@ -36,7 +40,7 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     _controllers.push_back( _inventoryController.get() );
 
     // --- Progression ---
-    _progressionController = std::make_unique<CharacterProgressionController>( _eventBus, _messageSender, *_character );
+    _progressionController = std::make_unique<CharacterProgressionController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
     _controllers.push_back( _progressionController.get() );
 
     // --- Skills ---
@@ -116,8 +120,8 @@ void CharacterInstance::sendMessage( MessageSenderType type, const Json::Value& 
     _messageSender.sendMessage( type, payload );
 }
 
-CharacterActionsController* CharacterInstance::actionsController() {
-    return _actionsController.get();
+void CharacterInstance::publishEvent( CharacterEventType type, const Json::Value& payload ) {
+    _eventBus.publish( CharacterEvent( type, payload ) );
 }
 
 } // namespace Engine

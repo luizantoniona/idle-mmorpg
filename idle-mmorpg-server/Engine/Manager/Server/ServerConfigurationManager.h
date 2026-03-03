@@ -12,16 +12,10 @@ public:
     void initialize( const std::string& configurationPath );
 
     int tickRate() const;
-    void setTickRate( int tickRate );
-
     int threadPool() const;
-    void setThreadPool( int threadPool );
 
     double baseExperience() const;
-    void setBaseExperience( double baseExperience );
-
     double growthRate() const;
-    void setGrowthRate( double growthRate );
 
 private:
     int _tickRate;

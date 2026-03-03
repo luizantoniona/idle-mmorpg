@@ -8,8 +8,11 @@ Creature::Creature() :
     _name( "" ),
     _description( "" ),
     _icon( "" ),
-    _action(),
-    _vitals() {
+    _vitals(),
+    _loot(),
+    // --- Runtime Data
+    _combatId( 0 ),
+    _combat() {
 }
 
 std::string Creature::id() const {
@@ -52,14 +55,6 @@ void Creature::setIcon( const std::string& icon ) {
     _icon = icon;
 }
 
-CreatureAction& Creature::action() {
-    return _action;
-}
-
-void Creature::setAction( const CreatureAction& action ) {
-    _action = action;
-}
-
 CreatureVitals& Creature::vitals() {
     return _vitals;
 }
@@ -86,6 +81,14 @@ int Creature::combatId() const {
 
 void Creature::setCombatId( int combatId ) {
     _combatId = combatId;
+}
+
+CreatureCombat& Creature::combat() {
+    return _combat;
+}
+
+void Creature::setAction( const CreatureCombat& combat ) {
+    _combat = combat;
 }
 
 } // namespace Domain

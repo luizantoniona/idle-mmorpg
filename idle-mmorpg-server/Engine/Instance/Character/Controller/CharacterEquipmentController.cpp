@@ -36,6 +36,9 @@ void CharacterEquipmentController::onEnterWorld() {
     resolve( _characterEquipment.sickle() );
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _characterEquipment.toJson() );
+
+    Json::Value payload;
+    _eventBus.publish( CharacterEvent( CharacterEventType::EQUIPMENT_ITEM_EQUIPPED, payload ) );
 }
 
 void CharacterEquipmentController::onLeaveWorld() {

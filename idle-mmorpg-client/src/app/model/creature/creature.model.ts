@@ -1,10 +1,10 @@
-import { CreatureAction } from "./creature-action.model";
+import { CreatureCombat } from "./creature-combat.model";
 import { CreatureVitals } from "./creature-vitals.model";
 
 export type Creature = {
     name: string;
     id: number;
     icon: string;
-    actions: CreatureAction;
+    combat: CreatureCombat;
     vitals: CreatureVitals;
 };

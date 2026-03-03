@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <Engine/Manager/Server/ServerConfigurationManager.h>
 #include <Engine/Manager/Server/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
@@ -71,6 +72,11 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
 
         creature->addLoot( loot );
     }
+
+    const Json::Value& combatJson = creatureJson[ "combat" ];
+    creature->combat().setAttack( combatJson[ "attack" ].asDouble() );
+    creature->combat().setAttackCounter( 0 );
+    creature->combat().setAttackDuration( static_cast<int>( combatJson[ "speed" ].asDouble() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() ) );
 
     return creature;
 }

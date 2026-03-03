@@ -6,8 +6,9 @@ namespace Domain {
 enum class ActionType {
     IDLE,
 
-    TRAIN,
     COMBAT,
+
+    TRAIN,
 
     MINING,
 

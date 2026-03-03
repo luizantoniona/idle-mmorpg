@@ -9,7 +9,9 @@ namespace Domain {
 namespace {
 constexpr std::array<std::pair<std::string_view, ActionType>, static_cast<int>( ActionType::UNKNOWN )> ACTION_TYPE_TABLE = { {
     { "IDLE", ActionType::IDLE },
+
     { "COMBAT", ActionType::COMBAT },
+
     { "TRAIN", ActionType::TRAIN },
 
     { "MINING", ActionType::MINING },

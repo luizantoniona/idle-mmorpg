@@ -4,6 +4,9 @@ import { Subscription } from "rxjs";
 
 import { BarComponent, ButtonComponent, CardComponent, ImageComponent, PanelComponent } from "../../../../component/ui";
 
+import { CharacterCombatCardComponent } from "./character-combat-card";
+import { CreatureCombatCardComponent } from "./creature-combat-card";
+
 import { Combat, CombatInstance } from "../../../../model";
 
 import { WebsocketService } from "../../../../service";
@@ -19,6 +22,8 @@ import { WebsocketService } from "../../../../service";
         CardComponent,
         ImageComponent,
         PanelComponent,
+        CharacterCombatCardComponent,
+        CreatureCombatCardComponent
     ],
 })
 

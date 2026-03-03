@@ -8,6 +8,8 @@ enum class CharacterEventType {
 
     VITAL_MAX_GAINED,
 
+    EQUIPMENT_ITEM_EQUIPPED,
+
     UNKNOWN,
 };
 

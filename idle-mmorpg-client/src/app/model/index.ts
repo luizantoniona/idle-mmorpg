@@ -2,6 +2,7 @@ export type { Action, ActionOption } from "./action/action.model";
 
 export type { Character } from "./character/character.model";
 export type { CharacterActions } from "./character/character-action.model";
+export type { CharacterCombat } from "./character/character-combat.model";
 export type { CharacterEffect } from "./character/character-effect.model";
 export type { CharacterEquipment } from "./character/character-equipment.model";
 export type { CharacterInventory } from "./character/character-inventory.model";
@@ -15,7 +16,7 @@ export type { CombatInstance } from "./combat/combat-instance.model";
 export type { Combat } from "./combat/combat.model";
 
 export type { Creature } from "./creature/creature.model";
-export type { CreatureAction } from "./creature/creature-action.model";
+export type { CreatureCombat } from "./creature/creature-combat.model";
 export type { CreatureVitals } from "./creature/creature-vitals.model";
 
 export type { Item } from "./item/item.model";

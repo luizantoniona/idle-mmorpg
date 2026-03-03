@@ -4,9 +4,10 @@
 #include <string>
 #include <vector>
 
-#include "CreatureAction.h"
 #include "CreatureLoot.h"
 #include "CreatureVitals.h"
+
+#include "CreatureCombat.h"
 
 namespace Domain {
 
@@ -29,9 +30,6 @@ public:
     std::string icon() const;
     void setIcon( const std::string& icon );
 
-    CreatureAction& action();
-    void setAction( const CreatureAction& action );
-
     CreatureVitals& vitals();
     void setVitals( const CreatureVitals& vitals );
 
@@ -39,8 +37,12 @@ public:
     void setLoot( const std::vector<CreatureLoot>& loot );
     void addLoot( const CreatureLoot& loot );
 
+    // --- Runtime Data
     int combatId() const;
     void setCombatId( int combatId );
+
+    CreatureCombat& combat();
+    void setAction( const CreatureCombat& combat );
 
 private:
     std::string _id;
@@ -49,12 +51,12 @@ private:
     std::string _description;
     std::string _icon;
 
-    CreatureAction _action;
     CreatureVitals _vitals;
-
     std::vector<CreatureLoot> _loot;
 
+    // --- Runtime Data
     int _combatId;
+    CreatureCombat _combat;
 };
 
 } // namespace Domain

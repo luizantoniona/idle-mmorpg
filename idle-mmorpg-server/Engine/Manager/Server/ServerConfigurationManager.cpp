@@ -38,16 +38,16 @@ int ServerConfigurationManager::tickRate() const {
     return _tickRate;
 }
 
-void ServerConfigurationManager::setTickRate( int tickRate ) {
-    _tickRate = tickRate;
-}
-
 int ServerConfigurationManager::threadPool() const {
     return _threadPool;
 }
 
-void ServerConfigurationManager::setThreadPool( int threadPool ) {
-    _threadPool = threadPool;
+double ServerConfigurationManager::baseExperience() const {
+    return _baseExperience;
+}
+
+double ServerConfigurationManager::growthRate() const {
+    return _growthRate;
 }
 
 } // namespace Manager

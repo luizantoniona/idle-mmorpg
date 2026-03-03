@@ -17,7 +17,9 @@ Character::Character() :
     _wallet(),
     // --- Runtime Data
     _actions(),
-    _effects() {}
+    _combat(),
+    _effects() {
+}
 
 Json::Value Character::toJson() {
     Json::Value values;
@@ -121,6 +123,14 @@ CharacterActions& Character::actions() {
 
 void Character::setActions( const CharacterActions& actions ) {
     _actions = actions;
+}
+
+CharacterCombat& Character::combat() {
+    return _combat;
+}
+
+void Character::setCombat( const CharacterCombat& combat ) {
+    _combat = combat;
 }
 
 CharacterEffects& Character::effects() {
