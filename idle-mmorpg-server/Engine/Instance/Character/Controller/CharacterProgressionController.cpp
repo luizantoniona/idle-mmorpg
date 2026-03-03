@@ -33,7 +33,7 @@ void CharacterProgressionController::onProgressionExperienceGained( const Charac
         return;
     }
 
-    const double value = payload[ "value" ].asInt();
+    const int value = payload[ "value" ].asInt();
 
     // TODO: Apply experience and level up if needed, and maxStats improvement;
 

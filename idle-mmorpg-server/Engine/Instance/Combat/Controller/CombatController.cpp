@@ -133,7 +133,7 @@ void CombatController::computeCharactersExperience( std::unordered_map<std::stri
         return;
     }
 
-    double xpPerCharacter = totalXP / characters.size();
+    int xpPerCharacter = static_cast<int>( std::ceil( totalXP / characters.size() ) );
 
     for ( const auto& [ sessionId, characterInstance ] : characters ) {
         Json::Value payload;
