@@ -29,6 +29,7 @@ This project was envisioned, created, and is maintained by:
 ### 📖 **Documentation**:  
 [`API`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/API.md) – API requests documentation.  
 [`WebSocket`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/WebSocket.md) – WebSocket messages documentation.  
+[`Character Event Bus`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/CharacterEventBus.md) – internal character event schema and payloads.  
 
 ### ⚙️ **Database**
 - **For now, you need to run the schema manually.**

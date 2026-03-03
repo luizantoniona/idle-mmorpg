@@ -4,7 +4,9 @@
   - Built with **Angular** and **Typescript**.
 
 ### 📖 **Documentation**:  
-TODO
+Refer to the root `documentation/` folder for the HTTP API and WebSocket protocol:
+- [`API.md`](../documentation/API.md)
+- [`WebSocket.md`](../documentation/WebSocket.md)
 
 ### **GH Deploy**
 ```
