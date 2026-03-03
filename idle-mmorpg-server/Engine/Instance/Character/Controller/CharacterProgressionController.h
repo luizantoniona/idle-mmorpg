@@ -23,6 +23,8 @@ private:
     Domain::CharacterProgression& _characterProgression;
     Manager::ServerConfigurationManager& _configurationManager;
 
+    void applyLevelUp();
+
     // --- EventBus methods ---
     void onProgressionExperienceGained( const CharacterEvent& event );
 };

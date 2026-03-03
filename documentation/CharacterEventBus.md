@@ -19,20 +19,22 @@ following section documents the expected fields for each event.
 
 ## Event types & payload requirements
 
-| Event                         | Description                                        | Payload fields |
-|-------------------------------|----------------------------------------------------|----------------|
-| `EQUIPMENT_ITEM_EQUIPPED`     | Equipment was (re)resolved on entry to world       | none (`{}`)    |
-| `INVENTORY_ITEM_GAINED`       | Item added to inventory                            | `item`: string<br>`amount`: int |
-| `PROGRESSION_EXPERIENCE_GAINED` | General progression XP awarded                  | `value`: int   |
-| `SKILL_EXPERIENCE_GAINED`     | XP gained for a particular skill                   | `skill`: int (*Domain::SkillType*)<br>`experience`: int |
-| `VITAL_MAX_HEALTH_GAINED`     | Max health increased                               | `value`: double |
-| `VITAL_MAX_MANA_GAINED`       | Max mana increased                                 | `value`: double |
-| `VITAL_MAX_STAMINA_GAINED`    | Max stamina increased                              | `value`: double |
-| `VITAL_HEALTH_CHANGED`        | Current health changed (pos/neg)                   | `value`: double |
-| `VITAL_MANA_CHANGED`          | Current mana changed (pos/neg)                     | `value`: double |
-| `VITAL_STAMINA_CHANGED`       | Current stamina changed (pos/neg)                  | `value`: double |
-| `WALLET_COIN_GAINED`          | Currency added to wallet                           | `item`: string (`coin_*` )<br>`amount`: int |
-| `UNKNOWN`                     | Placeholder / default                              | ignored        |
+| Event                           | Description                                        | Payload fields |
+|---------------------------------|----------------------------------------------------|----------------|
+| `EQUIPMENT_ITEM_EQUIPPED`       | Equipment was (re)resolved on entry to world       | none (`{}`)    |
+| `INVENTORY_ITEM_GAINED`         | Item added to inventory                            | `item`: string<br>`amount`: int |
+| `PROGRESSION_EXPERIENCE_GAINED` | General progression XP awarded                     | `value`: int   |
+| `PROGRESSION_LEVEL_GAINED`      | General progression Level up                       | none (`{}`)    |
+| `SKILL_EXPERIENCE_GAINED`       | XP gained for a particular skill                   | `skill`: int (*Domain::SkillType*)<br>`experience`: int |
+| `SKILL_LEVEL_GAINED`            | Level gained for a particular skill                | `skill`: int (*Domain::SkillType*)|
+| `VITAL_MAX_HEALTH_GAINED`       | Max health increased                               | `value`: double |
+| `VITAL_MAX_MANA_GAINED`         | Max mana increased                                 | `value`: double |
+| `VITAL_MAX_STAMINA_GAINED`      | Max stamina increased                              | `value`: double |
+| `VITAL_HEALTH_CHANGED`          | Current health changed (pos/neg)                   | `value`: double |
+| `VITAL_MANA_CHANGED`            | Current mana changed (pos/neg)                     | `value`: double |
+| `VITAL_STAMINA_CHANGED`         | Current stamina changed (pos/neg)                  | `value`: double |
+| `WALLET_COIN_GAINED`            | Currency added to wallet                           | `item`: string (`coin_*` )<br>`amount`: int |
+| `UNKNOWN`                       | Placeholder / default                              | ignored        |
 
 > **Note:** the types above correspond exactly to the entries in
 > `Engine/Instance/Character/EventBus/CharacterEventType.h`.

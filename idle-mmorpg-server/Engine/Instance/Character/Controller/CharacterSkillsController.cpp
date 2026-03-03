@@ -36,54 +36,6 @@ void CharacterSkillsController::onLeaveWorld() {
 void CharacterSkillsController::onTick() {
 }
 
-void CharacterSkillsController::onSkillExperienceGained( const CharacterEvent& event ) {
-    const Json::Value& payload = event.payload();
-    if ( !payload.isMember( "skill" ) || !payload.isMember( "experience" ) ) {
-        return;
-    }
-
-    int xpGained = payload[ "experience" ].asInt();
-
-    if ( xpGained <= 0 ) {
-        return;
-    }
-
-    Domain::SkillType skillType = static_cast<Domain::SkillType>( payload[ "skill" ].asInt() );
-
-    Domain::CharacterSkill* characterSkill = _characterSkills.skill( skillType );
-
-    if ( !characterSkill ) {
-
-        std::string skillId = Domain::SkillHelper::typeToString( skillType );
-
-        Domain::Skill* skillData = _skillManager.skill( skillId );
-
-        if ( !skillData ) {
-            std::cerr << "[CharacterSkillsController] Unknown skill id: " << skillId << std::endl;
-            return;
-        }
-
-        Domain::CharacterSkill newSkill;
-        newSkill.setType( skillType );
-        newSkill.setId( skillId );
-        newSkill.setLevel( 0 );
-        newSkill.setExperience( 0 );
-        newSkill.setSkill( skillData );
-
-        _characterSkills.addSkill( newSkill );
-
-        characterSkill = _characterSkills.skill( skillType );
-    }
-
-    if ( !characterSkill ) {
-        return;
-    }
-
-    applyExperience( characterSkill, xpGained );
-
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_SKILLS, _characterSkills.toJson() );
-}
-
 void CharacterSkillsController::applyExperience( Domain::CharacterSkill* characterSkill, int xpGained ) {
     int newXp = characterSkill->experience() + xpGained;
 
@@ -97,6 +49,10 @@ void CharacterSkillsController::applyExperience( Domain::CharacterSkill* charact
         applyMilestone( characterSkill );
 
         xpNeeded = characterSkill->skill()->experienceForNextLevel( characterSkill->level() );
+
+        Json::Value payload;
+        payload[ "skill" ] = static_cast<int>( characterSkill->type() );
+        _eventBus.publish( CharacterEvent( CharacterEventType::SKILL_LEVEL_GAINED, payload ) );
     }
 
     characterSkill->setExperience( newXp );
@@ -145,12 +101,59 @@ void CharacterSkillsController::applyMilestoneBonus( const Domain::SkillMileston
 
         Json::Value payload;
         payload[ "value" ] = value;
-
         _eventBus.publish( CharacterEvent( eventType, payload ) );
 
     } else {
         std::cerr << "CharacterSkillsController Unknown type: " << type << std::endl;
     }
+}
+
+void CharacterSkillsController::onSkillExperienceGained( const CharacterEvent& event ) {
+    const Json::Value& payload = event.payload();
+    if ( !payload.isMember( "skill" ) || !payload.isMember( "experience" ) ) {
+        return;
+    }
+
+    int xpGained = payload[ "experience" ].asInt();
+
+    if ( xpGained <= 0 ) {
+        return;
+    }
+
+    Domain::SkillType skillType = static_cast<Domain::SkillType>( payload[ "skill" ].asInt() );
+
+    Domain::CharacterSkill* characterSkill = _characterSkills.skill( skillType );
+
+    if ( !characterSkill ) {
+
+        std::string skillId = Domain::SkillHelper::typeToString( skillType );
+
+        Domain::Skill* skillData = _skillManager.skill( skillId );
+
+        if ( !skillData ) {
+            std::cerr << "[CharacterSkillsController] Unknown skill id: " << skillId << std::endl;
+            return;
+        }
+
+        Domain::CharacterSkill newSkill;
+        newSkill.setType( skillType );
+        newSkill.setId( skillId );
+        newSkill.setLevel( 0 );
+        newSkill.setExperience( 0 );
+        newSkill.setSkill( skillData );
+
+        _characterSkills.addSkill( newSkill );
+
+        characterSkill = _characterSkills.skill( skillType );
+    }
+
+    if ( !characterSkill ) {
+        return;
+    }
+
+    applyExperience( characterSkill, xpGained );
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_SKILLS, _characterSkills.toJson() );
 }
 
 } // namespace Engine

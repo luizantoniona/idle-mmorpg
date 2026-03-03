@@ -26,12 +26,12 @@ private:
     Domain::CharacterSkills& _characterSkills;
     Manager::SkillManager& _skillManager;
 
-    // --- EventBus methods ---
-    void onSkillExperienceGained( const CharacterEvent& event );
-
     void applyExperience( Domain::CharacterSkill* characterSkill, int xpGained );
     void applyMilestone( Domain::CharacterSkill* characterSkill );
     void applyMilestoneBonus( const Domain::SkillMilestoneBonus& milestoneBonus );
+
+    // --- EventBus methods ---
+    void onSkillExperienceGained( const CharacterEvent& event );
 };
 
 } // namespace Engine
