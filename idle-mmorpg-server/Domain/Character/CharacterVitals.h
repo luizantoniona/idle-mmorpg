@@ -35,6 +35,14 @@ public:
     int regenCounter() const;
     void setRegenCounter(int regenCounter);
 
+    void modifyHealth( double delta );
+    void modifyMana( double delta );
+    void modifyStamina( double delta );
+
+    void modifyMaxHealth( double delta );
+    void modifyMaxMana( double delta );
+    void modifyMaxStamina( double delta );
+
 private:
     double _health;
     double _maxHealth;

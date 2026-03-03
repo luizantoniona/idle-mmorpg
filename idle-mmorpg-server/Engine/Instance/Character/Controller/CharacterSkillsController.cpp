@@ -127,11 +127,26 @@ void CharacterSkillsController::applyMilestoneBonus( const Domain::SkillMileston
 
     if ( type == "vital" ) {
 
+        CharacterEventType eventType;
+
+        if ( id == "health" ) {
+            eventType = CharacterEventType::VITAL_MAX_HEALTH_GAINED;
+
+        } else if ( id == "mana" ) {
+            eventType = CharacterEventType::VITAL_MAX_MANA_GAINED;
+
+        } else if ( id == "stamina" ) {
+            eventType = CharacterEventType::VITAL_MAX_STAMINA_GAINED;
+
+        } else {
+            std::cerr << "CharacterSkillsController Unknown id: " << id << std::endl;
+            return;
+        }
+
         Json::Value payload;
         payload[ "value" ] = value;
-        payload[ "vital" ] = id;
 
-        _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_GAINED, payload ) );
+        _eventBus.publish( CharacterEvent( eventType, payload ) );
 
     } else {
         std::cerr << "CharacterSkillsController Unknown type: " << type << std::endl;

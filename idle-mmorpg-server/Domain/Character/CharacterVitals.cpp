@@ -90,4 +90,52 @@ void CharacterVitals::setRegenCounter( int regenCounter ) {
     _regenCounter = regenCounter;
 }
 
+void CharacterVitals::modifyHealth( double delta ) {
+    _health += delta;
+
+    if ( _health > _maxHealth ) {
+        _health = _maxHealth;
+    }
+
+    if ( _health < 0.0 ) {
+        _health = 0.0;
+    }
+}
+
+void CharacterVitals::modifyMana( double delta ) {
+    _mana += delta;
+
+    if ( _mana > _maxMana ) {
+        _mana = _maxMana;
+    }
+
+    if ( _mana < 0.0 ) {
+        _mana = 0.0;
+    }
+}
+
+void CharacterVitals::modifyStamina( double delta ) {
+    _stamina += delta;
+
+    if ( _stamina > _maxStamina ) {
+        _stamina = _maxStamina;
+    }
+
+    if ( _stamina < 0.0 ) {
+        _stamina = 0.0;
+    }
+}
+
+void CharacterVitals::modifyMaxHealth( double delta ) {
+    _maxHealth += delta;
+}
+
+void CharacterVitals::modifyMaxMana( double delta ) {
+    _maxMana += delta;
+}
+
+void CharacterVitals::modifyMaxStamina( double delta ) {
+    _maxStamina += delta;
+}
+
 } // namespace Domain

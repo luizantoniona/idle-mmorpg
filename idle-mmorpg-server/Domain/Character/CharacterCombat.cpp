@@ -3,6 +3,7 @@
 namespace Domain {
 
 CharacterCombat::CharacterCombat() :
+    _isInCombat( false ),
     _attack( 0.00 ),
     _attackCounter( 0 ),
     _attackDuration( 0 ) {
@@ -16,6 +17,14 @@ Json::Value CharacterCombat::toJson() {
     Json::Value combatJson;
     combatJson[ "combat" ] = values;
     return combatJson;
+}
+
+bool CharacterCombat::isInCombat() const {
+    return _isInCombat;
+}
+
+void CharacterCombat::setIsInCombat( bool isInCombat ) {
+    _isInCombat = isInCombat;
 }
 
 double CharacterCombat::attack() const {

@@ -7,7 +7,7 @@ CharacterInventory::CharacterInventory() {}
 Json::Value CharacterInventory::toJson() {
     Json::Value values;
     for ( auto& item : items() ) {
-        values.append( item.toJson() );
+        values[ "items" ].append( item.toJson() );
     }
 
     Json::Value inventory;

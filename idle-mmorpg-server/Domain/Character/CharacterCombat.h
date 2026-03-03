@@ -11,6 +11,9 @@ public:
 
     Json::Value toJson();
 
+    bool isInCombat() const;
+    void setIsInCombat( bool isInCombat );
+
     double attack() const;
     void setAttack( double attack );
 
@@ -21,6 +24,8 @@ public:
     void setAttackDuration( int attackDuration );
 
 private:
+    bool _isInCombat;
+
     double _attack;
 
     int _attackCounter;

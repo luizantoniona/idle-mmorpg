@@ -28,15 +28,12 @@ const std::unordered_map<std::string, CharacterInstance*>& CombatInstance::chara
 }
 
 bool CombatInstance::isFinished() const {
-    bool anyCharacterAlive = false;
     for ( const auto& [ id, character ] : _characters ) {
         if ( character->character().vitals().health() > 0 ) {
-            anyCharacterAlive = true;
-            break;
+            return false;
         }
     }
-
-    return !anyCharacterAlive;
+    return true;
 }
 
 Json::Value CombatInstance::instanceToJson() const {
@@ -83,15 +80,42 @@ Json::Value CombatInstance::combatToJson() const {
 }
 
 void CombatInstance::addCharacter( const std::string& sessionId, CharacterInstance* characterInstance ) {
+    characterInstance->character().combat().setIsInCombat( true );
     characterInstance->character().combat().setAttackCounter( 0 );
     _characters[ sessionId ] = characterInstance;
 }
 
 void CombatInstance::removeCharacter( const std::string& sessionId ) {
+    auto it = _characters.find( sessionId );
+    if ( it == _characters.end() ) {
+        return;
+    }
+
+    auto& combat = it->second->character().combat();
+    combat.setIsInCombat( false );
+    combat.setAttackCounter( 0 );
+
     _characters.erase( sessionId );
 }
 
+void CombatInstance::shutdown() {
+    for ( auto& [ sessionId, characterInstance ] : _characters ) {
+
+        auto& combat = characterInstance->character().combat();
+
+        combat.setIsInCombat( false );
+        combat.setAttackCounter( 0 );
+    }
+
+    _characters.clear();
+    _creatures.clear();
+}
+
 void CombatInstance::tick() {
+    if ( isFinished() ) {
+        return;
+    }
+
     if ( _creatures.empty() ) {
         spawnCreatures();
     }

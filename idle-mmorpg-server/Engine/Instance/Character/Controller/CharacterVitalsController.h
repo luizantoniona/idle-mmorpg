@@ -2,6 +2,7 @@
 #define CHARACTERVITALSCONTROLLER_H
 
 #include <Domain/Character/Character.h>
+#include <Engine/Manager/Server/ServerConfigurationManager.h>
 
 #include "CharacterController.h"
 
@@ -10,7 +11,8 @@ namespace Engine {
 class CharacterVitalsController : public CharacterController {
 public:
     explicit CharacterVitalsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                        Domain::Character& character );
+                                        Domain::Character& character,
+                                        Manager::ServerConfigurationManager& configurationManager );
 
     void onEnterWorld() override;
     void onLeaveWorld() override;
@@ -18,10 +20,17 @@ public:
     void onTick() override;
 
 private:
+    Domain::Character& _character;
     Domain::CharacterVitals& _characterVitals;
+    Manager::ServerConfigurationManager& _configurationManager;
 
     // --- EventBus methods ---
-    void onVitalMaxGained( const CharacterEvent& event );
+    void onVitalMaxHealthGained( const CharacterEvent& event );
+    void onVitalMaxManaGained( const CharacterEvent& event );
+    void onVitalMaxStaminaGained( const CharacterEvent& event );
+    void onVitalHealthChanged( const CharacterEvent& event );
+    void onVitalManaChanged( const CharacterEvent& event );
+    void onVitalStaminaChanged( const CharacterEvent& event );
 };
 
 } // namespace Engine

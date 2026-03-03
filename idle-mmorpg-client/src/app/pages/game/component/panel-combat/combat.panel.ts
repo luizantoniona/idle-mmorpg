@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Subscription } from "rxjs";
 
-import { BarComponent, ButtonComponent, CardComponent, ImageComponent, PanelComponent } from "../../../../component/ui";
+import { ButtonComponent, CardComponent, PanelComponent } from "../../../../component/ui";
 
 import { CharacterCombatCardComponent } from "./character-combat-card";
 import { CreatureCombatCardComponent } from "./creature-combat-card";
@@ -17,10 +17,8 @@ import { WebsocketService } from "../../../../service";
     styleUrls: ["./combat.panel.scss"],
     imports: [
         CommonModule,
-        BarComponent,
         ButtonComponent,
         CardComponent,
-        ImageComponent,
         PanelComponent,
         CharacterCombatCardComponent,
         CreatureCombatCardComponent

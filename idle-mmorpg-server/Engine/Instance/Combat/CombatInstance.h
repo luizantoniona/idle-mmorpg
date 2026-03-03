@@ -28,6 +28,8 @@ public:
     void addCharacter( const std::string& sessionId, CharacterInstance* characterInstance );
     void removeCharacter( const std::string& sessionId );
 
+    void shutdown();
+
     void tick();
 
     void handleMessage( const std::string& sessionId, MessageReceiverType type, const Json::Value& payload );

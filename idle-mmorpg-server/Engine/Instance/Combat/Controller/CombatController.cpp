@@ -26,6 +26,10 @@ void CombatController::resolveCharacterAttack( CharacterInstance& attacker, Doma
         return;
     }
 
+    Json::Value payload;
+    payload[ "value" ] = -1.0;
+    attacker.publishEvent( CharacterEventType::VITAL_STAMINA_CHANGED, payload );
+
     double damage = combat.attack();
 
     double newHealth = (std::max)( 0.0, target.vitals().health() - damage );
@@ -52,9 +56,9 @@ void CombatController::resolveCreatureAttack( Domain::Creature& attacker, Charac
 
     double damage = combat.attack();
 
-    double newHealth = (std::max)( 0.0, target.character().vitals().health() - damage );
-
-    target.character().vitals().setHealth( newHealth );
+    Json::Value payload;
+    payload[ "value" ] = -damage;
+    target.publishEvent( CharacterEventType::VITAL_HEALTH_CHANGED, payload );
 
     combat.setAttackCounter( 0 );
 }

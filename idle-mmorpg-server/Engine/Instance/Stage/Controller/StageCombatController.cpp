@@ -40,10 +40,11 @@ void StageCombatController::onTick() {
         combat->tick();
 
         if ( combat->isFinished() ) {
-
             for ( const auto& [ sessionId, _ ] : combat->characters() ) {
                 _characterToCombatCache.erase( sessionId );
             }
+
+            combat->shutdown();
 
             it = _combats.erase( it );
 
@@ -141,10 +142,6 @@ void StageCombatController::exitCombat( CharacterInstance* characterInstance ) {
     CombatInstance* combat = it->second;
     combat->removeCharacter( sessionId );
     _characterToCombatCache.erase( it );
-
-    if ( combat->characters().empty() ) {
-        _combats.erase( combat->id() );
-    }
 
     notifyCombatRooms();
 }
