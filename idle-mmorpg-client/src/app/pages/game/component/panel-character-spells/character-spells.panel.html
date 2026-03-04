@@ -1,14 +1,11 @@
 <app-panel>
     <strong>Spells</strong>
 
-    @if ( character && character.spells && (character.spells.healing.length || character.spells.attack.length) ) {
+    @if ( character && character.spells ) {
     <div class="spells-grid">
-        @for (spell of character.spells.healing; track spell.id) {
-        <app-spell [spell]="spell" type="healing" (spellClick)="onSpellClicked($event)"></app-spell>
-        }
-
-        @for (spell of character.spells.attack; track spell.id) {
-        <app-spell [spell]="spell" type="attack" (spellClick)="onSpellClicked($event)"></app-spell>
+        @for (spell of character.spells; track spell.id) {
+        <app-spell [spell]="spell" (spellClick)="onSpellClicked($event)">
+        </app-spell>
         }
     </div>
     }

@@ -5,9 +5,10 @@ import { CharacterEquipment } from "./character-equipment.model";
 import { CharacterInventory } from "./character-inventory.model";
 import { CharacterProgression } from "./character-progression.model";
 import { CharacterSkill } from "./character-skill.model";
-import { CharacterSpells } from "./character-spells.model";
 import { CharacterVitals } from "./character-vitals.model";
 import { CharacterWallet } from "./character-wallet.model";
+
+import { Spell } from "../spell/spell.model"
 
 export type Character = {
     idCharacter: number;
@@ -19,7 +20,7 @@ export type Character = {
     inventory: CharacterInventory;
     progression: CharacterProgression;
     skills: CharacterSkill[];
-    spells: CharacterSpells;
+    spells: Spell[];
     vitals: CharacterVitals;
     wallet: CharacterWallet;
 

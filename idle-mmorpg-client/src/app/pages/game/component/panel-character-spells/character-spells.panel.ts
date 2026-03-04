@@ -32,13 +32,18 @@ export class CharacterSpellsPanel {
     }
 
     onSpellClicked(spell: Spell): void {
-
         this.sendMessage({
             type: 'CHARACTER_CAST_SPELL',
             payload: {
                 id: spell.id,
                 type: spell.type
             },
+        });
+    }
+
+    onLearnSpellClicked(): void {
+        this.sendMessage({
+            // TODO: Learn new spell -> open new popup?
         });
     }
 }

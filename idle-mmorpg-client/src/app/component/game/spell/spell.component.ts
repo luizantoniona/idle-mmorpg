@@ -20,12 +20,15 @@ export type SpellType = "healing" | "attack";
 
 export class SpellComponent {
     @Input() spell!: Spell;
-    @Input() type: SpellType = "attack";
     @Output() spellClick = new EventEmitter<Spell>();
 
     Math = Math;
 
     onClick() {
         this.spellClick.emit(this.spell);
+    }
+
+    get type(): SpellType {
+        return this.spell.type as SpellType;
     }
 }

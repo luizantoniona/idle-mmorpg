@@ -1,6 +1,6 @@
 {
     "spells": [
-        "attack/lightning_bolt",
-        "healing/minor_healing"
+        "spells/lightning_bolt",
+        "spells/minor_healing"
     ]
 }

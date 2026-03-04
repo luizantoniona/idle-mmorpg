@@ -8,7 +8,6 @@
     "cooldown": 5,
     "effect": {
         "type": "damage",
-        "element": "electric",
         "value": 10
     }
 }
