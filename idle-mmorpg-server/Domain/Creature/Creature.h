@@ -4,9 +4,10 @@
 #include <string>
 #include <vector>
 
-#include "CreatureCombatAction.h"
 #include "CreatureLoot.h"
 #include "CreatureVitals.h"
+
+#include "CreatureCombat.h"
 
 namespace Domain {
 
@@ -16,9 +17,6 @@ public:
 
     std::string id() const;
     void setId( const std::string& id );
-
-    int combatId() const;
-    void setCombatId( int combatId );
 
     std::string type() const;
     void setType( const std::string& type );
@@ -35,56 +33,34 @@ public:
     int experience() const;
     void setExperience( int experience );
 
-    CreatureCombatAction& combatAction();
-    void setCombatAction( const CreatureCombatAction& combatAction );
-
     CreatureVitals& vitals();
     void setVitals( const CreatureVitals& vitals );
-
-    double health() const;
-    void setHealth( double health );
-
-    double mana() const;
-    void setMana( double mana );
-
-    double attack() const;
-    void setAttack( double attack );
-
-    double attackSpeed() const;
-    void setAttackSpeed( double attackSpeed );
-
-    double accuracy() const;
-    void setAccuracy( double accuracy );
-
-    double defense() const;
-    void setDefense( double defense );
-
-    double evasion() const;
-    void setEvasion( double evasion );
 
     std::vector<CreatureLoot> loot() const;
     void setLoot( const std::vector<CreatureLoot>& loot );
     void addLoot( const CreatureLoot& loot );
 
+    // --- Runtime Data
+    int combatId() const;
+    void setCombatId( int combatId );
+
+    CreatureCombat& combat();
+    void setAction( const CreatureCombat& combat );
+
 private:
     std::string _id;
-    int _combatId;
     std::string _type;
     std::string _name;
     std::string _description;
     std::string _icon;
     int _experience;
 
-    CreatureCombatAction _combatAction;
     CreatureVitals _vitals;
-
-    double _attack;
-    double _attackSpeed;
-    double _accuracy;
-    double _defense;
-    double _evasion;
-
     std::vector<CreatureLoot> _loot;
+
+    // --- Runtime Data
+    int _combatId;
+    CreatureCombat _combat;
 };
 
 } // namespace Domain

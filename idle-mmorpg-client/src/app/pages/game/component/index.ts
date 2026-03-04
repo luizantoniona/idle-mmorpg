@@ -1,14 +1,10 @@
 
-export { CharacterPanel } from './character-panel/character-panel.component';
-export { CharacterAttributesPanel } from './character-attributes-panel/character-attributes-panel.component';
-export { CharacterEquipmentPanel } from './character-equipment-panel/character-equipment.panel';
-export { CharacterInventoryPanel } from './character-inventory-panel/character-inventory.panel';
-export { CharacterSkillsPanel } from './character-skills-panel/character-skills-panel.component';
-export { CharacterWalletPanel } from './character-wallet-panel/character-wallet-panel.component';
-
-export { CombatPanel } from './combat-panel/combat.panel'
-
-export { LocationPanel } from './location-panel/location.panel';
-
-export { MainPanel } from './main-panel/main.panel';
-export { OptionsPanel } from "./options-panel/options.panel";
+export { CharacterActionPanel } from "./panel-character-action/character-action.panel";
+export { CharacterDataPanel } from "./panel-character-data/character-data.panel";
+export { CharacterEquipmentPanel } from "./panel-character-equipment/character-equipment.panel";
+export { CharacterInventoryPanel } from "./panel-character-inventory/character-inventory.panel";
+export { CharacterSkillsPanel } from "./panel-character-skills/character-skills.panel";
+export { CharacterSpellsPanel } from "./panel-character-spells/character-spells.panel"
+export { CombatPanel } from './panel-combat/combat.panel'
+export { StagePanel } from './panel-stage/stage.panel';
+export { OptionsPanel } from "./panel-options/options.panel";

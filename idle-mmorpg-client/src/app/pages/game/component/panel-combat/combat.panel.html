@@ -1,0 +1,38 @@
+<app-panel>
+    @if(!combat){
+    <div class="combat-selection">
+        <h2>Combat Selection</h2>
+        @if(combatInstances){
+        @for(combat of combatInstances; track combat.id){
+        <app-card (click)="onJoinClicked(combat.id)"><strong>{{combat.name}}</strong>: {{combat.characters}}</app-card>
+        }
+        }
+        <app-button text="Create new" (clickEvent)="onCreateClicked()"></app-button>
+        <!-- <app-button text="Exit" (clickEvent)="onExitClicked()"></app-button> -->
+    </div>
+
+    } @else {
+
+    <app-button text="Exit combat" (clickEvent)="onExitCombatClicked()"></app-button>
+
+    <div class="combat-panel">
+
+        <div class="characters-column">
+            <h3>Characters: {{combat.characters.length}}</h3>
+
+            @for (character of combat.characters; track character.idCharacter) {
+            <app-character-combat-card [character]="character">
+            </app-character-combat-card>
+            }
+        </div>
+
+        <div class="creatures-column">
+            <h3>Creatures: {{combat.creatures.length}}</h3>
+
+            @for (creature of combat.creatures; track creature.id) {
+            <app-creature-combat-card [creature]="creature"></app-creature-combat-card>
+            }
+        </div>
+    </div>
+    }
+</app-panel>

@@ -13,22 +13,12 @@ public:
 
     Json::Value toJson();
 
-    std::vector<CharacterSpell>& healingSpells();
-    void setHealingSpells( const std::vector<CharacterSpell>& healingSpells );
-    void addHealingSpell( const CharacterSpell& healingSpell );
-
-    std::vector<CharacterSpell>& attackSpells();
-    void setAttackSpells( const std::vector<CharacterSpell>& attackSpells );
-    void addAttackSpell( const CharacterSpell& attackSpell );
-
-    bool hasSpell( const std::string& spellId ) const;
-
-    CharacterSpell* attackSpell( const std::string& spellId );
-    CharacterSpell* healingSpell( const std::string& spellId );
+    std::vector<CharacterSpell>& spells();
+    void setSpells( const std::vector<CharacterSpell>& spells );
+    void addSpell( const CharacterSpell& spell );
 
 private:
-    std::vector<CharacterSpell> _healingSpells;
-    std::vector<CharacterSpell> _attackSpells;
+    std::vector<CharacterSpell> _spells;
 };
 
 } // namespace Domain

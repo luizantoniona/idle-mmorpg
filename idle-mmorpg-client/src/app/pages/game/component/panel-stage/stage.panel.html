@@ -1,0 +1,12 @@
+<div class="stage-column">
+    @if(stage && stage.level) {
+    <app-panel>
+        <div class="stage-row">
+            <app-button text="Stage: {{ stage.level }}" (clickEvent)="onNextStage()"></app-button>
+        </div>
+    </app-panel>
+
+    }@else {
+    <app-loading></app-loading>
+    }
+</div>

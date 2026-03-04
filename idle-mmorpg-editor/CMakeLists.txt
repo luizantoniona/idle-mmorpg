@@ -28,16 +28,16 @@ qt_add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 set(QML_FILES
   qml/Main.qml
-  qml/components/Editor.qml
-  qml/components/FilesBar.qml
-  qml/components/FilesBarDesign.ui.qml
-  qml/components/NavBar.qml
+  qml/Editor.qml
+  qml/FilesBar.qml
+  qml/FilesBarDesign.ui.qml
+  qml/NavBar.qml
 )
 
 qt_add_qml_module(
   ${PROJECT_NAME}
   URI
-  editor
+  Editor
   VERSION
   1.0
   QML_FILES
@@ -45,6 +45,23 @@ qt_add_qml_module(
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+list(APPEND QML_IMPORT_PATH "${CMAKE_SOURCE_DIR}/qml")
+list(APPEND QML_IMPORT_PATH "${CMAKE_SOURCE_DIR}/qml/Styles")
+list(APPEND QML_IMPORT_PATH "${CMAKE_SOURCE_DIR}/qml/Components")
+list(REMOVE_DUPLICATES QML_IMPORT_PATH)
+set(QML_IMPORT_PATH ${QML_IMPORT_PATH}
+    CACHE STRING "Qt Creator extra qml import paths"
+    FORCE
+)
+set(QML_IMPORT_PATH ${QML_IMPORT_PATH} "" INTERNAL)
+
+add_subdirectory(qml/Styles)
+add_subdirectory(qml/Components)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+  StylesPlugin
+  ComponentsPlugin
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Quick Qt6::Qml)
 

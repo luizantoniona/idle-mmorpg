@@ -1,0 +1,7 @@
+{
+    "actions": [
+        "actions/idle",
+        "actions/train",
+        "actions/mining"
+    ]
+}

@@ -1,9 +1,12 @@
 #ifndef CHARACTERACTION_H
 #define CHARACTERACTION_H
 
+#include <json/json.h>
+
 #include <string>
 
-#include <json/json.h>
+#include "CharacterActionOption.h"
+#include <Domain/Action/ActionType.h>
 
 namespace Domain {
 
@@ -11,23 +14,25 @@ class CharacterAction {
 public:
     CharacterAction();
 
-    Json::Value toJson();
+    Json::Value toJson() const;
 
-    std::string id() const;
-    void setId( const std::string& id );
+    ActionType type() const;
+    void setType( ActionType type );
 
-    int duration() const;
-    void setDuration( int duration );
+    std::string description() const;
+    void setDescription( const std::string& description );
 
-    int counter() const;
-    void setCounter( int counter );
+    CharacterActionOption selectedOption() const;
+    void setSelectedOption( const CharacterActionOption& selectedOption );
 
-    void clear();
+    std::vector<CharacterActionOption> options() const;
+    void setOptions( const std::vector<CharacterActionOption>& options );
 
 private:
-    std::string _id;
-    int _duration;
-    int _counter;
+    ActionType _type;
+    std::string _description;
+    CharacterActionOption _selectedOption;
+    std::vector<CharacterActionOption> _options;
 };
 
 } // namespace Domain

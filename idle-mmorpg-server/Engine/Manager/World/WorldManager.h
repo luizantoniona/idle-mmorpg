@@ -5,10 +5,10 @@
 #include <memory>
 #include <thread>
 
-#include <Engine/Instance/WorldInstance.h>
 #include <Domain/World/World.h>
+#include <Engine/Instance/World/WorldInstance.h>
 
-namespace Engine {
+namespace Manager {
 
 class WorldManager {
 public:
@@ -18,11 +18,12 @@ public:
     Engine::WorldInstance* worldInstance();
 
     void initialize( const std::string& mapPath );
-    void start();
-    void stop();
+    void finalize();
 
-    bool addCharacter( const std::string& sessionId, int idUser, int idCharacter );
+    bool addCharacter( const std::string& sessionId, int idUser, int idCharacter, drogon::WebSocketConnectionPtr connection );
     void removeCharacter( const std::string& sessionId );
+
+    void handleMessage( const std::string& sessionId, const Json::Value& messageJson );
 
 private:
     std::atomic<bool> _running;
@@ -31,6 +32,6 @@ private:
     std::unique_ptr<Engine::WorldInstance> _worldInstance;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // WORLDMANAGER_H

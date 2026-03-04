@@ -1,8 +1,8 @@
 #include "AuthController.h"
 
-#include <Engine/Repository/User/UserRepository.h>
 #include <Infrastructure/Database/Database.h>
 #include <Infrastructure/Network/NetworkServer.h>
+#include <Repository/User/UserRepository.h>
 #include <Shared/Commons/Singleton.h>
 
 namespace Network {
@@ -90,7 +90,76 @@ void AuthController::logout( const drogon::HttpRequestPtr& request, std::functio
 }
 
 void AuthController::sign( const drogon::HttpRequestPtr& request, std::function<void( const drogon::HttpResponsePtr& )>&& callback ) const {
-    //TODO Implement sign
+    auto requestJson = request->getJsonObject();
+    Json::Value responseJson;
+
+    if ( !requestJson ) {
+        responseJson[ "error" ] = "No JSON";
+        auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+        response->setStatusCode( drogon::k400BadRequest );
+        callback( response );
+        return;
+    }
+
+    if ( !requestJson->isMember( "username" ) || !requestJson->isMember( "password" ) ) {
+        responseJson[ "error" ] = "Invalid JSON";
+        auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+        response->setStatusCode( drogon::k400BadRequest );
+        callback( response );
+        return;
+    }
+
+    std::string username = ( *requestJson )[ "username" ].asString();
+    std::string password = ( *requestJson )[ "password" ].asString();
+
+    if ( username.empty() || password.empty() ) {
+        responseJson[ "error" ] = "Username or password empty";
+        auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+        response->setStatusCode( drogon::k400BadRequest );
+        callback( response );
+        return;
+    }
+
+    Repository::UserRepository userRepository;
+
+    if ( userRepository.findByUsername( username ) ) {
+        responseJson[ "error" ] = "Username already exists";
+        auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+        response->setStatusCode( drogon::k409Conflict );
+        callback( response );
+        return;
+    }
+
+    if ( !userRepository.createUser( username, password ) ) {
+        responseJson[ "error" ] = "Failed to create user";
+        auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+        response->setStatusCode( drogon::k500InternalServerError );
+        callback( response );
+        return;
+    }
+
+    auto user = userRepository.findByUsername( username );
+
+    if ( !user ) {
+        responseJson[ "error" ] = "User created but not found";
+        auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+        response->setStatusCode( drogon::k500InternalServerError );
+        callback( response );
+        return;
+    }
+
+    std::string sessionId = Commons::Singleton<NetworkServer>::instance().createSession( user->idUser(), user->dsUsername() );
+
+    responseJson[ "userID" ] = user->idUser();
+    responseJson[ "username" ] = user->dsUsername();
+    responseJson[ "sessionID" ] = sessionId;
+    responseJson[ "message" ] = "User created successfully";
+
+    std::cout << "AuthController::sign [User] " << user->dsUsername() << " [UUID] " << sessionId << std::endl;
+
+    auto response = drogon::HttpResponse::newHttpJsonResponse( responseJson );
+    response->setStatusCode( drogon::k201Created );
+    callback( response );
 }
 
 } // namespace Network

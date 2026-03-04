@@ -1,34 +1,31 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
-import { CharacterPanel } from './component';
-import { CharacterAttributesPanel } from './component';
-import { CharacterEquipmentPanel } from './component';
-import { CharacterInventoryPanel } from './component';
-import { CharacterSkillsPanel } from './component';
-import { CharacterWalletPanel } from './component';
-import { MainPanel } from './component';
-import { OptionsPanel } from './component';
+import {
+    CharacterActionPanel, CharacterDataPanel, CharacterEquipmentPanel, CharacterInventoryPanel,
+    CharacterSkillsPanel, CharacterSpellsPanel,
+    CombatPanel, OptionsPanel, StagePanel
+} from "./component";
 
-import { Character } from '../../model';
-import { Location } from '../../model';
+import { Character, CombatInstance, Stage } from "../../model";
 
-import { WebsocketService } from '../../service/websocket.service';
+import { WebsocketService } from "../../service";
 
 @Component({
-    selector: 'app-game-page',
-    templateUrl: './game.page.html',
-    styleUrl: './game.page.scss',
+    selector: "app-game-page",
+    templateUrl: "./game.page.html",
+    styleUrls: ["./game.page.scss"],
     imports: [
-        CharacterPanel,
-        CharacterAttributesPanel,
+        CharacterActionPanel,
+        CharacterDataPanel,
         CharacterEquipmentPanel,
         CharacterInventoryPanel,
         CharacterSkillsPanel,
-        CharacterWalletPanel,
-        MainPanel,
+        CharacterSpellsPanel,
+        CombatPanel,
         OptionsPanel,
+        StagePanel
     ],
 })
 
@@ -37,18 +34,21 @@ export class GamePage implements OnInit, OnDestroy {
     private websocketService = inject(WebsocketService);
 
     character: Character | null = null;
-    location: Location | null = null;
+    stage: Stage | null = null;
+    combatInstances: CombatInstance[] = [];
+
     connectionStatus = 'Desconectado';
 
     private subscriptions = new Subscription();
 
     ngOnInit(): void {
-        const navState = this.router.getCurrentNavigation()?.extras.state;
+        const navState = this.router.currentNavigation()?.extras.state;
         const passedCharacter = navState?.['character'] as Character | undefined;
 
         if (passedCharacter) {
             this.character = passedCharacter;
             localStorage.setItem('selectedCharacter', JSON.stringify(passedCharacter));
+
         } else {
             const stored = localStorage.getItem('selectedCharacter');
             if (stored) {
@@ -86,28 +86,24 @@ export class GamePage implements OnInit, OnDestroy {
     }
 
     handleMessage(data: any): void {
-        if (data && (data.type === 'COMBAT_ROOMS_UPDATE' || data.type === 'COMBAT_UPDATE' || data.type === 'CHARACTER_DEAD')) {
-            return;
-        }
-
-        console.log(data)
+        console.log('Message:', data);
         switch (data.type) {
-            case 'CHARACTER_UPDATE':
+            case 'CHARACTER':
                 if (data.payload) {
                     this.character = data.payload as Character;
                 }
                 break;
 
-            case 'CHARACTER_ATTRIBUTES_UPDATE':
-                if (data.payload?.combatAttributes) {
+            case 'CHARACTER_ACTIONS':
+                if (data.payload?.actions) {
                     this.character = {
                         ...this.character!,
-                        combatAttributes: data.payload.combatAttributes,
+                        actions: data.payload.actions,
                     };
                 }
                 break;
 
-            case 'CHARACTER_EFFECTS_UPDATE':
+            case 'CHARACTER_EFFECTS':
                 if (Array.isArray(data.payload?.effects)) {
                     this.character = {
                         ...this.character!,
@@ -116,7 +112,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_EQUIPMENT_UPDATE':
+            case 'CHARACTER_EQUIPMENT':
                 if (data.payload?.equipment) {
                     this.character = {
                         ...this.character!,
@@ -125,7 +121,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_INVENTORY_UPDATE':
+            case 'CHARACTER_INVENTORY':
                 if ('inventory' in data.payload) {
                     this.character = {
                         ...this.character!,
@@ -134,7 +130,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_PROGRESSION_UPDATE':
+            case 'CHARACTER_PROGRESSION':
                 if (data.payload?.progression) {
                     this.character = {
                         ...this.character!,
@@ -143,25 +139,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_QUESTS_UPDATE':
-                if (data.payload?.quests) {
-                    this.character = {
-                        ...this.character!,
-                        quests: data.payload.quests,
-                    };
-                }
-                break;
-
-            case 'CHARACTER_SPELLS_UPDATE':
-                if (data.payload?.spells) {
-                    this.character = {
-                        ...this.character!,
-                        spells: data.payload.spells,
-                    };
-                }
-                break;
-
-            case 'CHARACTER_SKILLS_UPDATE':
+            case 'CHARACTER_SKILLS':
                 if (Array.isArray(data.payload?.skills)) {
                     this.character = {
                         ...this.character!,
@@ -170,7 +148,16 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_VITALS_UPDATE':
+            case 'CHARACTER_SPELLS':
+                if (data.payload?.spells) {
+                    this.character = {
+                        ...this.character!,
+                        spells: data.payload.spells,
+                    };
+                }
+                break;
+
+            case 'CHARACTER_VITALS':
                 if (data.payload?.vitals) {
                     this.character = {
                         ...this.character!,
@@ -179,7 +166,7 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_WALLET_UPDATE':
+            case 'CHARACTER_WALLET':
                 if (data.payload?.wallet) {
                     this.character = {
                         ...this.character!,
@@ -188,38 +175,17 @@ export class GamePage implements OnInit, OnDestroy {
                 }
                 break;
 
-            case 'CHARACTER_CURRENT_ACTION_UPDATE':
-                if (data.payload?.action) {
-                    this.character = {
-                        ...this.character!,
-                        action: data.payload.action,
-                    };
+            case 'STAGE':
+                if (data.payload?.stage) {
+                    this.stage = data.payload.stage;
                 }
-                break;
-
-            case 'CHARACTER_CURRENT_COORDINATES_UPDATE': {
-                if (data.payload?.coordinates) {
-                    this.character = {
-                        ...this.character!,
-                        coordinates: data.payload.coordinates,
-                    };
-                }
-                break;
-            }
-
-            case 'LOCATION_UPDATE':
-                if (data.payload?.location) {
-                    this.location = data.payload.location;
-                }
-                if (this.location) {
-                    this.location.actions = data.payload?.actions ?? [];
-                    this.location.connections = data.payload?.connections ?? [];
-                    this.location.denizens = data.payload?.denizens ?? [];
+                if (this.stage) {
+                    this.stage.objectives = data.payload?.objectives ?? [];
                 }
                 break;
 
             default:
-                console.warn('Unkown message:', data.type);
+                break;
         }
     }
 

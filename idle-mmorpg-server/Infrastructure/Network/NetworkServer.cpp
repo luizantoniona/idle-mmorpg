@@ -51,34 +51,4 @@ std::optional<Network::NetworkSession> NetworkServer::getSession( const std::str
     return std::nullopt;
 }
 
-void NetworkServer::bindConnectionToSession( const std::string& uuid, const drogon::WebSocketConnectionPtr& wsConnection ) {
-    std::lock_guard<std::mutex> lock( _sessionMutex );
-
-    auto it = _sessions.find( uuid );
-    if ( it != _sessions.end() ) {
-        it->second.setConnection( wsConnection );
-    }
-}
-
-void NetworkServer::unbindConnectionFromSession( const std::string& uuid ) {
-    std::lock_guard<std::mutex> lock( _sessionMutex );
-
-    auto it = _sessions.find( uuid );
-    if ( it != _sessions.end() ) {
-        it->second.setConnection( nullptr );
-    }
-}
-
-bool NetworkServer::isSessionConnected( const std::string& uuid ) {
-    std::lock_guard lock( _sessionMutex );
-
-    auto it = _sessions.find( uuid );
-    if ( it == _sessions.end() ) {
-        return false;
-    }
-
-    return it->second.hasActiveConnection();
-
-}
-
 } // namespace Network

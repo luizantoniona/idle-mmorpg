@@ -1,0 +1,13 @@
+.stage-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 12px;
+}
+
+.stage-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}

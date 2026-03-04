@@ -1,0 +1,9 @@
+<app-panel>
+    <div class="options">
+        <app-button text="Chat" (clickEvent)="onChatClick()"></app-button>
+        <!-- TODO:<app-button text="Bestiary"></app-button> -->
+    </div>
+</app-panel>
+
+<app-chat-popup [visible]="showChat" (closed)="onClose()">
+</app-chat-popup>

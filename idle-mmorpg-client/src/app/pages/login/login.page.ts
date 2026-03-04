@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { ServerFormComponent } from "./component/server-form/server-form.component";
-import { LoginFormComponent } from "./component/login-form/login-form.component";
+import { ImageComponent } from "../../component/ui";
+
+import { LoginPanel } from "./component/login-panel/login-panel.component";
 
 @Component({
     selector: "app-login-page",
@@ -10,8 +11,8 @@ import { LoginFormComponent } from "./component/login-form/login-form.component"
     styleUrls: ["./login.page.scss"],
     imports: [
         CommonModule,
-        ServerFormComponent,
-        LoginFormComponent,
+        ImageComponent,
+        LoginPanel,
     ],
 })
 

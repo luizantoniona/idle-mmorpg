@@ -17,9 +17,20 @@ public:
     int experience() const;
     void setExperience( int experience );
 
+    int experienceForNextLevel( int currentLevel ) const;
+
+    double baseExperience() const;
+    void setBaseExperience( double baseExperience );
+
+    double growthRate() const;
+    void setGrowthRate( double growthRate );
+
 private:
     int _level;
     int _experience;
+
+    double _baseExperience;
+    double _growthRate;
 };
 
 } // namespace Domain

@@ -1,14 +1,33 @@
 cmake_minimum_required(VERSION 3.16)
 
+if(DEFINED ENV{VCPKG_ROOT})
+    file(TO_CMAKE_PATH "$ENV{VCPKG_ROOT}" VCPKG_ROOT_CMAKE)
+    set(CMAKE_TOOLCHAIN_FILE
+        "${VCPKG_ROOT_CMAKE}/scripts/buildsystems/vcpkg.cmake"
+        CACHE STRING ""
+    )
+endif()
+
 project(idle-mmorpg-server LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB_RECURSE SOURCES Domain/*.cpp Engine/*.cpp Infrastructure/*.cpp
-     Shared/*.cpp)
+file(GLOB_RECURSE SOURCES
+  Domain/*.cpp
+  Engine/*.cpp
+  Infrastructure/*.cpp
+  Repository/*.cpp
+  Shared/*.cpp
+)
 
-file(GLOB_RECURSE HEADERS Domain/*.h Engine/*.h Infrastructure/*.h Shared/*.h)
+file(GLOB_RECURSE HEADERS
+  Domain/*.h
+  Engine/*.h
+  Infrastructure/*.h
+  Repository/*.h
+  Shared/*.h
+)
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
 
@@ -21,14 +40,6 @@ if(WIN32)
 endif(WIN32)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-file(GLOB_RECURSE SQL_FILES Resources/*.sql)
-
-source_group("SQL Files" FILES ${SQL_FILES})
-
-target_sources(${PROJECT_NAME} PRIVATE ${SQL_FILES})
-
-file(COPY Resources DESTINATION ${CMAKE_BINARY_DIR})
 
 include(GNUInstallDirs)
 install(

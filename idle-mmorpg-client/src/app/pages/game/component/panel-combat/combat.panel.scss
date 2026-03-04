@@ -1,0 +1,23 @@
+.combat-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.combat-panel {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 12px;
+    width: 100%;
+}
+
+.characters-column,
+.creatures-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    width: 100%;
+}

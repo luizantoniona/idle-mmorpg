@@ -9,18 +9,18 @@ CharacterInventoryItem::CharacterInventoryItem() :
 }
 
 Json::Value CharacterInventoryItem::toJson() {
-    Json::Value root;
-    root[ "id" ] = id();
-    root[ "amount" ] = amount();
+    Json::Value values;
+    values[ "id" ] = id();
+    values[ "amount" ] = amount();
 
     if ( _item ) {
         Json::Value itemJson = item()->toJson();
         for ( const auto& key : itemJson.getMemberNames() ) {
-            root[ key ] = itemJson[ key ];
+            values[ key ] = itemJson[ key ];
         }
     }
 
-    return root;
+    return values;
 }
 
 std::string CharacterInventoryItem::id() const {

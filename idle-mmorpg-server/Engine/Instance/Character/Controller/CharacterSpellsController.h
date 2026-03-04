@@ -1,0 +1,28 @@
+#ifndef CHARACTERSPELLSCONTROLLER_H
+#define CHARACTERSPELLSCONTROLLER_H
+
+#include <Domain/Character/Character.h>
+#include <Engine/Manager/Spell/SpellManager.h>
+
+#include "CharacterController.h"
+
+namespace Engine {
+
+class CharacterSpellsController : public CharacterController {
+public:
+    explicit CharacterSpellsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
+                                        Domain::Character& character,
+                                        Manager::SpellManager& spellManager );
+
+    void onEnterWorld() override;
+    void onLeaveWorld() override;
+
+    void onTick() override;
+
+private:
+    Domain::CharacterSpells& _characterSpells;
+    Manager::SpellManager& _spellManager;
+};
+
+} // namespace Engine
+#endif // CHARACTERSPELLSCONTROLLER_H

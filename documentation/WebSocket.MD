@@ -2,15 +2,16 @@
 
 ### Overview
 
-This WebSocket server is designed to provide real-time communication between the game client and the server. It allows the client to receive updates about the character, location, combat, and other game systems, and also enables the client to send actions or requests to the server.
+The WebSocket endpoint (`/ws/character`) is the primary channel for real‑time, bidirectional traffic between client and server. Before opening a socket the client should have a valid session ID obtained via the HTTP API; the token is passed either as an `Authorization: X-Session <id>` header or as the `sid` query parameter. Once the connection is established, every message must follow the JSON envelope described below.
 
-All messages are **JSON-encoded**, and each message is categorized by a type (event name) that defines its purpose.
+This document lists the supported event types along with general payload guidelines.
+
+All payloads are **JSON-encoded**, and each message is categorized by a type (event name) that defines its purpose.
 
 ### Key Features:
 - Real-time updates for character stats, inventory, equipment, vitals, skills, and progression.
-- Real-time updates for location information including NPCs, actions, and connections.
 - Combat room management and combat state synchronization.
-- Client-driven actions including character actions, structure updates, movement, and combat room management.
+- Client-driven actions including character actions and combat room management.
 
 ## Event Structure
 
@@ -22,61 +23,105 @@ Each WebSocket message follows the general structure:
   "payload": { ... }
 }
 ```
-- **type**: The name of the event (e.g., CHARACTER_UPDATE).
+
+- **type**: The name of the event (e.g., `CHARACTER` or `COMBAT_ROOM_CREATE`). These identifiers correspond to the `MessageSenderType` enum for server‑to‑client events and to `MessageReceiverType` for client‑to‑server messages.
 - **payload**: The data associated with the event.
+
+The sections below list the known message types; concrete examples appear at the end of this file.
 
 ## Server → Client Events
 
 The server sends events to the client to inform it of changes or updates:
 
 **Character Updates**:  
-- CHARACTER_UPDATE
-- CHARACTER_DEAD
-- CHARACTER_ATTRIBUTES_UPDATE
-- CHARACTER_EFFECTS_UPDATE
-- CHARACTER_EQUIPMENT_UPDATE
-- CHARACTER_INVENTORY_UPDATE
-- CHARACTER_PROGRESSION_UPDATE
-- CHARACTER_QUESTS_UPDATE
-- CHARACTER_SKILLS_UPDATE
-- CHARACTER_SPELLS_UPDATE
-- CHARACTER_VITALS_UPDATE
-- CHARACTER_WALLET_UPDATE
+- CHARACTER
+- CHARACTER_ACTIONS
+- CHARACTER_EFFECTS
+- CHARACTER_EQUIPMENT
+- CHARACTER_INVENTORY
+- CHARACTER_PROGRESSION
+- CHARACTER_SKILLS
+- CHARACTER_SPELLS
+- CHARACTER_STAGE
+- CHARACTER_VITALS
+- CHARACTER_WALLET
 
-**Character Current State Updates**:
-- CHARACTER_CURRENT_ACTION_UPDATE
-- CHARACTER_CURRENT_COORDINATES_UPDATE
+**Stage Updates**:
+- STAGE
 
-**Location Updates**:
-- LOCATION_UPDATE
+**Combat Rooms**
+- COMBAT_ROOMS
 
-**Location Combat Rooms**
-- COMBAT_ROOMS_UPDATE
-- COMBAT_UPDATE
+**Combat**
+- COMBAT
 
 ## Client → Server Events
 
 The client sends events to the server to perform actions or request changes:
 
 **Character Actions**: 
-- CHARACTER_ACTION_UPDATE
+- CHARACTER_SET_ACTION
 - CHARACTER_EQUIP_ITEM
 - CHARACTER_USE_ITEM
 - CHARACTER_CAST_SPELL
-- CHARACTER_INTERACT_DENIZEM
-- CHARACTER_TRADE_DENIZEN
-- CHARACTER_ACCEPT_DENIZEN_QUEST
-- CHARACTER_FINISH_DENIZEN_QUEST
-
-**Structure Updates**: 
-- CHARACTER_STRUCTURE_UPDATE
-
-**Location Changes**: 
-- CHARACTER_LOCATION_UPDATE
 
 **Combat Room Management**: 
 - COMBAT_ROOM_CREATE
 - COMBAT_ROOM_ENTER
 - COMBAT_ROOM_EXIT
 
-# WIP (Work in Progress)
+## Payload examples
+
+### Server → Client
+
+- **CHARACTER** – complete snapshot of the character state (same format returned by the `/characters` API). Example:
+```json
+{
+  "type": "CHARACTER",
+  "payload": {
+    "id": 1,
+    "name": "Zeldar",
+    "equipment": { /* ... */ },
+    "inventory": [ /* ... */ ],
+    "vitals": { "health": 100, "mana": 50, "stamina": 80 },
+    /* more fields */
+  }
+}
+```
+
+- **COMBAT_ROOMS** – list of available combat instances:
+```json
+{
+  "type": "COMBAT_ROOMS",
+  "payload": {
+    "combatInstances": [ { "id": "room1", "participants": 2 }, ... ]
+  }
+}
+```
+
+- **COMBAT** – current combat state when inside a room.
+
+### Client → Server
+
+- **CHARACTER_ACTION_UPDATE** – request to start or change an action:
+```json
+{
+  "type": "CHARACTER_SET_ACTION",
+  "payload": {
+    "type": 3,
+    "optionStage": 2
+  }
+}
+```
+
+- **COMBAT_ROOM_CREATE** – payload is an empty object `{}`.
+
+- **COMBAT_ROOM_ENTER** – provide the target room id:
+```json
+{
+  "type": "COMBAT_ROOM_ENTER",
+  "payload": { "id": "room1" }
+}
+```
+
+- **COMBAT_ROOM_EXIT** – simply send `{}`.

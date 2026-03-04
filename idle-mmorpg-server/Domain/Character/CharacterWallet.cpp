@@ -8,11 +8,14 @@ CharacterWallet::CharacterWallet() :
     _gold( 0 ) {}
 
 Json::Value CharacterWallet::toJson() {
-    Json::Value root;
-    root[ "copper" ] = copper();
-    root[ "silver" ] = silver();
-    root[ "gold" ] = gold();
-    return root;
+    Json::Value values;
+    values[ "copper" ] = copper();
+    values[ "silver" ] = silver();
+    values[ "gold" ] = gold();
+
+    Json::Value wallet;
+    wallet[ "wallet" ] = values;
+    return wallet;
 }
 
 int CharacterWallet::copper() const {

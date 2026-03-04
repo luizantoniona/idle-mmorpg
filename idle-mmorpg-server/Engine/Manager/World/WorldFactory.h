@@ -5,13 +5,13 @@
 
 #include <Domain/World/World.h>
 
-namespace Engine {
+namespace Manager {
 
 class WorldFactory {
 public:
     static std::unique_ptr<Domain::World> createWorld( const std::string& mapPath );
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // WORLDFACTORY_H

@@ -1,0 +1,8 @@
+{
+    "tickRate": 20,
+    "logo": "logo/logo.png",
+    "experience": {
+        "baseExperience": 100,
+        "growthRate": 1.05
+    }
+}

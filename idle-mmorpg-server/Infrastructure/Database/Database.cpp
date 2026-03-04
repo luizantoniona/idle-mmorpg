@@ -25,6 +25,22 @@ bool Database::migrate() {
         return false;
     }
 
+    char* errorMsg = nullptr;
+
+    const char* MIGRATION_TABLE_SQL = R"SQL(
+        CREATE TABLE IF NOT EXISTS schema_migrations (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            executed DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+    )SQL";
+
+    if ( sqlite3_exec( _database, MIGRATION_TABLE_SQL, nullptr, nullptr, &errorMsg ) != SQLITE_OK ) {
+        std::cerr << "[Database][migrate] " << errorMsg << std::endl;
+        sqlite3_free( errorMsg );
+        return false;
+    }
+
     // TODO: FUTURAMENTE Execute os SQL's migrations caso não tenha rodado
 
     return true;

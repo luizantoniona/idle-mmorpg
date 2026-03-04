@@ -7,7 +7,7 @@
 
 #include <Domain/Spell/Spell.h>
 
-namespace Engine {
+namespace Manager {
 
 class SpellManager {
 public:
@@ -21,6 +21,6 @@ private:
     std::unordered_map<std::string, std::unique_ptr<Domain::Spell> > _spells;
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // SPELLMANAGER_H

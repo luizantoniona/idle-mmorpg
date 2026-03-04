@@ -5,19 +5,18 @@
 
 #include <json/json.h>
 
-#include "CharacterAction.h"
-#include "CharacterCombatAction.h"
-#include "CharacterCombatAttributes.h"
-#include "CharacterCoordinates.h"
-#include "CharacterEffects.h"
 #include "CharacterEquipment.h"
 #include "CharacterInventory.h"
 #include "CharacterProgression.h"
-#include "CharacterQuests.h"
 #include "CharacterSkills.h"
 #include "CharacterSpells.h"
+#include "CharacterStage.h"
 #include "CharacterVitals.h"
 #include "CharacterWallet.h"
+
+#include "CharacterActions.h"
+#include "CharacterCombat.h"
+#include "CharacterEffects.h"
 
 namespace Domain {
 
@@ -36,24 +35,7 @@ public:
     std::string name() const;
     void setName( const std::string& name );
 
-    std::string sessionId() const;
-    void setSessionId( const std::string& sessionId );
-
-    CharacterAction& action();
-    void setAction( const CharacterAction& action );
-
-    CharacterCombatAction& combatAction();
-    void setCombatAction( const CharacterCombatAction& combatAction );
-
-    CharacterCombatAttributes& combatAttributes();
-    void setCombatAttributes( const CharacterCombatAttributes& combatAttributes );
-
-    CharacterCoordinates& coordinates();
-    void setCoordinates( const CharacterCoordinates& coordinates );
-
-    CharacterEffects& effects();
-    void setEffects( const CharacterEffects& effects );
-
+    // --- Persistent Data
     CharacterEquipment& equipment();
     void setEquipment( const CharacterEquipment& equipment );
 
@@ -63,14 +45,14 @@ public:
     CharacterProgression& progression();
     void setProgression( const CharacterProgression& progression );
 
-    CharacterQuests& quests();
-    void setQuests( const CharacterQuests& quests );
-
     CharacterSkills& skills();
     void setSkills( const CharacterSkills& skills );
 
     CharacterSpells& spells();
     void setSpells( const CharacterSpells& spells );
+
+    CharacterStage& stage();
+    void setStage( const CharacterStage& stage );
 
     CharacterVitals& vitals();
     void setVitals( const CharacterVitals& vitals );
@@ -78,24 +60,35 @@ public:
     CharacterWallet& wallet();
     void setWallet( const CharacterWallet& wallet );
 
+    // --- Runtime Data
+    CharacterActions& actions();
+    void setActions( const CharacterActions& actions );
+
+    CharacterCombat& combat();
+    void setCombat( const CharacterCombat& combat );
+
+    CharacterEffects& effects();
+    void setEffects( const CharacterEffects& effects );
+
 private:
     int _idCharacter;
     int _idUser;
     std::string _name;
-    std::string _sessionId;
-    CharacterAction _action;
-    CharacterCombatAction _combatAction;
-    CharacterCombatAttributes _combatAttributes;
-    CharacterCoordinates _coordinates;
-    CharacterEffects _effects;
+
+    // --- Persistent Data
     CharacterEquipment _equipment;
     CharacterInventory _inventory;
     CharacterProgression _progression;
-    CharacterQuests _quests;
     CharacterSkills _skills;
     CharacterSpells _spells;
+    CharacterStage _stage;
     CharacterVitals _vitals;
     CharacterWallet _wallet;
+
+    // --- Runtime Data
+    CharacterActions _actions;
+    CharacterCombat _combat;
+    CharacterEffects _effects;
 };
 
 } // namespace Domain

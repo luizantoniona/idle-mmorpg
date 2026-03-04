@@ -4,37 +4,38 @@
 
 #include <Shared/Helper/JsonHelper.h>
 
-#include "LocationFactory.h"
+#include "StageFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 std::unique_ptr<Domain::World> WorldFactory::createWorld( const std::string& mapPath ) {
     std::cout << "WorldFactory::createWorld" << std::endl;
 
     std::unique_ptr<Domain::World> world = std::make_unique<Domain::World>();
 
-    Json::Value worldConfig = Helper::JsonHelper::loadJsonFile( mapPath + "world.json" );
+    Json::Value worldJson = Helper::JsonHelper::loadJsonFile( mapPath + "world.json" );
 
-    if ( !worldConfig.isMember( "locations" ) || !worldConfig["locations"].isArray() ) {
-        std::cerr << "WorldFactory::createWorld missing or invalid 'locations' array in world.json" << std::endl;
+    if ( !worldJson.isMember( "stages" ) || !worldJson[ "stages" ].isArray() ) {
+        std::cerr << "WorldFactory::createWorld missing or invalid 'stages' array in world.json" << std::endl;
         return nullptr;
     }
 
-    for ( const Json::Value& locationIdJson : worldConfig["locations"] ) {
-        std::string locationId = locationIdJson.asString();
-        std::string locationPath = mapPath + "locations/" + locationId + "/";
+    for ( const Json::Value& stageJson : worldJson[ "stages" ] ) {
+        std::string stageFile = mapPath + stageJson.asString() + ".json";
 
-        auto location = LocationFactory::createLocation( locationId, locationPath );
+        auto stage = StageFactory::createStage( stageFile );
 
-        if ( !location ) {
-            std::cerr << "WorldFactory::createWorld failed to load location: " << locationId << std::endl;
+        if ( !stage ) {
+            std::cerr << "WorldFactory::createWorld failed to load stage: " << stageFile << std::endl;
             continue;
         }
 
-        world->addLocation( std::move( location ) );
+        world->addStage( std::move( stage ) );
     }
+
+    std::cout << "WorldFactory::createWorld Number of stages loaded: " << world->stages().size() << std::endl;
 
     return world;
 }
 
-} // namespace Engine
+} // namespace Manager

@@ -5,14 +5,14 @@
 
 #include <Domain/Skill/SkillType.h>
 
-namespace Helper {
+namespace Domain {
 
 class SkillHelper {
 public:
-    static Domain::SkillType stringToEnum( const std::string& type );
-    static std::string enumToString( Domain::SkillType type );
+    static SkillType stringToType( const std::string& type );
+    static std::string typeToString( SkillType type );
 };
 
-} // namespace Helper
+} // namespace Domain
 
 #endif // SKILLHELPER_H

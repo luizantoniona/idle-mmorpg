@@ -1,7 +1,7 @@
 # 🛡️🧙 iMMO — Idle-MMORPG
 
 <p align="center">
-  <img src="documentation/images/icon.512.png" alt="iMMO Logo" height="300"/>
+  <img src="idle-mmorpg-data/idle-mmorpg-configuration/logo/logo.png" alt="iMMO Logo" height="300"/>
 </p>
 
 # 💡 Motivation
@@ -29,6 +29,7 @@ This project was envisioned, created, and is maintained by:
 ### 📖 **Documentation**:  
 [`API`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/API.md) – API requests documentation.  
 [`WebSocket`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/WebSocket.md) – WebSocket messages documentation.  
+[`Character Event Bus`](https://github.com/luizantoniona/idle-mmorpg/tree/main/documentation/CharacterEventBus.md) – internal character event schema and payloads.  
 
 ### ⚙️ **Database**
 - **For now, you need to run the schema manually.**
@@ -45,7 +46,7 @@ This project was envisioned, created, and is maintained by:
   - Easily expandable to support balancing, batch editing, or procedural generation.
   - 🐾 **idle-mmorpg-creature**: Defines the structure and attributes of all creatures.
   - 🗡️ **idle-mmorpg-item**: Defines the items structure.
-  - 🗺️ **idle-mmorpg-map**: Defines the world structure, continents, areas, enemies, NPCs, and navigation logic.
+  - 🗺️ **idle-mmorpg-world**: Defines the world structure and stages.
   - 🤺 **idle-mmorpg-skill**: Defines all the skills in game.
   - 🔮 **idle-mmorpg-spell**: Defines all the magical spells available in the game.
 
@@ -57,22 +58,22 @@ This project was envisioned, created, and is maintained by:
 ### 🖼️ **Images**:  
 Login Page:
 <div align="left">
-  <img src="documentation/images/01_login.png" alt="Login" height="500"/>
+  <img src="documentation/images/01_login.png" alt="Login" height="400"/>
 </div>
 
 Account Page:
 <p align="left">
-  <img src="documentation/images/02_account.png" alt="Account" height="500"/>
+  <img src="documentation/images/02_account.png" alt="Account" height="400"/>
 </p>
 
 Game Page:
 <p align="left">
-  <img src="documentation/images/03_game.png" alt="Game" height="500"/>
+  <img src="documentation/images/03_game.png" alt="Game" height="400"/>
 </p>
 
 Combat:
 <p align="left">
-  <img src="documentation/images/04_combat.png" alt="Game" height="500"/>
+  <img src="documentation/images/04_combat.png" alt="Game" height="400"/>
 </p>
 
 # 🚀 Running
@@ -87,7 +88,7 @@ Each part of the project has its own dependencies. Make sure you have the follow
 ### 🔧 Dependency management:
 - The server uses **vcpkg** for C++ dependencies
 - The client and editor uses package.json (via **npm**)
-- The data project uses **requirements.txt**
+- The editor project uses vcpkg and a Qt6
 
 ## 📁 Clone the Repository
 ```bash
@@ -124,5 +125,5 @@ npm install
 
 3 - Start the development server:
 ```bash
-ng serve
+npm start
 ```

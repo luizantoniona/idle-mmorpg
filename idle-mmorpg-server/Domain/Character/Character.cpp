@@ -6,25 +6,27 @@ Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
     _name( "" ),
-    _sessionId( "" ),
-    _action(),
-    _combatAction(),
-    _combatAttributes(),
-    _coordinates(),
+    // --- Persistent Data
     _equipment(),
     _inventory(),
     _progression(),
     _skills(),
+    _spells(),
+    _stage(),
     _vitals(),
-    _wallet() {
+    _wallet(),
+    // --- Runtime Data
+    _actions(),
+    _combat(),
+    _effects() {
 }
 
 Json::Value Character::toJson() {
-    Json::Value root;
-    root[ "idUser" ] = idUser();
-    root[ "idCharacter" ] = idCharacter();
-    root[ "name" ] = name();
-    return root;
+    Json::Value values;
+    values[ "idUser" ] = idUser();
+    values[ "idCharacter" ] = idCharacter();
+    values[ "name" ] = name();
+    return values;
 }
 
 int Character::idCharacter() const {
@@ -51,54 +53,6 @@ void Character::setName( const std::string& name ) {
     _name = name;
 }
 
-std::string Character::sessionId() const {
-    return _sessionId;
-}
-
-void Character::setSessionId( const std::string& sessionId ) {
-    _sessionId = sessionId;
-}
-
-CharacterAction& Character::action() {
-    return _action;
-}
-
-void Character::setAction( const CharacterAction& action ) {
-    _action = action;
-}
-
-CharacterCombatAction& Character::combatAction() {
-    return _combatAction;
-}
-
-void Character::setCombatAction( const CharacterCombatAction& combatAction ) {
-    _combatAction = combatAction;
-}
-
-CharacterCombatAttributes& Character::combatAttributes() {
-    return _combatAttributes;
-}
-
-void Character::setCombatAttributes( const CharacterCombatAttributes& combatAttributes ) {
-    _combatAttributes = combatAttributes;
-}
-
-CharacterCoordinates& Character::coordinates() {
-    return _coordinates;
-}
-
-void Character::setCoordinates( const CharacterCoordinates& coordinates ) {
-    _coordinates = coordinates;
-}
-
-CharacterEffects& Character::effects() {
-    return _effects;
-}
-
-void Character::setEffects( const CharacterEffects& effects ) {
-    _effects = effects;
-}
-
 CharacterEquipment& Character::equipment() {
     return _equipment;
 }
@@ -123,14 +77,6 @@ void Character::setProgression( const CharacterProgression& progression ) {
     _progression = progression;
 }
 
-CharacterQuests& Character::quests() {
-    return _quests;
-}
-
-void Character::setQuests( const CharacterQuests& quests ) {
-    _quests = quests;
-}
-
 CharacterSkills& Character::skills() {
     return _skills;
 }
@@ -147,6 +93,14 @@ void Character::setSpells( const CharacterSpells& spells ) {
     _spells = spells;
 }
 
+CharacterStage& Character::stage() {
+    return _stage;
+}
+
+void Character::setStage( const CharacterStage& stage ) {
+    _stage = stage;
+}
+
 CharacterVitals& Character::vitals() {
     return _vitals;
 }
@@ -161,6 +115,30 @@ CharacterWallet& Character::wallet() {
 
 void Character::setWallet( const CharacterWallet& wallet ) {
     _wallet = wallet;
+}
+
+CharacterActions& Character::actions() {
+    return _actions;
+}
+
+void Character::setActions( const CharacterActions& actions ) {
+    _actions = actions;
+}
+
+CharacterCombat& Character::combat() {
+    return _combat;
+}
+
+void Character::setCombat( const CharacterCombat& combat ) {
+    _combat = combat;
+}
+
+CharacterEffects& Character::effects() {
+    return _effects;
+}
+
+void Character::setEffects( const CharacterEffects& effects ) {
+    _effects = effects;
 }
 
 } // namespace Domain

@@ -2,12 +2,11 @@ import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
-import { ButtonComponent } from "../../../../component";
-import { PanelComponent } from "../../../../component";
+import { ButtonComponent, PanelComponent } from "../../../../component/ui";
 
 import { Character } from "../../../../model";
 
-import { APIService } from "../../../../service/api.service";
+import { APIService } from "../../../../service";
 
 @Component({
     selector: "app-character-delete",

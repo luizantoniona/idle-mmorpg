@@ -6,22 +6,16 @@ namespace Engine {
 
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
-        { "CHARACTER_ACTION_UPDATE", MessageReceiverType::CHARACTER_ACTION_UPDATE },
-        { "CHARACTER_STRUCTURE_UPDATE", MessageReceiverType::CHARACTER_STRUCTURE_UPDATE },
-        { "CHARACTER_LOCATION_UPDATE", MessageReceiverType::CHARACTER_LOCATION_UPDATE },
-
-        { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
-        { "CHARACTER_USE_ITEM", MessageReceiverType::CHARACTER_USE_ITEM },
-        { "CHARACTER_CAST_SPELL", MessageReceiverType::CHARACTER_CAST_SPELL },
-
-        { "CHARACTER_INTERACT_DENIZEM", MessageReceiverType::CHARACTER_INTERACT_DENIZEM },
-        { "CHARACTER_TRADE_DENIZEN", MessageReceiverType::CHARACTER_TRADE_DENIZEN },
-        { "CHARACTER_ACCEPT_DENIZEN_QUEST", MessageReceiverType::CHARACTER_ACCEPT_DENIZEN_QUEST },
-        { "CHARACTER_FINISH_DENIZEN_QUEST", MessageReceiverType::CHARACTER_FINISH_DENIZEN_QUEST },
+        { "CHARACTER_SET_ACTION", MessageReceiverType::CHARACTER_SET_ACTION },
 
         { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
         { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },
         { "COMBAT_ROOM_EXIT", MessageReceiverType::COMBAT_ROOM_EXIT },
+
+        // REVIEW
+        { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
+        { "CHARACTER_USE_ITEM", MessageReceiverType::CHARACTER_USE_ITEM },
+        { "CHARACTER_CAST_SPELL", MessageReceiverType::CHARACTER_CAST_SPELL },
     };
 
     auto it = map.find( type );
@@ -30,46 +24,45 @@ MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
 
 std::string MessageHelper::typeToString( const MessageSenderType type ) {
     switch ( type ) {
-        case MessageSenderType::CHARACTER_UPDATE:
-            return "CHARACTER_UPDATE";
-        case MessageSenderType::CHARACTER_DEAD:
-            return "CHARACTER_DEAD";
-        case MessageSenderType::CHARACTER_ATTRIBUTES_UPDATE:
-            return "CHARACTER_ATTRIBUTES_UPDATE";
-        case MessageSenderType::CHARACTER_EFFECTS_UPDATE:
-            return "CHARACTER_EFFECTS_UPDATE";
-        case MessageSenderType::CHARACTER_EQUIPMENT_UPDATE:
-            return "CHARACTER_EQUIPMENT_UPDATE";
-        case MessageSenderType::CHARACTER_INVENTORY_UPDATE:
-            return "CHARACTER_INVENTORY_UPDATE";
-        case MessageSenderType::CHARACTER_PROGRESSION_UPDATE:
-            return "CHARACTER_PROGRESSION_UPDATE";
-        case MessageSenderType::CHARACTER_QUESTS_UPDATE:
-            return "CHARACTER_QUESTS_UPDATE";
-        case MessageSenderType::CHARACTER_SKILLS_UPDATE:
-            return "CHARACTER_SKILLS_UPDATE";
-        case MessageSenderType::CHARACTER_SPELLS_UPDATE:
-            return "CHARACTER_SPELLS_UPDATE";
-        case MessageSenderType::CHARACTER_VITALS_UPDATE:
-            return "CHARACTER_VITALS_UPDATE";
-        case MessageSenderType::CHARACTER_WALLET_UPDATE:
-            return "CHARACTER_WALLET_UPDATE";
 
-        case MessageSenderType::CHARACTER_CURRENT_ACTION_UPDATE:
-            return "CHARACTER_CURRENT_ACTION_UPDATE";
-        case MessageSenderType::CHARACTER_CURRENT_COORDINATES_UPDATE:
-            return "CHARACTER_CURRENT_COORDINATES_UPDATE";
+        // --- Character Updates ---
+    case MessageSenderType::CHARACTER:
+        return "CHARACTER";
+    case MessageSenderType::CHARACTER_ACTIONS:
+        return "CHARACTER_ACTIONS";
+    case MessageSenderType::CHARACTER_EFFECTS:
+        return "CHARACTER_EFFECTS";
+    case MessageSenderType::CHARACTER_EQUIPMENT:
+        return "CHARACTER_EQUIPMENT";
+    case MessageSenderType::CHARACTER_INVENTORY:
+        return "CHARACTER_INVENTORY";
+    case MessageSenderType::CHARACTER_PROGRESSION:
+        return "CHARACTER_PROGRESSION";
+    case MessageSenderType::CHARACTER_SKILLS:
+        return "CHARACTER_SKILLS";
+    case MessageSenderType::CHARACTER_SPELLS:
+        return "CHARACTER_SPELLS";
+    case MessageSenderType::CHARACTER_STAGE:
+        return "CHARACTER_STAGE";
+    case MessageSenderType::CHARACTER_VITALS:
+        return "CHARACTER_VITALS";
+    case MessageSenderType::CHARACTER_WALLET:
+        return "CHARACTER_WALLET";
 
-        case MessageSenderType::LOCATION_UPDATE:
-            return "LOCATION_UPDATE";
+        // --- Stage Updates ---
+    case MessageSenderType::STAGE:
+        return "STAGE";
 
-        case MessageSenderType::COMBAT_ROOMS_UPDATE:
-            return "COMBAT_ROOMS_UPDATE";
-        case MessageSenderType::COMBAT_UPDATE:
-            return "COMBAT_UPDATE";
+        // --- Combat Rooms Updates ---
+    case MessageSenderType::COMBAT_ROOMS:
+        return "COMBAT_ROOMS";
 
-        default:
-            return "UNKNOWN";
+        // --- Combat Updates ---
+    case MessageSenderType::COMBAT:
+        return "COMBAT";
+
+    default:
+        return "UNKNOWN";
     }
 }
 

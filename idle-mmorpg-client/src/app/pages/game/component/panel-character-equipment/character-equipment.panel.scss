@@ -1,0 +1,108 @@
+.tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.slot {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.equipment-layout {
+    display: grid;
+    grid-template-areas:
+        "amulet helmet ring"
+        "weapon armor offhand"
+        ". leg ."
+        ". boot .";
+    grid-template-columns: repeat(3, 40px);
+    gap: 8px;
+    justify-items: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.amulet {
+    grid-area: amulet;
+}
+
+.ring {
+    grid-area: ring;
+}
+
+.helmet {
+    grid-area: helmet;
+}
+
+.armor {
+    grid-area: armor;
+}
+
+.leg {
+    grid-area: leg;
+}
+
+.boot {
+    grid-area: boot;
+}
+
+.weapon {
+    grid-area: weapon;
+}
+
+.offhand {
+    grid-area: offhand;
+}
+
+.tools-layout {
+    display: grid;
+    grid-template-areas:
+        "pickaxe woodaxe fishingrod"
+        "shovel rope sickle";
+    grid-template-columns: repeat(3, 40px);
+    gap: 12px;
+    justify-items: center;
+    align-items: center;
+    padding: 12px;
+}
+
+.pickaxe {
+    grid-area: pickaxe;
+}
+
+.woodaxe {
+    grid-area: woodaxe;
+}
+
+.fishingrod {
+    grid-area: fishingrod;
+}
+
+.shovel {
+    grid-area: shovel;
+}
+
+.sickle {
+    grid-area: sickle;
+}
+
+.rope {
+    grid-area: rope;
+}
+
+.wallet-layout {
+    width: 100%;
+}
+
+.copper,
+.silver,
+.gold {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 4px;
+}

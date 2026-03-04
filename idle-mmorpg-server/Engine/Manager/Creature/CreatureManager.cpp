@@ -2,13 +2,13 @@
 
 #include "CreatureFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 CreatureManager::CreatureManager() :
     _creatures() {}
 
 void CreatureManager::initialize( const std::string& creaturesPath ) {
-    _creatures = Engine::CreatureFactory::createCreatures( creaturesPath );
+    _creatures = Manager::CreatureFactory::createCreatures( creaturesPath );
 }
 
 const Domain::Creature* CreatureManager::creatureById( const std::string& idCreature ) const {
@@ -21,4 +21,4 @@ const Domain::Creature* CreatureManager::creatureById( const std::string& idCrea
     return nullptr;
 }
 
-} // namespace Engine
+} // namespace Manager

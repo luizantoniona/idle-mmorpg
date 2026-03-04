@@ -7,7 +7,7 @@
 
 #include <Domain/Skill/Skill.h>
 
-namespace Engine {
+namespace Manager {
 
 class SkillFactory {
 public:
@@ -17,6 +17,6 @@ private:
     static std::unique_ptr<Domain::Skill> createSkill( const std::string& skillPath );
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // SKILLFACTORY_H

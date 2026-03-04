@@ -2,13 +2,13 @@
 
 #include "SpellFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 SpellManager::SpellManager() :
     _spells() {}
 
 void SpellManager::initialize( const std::string& spellsPath ) {
-    _spells = Engine::SpellFactory::createSpells( spellsPath );
+    _spells = SpellFactory::createSpells( spellsPath );
 }
 
 Domain::Spell* SpellManager::spellById( const std::string& spellId ) {
@@ -20,4 +20,4 @@ Domain::Spell* SpellManager::spellById( const std::string& spellId ) {
     return nullptr;
 }
 
-} // namespace Engine
+} // namespace Manager

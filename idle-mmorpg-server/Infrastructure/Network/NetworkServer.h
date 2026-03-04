@@ -23,13 +23,9 @@ public:
 
     std::optional<NetworkSession> getSession( const std::string& uuid ) const;
 
-    void bindConnectionToSession( const std::string& uuid, const drogon::WebSocketConnectionPtr& wsConnection );
-    void unbindConnectionFromSession( const std::string& uuid );
-    bool isSessionConnected( const std::string& uuid );
-
 private:
-    std::unordered_map<std::string, Network::NetworkSession> _sessions;
     mutable std::mutex _sessionMutex;
+    std::unordered_map<std::string, Network::NetworkSession> _sessions;
 };
 
 } // namespace Network

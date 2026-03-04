@@ -1,0 +1,77 @@
+<app-panel>
+    <nav class="tabs">
+        <app-button text="Equip" (click)="setTab('equipment')" [disabled]="activeTab === 'equipment'"></app-button>
+        <app-button text="Tools" (click)="setTab('tools')" [disabled]="activeTab === 'tools'"></app-button>
+        <app-button text="Wallet" (click)="setTab('wallet')" [disabled]="activeTab === 'wallet'"></app-button>
+    </nav>
+
+    @if(activeTab == 'equipment'){
+    @if(character.equipment){
+    <div class="equipment-layout">
+        <app-item class="amulet" [item]="character.equipment.amulet!" [slot]="'amulet'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="ring" [item]="character.equipment.ring!" [slot]="'ring'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="helmet" [item]="character.equipment.helmet!" [slot]="'helmet'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="armor" [item]="character.equipment.armor!" [slot]="'armor'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="leg" [item]="character.equipment.leg!" [slot]="'leg'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="boot" [item]="character.equipment.boot!" [slot]="'boot'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="weapon" [item]="character.equipment.weapon!" [slot]="'weapon'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item class="offhand" [item]="character.equipment.offhand!" [slot]="'offhand'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+    </div>
+    }
+    }
+
+    @if(activeTab == 'tools'){
+    @if(character.equipment){
+    <div class="tools-layout">
+        <app-item [item]="character.equipment.pickaxe!" [slot]="'pickaxe'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item [item]="character.equipment.woodaxe!" [slot]="'woodaxe'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item [item]="character.equipment.fishingrod!" [slot]="'fishingrod'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+
+        <app-item [item]="character.equipment.sickle!" [slot]="'sickle'" mode="slot"
+            (equip)="onSlotClick($event)"></app-item>
+    </div>
+    }
+    }
+
+    @if(activeTab == 'wallet'){
+    @if(character.wallet){
+    <div class="wallet-layout">
+        <div class="copper">
+            <img [src]="'assets/coins/copper.gif'" alt="Copper" />
+            <strong>Copper:</strong> {{ character.wallet.copper }}
+        </div>
+        <div class="silver">
+            <img [src]="'assets/coins/silver.gif'" alt="Silver" />
+            <strong>Silver:</strong> {{ character.wallet.silver }}
+        </div>
+        <div class="gold">
+            <img [src]="'assets/coins/gold.gif'" alt="Gold" />
+            <strong>Gold:</strong> {{ character.wallet.gold }}
+        </div>
+    </div>
+    }
+    }
+</app-panel>
+
+<app-character-equip-panel [character]="character" [slot]="selectedSlot" [visible]="showEquip" (closed)="onClose()">
+</app-character-equip-panel>

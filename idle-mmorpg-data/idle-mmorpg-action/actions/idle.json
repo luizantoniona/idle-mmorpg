@@ -1,0 +1,12 @@
+{
+    "id": "IDLE",
+    "description": "Do nothing",
+    "options": [
+        {
+            "stage": 0,
+            "duration": 0,
+            "skill": "UNKNOWN",
+            "experience": 0
+        }
+    ]
+}

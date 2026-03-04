@@ -3,21 +3,22 @@
     "name": "Skeleton",
     "description": "A reanimated skeleton held together by dark magic.",
     "icon": "skeleton.gif",
-    "experience": 35,
-    "health": 50,
-    "mana": 0,
-    "stamina": 15,
-    "attack": 10,
-    "attackSpeed": 1.0,
-    "accuracy": 5,
-    "defense": 2,
-    "evasion": 5,
+    "experience": 10,
+    "vitals": {
+        "health": 10,
+        "mana": 10,
+        "stamina": 10
+    },
+    "combat": {
+        "attack": 10.0,
+        "speed": 3.0
+    },
     "loot": [
         {
             "id": "coin_copper",
             "chance": 0.35,
             "minAmount": 1,
-            "maxAmount": 5
+            "maxAmount": 1
         }
     ]
 }

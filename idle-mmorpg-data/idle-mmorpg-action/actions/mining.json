@@ -1,0 +1,20 @@
+{
+    "id": "MINING",
+    "description": "Mine for minerals ore",
+    "options": [
+        {
+            "stage": 5,
+            "duration": 5,
+            "skill": "MINING",
+            "experience": 1,
+            "item": "copper_ore"
+        },
+        {
+            "stage": 10,
+            "duration": 15,
+            "skill": "MINING",
+            "experience": 2,
+            "item": "iron_ore"
+        }
+    ]
+}

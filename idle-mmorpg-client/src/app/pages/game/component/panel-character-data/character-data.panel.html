@@ -1,0 +1,34 @@
+<div class="character-column">
+    <app-panel>
+        <app-button [text]="nameLevel" (clickEvent)="handleClick()">
+        </app-button>
+    </app-panel>
+
+    <app-panel>
+        @if(character && character.progression) {
+        <app-bar label="XP ( {{character.progression.experience}} / {{character.progression.experienceNextLevel}} )"
+            [value]="character.progression.experience" [max]="character.progression.experienceNextLevel"
+            color="#fdd835" />
+        }
+
+        @if(character && character.vitals) {
+        <app-bar
+            label="Health ( {{character.vitals.health | number:'1.2-2'}} / {{character.vitals.maxHealth | number:'1.2-2'}} )"
+            [value]="character.vitals.health" [max]="character.vitals.maxHealth" color="#e53935" />
+
+        <app-bar
+            label="Mana ( {{character.vitals.mana | number:'1.2-2'}} / {{character.vitals.maxMana | number:'1.2-2'}} )"
+            [value]="character.vitals.mana" [max]="character.vitals.maxMana" color="#1e88e5" />
+
+        <app-bar
+            label="Stamina ( {{character.vitals.stamina | number:'1.2-2'}} / {{character.vitals.maxStamina | number:'1.2-2'}} )"
+            [value]="character.vitals.stamina" [max]="character.vitals.maxStamina" color="#4caf50" />
+
+        }
+
+        @if(!character || !character.progression || !character.vitals){
+        <app-loading></app-loading>
+        }
+
+    </app-panel>
+</div>

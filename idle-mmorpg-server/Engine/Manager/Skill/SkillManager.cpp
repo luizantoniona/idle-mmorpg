@@ -4,17 +4,17 @@
 
 #include "SkillFactory.h"
 
-namespace Engine {
+namespace Manager {
 
 SkillManager::SkillManager() :
     _skills() {}
 
 void SkillManager::initialize( const std::string& skillsPath ) {
-    _skills = Engine::SkillFactory::createSkills( skillsPath );
+    _skills = Manager::SkillFactory::createSkills( skillsPath );
 }
 
-Domain::Skill* SkillManager::skill( const std::string& idSkill ) {
-    auto it = _skills.find( idSkill );
+Domain::Skill* SkillManager::skill( const std::string& skillId ) {
+    auto it = _skills.find( skillId );
     if ( it != _skills.end() ) {
         return it->second.get();
     }
@@ -22,9 +22,9 @@ Domain::Skill* SkillManager::skill( const std::string& idSkill ) {
     return nullptr;
 }
 
-Domain::Skill* SkillManager::skill( Domain::SkillType typeSkill ) {
-    std::string skillId = Helper::SkillHelper::enumToString( typeSkill );
+Domain::Skill* SkillManager::skill( Domain::SkillType skillType ) {
+    std::string skillId = Domain::SkillHelper::typeToString( skillType );
     return skill( skillId );
 }
 
-} // namespace Engine
+} // namespace Manager

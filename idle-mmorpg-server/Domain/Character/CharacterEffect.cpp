@@ -9,19 +9,18 @@ CharacterEffect::CharacterEffect() :
     _category( "" ),
     _value( 0.0 ),
     _duration( 0 ),
-    _counter( 0 ) {
-}
+    _counter( 0 ) {}
 
 Json::Value Domain::CharacterEffect::toJson() {
-    Json::Value root;
-    root[ "source" ] = source();
-    root[ "sourceName" ] = sourceName();
-    root[ "type" ] = type();
-    root[ "category" ] = category();
-    root[ "value" ] = value();
-    root[ "duration" ] = duration();
-    root[ "counter" ] = counter();
-    return root;
+    Json::Value values;
+    values[ "source" ] = source();
+    values[ "sourceName" ] = sourceName();
+    values[ "type" ] = type();
+    values[ "category" ] = category();
+    values[ "value" ] = value();
+    values[ "duration" ] = duration();
+    values[ "counter" ] = counter();
+    return values;
 }
 
 std::string CharacterEffect::source() const {

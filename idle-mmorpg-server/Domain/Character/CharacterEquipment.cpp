@@ -18,20 +18,23 @@ CharacterEquipment::CharacterEquipment() :
 }
 
 Json::Value CharacterEquipment::toJson() {
-    Json::Value root;
-    root[ "helmet" ] = helmet().toJson();
-    root[ "armor" ] = armor().toJson();
-    root[ "leg" ] = leg().toJson();
-    root[ "boot" ] = boot().toJson();
-    root[ "weapon" ] = weapon().toJson();
-    root[ "offhand" ] = offhand().toJson();
-    root[ "amulet" ] = amulet().toJson();
-    root[ "ring" ] = ring().toJson();
-    root[ "pickaxe" ] = pickaxe().toJson();
-    root[ "woodaxe" ] = woodaxe().toJson();
-    root[ "fishingrod" ] = fishingrod().toJson();
-    root[ "sickle" ] = sickle().toJson();
-    return root;
+    Json::Value values;
+    values[ "helmet" ] = helmet().toJson();
+    values[ "armor" ] = armor().toJson();
+    values[ "leg" ] = leg().toJson();
+    values[ "boot" ] = boot().toJson();
+    values[ "weapon" ] = weapon().toJson();
+    values[ "offhand" ] = offhand().toJson();
+    values[ "amulet" ] = amulet().toJson();
+    values[ "ring" ] = ring().toJson();
+    values[ "pickaxe" ] = pickaxe().toJson();
+    values[ "woodaxe" ] = woodaxe().toJson();
+    values[ "fishingrod" ] = fishingrod().toJson();
+    values[ "sickle" ] = sickle().toJson();
+
+    Json::Value equipment;
+    equipment[ "equipment" ] = values;
+    return equipment;
 }
 
 CharacterEquipmentItem& CharacterEquipment::helmet() {

@@ -4,20 +4,16 @@ namespace Domain {
 
 Creature::Creature() :
     _id( "" ),
-    _combatId( 0 ),
     _type( "" ),
     _name( "" ),
     _description( "" ),
     _icon( "" ),
     _experience( 0 ),
     _vitals(),
-    _combatAction(),
-    _attack( 0.0 ),
-    _attackSpeed( 0.0 ),
-    _accuracy( 0.0 ),
-    _defense( 0.0 ),
-    _evasion( 0.0 ),
-    _loot( {} ) {
+    _loot(),
+    // --- Runtime Data
+    _combatId( 0 ),
+    _combat() {
 }
 
 std::string Creature::id() const {
@@ -26,14 +22,6 @@ std::string Creature::id() const {
 
 void Creature::setId( const std::string& id ) {
     _id = id;
-}
-
-int Creature::combatId() const {
-    return _combatId;
-}
-
-void Creature::setCombatId( int combatId ) {
-    _combatId = combatId;
 }
 
 std::string Creature::type() const {
@@ -76,60 +64,12 @@ void Creature::setExperience( int experience ) {
     _experience = experience;
 }
 
-CreatureCombatAction& Creature::combatAction() {
-    return _combatAction;
-}
-
-void Creature::setCombatAction( const CreatureCombatAction& combatAction ) {
-    _combatAction = combatAction;
-}
-
 CreatureVitals& Creature::vitals() {
     return _vitals;
 }
 
 void Creature::setVitals( const CreatureVitals& vitals ) {
     _vitals = vitals;
-}
-
-double Creature::attack() const {
-    return _attack;
-}
-
-void Creature::setAttack( double attack ) {
-    _attack = attack;
-}
-
-double Creature::attackSpeed() const {
-    return _attackSpeed;
-}
-
-void Creature::setAttackSpeed( double attackSpeed ) {
-    _attackSpeed = attackSpeed;
-}
-
-double Creature::accuracy() const {
-    return _accuracy;
-}
-
-void Creature::setAccuracy( double accuracy ) {
-    _accuracy = accuracy;
-}
-
-double Creature::defense() const {
-    return _defense;
-}
-
-void Creature::setDefense( double defense ) {
-    _defense = defense;
-}
-
-double Creature::evasion() const {
-    return _evasion;
-}
-
-void Creature::setEvasion( double evasion ) {
-    _evasion = evasion;
 }
 
 std::vector<CreatureLoot> Creature::loot() const {
@@ -142,6 +82,22 @@ void Creature::setLoot( const std::vector<CreatureLoot>& loot ) {
 
 void Creature::addLoot( const CreatureLoot& loot ) {
     _loot.push_back( loot );
+}
+
+int Creature::combatId() const {
+    return _combatId;
+}
+
+void Creature::setCombatId( int combatId ) {
+    _combatId = combatId;
+}
+
+CreatureCombat& Creature::combat() {
+    return _combat;
+}
+
+void Creature::setAction( const CreatureCombat& combat ) {
+    _combat = combat;
 }
 
 } // namespace Domain

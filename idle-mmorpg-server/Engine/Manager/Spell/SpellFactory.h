@@ -7,7 +7,7 @@
 
 #include <Domain/Spell/Spell.h>
 
-namespace Engine {
+namespace Manager {
 
 class SpellFactory {
 public:
@@ -17,6 +17,6 @@ private:
     static std::unique_ptr<Domain::Spell> createSpell( const std::string& spellPath );
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // SPELLFACTORY_H

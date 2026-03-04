@@ -5,9 +5,7 @@
 #include <Domain/Skill/SkillHelper.h>
 #include <Shared/Helper/JsonHelper.h>
 
-namespace Engine {
-
-// TODO REVIEW THIS, MAYBE REMOVE FROM JSONS AND MADE SKILLS HARD CODED
+namespace Manager {
 
 std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > SkillFactory::createSkills( const std::string& skillsPath ) {
     std::cout << "SkillFactory::createSkills" << std::endl;
@@ -39,18 +37,22 @@ std::unique_ptr<Domain::Skill> SkillFactory::createSkill( const std::string& ski
 
     const std::string skillId = skillJson[ "id" ].asString();
 
-    if ( Helper::SkillHelper::stringToEnum( skillId ) == Domain::SkillType::UNKNOWN ) {
+    if ( Domain::SkillHelper::stringToType( skillId ) == Domain::SkillType::UNKNOWN ) {
         std::cerr << "Unmaped skill: " << skillId << std::endl;
         return nullptr;
     }
 
     auto skill = std::make_unique<Domain::Skill>();
 
-    skill->setType( Helper::SkillHelper::stringToEnum( skillId ) );
     skill->setId( skillId );
+    skill->setType( Domain::SkillHelper::stringToType( skillId ) );
     skill->setName( skillJson[ "name" ].asString() );
     skill->setDescription( skillJson[ "description" ].asString() );
     skill->setCategory( skillJson[ "category" ].asString() );
+
+    // TODO: We need to review this later - global or by skill
+    skill->setBaseExperience( 100.00 );
+    skill->setGrowthRate( 1.05 );
 
     const auto& milestonesJson = skillJson[ "milestones" ];
     for ( const auto& milestoneJson : milestonesJson ) {
@@ -73,4 +75,4 @@ std::unique_ptr<Domain::Skill> SkillFactory::createSkill( const std::string& ski
     return skill;
 }
 
-} // namespace Engine
+} // namespace Manager

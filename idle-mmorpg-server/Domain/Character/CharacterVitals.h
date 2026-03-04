@@ -30,10 +30,18 @@ public:
     void setMaxStamina( double maxStamina );
 
     int regenDuration() const;
-    void setRegenDuration( int regenDuration );
+    void setRegenDuration(int regenDuration);
 
     int regenCounter() const;
-    void setRegenCounter( int regenCounter );
+    void setRegenCounter(int regenCounter);
+
+    void modifyHealth( double delta );
+    void modifyMana( double delta );
+    void modifyStamina( double delta );
+
+    void modifyMaxHealth( double delta );
+    void modifyMaxMana( double delta );
+    void modifyMaxStamina( double delta );
 
 private:
     double _health;
@@ -42,6 +50,7 @@ private:
     double _maxMana;
     double _stamina;
     double _maxStamina;
+
     int _regenDuration;
     int _regenCounter;
 };

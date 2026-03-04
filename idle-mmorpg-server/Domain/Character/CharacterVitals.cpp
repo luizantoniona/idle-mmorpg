@@ -9,18 +9,21 @@ CharacterVitals::CharacterVitals() :
     _maxMana( 0.0 ),
     _stamina( 0.0 ),
     _maxStamina( 0.0 ),
-    _regenDuration( 0.0 ),
+    _regenDuration( 0 ),
     _regenCounter( 0 ) {}
 
 Json::Value CharacterVitals::toJson() {
-    Json::Value root;
-    root[ "health" ] = health();
-    root[ "maxHealth" ] = maxHealth();
-    root[ "mana" ] = mana();
-    root[ "maxMana" ] = maxMana();
-    root[ "stamina" ] = stamina();
-    root[ "maxStamina" ] = maxStamina();
-    return root;
+    Json::Value values;
+    values[ "health" ] = health();
+    values[ "maxHealth" ] = maxHealth();
+    values[ "mana" ] = mana();
+    values[ "maxMana" ] = maxMana();
+    values[ "stamina" ] = stamina();
+    values[ "maxStamina" ] = maxStamina();
+
+    Json::Value vitals;
+    vitals[ "vitals" ] = values;
+    return vitals;
 }
 
 double CharacterVitals::health() const {
@@ -85,6 +88,54 @@ int CharacterVitals::regenCounter() const {
 
 void CharacterVitals::setRegenCounter( int regenCounter ) {
     _regenCounter = regenCounter;
+}
+
+void CharacterVitals::modifyHealth( double delta ) {
+    _health += delta;
+
+    if ( _health > _maxHealth ) {
+        _health = _maxHealth;
+    }
+
+    if ( _health < 0.0 ) {
+        _health = 0.0;
+    }
+}
+
+void CharacterVitals::modifyMana( double delta ) {
+    _mana += delta;
+
+    if ( _mana > _maxMana ) {
+        _mana = _maxMana;
+    }
+
+    if ( _mana < 0.0 ) {
+        _mana = 0.0;
+    }
+}
+
+void CharacterVitals::modifyStamina( double delta ) {
+    _stamina += delta;
+
+    if ( _stamina > _maxStamina ) {
+        _stamina = _maxStamina;
+    }
+
+    if ( _stamina < 0.0 ) {
+        _stamina = 0.0;
+    }
+}
+
+void CharacterVitals::modifyMaxHealth( double delta ) {
+    _maxHealth += delta;
+}
+
+void CharacterVitals::modifyMaxMana( double delta ) {
+    _maxMana += delta;
+}
+
+void CharacterVitals::modifyMaxStamina( double delta ) {
+    _maxStamina += delta;
 }
 
 } // namespace Domain

@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include <Engine/Manager/Configuration/ServerConfigurationManager.h>
-#include <Engine/Manager/Configuration/ServerImageManager.h>
+#include <Engine/Manager/Server/ServerConfigurationManager.h>
+#include <Engine/Manager/Server/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
 #include <Shared/Helper/JsonHelper.h>
 
-namespace Engine {
+namespace Manager {
 
 std::unordered_map<std::string, std::unique_ptr<Domain::Item> > ItemFactory::createItems( const std::string& itemsPath ) {
     std::cout << "ItemFactory::createItems" << std::endl;
@@ -49,7 +49,7 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
 
     item->setIcon( itemJson[ "icon" ].asString() );
     std::string baseDir = itemPath.substr( 0, itemPath.find_last_of( '/' ) + 1 );
-    Commons::Singleton<Engine::ServerImageManager>::instance().loadImage( item->icon(), baseDir + item->icon() );
+    Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( item->icon(), baseDir + item->icon() );
 
     if ( itemJson.isMember( "bonus" ) && itemJson[ "bonus" ].isArray() ) {
         const Json::Value& bonusesJson = itemJson[ "bonus" ];
@@ -76,7 +76,7 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
             effect.setType( effectJson[ "type" ].asString() );
             effect.setCategory( effectJson[ "category" ].asString() );
             effect.setValue( effectJson[ "value" ].asDouble() );
-            effect.setDuration( effectJson[ "duration" ].asInt() * Commons::Singleton<Engine::ServerConfigurationManager>::instance().tickRate() );
+            effect.setDuration( effectJson[ "duration" ].asInt() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
 
             effects.push_back( effect );
         }
@@ -87,4 +87,4 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
     return item;
 }
 
-} // namespace Engine
+} // namespace Manager

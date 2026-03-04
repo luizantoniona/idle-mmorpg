@@ -1,0 +1,23 @@
+{
+    "level": 1,
+    "creatures": [
+        {
+            "id": "rat",
+            "amount": 1
+        }
+    ],
+    "objectives": [
+        {
+            "id": "1-1",
+            "target": "rat",
+            "amount": 5,
+            "rewards": [
+                {
+                    "type": "item",
+                    "id": "coin_copper",
+                    "amount": 5
+                }
+            ]
+        }
+    ]
+}

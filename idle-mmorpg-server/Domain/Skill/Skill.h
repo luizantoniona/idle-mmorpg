@@ -17,6 +17,9 @@ public:
 
     Json::Value toJson();
 
+    SkillType type() const;
+    void setType( SkillType type );
+
     std::string id() const;
     void setId( const std::string& id );
 
@@ -33,8 +36,13 @@ public:
     void setMillestones( const std::vector<SkillMilestone>& millestones );
     void addMilestone( const SkillMilestone& milestone );
 
-    SkillType type() const;
-    void setType( SkillType type );
+    int experienceForNextLevel( int currentLevel ) const;
+
+    double baseExperience() const;
+    void setBaseExperience( double baseExperience );
+
+    double growthRate() const;
+    void setGrowthRate( double growthRate );
 
 private:
     SkillType _type;
@@ -43,6 +51,9 @@ private:
     std::string _description;
     std::string _category;
     std::vector<SkillMilestone> _millestones;
+
+    double _baseExperience;
+    double _growthRate;
 };
 
 } // namespace Domain

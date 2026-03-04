@@ -12,16 +12,6 @@ CREATE TABLE 'character' (
     FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE
 );
 
-CREATE TABLE character_coordinates (
-    id_character INTEGER PRIMARY KEY,
-    location_id TEXT,
-    structure_id TEXT,
-    spawn_location_id TEXT,
-    spawn_structure_id TEXT,
-
-    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
-);
-
 CREATE TABLE character_equipment (
     id_character INTEGER PRIMARY KEY,
     helmet_item_id TEXT DEFAULT NULL,
@@ -37,7 +27,7 @@ CREATE TABLE character_equipment (
     fishingrod_item_id TEXT DEFAULT NULL,
     sickle_item_id TEXT DEFAULT NULL,
 
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );
 
 CREATE TABLE character_inventory (
@@ -46,7 +36,7 @@ CREATE TABLE character_inventory (
     amount INTEGER DEFAULT 0,
 
     PRIMARY KEY (id_character, id_item),
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );
 
 CREATE TABLE character_progression (
@@ -54,21 +44,7 @@ CREATE TABLE character_progression (
     'level' INTEGER NOT NULL DEFAULT 0,
     experience INTEGER NOT NULL DEFAULT 0,
 
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
-);
-
-CREATE TABLE character_quests (
-    id_character INTEGER NOT NULL,
-    id_quest TEXT NOT NULL,
-    type TEXT NOT NULL,
-    objective_id TEXT,
-    current_amount INTEGER DEFAULT 0,
-    objective_amount INTEGER DEFAULT 0,
-    finished INTEGER DEFAULT 0,
-    claimed INTEGER DEFAULT 0,
-
-    PRIMARY KEY (id_character, id_quest),
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );
 
 CREATE TABLE character_skills (
@@ -78,7 +54,7 @@ CREATE TABLE character_skills (
     level INTEGER DEFAULT 0,
 
     PRIMARY KEY (id_character, id_skill),
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );
 
 CREATE TABLE character_spells (
@@ -86,8 +62,16 @@ CREATE TABLE character_spells (
     id_spell TEXT NOT NULL,
 
     PRIMARY KEY (id_character, id_spell),
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 ); 
+
+CREATE TABLE character_stage (
+    id_character INTEGER PRIMARY KEY,
+    id_stage INTEGER NOT NULL,
+    completed BOOLEAN DEFAULT 0,
+
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
+);
 
 CREATE TABLE character_vitals (
     id_character INTEGER PRIMARY KEY,
@@ -107,5 +91,5 @@ CREATE TABLE character_wallet (
     silver INTEGER DEFAULT 0,
     gold INTEGER DEFAULT 0,
 
-    FOREIGN KEY (id_character) REFERENCES character(id_character) ON DELETE CASCADE
+    FOREIGN KEY (id_character) REFERENCES 'character'(id_character) ON DELETE CASCADE
 );

@@ -9,18 +9,18 @@ CharacterSpell::CharacterSpell() :
 }
 
 Json::Value CharacterSpell::toJson() const {
-    Json::Value root;
-    root[ "id" ] = id();
-    root[ "count" ] = count();
+    Json::Value values;
+    values[ "id" ] = id();
+    values[ "count" ] = count();
     if ( spell() ) {
-        root[ "name" ] = spell()->name();
-        root[ "description" ] = spell()->description();
-        root[ "icon" ] = spell()->icon();
-        root[ "type" ] = spell()->type();
-        root[ "manaCost" ] = spell()->manaCost();
-        root[ "cooldown" ] = spell()->cooldown();
+        values[ "name" ] = spell()->name();
+        values[ "description" ] = spell()->description();
+        values[ "icon" ] = spell()->icon();
+        values[ "type" ] = spell()->type();
+        values[ "manaCost" ] = spell()->manaCost();
+        values[ "cooldown" ] = spell()->cooldown();
     }
-    return root;
+    return values;
 }
 
 std::string CharacterSpell::id() const {

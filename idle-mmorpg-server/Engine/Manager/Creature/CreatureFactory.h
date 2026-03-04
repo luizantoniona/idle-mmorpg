@@ -6,7 +6,7 @@
 
 #include <Domain/Creature/Creature.h>
 
-namespace Engine {
+namespace Manager {
 
 class CreatureFactory {
 public:
@@ -16,6 +16,6 @@ private:
     static std::unique_ptr<Domain::Creature> createCreature( const std::string& creaturePath );
 };
 
-} // namespace Engine
+} // namespace Manager
 
 #endif // CREATUREFACTORY_H
