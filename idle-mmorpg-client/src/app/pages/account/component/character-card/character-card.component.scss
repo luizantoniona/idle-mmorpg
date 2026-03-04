@@ -3,3 +3,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.character-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}

@@ -1,18 +1,20 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { CharacterCardComponent } from '../character-card/character-card.component';
+import { CharacterCardComponent } from "../character-card/character-card.component";
 
-import type { Character } from '../../../../model';
+import type { Character } from "../../../../model";
 
 @Component({
-    selector: 'app-character-list',
-    templateUrl: './character-list.component.html',
+    selector: "app-character-list",
+    templateUrl: "./character-list.component.html",
+    styleUrls: ["./character-list.component.scss"],
     imports: [
         CommonModule,
         CharacterCardComponent,
     ],
 })
+
 export class CharacterListComponent {
     @Input() characters: Character[] = [];
     @Output() onSelect = new EventEmitter<Character>();

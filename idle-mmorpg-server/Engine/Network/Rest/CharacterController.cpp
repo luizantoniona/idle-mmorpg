@@ -133,6 +133,17 @@ void CharacterController::list( const drogon::HttpRequestPtr& request, std::func
 
             for ( const auto& character : characters ) {
                 Json::Value characterJson = character->toJson();
+
+                Json::Value progressionJson = character->progression().toJson();
+                for ( const auto& key : progressionJson.getMemberNames() ) {
+                    characterJson[ key ] = progressionJson[ key ];
+                }
+
+                Json::Value vitalsJson = character->vitals().toJson();
+                for ( const auto& key : vitalsJson.getMemberNames() ) {
+                    characterJson[ key ] = vitalsJson[ key ];
+                }
+
                 charactersJson.append( characterJson );
             }
 

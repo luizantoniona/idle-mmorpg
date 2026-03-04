@@ -92,47 +92,20 @@ std::vector<std::unique_ptr<Domain::Character> > CharacterRepository::findAllByI
 
     std::vector<std::unique_ptr<Domain::Character> > characters;
 
-    // TODO: Review this method, as it is only for the account page. So we don't need to load all data from character;
-
     while ( query.step() ) {
         auto character = std::make_unique<Domain::Character>();
         character->setIdCharacter( query.getColumnInt( 0 ) );
         character->setIdUser( query.getColumnInt( 1 ) );
         character->setName( query.getColumnText( 2 ) );
 
-        // auto equipment = CharacterEquipmentRepository().findByCharacterId( character->idCharacter() );
-        // if ( equipment ) {
-        //     character->setEquipment( *equipment );
-        // }
-
-        // auto inventory = CharacterInventoryRepository().findByCharacterId( character->idCharacter() );
-        // if ( inventory ) {
-        //     character->setInventory( *inventory );
-        // }
-
         auto progression = CharacterProgressionRepository().findByCharacterId( character->idCharacter() );
         if ( progression ) {
             character->setProgression( *progression );
         }
 
-        // auto skills = CharacterSkillsRepository().findByCharacterId( character->idCharacter() );
-        // if ( skills ) {
-        //     character->setSkills( *skills );
-        // }
-
-        // auto spells = CharacterSpellsRepository().findByCharacterId( character->idCharacter() );
-        // if ( spells ) {
-        //     character->setSpells( *spells );
-        // }
-
-        // auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
-        // if ( vitals ) {
-        //     character->setVitals( *vitals );
-        // }
-
-        auto wallet = CharacterWalletRepository().findByCharacterId( character->idCharacter() );
-        if ( wallet ) {
-            character->setWallet( *wallet );
+        auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
+        if ( vitals ) {
+            character->setVitals( *vitals );
         }
 
         characters.push_back( std::move( character ) );

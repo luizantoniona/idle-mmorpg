@@ -1,0 +1,11 @@
+.character-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+app-character-card {
+    flex: 0 0 200px;
+}
