@@ -58,22 +58,22 @@ This project was envisioned, created, and is maintained by:
 ### 🖼️ **Images**:  
 Login Page:
 <div align="left">
-  <img src="documentation/images/01_login.png" alt="Login" height="500"/>
+  <img src="documentation/images/01_login.png" alt="Login" height="400"/>
 </div>
 
 Account Page:
 <p align="left">
-  <img src="documentation/images/02_account.png" alt="Account" height="500"/>
+  <img src="documentation/images/02_account.png" alt="Account" height="400"/>
 </p>
 
 Game Page:
 <p align="left">
-  <img src="documentation/images/03_game.png" alt="Game" height="500"/>
+  <img src="documentation/images/03_game.png" alt="Game" height="400"/>
 </p>
 
 Combat:
 <p align="left">
-  <img src="documentation/images/04_combat.png" alt="Game" height="500"/>
+  <img src="documentation/images/04_combat.png" alt="Game" height="400"/>
 </p>
 
 # 🚀 Running
