@@ -52,7 +52,7 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     _controllers.push_back( _spellsController.get() );
 
     // --- Vitals ---
-    _vitalsController = std::make_unique<CharacterVitalsController>( _eventBus, _messageSender, *_character );
+    _vitalsController = std::make_unique<CharacterVitalsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
     _controllers.push_back( _vitalsController.get() );
 
     // --- Wallet ---
