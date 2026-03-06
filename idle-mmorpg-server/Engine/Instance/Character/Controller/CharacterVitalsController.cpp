@@ -56,20 +56,20 @@ void CharacterVitalsController::onTick() {
     bool changed = false;
 
     if ( _characterVitals.health() < _characterVitals.maxHealth() ) {
-        // TODO
-        // _characterVitals.modifyHealth( _configurationManager.healthRegenRate() );
+        // TODO: Adjust Regeneration Hate
+        _characterVitals.modifyHealth( 1.0 );
         changed = true;
     }
 
     if ( _characterVitals.mana() < _characterVitals.maxMana() ) {
-        // TODO
-        // _characterVitals.modifyMana( _configurationManager.manaRegenRate() );
+        // TODO: Adjust Regeneration Hate
+        _characterVitals.modifyMana( 1.0 );
         changed = true;
     }
 
     if ( _characterVitals.stamina() < _characterVitals.maxStamina() ) {
-        // TODO
-        // _characterVitals.modifyStamina( _configurationManager.staminaRegenRate() );
+        // TODO: Adjust Regeneration Hate
+        _characterVitals.modifyStamina( 1.0 );
         changed = true;
     }
 

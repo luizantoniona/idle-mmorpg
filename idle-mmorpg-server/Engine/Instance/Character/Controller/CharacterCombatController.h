@@ -28,6 +28,7 @@ private:
 
     // --- EventBus methods ---
     void onEquipmentEquipped( const CharacterEvent& event );
+    void onSkillLeveledUp( const CharacterEvent& event );
 };
 
 } // namespace Engine

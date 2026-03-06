@@ -11,11 +11,17 @@ CharacterCombatController::CharacterCombatController( CharacterEventBus& eventBu
     _configurationManager( configurationManager ) {
 
     _eventBus.subscribe( CharacterEventType::EQUIPMENT_ITEM_EQUIPPED, [ this ]( const CharacterEvent& event ) {
-        onEquipmentEquipped( event );
-    } );
+            onEquipmentEquipped( event );
+        } );
+
+    _eventBus.subscribe( CharacterEventType::SKILL_LEVEL_GAINED, [ this ]( const CharacterEvent& event ) {
+            onSkillLeveledUp( event );
+        } );
 }
 
 void CharacterCombatController::onEnterWorld() {
+    // TODO: Recompute _characterCombat.attackDuration -> based on weapon
+    _characterCombat.setAttackDuration( 2 * _configurationManager.tickRate() );
 }
 
 void CharacterCombatController::onLeaveWorld() {
@@ -35,11 +41,17 @@ void CharacterCombatController::onEquipmentEquipped( const CharacterEvent& event
 
     if ( characterWeapon ) {
         // TODO: Recompute _characterCombat.attackDuration -> based on weapon
+        // TODO: Recompute attack value
     }
 
     if ( characterOffHand ) {
         // TODO: Recompute _characterCombat.attackDuration -> based on offhand
+        // TODO: Recompute attack value
     }
+}
+
+void CharacterCombatController::onSkillLeveledUp( const CharacterEvent& event ) {
+    // TODO: Recompute attack value
 }
 
 } // namespace Engine
