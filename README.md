@@ -35,46 +35,54 @@ This project was envisioned, created, and is maintained by:
 - **For now, you need to run the schema manually.**
 - **Once all tables are defined and only minor changes are needed, we will create the migration steps.**
 
-## 🎨 [`idle-mmorpg-editor`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-editor)
-- **Data Editor**
-  - TODO
-
-## 🧩 [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
-- **Data Project**
-  - Game content.
-  - Outputs JSON files that are consumed by the server.
-  - Easily expandable to support balancing, batch editing, or procedural generation.
-  - 🐾 **idle-mmorpg-creature**: Defines the structure and attributes of all creatures.
-  - 🗡️ **idle-mmorpg-item**: Defines the items structure.
-  - 🗺️ **idle-mmorpg-world**: Defines the world structure and stages.
-  - 🤺 **idle-mmorpg-skill**: Defines all the skills in game.
-  - 🔮 **idle-mmorpg-spell**: Defines all the magical spells available in the game.
-
 ## ⚔️ [`idle-mmorpg-client`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-client)
 - **Web Client**
   - Responsible for rendering the game UI, receiving real-time updates via WebSocket, and sending player actions to the server.
   - Built with **Angular** and **Typescript**.
 
 ### 🖼️ **Images**:  
-Login Page:
-<div align="left">
+**Login Page:**
+<div align="center">
   <img src="documentation/images/01_login.png" alt="Login" height="400"/>
 </div>
 
-Account Page:
-<p align="left">
+**Account Page:**
+<p align="center">
   <img src="documentation/images/02_account.png" alt="Account" height="400"/>
 </p>
 
-Game Page:
-<p align="left">
+**Game Page:**
+<p align="center">
   <img src="documentation/images/03_game.png" alt="Game" height="400"/>
 </p>
 
-Combat:
-<p align="left">
+**Combat:**
+<p align="center">
   <img src="documentation/images/04_combat.png" alt="Game" height="400"/>
 </p>
+
+## 🎨 [`idle-mmorpg-editor`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-editor)
+- **Data Editor**
+  - TODO
+
+## 🧩 [`idle-mmorpg-data`](https://github.com/luizantoniona/idle-mmorpg/tree/main/idle-mmorpg-data)
+- **Data Project** – static JSON definitions consumed by the server at
+  deployment.
+  - Contains all game content (creatures, items, spells, skills, world stages,
+    idle actions and global configuration).
+  - Easily editable without recompilation; see the [module
+    READMEs](idle-mmorpg-data/README.md) for schema details and examples.
+  - Modules are split into subpackages so tooling and editors can operate on a
+    focused set of files:
+    - [⚡ `idle-mmorpg-action`](idle-mmorpg-data/idle-mmorpg-action/README.md)
+    - [🐾 `idle-mmorpg-creature`](idle-mmorpg-data/idle-mmorpg-creature/README.md)
+    - [🗡️ `idle-mmorpg-item`](idle-mmorpg-data/idle-mmorpg-item/README.md)
+    - [🤺 `idle-mmorpg-skill`](idle-mmorpg-data/idle-mmorpg-skill/README.md)
+    - [🔮 `idle-mmorpg-spell`](idle-mmorpg-data/idle-mmorpg-spell/README.md)
+    - [🗺️ `idle-mmorpg-world`](idle-mmorpg-data/idle-mmorpg-world/README.md)
+    - [⚙️ `idle-mmorpg-configuration`](idle-mmorpg-data/idle-mmorpg-configuration/README.md)
+
+---
 
 # 🚀 Running
 These instructions will help you set up the project locally for development and testing.
