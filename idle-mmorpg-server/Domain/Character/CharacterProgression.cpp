@@ -1,5 +1,7 @@
 #include "CharacterProgression.h"
 
+#include <cmath>
+
 namespace Domain {
 
 CharacterProgression::CharacterProgression() :
