@@ -32,9 +32,6 @@ public:
     std::string description() const;
     void setDescription( const std::string& description );
 
-    std::string rarity() const;
-    void setRarity( const std::string& rarity );
-
     std::string icon() const;
     void setIcon( const std::string& icon );
 
@@ -55,7 +52,6 @@ private:
     std::string _category;
     std::string _name;
     std::string _description;
-    std::string _rarity;
     std::string _icon;
     int _price;
     std::vector<ItemBonus> _bonuses;

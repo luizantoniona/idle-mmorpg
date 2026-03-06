@@ -5,7 +5,6 @@
     "name": "Cheese",
     "description": "A simple chunk of cheese. Smells... questionable.",
     "icon": "food_cheese.gif",
-    "rarity": "common",
     "price": 5,
     "effects": [
         {

@@ -8,7 +8,6 @@ Item::Item() :
     _category( "" ),
     _name( "" ),
     _description( "" ),
-    _rarity( "" ),
     _icon( "" ),
     _price( 0 ),
     _bonuses( {} ),
@@ -22,15 +21,14 @@ Json::Value Item::toJson() const {
     root[ "category" ] = category();
     root[ "name" ] = name();
     root[ "description" ] = description();
-    root[ "rarity" ] = rarity();
     root[ "icon" ] = icon();
     root[ "price" ] = price();
 
-    for ( ItemBonus& bonus : bonuses() ) {
+    for ( const ItemBonus& bonus : _bonuses ) {
         root[ "bonuses" ].append( bonus.toJson() );
     }
 
-    for ( ItemEffect& effect : effects() ) {
+    for ( const ItemEffect& effect : _effects ) {
         root[ "effects" ].append( effect.toJson() );
     }
 
@@ -75,14 +73,6 @@ std::string Item::description() const {
 
 void Item::setDescription( const std::string& description ) {
     _description = description;
-}
-
-std::string Item::rarity() const {
-    return _rarity;
-}
-
-void Item::setRarity( const std::string& rarity ) {
-    _rarity = rarity;
 }
 
 std::string Item::icon() const {

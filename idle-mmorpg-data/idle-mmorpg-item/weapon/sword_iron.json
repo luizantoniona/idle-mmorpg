@@ -5,7 +5,6 @@
     "name": "Iron Sword",
     "description": "A basic sword made of iron.",
     "icon": "sword_iron.png",
-    "rarity": "common",
     "price": 5,
     "bonus": [
         {

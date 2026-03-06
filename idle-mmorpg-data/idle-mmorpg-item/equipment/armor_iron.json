@@ -5,7 +5,6 @@
     "name": "Iron Armor",
     "description": "A simple armor made of iron.",
     "icon": "armor_iron.png",
-    "rarity": "common",
     "price": 50,
     "bonus": [
         {

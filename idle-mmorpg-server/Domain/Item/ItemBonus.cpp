@@ -8,7 +8,7 @@ ItemBonus::ItemBonus() :
     _value( 0.0 ) {
 }
 
-Json::Value ItemBonus::toJson() {
+Json::Value ItemBonus::toJson() const {
     Json::Value root;
     root[ "type" ] = type();
     root[ "category" ] = category();

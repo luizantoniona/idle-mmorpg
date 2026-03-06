@@ -5,7 +5,6 @@
     "name": "Small Shield",
     "description": "A small shield made of wood.",
     "icon": "shield_small.png",
-    "rarity": "common",
     "price": 5,
     "bonus": [
         {

@@ -5,7 +5,6 @@
     "name": "Woodaxe",
     "description": "A normal woodaxe used to get wood.",
     "icon": "woodaxe.png",
-    "rarity": "common",
     "price": 30,
     "bonus": [
         {

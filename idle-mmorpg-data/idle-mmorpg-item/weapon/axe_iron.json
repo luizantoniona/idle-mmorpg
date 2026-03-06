@@ -5,7 +5,6 @@
     "name": "Iron Axe",
     "description": "A simple axe made of iron.",
     "icon": "axe_iron.png",
-    "rarity": "common",
     "price": 5,
     "bonus": [
         {

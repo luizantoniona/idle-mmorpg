@@ -11,7 +11,7 @@ class ItemBonus {
 public:
     ItemBonus();
 
-    Json::Value toJson();
+    Json::Value toJson() const;
 
     std::string type() const;
     void setType( const std::string& type );

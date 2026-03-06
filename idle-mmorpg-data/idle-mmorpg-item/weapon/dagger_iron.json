@@ -5,7 +5,6 @@
     "name": "Iron Dagger",
     "description": "A small dagger made of iron.",
     "icon": "dagger_iron.png",
-    "rarity": "common",
     "price": 5,
     "bonus": [
         {

@@ -5,6 +5,5 @@
     "name": "Iron Ore",
     "description": "A basic metal ore commonly mined from rocks. Used for creating ingots.",
     "icon": "ore_iron.gif",
-    "rarity": "common",
     "price": 2
 }

@@ -5,7 +5,6 @@
     "name": "Fishingrod",
     "description": "A normal fishrod used to catch fishes.",
     "icon": "fishingrod.png",
-    "rarity": "common",
     "price": 30,
     "bonus": [
         {

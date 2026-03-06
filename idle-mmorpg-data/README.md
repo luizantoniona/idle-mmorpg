@@ -45,7 +45,6 @@ Fields:
   "name": "Meat",
   "description": "A simple meat.",
   "icon": "food_meat.gif",
-  "rarity": "common",
   "price": 5,
   "effects": [
     {"type":"vital","category":"health","value":2,"duration":10},
