@@ -44,7 +44,6 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
     item->setCategory( itemJson[ "category" ].asString() );
     item->setName( itemJson[ "name" ].asString() );
     item->setDescription( itemJson[ "description" ].asString() );
-    item->setRarity( itemJson[ "rarity" ].asString() );
     item->setPrice( itemJson[ "price" ].asInt() );
 
     item->setIcon( itemJson[ "icon" ].asString() );
