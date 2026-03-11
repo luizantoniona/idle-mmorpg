@@ -77,7 +77,7 @@ export class CharacterEquipPanel {
         this.sendMessage({
             type: "CHARACTER_EQUIP_ITEM",
             payload: {
-                itemId: item ? item.id : "",
+                item: item ? item.id : "",
                 slot: this.slot
             }
         });

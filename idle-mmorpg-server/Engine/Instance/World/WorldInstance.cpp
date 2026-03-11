@@ -147,7 +147,9 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
         break;
 
         // --- Character ---
-    case MessageReceiverType::CHARACTER_SET_ACTION:
+    case MessageReceiverType::CHARACTER_ACTION_SET:
+    case MessageReceiverType::CHARACTER_ITEM_EQUIP:
+    case MessageReceiverType::CHARACTER_ITEM_USE:
         character->handleMessage( type, payload );
         break;
 

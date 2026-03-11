@@ -22,13 +22,14 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
+    // --- EventBus methods ---
+    void onItemEquipped( const CharacterEvent& event );
+    void onSkillLeveledUp( const CharacterEvent& event );
+
+private:
     Domain::Character& _character;
     Domain::CharacterCombat& _characterCombat;
     Manager::ServerConfigurationManager& _configurationManager;
-
-    // --- EventBus methods ---
-    void onEquipmentEquipped( const CharacterEvent& event );
-    void onSkillLeveledUp( const CharacterEvent& event );
 };
 
 } // namespace Engine

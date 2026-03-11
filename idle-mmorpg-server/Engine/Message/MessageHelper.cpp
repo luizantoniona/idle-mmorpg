@@ -6,15 +6,15 @@ namespace Engine {
 
 MessageReceiverType MessageHelper::stringToType( const std::string& type ) {
     static const std::unordered_map<std::string, MessageReceiverType> map = {
-        { "CHARACTER_SET_ACTION", MessageReceiverType::CHARACTER_SET_ACTION },
+        { "CHARACTER_ACTION_SET", MessageReceiverType::CHARACTER_ACTION_SET },
+        { "CHARACTER_ITEM_EQUIP", MessageReceiverType::CHARACTER_ITEM_EQUIP },
+        { "CHARACTER_ITEM_USE", MessageReceiverType::CHARACTER_ITEM_USE },
 
         { "COMBAT_ROOM_CREATE", MessageReceiverType::COMBAT_ROOM_CREATE },
         { "COMBAT_ROOM_ENTER", MessageReceiverType::COMBAT_ROOM_ENTER },
         { "COMBAT_ROOM_EXIT", MessageReceiverType::COMBAT_ROOM_EXIT },
 
         // REVIEW
-        { "CHARACTER_EQUIP_ITEM", MessageReceiverType::CHARACTER_EQUIP_ITEM },
-        { "CHARACTER_USE_ITEM", MessageReceiverType::CHARACTER_USE_ITEM },
         { "CHARACTER_CAST_SPELL", MessageReceiverType::CHARACTER_CAST_SPELL },
     };
 

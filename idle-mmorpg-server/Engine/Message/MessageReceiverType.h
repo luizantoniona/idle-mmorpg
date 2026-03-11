@@ -7,16 +7,17 @@ enum class MessageReceiverType {
     UNKNOWN,
 
     // --- Character Updates ---
-    CHARACTER_SET_ACTION,
+    CHARACTER_ACTION_SET,
+    CHARACTER_ITEM_EQUIP,
+    CHARACTER_ITEM_USE,
 
-    // --- OLD: Need Review
-    CHARACTER_EQUIP_ITEM,
-    CHARACTER_USE_ITEM,
-    CHARACTER_CAST_SPELL,
-
+    // --- Combat Rooms Updates ---
     COMBAT_ROOM_CREATE,
     COMBAT_ROOM_ENTER,
     COMBAT_ROOM_EXIT,
+
+    // --- OLD: Need Review
+    CHARACTER_CAST_SPELL,
 };
 
 } // namespace Engine

@@ -110,12 +110,7 @@ void CombatController::computeCharactersLoot( std::unordered_map<std::string, Ch
             payload[ "item" ] = itemId;
             payload[ "amount" ] = amount;
 
-            if ( itemId == "coin_copper" || itemId == "coin_silver" || itemId == "coin_gold" ) {
-                receiverInstance->publishEvent( CharacterEventType::WALLET_COIN_GAINED, payload );
-
-            } else {
-                receiverInstance->publishEvent( CharacterEventType::INVENTORY_ITEM_GAINED, payload );
-            }
+            receiverInstance->publishEvent( CharacterEventType::ITEM_GAINED, payload );
         }
     }
 }

@@ -4,9 +4,9 @@
 namespace Engine {
 
 enum class CharacterEventType {
-    EQUIPMENT_ITEM_EQUIPPED,
-
-    INVENTORY_ITEM_GAINED,
+    ITEM_EQUIPPED,
+    ITEM_USED,
+    ITEM_GAINED,
 
     PROGRESSION_EXPERIENCE_GAINED,
     PROGRESSION_LEVEL_GAINED,
@@ -20,8 +20,6 @@ enum class CharacterEventType {
     VITAL_HEALTH_CHANGED,
     VITAL_MANA_CHANGED,
     VITAL_STAMINA_CHANGED,
-
-    WALLET_COIN_GAINED,
 
     UNKNOWN,
 };

@@ -32,9 +32,9 @@ export class CharacterInventoryPanel {
 
     useItem(item: Item | null) {
         this.sendMessage({
-            type: "CHARACTER_USE_ITEM",
+            type: "CHARACTER_ITEM_USE",
             payload: {
-                itemId: item ? item.id : ""
+                item: item ? item.id : ""
             }
         });
     }

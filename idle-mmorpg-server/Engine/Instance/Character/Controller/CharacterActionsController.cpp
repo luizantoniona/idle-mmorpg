@@ -78,7 +78,7 @@ void CharacterActionsController::onTick() {
 
 void CharacterActionsController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
-    case MessageReceiverType::CHARACTER_SET_ACTION: {
+    case MessageReceiverType::CHARACTER_ACTION_SET: {
 
         if ( !payload.isMember( "type" ) ) {
             return;

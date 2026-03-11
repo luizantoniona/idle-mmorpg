@@ -8,13 +8,11 @@
 #include "Controller/CharacterActionsController.h"
 #include "Controller/CharacterCombatController.h"
 #include "Controller/CharacterEffectsController.h"
-#include "Controller/CharacterEquipmentController.h"
-#include "Controller/CharacterInventoryController.h"
+#include "Controller/CharacterItemController.h"
 #include "Controller/CharacterProgressionController.h"
 #include "Controller/CharacterSkillsController.h"
 #include "Controller/CharacterSpellsController.h"
 #include "Controller/CharacterVitalsController.h"
-#include "Controller/CharacterWalletController.h"
 #include "EventBus/CharacterEventBus.h"
 #include "Message/CharacterMessageSender.h"
 
@@ -55,13 +53,11 @@ private:
     std::unique_ptr<CharacterActionsController> _actionsController;
     std::unique_ptr<CharacterCombatController> _combatController;
     std::unique_ptr<CharacterEffectsController> _effectsController;
-    std::unique_ptr<CharacterEquipmentController> _equipmentController;
-    std::unique_ptr<CharacterInventoryController> _inventoryController;
+    std::unique_ptr<CharacterItemController> _itemController;
     std::unique_ptr<CharacterProgressionController> _progressionController;
     std::unique_ptr<CharacterSkillsController> _skillsController;
     std::unique_ptr<CharacterSpellsController> _spellsController;
     std::unique_ptr<CharacterVitalsController> _vitalsController;
-    std::unique_ptr<CharacterWalletController> _walletControler;
 };
 
 } // namespace Engine

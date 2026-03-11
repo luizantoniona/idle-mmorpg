@@ -60,10 +60,9 @@ The server sends events to the client to inform it of changes or updates:
 The client sends events to the server to perform actions or request changes:
 
 **Character Actions**: 
-- CHARACTER_SET_ACTION
-- CHARACTER_EQUIP_ITEM
-- CHARACTER_USE_ITEM
-- CHARACTER_CAST_SPELL
+- CHARACTER_ACTION_SET
+- CHARACTER_ITEM_EQUIP
+- CHARACTER_ITEM_USE
 
 **Combat Room Management**: 
 - COMBAT_ROOM_CREATE
@@ -106,10 +105,31 @@ The client sends events to the server to perform actions or request changes:
 - **CHARACTER_ACTION_UPDATE** – request to start or change an action:
 ```json
 {
-  "type": "CHARACTER_SET_ACTION",
+  "type": "CHARACTER_ACTION_SET",
   "payload": {
     "type": 3,
     "optionStage": 2
+  }
+}
+```
+
+- **CHARACTER_ITEM_EQUIP** - request to equip item:
+```json
+{
+  "type": "CHARACTER_ITEM_EQUIP",
+  "payload": {
+    "item": "iron_sword",
+    "slot": "weapon"
+  }
+}
+```
+
+- **CHARACTER_ITEM_USE** - request to use item:
+```json
+{
+  "type": "CHARACTER_ITEM_USE",
+  "payload": {
+    "item": "food_cheese"
   }
 }
 ```

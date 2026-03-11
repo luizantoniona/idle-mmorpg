@@ -10,13 +10,13 @@ CharacterCombatController::CharacterCombatController( CharacterEventBus& eventBu
     _characterCombat( character.combat() ),
     _configurationManager( configurationManager ) {
 
-    _eventBus.subscribe( CharacterEventType::EQUIPMENT_ITEM_EQUIPPED, [ this ]( const CharacterEvent& event ) {
-            onEquipmentEquipped( event );
-        } );
+    _eventBus.subscribe( CharacterEventType::ITEM_EQUIPPED, [ this ]( const CharacterEvent& event ) {
+        onItemEquipped( event );
+    } );
 
     _eventBus.subscribe( CharacterEventType::SKILL_LEVEL_GAINED, [ this ]( const CharacterEvent& event ) {
-            onSkillLeveledUp( event );
-        } );
+        onSkillLeveledUp( event );
+    } );
 }
 
 void CharacterCombatController::onEnterWorld() {
@@ -33,7 +33,7 @@ void CharacterCombatController::onTick() {
 void CharacterCombatController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
 }
 
-void CharacterCombatController::onEquipmentEquipped( const CharacterEvent& event ) {
+void CharacterCombatController::onItemEquipped( const CharacterEvent& event ) {
     auto& characterEquipment = _character.equipment();
 
     const Domain::Item* characterWeapon = characterEquipment.weapon().item();

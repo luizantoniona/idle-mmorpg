@@ -31,13 +31,9 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, *_character );
     _controllers.push_back( _effectsController.get() );
 
-    // --- Equipment ---
-    _equipmentController = std::make_unique<CharacterEquipmentController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance() );
-    _controllers.push_back( _equipmentController.get() );
-
-    // --- Inventory ---
-    _inventoryController = std::make_unique<CharacterInventoryController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance() );
-    _controllers.push_back( _inventoryController.get() );
+    // --- Equipment --- Inventory --- Wallet ---
+    _itemController = std::make_unique<CharacterItemController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance() );
+    _controllers.push_back( _itemController.get() );
 
     // --- Progression ---
     _progressionController = std::make_unique<CharacterProgressionController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
@@ -54,10 +50,6 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     // --- Vitals ---
     _vitalsController = std::make_unique<CharacterVitalsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
     _controllers.push_back( _vitalsController.get() );
-
-    // --- Wallet ---
-    _walletControler = std::make_unique<CharacterWalletController>( _eventBus, _messageSender, *_character );
-    _controllers.push_back( _walletControler.get() );
 }
 
 std::string CharacterInstance::sessionId() const {
@@ -108,8 +100,12 @@ void CharacterInstance::onTick() {
 
 void CharacterInstance::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
-    case MessageReceiverType::CHARACTER_SET_ACTION:
+    case MessageReceiverType::CHARACTER_ACTION_SET:
         _actionsController->handleMessage( type, payload );
+        break;
+    case MessageReceiverType::CHARACTER_ITEM_EQUIP:
+    case MessageReceiverType::CHARACTER_ITEM_USE:
+        _itemController->handleMessage( type, payload );
         break;
     default:
         break;

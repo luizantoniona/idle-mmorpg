@@ -47,7 +47,7 @@ export class CharacterActionPanel {
 
         const option = action.options[0];
         this.sendMessage({
-            type: 'CHARACTER_SET_ACTION',
+            type: 'CHARACTER_ACTION_SET',
             payload: {
                 type: action.type,
                 optionStage: option.stage
@@ -61,7 +61,7 @@ export class CharacterActionPanel {
         }
 
         this.sendMessage({
-            type: 'CHARACTER_SET_ACTION',
+            type: 'CHARACTER_ACTION_SET',
             payload: {
                 type: this.selectedActionType,
                 optionStage: option.stage
