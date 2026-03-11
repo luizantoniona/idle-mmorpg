@@ -353,20 +353,6 @@ The following systems existed in the OLD architecture and need to be fully imple
 
 Based on analysis of the current server architecture, here are promising features to enhance the game:
 
-### 1. **Passive Income Streams** (Core Idle Mechanic)
-- Implement "AFK gathering" - characters continue gathering resources when offline
-- Add passive skill training during downtime
-- Create production facilities (farms, mines) that generate resources over time
-- Implement market trading bot for AFK profit
-- **Implementation Location:** New PassiveIncomeController in CharacterInstance
-
-### 2. **Prestige/Reincarnation System**
-- Allow players to reset character progression for permanent bonuses
-- Implement new game+ content with enhanced rewards
-- Add prestige shop with unique items/bonuses
-- Create achievement milestones that track prestige runs
-- **Implementation Location:** New PrestigeController + database tables
-
 ### 3. **Guild/Faction System**
 - Create player guilds with shared treasury
 - Implement guild vs guild warfare/leaderboards
@@ -402,20 +388,6 @@ Based on analysis of the current server architecture, here are promising feature
 - Add elemental damage variations
 - **Implementation Location:** Extend equipment system
 
-### 8. **Minigame System**
-- Create optional mini-games for resource farming acceleration
-- Add gambling/casino mechanics with resource costs
-- Implement dungeon runs with time-based challenges
-- Create puzzle challenges for bonus rewards
-- **Implementation Location:** New MinigameController + separate endpoints
-
-### 9. **Seasonal Events & Battle Pass**
-- Implement limited-time seasonal events
-- Create battle pass progression system
-- Add seasonal exclusive cosmetics and rewards
-- Implement rotating stage challenges
-- **Implementation Location:** New SeasonalEventController + configuration
-
 ### 10. **Dynamic World Events**
 - Server-wide events affecting all players
 - Invasions requiring collective defense
@@ -430,14 +402,6 @@ Based on analysis of the current server architecture, here are promising feature
 - PvP rating system
 - Achievement-based rankings
 - **Implementation Location:** New LeaderboardManager + database queries
-
-### 12. **Loot System Enhancement**
-- Implement progressive difficulty with scaling loot
-- Add rare/epic/legendary item rarities
-- Create item affixes and randomization
-- Implement loot specialization (class-based rewards)
-- Add guaranteed loot thresholds
-- **Implementation Location:** Enhance existing LootSystem
 
 ### 13. **PvP Arena System**
 - 1v1 ranked matches
@@ -454,14 +418,7 @@ Based on analysis of the current server architecture, here are promising feature
 - Dungeon weekly lockouts and reset mechanics
 - **Implementation Location:** New DungeonController + enhanced StageController
 
-### 15. **Mentorship/Blessing System**
-- Allow veteran players to aid new players
-- Implement mentor rewards and recognition
-- Create blessing bonuses for mentored players
-- Add level sync for scaling content in groups
-- **Implementation Location:** New MentorshipController
-
-### 16. **Prestige Cosmetics**
+### 16. **Cosmetics**
 - Implement cosmetic-only items (skins, pets skins, effects)
 - Create transmog system for equipment appearance
 - Add particle effect customization
@@ -482,64 +439,12 @@ Based on analysis of the current server architecture, here are promising feature
 - Price suggestion/market analysis
 - **Implementation Location:** New MarketplaceController + database
 
-### 19. **Prophecy/Prediction System**
-- Implement fortune telling mechanics
-- Create randomized future rewards
-- Add decision trees with outcomes
-- Implement cosmic event predictions
-- **Implementation Location:** New ProphecyController
-
 ### 20. **Enchantment System**
 - Refine equipment with rare materials
 - Create enchantment leveling progression
 - Implement failed enchantment penalties/safeguards
 - Add specific enchantment effects per slot
 - **Implementation Location:** New EnchantmentController
-
----
-
----
-
-## 📊 Priority Matrix
-
-### Immediate (This Sprint)
-1. ✅ **LEGACY MIGRATION - Phase 1:**
-   - Fix character vitals regeneration system (health, mana, stamina)
-   - Implement combat experience distribution to skills
-   - Activate gathering action effects
-   - Activate regenerative action effects
-2. Define chat system architecture (BLOCKING multiple features)
-3. Create stage objectives system
-4. Create CharacterTradeController for stage-based trades
-
-### Short Term (1-2 Weeks)
-1. ✅ **LEGACY MIGRATION - Phase 2:**
-   - Complete spell cooling and hotkey management
-   - Implement spell damage computation
-   - Implement block/evasion mechanics
-   - Implement loot generation and distribution
-2. Complete trade system refactoring
-3. Finalize weapon attack duration calculations
-4. Extend server configuration system
-
-### Medium Term (2-4 Weeks)
-1. ✅ **LEGACY MIGRATION - Phase 3:**
-   - Implement milestone detection and bonus application
-   - Skill-based equipment modifier computation
-   - Status effect system completion
-   - Spell cooldown tracking
-2. Implement leaderboard system
-3. Create crafting/alchemy system
-4. Add prestige/reincarnation mechanics
-
-### Long Term (1+ Month)
-1. ✅ **LEGACY MIGRATION - Phase 4:**
-   - Review and optimize all completed migrations
-   - Full test coverage for all controllers
-   - Performance optimization
-2. Guild/faction system
-3. PvP arena system
-4. Dungeon/raid system
 
 ---
 
@@ -570,60 +475,8 @@ Based on analysis of the current server architecture, here are promising feature
 | CharacterTradeController | Stage-based NPC trading | HIGH |
 | CharacterChatController | Multi-channel chat system | HIGH (pending arch decision) |
 | CharacterObjectiveController | Stage objectives & progression | HIGH |
-| CharacterPassiveIncomeController | AFK gathering, passive bonuses | MEDIUM |
-| CharacterPrestigeController | Prestige/reincarnation system | MEDIUM |
 | CharacterCraftingController | Crafting & alchemy | MEDIUM |
-| CharacterMiniGameController | Mini-game participation | MEDIUM |
 | CharacterLeaderboardController | Ranking & statistics tracking | MEDIUM |
 | CharacterPvPController | Arena & PvP matchmaking | MEDIUM-LOW |
 | CharacterGuildController | Guild membership & perks | MEDIUM-LOW |
 | CharacterCompanionController | Pet/companion management | LOW |
-| CharacterBattlePassController | Season pass progression | LOW |
-
----
-
-## 📝 Notes
-
-- All TODOs from source code have been documented in the corresponding sections
-- **LEGACY MIGRATION:** 11 out of 10 OLD systems partially mapped to 11 controllers; 1 system (Trade) needs complete redesign
-- Chat system architecture decision is BLOCKING several dependent features
-- Trade and Quest systems are in active refactoring - existing code should not be relied upon
-- Configuration system needs significant expansion before proper game balancing
-- Server architecture (CharacterInstance + EventBus) is solid foundation for new systems
-- **Controller Completion:** Focus should be on completing existing controllers before creating new ones
-- **EventBus Integration:** All controllers should publish relevant events for the system to be cohesive
-
----
-
-## � Controller Code Review Summary (March 4, 2026)
-
-**Review Findings:**
-- **Total Controllers Reviewed:** 11 Character controllers + 3 Stage/Combat controllers
-- **Controllers with TODOs:** 8 controllers have active TODOs in code
-- **EventBus Integration:** 5 controllers have EventBus subscriptions, but only 1 publishes events
-- **Critical Gaps:** Regeneration system (CharacterVitalsController) is 90% commented out
-- **Best Implemented:** CharacterProgressionController and CharacterSkillsController have most complete logic
-- **Most Incomplete:** CharacterEffectsController and CharacterSpellsController lack core functionality
-
-**Key Observations:**
-- Controllers follow consistent architecture with onEnterWorld/onTick/handleMessage pattern
-- EventBus is underutilized - most state changes don't publish events
-- ConfigurationManager integration is missing in many places (hardcoded values)
-- Legacy migration is ~60% complete based on OLD system features
-- Combat system has solid damage calculation but missing experience/loot distribution
-
-**Immediate Action Items:**
-1. Uncomment and fix CharacterVitalsController regeneration (HIGH PRIORITY)
-2. Implement CombatController experience distribution
-3. Add EventBus event publishing to all controllers
-4. Complete CharacterActionsController gathering effects
-5. Integrate configuration values instead of hardcoded numbers
-
----
-
-## �📞 Contact & Questions
-
-For questions about this roadmap, refer to:
-- [CharacterEventBus Documentation](documentation/CharacterEventBus.md)
-- [API Documentation](documentation/API.md)
-- [WebSocket Documentation](documentation/WebSocket.MD)
