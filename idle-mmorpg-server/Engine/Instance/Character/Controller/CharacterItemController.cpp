@@ -219,30 +219,27 @@ void CharacterItemController::handleUseItem( const Json::Value& payload ) {
         return;
     }
 
-    for ( const Domain::ItemEffect& itemEffect : item->effects() ) {
-        Domain::CharacterEffect effect;
-
-        effect.setSource( itemId );
-        effect.setSourceName( item->name() );
-        effect.setType( itemEffect.type() );
-        effect.setCategory( itemEffect.category() );
-        effect.setValue( itemEffect.value() );
-        effect.setDuration( itemEffect.duration() );
-        effect.setCounter( 0 );
-
-        Json::Value payload;
-        payload[ "effect" ] = effect.toJson();
-        _eventBus.publish( CharacterEvent( CharacterEventType::EFFECT_APPLY, payload ) );
+    if ( item->effects().empty() ) {
+        return;
     }
 
     _characterInventory.removeItem( itemId, 1 );
+
+    Json::Value eventPayload;
+    eventPayload[ "item" ] = itemId;
+    _eventBus.publish( CharacterEvent( CharacterEventType::EFFECT_APPLY, eventPayload ) );
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _characterInventory.toJson() );
 }
 
 void CharacterItemController::onItemGained( const CharacterEvent& event ) {
-    std::string itemId = event.payload()[ "item" ].asString();
-    int amount = event.payload()[ "amount" ].asInt();
+    const Json::Value& payload = event.payload();
+    if ( !payload.isMember( "item" ) || !payload.isMember( "amount" ) ) {
+        return;
+    }
+
+    const std::string itemId = payload[ "item" ].asString();
+    const int amount = payload[ "amount" ].asInt();
 
     if ( itemId == "coin_copper" ) {
         _characterWallet.setCopper( _characterWallet.copper() + amount );

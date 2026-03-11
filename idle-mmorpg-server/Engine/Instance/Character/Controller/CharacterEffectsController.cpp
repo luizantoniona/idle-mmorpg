@@ -3,9 +3,14 @@
 namespace Engine {
 
 CharacterEffectsController::CharacterEffectsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
-                                                        Domain::Character& character ) :
+                                                        Domain::Character& character,
+                                                        Manager::ItemManager& itemManager,
+                                                        Manager::ServerConfigurationManager& configurationManager ) :
     CharacterController( eventBus, messageSender ),
-    _characterEffects( character.effects() ) {
+    _characterEffects( character.effects() ),
+    _itemManager( itemManager ),
+    _configurationManager( configurationManager ),
+    _tickRate( configurationManager.tickRate() ) {
 
     _eventBus.subscribe( CharacterEventType::EFFECT_APPLY, [ this ]( const CharacterEvent& event ) {
         onApplyEffect( event );
@@ -20,21 +25,83 @@ void CharacterEffectsController::onLeaveWorld() {
 }
 
 void CharacterEffectsController::onTick() {
+
+    auto& effects = _characterEffects.effects();
+
+    if ( effects.empty() ) {
+        return;
+    }
+
+    std::vector<Domain::CharacterEffect> expiredEffects;
+    bool effectsChanged = false;
+
+    for ( auto& effect : effects ) {
+        effect.setCounter( effect.counter() + 1 );
+
+        if ( effect.counter() % _tickRate == 0 ) {
+
+            if ( effect.type() == "vital" ) {
+
+                Json::Value payload;
+                payload[ "value" ] = effect.value();
+
+                if ( effect.category() == "health" ) {
+                    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_HEALTH_CHANGED, payload ) );
+
+                } else if ( effect.category() == "mana" ) {
+                    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MANA_CHANGED, payload ) );
+
+                } else if ( effect.category() == "stamina" ) {
+                    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_STAMINA_CHANGED, payload ) );
+                }
+            }
+        }
+
+        if ( effect.counter() >= effect.duration() ) {
+            expiredEffects.push_back( effect );
+        }
+    }
+
+    if ( !expiredEffects.empty() ) {
+        for ( const auto& effect : expiredEffects ) {
+            _characterEffects.removeEffect( effect );
+        }
+
+        effectsChanged = true;
+    }
+
+    if ( effectsChanged ) {
+        _messageSender.sendMessage(
+            MessageSenderType::CHARACTER_EFFECTS,
+            _characterEffects.toJson() );
+    }
 }
 
 void CharacterEffectsController::onApplyEffect( const CharacterEvent& event ) {
-    Json::Value payload = event.payload();
+    const Json::Value& payload = event.payload();
+    if ( !payload.isMember( "item" ) ) {
+        return;
+    }
 
-    Domain::CharacterEffect effect;
-    effect.setSource( payload[ "effect" ][ "source" ].asString() );
-    effect.setSourceName( payload[ "effect" ][ "sourceName" ].asString() );
-    effect.setType( payload[ "effect" ][ "type" ].asString() );
-    effect.setCategory( payload[ "effect" ][ "category" ].asString() );
-    effect.setValue( payload[ "effect" ][ "value" ].asDouble() );
-    effect.setDuration( payload[ "effect" ][ "duration" ].asInt() );
-    effect.setCounter( payload[ "effect" ][ "counter" ].asInt() );
+    const std::string itemId = payload[ "item" ].asString();
 
-    _characterEffects.addEffect( effect );
+    const Domain::Item* itemPointer = _itemManager.itemById( itemId );
+    if ( !itemPointer ) {
+        return;
+    }
+
+    for ( const Domain::ItemEffect& itemEffect : itemPointer->effects() ) {
+        Domain::CharacterEffect effect;
+        effect.setSource( itemId );
+        effect.setSourceName( itemPointer->name() );
+        effect.setType( itemEffect.type() );
+        effect.setCategory( itemEffect.category() );
+        effect.setValue( itemEffect.value() );
+        effect.setDuration( itemEffect.duration() );
+        effect.setCounter( 0 );
+
+        _characterEffects.addEffect( effect );
+    }
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_EFFECTS, _characterEffects.toJson() );
 }

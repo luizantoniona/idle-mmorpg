@@ -20,6 +20,7 @@ CharacterCombatController::CharacterCombatController( CharacterEventBus& eventBu
 }
 
 void CharacterCombatController::onEnterWorld() {
+    recomputeCombatAttributes();
 }
 
 void CharacterCombatController::onLeaveWorld() {

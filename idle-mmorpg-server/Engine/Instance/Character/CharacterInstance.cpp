@@ -31,14 +31,6 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     _actionsController = std::make_unique<CharacterActionsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ActionManager>::instance() );
     _controllers.push_back( _actionsController.get() );
 
-    // --- Combat ---
-    _combatController = std::make_unique<CharacterCombatController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
-    _controllers.push_back( _combatController.get() );
-
-    // --- Effects ---
-    _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, *_character );
-    _controllers.push_back( _effectsController.get() );
-
     // --- Equipment --- Inventory --- Wallet ---
     _itemController = std::make_unique<CharacterItemController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance() );
     _controllers.push_back( _itemController.get() );
@@ -50,6 +42,14 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     // --- Vitals ---
     _vitalsController = std::make_unique<CharacterVitalsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
     _controllers.push_back( _vitalsController.get() );
+
+    // --- Combat ---
+    _combatController = std::make_unique<CharacterCombatController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
+    _controllers.push_back( _combatController.get() );
+
+    // --- Effects ---
+    _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance(), Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
+    _controllers.push_back( _effectsController.get() );
 }
 
 std::string CharacterInstance::sessionId() const {
