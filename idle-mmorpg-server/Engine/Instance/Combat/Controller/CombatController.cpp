@@ -75,42 +75,31 @@ void CombatController::computeCharactersLoot( std::unordered_map<std::string, Ch
         return;
     }
 
-    std::vector<std::string> sessionIds;
-    sessionIds.reserve( characters.size() );
-
-    for ( const auto& [ sessionId, _ ] : characters ) {
-        sessionIds.push_back( sessionId );
-    }
-
     for ( const auto& creature : creatures ) {
 
-        for ( const auto& lootEntry : creature->loot() ) {
+        for ( const auto& [ sessionId, receiverInstance ] : characters ) {
 
-            double roll = static_cast<double>( rand() ) / RAND_MAX;
+            for ( const auto& lootEntry : creature->loot() ) {
 
-            if ( roll > lootEntry.chance() ) {
-                continue;
+                double roll = static_cast<double>( rand() ) / RAND_MAX;
+
+                if ( roll > lootEntry.chance() ) {
+                    continue;
+                }
+
+                int amount = lootEntry.minAmount() + ( rand() % ( lootEntry.maxAmount() - lootEntry.minAmount() + 1 ) );
+
+                if ( amount <= 0 ) {
+                    continue;
+                }
+
+                const std::string& itemId = lootEntry.id();
+
+                Json::Value payload;
+                payload[ "item" ] = itemId;
+                payload[ "amount" ] = amount;
+                receiverInstance->publishEvent( CharacterEventType::ITEM_GAINED, payload );
             }
-
-            const std::string& randomSession = sessionIds[ rand() % sessionIds.size() ];
-
-            CharacterInstance* receiverInstance = characters.at( randomSession );
-
-            auto& receiver = receiverInstance->character();
-
-            int amount = lootEntry.minAmount() + ( rand() % ( lootEntry.maxAmount() - lootEntry.minAmount() + 1 ) );
-
-            if ( amount <= 0 ) {
-                continue;
-            }
-
-            const std::string itemId = lootEntry.id();
-
-            Json::Value payload;
-            payload[ "item" ] = itemId;
-            payload[ "amount" ] = amount;
-
-            receiverInstance->publishEvent( CharacterEventType::ITEM_GAINED, payload );
         }
     }
 }
