@@ -1,4 +1,5 @@
 import { ItemBonus } from "./item-bonus.model";
+import { ItemCombat } from "./item-combat.model";
 import { ItemEffect } from "./item-effect.model";
 
 export type Item = {
@@ -8,9 +9,9 @@ export type Item = {
     category: string;
     name: string;
     description: string;
-    rarity: string;
     icon: string;
     price: number;
+    combat: ItemCombat;
     bonuses: ItemBonus[];
     effects: ItemEffect[];
 };

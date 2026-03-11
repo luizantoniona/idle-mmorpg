@@ -1,11 +1,17 @@
 {
     "id": "food_meat",
-    "type": "consumable",
-    "category": "food",
+    "type": "CONSUMABLE",
+    "category": "FOOD",
     "name": "Meat",
     "description": "A simple meat.",
     "icon": "food_meat.gif",
     "price": 5,
+    "combat": {
+        "attack": 0.0,
+        "attackSpeed": 0.0,
+        "defense": 0.0
+    },
+    "bonus": [],
     "effects": [
         {
             "type": "vital",

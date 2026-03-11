@@ -169,21 +169,19 @@ std::vector<Domain::SkillType> CharacterActionsController::combatSkill( Domain::
             return Domain::SkillType::FIST_MASTERY;
         }
 
-        const std::string& category = item->category();
-
-        if ( category == "sword" ) {
-            return Domain::SkillType::SWORD_MASTERY;
-        }
-
-        if ( category == "axe" ) {
+        switch ( item->category() ) {
+        case Domain::ItemCategory::AXE:
             return Domain::SkillType::AXE_MASTERY;
-        }
 
-        if ( category == "dagger" ) {
+        case Domain::ItemCategory::DAGGER:
             return Domain::SkillType::DAGGER_MASTERY;
-        }
 
-        return Domain::SkillType::UNKNOWN;
+        case Domain::ItemCategory::SWORD:
+            return Domain::SkillType::SWORD_MASTERY;
+
+        default:
+            return Domain::SkillType::UNKNOWN;
+        }
     };
 
     auto getSkillForOffhand = []( const Domain::Item* item ) -> Domain::SkillType {
@@ -191,13 +189,13 @@ std::vector<Domain::SkillType> CharacterActionsController::combatSkill( Domain::
             return Domain::SkillType::UNKNOWN;
         }
 
-        const std::string& category = item->category();
-
-        if ( category == "shield" ) {
+        switch ( item->category() ) {
+        case Domain::ItemCategory::SHIELD:
             return Domain::SkillType::SHIELD_MASTERY;
-        }
 
-        return Domain::SkillType::UNKNOWN;
+        default:
+            return Domain::SkillType::UNKNOWN;
+        }
     };
 
     Domain::SkillType weaponSkill = getSkillForWeapon( weapon );

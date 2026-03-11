@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <Domain/Skill/SkillType.h>
+#include "SkillType.h"
 
 namespace Domain {
 

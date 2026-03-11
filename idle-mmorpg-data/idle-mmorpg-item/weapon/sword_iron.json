@@ -1,7 +1,7 @@
 {
     "id": "sword_iron",
-    "type": "weapon",
-    "category": "sword",
+    "type": "WEAPON",
+    "category": "SWORD",
     "name": "Iron Sword",
     "description": "A basic sword made of iron.",
     "icon": "sword_iron.png",

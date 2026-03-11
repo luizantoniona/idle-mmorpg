@@ -1,11 +1,17 @@
 {
     "id": "food_cheese",
-    "type": "consumable",
-    "category": "food",
+    "type": "CONSUMABLE",
+    "category": "FOOD",
     "name": "Cheese",
     "description": "A simple chunk of cheese. Smells... questionable.",
     "icon": "food_cheese.gif",
     "price": 5,
+    "combat": {
+        "attack": 0.0,
+        "attackSpeed": 0.0,
+        "defense": 0.0
+    },
+    "bonus": [],
     "effects": [
         {
             "type": "vital",

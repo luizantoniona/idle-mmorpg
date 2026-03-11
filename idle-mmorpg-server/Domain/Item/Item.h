@@ -7,7 +7,11 @@
 #include <json/json.h>
 
 #include "ItemBonus.h"
+#include "ItemCombat.h"
 #include "ItemEffect.h"
+
+#include "ItemCategory.h"
+#include "ItemType.h"
 
 namespace Domain {
 
@@ -20,11 +24,11 @@ public:
     std::string id() const;
     void setId( const std::string& id );
 
-    std::string type() const;
-    void setType( const std::string& type );
+    ItemType type() const;
+    void setType( ItemType type );
 
-    std::string category() const;
-    void setCategory( const std::string& category );
+    ItemCategory category() const;
+    void setCategory( ItemCategory category );
 
     std::string name() const;
     void setName( const std::string& name );
@@ -38,6 +42,9 @@ public:
     int price() const;
     void setPrice( int price );
 
+    ItemCombat combat() const;
+    void setCombat( const ItemCombat& combat );
+
     std::vector<ItemBonus> bonuses() const;
     void setBonuses( const std::vector<ItemBonus>& bonuses );
     void addBonus( const ItemBonus& bonus );
@@ -48,12 +55,14 @@ public:
 
 private:
     std::string _id;
-    std::string _type;
-    std::string _category;
+    ItemType _type;
+    ItemCategory _category;
     std::string _name;
     std::string _description;
     std::string _icon;
     int _price;
+
+    ItemCombat _combat;
     std::vector<ItemBonus> _bonuses;
     std::vector<ItemEffect> _effects;
 };

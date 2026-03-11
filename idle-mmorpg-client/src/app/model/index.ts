@@ -20,7 +20,9 @@ export type { CreatureCombat } from "./creature/creature-combat.model";
 export type { CreatureVitals } from "./creature/creature-vitals.model";
 
 export type { Item } from "./item/item.model";
+export type { ItemCombat } from "./item/item-combat.model";
 export type { ItemBonus } from "./item/item-bonus.model";
+export type { ItemEffect } from "./item/item-effect.model";
 
 export type { Stage } from "./stage/stage.model";
 

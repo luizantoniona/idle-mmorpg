@@ -1,9 +1,16 @@
 {
     "id": "ore_iron",
-    "type": "diverse",
-    "category": "ore",
+    "type": "DIVERSE",
+    "category": "ORE",
     "name": "Iron Ore",
     "description": "A basic metal ore commonly mined from rocks. Used for creating ingots.",
     "icon": "ore_iron.gif",
-    "price": 2
+    "price": 2,
+    "combat": {
+        "attack": 0.0,
+        "attackSpeed": 0.0,
+        "defense": 0.0
+    },
+    "bonus": [],
+    "effects": []
 }

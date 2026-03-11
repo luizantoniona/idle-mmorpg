@@ -1,16 +1,16 @@
 {
     "id": "axe_iron",
-    "type": "weapon",
-    "category": "axe",
+    "type": "WEAPON",
+    "category": "AXE",
     "name": "Iron Axe",
     "description": "A simple axe made of iron.",
     "icon": "axe_iron.png",
     "price": 5,
-    "bonus": [
-        {
-            "type": "combat",
-            "category": "attack",
-            "value": 1
-        }
-    ]
+    "combat": {
+        "attack": 1.0,
+        "attackSpeed": 1.5,
+        "defense": 0.0
+    },
+    "bonus": [],
+    "effects": []
 }

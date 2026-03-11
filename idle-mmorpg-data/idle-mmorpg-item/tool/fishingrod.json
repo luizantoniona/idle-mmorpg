@@ -1,16 +1,22 @@
 {
     "id": "fishingrod",
-    "type": "tool",
-    "category": "fishingrod",
+    "type": "TOOL",
+    "category": "FISHINGROD",
     "name": "Fishingrod",
     "description": "A normal fishrod used to catch fishes.",
     "icon": "fishingrod.png",
     "price": 30,
+    "combat": {
+        "attack": 0.0,
+        "attackSpeed": 0.0,
+        "defense": 0.0
+    },
     "bonus": [
         {
             "type": "skill",
             "category": "FISHING",
             "value": 1
         }
-    ]
+    ],
+    "effects": []
 }

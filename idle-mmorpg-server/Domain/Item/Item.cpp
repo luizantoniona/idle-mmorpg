@@ -1,28 +1,33 @@
 #include "Item.h"
 
+#include "ItemHelper.h"
+
 namespace Domain {
 
 Item::Item() :
     _id( "" ),
-    _type( "" ),
-    _category( "" ),
+    _type( ItemType::UNKNOWN ),
+    _category( ItemCategory::UNKNOWN ),
     _name( "" ),
     _description( "" ),
     _icon( "" ),
     _price( 0 ),
+    _combat(),
     _bonuses( {} ),
     _effects( {} ) {
 }
 
 Json::Value Item::toJson() const {
     Json::Value root;
-    root[ "id" ] = id();
-    root[ "type" ] = type();
-    root[ "category" ] = category();
-    root[ "name" ] = name();
-    root[ "description" ] = description();
-    root[ "icon" ] = icon();
-    root[ "price" ] = price();
+    root[ "id" ] = _id;
+    root[ "type" ] = ItemHelper::typeToString( _type );
+    root[ "category" ] = ItemHelper::categoryToString( _category );
+    root[ "name" ] = _name;
+    root[ "description" ] = _description;
+    root[ "icon" ] = _icon;
+    root[ "price" ] = _price;
+
+    root[ "combat" ] = _combat.toJson();
 
     for ( const ItemBonus& bonus : _bonuses ) {
         root[ "bonuses" ].append( bonus.toJson() );
@@ -43,19 +48,19 @@ void Item::setId( const std::string& id ) {
     _id = id;
 }
 
-std::string Item::type() const {
+ItemType Item::type() const {
     return _type;
 }
 
-void Item::setType( const std::string& type ) {
+void Item::setType( ItemType type ) {
     _type = type;
 }
 
-std::string Item::category() const {
+ItemCategory Item::category() const {
     return _category;
 }
 
-void Item::setCategory( const std::string& category ) {
+void Item::setCategory( ItemCategory category ) {
     _category = category;
 }
 
@@ -89,6 +94,14 @@ int Item::price() const {
 
 void Item::setPrice( int price ) {
     _price = price;
+}
+
+ItemCombat Item::combat() const {
+    return _combat;
+}
+
+void Item::setCombat( const ItemCombat& combat ) {
+    _combat = combat;
 }
 
 std::vector<ItemBonus> Item::bonuses() const {
