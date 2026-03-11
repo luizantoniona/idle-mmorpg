@@ -23,15 +23,17 @@ public:
     void onTick() override;
 
 private:
-    Domain::CharacterSkills& _characterSkills;
-    Manager::SkillManager& _skillManager;
-
     void applyExperience( Domain::CharacterSkill* characterSkill, int xpGained );
     void applyMilestone( Domain::CharacterSkill* characterSkill );
     void applyMilestoneBonus( const Domain::SkillMilestoneBonus& milestoneBonus );
 
     // --- EventBus methods ---
     void onSkillExperienceGained( const CharacterEvent& event );
+    void onItemEquipped( const CharacterEvent& event );
+
+private:
+    Domain::CharacterSkills& _characterSkills;
+    Manager::SkillManager& _skillManager;
 };
 
 } // namespace Engine

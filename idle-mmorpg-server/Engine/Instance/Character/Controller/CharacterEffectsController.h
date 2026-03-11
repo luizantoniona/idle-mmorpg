@@ -18,6 +18,10 @@ public:
     void onTick() override;
 
 private:
+    // --- EventBus methods ---
+    void onApplyEffect( const CharacterEvent& event );
+
+private:
     Domain::CharacterEffects& _characterEffects;
 };
 

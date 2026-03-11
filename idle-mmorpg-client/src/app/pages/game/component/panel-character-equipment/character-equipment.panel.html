@@ -1,59 +1,59 @@
 <app-panel>
     <nav class="tabs">
-        <app-button text="Equip" (click)="setTab('equipment')" [disabled]="activeTab === 'equipment'"></app-button>
-        <app-button text="Tools" (click)="setTab('tools')" [disabled]="activeTab === 'tools'"></app-button>
-        <app-button text="Wallet" (click)="setTab('wallet')" [disabled]="activeTab === 'wallet'"></app-button>
+        <app-button text="Equip" (click)="setTab('EQUIPMENT')" [disabled]="activeTab === 'EQUIPMENT'"></app-button>
+        <app-button text="Tools" (click)="setTab('TOOLS')" [disabled]="activeTab === 'TOOLS'"></app-button>
+        <app-button text="Wallet" (click)="setTab('WALLET')" [disabled]="activeTab === 'WALLET'"></app-button>
     </nav>
 
-    @if(activeTab == 'equipment'){
+    @if(activeTab == 'EQUIPMENT'){
     @if(character.equipment){
     <div class="equipment-layout">
-        <app-item class="amulet" [item]="character.equipment.amulet!" [slot]="'amulet'" mode="slot"
+        <app-item class="amulet" [item]="character.equipment.amulet!" [slot]="'AMULET'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="ring" [item]="character.equipment.ring!" [slot]="'ring'" mode="slot"
+        <app-item class="ring" [item]="character.equipment.ring!" [slot]="'RING'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="helmet" [item]="character.equipment.helmet!" [slot]="'helmet'" mode="slot"
+        <app-item class="helmet" [item]="character.equipment.helmet!" [slot]="'HELMET'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="armor" [item]="character.equipment.armor!" [slot]="'armor'" mode="slot"
+        <app-item class="armor" [item]="character.equipment.armor!" [slot]="'ARMOR'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="leg" [item]="character.equipment.leg!" [slot]="'leg'" mode="slot"
+        <app-item class="leg" [item]="character.equipment.leg!" [slot]="'LEG'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="boot" [item]="character.equipment.boot!" [slot]="'boot'" mode="slot"
+        <app-item class="boot" [item]="character.equipment.boot!" [slot]="'BOOT'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="weapon" [item]="character.equipment.weapon!" [slot]="'weapon'" mode="slot"
+        <app-item class="weapon" [item]="character.equipment.weapon!" [slot]="'WEAPON'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item class="offhand" [item]="character.equipment.offhand!" [slot]="'offhand'" mode="slot"
+        <app-item class="offhand" [item]="character.equipment.offhand!" [slot]="'OFFHAND'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
     </div>
     }
     }
 
-    @if(activeTab == 'tools'){
+    @if(activeTab == 'TOOLS'){
     @if(character.equipment){
     <div class="tools-layout">
-        <app-item [item]="character.equipment.pickaxe!" [slot]="'pickaxe'" mode="slot"
+        <app-item [item]="character.equipment.pickaxe!" [slot]="'PICKAXE'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item [item]="character.equipment.woodaxe!" [slot]="'woodaxe'" mode="slot"
+        <app-item [item]="character.equipment.woodaxe!" [slot]="'WOODAXE'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item [item]="character.equipment.fishingrod!" [slot]="'fishingrod'" mode="slot"
+        <app-item [item]="character.equipment.fishingrod!" [slot]="'FISHINGROD'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
 
-        <app-item [item]="character.equipment.sickle!" [slot]="'sickle'" mode="slot"
+        <app-item [item]="character.equipment.sickle!" [slot]="'SICKLE'" mode="slot"
             (equip)="onSlotClick($event)"></app-item>
     </div>
     }
     }
 
-    @if(activeTab == 'wallet'){
+    @if(activeTab == 'WALLET'){
     @if(character.wallet){
     <div class="wallet-layout">
         <div class="copper">

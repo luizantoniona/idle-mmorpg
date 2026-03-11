@@ -25,9 +25,9 @@ import { Character } from "../../../../model";
 export class CharacterEquipmentPanel {
     @Input() character!: Character;
 
-    activeTab: 'equipment' | 'tools' | 'wallet' = 'equipment';
+    activeTab: 'EQUIPMENT' | 'TOOLS' | 'WALLET' = 'EQUIPMENT';
 
-    setTab(tab: 'equipment' | 'tools' | 'wallet') {
+    setTab(tab: 'EQUIPMENT' | 'TOOLS' | 'WALLET') {
         this.activeTab = tab;
     }
 

@@ -22,6 +22,8 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
+    void recomputeCombatAttributes();
+
     // --- EventBus methods ---
     void onItemEquipped( const CharacterEvent& event );
     void onSkillLeveledUp( const CharacterEvent& event );

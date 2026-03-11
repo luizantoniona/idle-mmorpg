@@ -14,6 +14,10 @@ CharacterSkillsController::CharacterSkillsController( CharacterEventBus& eventBu
     _eventBus.subscribe( CharacterEventType::SKILL_EXPERIENCE_GAINED, [ this ]( const CharacterEvent& event ) {
         onSkillExperienceGained( event );
     } );
+
+    _eventBus.subscribe( CharacterEventType::ITEM_EQUIPPED, [ this ]( const CharacterEvent& event ) {
+        onItemEquipped( event );
+    } );
 }
 
 void CharacterSkillsController::onEnterWorld() {
@@ -154,6 +158,10 @@ void CharacterSkillsController::onSkillExperienceGained( const CharacterEvent& e
     applyExperience( characterSkill, xpGained );
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_SKILLS, _characterSkills.toJson() );
+}
+
+void CharacterSkillsController::onItemEquipped( const CharacterEvent& event ) {
+    // TODO: Apply item bonus on skills in the future
 }
 
 } // namespace Engine

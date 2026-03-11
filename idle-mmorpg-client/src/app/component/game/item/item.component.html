@@ -35,7 +35,7 @@
         </div>
         }
 
-        @if(item.type === "consumable" && item.effects && item.effects.length){
+        @if(item.type === "CONSUMABLE" && item.effects && item.effects.length){
         <div class="effects-list">
             @for(effect of item.effects; track effect.category){
             <div class="effect-row">

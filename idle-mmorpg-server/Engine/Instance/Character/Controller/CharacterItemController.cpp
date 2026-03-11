@@ -98,54 +98,181 @@ void CharacterItemController::resolveItem( Domain::CharacterEquipmentItem& item 
     item.setItem( itemPointer );
 }
 
+Domain::CharacterEquipmentItem* CharacterItemController::resolveSlot( const std::string& slot ) {
+    if ( slot == "HELMET" ) {
+        return &_characterEquipment.helmet();
+    }
+    if ( slot == "ARMOR" ) {
+        return &_characterEquipment.armor();
+    }
+    if ( slot == "LEG" ) {
+        return &_characterEquipment.leg();
+    }
+    if ( slot == "BOOT" ) {
+        return &_characterEquipment.boot();
+    }
+    if ( slot == "WEAPON" ) {
+        return &_characterEquipment.weapon();
+    }
+    if ( slot == "OFFHAND" ) {
+        return &_characterEquipment.offhand();
+    }
+    if ( slot == "AMULET" ) {
+        return &_characterEquipment.amulet();
+    }
+    if ( slot == "RING" ) {
+        return &_characterEquipment.ring();
+    }
+    if ( slot == "PICKAXE" ) {
+        return &_characterEquipment.pickaxe();
+    }
+    if ( slot == "WOODAXE" ) {
+        return &_characterEquipment.woodaxe();
+    }
+    if ( slot == "FISHINGROD" ) {
+        return &_characterEquipment.fishingrod();
+    }
+    if ( slot == "SICKLE" ) {
+        return &_characterEquipment.sickle();
+    } 
+
+    return nullptr;
+}
+
 void CharacterItemController::handleEquip( const Json::Value& payload ) {
-    // TODO implement equip item
+    std::string itemId = payload[ "item" ].asString();
+    std::string slotId = payload[ "slot" ].asString();
+
+    auto* equipmentSlot = resolveSlot( slotId );
+    if ( !equipmentSlot ) {
+        return;
+    }
+
+    if ( itemId.empty() ) {
+        if ( !equipmentSlot->id().empty() ) {
+            std::string oldItemId = equipmentSlot->id();
+
+            _characterInventory.addItem( oldItemId, 1 );
+
+            auto* inventoryItem = _characterInventory.itemById( oldItemId );
+            if ( inventoryItem ) {
+
+                const Domain::Item* item = _itemManager.itemById( oldItemId );
+                if ( item ) {
+                    inventoryItem->setItem( item );
+                }
+            }
+        }
+
+        equipmentSlot->setId( "" );
+        equipmentSlot->setItem( nullptr );
+
+    } else {
+        auto* inventoryItem = _characterInventory.itemById( itemId );
+        if ( !inventoryItem ) {
+            return;
+        }
+
+        const Domain::Item* item = inventoryItem->item();
+        if ( !item ) {
+            return;
+        }
+
+        if ( equipmentSlot->id() == itemId ) {
+            return;
+        }
+
+        if ( !equipmentSlot->id().empty() ) {
+            _characterInventory.addItem( equipmentSlot->id(), 1 );
+        }
+
+        if ( !_characterInventory.removeItem( itemId, 1 ) ) {
+            return;
+        }
+
+        equipmentSlot->setId( itemId );
+        equipmentSlot->setItem( item );
+    }
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _characterInventory.toJson() );
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_EQUIPMENT, _characterEquipment.toJson() );
 
     Json::Value eventPayload;
     _eventBus.publish( CharacterEvent( CharacterEventType::ITEM_EQUIPPED, eventPayload ) );
 }
 
 void CharacterItemController::handleUseItem( const Json::Value& payload ) {
-    // TODO implement use item
+    std::string itemId = payload[ "item" ].asString();
 
-    Json::Value eventPayload;
-    _eventBus.publish( CharacterEvent( CharacterEventType::ITEM_USED, eventPayload ) );
+    auto* inventoryItem = _characterInventory.itemById( itemId );
+    if ( !inventoryItem ) {
+        return;
+    }
+
+    const Domain::Item* item = inventoryItem->item();
+    if ( !item ) {
+        return;
+    }
+
+    if ( item->type() != Domain::ItemType::CONSUMABLE ) {
+        return;
+    }
+
+    for ( const Domain::ItemEffect& itemEffect : item->effects() ) {
+        Domain::CharacterEffect effect;
+
+        effect.setSource( itemId );
+        effect.setSourceName( item->name() );
+        effect.setType( itemEffect.type() );
+        effect.setCategory( itemEffect.category() );
+        effect.setValue( itemEffect.value() );
+        effect.setDuration( itemEffect.duration() );
+        effect.setCounter( 0 );
+
+        Json::Value payload;
+        payload[ "effect" ] = effect.toJson();
+        _eventBus.publish( CharacterEvent( CharacterEventType::EFFECT_APPLY, payload ) );
+    }
+
+    _characterInventory.removeItem( itemId, 1 );
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _characterInventory.toJson() );
 }
 
 void CharacterItemController::onItemGained( const CharacterEvent& event ) {
-    // TODO implement gained loot
-    // Here we have to handle coins and wallet related things too
-    /*
-    Json::Value payload;
-    payload[ "item" ] = itemId;
-    payload[ "amount" ] = amount;
+    std::string itemId = event.payload()[ "item" ].asString();
+    int amount = event.payload()[ "amount" ].asInt();
 
-    receiverInstance->publishEvent( CharacterEventType::ITEM_GAINED, payload );
-    */
+    if ( itemId == "coin_copper" ) {
+        _characterWallet.setCopper( _characterWallet.copper() + amount );
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_WALLET, _characterWallet.toJson() );
+        return;
+
+    } else if ( itemId == "coin_silver" ) {
+        _characterWallet.setSilver( _characterWallet.silver() + amount );
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_WALLET, _characterWallet.toJson() );
+        return;
+
+    } else if ( itemId == "coin_gold" ) {
+        _characterWallet.setGold( _characterWallet.gold() + amount );
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_WALLET, _characterWallet.toJson() );
+        return;
+    }
+
+    const Domain::Item* item = _itemManager.itemById( itemId );
+    if ( !item ) {
+        return;
+    }
+
+    _characterInventory.addItem( itemId, amount );
+
+    auto* inventoryItem = _characterInventory.itemById( itemId );
+    if ( inventoryItem ) {
+        inventoryItem->setItem( item );
+    }
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _characterInventory.toJson() );
 }
-
-/*
-bool CharacterInstance::addItemToInventory(
-    const std::string& itemId,
-    int amount
-    ) {
-
- Item* item = itemManager.itemById( itemId );
- if ( !item ) {
-     return false;
- }
-
- auto& inventory = _character->inventory();
-
- inventory.addItem( itemId, amount );
-
- auto* inventoryItem = inventory.itemById( itemId );
- if ( inventoryItem ) {
-     inventoryItem->setItem( item );
- }
-
- return true;
-}
-*/
 
 } // namespace Engine

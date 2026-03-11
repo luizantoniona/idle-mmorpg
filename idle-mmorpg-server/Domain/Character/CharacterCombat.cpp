@@ -4,9 +4,10 @@ namespace Domain {
 
 CharacterCombat::CharacterCombat() :
     _isInCombat( false ),
-    _attack( 0.00 ),
+    _attack( 0.0 ),
+    _defense( 0.0 ),
     _attackCounter( 0 ),
-    _attackDuration( 0 ) {
+    _attackDuration( 1000 ) {
 }
 
 Json::Value CharacterCombat::toJson() {
@@ -35,6 +36,14 @@ void CharacterCombat::setAttack( double attack ) {
     _attack = attack;
 }
 
+double CharacterCombat::defense() const {
+    return _defense;
+}
+
+void CharacterCombat::setDefense( double defense ) {
+    _defense = defense;
+}
+
 int CharacterCombat::attackCounter() const {
     return _attackCounter;
 }
@@ -49,6 +58,13 @@ int CharacterCombat::attackDuration() const {
 
 void CharacterCombat::setAttackDuration( int attackDuration ) {
     _attackDuration = attackDuration;
+}
+
+void CharacterCombat::clearAttributes() {
+    _attack = 0.0;
+    _defense = 0.0;
+    _attackCounter = 0;
+    _attackDuration = 1000;
 }
 
 } // namespace Domain

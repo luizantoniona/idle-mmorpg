@@ -5,8 +5,9 @@ namespace Engine {
 
 enum class CharacterEventType {
     ITEM_EQUIPPED,
-    ITEM_USED,
     ITEM_GAINED,
+
+    EFFECT_APPLY,
 
     PROGRESSION_EXPERIENCE_GAINED,
     PROGRESSION_LEVEL_GAINED,

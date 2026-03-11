@@ -28,6 +28,8 @@ private:
     void resolveEquipment();
     void resolveItem( Domain::CharacterEquipmentItem& item );
 
+    Domain::CharacterEquipmentItem* resolveSlot( const std::string& slot );
+
     void handleEquip( const Json::Value& payload );
     void handleUseItem( const Json::Value& payload );
 

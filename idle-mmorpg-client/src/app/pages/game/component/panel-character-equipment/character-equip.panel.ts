@@ -53,7 +53,7 @@ export class CharacterEquipPanel {
         }
 
         return this.character.inventory.items.filter(item => {
-            if (!["equipment", "weapon", "offhand", "tool"].includes(item.type)) {
+            if (!["EQUIPMENT", "WEAPON", "OFFHAND", "TOOL"].includes(item.type)) {
                 return false;
             }
 
@@ -61,11 +61,11 @@ export class CharacterEquipPanel {
                 return true;
             }
 
-            if (["offhand"].includes(this.slot) && item.type === "offhand") {
+            if (["OFFHAND"].includes(this.slot) && item.type === "OFFHAND") {
                 return true;
             }
 
-            if (["weapon"].includes(this.slot) && item.type === "weapon") {
+            if (["WEAPON"].includes(this.slot) && item.type === "WEAPON") {
                 return true;
             }
 
@@ -75,7 +75,7 @@ export class CharacterEquipPanel {
 
     equipItem(item: Item | null) {
         this.sendMessage({
-            type: "CHARACTER_EQUIP_ITEM",
+            type: "CHARACTER_ITEM_EQUIP",
             payload: {
                 item: item ? item.id : "",
                 slot: this.slot
