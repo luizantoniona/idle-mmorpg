@@ -6,30 +6,12 @@
     "description": "A simple meat.",
     "icon": "food_meat.gif",
     "price": 5,
-    "combat": {
-        "attack": 0.0,
-        "attackSpeed": 0.0,
-        "defense": 0.0
-    },
-    "bonus": [],
-    "effects": [
-        {
-            "type": "vital",
-            "category": "health",
-            "value": 2,
-            "duration": 10
-        },
-        {
-            "type": "vital",
-            "category": "stamina",
-            "value": 2,
-            "duration": 10
-        },
-        {
-            "type": "vital",
-            "category": "mana",
-            "value": 2,
-            "duration": 10
-        }
-    ]
+    "bonus": {},
+    "combat": {},
+    "effects": {
+        "duration": 20,
+        "health": 2,
+        "mana": 2,
+        "stamina": 2
+    }
 }

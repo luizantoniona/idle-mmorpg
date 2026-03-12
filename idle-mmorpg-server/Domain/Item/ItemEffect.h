@@ -11,22 +11,22 @@ public:
 
     Json::Value toJson() const;
 
-    std::string type() const;
-    void setType( const std::string& type );
+    double health() const;
+    void setHealth( double health );
 
-    std::string category() const;
-    void setCategory( const std::string& category );
+    double mana() const;
+    void setMana( double mana );
 
-    double value() const;
-    void setValue( double value );
+    double stamina() const;
+    void setStamina( double stamina );
 
     int duration() const;
     void setDuration( int duration );
 
 private:
-    std::string _type;
-    std::string _category;
-    double _value;
+    double _health;
+    double _mana;
+    double _stamina;
     int _duration;
 };
 

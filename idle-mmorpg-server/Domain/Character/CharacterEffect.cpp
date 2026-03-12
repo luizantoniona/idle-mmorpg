@@ -5,9 +5,9 @@ namespace Domain {
 CharacterEffect::CharacterEffect() :
     _source( "" ),
     _sourceName( "" ),
-    _type( "" ),
-    _category( "" ),
-    _value( 0.0 ),
+    _health( 0.0 ),
+    _mana( 0.0 ),
+    _stamina( 0.0 ),
     _duration( 0 ),
     _counter( 0 ) {}
 
@@ -15,9 +15,9 @@ Json::Value Domain::CharacterEffect::toJson() {
     Json::Value values;
     values[ "source" ] = source();
     values[ "sourceName" ] = sourceName();
-    values[ "type" ] = type();
-    values[ "category" ] = category();
-    values[ "value" ] = value();
+    values[ "health" ] = _health;
+    values[ "mana" ] = _mana;
+    values[ "stamina" ] = _stamina;
     values[ "duration" ] = duration();
     values[ "counter" ] = counter();
     return values;
@@ -39,28 +39,28 @@ void CharacterEffect::setSourceName( const std::string& sourceName ) {
     _sourceName = sourceName;
 }
 
-std::string CharacterEffect::type() const {
-    return _type;
+double CharacterEffect::health() const {
+    return _health;
 }
 
-void CharacterEffect::setType( const std::string& type ) {
-    _type = type;
+void CharacterEffect::setHealth( double health ) {
+    _health = health;
 }
 
-std::string CharacterEffect::category() const {
-    return _category;
+double CharacterEffect::mana() const {
+    return _mana;
 }
 
-void CharacterEffect::setCategory( const std::string& category ) {
-    _category = category;
+void CharacterEffect::setMana( double mana ) {
+    _mana = mana;
 }
 
-double CharacterEffect::value() const {
-    return _value;
+double CharacterEffect::stamina() const {
+    return _stamina;
 }
 
-void CharacterEffect::setValue( double value ) {
-    _value = value;
+void CharacterEffect::setStamina( double stamina ) {
+    _stamina = stamina;
 }
 
 int CharacterEffect::duration() const {

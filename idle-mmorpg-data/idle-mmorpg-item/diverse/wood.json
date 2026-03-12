@@ -6,11 +6,7 @@
     "description": "Simple log of wood. Used in crafting.",
     "icon": "wood.gif",
     "price": 2,
-    "combat": {
-        "attack": 0.0,
-        "attackSpeed": 0.0,
-        "defense": 0.0
-    },
-    "bonus": [],
-    "effects": []
+    "bonus": {},
+    "combat": {},
+    "effects": {}
 }

@@ -6,11 +6,10 @@
     "description": "A simple armor made of iron.",
     "icon": "armor_iron.png",
     "price": 50,
+    "bonus": {},
     "combat": {
         "attack": 0.0,
-        "attackSpeed": 0.0,
-        "defense": 2.0
+        "defense": 1.0
     },
-    "bonus": [],
-    "effects": []
+    "effects": {}
 }

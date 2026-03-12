@@ -14,15 +14,11 @@ public:
     double attack() const;
     void setAttack( double attack );
 
-    double attackSpeed() const;
-    void setAttackSpeed( double attackSpeed );
-
     double defense() const;
     void setDefense( double defense );
 
 private:
     double _attack;
-    double _attackSpeed;
     double _defense;
 };
 

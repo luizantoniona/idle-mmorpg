@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+#include <Domain/Skill/SkillType.h>
+
 namespace Domain {
 
 class ItemBonus {
@@ -13,18 +15,14 @@ public:
 
     Json::Value toJson() const;
 
-    std::string type() const;
-    void setType( const std::string& type );
-
-    std::string category() const;
-    void setCategory( const std::string& category );
+    SkillType type() const;
+    void setType( SkillType type );
 
     double value() const;
     void setValue( double value );
 
 private:
-    std::string _type;
-    std::string _category;
+    SkillType _type;
     double _value;
 };
 

@@ -1,35 +1,26 @@
 #include "ItemBonus.h"
 
+#include <Domain/Skill/SkillHelper.h>
+
 namespace Domain {
 
 ItemBonus::ItemBonus() :
-    _type( "" ),
-    _category( "" ),
-    _value( 0.0 ) {
-}
+    _type( SkillType::UNKNOWN ),
+    _value( 0.0 ) {}
 
 Json::Value ItemBonus::toJson() const {
     Json::Value root;
-    root[ "type" ] = type();
-    root[ "category" ] = category();
-    root[ "value" ] = value();
+    root[ "type" ] = SkillHelper::typeToString( _type );
+    root[ "value" ] = _value;
     return root;
 }
 
-std::string ItemBonus::type() const {
+SkillType ItemBonus::type() const {
     return _type;
 }
 
-void ItemBonus::setType( const std::string& type ) {
+void ItemBonus::setType( SkillType type ) {
     _type = type;
-}
-
-std::string ItemBonus::category() const {
-    return _category;
-}
-
-void ItemBonus::setCategory( const std::string& category ) {
-    _category = category;
 }
 
 double ItemBonus::value() const {

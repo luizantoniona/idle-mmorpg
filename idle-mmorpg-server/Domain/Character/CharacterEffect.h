@@ -17,14 +17,14 @@ public:
     std::string sourceName() const;
     void setSourceName( const std::string& sourceName );
 
-    std::string type() const;
-    void setType( const std::string& type );
+    double health() const;
+    void setHealth( double health );
 
-    std::string category() const;
-    void setCategory( const std::string& category );
+    double mana() const;
+    void setMana( double mana );
 
-    double value() const;
-    void setValue( double value );
+    double stamina() const;
+    void setStamina( double stamina );
 
     int duration() const;
     void setDuration( int duration );
@@ -35,9 +35,11 @@ public:
 private:
     std::string _source;
     std::string _sourceName;
-    std::string _type;
-    std::string _category;
-    double _value;
+
+    double _health;
+    double _mana;
+    double _stamina;
+
     int _duration;
     int _counter;
 };

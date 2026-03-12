@@ -40,20 +40,22 @@ void CharacterEffectsController::onTick() {
 
         if ( effect.counter() % _tickRate == 0 ) {
 
-            if ( effect.type() == "vital" ) {
-
+            if ( effect.health() > 0 ) {
                 Json::Value payload;
-                payload[ "value" ] = effect.value();
+                payload["value"] = effect.health();
+                _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_HEALTH_CHANGED, payload ) );
+            }
 
-                if ( effect.category() == "health" ) {
-                    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_HEALTH_CHANGED, payload ) );
+            if ( effect.mana() > 0 ) {
+                Json::Value payload;
+                payload["value"] = effect.mana();
+                _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MANA_CHANGED, payload ) );
+            }
 
-                } else if ( effect.category() == "mana" ) {
-                    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MANA_CHANGED, payload ) );
-
-                } else if ( effect.category() == "stamina" ) {
-                    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_STAMINA_CHANGED, payload ) );
-                }
+            if ( effect.stamina() > 0 ) {
+                Json::Value payload;
+                payload["value"] = effect.stamina();
+                _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_STAMINA_CHANGED, payload ) );
             }
         }
 
@@ -71,9 +73,7 @@ void CharacterEffectsController::onTick() {
     }
 
     if ( effectsChanged ) {
-        _messageSender.sendMessage(
-            MessageSenderType::CHARACTER_EFFECTS,
-            _characterEffects.toJson() );
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_EFFECTS, _characterEffects.toJson() );
     }
 }
 
@@ -90,18 +90,18 @@ void CharacterEffectsController::onApplyEffect( const CharacterEvent& event ) {
         return;
     }
 
-    for ( const Domain::ItemEffect& itemEffect : itemPointer->effects() ) {
-        Domain::CharacterEffect effect;
-        effect.setSource( itemId );
-        effect.setSourceName( itemPointer->name() );
-        effect.setType( itemEffect.type() );
-        effect.setCategory( itemEffect.category() );
-        effect.setValue( itemEffect.value() );
-        effect.setDuration( itemEffect.duration() );
-        effect.setCounter( 0 );
+    const Domain::ItemEffect itemEffect = itemPointer->effect();
 
-        _characterEffects.addEffect( effect );
-    }
+    Domain::CharacterEffect effect;
+    effect.setSource( itemId );
+    effect.setSourceName( itemPointer->name() );
+    effect.setHealth( itemEffect.health() );
+    effect.setMana( itemEffect.mana() );
+    effect.setStamina( itemEffect.stamina() );
+    effect.setDuration( itemEffect.duration() );
+    effect.setCounter( 0 );
+
+    _characterEffects.addEffect( effect );
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_EFFECTS, _characterEffects.toJson() );
 }

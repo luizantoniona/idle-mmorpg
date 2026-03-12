@@ -7,35 +7,28 @@ namespace Domain {
 Item::Item() :
     _id( "" ),
     _type( ItemType::UNKNOWN ),
-    _category( ItemCategory::UNKNOWN ),
+    _category( ItemCategoryType::UNKNOWN ),
     _name( "" ),
     _description( "" ),
     _icon( "" ),
     _price( 0 ),
+    _bonus(),
     _combat(),
-    _bonuses( {} ),
-    _effects( {} ) {
-}
+    _effect() {}
 
 Json::Value Item::toJson() const {
     Json::Value root;
     root[ "id" ] = _id;
     root[ "type" ] = ItemHelper::typeToString( _type );
-    root[ "category" ] = ItemHelper::categoryToString( _category );
+    root[ "category" ] = ItemHelper::categoryTypeToString( _category );
     root[ "name" ] = _name;
     root[ "description" ] = _description;
     root[ "icon" ] = _icon;
     root[ "price" ] = _price;
 
+    root[ "bonus" ].append( _bonus.toJson() );
     root[ "combat" ] = _combat.toJson();
-
-    for ( const ItemBonus& bonus : _bonuses ) {
-        root[ "bonuses" ].append( bonus.toJson() );
-    }
-
-    for ( const ItemEffect& effect : _effects ) {
-        root[ "effects" ].append( effect.toJson() );
-    }
+    root[ "effect" ].append( _effect.toJson() );
 
     return root;
 }
@@ -56,11 +49,11 @@ void Item::setType( ItemType type ) {
     _type = type;
 }
 
-ItemCategory Item::category() const {
+ItemCategoryType Item::category() const {
     return _category;
 }
 
-void Item::setCategory( ItemCategory category ) {
+void Item::setCategory( ItemCategoryType category ) {
     _category = category;
 }
 
@@ -96,6 +89,14 @@ void Item::setPrice( int price ) {
     _price = price;
 }
 
+ItemBonus Item::bonus() const {
+    return _bonus;
+}
+
+void Item::setBonus( const ItemBonus& bonus ) {
+    _bonus = bonus;
+}
+
 ItemCombat Item::combat() const {
     return _combat;
 }
@@ -104,28 +105,12 @@ void Item::setCombat( const ItemCombat& combat ) {
     _combat = combat;
 }
 
-std::vector<ItemBonus> Item::bonuses() const {
-    return _bonuses;
+ItemEffect Item::effect() const {
+    return _effect;
 }
 
-void Item::setBonuses( const std::vector<ItemBonus>& bonuses ) {
-    _bonuses = bonuses;
-}
-
-void Item::addBonus( const ItemBonus& bonus ) {
-    _bonuses.push_back( bonus );
-}
-
-std::vector<ItemEffect> Item::effects() const {
-    return _effects;
-}
-
-void Item::setEffects( const std::vector<ItemEffect>& effects ) {
-    _effects = effects;
-}
-
-void Item::addEffect( const ItemEffect& effect ) {
-    _effects.push_back( effect );
+void Item::setEffect( const ItemEffect& effect ) {
+    _effect = effect;
 }
 
 } // namespace Domain

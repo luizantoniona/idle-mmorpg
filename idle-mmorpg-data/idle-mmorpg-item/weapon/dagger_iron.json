@@ -6,11 +6,10 @@
     "description": "A small dagger made of iron.",
     "icon": "dagger_iron.png",
     "price": 5,
+    "bonus": {},
     "combat": {
         "attack": 1.0,
-        "attackSpeed": 1.5,
         "defense": 0.0
     },
-    "bonus": [],
-    "effects": []
+    "effects": {}
 }

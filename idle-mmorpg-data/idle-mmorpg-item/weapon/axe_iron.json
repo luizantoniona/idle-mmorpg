@@ -6,11 +6,10 @@
     "description": "A simple axe made of iron.",
     "icon": "axe_iron.png",
     "price": 5,
+    "bonus": {},
     "combat": {
-        "attack": 1.0,
-        "attackSpeed": 1.5,
+        "attack": 3.0,
         "defense": 0.0
     },
-    "bonus": [],
-    "effects": []
+    "effects": {}
 }

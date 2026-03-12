@@ -6,11 +6,10 @@
     "description": "A basic sword made of iron.",
     "icon": "sword_iron.png",
     "price": 5,
+    "bonus": {},
     "combat": {
-        "attack": 1.0,
-        "attackSpeed": 1.5,
+        "attack": 2.0,
         "defense": 0.0
     },
-    "bonus": [],
-    "effects": []
+    "effects": {}
 }

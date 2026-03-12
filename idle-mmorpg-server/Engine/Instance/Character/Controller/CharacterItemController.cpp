@@ -219,10 +219,6 @@ void CharacterItemController::handleUseItem( const Json::Value& payload ) {
         return;
     }
 
-    if ( item->effects().empty() ) {
-        return;
-    }
-
     _characterInventory.removeItem( itemId, 1 );
 
     Json::Value eventPayload;

@@ -1,9 +1,9 @@
-#ifndef ITEMCATEGORY_H
-#define ITEMCATEGORY_H
+#ifndef ITEMCATEGORYTYPE_H
+#define ITEMCATEGORYTYPE_H
 
 namespace Domain {
 
-enum class ItemCategory {
+enum class ItemCategoryType {
     // --- Consumable ---
     FOOD,
     POTION,
@@ -39,4 +39,4 @@ enum class ItemCategory {
 
 } // namespace Domain
 
-#endif // ITEMCATEGORY_H
+#endif // ITEMCATEGORYTYPE_H

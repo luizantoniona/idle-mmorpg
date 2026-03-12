@@ -6,17 +6,10 @@
     "description": "A normal woodaxe used to get wood.",
     "icon": "woodaxe.png",
     "price": 30,
-    "combat": {
-        "attack": 0.0,
-        "attackSpeed": 0.0,
-        "defense": 0.0
+    "bonus": {
+        "skill": "WOODCUTTING",
+        "value": 1
     },
-    "bonus": [
-        {
-            "type": "skill",
-            "category": "WOODCUTTING",
-            "value": 1
-        }
-    ],
-    "effects": []
+    "combat": {},
+    "effects": {}
 }

@@ -3,43 +3,42 @@
 namespace Domain {
 
 ItemEffect::ItemEffect() :
-    _type( "" ),
-    _category( "" ),
-    _value( 0.0 ),
-    _duration( 0 ) {
-}
+    _health( 0.0 ),
+    _mana( 0.0 ),
+    _stamina( 0.0 ),
+    _duration( 0 ) {}
 
 Json::Value ItemEffect::toJson() const {
     Json::Value root;
-    root[ "type" ] = type();
-    root[ "category" ] = category();
-    root[ "value" ] = value();
-    root[ "duration" ] = duration();
+    root[ "health" ] = _health;
+    root[ "mana" ] = _mana;
+    root[ "stamina" ] = _stamina;
+    root[ "duration" ] = _duration;
     return root;
 }
 
-std::string ItemEffect::type() const {
-    return _type;
+double ItemEffect::health() const {
+    return _health;
 }
 
-void ItemEffect::setType( const std::string& type ) {
-    _type = type;
+void ItemEffect::setHealth( double health ) {
+    _health = health;
 }
 
-std::string ItemEffect::category() const {
-    return _category;
+double ItemEffect::mana() const {
+    return _mana;
 }
 
-void ItemEffect::setCategory( const std::string& category ) {
-    _category = category;
+void ItemEffect::setMana( double mana ) {
+    _mana = mana;
 }
 
-double ItemEffect::value() const {
-    return _value;
+double ItemEffect::stamina() const {
+    return _stamina;
 }
 
-void ItemEffect::setValue( double value ) {
-    _value = value;
+void ItemEffect::setStamina( double stamina ) {
+    _stamina = stamina;
 }
 
 int ItemEffect::duration() const {

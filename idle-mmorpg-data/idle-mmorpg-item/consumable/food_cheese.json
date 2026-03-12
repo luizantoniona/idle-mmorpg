@@ -6,30 +6,12 @@
     "description": "A simple chunk of cheese. Smells... questionable.",
     "icon": "food_cheese.gif",
     "price": 5,
-    "combat": {
-        "attack": 0.0,
-        "attackSpeed": 0.0,
-        "defense": 0.0
-    },
-    "bonus": [],
-    "effects": [
-        {
-            "type": "vital",
-            "category": "health",
-            "value": 1,
-            "duration": 10
-        },
-        {
-            "type": "vital",
-            "category": "stamina",
-            "value": 1,
-            "duration": 10
-        },
-        {
-            "type": "vital",
-            "category": "mana",
-            "value": 1,
-            "duration": 10
-        }
-    ]
+    "bonus": {},
+    "combat": {},
+    "effects": {
+        "duration": 10,
+        "health": 1,
+        "mana": 1,
+        "stamina": 1
+    }
 }

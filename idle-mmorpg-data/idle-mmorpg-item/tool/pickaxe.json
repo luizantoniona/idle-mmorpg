@@ -6,17 +6,10 @@
     "description": "A normal pickaxe used to mine ores.",
     "icon": "pickaxe.png",
     "price": 30,
-    "combat": {
-        "attack": 0.0,
-        "attackSpeed": 0.0,
-        "defense": 0.0
+    "bonus": {
+        "skill": "MINING",
+        "value": 1
     },
-    "bonus": [
-        {
-            "type": "skill",
-            "category": "MINING",
-            "value": 1
-        }
-    ],
-    "effects": []
+    "combat": {},
+    "effects": {}
 }

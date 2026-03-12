@@ -2,15 +2,16 @@
 #define ITEM_H
 
 #include <string>
-#include <vector>
 
 #include <json/json.h>
+
+#include <Domain/Skill/SkillType.h>
 
 #include "ItemBonus.h"
 #include "ItemCombat.h"
 #include "ItemEffect.h"
 
-#include "ItemCategory.h"
+#include "ItemCategoryType.h"
 #include "ItemType.h"
 
 namespace Domain {
@@ -27,8 +28,8 @@ public:
     ItemType type() const;
     void setType( ItemType type );
 
-    ItemCategory category() const;
-    void setCategory( ItemCategory category );
+    ItemCategoryType category() const;
+    void setCategory( ItemCategoryType category );
 
     std::string name() const;
     void setName( const std::string& name );
@@ -42,29 +43,32 @@ public:
     int price() const;
     void setPrice( int price );
 
+    SkillType skill() const;
+    void setSkill( SkillType skill );
+
+    ItemBonus bonus() const;
+    void setBonus( const ItemBonus& bonus );
+
     ItemCombat combat() const;
     void setCombat( const ItemCombat& combat );
 
-    std::vector<ItemBonus> bonuses() const;
-    void setBonuses( const std::vector<ItemBonus>& bonuses );
-    void addBonus( const ItemBonus& bonus );
-
-    std::vector<ItemEffect> effects() const;
-    void setEffects( const std::vector<ItemEffect>& effects );
-    void addEffect( const ItemEffect& effect );
+    ItemEffect effect() const;
+    void setEffect( const ItemEffect& effect );
 
 private:
     std::string _id;
     ItemType _type;
-    ItemCategory _category;
+    ItemCategoryType _category;
     std::string _name;
     std::string _description;
     std::string _icon;
     int _price;
 
+    SkillType _skill;
+
+    ItemBonus _bonus;
     ItemCombat _combat;
-    std::vector<ItemBonus> _bonuses;
-    std::vector<ItemEffect> _effects;
+    ItemEffect _effect;
 };
 
 } // namespace Domain

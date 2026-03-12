@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <Domain/Item/ItemHelper.h>
+#include <Domain/Skill/SkillHelper.h>
 #include <Engine/Manager/Server/ServerConfigurationManager.h>
 #include <Engine/Manager/Server/ServerImageManager.h>
 #include <Shared/Commons/Singleton.h>
@@ -40,9 +41,9 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
     Json::Value itemJson = Helper::JsonHelper::loadJsonFile( itemPath );
 
     const Domain::ItemType itemType = Domain::ItemHelper::stringToType( itemJson[ "type" ].asString() );
-    const Domain::ItemCategory itemCategory = Domain::ItemHelper::stringToCategory( itemJson[ "category" ].asString() );
+    const Domain::ItemCategoryType itemCategory = Domain::ItemHelper::stringToCategoryType( itemJson[ "category" ].asString() );
 
-    if ( itemType == Domain::ItemType::UNKNOWN || itemCategory == Domain::ItemCategory::UNKNOWN ) {
+    if ( itemType == Domain::ItemType::UNKNOWN || itemCategory == Domain::ItemCategoryType::UNKNOWN ) {
         std::cout << "Item Type not mapped: " << itemJson[ "type" ].asString() << " or Category: " << itemJson[ "category" ].asString() << std::endl;
         return nullptr;
     }
@@ -59,46 +60,35 @@ std::unique_ptr<Domain::Item> ItemFactory::createItem( const std::string& itemPa
     std::string baseDir = itemPath.substr( 0, itemPath.find_last_of( '/' ) + 1 );
     Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( item->icon(), baseDir + item->icon() );
 
-    if ( itemJson.isMember( "combat" ) && itemJson[ "combat" ].isObject() ) {
-        const Json::Value& combatJson = itemJson[ "combat" ];
+    // --- ItemBonus ---
+    const auto& bonusJson = itemJson[ "bonus" ];
+    if ( !bonusJson.isNull() ) {
+        Domain::ItemBonus bonus;
+        bonus.setType( Domain::SkillHelper::stringToType( bonusJson[ "skill" ].asString() ) );
+        bonus.setValue( bonusJson[ "value" ].asDouble() );
+
+        item->setBonus( bonus );
+    }
+
+    // --- ItemCombat ---
+    const auto& combatJson = itemJson[ "combat" ];
+    if ( !combatJson.isNull() ) {
         Domain::ItemCombat combat;
         combat.setAttack( combatJson[ "attack" ].asDouble() );
-        combat.setAttackSpeed( combatJson[ "attackSpeed" ].asDouble() );
         combat.setDefense( combatJson[ "defense" ].asDouble() );
         item->setCombat( combat );
     }
 
-    if ( itemJson.isMember( "bonus" ) && itemJson[ "bonus" ].isArray() ) {
-        const Json::Value& bonusesJson = itemJson[ "bonus" ];
-        std::vector<Domain::ItemBonus> bonuses;
+    // --- ItemEffect ---
+    const auto& effectJson = itemJson[ "effects" ];
+    if ( !effectJson.isNull() ) {
+        Domain::ItemEffect effect;
+        effect.setHealth( effectJson[ "health" ].asDouble() );
+        effect.setMana( effectJson[ "mana" ].asDouble() );
+        effect.setStamina( effectJson[ "stamina" ].asDouble() );
+        effect.setDuration( effectJson[ "duration" ].asInt() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
 
-        for ( const auto& bonusJson : bonusesJson ) {
-            Domain::ItemBonus bonus;
-            bonus.setType( bonusJson[ "type" ].asString() );
-            bonus.setCategory( bonusJson[ "category" ].asString() );
-            bonus.setValue( bonusJson[ "value" ].asDouble() );
-
-            bonuses.push_back( bonus );
-        }
-
-        item->setBonuses( bonuses );
-    }
-
-    if ( itemJson.isMember( "effects" ) && itemJson[ "effects" ].isArray() ) {
-        const Json::Value& effectsJson = itemJson[ "effects" ];
-        std::vector<Domain::ItemEffect> effects;
-
-        for ( const auto& effectJson : effectsJson ) {
-            Domain::ItemEffect effect;
-            effect.setType( effectJson[ "type" ].asString() );
-            effect.setCategory( effectJson[ "category" ].asString() );
-            effect.setValue( effectJson[ "value" ].asDouble() );
-            effect.setDuration( effectJson[ "duration" ].asInt() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() );
-
-            effects.push_back( effect );
-        }
-
-        item->setEffects( effects );
+        item->setEffect( effect );
     }
 
     return item;

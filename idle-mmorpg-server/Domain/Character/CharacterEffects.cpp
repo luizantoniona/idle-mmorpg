@@ -23,7 +23,7 @@ std::vector<CharacterEffect>& CharacterEffects::effects() {
 
 void CharacterEffects::addEffect( CharacterEffect effect ) {
     for ( auto& oldEffect : _effects ) {
-        if ( oldEffect.source() == effect.source() && oldEffect.type() == effect.type() && oldEffect.category() == effect.category() ) {
+        if ( oldEffect.source() == effect.source() ) {
             oldEffect.setDuration( oldEffect.duration() + effect.duration() );
             return;
         }
@@ -35,7 +35,7 @@ void CharacterEffects::addEffect( CharacterEffect effect ) {
 void CharacterEffects::removeEffect( const CharacterEffect& effect ) {
     _effects.erase(
         std::remove_if( _effects.begin(), _effects.end(), [ &effect ]( const CharacterEffect& e ) {
-            return e.source() == effect.source() && e.type() == effect.type() && e.category() == effect.category();
+            return e.source() == effect.source();
         } ),
         _effects.end() );
 }

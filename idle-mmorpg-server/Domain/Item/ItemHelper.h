@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "ItemCategory.h"
+#include "ItemCategoryType.h"
 #include "ItemType.h"
 
 namespace Domain {
@@ -13,8 +13,8 @@ public:
     static ItemType stringToType( const std::string& type );
     static std::string typeToString( ItemType type );
 
-    static ItemCategory stringToCategory( const std::string& category );
-    static std::string categoryToString( ItemCategory category );
+    static ItemCategoryType stringToCategoryType( const std::string& type );
+    static std::string categoryTypeToString( ItemCategoryType type );
 };
 
 } // namespace Domain
