@@ -7,19 +7,20 @@
 
 namespace Manager {
 
-std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > SkillFactory::createSkills( const std::string& skillsPath ) {
+std::unordered_map<Domain::SkillType, std::unique_ptr<Domain::Skill> > SkillFactory::createSkills( const std::string& skillsPath ) {
     std::cout << "SkillFactory::createSkills" << std::endl;
 
-    std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > skills;
+    std::unordered_map<Domain::SkillType, std::unique_ptr<Domain::Skill> > skills;
 
     Json::Value skillsConfig = Helper::JsonHelper::loadJsonFile( skillsPath + "skills.json" );
 
-    for ( const auto& skillEntry : skillsConfig[ "skills" ] ) {
+    for ( const auto& skillEntry : skillsConfig["skills"] ) {
         std::string skillPath = skillsPath + skillEntry.asString() + ".json";
 
         auto skill = createSkill( skillPath );
         if ( skill ) {
-            skills[ skill->id() ] = std::move( skill );
+            skills[skill->type()] = std::move( skill );
+
         } else {
             std::cerr << "Failed to load skill: " << skillPath << std::endl;
         }
@@ -37,39 +38,34 @@ std::unique_ptr<Domain::Skill> SkillFactory::createSkill( const std::string& ski
 
     const std::string skillId = skillJson[ "id" ].asString();
 
-    if ( Domain::SkillHelper::stringToType( skillId ) == Domain::SkillType::UNKNOWN ) {
-        std::cerr << "Unmaped skill: " << skillId << std::endl;
+    Domain::SkillType skillType = Domain::SkillHelper::stringToType( skillId );
+
+    if ( skillType == Domain::SkillType::UNKNOWN ) {
+        std::cerr << "Unmapped skill: " << skillId << std::endl;
         return nullptr;
     }
 
     auto skill = std::make_unique<Domain::Skill>();
 
-    skill->setId( skillId );
-    skill->setType( Domain::SkillHelper::stringToType( skillId ) );
+    skill->setType( skillType );
+    skill->setCategory( skillJson[ "category" ].asString() );
     skill->setName( skillJson[ "name" ].asString() );
     skill->setDescription( skillJson[ "description" ].asString() );
-    skill->setCategory( skillJson[ "category" ].asString() );
 
-    // TODO: We need to review this later - global or by skill
-    skill->setBaseExperience( 100.00 );
-    skill->setGrowthRate( 1.05 );
+    // --- Experience ---
+    const auto& expJson = skillJson[ "experience" ];
+    skill->setBaseExperience( expJson[ "base" ].asDouble() );
+    skill->setGrowthRate( expJson[ "growth" ].asDouble() );
 
-    const auto& milestonesJson = skillJson[ "milestones" ];
-    for ( const auto& milestoneJson : milestonesJson ) {
+    // --- Milestone ---
+    const auto& milestoneJson = skillJson[ "milestone" ];
+    if ( !milestoneJson.isNull() ) {
         Domain::SkillMilestone milestone;
-        milestone.setLevel( milestoneJson[ "level" ].asInt() );
+        milestone.setInterval( milestoneJson[ "interval" ].asInt() );
+        milestone.setType( Domain::SkillHelper::stringToMilestoneType( milestoneJson[ "type" ].asString() ) );
+        milestone.setValue( milestoneJson[ "value" ].asDouble() );
 
-        const auto& bonusesJson = milestoneJson[ "bonuses" ];
-        for ( const auto& bonusJson : bonusesJson ) {
-            Domain::SkillMilestoneBonus milestoneBonus;
-
-            milestoneBonus.setType( bonusJson[ "type" ].asString() );
-            milestoneBonus.setId( bonusJson[ "id" ].asString() );
-            milestoneBonus.setValue( bonusJson[ "value" ].asDouble() );
-            milestone.addBonus( milestoneBonus );
-        }
-
-        skill->addMilestone( milestone );
+        skill->setMilestone( milestone );
     }
 
     return skill;

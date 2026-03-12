@@ -19,9 +19,6 @@ public:
     SkillType type() const;
     void setType( SkillType type );
 
-    std::string id() const;
-    void setId( const std::string& id );
-
     int level() const;
     void setLevel( int level );
 
@@ -39,7 +36,6 @@ public:
 
 private:
     SkillType _type;
-    std::string _id;
     int _level;
     int _bonusLevel;
     int _experience;

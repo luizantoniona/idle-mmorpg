@@ -2,25 +2,26 @@
 
 #include <cmath>
 
+#include "SkillHelper.h"
+
 namespace Domain {
 
 Skill::Skill() :
     _type( SkillType::UNKNOWN ),
-    _id( "" ),
+    // TODO: Create a enum for category?
+    _category( "" ),
     _name( "" ),
     _description( "" ),
-    _category( "" ),
-    _millestones( {} ),
-    _baseExperience( 0.00 ),
-    _growthRate( 0.00 ) {
-}
+    _milestone(),
+    _baseExperience( 0.0 ),
+    _growthRate( 0.0 ) {}
 
 Json::Value Skill::toJson() {
     Json::Value root;
-    root[ "id" ] = id();
-    root[ "name" ] = name();
-    root[ "description" ] = description();
-    root[ "category" ] = category();
+    root[ "type" ] = SkillHelper::typeToString( _type );
+    root[ "category" ] = _category;
+    root[ "name" ] = _name;
+    root[ "description" ] = _description;
     return root;
 }
 
@@ -32,12 +33,12 @@ void Skill::setType( SkillType type ) {
     _type = type;
 }
 
-std::string Skill::id() const {
-    return _id;
+std::string Skill::category() const {
+    return _category;
 }
 
-void Skill::setId( const std::string& id ) {
-    _id = id;
+void Skill::setCategory( const std::string& category ) {
+    _category = category;
 }
 
 std::string Skill::name() const {
@@ -56,28 +57,12 @@ void Skill::setDescription( const std::string& description ) {
     _description = description;
 }
 
-std::string Skill::category() const {
-    return _category;
+SkillMilestone Skill::milestone() const {
+    return _milestone;
 }
 
-void Skill::setCategory( const std::string& category ) {
-    _category = category;
-}
-
-std::vector<SkillMilestone> Skill::millestones() const {
-    return _millestones;
-}
-
-void Skill::setMillestones( const std::vector<SkillMilestone>& millestones ) {
-    _millestones = millestones;
-}
-
-void Skill::addMilestone( const SkillMilestone& milestone ) {
-    _millestones.push_back( milestone );
-}
-
-int Skill::experienceForNextLevel( int currentLevel ) const {
-    return static_cast<int>( _baseExperience * std::pow( _growthRate, currentLevel ) );
+void Skill::setMilestone( const SkillMilestone& milestone ) {
+    _milestone = milestone;
 }
 
 double Skill::baseExperience() const {
@@ -94,6 +79,10 @@ double Skill::growthRate() const {
 
 void Skill::setGrowthRate( double growthRate ) {
     _growthRate = growthRate;
+}
+
+int Skill::experienceForNextLevel( int currentLevel ) const {
+    return static_cast<int>( _baseExperience * std::pow( _growthRate, currentLevel ) );
 }
 
 } // namespace Domain

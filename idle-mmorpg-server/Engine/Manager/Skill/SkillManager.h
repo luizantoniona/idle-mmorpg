@@ -15,11 +15,10 @@ public:
 
     void initialize( const std::string& skillsPath );
 
-    Domain::Skill* skill( const std::string& skillId );
-    Domain::Skill* skill( Domain::SkillType skillType );
+    Domain::Skill* skill( Domain::SkillType skillType ) const;
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > _skills;
+    std::unordered_map<Domain::SkillType, std::unique_ptr<Domain::Skill> > _skills;
 };
 
 } // namespace Manager

@@ -3,5 +3,9 @@
     "name": "Mining",
     "description": "Extract ores and minerals from the ground.",
     "category": "gathering",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

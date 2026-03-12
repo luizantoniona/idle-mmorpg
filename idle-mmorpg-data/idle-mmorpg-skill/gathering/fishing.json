@@ -3,5 +3,9 @@
     "name": "Fishing",
     "description": "Your proeficiency in catching fishes.",
     "category": "gathering",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

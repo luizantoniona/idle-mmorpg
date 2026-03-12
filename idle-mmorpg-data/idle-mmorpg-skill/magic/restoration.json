@@ -3,5 +3,9 @@
     "name": "Restoration",
     "description": "Your ability to channel restorative magic and mend wounds effectively.",
     "category": "magic",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

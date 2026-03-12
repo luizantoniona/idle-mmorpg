@@ -3,28 +3,32 @@
 namespace Domain {
 
 SkillMilestone::SkillMilestone() :
-    _level( 0 ),
-    _bonuses( {} ) {
+    _type( SkillMilestoneType::UNKNOWN ),
+    _value( 0.0 ),
+    _interval( 0 ) {}
+
+SkillMilestoneType SkillMilestone::type() const {
+    return _type;
 }
 
-int SkillMilestone::level() const {
-    return _level;
+double SkillMilestone::value() const {
+    return _value;
 }
 
-void SkillMilestone::setLevel( int level ) {
-    _level = level;
+void SkillMilestone::setValue( double value ) {
+    _value = value;
 }
 
-std::vector<SkillMilestoneBonus> SkillMilestone::bonuses() const {
-    return _bonuses;
+void SkillMilestone::setType( SkillMilestoneType type ) {
+    _type = type;
 }
 
-void SkillMilestone::setBonuses( const std::vector<SkillMilestoneBonus>& bonuses ) {
-    _bonuses = bonuses;
+int SkillMilestone::interval() const {
+    return _interval;
 }
 
-void SkillMilestone::addBonus( const SkillMilestoneBonus& bonus ) {
-    _bonuses.push_back( bonus );
+void SkillMilestone::setInterval( int interval ) {
+    _interval = interval;
 }
 
 } // namespace Domain

@@ -21,14 +21,14 @@ CharacterSkillsController::CharacterSkillsController( CharacterEventBus& eventBu
 }
 
 void CharacterSkillsController::onEnterWorld() {
-    for ( auto& skill : _characterSkills.skills() ) {
-        Domain::Skill* resolved = _skillManager.skill( skill.id() );
+    for ( auto& [type, skill] : _characterSkills.skills() ) {
+        Domain::Skill* resolved = _skillManager.skill( type );
+
         if ( !resolved ) {
             continue;
         }
 
         skill.setSkill( resolved );
-        skill.setType( Domain::SkillHelper::stringToType( skill.id() ) );
     }
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_SKILLS, _characterSkills.toJson() );
@@ -69,47 +69,42 @@ void CharacterSkillsController::applyMilestone( Domain::CharacterSkill* characte
         return;
     }
 
-    for ( const auto& milestone : skillData->millestones() ) {
+    const auto& milestone = skillData->milestone();
 
-        if ( milestone.level() == characterSkill->level() ) {
-
-            for ( const auto& bonus : milestone.bonuses() ) {
-                applyMilestoneBonus( bonus );
-            }
-        }
+    if ( milestone.interval() <= 0 ) {
+        return;
     }
-}
 
-void CharacterSkillsController::applyMilestoneBonus( const Domain::SkillMilestoneBonus& milestoneBonus ) {
-    const std::string& type = milestoneBonus.type();
-    const std::string& id = milestoneBonus.id();
-    double value = milestoneBonus.value();
+    if ( characterSkill->level() % milestone.interval() != 0 ) {
+        return;
+    }
 
-    if ( type == "vital" ) {
+    double value = milestone.value();
 
-        CharacterEventType eventType;
+    CharacterEventType eventType;
 
-        if ( id == "health" ) {
+    switch ( milestone.type() ) {
+
+        case Domain::SkillMilestoneType::VITAL_HEALTH:
             eventType = CharacterEventType::VITAL_MAX_HEALTH_GAINED;
+            break;
 
-        } else if ( id == "mana" ) {
+        case Domain::SkillMilestoneType::VITAL_MANA:
             eventType = CharacterEventType::VITAL_MAX_MANA_GAINED;
+            break;
 
-        } else if ( id == "stamina" ) {
+        case Domain::SkillMilestoneType::VITAL_STAMINA:
             eventType = CharacterEventType::VITAL_MAX_STAMINA_GAINED;
+            break;
 
-        } else {
-            std::cerr << "CharacterSkillsController Unknown id: " << id << std::endl;
+        default:
+            std::cerr << "CharacterSkillsController Unknown milestone type" << std::endl;
             return;
-        }
-
-        Json::Value payload;
-        payload[ "value" ] = value;
-        _eventBus.publish( CharacterEvent( eventType, payload ) );
-
-    } else {
-        std::cerr << "CharacterSkillsController Unknown type: " << type << std::endl;
     }
+
+    Json::Value payload;
+    payload["value"] = value;
+    _eventBus.publish( CharacterEvent( eventType, payload ) );
 }
 
 void CharacterSkillsController::onSkillExperienceGained( const CharacterEvent& event ) {
@@ -130,18 +125,15 @@ void CharacterSkillsController::onSkillExperienceGained( const CharacterEvent& e
 
     if ( !characterSkill ) {
 
-        std::string skillId = Domain::SkillHelper::typeToString( skillType );
-
-        Domain::Skill* skillData = _skillManager.skill( skillId );
+        Domain::Skill* skillData = _skillManager.skill( skillType );
 
         if ( !skillData ) {
-            std::cerr << "[CharacterSkillsController] Unknown skill id: " << skillId << std::endl;
+            std::cerr << "[CharacterSkillsController] Unknown skill" << std::endl;
             return;
         }
 
         Domain::CharacterSkill newSkill;
         newSkill.setType( skillType );
-        newSkill.setId( skillId );
         newSkill.setLevel( 0 );
         newSkill.setExperience( 0 );
         newSkill.setSkill( skillData );

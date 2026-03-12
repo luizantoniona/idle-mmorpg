@@ -3,5 +3,9 @@
     "name": "Shield Mastery",
     "description": "Your mastery using shields.",
     "category": "weapon",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

@@ -7,7 +7,7 @@ CharacterSkills::CharacterSkills() :
 
 Json::Value CharacterSkills::toJson() {
     Json::Value values;
-    for ( auto& skill : _skills ) {
+    for ( auto& [ type, skill ] : _skills ) {
         values.append( skill.toJson() );
     }
 
@@ -16,33 +16,36 @@ Json::Value CharacterSkills::toJson() {
     return skills;
 }
 
-std::vector<CharacterSkill>& CharacterSkills::skills() {
+std::unordered_map<SkillType, CharacterSkill>& CharacterSkills::skills() {
     return _skills;
 }
 
 CharacterSkill* CharacterSkills::skill( SkillType type ) {
-    for ( auto& skill : _skills ) {
-        if ( skill.type() == type ) {
-            return &skill;
-        }
+    auto it = _skills.find( type );
+
+    if ( it == _skills.end() ) {
+        return nullptr;
     }
 
-    return nullptr;
+    return &it->second;
 }
 
-void CharacterSkills::addSkill( CharacterSkill skill ) {
-    _skills.push_back( skill );
+void CharacterSkills::addSkill( const CharacterSkill& skill ) {
+    _skills[ skill.type() ] = skill;
 }
 
-int CharacterSkills::skillLevel( SkillType type ) {
-    CharacterSkill* skillToSee = skill( type );
-    return skillToSee ? skillToSee->level() + skillToSee->bonusLevel() : 0;
+int CharacterSkills::skillLevel( SkillType type ) const {
+    auto it = _skills.find( type );
+
+    if ( it == _skills.end() ) {
+        return 0;
+    }
+
+    return it->second.level() + it->second.bonusLevel();
 }
 
 void CharacterSkills::clear() {
-    for ( auto& skill : _skills ) {
-        skill.clear();
-    }
+    _skills.clear();
 }
 
 } // namespace Domain

@@ -11,7 +11,7 @@ namespace Manager {
 
 class SkillFactory {
 public:
-    static std::unordered_map<std::string, std::unique_ptr<Domain::Skill> > createSkills( const std::string& skillsPath );
+    static std::unordered_map<Domain::SkillType, std::unique_ptr<Domain::Skill> > createSkills( const std::string& skillsPath );
 
 private:
     static std::unique_ptr<Domain::Skill> createSkill( const std::string& skillPath );

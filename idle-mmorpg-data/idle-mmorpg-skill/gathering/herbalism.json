@@ -3,5 +3,9 @@
     "name": "Herbalism",
     "description": "Identify and harvest herbs for potions, remedies, or magical uses.",
     "category": "gathering",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

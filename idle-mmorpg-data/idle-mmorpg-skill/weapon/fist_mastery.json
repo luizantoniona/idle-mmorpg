@@ -3,5 +3,9 @@
     "name": "Fist Mastery",
     "description": "Your skill in fighting without weapons, using your fists and body.",
     "category": "weapon",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

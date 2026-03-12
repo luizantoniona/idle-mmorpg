@@ -26,6 +26,12 @@ constexpr std::array<std::pair<std::string_view, SkillType>, static_cast<int>( S
     { "MINING", SkillType::MINING },
     { "WOODCUTTING", SkillType::WOODCUTTING },
 } };
+
+constexpr std::array<std::pair<std::string_view, SkillMilestoneType>, static_cast<int>( SkillMilestoneType::UNKNOWN )> SKILL_MILESTONE_TYPE_TABLE = { {
+    { "VITAL_HEALTH", SkillMilestoneType::VITAL_HEALTH },
+    { "VITAL_MANA", SkillMilestoneType::VITAL_MANA },
+    { "VITAL_STAMINA", SkillMilestoneType::VITAL_STAMINA },
+} };
 }
 
 SkillType SkillHelper::stringToType( const std::string& type ) {
@@ -42,6 +48,22 @@ std::string SkillHelper::typeToString( SkillType type ) {
         } );
 
     return it != SKILL_TYPE_TABLE.end() ? std::string( it->first ) : "";
+}
+
+SkillMilestoneType SkillHelper::stringToMilestoneType( const std::string& type ) {
+    auto it = std::find_if( SKILL_MILESTONE_TYPE_TABLE.begin(), SKILL_MILESTONE_TYPE_TABLE.end(), [&]( const auto& pair ) {
+            return pair.first == type;
+        } );
+
+    return it != SKILL_MILESTONE_TYPE_TABLE.end() ? it->second : SkillMilestoneType::UNKNOWN;
+}
+
+std::string SkillHelper::milestoneTypeToString( SkillMilestoneType type ) {
+    auto it = std::find_if( SKILL_MILESTONE_TYPE_TABLE.begin(), SKILL_MILESTONE_TYPE_TABLE.end(), [&]( const auto& pair ) {
+            return pair.second == type;
+        } );
+
+    return it != SKILL_MILESTONE_TYPE_TABLE.end() ? std::string( it->first ) : "";
 }
 
 } // namespace Domain

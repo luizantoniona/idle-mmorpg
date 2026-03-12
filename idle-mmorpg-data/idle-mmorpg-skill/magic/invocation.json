@@ -3,5 +3,9 @@
     "name": "Invocation",
     "description": "Your ability to concentrate and channel magical energy effectively.",
     "category": "magic",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

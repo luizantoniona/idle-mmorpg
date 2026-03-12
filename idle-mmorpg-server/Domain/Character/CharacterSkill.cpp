@@ -1,10 +1,11 @@
 #include "CharacterSkill.h"
 
+#include <Domain/Skill/SkillHelper.h>
+
 namespace Domain {
 
 CharacterSkill::CharacterSkill() :
     _type( SkillType::UNKNOWN ),
-    _id( "" ),
     _level( 0 ),
     _bonusLevel( 0 ),
     _experience( 0 ),
@@ -12,10 +13,10 @@ CharacterSkill::CharacterSkill() :
 
 Json::Value CharacterSkill::toJson() {
     Json::Value values;
-    values[ "id" ] = id();
-    values[ "level" ] = level();
-    values[ "bonusLevel" ] = bonusLevel();
-    values[ "experience" ] = experience();
+    values[ "type" ] = SkillHelper::typeToString( _type );
+    values[ "level" ] = _level;
+    values[ "bonusLevel" ] = _bonusLevel;
+    values[ "experience" ] = _experience;
     values[ "experienceNextLevel" ] = skill()->experienceForNextLevel( level() );
     values[ "skill" ] = skill()->toJson();
     return values;
@@ -27,14 +28,6 @@ SkillType CharacterSkill::type() const {
 
 void CharacterSkill::setType( SkillType type ) {
     _type = type;
-}
-
-std::string CharacterSkill::id() const {
-    return _id;
-}
-
-void CharacterSkill::setId( const std::string& id ) {
-    _id = id;
 }
 
 int CharacterSkill::level() const {

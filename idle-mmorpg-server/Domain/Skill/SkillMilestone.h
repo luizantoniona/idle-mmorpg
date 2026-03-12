@@ -1,9 +1,9 @@
 #ifndef SKILLMILESTONE_H
 #define SKILLMILESTONE_H
 
-#include <vector>
+#include <string>
 
-#include "SkillMilestoneBonus.h"
+#include "SkillMilestoneType.h"
 
 namespace Domain {
 
@@ -11,16 +11,19 @@ class SkillMilestone {
 public:
     SkillMilestone();
 
-    int level() const;
-    void setLevel( int level );
+    SkillMilestoneType type() const;
+    void setType( SkillMilestoneType type );
 
-    std::vector<SkillMilestoneBonus> bonuses() const;
-    void setBonuses( const std::vector<SkillMilestoneBonus>& bonuses );
-    void addBonus( const SkillMilestoneBonus& bonus );
+    double value() const;
+    void setValue( double value );
+
+    int interval() const;
+    void setInterval( int interval );
 
 private:
-    int _level;
-    std::vector<SkillMilestoneBonus> _bonuses;
+    SkillMilestoneType _type;
+    double _value;
+    int _interval;
 };
 
 } // namespace Domain

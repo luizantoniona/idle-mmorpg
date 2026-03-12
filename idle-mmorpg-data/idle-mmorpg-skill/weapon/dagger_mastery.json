@@ -3,5 +3,9 @@
     "name": "Dagger Mastery",
     "description": "Improve your speed with daggers.",
     "category": "weapon",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

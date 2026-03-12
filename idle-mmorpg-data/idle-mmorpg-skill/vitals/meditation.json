@@ -3,86 +3,13 @@
     "name": "Meditation",
     "description": "Through focus and inner calm, you expand your mind, increasing your maximum mana.",
     "category": "vitals",
-    "milestones": [
-        {
-            "level": 1,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 3,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 5,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 7,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 9,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 11,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 13,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        },
-        {
-            "level": 15,
-            "bonuses": [
-                {
-                    "type": "vital",
-                    "id": "mana",
-                    "value": 5
-                }
-            ]
-        }
-    ]
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {
+        "interval": 5,
+        "type": "VITAL_MANA",
+        "value": 5
+    }
 }

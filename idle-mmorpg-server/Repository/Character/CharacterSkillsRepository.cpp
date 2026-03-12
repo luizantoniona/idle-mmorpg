@@ -1,5 +1,6 @@
 #include "CharacterSkillsRepository.h"
 
+#include <Domain/Skill/SkillHelper.h>
 #include <Infrastructure/Database/Query.h>
 
 namespace Repository {
@@ -20,11 +21,11 @@ bool CharacterSkillsRepository::updateSkills( int idCharacter, Domain::Character
             level = excluded.level
     )SQL";
 
-    for ( auto& skill : characterSkills.skills() ) {
+    for ( auto& [type, skill] : characterSkills.skills() ) {
 
         Database::Query query( _db, upsertSql );
         query.bindInt( 1, idCharacter );
-        query.bindText( 2, skill.id() );
+        query.bindText( 2, Domain::SkillHelper::typeToString( type ) );
         query.bindInt( 3, skill.experience() );
         query.bindInt( 4, skill.level() );
 
@@ -48,7 +49,7 @@ std::unique_ptr<Domain::CharacterSkills> CharacterSkillsRepository::findByCharac
 
     while ( query.step() ) {
         Domain::CharacterSkill characterSkill;
-        characterSkill.setId( query.getColumnText( 0 ) );
+        characterSkill.setType( Domain::SkillHelper::stringToType( query.getColumnText( 0 ) ) );
         characterSkill.setExperience( query.getColumnInt( 1 ) );
         characterSkill.setLevel( query.getColumnInt( 2 ) );
 

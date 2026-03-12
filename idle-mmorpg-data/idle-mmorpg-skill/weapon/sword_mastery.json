@@ -3,5 +3,9 @@
     "name": "Sword Mastery",
     "description": "Increase your accuracy with swords.",
     "category": "weapon",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

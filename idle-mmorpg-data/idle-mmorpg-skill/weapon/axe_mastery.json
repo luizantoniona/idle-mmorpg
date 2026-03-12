@@ -3,5 +3,9 @@
     "name": "Axe Mastery",
     "description": "Improve your skill with axes, increasing attack power.",
     "category": "weapon",
-    "milestones": []
+    "experience": {
+        "base": 100,
+        "growth": 1.05
+    },
+    "milestone": {}
 }

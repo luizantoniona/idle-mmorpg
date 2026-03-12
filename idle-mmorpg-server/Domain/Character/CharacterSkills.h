@@ -1,6 +1,8 @@
 #ifndef CHARACTERSKILLS_H
 #define CHARACTERSKILLS_H
 
+#include <unordered_map>
+
 #include <json/json.h>
 
 #include "CharacterSkill.h"
@@ -13,17 +15,17 @@ public:
 
     Json::Value toJson();
 
-    std::vector<CharacterSkill>& skills();
+    std::unordered_map<SkillType, CharacterSkill>& skills();
 
     CharacterSkill* skill( SkillType type );
-    void addSkill( CharacterSkill skill );
+    void addSkill( const CharacterSkill& skill );
 
-    int skillLevel( SkillType type );
+    int skillLevel( SkillType type ) const;
 
     void clear();
 
 private:
-    std::vector<CharacterSkill> _skills;
+    std::unordered_map<SkillType, CharacterSkill> _skills;
 };
 
 } // namespace Domain
