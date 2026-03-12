@@ -91,19 +91,20 @@ void CharacterCombatController::recomputeCombatAttributes() {
         attack += skill->level() * 0.5;
     }
 
-    double attackSpeed = 0.0;
+    double speed = 0.0;
 
     if ( weaponItem ) {
-        attackSpeed = weaponItem->combat().attackSpeed();
+        // TODO: Ajustar a speed de acordo com category do weapon
+        speed = 1.0;
 
     } else {
-        attackSpeed = 0.5;
+        speed = 1.0;
     }
 
     _characterCombat.setAttack( attack );
     _characterCombat.setDefense( defense );
 
-    int attackDuration = attackSpeed * _configurationManager.tickRate();
+    int attackDuration = speed * _configurationManager.tickRate();
     _characterCombat.setAttackDuration( attackDuration );
 }
 
