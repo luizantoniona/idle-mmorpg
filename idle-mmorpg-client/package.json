@@ -5,7 +5,9 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-        "watch": "ng build --watch --configuration development",
+        "build:dev": "ng build --watch --configuration development",
+        "build:prod": "ng build --configuration production",
+        "deploy": "ng deploy",
         "test": "ng test"
     },
     "prettier": {

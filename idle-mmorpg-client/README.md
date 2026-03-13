@@ -8,8 +8,9 @@ Refer to the root `documentation/` folder for the HTTP API and WebSocket protoco
 - [`API.md`](../documentation/API.md)
 - [`WebSocket.md`](../documentation/WebSocket.md)
 
-### **GH Deploy**
+### **GithubPages Deploy**
+Use the scripts in package.json with npm
 ```
-ng build --configuration production
-ng deploy
+npm run build:prod
+npm run deploy
 ```
