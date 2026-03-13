@@ -11,7 +11,7 @@ export type Item = {
     description: string;
     icon: string;
     price: number;
+    bonus: ItemBonus;
     combat: ItemCombat;
-    bonuses: ItemBonus[];
-    effects: ItemEffect[];
+    effect: ItemEffect;
 };

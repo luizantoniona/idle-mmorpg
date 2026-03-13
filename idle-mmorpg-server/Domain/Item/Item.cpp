@@ -26,9 +26,9 @@ Json::Value Item::toJson() const {
     root[ "icon" ] = _icon;
     root[ "price" ] = _price;
 
-    root[ "bonus" ].append( _bonus.toJson() );
+    root[ "bonus" ] = _bonus.toJson();
     root[ "combat" ] = _combat.toJson();
-    root[ "effect" ].append( _effect.toJson() );
+    root[ "effect" ] = _effect.toJson();
 
     return root;
 }

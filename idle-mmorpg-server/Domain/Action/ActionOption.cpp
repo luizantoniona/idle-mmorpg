@@ -6,8 +6,8 @@ ActionOption::ActionOption() :
     _stage( 0 ),
     _duration( 0 ),
     _experience( 0 ),
-    _skill( SkillType::UNKNOWN ),
-    _itemId( "" ) {
+    _itemId( "" ),
+    _description( "" ) {
 }
 
 int ActionOption::stage() const {
@@ -34,20 +34,20 @@ void ActionOption::setExperience( int experience ) {
     _experience = experience;
 }
 
-SkillType ActionOption::skill() const {
-    return _skill;
-}
-
-void ActionOption::setSkill( SkillType skill ) {
-    _skill = skill;
-}
-
 const std::string& ActionOption::itemId() const {
     return _itemId;
 }
 
 void ActionOption::setItemId( const std::string& id ) {
     _itemId = id;
+}
+
+std::string ActionOption::description() const {
+    return _description;
+}
+
+void ActionOption::setDescription( const std::string& description ) {
+    _description = description;
 }
 
 } // namespace Domain

@@ -1,6 +1,6 @@
 export type ItemEffect = {
-    type: string;
-    category: string;
-    value: number;
+    health: number;
+    mana: number;
+    stamina: number;
     duration: number;
 };

@@ -5,16 +5,16 @@
         {
             "stage": 5,
             "duration": 5,
-            "skill": "MINING",
             "experience": 1,
-            "item": "copper_ore"
+            "item": "copper_ore",
+            "description": "Mine copper ore"
         },
         {
             "stage": 10,
             "duration": 15,
-            "skill": "MINING",
             "experience": 2,
-            "item": "iron_ore"
+            "item": "iron_ore",
+            "description": "Mine iron ore"
         }
     ]
 }

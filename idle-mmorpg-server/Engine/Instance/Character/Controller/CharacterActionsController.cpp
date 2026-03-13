@@ -1,5 +1,7 @@
 #include "CharacterActionsController.h"
 
+#include <Engine/Instance/Character/Helper/CombatHelper.h>
+
 namespace Engine {
 
 CharacterActionsController::CharacterActionsController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
@@ -26,7 +28,7 @@ void CharacterActionsController::onEnterWorld() {
                 charOpt.setStage( option.stage() );
                 charOpt.setDuration( option.duration() );
                 charOpt.setExperience( option.experience() );
-                charOpt.setSkill( option.skill() );
+                charOpt.setDescription( option.description() );
                 charOpt.setItemId( option.itemId() );
                 filtered.push_back( charOpt );
             }
@@ -159,54 +161,19 @@ void CharacterActionsController::executeTraining( const Domain::CharacterActionO
 }
 
 std::vector<Domain::SkillType> CharacterActionsController::combatSkill( Domain::Character* character ) {
-    const Domain::Item* weapon = character->equipment().weapon().item();
-    const Domain::Item* offhand = character->equipment().offhand().item();
+    std::vector<Domain::SkillType> skills;
 
-    std::vector<Domain::SkillType> skills = {};
-
-    auto getSkillForWeapon = []( const Domain::Item* item ) -> Domain::SkillType {
-        if ( !item ) {
-            return Domain::SkillType::FIST_MASTERY;
-        }
-
-        switch ( item->category() ) {
-        case Domain::ItemCategory::AXE:
-            return Domain::SkillType::AXE_MASTERY;
-
-        case Domain::ItemCategory::DAGGER:
-            return Domain::SkillType::DAGGER_MASTERY;
-
-        case Domain::ItemCategory::SWORD:
-            return Domain::SkillType::SWORD_MASTERY;
-
-        default:
-            return Domain::SkillType::UNKNOWN;
-        }
+    const Domain::Item* items[] = {
+        character->equipment().weapon().item(),
+        character->equipment().offhand().item(),
     };
 
-    auto getSkillForOffhand = []( const Domain::Item* item ) -> Domain::SkillType {
-        if ( !item ) {
-            return Domain::SkillType::UNKNOWN;
+    for ( const Domain::Item* item : items ) {
+        auto skill = CombatHelper::skillTypeByItem( item );
+
+        if ( skill != Domain::SkillType::UNKNOWN ) {
+            skills.push_back( skill );
         }
-
-        switch ( item->category() ) {
-        case Domain::ItemCategory::SHIELD:
-            return Domain::SkillType::SHIELD_MASTERY;
-
-        default:
-            return Domain::SkillType::UNKNOWN;
-        }
-    };
-
-    Domain::SkillType weaponSkill = getSkillForWeapon( weapon );
-    Domain::SkillType offhandSkill = getSkillForOffhand( offhand );
-
-    if ( weaponSkill != Domain::SkillType::UNKNOWN ) {
-        skills.push_back( weaponSkill );
-    }
-
-    if ( offhandSkill != Domain::SkillType::UNKNOWN ) {
-        skills.push_back( offhandSkill );
     }
 
     return skills;

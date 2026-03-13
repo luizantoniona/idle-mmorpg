@@ -5,8 +5,9 @@
 
 #include <string>
 
-#include "CharacterActionOption.h"
 #include <Domain/Action/ActionType.h>
+
+#include "CharacterActionOption.h"
 
 namespace Domain {
 

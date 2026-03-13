@@ -1,7 +1,7 @@
 import { Skill } from "../skill/skill.model";
 
 export type CharacterSkill = {
-    id: string;
+    type: string;
     level: number;
     bonusLevel: number;
     experience: number;

@@ -7,7 +7,7 @@
         @for (category of groupSkillsByCategory(character.skills) | keyvalue; track category.key) {
         <strong class="category-title">{{ category.key | titlecase }}</strong>
 
-        @for (characterSkill of category.value; track characterSkill.id) {
+        @for (characterSkill of category.value; track characterSkill.type) {
         <app-tooltip>
             <div tooltip-target>
                 <app-bar

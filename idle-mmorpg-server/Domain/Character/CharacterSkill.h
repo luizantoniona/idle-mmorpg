@@ -1,8 +1,6 @@
 #ifndef CHARACTERSKILL_H
 #define CHARACTERSKILL_H
 
-#include <string>
-
 #include <json/json.h>
 
 #include <Domain/Skill/Skill.h>

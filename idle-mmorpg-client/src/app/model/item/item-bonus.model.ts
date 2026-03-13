@@ -1,5 +1,4 @@
 export type ItemBonus = {
     type: string;
-    category: string;
     value: number;
 };

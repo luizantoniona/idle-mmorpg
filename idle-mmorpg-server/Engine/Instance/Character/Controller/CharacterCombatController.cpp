@@ -1,5 +1,7 @@
 #include "CharacterCombatController.h"
 
+#include <Engine/Instance/Character/Helper/CombatHelper.h>
+
 namespace Engine {
 
 CharacterCombatController::CharacterCombatController( CharacterEventBus& eventBus, CharacterMessageSender& messageSender,
@@ -64,40 +66,16 @@ void CharacterCombatController::recomputeCombatAttributes() {
         defense += item->combat().defense();
     }
 
-    auto getSkillForWeapon = []( const Domain::Item* item ) -> Domain::SkillType {
-        if ( !item ) {
-            return Domain::SkillType::FIST_MASTERY;
-        }
-
-        switch ( item->category() ) {
-
-        case Domain::ItemCategory::AXE:
-            return Domain::SkillType::AXE_MASTERY;
-
-        case Domain::ItemCategory::DAGGER:
-            return Domain::SkillType::DAGGER_MASTERY;
-
-        case Domain::ItemCategory::SWORD:
-            return Domain::SkillType::SWORD_MASTERY;
-
-        default:
-            return Domain::SkillType::FIST_MASTERY;
-        }
-    };
-
-    Domain::SkillType weaponSkill = getSkillForWeapon( weaponItem );
+    Domain::SkillType weaponSkill = CombatHelper::skillTypeByItem( weaponItem );
 
     if ( auto* skill = skills.skill( weaponSkill ) ) {
         attack += skill->level() * 0.5;
     }
 
-    double speed = 0.0;
+    double speed = 1.0;
 
     if ( weaponItem ) {
         // TODO: Ajustar a speed de acordo com category do weapon
-        speed = 1.0;
-
-    } else {
         speed = 1.0;
     }
 

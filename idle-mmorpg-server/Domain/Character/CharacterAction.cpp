@@ -22,7 +22,7 @@ Json::Value CharacterAction::toJson() const {
             optionJson[ "stage" ] = option.stage();
             optionJson[ "duration" ] = option.duration();
             optionJson[ "experience" ] = option.experience();
-            optionJson[ "skill" ] = static_cast<int>( option.skill() );
+            optionJson[ "description" ] = option.description();
 
             if ( !option.itemId().empty() ) {
                 optionJson[ "item" ] = option.itemId();
@@ -38,7 +38,7 @@ Json::Value CharacterAction::toJson() const {
         selectedJson[ "stage" ] = _selectedOption.stage();
         selectedJson[ "duration" ] = _selectedOption.duration();
         selectedJson[ "experience" ] = _selectedOption.experience();
-        selectedJson[ "skill" ] = static_cast<int>( _selectedOption.skill() );
+        selectedJson[ "description" ] = _selectedOption.description();
 
         if ( !_selectedOption.itemId().empty() ) {
             selectedJson[ "item" ] = _selectedOption.itemId();

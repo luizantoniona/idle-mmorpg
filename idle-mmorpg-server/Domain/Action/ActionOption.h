@@ -3,8 +3,6 @@
 
 #include <string>
 
-#include <Domain/Skill/SkillType.h>
-
 namespace Domain {
 
 class ActionOption {
@@ -20,18 +18,18 @@ public:
     int experience() const;
     void setExperience( int experience );
 
-    SkillType skill() const;
-    void setSkill( SkillType skill );
-
     const std::string& itemId() const;
     void setItemId( const std::string& id );
+
+    std::string description() const;
+    void setDescription( const std::string& description );
 
 private:
     int _stage;
     int _duration;
     int _experience;
-    SkillType _skill;
     std::string _itemId;
+    std::string _description;
 };
 
 } // namespace Domain

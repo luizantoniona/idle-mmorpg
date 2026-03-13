@@ -3,11 +3,11 @@
 namespace Domain {
 
 CharacterActionOption::CharacterActionOption() :
-    _stage(0),
-    _duration(0),
-    _experience(0),
-    _skill(SkillType::UNKNOWN),
-    _itemId("") {
+    _stage( 0 ),
+    _duration( 0 ),
+    _experience( 0 ),
+    _itemId( "" ),
+    _description( "" ) {
 }
 
 int CharacterActionOption::stage() const {
@@ -34,20 +34,20 @@ void CharacterActionOption::setExperience(int experience) {
     _experience = experience;
 }
 
-SkillType CharacterActionOption::skill() const {
-    return _skill;
-}
-
-void CharacterActionOption::setSkill(SkillType skill) {
-    _skill = skill;
-}
-
 const std::string& CharacterActionOption::itemId() const {
     return _itemId;
 }
 
 void CharacterActionOption::setItemId(const std::string& id) {
     _itemId = id;
+}
+
+std::string CharacterActionOption::description() const {
+    return _description;
+}
+
+void CharacterActionOption::setDescription( const std::string& description ) {
+    _description = description;
 }
 
 } // namespace Domain

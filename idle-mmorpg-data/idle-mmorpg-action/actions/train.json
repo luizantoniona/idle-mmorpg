@@ -3,16 +3,16 @@
     "description": "Train your combat skills",
     "options": [
         {
-            "stage": 0,
+            "stage": 1,
             "duration": 2,
-            "skill": "COMBAT",
-            "experience": 1
+            "experience": 1,
+            "description": "Initial training"
         },
         {
-            "stage": 1,
+            "stage": 5,
             "duration": 5,
-            "skill": "COMBAT",
-            "experience": 2
+            "experience": 2,
+            "description": "Advanced training"
         }
     ]
 }
