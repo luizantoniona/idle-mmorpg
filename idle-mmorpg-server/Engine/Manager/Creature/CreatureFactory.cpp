@@ -56,6 +56,7 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     std::string baseDir = creaturePath.substr( 0, creaturePath.find_last_of( '/' ) + 1 );
     Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( creature->icon(), baseDir + creature->icon() );
 
+    // --- Creature Vital ---
     const Json::Value& vitalsJson = creatureJson[ "vitals" ];
     creature->vitals().setMaxHealth( vitalsJson[ "health" ].asDouble() );
     creature->vitals().setHealth( vitalsJson[ "health" ].asDouble() );
@@ -64,6 +65,14 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
     creature->vitals().setMaxStamina( vitalsJson[ "stamina" ].asDouble() );
     creature->vitals().setStamina( vitalsJson[ "stamina" ].asDouble() );
 
+    // --- Creature Combat ---
+    const Json::Value& combatJson = creatureJson[ "combat" ];
+    creature->combat().setAttack( combatJson[ "attack" ].asDouble() );
+    creature->combat().setDefense( combatJson[ "defense" ].asDouble() );
+    creature->combat().setAttackCounter( 0 );
+    creature->combat().setAttackDuration( static_cast<int>( combatJson[ "speed" ].asDouble() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() ) );
+
+    // --- Creature Loot ---
     for ( const auto& lootJson : creatureJson[ "loot" ] ) {
         Domain::CreatureLoot loot;
         loot.setId( lootJson[ "id" ].asString() );
@@ -73,11 +82,6 @@ std::unique_ptr<Domain::Creature> CreatureFactory::createCreature( const std::st
 
         creature->addLoot( loot );
     }
-
-    const Json::Value& combatJson = creatureJson[ "combat" ];
-    creature->combat().setAttack( combatJson[ "attack" ].asDouble() );
-    creature->combat().setAttackCounter( 0 );
-    creature->combat().setAttackDuration( static_cast<int>( combatJson[ "speed" ].asDouble() * Commons::Singleton<Manager::ServerConfigurationManager>::instance().tickRate() ) );
 
     return creature;
 }
