@@ -21,7 +21,7 @@ void CombatController::resolveCharacterAttack( CharacterInstance& attacker, Doma
         return;
     }
 
-    if ( attacker.character().vitals().health() <= 0 ) {
+    if ( attacker.character().vitals().health() <= 0 ||  attacker.character().vitals().stamina() <= 0 ) {
         return;
     }
 
