@@ -3,7 +3,8 @@
 namespace Domain {
 
 CreatureCombat::CreatureCombat() :
-    _attack( 0.00 ),
+    _attack( 0.0 ),
+    _defense( 0.0 ),
     _attackCounter( 0 ),
     _attackDuration( 0 ) {
 }
@@ -21,6 +22,14 @@ double CreatureCombat::attack() const {
 
 void CreatureCombat::setAttack( double attack ) {
     _attack = attack;
+}
+
+double CreatureCombat::defense() const {
+    return _defense;
+}
+
+void CreatureCombat::setDefense( double defense ) {
+    _defense = defense;
 }
 
 int CreatureCombat::attackCounter() const {

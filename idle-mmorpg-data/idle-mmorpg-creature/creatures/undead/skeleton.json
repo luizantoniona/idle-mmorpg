@@ -11,6 +11,7 @@
     },
     "combat": {
         "attack": 10.0,
+        "defense": 10.0,
         "speed": 3.0
     },
     "loot": [

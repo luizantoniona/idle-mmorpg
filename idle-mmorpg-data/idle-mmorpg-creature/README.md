@@ -19,7 +19,7 @@ Each creature file is a JSON object with the following fields:
   "icon": "rat.gif",
   "experience": 3,
   "vitals": {"health":3,"mana":3,"stamina":3},
-  "combat": {"attack":3.0,"speed":1.0},
+  "combat": {"attack":3.0,"defense":3.0, "speed":1.0},
   "loot": [
     {"id":"food_cheese","chance":0.1,"minAmount":1,"maxAmount":1},
     {"id":"coin_copper","chance":0.35,"minAmount":1,"maxAmount":1}

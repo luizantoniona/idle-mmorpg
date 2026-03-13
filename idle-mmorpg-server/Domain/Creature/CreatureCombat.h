@@ -14,6 +14,9 @@ public:
     double attack() const;
     void setAttack( double attack );
 
+    double defense() const;
+    void setDefense( double defense );
+
     int attackCounter() const;
     void setAttackCounter( int attackCounter );
 
@@ -22,6 +25,7 @@ public:
 
 private:
     double _attack;
+    double _defense;
 
     int _attackCounter;
     int _attackDuration;
