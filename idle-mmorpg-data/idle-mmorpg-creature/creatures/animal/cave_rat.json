@@ -5,13 +5,13 @@
     "icon": "cave_rat.gif",
     "experience": 5,
     "vitals": {
-        "health": 5,
+        "health": 10,
         "mana": 5,
         "stamina": 5
     },
     "combat": {
-        "attack": 5.0,
-        "defense": 5.0,
+        "attack": 2.0,
+        "defense": 3.0,
         "speed": 1.0
     },
     "loot": [
@@ -23,7 +23,7 @@
         },
         {
             "id": "coin_copper",
-            "chance": 0.35,
+            "chance": 0.5,
             "minAmount": 1,
             "maxAmount": 1
         }

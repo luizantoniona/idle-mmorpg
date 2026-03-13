@@ -8,8 +8,8 @@
         "growth": 1.05
     },
     "milestone": {
-        "interval": 5,
+        "interval": 1,
         "type": "VITAL_HEALTH",
-        "value": 5
+        "value": 1
     }
 }
