@@ -4,6 +4,11 @@
 namespace Domain {
 
 enum class SkillType {
+    // Vital
+    ENDURANCE,
+    MEDITATION,
+    VITALITY,
+
     // Weapons and Combat
     AXE_MASTERY,
     DAGGER_MASTERY,
@@ -14,11 +19,6 @@ enum class SkillType {
     // Magic
     INVOCATION,
     RESTORATION,
-
-    // Vital
-    ENDURANCE,
-    MEDITATION,
-    VITALITY,
 
     // Gathering
     FISHING,

@@ -120,6 +120,13 @@ void CharacterVitalsController::onVitalHealthChanged( const CharacterEvent& even
     const double value = payload[ "value" ].asDouble();
     _characterVitals.modifyHealth( value );
     _messageSender.sendMessage( MessageSenderType::CHARACTER_VITALS, _characterVitals.toJson() );
+
+    if ( value < 0 ) {
+        Json::Value xpPayload;
+        xpPayload[ "skill" ] = static_cast<int>( Domain::SkillType::VITALITY );
+        xpPayload[ "experience" ] = std::abs( value );
+        _eventBus.publish( CharacterEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, xpPayload ) );
+    }
 }
 
 void CharacterVitalsController::onVitalManaChanged( const CharacterEvent& event ) {
@@ -131,6 +138,13 @@ void CharacterVitalsController::onVitalManaChanged( const CharacterEvent& event 
     const double value = payload[ "value" ].asDouble();
     _characterVitals.modifyMana( value );
     _messageSender.sendMessage( MessageSenderType::CHARACTER_VITALS, _characterVitals.toJson() );
+
+    if ( value < 0 ) {
+        Json::Value xpPayload;
+        xpPayload[ "skill" ] = static_cast<int>( Domain::SkillType::MEDITATION );
+        xpPayload[ "experience" ] = std::abs( value );
+        _eventBus.publish( CharacterEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, xpPayload ) );
+    }
 }
 
 void CharacterVitalsController::onVitalStaminaChanged( const CharacterEvent& event ) {
@@ -142,6 +156,13 @@ void CharacterVitalsController::onVitalStaminaChanged( const CharacterEvent& eve
     const double value = payload[ "value" ].asDouble();
     _characterVitals.modifyStamina( value );
     _messageSender.sendMessage( MessageSenderType::CHARACTER_VITALS, _characterVitals.toJson() );
+
+    if ( value < 0 ) {
+        Json::Value xpPayload;
+        xpPayload[ "skill" ] = static_cast<int>( Domain::SkillType::ENDURANCE );
+        xpPayload[ "experience" ] = std::abs( value );
+        _eventBus.publish( CharacterEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, xpPayload ) );
+    }
 }
 
 } // namespace Engine

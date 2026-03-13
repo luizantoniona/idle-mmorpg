@@ -31,8 +31,6 @@ void CombatController::resolveCharacterAttack( CharacterInstance& attacker, Doma
     payload[ "value" ] = -1.0;
     attacker.publishEvent( CharacterEventType::VITAL_STAMINA_CHANGED, payload );
 
-    // TODO: Should apply experience on endurance skill.
-
     double damage = combat.attack();
 
     // TODO: Should apply experience on attack weapon skill.
@@ -60,8 +58,6 @@ void CombatController::resolveCreatureAttack( Domain::Creature& attacker, Charac
     }
 
     double damage = combat.attack();
-
-    // TODO: Should apply experience on vitallity skill.
 
     Json::Value payload;
     payload[ "value" ] = -damage;
