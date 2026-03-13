@@ -9,17 +9,8 @@
 
 ### Character Combat & Experience (HIGH PRIORITY)
 - **File:** [idle-mmorpg-server/Engine/Instance/Combat/Controller/CombatController.cpp](idle-mmorpg-server/Engine/Instance/Combat/Controller/CombatController.cpp#L33)
-- ⚠️ **TODO:** Apply experience to endurance skill on damage taken (line 33)
 - ⚠️ **TODO:** Apply experience to attack weapon skill on dealing damage (line 37)
-- ⚠️ **TODO:** Apply experience to vitality skill on health recovery (line 63)
 - **Details:** Combat experience distribution needs proper implementation. Currently these are placeholder TODOs. Combat resolution logic exists but experience events are not published to CharacterEventBus.
-
-
-### Weapon Attack Duration Recalculation
-- **File:** [idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterCombatController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterCombatController.cpp)
-- ⚠️ **TODO:** Verify offhand contribution to attack speed when dual-wielding. Weapon-based recalculation is implemented.
-- **Details:** Attack duration is now set from weapon attackSpeed, but offhand is not accounted for. Ensure dual-wield logic matches design.
----
 
 ## 📦 Legacy System Mapping (OLD → NEW Controllers)
 
@@ -68,8 +59,7 @@ The following systems existed in the OLD architecture and need to be fully imple
 - ✅ Creature counterattack damage calculation exists
 - ⚠️ **TODO:** Implement spell damage computation - no spell damage logic in CombatController
 - ⚠️ **TODO:** Implement block/evasion mechanics - missing in resolveCreatureAttack
-- ⚠️ **TODO:** Implement experience skill acquisition from combat - TODOs in code for endurance, weapon skill, vitality
-- ⚠️ **TODO:** Implement loot computation - computeCharactersLoot exists but incomplete
+- ⚠️ **TODO:** Implement experience skill acquisition from combat - TODOs in code for weapon skill
 - [ ] Add combat events to CharacterEventBus (hit, damage taken, spell cast, etc.) - no events published
 - [ ] Re-implement damage multipliers from configuration - hardcoded values used
 

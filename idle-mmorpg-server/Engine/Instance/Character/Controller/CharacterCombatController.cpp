@@ -54,7 +54,7 @@ void CharacterCombatController::recomputeCombatAttributes() {
         equipment.ring().item(),
     };
 
-    double attack = 0.0;
+    double attack = 1.0;
     double defense = 0.0;
 
     for ( const Domain::Item* item : items ) {
@@ -67,23 +67,15 @@ void CharacterCombatController::recomputeCombatAttributes() {
     }
 
     Domain::SkillType weaponSkill = CombatHelper::skillTypeByItem( weaponItem );
-
     if ( auto* skill = skills.skill( weaponSkill ) ) {
         attack += skill->level() * 0.5;
     }
 
-    double speed = 1.0;
-
-    if ( weaponItem ) {
-        // TODO: Ajustar a speed de acordo com category do weapon
-        speed = 1.0;
-    }
+    double speed = CombatHelper::attackSpeedByItem( weaponItem );
 
     _characterCombat.setAttack( attack );
     _characterCombat.setDefense( defense );
-
-    int attackDuration = speed * _configurationManager.tickRate();
-    _characterCombat.setAttackDuration( attackDuration );
+    _characterCombat.setAttackDuration( speed * _configurationManager.tickRate() );
 }
 
 void CharacterCombatController::onItemEquipped( const CharacterEvent& event ) {
