@@ -3,28 +3,27 @@
 namespace Domain {
 
 StageObjective::StageObjective() :
-    _id( "" ),
+    _type( "" ),
     _target( "" ),
-    _amount( 0 ),
-    _rewards( {} ) {
+    _amount( 0 ) {
 }
 
 StageObjective::~StageObjective() = default;
 
 Json::Value StageObjective::toJson() {
     Json::Value values;
-    values[ "id" ] = id();
+    values[ "id" ] = _type;
     values[ "target" ] = target();
     values[ "amount" ] = amount();
     return values;
 }
 
-std::string StageObjective::id() const {
-    return _id;
+std::string StageObjective::type() const {
+    return _type;
 }
 
-void StageObjective::setId( const std::string& id ) {
-    _id = id;
+void StageObjective::setType( const std::string& type ) {
+    _type = type;
 }
 
 std::string StageObjective::target() const {
@@ -41,18 +40,6 @@ int StageObjective::amount() const {
 
 void StageObjective::setAmount( int amount ) {
     _amount = amount;
-}
-
-std::vector<StageObjectiveReward> StageObjective::rewards() const {
-    return _rewards;
-}
-
-void StageObjective::setRewards( const std::vector<StageObjectiveReward>& rewards ) {
-    _rewards = rewards;
-}
-
-void StageObjective::addReward( const StageObjectiveReward& reward ) {
-    _rewards.push_back( reward );
 }
 
 } // namespace Domain

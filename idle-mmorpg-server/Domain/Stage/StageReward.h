@@ -1,14 +1,14 @@
-#ifndef STAGEOBJECTIVEREWARD_H
-#define STAGEOBJECTIVEREWARD_H
+#ifndef STAGEREWARD_H
+#define STAGEREWARD_H
 
 #include <string>
 
 namespace Domain {
 
-class StageObjectiveReward {
+class StageReward {
 public:
-    StageObjectiveReward();
-    ~StageObjectiveReward();
+    StageReward();
+    ~StageReward();
 
     std::string type() const;
     void setType( const std::string& type );
@@ -27,4 +27,4 @@ private:
 
 } // namespace Domain
 
-#endif // STAGEOBJECTIVEREWARD_H
+#endif // STAGEREWARD_H

@@ -3,6 +3,7 @@
 
 #include "StageCreature.h"
 #include "StageObjective.h"
+#include "StageReward.h"
 
 namespace Domain {
 
@@ -24,10 +25,15 @@ public:
     void setObjectives( const std::vector<StageObjective>& objectives );
     void addObjective( const StageObjective& objective );
 
+    std::vector<StageReward> rewards() const;
+    void setRewards( const std::vector<StageReward>& rewards );
+    void addReward( const StageReward& reward );
+
 private:
     int _level;
     std::vector<StageCreature> _creatures;
     std::vector<StageObjective> _objectives;
+    std::vector<StageReward> _rewards;
 };
 
 } // namespace Domain

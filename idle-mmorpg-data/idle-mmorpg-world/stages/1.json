@@ -8,16 +8,16 @@
     ],
     "objectives": [
         {
-            "id": "1-1",
+            "type": "KILL",
             "target": "rat",
-            "amount": 5,
-            "rewards": [
-                {
-                    "type": "item",
-                    "id": "coin_copper",
-                    "amount": 5
-                }
-            ]
+            "amount": 5
+        }
+    ],
+    "rewards": [
+        {
+            "type": "item",
+            "id": "coin_copper",
+            "amount": 5
         }
     ]
 }

@@ -55,4 +55,16 @@ void Stage::addObjective( const StageObjective& objective ) {
     _objectives.push_back( objective );
 }
 
+std::vector<StageReward> Stage::rewards() const {
+    return _rewards;
+}
+
+void Stage::setRewards( const std::vector<StageReward>& rewards ) {
+    _rewards = rewards;
+}
+
+void Stage::addReward( const StageReward& reward ) {
+    _rewards.push_back( reward );
+}
+
 } // namespace Domain

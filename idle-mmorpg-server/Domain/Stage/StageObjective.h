@@ -2,11 +2,8 @@
 #define STAGEOBJECTIVE_H
 
 #include <string>
-#include <vector>
 
 #include <json/json.h>
-
-#include "StageObjectiveReward.h"
 
 namespace Domain {
 
@@ -17,8 +14,8 @@ public:
 
     Json::Value toJson();
 
-    std::string id() const;
-    void setId( const std::string& id );
+    std::string type() const;
+    void setType( const std::string& type );
 
     std::string target() const;
     void setTarget( const std::string& target );
@@ -26,15 +23,10 @@ public:
     int amount() const;
     void setAmount( int amount );
 
-    std::vector<StageObjectiveReward> rewards() const;
-    void setRewards( const std::vector<StageObjectiveReward>& rewards );
-    void addReward( const StageObjectiveReward& reward );
-
 private:
-    std::string _id;
+    std::string _type;
     std::string _target;
     int _amount;
-    std::vector<StageObjectiveReward> _rewards;
 };
 
 } // namespace Domain

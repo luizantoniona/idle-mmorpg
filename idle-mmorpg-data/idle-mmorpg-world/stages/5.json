@@ -1,23 +1,32 @@
 {
-    "level": 2,
+    "level": 5,
     "creatures": [
         {
             "id": "rat",
-            "amount": 2
+            "amount": 3
+        },
+        {
+            "id": "cave_rat",
+            "amount": 1
         }
     ],
     "objectives": [
         {
             "type": "KILL",
             "target": "rat",
-            "amount": 10
+            "amount": 20
+        },
+        {
+            "type": "KILL",
+            "target": "cave_rat",
+            "amount": 5
         }
     ],
     "rewards": [
         {
             "type": "item",
             "id": "coin_copper",
-            "amount": 5
+            "amount": 30
         }
     ]
 }

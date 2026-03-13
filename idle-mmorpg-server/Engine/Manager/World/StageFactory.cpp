@@ -22,27 +22,25 @@ std::unique_ptr<Domain::Stage> StageFactory::createStage( const std::string& sta
         creature.setId( creatureJson[ "id" ].asString() );
         creature.setAmount( creatureJson[ "amount" ].asInt() );
         creature.setCreature( Commons::Singleton<Manager::CreatureManager>::instance().creatureById( creature.id() ) );
-
         stage->addCreature( creature );
     }
 
     // --- Objectives ---
     for ( const Json::Value& objectiveJson : stageJson[ "objectives" ] ) {
         Domain::StageObjective objective;
-        objective.setId( objectiveJson[ "id" ].asString() );
+        objective.setType( objectiveJson[ "type" ].asString() );
         objective.setTarget( objectiveJson[ "target" ].asString() );
         objective.setAmount( objectiveJson[ "amount" ].asInt() );
-
-        for ( const Json::Value& rewardJson : objectiveJson[ "rewards" ] ) {
-            Domain::StageObjectiveReward reward;
-            reward.setType( rewardJson[ "type" ].asString() );
-            reward.setId( rewardJson[ "id" ].asString() );
-            reward.setAmount( rewardJson[ "amount" ].asInt() );
-
-            objective.addReward( reward );
-        }
-
         stage->addObjective( objective );
+    }
+
+    // --- Rewards ---
+    for ( const Json::Value& rewardJson : stageJson[ "rewards" ] ) {
+        Domain::StageReward reward;
+        reward.setType( rewardJson[ "type" ].asString() );
+        reward.setId( rewardJson[ "id" ].asString() );
+        reward.setAmount( rewardJson[ "amount" ].asInt() );
+        stage->addReward( reward );
     }
 
     return stage;
