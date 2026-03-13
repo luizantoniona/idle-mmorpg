@@ -7,11 +7,6 @@
 - ⚠️ **TODO:** Tune regeneration amounts and integrate `configurationManager` rates (currently fixed +1 values).
 - **Details:** Regeneration logic is implemented with placeholder values. Adjust formulas and apply configuration-based modifiers; the controller already sends updates when vitals change.
 
-### Character Combat & Experience (HIGH PRIORITY)
-- **File:** [idle-mmorpg-server/Engine/Instance/Combat/Controller/CombatController.cpp](idle-mmorpg-server/Engine/Instance/Combat/Controller/CombatController.cpp#L33)
-- ⚠️ **TODO:** Apply experience to attack weapon skill on dealing damage (line 37)
-- **Details:** Combat experience distribution needs proper implementation. Currently these are placeholder TODOs. Combat resolution logic exists but experience events are not published to CharacterEventBus.
-
 ## 📦 Legacy System Mapping (OLD → NEW Controllers)
 
 The following systems existed in the OLD architecture and need to be fully implemented in the new CharacterInstance+EventBus architecture:
@@ -37,31 +32,6 @@ The following systems existed in the OLD architecture and need to be fully imple
 - ⚠️ **TODO:** Verify duration calculations match old formula: `base * max(0.5, 1.0 - 0.01 * skillLevel)` - need to check implementation
 - [ ] Update to use CharacterEventBus for state changes - no events published
 - [ ] Ensure action events are published - missing event publishing
-
-### 2. Combat System → CombatController & CombatInstance ✅ (PARTIAL)
-**Old Location:** `Old/CombatSystem.cpp`
-**New Location:** [Engine/Instance/Combat/Controller/CombatController.cpp](idle-mmorpg-server/Engine/Instance/Combat/Controller/CombatController.cpp)
-
-**What OLD had:**
-- Hit damage computation (character → creature)
-- Creature counterattack damage calculation
-- Spell damage computation
-- Hit chance calculations with skill modifiers
-- Block/evasion mechanics
-- Defense damage reduction
-- Experience distribution from combat
-- Loot distribution from defeated creatures
-- Dynamic multipliers (WEAPON_SKILL_DAMAGE_MULTIPLIER, MAGIC_SKILL_DAMAGE_MULTIPLIER)
-
-**Status & TODO:**
-- ✅ Combat resolution exists (resolveCharacterAttack, resolveCreatureAttack)
-- ✅ Hit damage computation implemented (character → creature)
-- ✅ Creature counterattack damage calculation exists
-- ⚠️ **TODO:** Implement spell damage computation - no spell damage logic in CombatController
-- ⚠️ **TODO:** Implement block/evasion mechanics - missing in resolveCreatureAttack
-- ⚠️ **TODO:** Implement experience skill acquisition from combat - TODOs in code for weapon skill
-- [ ] Add combat events to CharacterEventBus (hit, damage taken, spell cast, etc.) - no events published
-- [ ] Re-implement damage multipliers from configuration - hardcoded values used
 
 ### 4. Regeneration System → CharacterVitalsController ✅ (PARTIAL)
 **Old Location:** `Old/RegenerationSystem.cpp`

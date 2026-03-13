@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 
+#include <Engine/Instance/Character/Helper/CombatHelper.h>
+
 namespace Engine {
 
 CombatController::CombatController( Manager::ServerConfigurationManager& serverManager ) :
@@ -12,10 +14,10 @@ CombatController::CombatController( Manager::ServerConfigurationManager& serverM
 CombatController::~CombatController() = default;
 
 void CombatController::resolveCharacterAttack( CharacterInstance& attacker, Domain::Creature& target ) {
-    auto& combat = attacker.character().combat();
+    auto& attackerCombat = attacker.character().combat();
 
-    if ( combat.attackCounter() < combat.attackDuration() ) {
-        combat.setAttackCounter( combat.attackCounter() + 1 );
+    if ( attackerCombat.attackCounter() < attackerCombat.attackDuration() ) {
+        attackerCombat.setAttackCounter( attackerCombat.attackCounter() + 1 );
         return;
     }
 
@@ -27,25 +29,38 @@ void CombatController::resolveCharacterAttack( CharacterInstance& attacker, Doma
         return;
     }
 
-    Json::Value payload;
-    payload[ "value" ] = -1.0;
-    attacker.publishEvent( CharacterEventType::VITAL_STAMINA_CHANGED, payload );
+    Json::Value staminaPayload;
+    staminaPayload[ "value" ] = -1.0;
+    attacker.publishEvent( CharacterEventType::VITAL_STAMINA_CHANGED, staminaPayload );
 
-    double damage = combat.attack();
+    double attack = attackerCombat.attack();
+    double defense = target.combat().defense();
 
-    // TODO: Should apply experience on attack weapon skill.
+    double damage = ( attack * attack ) / (std::max)( 1.0, attack + defense );
 
-    double newHealth = (std::max)( 0.0, target.vitals().health() - damage );
+    double targetHealth = target.vitals().health();
+    double effectiveDamage = (std::min)( damage, targetHealth );
+
+    double newHealth = (std::max)( 0.0, targetHealth - damage );
     target.vitals().setHealth( newHealth );
 
-    combat.setAttackCounter( 0 );
+    attackerCombat.setAttackCounter( 0 );
+
+    const Domain::Item* weapon = attacker.character().equipment().weapon().item();
+    Domain::SkillType skill = CombatHelper::skillTypeByItem( weapon );
+    if ( skill != Domain::SkillType::UNKNOWN ) {
+        Json::Value xpPayload;
+        xpPayload[ "skill" ] = static_cast<int>( skill );
+        xpPayload[ "experience" ] = (std::max)( 1.0, effectiveDamage );
+        attacker.publishEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, xpPayload );
+    }
 }
 
 void CombatController::resolveCreatureAttack( Domain::Creature& attacker, CharacterInstance& target ) {
-    auto& combat = attacker.combat();
+    auto& attackerCombat = attacker.combat();
 
-    if ( combat.attackCounter() < combat.attackDuration() ) {
-        combat.setAttackCounter( combat.attackCounter() + 1 );
+    if ( attackerCombat.attackCounter() < attackerCombat.attackDuration() ) {
+        attackerCombat.setAttackCounter( attackerCombat.attackCounter() + 1 );
         return;
     }
 
@@ -57,13 +72,44 @@ void CombatController::resolveCreatureAttack( Domain::Creature& attacker, Charac
         return;
     }
 
-    double damage = combat.attack();
+    double attack = attackerCombat.attack();
+    double defense = target.character().combat().defense();
+
+    double damage = ( attack * attack ) / (std::max)( 1.0, attack + defense );
+
+    attackerCombat.setAttackCounter( 0 );
+
+    const Domain::Item* offhand = target.character().equipment().offhand().item();
+    if ( offhand && offhand->category() == Domain::ItemCategoryType::SHIELD ) {
+
+        int blockLevel = target.character().skills().skillLevel( Domain::SkillType::SHIELD_MASTERY );
+
+        double blockChance = blockLevel / ( blockLevel + attack );
+        blockChance = (std::min)( 0.75, blockChance );
+
+        double roll = static_cast<double>( rand() ) / RAND_MAX;
+
+        if ( roll < blockChance ) {
+            double targetHealth = target.character().vitals().health();
+            double effectiveDamage = (std::min)( damage, targetHealth );
+
+            Json::Value xpPayload;
+            xpPayload[ "skill" ] = static_cast<int>( Domain::SkillType::SHIELD_MASTERY );
+            xpPayload[ "experience" ] = (std::max)( 1.0, effectiveDamage );
+            target.publishEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, xpPayload );
+
+            return;
+        }
+
+        Json::Value xpPayload;
+        xpPayload[ "skill" ] = static_cast<int>( Domain::SkillType::SHIELD_MASTERY );
+        xpPayload[ "experience" ] = ( 1.0 );
+        target.publishEvent( CharacterEventType::SKILL_EXPERIENCE_GAINED, xpPayload );
+    }
 
     Json::Value payload;
     payload[ "value" ] = -damage;
     target.publishEvent( CharacterEventType::VITAL_HEALTH_CHANGED, payload );
-
-    combat.setAttackCounter( 0 );
 }
 
 void CombatController::computeCharactersLoot( std::unordered_map<std::string, CharacterInstance*>& characters, std::vector<Domain::Creature*>& creatures ) {
