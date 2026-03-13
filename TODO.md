@@ -88,19 +88,6 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Add regeneration events to CharacterEventBus - events are subscribed to but not published
 - [ ] See formula: `baseRegen + (skillLevel * VITAL_SKILL_REGENERATION_MULTIPLIER)`
 
-### 7. Skill System → CharacterSkillsController ✅ (PARTIAL)
-**Old Location:** `Old/SkillSystem.h` (header only)
-**New Location:** [Engine/Instance/Character/Controller/CharacterSkillsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterSkillsController.cpp)
-
-**What OLD had:**
-- Skill data management and loading
-
-**Status & TODO:**
-- ✅ Skill controller framework exists
-- ⚠️ **TODO:** Review skill experience logic (global vs per-skill multipliers)
-- [ ] Implement skill tree branching (if desired)
-- [ ] Add talent point allocation system
-
 ### 8. Spell System → CharacterSpellsController ✅ (PARTIAL)
 **Old Location:** `Old/SpellSystem.cpp`
 **New Location:** [Engine/Instance/Character/Controller/CharacterSpellsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterSpellsController.cpp)
@@ -135,36 +122,6 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Implement trade completion logic
 - [ ] Add trade events to CharacterEventBus
 - [ ] Create WebSocket endpoints for trade
-
-### 10. Training System → CharacterActionsController (Training Action) ✅ (PARTIAL)
-**Old Location:** `Old/TrainingSystem.cpp`
-**New Location:** [Engine/Instance/Character/Controller/CharacterActionsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterActionsController.cpp#L27) (executeTraining method exists)
-
-**What OLD had:**
-- Skill training action execution
-- Skill selection for training
-- Experience distribution on training completion
-
-**Status & TODO:**
-- ✅ Training action framework exists
-- ⚠️ **TODO:** Verify training experience distribution
-- [ ] Ensure training respects character skills
-- [ ] Add training events to CharacterEventBus
-
-### 11. Effect System → CharacterEffectsController ✅ (PARTIAL)
-**Old Location:** `Old/EffectSystem.cpp`
-**New Location:** [Engine/Instance/Character/Controller/CharacterEffectsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterEffectsController.cpp)
-
-**What OLD had:**
-- Effect processing and application
-- Buff/debuff management (likely)
-
-**Status & TODO:**
-- ✅ Effects controller framework exists
-- [ ] Implement status effect tracking
-- [ ] Implement effect duration management
-- [ ] Implement effect modifier calculations
-- [ ] Add effect events to CharacterEventBus
 
 ---
 
