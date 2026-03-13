@@ -29,15 +29,15 @@ void CharacterProgressionController::onTick() {
 
 void CharacterProgressionController::applyLevelUp() {
     Json::Value healthPayload;
-    healthPayload[ "value" ] = 10; // TODO: Define the value in configuration
+    healthPayload[ "value" ] = _configurationManager.vitalsRate().health;
     _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_HEALTH_GAINED, healthPayload ) );
 
     Json::Value manaPayload;
-    manaPayload[ "value" ] = 10; // TODO: Define the value in configuration
+    manaPayload[ "value" ] = _configurationManager.vitalsRate().mana;
     _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_MANA_GAINED, manaPayload ) );
 
     Json::Value staminaPayload;
-    staminaPayload[ "value" ] = 10; // TODO: Define the value in configuration
+    staminaPayload[ "value" ] = _configurationManager.vitalsRate().stamina;
     _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_STAMINA_GAINED, staminaPayload ) );
 }
 

@@ -73,30 +73,6 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Add combat events to CharacterEventBus (hit, damage taken, spell cast, etc.) - no events published
 - [ ] Re-implement damage multipliers from configuration - hardcoded values used
 
-### 3. Progression System → CharacterProgressionController ✅ (PARTIAL)
-**Old Location:** `Old/ProgressionSystem.cpp`
-**New Location:** [Engine/Instance/Character/Controller/CharacterProgressionController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterProgressionController.cpp)
-
-**What OLD had:**
-- Experience point accumulation per skill
-- Level-up logic with experience overflow
-- Milestone achievements per skill level
-- Milestone bonus application (health, mana, stamina gains)
-- General character progression XP
-- Skill milestone bonuses application
-
-**Status & TODO:**
-- ✅ Basic progression framework exists (applyExperience, applyMilestone)
-- ✅ Experience point accumulation per skill implemented
-- ✅ Level-up logic with experience overflow exists
-- ✅ Milestone achievements per skill level implemented
-- ✅ Milestone bonus application exists (applyMilestoneBonus)
-- ⚠️ **TODO:** Implement milestone detection and bonus application - applyMilestone method exists but may need verification
-- ⚠️ **TODO:** Ensure overflow XP is properly carried over on level up - logic exists but needs testing
-- [ ] Add progression events to CharacterEventBus - no events published in controller
-- [ ] Implement LevelExperienceHelper integration - used in applyExperience
-- [ ] Test milestone bonus calculations - hardcoded values in applyLevelUp (line 32,36,40)
-
 ### 4. Regeneration System → CharacterVitalsController ✅ (PARTIAL)
 **Old Location:** `Old/RegenerationSystem.cpp`
 **New Location:** [Engine/Instance/Character/Controller/CharacterVitalsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterVitalsController.cpp)

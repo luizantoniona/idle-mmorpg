@@ -1,8 +1,17 @@
 {
-    "tickRate": 20,
-    "logo": "logo/logo.png",
-    "experience": {
-        "baseExperience": 100,
-        "growthRate": 1.05
+    "server": {
+        "tickRate": 20,
+        "logo": "logo/logo.png"
+    },
+    "rates": {
+        "progression": {
+            "baseExperience": 100,
+            "growthRate": 1.05
+        },
+        "levelUp": {
+            "health": 10,
+            "mana": 10,
+            "stamina": 10
+        }
     }
 }

@@ -10,7 +10,8 @@
 namespace Manager {
 
 ServerConfigurationManager::ServerConfigurationManager() :
-    _tickRate( 0 ),
+    _vitalsRate{ 10, 10, 10 },
+    _tickRate( 20 ),
     _threadPool( 4 ),
     _baseExperience( 0.00 ),
     _growthRate( 0.00 ) {
@@ -21,19 +22,32 @@ void ServerConfigurationManager::initialize( const std::string& configurationPat
 
     Json::Value configurationJson = Helper::JsonHelper::loadJsonFile( configurationPath + "configuration.json" );
 
-    _tickRate = configurationJson[ "tickRate" ].asInt();
-    _baseExperience = configurationJson[ "experience" ][ "baseExperience" ].asDouble();
-    _growthRate = configurationJson[ "experience" ][ "growthRate" ].asDouble();
+    // --- Vitals Rate ---
+    _vitalsRate.health = configurationJson[ "rates" ][ "levelUp" ][ "health" ].asInt();
+    _vitalsRate.mana = configurationJson[ "rates" ][ "levelUp" ][ "mana" ].asInt();
+    _vitalsRate.stamina = configurationJson[ "rates" ][ "levelUp" ][ "stamina" ].asInt();
 
-    std::string logoFile = configurationJson[ "logo" ].asString();
+    // --- Server Images ---
+    std::string logoFile = configurationJson[ "server" ][ "logo" ].asString();
     Commons::Singleton<Manager::ServerImageManager>::instance().loadImage( "logo.png", configurationPath + logoFile );
+
+    // TODO: Create separated structs for general configurations
+    _tickRate = configurationJson[ "server" ].get( "tickRate", 20 ).asInt();
+    _baseExperience = configurationJson[ "rates" ][ "progression" ][ "baseExperience" ].asDouble();
+    _growthRate = configurationJson[ "rates" ][ "progression" ][ "growthRate" ].asDouble();
 
     std::cout << "ServerConfigurationManager::initialize"
               << " [TICK_RATE] " << _tickRate
               << " [BASE_EXPERIENCE] " << _baseExperience
-              << " [GROWTH_RATE] " << _growthRate << std::endl;
+              << " [GROWTH_RATE] " << _growthRate
+              << std::endl;
 }
 
+const VitalRate& ServerConfigurationManager::vitalsRate() const {
+    return _vitalsRate;
+}
+
+// TODO: Create separated structs for general configurations
 int ServerConfigurationManager::tickRate() const {
     return _tickRate;
 }

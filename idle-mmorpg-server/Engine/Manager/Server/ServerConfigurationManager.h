@@ -5,12 +5,21 @@
 
 namespace Manager {
 
+struct VitalRate {
+    int health;
+    int mana;
+    int stamina;
+};
+
 class ServerConfigurationManager {
 public:
     ServerConfigurationManager();
 
     void initialize( const std::string& configurationPath );
 
+    const VitalRate& vitalsRate() const;
+
+    // TODO: Create separated structs for general configurations
     int tickRate() const;
     int threadPool() const;
 
@@ -18,6 +27,9 @@ public:
     double growthRate() const;
 
 private:
+    VitalRate _vitalsRate;
+
+    // TODO: Create separated structs for general configurations
     int _tickRate;
     int _threadPool;
 
