@@ -163,16 +163,17 @@ void CharacterActionsController::executeTraining( const Domain::CharacterActionO
 std::vector<Domain::SkillType> CharacterActionsController::combatSkill( Domain::Character* character ) {
     std::vector<Domain::SkillType> skills;
 
-    const Domain::Item* items[] = {
-        character->equipment().weapon().item(),
-        character->equipment().offhand().item(),
-    };
+    const Domain::Item* weapon = character->equipment().weapon().item();
+    auto weaponSkill = CombatHelper::skillTypeByItem( weapon );
+    if ( weaponSkill != Domain::SkillType::UNKNOWN ) {
+        skills.push_back( weaponSkill );
+    }
 
-    for ( const Domain::Item* item : items ) {
-        auto skill = CombatHelper::skillTypeByItem( item );
-
-        if ( skill != Domain::SkillType::UNKNOWN ) {
-            skills.push_back( skill );
+    const Domain::Item* offHand = character->equipment().offhand().item();
+    if ( offHand ) {
+        auto offHandSkill = CombatHelper::skillTypeByItem( offHand );
+        if ( offHandSkill != Domain::SkillType::UNKNOWN ) {
+            skills.push_back( offHandSkill );
         }
     }
 
