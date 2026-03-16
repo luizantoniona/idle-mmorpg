@@ -12,6 +12,7 @@ CharacterCombat::CharacterCombat() :
 
 Json::Value CharacterCombat::toJson() {
     Json::Value values;
+    values[ "inCombat" ] = _isInCombat;
     values[ "attackCounter" ] = _attackCounter;
     values[ "attackDuration" ] = _attackDuration;
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, inject } from "@angular/core";
+import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Subscription } from "rxjs";
 
@@ -7,7 +7,7 @@ import { ButtonComponent, CardComponent, PanelComponent } from "../../../../comp
 import { CharacterCombatCardComponent } from "./character-combat-card";
 import { CreatureCombatCardComponent } from "./creature-combat-card";
 
-import { Combat, CombatInstance } from "../../../../model";
+import { Character, Combat, CombatInstance } from "../../../../model";
 
 import { WebsocketService } from "../../../../service";
 
@@ -26,6 +26,8 @@ import { WebsocketService } from "../../../../service";
 })
 
 export class CombatPanel {
+    @Input() character!: Character;
+
     private websocketService = inject(WebsocketService);
     private subscriptions = new Subscription();
 

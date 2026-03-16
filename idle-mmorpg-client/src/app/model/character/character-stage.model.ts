@@ -1,3 +1,4 @@
 export type CharacterStage = {
-    id: number
+    id: number;
+    completed: boolean;
 };
