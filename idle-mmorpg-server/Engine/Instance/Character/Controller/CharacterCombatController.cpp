@@ -12,27 +12,32 @@ CharacterCombatController::CharacterCombatController( CharacterEventBus& eventBu
     _characterCombat( character.combat() ),
     _configurationManager( configurationManager ) {
 
+    _eventBus.subscribe( CharacterEventType::COMBAT_ENTER, [ this ]( const CharacterEvent& event ) {
+            onCombatEnter( event );
+        } );
+
+    _eventBus.subscribe( CharacterEventType::COMBAT_EXIT, [ this ]( const CharacterEvent& event ) {
+            onCombatExit( event );
+        } );
+
     _eventBus.subscribe( CharacterEventType::ITEM_EQUIPPED, [ this ]( const CharacterEvent& event ) {
-        onItemEquipped( event );
-    } );
+            onItemEquipped( event );
+        } );
 
     _eventBus.subscribe( CharacterEventType::SKILL_LEVEL_GAINED, [ this ]( const CharacterEvent& event ) {
-        onSkillLeveledUp( event );
-    } );
+            onSkillLeveledUp( event );
+        } );
 }
 
 void CharacterCombatController::onEnterWorld() {
     recomputeCombatAttributes();
 }
 
-void CharacterCombatController::onLeaveWorld() {
-}
+void CharacterCombatController::onLeaveWorld() {}
 
-void CharacterCombatController::onTick() {
-}
+void CharacterCombatController::onTick() {}
 
-void CharacterCombatController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
-}
+void CharacterCombatController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {}
 
 void CharacterCombatController::recomputeCombatAttributes() {
     auto& equipment = _character.equipment();
@@ -76,6 +81,18 @@ void CharacterCombatController::recomputeCombatAttributes() {
     _characterCombat.setAttack( attack );
     _characterCombat.setDefense( defense );
     _characterCombat.setAttackDuration( speed * _configurationManager.tickRate() );
+}
+
+void CharacterCombatController::onCombatEnter( const CharacterEvent& event ) {
+    _characterCombat.setIsInCombat( true );
+    _characterCombat.setAttackCounter( 0 );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_COMBAT, _characterCombat.toJson() );
+}
+
+void CharacterCombatController::onCombatExit( const CharacterEvent& event ) {
+    _characterCombat.setIsInCombat( false );
+    _characterCombat.setAttackCounter( 0 );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_COMBAT, _characterCombat.toJson() );
 }
 
 void CharacterCombatController::onItemEquipped( const CharacterEvent& event ) {

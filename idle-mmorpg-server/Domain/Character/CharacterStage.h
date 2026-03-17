@@ -3,6 +3,8 @@
 
 #include <json/json.h>
 
+#include "CharacterStageObjective.h"
+
 namespace Domain {
 
 class CharacterStage {
@@ -17,9 +19,16 @@ public:
     bool completed() const;
     void setCompleted( bool completed );
 
+    std::vector<CharacterStageObjective> objectives() const;
+    void setObjectives( const std::vector<CharacterStageObjective>& objectives );
+    void addObjective( const CharacterStageObjective& objective );
+
 private:
     int _stageLevel;
     bool _completed;
+
+    std::vector<CharacterStageObjective> _objectives;
+
 };
 
 } // namespace Domain

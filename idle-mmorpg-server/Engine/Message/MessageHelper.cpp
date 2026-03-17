@@ -26,43 +26,45 @@ std::string MessageHelper::typeToString( const MessageSenderType type ) {
     switch ( type ) {
 
         // --- Character Updates ---
-    case MessageSenderType::CHARACTER:
-        return "CHARACTER";
-    case MessageSenderType::CHARACTER_ACTIONS:
-        return "CHARACTER_ACTIONS";
-    case MessageSenderType::CHARACTER_EFFECTS:
-        return "CHARACTER_EFFECTS";
-    case MessageSenderType::CHARACTER_EQUIPMENT:
-        return "CHARACTER_EQUIPMENT";
-    case MessageSenderType::CHARACTER_INVENTORY:
-        return "CHARACTER_INVENTORY";
-    case MessageSenderType::CHARACTER_PROGRESSION:
-        return "CHARACTER_PROGRESSION";
-    case MessageSenderType::CHARACTER_SKILLS:
-        return "CHARACTER_SKILLS";
-    case MessageSenderType::CHARACTER_SPELLS:
-        return "CHARACTER_SPELLS";
-    case MessageSenderType::CHARACTER_STAGE:
-        return "CHARACTER_STAGE";
-    case MessageSenderType::CHARACTER_VITALS:
-        return "CHARACTER_VITALS";
-    case MessageSenderType::CHARACTER_WALLET:
-        return "CHARACTER_WALLET";
+        case MessageSenderType::CHARACTER:
+            return "CHARACTER";
+        case MessageSenderType::CHARACTER_ACTIONS:
+            return "CHARACTER_ACTIONS";
+        case MessageSenderType::CHARACTER_COMBAT:
+            return "CHARACTER_COMBAT";
+        case MessageSenderType::CHARACTER_EFFECTS:
+            return "CHARACTER_EFFECTS";
+        case MessageSenderType::CHARACTER_EQUIPMENT:
+            return "CHARACTER_EQUIPMENT";
+        case MessageSenderType::CHARACTER_INVENTORY:
+            return "CHARACTER_INVENTORY";
+        case MessageSenderType::CHARACTER_PROGRESSION:
+            return "CHARACTER_PROGRESSION";
+        case MessageSenderType::CHARACTER_SKILLS:
+            return "CHARACTER_SKILLS";
+        case MessageSenderType::CHARACTER_SPELLS:
+            return "CHARACTER_SPELLS";
+        case MessageSenderType::CHARACTER_STAGE:
+            return "CHARACTER_STAGE";
+        case MessageSenderType::CHARACTER_VITALS:
+            return "CHARACTER_VITALS";
+        case MessageSenderType::CHARACTER_WALLET:
+            return "CHARACTER_WALLET";
 
         // --- Stage Updates ---
-    case MessageSenderType::STAGE:
-        return "STAGE";
+        case MessageSenderType::STAGE:
+            return "STAGE";
 
         // --- Combat Rooms Updates ---
-    case MessageSenderType::COMBAT_ROOMS:
-        return "COMBAT_ROOMS";
+        case MessageSenderType::COMBAT_ROOMS:
+            return "COMBAT_ROOMS";
 
         // --- Combat Updates ---
-    case MessageSenderType::COMBAT:
-        return "COMBAT";
+        case MessageSenderType::COMBAT:
+            return "COMBAT";
 
-    default:
-        return "UNKNOWN";
+        default:
+            return "UNKNOWN";
     }
 }
 

@@ -4,6 +4,9 @@
 namespace Engine {
 
 enum class CharacterEventType {
+    COMBAT_ENTER,
+    COMBAT_EXIT,
+
     ITEM_EQUIPPED,
     ITEM_GAINED,
 

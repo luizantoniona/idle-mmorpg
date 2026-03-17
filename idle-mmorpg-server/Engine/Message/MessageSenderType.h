@@ -7,6 +7,7 @@ enum class MessageSenderType {
     // --- Character Updates ---
     CHARACTER,
     CHARACTER_ACTIONS,
+    CHARACTER_COMBAT,
     CHARACTER_EFFECTS,
     CHARACTER_EQUIPMENT,
     CHARACTER_INVENTORY,

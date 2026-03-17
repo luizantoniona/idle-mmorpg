@@ -25,6 +25,8 @@ private:
     void recomputeCombatAttributes();
 
     // --- EventBus methods ---
+    void onCombatEnter( const CharacterEvent& event );
+    void onCombatExit( const CharacterEvent& event );
     void onItemEquipped( const CharacterEvent& event );
     void onSkillLeveledUp( const CharacterEvent& event );
 

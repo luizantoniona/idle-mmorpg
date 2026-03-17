@@ -33,4 +33,16 @@ void CharacterStage::setCompleted( bool completed ) {
     _completed = completed;
 }
 
+std::vector<CharacterStageObjective> CharacterStage::objectives() const {
+    return _objectives;
+}
+
+void CharacterStage::setObjectives( const std::vector<CharacterStageObjective>& objectives ) {
+    _objectives = objectives;
+}
+
+void CharacterStage::addObjective( const CharacterStageObjective& objective ) {
+    _objectives.push_back( objective );
+}
+
 } // namespace Domain

@@ -80,9 +80,10 @@ Json::Value CombatInstance::combatToJson() const {
 }
 
 void CombatInstance::addCharacter( const std::string& sessionId, CharacterInstance* characterInstance ) {
-    characterInstance->character().combat().setIsInCombat( true );
-    characterInstance->character().combat().setAttackCounter( 0 );
     _characters[ sessionId ] = characterInstance;
+
+    Json::Value enterCombatPayload;
+    characterInstance->publishEvent( CharacterEventType::COMBAT_ENTER, enterCombatPayload );
 }
 
 void CombatInstance::removeCharacter( const std::string& sessionId ) {
@@ -91,9 +92,8 @@ void CombatInstance::removeCharacter( const std::string& sessionId ) {
         return;
     }
 
-    auto& combat = it->second->character().combat();
-    combat.setIsInCombat( false );
-    combat.setAttackCounter( 0 );
+    Json::Value exitCombatPayload;
+    it->second->publishEvent( CharacterEventType::COMBAT_EXIT, exitCombatPayload );
 
     _characters.erase( sessionId );
 }
@@ -101,10 +101,8 @@ void CombatInstance::removeCharacter( const std::string& sessionId ) {
 void CombatInstance::shutdown() {
     for ( auto& [ sessionId, characterInstance ] : _characters ) {
 
-        auto& combat = characterInstance->character().combat();
-
-        combat.setIsInCombat( false );
-        combat.setAttackCounter( 0 );
+        Json::Value exitCombatPayload;
+        characterInstance->publishEvent( CharacterEventType::COMBAT_EXIT, exitCombatPayload );
     }
 
     _characters.clear();

@@ -34,6 +34,8 @@ bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstanc
         controller->onCharacterEnter( characterInstance );
     }
 
+    // TODO: Add character objectives
+
     return true;
 }
 
