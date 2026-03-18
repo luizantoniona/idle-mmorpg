@@ -50,6 +50,10 @@ CharacterInstance::CharacterInstance( std::unique_ptr<Domain::Character> charact
     // --- Effects ---
     _effectsController = std::make_unique<CharacterEffectsController>( _eventBus, _messageSender, *_character, Commons::Singleton<Manager::ItemManager>::instance(), Commons::Singleton<Manager::ServerConfigurationManager>::instance() );
     _controllers.push_back( _effectsController.get() );
+
+    // --- Stage ---
+    _stageController = std::make_unique<CharacterStageController>( _eventBus, _messageSender, *_character );
+    _controllers.push_back( _stageController.get() );
 }
 
 std::string CharacterInstance::sessionId() const {

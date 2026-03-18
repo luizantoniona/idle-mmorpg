@@ -12,9 +12,9 @@ StageObjective::~StageObjective() = default;
 
 Json::Value StageObjective::toJson() {
     Json::Value values;
-    values[ "id" ] = _type;
-    values[ "target" ] = target();
-    values[ "amount" ] = amount();
+    values[ "type" ] = _type;
+    values[ "target" ] = _target;
+    values[ "amount" ] = _amount;
     return values;
 }
 

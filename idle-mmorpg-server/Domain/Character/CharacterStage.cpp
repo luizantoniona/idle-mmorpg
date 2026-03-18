@@ -4,17 +4,22 @@ namespace Domain {
 
 CharacterStage::CharacterStage() :
     _stageLevel( 0 ),
-    _completed( false ) {
+    _completed( false ),
+    _objectives() {
 }
 
 Json::Value CharacterStage::toJson() const {
     Json::Value values;
-    values[ "stageLevel" ] = stageLevel();
-    values[ "completed" ] = completed();
+    values[ "stageLevel" ] = _stageLevel;
+    values[ "completed" ] = _completed;
+
+    for ( auto& objective : _objectives ) {
+        values[ "objectives" ].append( objective.toJson() );
+    }
 
     Json::Value stage;
     stage[ "stage" ] = values;
-    return values;
+    return stage;
 }
 
 int CharacterStage::stageLevel() const {

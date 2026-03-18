@@ -9,6 +9,7 @@
 #include <Engine/Instance/Character/CharacterInstance.h>
 
 #include "Controller/StageCombatController.h"
+#include "Controller/StageObjectiveController.h"
 
 namespace Engine {
 
@@ -30,6 +31,7 @@ private:
 
     std::vector<StageController*> _controllers;
     std::unique_ptr<StageCombatController> _combatController;
+    std::unique_ptr<StageObjectiveController> _objectiveController;
 };
 
 } // namespace Engine

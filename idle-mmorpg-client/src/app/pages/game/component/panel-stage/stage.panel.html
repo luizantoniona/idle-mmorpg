@@ -1,12 +1,13 @@
-<div class="stage-column">
-    @if(stage && stage.level) {
-    <app-panel>
+<app-panel>
+    <div class="stage-column">
+        @if(stage && stage.level && character && character.stage) {
         <div class="stage-row">
-            <app-button text="Stage: {{ stage.level }}" (clickEvent)="onNextStage()"></app-button>
+            <app-button text="Stage: {{ stage.level }}" (clickEvent)="onNextStage()"
+                [disabled]="!character.stage.completed"></app-button>
         </div>
-    </app-panel>
 
-    }@else {
-    <app-loading></app-loading>
-    }
-</div>
+        }@else {
+        <app-loading></app-loading>
+        }
+    </div>
+</app-panel>

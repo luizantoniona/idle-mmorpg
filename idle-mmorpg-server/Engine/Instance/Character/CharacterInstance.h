@@ -12,6 +12,7 @@
 #include "Controller/CharacterProgressionController.h"
 #include "Controller/CharacterSkillsController.h"
 #include "Controller/CharacterSpellsController.h"
+#include "Controller/CharacterStageController.h"
 #include "Controller/CharacterVitalsController.h"
 #include "EventBus/CharacterEventBus.h"
 #include "Message/CharacterMessageSender.h"
@@ -57,6 +58,7 @@ private:
     std::unique_ptr<CharacterProgressionController> _progressionController;
     std::unique_ptr<CharacterSkillsController> _skillsController;
     std::unique_ptr<CharacterSpellsController> _spellsController;
+    std::unique_ptr<CharacterStageController> _stageController;
     std::unique_ptr<CharacterVitalsController> _vitalsController;
 };
 

@@ -17,6 +17,10 @@ StageInstance::StageInstance( Domain::Stage* stage ) :
     // --- Combat ---
     _combatController = std::make_unique<StageCombatController>( stage );
     _controllers.push_back( _combatController.get() );
+
+    // --- Objective ---
+    _objectiveController = std::make_unique<StageObjectiveController>( stage );
+    _controllers.push_back( _objectiveController.get() );
 }
 
 bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstance* characterInstance ) {
@@ -33,8 +37,6 @@ bool StageInstance::addCharacter( const std::string& sessionId, CharacterInstanc
     for ( auto* controller : _controllers ) {
         controller->onCharacterEnter( characterInstance );
     }
-
-    // TODO: Add character objectives
 
     return true;
 }

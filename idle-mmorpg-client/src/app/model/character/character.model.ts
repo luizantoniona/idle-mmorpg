@@ -5,6 +5,7 @@ import { CharacterEquipment } from "./character-equipment.model";
 import { CharacterInventory } from "./character-inventory.model";
 import { CharacterProgression } from "./character-progression.model";
 import { CharacterSkill } from "./character-skill.model";
+import { CharacterStage } from "./character-stage.model";
 import { CharacterVitals } from "./character-vitals.model";
 import { CharacterWallet } from "./character-wallet.model";
 
@@ -15,17 +16,15 @@ export type Character = {
     idUser: number;
     name: string;
 
-    // --- Persistent Data
+    actions: CharacterActions;
+    combat: CharacterCombat;
+    effects: CharacterEffect[];
     equipment: CharacterEquipment;
     inventory: CharacterInventory;
     progression: CharacterProgression;
     skills: CharacterSkill[];
     spells: Spell[];
+    stage: CharacterStage;
     vitals: CharacterVitals;
     wallet: CharacterWallet;
-
-    // --- Runtime Data
-    actions: CharacterActions;
-    combat: CharacterCombat;
-    effects: CharacterEffect[];
 };
