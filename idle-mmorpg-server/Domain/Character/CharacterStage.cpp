@@ -38,7 +38,7 @@ void CharacterStage::setCompleted( bool completed ) {
     _completed = completed;
 }
 
-std::vector<CharacterStageObjective> CharacterStage::objectives() const {
+std::vector<CharacterStageObjective>& CharacterStage::objectives() {
     return _objectives;
 }
 

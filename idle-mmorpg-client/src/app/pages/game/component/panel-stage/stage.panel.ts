@@ -1,7 +1,7 @@
 import { Component, Input, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { ButtonComponent, LoadingComponent, PanelComponent } from "../../../../component/ui";
+import { ButtonComponent, LoadingComponent, PanelComponent, TooltipComponent } from "../../../../component/ui";
 
 import { Character } from "../../../../model";
 import { Stage } from "../../../../model";
@@ -17,6 +17,7 @@ import { WebsocketService } from "../../../../service";
         ButtonComponent,
         LoadingComponent,
         PanelComponent,
+        TooltipComponent,
     ],
 })
 
@@ -34,8 +35,8 @@ export class StagePanel {
 
     onNextStage() {
         this.sendMessage({
-            type: '',
-            payload: '',
+            type: 'CHARACTER_STAGE_NEXT',
+            payload: {},
         });
     }
 }

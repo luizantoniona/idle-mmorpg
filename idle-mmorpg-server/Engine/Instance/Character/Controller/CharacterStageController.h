@@ -19,6 +19,11 @@ public:
 
 private:
     Domain::CharacterStage& _characterStage;
+
+    void updateStageCompletion();
+
+    // --- EventBus methods ---
+    void onCreatureKilled( const CharacterEvent& event );
 };
 
 } // namespace Engine

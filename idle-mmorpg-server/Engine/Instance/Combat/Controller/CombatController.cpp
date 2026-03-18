@@ -142,6 +142,10 @@ void CombatController::computeCharactersLoot( std::unordered_map<std::string, Ch
                 payload[ "amount" ] = amount;
                 receiverInstance->publishEvent( CharacterEventType::ITEM_GAINED, payload );
             }
+
+            Json::Value payload;
+            payload[ "creature" ] = creature->id();
+            receiverInstance->publishEvent( CharacterEventType::CREATURE_KILLED, payload );
         }
     }
 }

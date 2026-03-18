@@ -11,6 +11,8 @@ enum class MessageReceiverType {
     CHARACTER_ITEM_EQUIP,
     CHARACTER_ITEM_USE,
 
+    CHARACTER_STAGE_NEXT,
+
     // --- Combat Rooms Updates ---
     COMBAT_ROOM_CREATE,
     COMBAT_ROOM_ENTER,

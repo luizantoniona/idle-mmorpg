@@ -19,7 +19,7 @@ public:
     bool completed() const;
     void setCompleted( bool completed );
 
-    std::vector<CharacterStageObjective> objectives() const;
+    std::vector<CharacterStageObjective>& objectives();
     void setObjectives( const std::vector<CharacterStageObjective>& objectives );
     void addObjective( const CharacterStageObjective& objective );
 

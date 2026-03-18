@@ -1,10 +1,24 @@
 <app-panel>
     <div class="stage-column">
         @if(stage && stage.level && character && character.stage) {
-        <div class="stage-row">
-            <app-button text="Stage: {{ stage.level }}" (clickEvent)="onNextStage()"
-                [disabled]="!character.stage.completed"></app-button>
-        </div>
+        <app-tooltip>
+            <div tooltip-target>
+                <app-button text="Stage: {{ stage.level }}" (clickEvent)="onNextStage()"
+                    [disabled]="!character.stage.completed"></app-button>
+            </div>
+
+            <div tooltip-content>
+                <h3>Objectives:</h3>
+
+                @for(objective of character.stage.objectives; track objective.target) {
+                <div class="stage-row">
+                    <span>{{ objective.type }}</span>
+                    <span>{{ objective.target }}</span>
+                    <span>{{ objective.currentAmount }} / {{ objective.stageAmount }}</span>
+                </div>
+                }
+            </div>
+        </app-tooltip>
 
         }@else {
         <app-loading></app-loading>

@@ -7,6 +7,8 @@ enum class CharacterEventType {
     COMBAT_ENTER,
     COMBAT_EXIT,
 
+    CREATURE_KILLED,
+
     ITEM_EQUIPPED,
     ITEM_GAINED,
 

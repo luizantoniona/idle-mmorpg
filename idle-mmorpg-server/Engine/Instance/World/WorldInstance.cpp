@@ -147,10 +147,17 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
         break;
 
         // --- Character ---
-    case MessageReceiverType::CHARACTER_ACTION_SET:
-    case MessageReceiverType::CHARACTER_ITEM_EQUIP:
-    case MessageReceiverType::CHARACTER_ITEM_USE:
+    case Engine::MessageReceiverType::CHARACTER_ACTION_SET:
+    case Engine::MessageReceiverType::CHARACTER_ITEM_EQUIP:
+    case Engine::MessageReceiverType::CHARACTER_ITEM_USE:
         character->handleMessage( type, payload );
+        break;
+
+    case Engine::MessageReceiverType::CHARACTER_STAGE_NEXT:
+        // TODO: See if we need to send to character or what
+        // TODO: Validate if every objective is complete inside character (flag completed)
+        // TODO: If OK, WorldInstance Should change StageInstance from character
+        // TODO: If Stage Changed, we must update character and save on database
         break;
 
     default:
