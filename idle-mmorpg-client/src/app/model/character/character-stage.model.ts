@@ -6,7 +6,7 @@ export type CharacterStageObjective = {
 };
 
 export type CharacterStage = {
-    id: number;
+    stageLevel: number;
     completed: boolean;
     objectives: CharacterStageObjective[];
 }; 

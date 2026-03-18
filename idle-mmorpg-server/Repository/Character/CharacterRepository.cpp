@@ -103,6 +103,11 @@ std::vector<std::unique_ptr<Domain::Character> > CharacterRepository::findAllByI
             character->setProgression( *progression );
         }
 
+        auto stage = CharacterStageRepository().findByCharacterId( character->idCharacter() );
+        if ( stage ) {
+            character->setStage( *stage );
+        }
+
         auto vitals = CharacterVitalsRepository().findByCharacterId( character->idCharacter() );
         if ( vitals ) {
             character->setVitals( *vitals );

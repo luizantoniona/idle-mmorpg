@@ -5,6 +5,9 @@
 
 #include <json/json.h>
 
+#include "CharacterActions.h"
+#include "CharacterCombat.h"
+#include "CharacterEffects.h"
 #include "CharacterEquipment.h"
 #include "CharacterInventory.h"
 #include "CharacterProgression.h"
@@ -13,10 +16,6 @@
 #include "CharacterStage.h"
 #include "CharacterVitals.h"
 #include "CharacterWallet.h"
-
-#include "CharacterActions.h"
-#include "CharacterCombat.h"
-#include "CharacterEffects.h"
 
 namespace Domain {
 
@@ -35,7 +34,15 @@ public:
     std::string name() const;
     void setName( const std::string& name );
 
-    // --- Persistent Data
+    CharacterActions& actions();
+    void setActions( const CharacterActions& actions );
+
+    CharacterCombat& combat();
+    void setCombat( const CharacterCombat& combat );
+
+    CharacterEffects& effects();
+    void setEffects( const CharacterEffects& effects );
+
     CharacterEquipment& equipment();
     void setEquipment( const CharacterEquipment& equipment );
 
@@ -60,22 +67,14 @@ public:
     CharacterWallet& wallet();
     void setWallet( const CharacterWallet& wallet );
 
-    // --- Runtime Data
-    CharacterActions& actions();
-    void setActions( const CharacterActions& actions );
-
-    CharacterCombat& combat();
-    void setCombat( const CharacterCombat& combat );
-
-    CharacterEffects& effects();
-    void setEffects( const CharacterEffects& effects );
-
 private:
     int _idCharacter;
     int _idUser;
     std::string _name;
 
-    // --- Persistent Data
+    CharacterActions _actions;
+    CharacterCombat _combat;
+    CharacterEffects _effects;
     CharacterEquipment _equipment;
     CharacterInventory _inventory;
     CharacterProgression _progression;
@@ -84,11 +83,6 @@ private:
     CharacterStage _stage;
     CharacterVitals _vitals;
     CharacterWallet _wallet;
-
-    // --- Runtime Data
-    CharacterActions _actions;
-    CharacterCombat _combat;
-    CharacterEffects _effects;
 };
 
 } // namespace Domain

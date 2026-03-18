@@ -6,7 +6,9 @@ Character::Character() :
     _idCharacter( 0 ),
     _idUser( 0 ),
     _name( "" ),
-    // --- Persistent Data
+    _actions(),
+    _combat(),
+    _effects(),
     _equipment(),
     _inventory(),
     _progression(),
@@ -14,11 +16,7 @@ Character::Character() :
     _spells(),
     _stage(),
     _vitals(),
-    _wallet(),
-    // --- Runtime Data
-    _actions(),
-    _combat(),
-    _effects() {
+    _wallet() {
 }
 
 Json::Value Character::toJson() {
@@ -51,6 +49,30 @@ std::string Character::name() const {
 
 void Character::setName( const std::string& name ) {
     _name = name;
+}
+
+CharacterActions& Character::actions() {
+    return _actions;
+}
+
+void Character::setActions( const CharacterActions& actions ) {
+    _actions = actions;
+}
+
+CharacterCombat& Character::combat() {
+    return _combat;
+}
+
+void Character::setCombat( const CharacterCombat& combat ) {
+    _combat = combat;
+}
+
+CharacterEffects& Character::effects() {
+    return _effects;
+}
+
+void Character::setEffects( const CharacterEffects& effects ) {
+    _effects = effects;
 }
 
 CharacterEquipment& Character::equipment() {
@@ -115,30 +137,6 @@ CharacterWallet& Character::wallet() {
 
 void Character::setWallet( const CharacterWallet& wallet ) {
     _wallet = wallet;
-}
-
-CharacterActions& Character::actions() {
-    return _actions;
-}
-
-void Character::setActions( const CharacterActions& actions ) {
-    _actions = actions;
-}
-
-CharacterCombat& Character::combat() {
-    return _combat;
-}
-
-void Character::setCombat( const CharacterCombat& combat ) {
-    _combat = combat;
-}
-
-CharacterEffects& Character::effects() {
-    return _effects;
-}
-
-void Character::setEffects( const CharacterEffects& effects ) {
-    _effects = effects;
 }
 
 } // namespace Domain
