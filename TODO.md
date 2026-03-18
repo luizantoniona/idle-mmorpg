@@ -1,12 +1,5 @@
 # 📋 Idle MMORPG - Development Roadmap
 
-## 🔴 Critical Issues & Bug Fixes
-
-### Character Vitals System (HIGH PRIORITY)
-- **File:** [idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterVitalsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterVitalsController.cpp#L59)
-- ⚠️ **TODO:** Tune regeneration amounts and integrate `configurationManager` rates (currently fixed +1 values).
-- **Details:** Regeneration logic is implemented with placeholder values. Adjust formulas and apply configuration-based modifiers; the controller already sends updates when vitals change.
-
 ## 📦 Legacy System Mapping (OLD → NEW Controllers)
 
 The following systems existed in the OLD architecture and need to be fully implemented in the new CharacterInstance+EventBus architecture:
@@ -134,27 +127,6 @@ The following systems existed in the OLD architecture and need to be fully imple
   - [ ] Re-enable front-end trade UI components
   - [ ] Add trade history/log to database
 
-### 3. Quest → Stage Objectives System (MAJOR)
-- **Current Status:** Quests are being replaced with Stage Objectives
-- **Design:**
-  - Objectives are tied to stages (not free-roaming)
-  - Completing stage objectives unlocks progression to next stage
-  - Each new stage brings access to:
-    - New actions (gathering, skills)
-    - New NPC trades
-    - New mob encounters
-    - Stage-specific challenges
-- **Action Items:**
-  - [ ] Design stage progression system
-  - [ ] Define objective types (kill count, gather count, exploration, etc.)
-  - [ ] Create StageObjectiveController
-  - [ ] Implement stage unlock/progression logic
-  - [ ] Add objective events to CharacterEventBus
-  - [ ] Create WebSocket endpoints for objective tracking
-  - [ ] Update front-end to show stage progression UI
-  - [ ] Persist stage completion state in database
-  - [ ] Design XP/reward scaling per stage difficulty
-
 ---
 
 ## 🎮 Server Configuration & Balancing
@@ -188,38 +160,12 @@ The following systems existed in the OLD architecture and need to be fully imple
 
 ## 🛠️ Systems to Implement / Complete
 
-### Skill System Enhancement
-- **File:** [idle-mmorpg-server/Engine/Manager/Skill/SkillFactory.cpp](idle-mmorpg-server/Engine/Manager/Skill/SkillFactory.cpp#L53)
-- ⚠️ **TODO:** Review skill experience logic - should be global or per-skill specific values?
-- [ ] Implement skill-based damage calculations
-- [ ] Create skill combo system
-- [ ] Implement skill talent trees
-- [ ] Add skill mastery mechanics
-
 ### Spell System
 - [ ] Implement spell cast validation (stamina/mana costs)
 - [ ] Create spell cooldown system
 - [ ] Implement elemental damage system
 - [ ] Add spell chain/combo mechanics
 - [ ] Create spell enchantment system
-
-### Equipment & Upgrades
-- [ ] Implement equipment durability system
-- [ ] Create equipment upgrade/enhancement mechanics
-- [ ] Add socket/gem system (if desired)
-- [ ] Implement armor scaling calculations
-- [ ] Add equipment set bonuses
-
-### UI & Client Improvements
-- **File:** [idle-mmorpg-client/src/app/pages/game/component/panel-character-spells/character-spells.panel.ts](idle-mmorpg-client/src/app/pages/game/component/panel-character-spells/character-spells.panel.ts#L46)
-- ⚠️ **TODO:** Implement spell learning popup when unlocking new spells
-- **File:** [idle-mmorpg-client/src/app/component/game/item/item.component.ts](idle-mmorpg-client/src/app/component/game/item/item.component.ts#L31)
-- ⚠️ **TODO:** Adjust item click handlers and item interaction logic
-- [ ] Refine character stat display
-- [ ] Implement damage numbers floating text
-- [ ] Add combat log UI
-- [ ] Create achievement/milestone notifications
-- [ ] Implement loading screens between stages
 
 ### Deployment & Infrastructure
 - **File:** [idle-mmorpg-server/main.cpp](idle-mmorpg-server/main.cpp#L14)
@@ -244,8 +190,6 @@ The following systems existed in the OLD architecture and need to be fully imple
 
 ## 🌟 Feature Ideas for Idle-MMORPG
 
-Based on analysis of the current server architecture, here are promising features to enhance the game:
-
 ### 3. **Guild/Faction System**
 - Create player guilds with shared treasury
 - Implement guild vs guild warfare/leaderboards
@@ -267,19 +211,12 @@ Based on analysis of the current server architecture, here are promising feature
 - Implement alchemical potion brewing with effects
 - **Implementation Location:** New CraftingController + crafting configuration
 
-### 6. **Prestige Skill Trees**
+### 6. **Skill Trees**
 - Multiple skill paths (Warrior, Mage, Ranger, etc.)
 - Implement skill point allocation system
 - Create skill synergies and combo bonuses
 - Add respec mechanics with appropriate costs
 - **Implementation Location:** New SkillTreeController
-
-### 7. **Augmentation/Rune System**
-- Add rune/augmentation slots to armor and weapons
-- Implement rune crafting from gathered materials
-- Create rune combination effects
-- Add elemental damage variations
-- **Implementation Location:** Extend equipment system
 
 ### 10. **Dynamic World Events**
 - Server-wide events affecting all players
@@ -318,58 +255,9 @@ Based on analysis of the current server architecture, here are promising feature
 - Implement title/badge system
 - **Implementation Location:** New CosmeticsController
 
-### 17. **Daily/Weekly Challenge System**
-- Implement daily recurring tasks
-- Add weekly special challenges
-- Create seasonal objectives
-- Automatic reward distribution
-- **Implementation Location:** New ChallengeController
-
 ### 18. **Market/Trade Post**
 - Global player-to-player trading system
 - Listing management and price history
 - Trade tax mechanism
 - Price suggestion/market analysis
 - **Implementation Location:** New MarketplaceController + database
-
-### 20. **Enchantment System**
-- Refine equipment with rare materials
-- Create enchantment leveling progression
-- Implement failed enchantment penalties/safeguards
-- Add specific enchantment effects per slot
-- **Implementation Location:** New EnchantmentController
-
----
-
-## 🎯 Controller Implementation Status
-
-### Current Controllers (CharacterInstance + EventBus)
-
-#### ✅ Existing Controllers (Need Completion)
-
-| Controller | Status | Needs Implementation | EventBus Integration |
-|-----------|--------|----------------------|----------------------|
-| CharacterActionsController | Partial | Gathering effects, regenerative effects, action events | Needs events |
-| CharacterCombatController | Partial | Attack duration recalculation | Subscribed to equipment events |
-| CharacterEffectsController | Basic | Status effects, buffs, debuffs | None |
-| CharacterEquipmentController | Partial | Modifier computation, durability | Publishes equipment equipped event |
-| CharacterInventoryController | Partial | Item management integration, inventory events | None |
-| CharacterProgressionController | Partial | Milestone bonuses, progression events | Subscribed to experience events |
-| CharacterSkillsController | Partial | Skill-based calculations, skill events | Subscribed to experience events |
-| CharacterSpellsController | Basic | Spell learning popup, cooldown management | None |
-| CharacterVitalsController | CRITICAL | Regeneration formulas, spell cooldowns | Subscribed to vital change events |
-| CharacterWalletController | Basic | Coin operations | None |
-| CombatController | Partial | Spell damage, loot, experience, combat events | None |
-
-#### ❌ Missing Controllers (Need Creation)
-
-| Controller | Purpose | Priority |
-|-----------|---------|----------|
-| CharacterTradeController | Stage-based NPC trading | HIGH |
-| CharacterChatController | Multi-channel chat system | HIGH (pending arch decision) |
-| CharacterObjectiveController | Stage objectives & progression | HIGH |
-| CharacterCraftingController | Crafting & alchemy | MEDIUM |
-| CharacterLeaderboardController | Ranking & statistics tracking | MEDIUM |
-| CharacterPvPController | Arena & PvP matchmaking | MEDIUM-LOW |
-| CharacterGuildController | Guild membership & perks | MEDIUM-LOW |
-| CharacterCompanionController | Pet/companion management | LOW |
