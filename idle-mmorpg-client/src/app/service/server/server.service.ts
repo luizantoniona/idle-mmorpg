@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+
 import { ServerData, ServerManager } from "../../manager";
 
 @Injectable({
@@ -15,8 +16,10 @@ export class ServerService {
         this.server$ = this.serverSubject.asObservable();
     }
 
-    connect(address: string, port: string): void {
-        const data = { address, port };
+    connect(baseUrl: string): void {
+        const normalized = this.normalizeUrl(baseUrl);
+
+        const data = { baseUrl: normalized };
         this.serverManager.connect(data);
         this.serverSubject.next(data);
     }
@@ -26,15 +29,18 @@ export class ServerService {
         this.serverSubject.next(null);
     }
 
-    getAddress(): string | null {
-        return this.serverSubject.value?.address ?? null;
-    }
-
-    getPort(): string | null {
-        return this.serverSubject.value?.port ?? null;
+    getBaseUrl(): string | null {
+        return this.serverSubject.value?.baseUrl ?? null;
     }
 
     getServer(): ServerData | null {
         return this.serverSubject.value;
+    }
+
+    private normalizeUrl(url: string): string {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            return `http://${url}`;
+        }
+        return url;
     }
 }

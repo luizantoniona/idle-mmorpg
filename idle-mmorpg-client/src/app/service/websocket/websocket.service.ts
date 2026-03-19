@@ -22,6 +22,16 @@ export class WebsocketService implements OnDestroy {
         private authManager: AuthManager
     ) { }
 
+    private getWebSocketUrl(path: string): string {
+        const server = this.serverManager.get();
+        if (!server) {
+            throw new Error('No server configured');
+        }
+
+        let wsBase = server.baseUrl.replace(/^http:\/\//, 'ws://').replace(/^https:\/\//, 'wss://');
+        return `${wsBase}${path}`;
+    }
+
     connect(characterId: number): void {
         const server = this.serverManager.get();
         const auth = this.authManager.get();
@@ -34,7 +44,7 @@ export class WebsocketService implements OnDestroy {
             throw new Error('User not authenticated');
         }
 
-        const wsUrl = `ws://${server.address}:${server.port}/ws/character?sid=${auth.sessionID}&character=${characterId}`;
+        const wsUrl = this.getWebSocketUrl(`/ws/character?sid=${auth.sessionID}&character=${characterId}`);
 
         if (this.socket && this.currentUrl === wsUrl && this.socket.readyState === WebSocket.OPEN) {
             console.warn('WebSocket already connected.');

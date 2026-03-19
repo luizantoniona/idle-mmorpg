@@ -3,8 +3,7 @@ import { Injectable } from "@angular/core";
 import { StorageManager } from "../";
 
 export interface ServerData {
-    address: string;
-    port: string;
+    baseUrl: string;
 }
 
 const STORAGE_KEY = "server";

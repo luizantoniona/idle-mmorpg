@@ -12,6 +12,15 @@ export class ImageCacheService {
         private server: ServerManager
     ) { }
 
+    private getBaseUrl(): string {
+        const serverData = this.server.get();
+        if (!serverData) {
+            throw new Error("Server not configured.");
+        }
+
+        return serverData.baseUrl;
+    }
+
     async loadImage(path: string): Promise<string> {
         const key = `img-cache:${path}`;
 
@@ -20,12 +29,7 @@ export class ImageCacheService {
             return cached.base64;
         }
 
-        const serverData = this.server.get();
-        if (!serverData) {
-            throw new Error("Server not configured.");
-        }
-
-        const url = `http://${serverData.address}:${serverData.port}/image/${path}`;
+        const url = `${this.getBaseUrl()}/image/${encodeURIComponent(path)}`;
 
         let blob: Blob;
         try {
@@ -52,12 +56,7 @@ export class ImageCacheService {
     }
 
     async loadImageBlob(path: string): Promise<Blob> {
-        const serverData = this.server.get();
-        if (!serverData) {
-            throw new Error("Server not configured.");
-        }
-
-        const url = `http://${serverData.address}:${serverData.port}/image/${path}`;
+        const url = `${this.getBaseUrl()}/image/${encodeURIComponent(path)}`;
 
         return await firstValueFrom(
             this.http.get(url, { responseType: 'blob' })

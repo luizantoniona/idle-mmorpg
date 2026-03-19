@@ -21,7 +21,8 @@ export class APIService {
         if (!server) {
             throw new Error('No server connected.');
         }
-        return `http://${server.address}:${server.port}`;
+
+        return server.baseUrl.replace(/\/+$/, '');
     }
 
     private getHeaders(isBinary = false): HttpHeaders {
