@@ -39,9 +39,9 @@ export class LoginPanel implements OnInit {
 
     constructor() {
         const server = this.serverService.getServer();
+
         this.formServer = this.formbuilder.group({
-            ip: [server?.address || '', Validators.required],
-            port: [server?.port || '', Validators.required],
+            baseUrl: [server?.baseUrl || '', Validators.required],
         });
 
         if (server) {
@@ -60,6 +60,19 @@ export class LoginPanel implements OnInit {
         }
     }
 
+    private normalizeUrl(url: string): string {
+        let normalized = url.trim();
+
+        // TODO: In the future, we can change the server API to use https: or http: as prefix
+        // TODO: We need to handle both http or https
+
+        if (!normalized.startsWith('http://') && !normalized.startsWith('https://')) {
+            normalized = `http://${normalized}`;
+        }
+
+        return normalized.replace(/\/+$/, '');
+    }
+
     async checkStatus(): Promise<void> {
         try {
             await this.apiService.getStatus();
@@ -69,16 +82,18 @@ export class LoginPanel implements OnInit {
         }
     }
 
-    async checkStatusWithParams(ip: string, port: string): Promise<boolean> {
+    async checkStatusWithParams(baseUrl: string): Promise<boolean> {
         try {
-            const cleanedIp = ip.replace(/^https?:\/\//, '');
-            const response = await fetch(`http://${cleanedIp}:${port}/status`);
+            const normalized = this.normalizeUrl(baseUrl);
+
+            const response = await fetch(`${normalized}/status`);
             if (!response.ok) {
                 throw new Error();
             }
 
             this.status = 'online';
             return true;
+
         } catch {
             this.status = 'error';
             return false;
@@ -89,15 +104,17 @@ export class LoginPanel implements OnInit {
         this.errorServer = null;
         this.status = 'loading';
 
-        const { ip, port } = this.formServer.value;
-        const ok = await this.checkStatusWithParams(ip, port);
+        const { baseUrl } = this.formServer.value;
+
+        const ok = await this.checkStatusWithParams(baseUrl);
 
         if (!ok) {
             this.errorServer = 'Could not connect to the server.';
             return;
         }
 
-        this.serverService.connect(ip, port);
+        const normalized = this.normalizeUrl(baseUrl);
+        this.serverService.connect(normalized);
     }
 
     async handleLogin() {
@@ -135,8 +152,7 @@ export class LoginPanel implements OnInit {
         const { username, password } = this.formLogin.value;
 
         try {
-            const registerResponse =
-                await this.apiService.postData<any>('/sign', { username, password });
+            const registerResponse = await this.apiService.postData<any>('/sign', { username, password });
 
             if (!registerResponse?.sessionID || !registerResponse?.userID) {
                 throw new Error('Invalid register response');
