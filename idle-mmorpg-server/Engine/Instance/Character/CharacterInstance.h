@@ -31,12 +31,6 @@ public:
     void onEnterWorld();
     void onLeaveWorld();
 
-    void onEnterStage();
-    void onLeaveStage();
-
-    void onEnterCombat();
-    void onLeaveCombat();
-
     void onTick();
 
     void handleMessage( MessageReceiverType type, const Json::Value& payload );

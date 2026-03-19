@@ -15,6 +15,8 @@ public:
     void onCharacterExit( const std::string& sessionId ) override;
 
     void onTick() override;
+
+    void handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload ) override;
 };
 
 } // namespace Engine

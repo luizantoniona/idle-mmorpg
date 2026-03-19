@@ -29,4 +29,14 @@ void StageObjectiveController::onCharacterExit( const std::string& sessionId ) {
 void StageObjectiveController::onTick() {
 }
 
+void StageObjectiveController::handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload ) {
+    switch ( type ) {
+    case MessageReceiverType::CHARACTER_STAGE_NEXT:
+        // TODO: Here we must give the character rewards;
+        break;
+    default:
+        break;
+    }
+}
+
 } // namespace Engine

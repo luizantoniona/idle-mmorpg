@@ -111,6 +111,9 @@ void CharacterInstance::handleMessage( MessageReceiverType type, const Json::Val
     case MessageReceiverType::CHARACTER_ITEM_USE:
         _itemController->handleMessage( type, payload );
         break;
+    case Engine::MessageReceiverType::CHARACTER_STAGE_NEXT:
+        _stageController->handleMessage( type, payload );
+        break;
     default:
         break;
     }

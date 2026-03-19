@@ -22,6 +22,18 @@ void CharacterStageController::onLeaveWorld() {
 void CharacterStageController::onTick() {
 }
 
+void CharacterStageController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
+    switch ( type ) {
+    case MessageReceiverType::CHARACTER_STAGE_NEXT:
+        _characterStage.setStageLevel( _characterStage.stageLevel() + 1 );
+        _characterStage.setCompleted( false );
+
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_STAGE, _characterStage.toJson() );
+    default:
+        break;
+    }
+}
+
 void CharacterStageController::updateStageCompletion() {
     bool completed = true;
     for ( const auto& obj : _characterStage.objectives() ) {

@@ -74,6 +74,9 @@ void StageInstance::handleMessage( CharacterInstance* character, MessageReceiver
         _combatController->handleMessage( character, type, payload );
         break;
 
+    case Engine::MessageReceiverType::CHARACTER_STAGE_NEXT:
+        _objectiveController->handleMessage( character, type, payload );
+
     default:
         break;
     }

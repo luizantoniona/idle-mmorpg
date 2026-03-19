@@ -90,6 +90,32 @@ void WorldInstance::removeCharacter( const std::string& sessionId ) {
     }
 }
 
+bool WorldInstance::moveCharacter( const std::string& sessionId, CharacterInstance* characterInstance, StageInstance* currentStageInstance, Domain::Stage* nextStage ) {
+    std::lock_guard lock( _mutex );
+
+    if ( currentStageInstance ) {
+        currentStageInstance->removeCharacter( sessionId );
+    }
+
+    auto& nextStageInstance = _stages[ nextStage->level() ];
+    if ( !nextStageInstance ) {
+        nextStageInstance = std::make_unique<StageInstance>( nextStage );
+    }
+
+    if ( nextStageInstance->addCharacter( sessionId, characterInstance ) ) {
+        _characterToStage[ sessionId ] = nextStageInstance.get();
+        characterInstance->onEnterWorld();
+        return true;
+    }
+
+    if ( currentStageInstance ) {
+        currentStageInstance->addCharacter( sessionId, characterInstance );
+        _characterToStage[ sessionId ] = currentStageInstance;
+    }
+
+    return false;
+}
+
 StageInstance* WorldInstance::characterStageInstance( const std::string& sessionId ) {
     std::lock_guard lock( _mutex );
     auto it = _characterToStage.find( sessionId );
@@ -116,24 +142,24 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
 
     const Json::Value& payload = messageJson[ "payload" ];
 
-    CharacterInstance* character = nullptr;
-    StageInstance* stage = nullptr;
+    CharacterInstance* characterInstance = nullptr;
+    StageInstance* stageInstance = nullptr;
 
     {
         std::lock_guard<std::mutex> lock( _mutex );
 
         auto itChar = _characters.find( sessionId );
         if ( itChar != _characters.end() ) {
-            character = itChar->second.get();
+            characterInstance = itChar->second.get();
         }
 
         auto itStage = _characterToStage.find( sessionId );
         if ( itStage != _characterToStage.end() ) {
-            stage = itStage->second;
+            stageInstance = itStage->second;
         }
     }
 
-    if ( !character || !stage ) {
+    if ( !characterInstance || !stageInstance ) {
         return;
     }
 
@@ -143,22 +169,36 @@ void WorldInstance::handleMessage( const std::string& sessionId, const Json::Val
     case Engine::MessageReceiverType::COMBAT_ROOM_CREATE:
     case Engine::MessageReceiverType::COMBAT_ROOM_ENTER:
     case Engine::MessageReceiverType::COMBAT_ROOM_EXIT:
-        stage->handleMessage( character, type, payload );
+        stageInstance->handleMessage( characterInstance, type, payload );
         break;
 
         // --- Character ---
     case Engine::MessageReceiverType::CHARACTER_ACTION_SET:
     case Engine::MessageReceiverType::CHARACTER_ITEM_EQUIP:
     case Engine::MessageReceiverType::CHARACTER_ITEM_USE:
-        character->handleMessage( type, payload );
+        characterInstance->handleMessage( type, payload );
         break;
 
-    case Engine::MessageReceiverType::CHARACTER_STAGE_NEXT:
-        // TODO: See if we need to send to character or what
-        // TODO: Validate if every objective is complete inside character (flag completed)
-        // TODO: If OK, WorldInstance Should change StageInstance from character
-        // TODO: If Stage Changed, we must update character and save on database
+        // --- Character and Stage ---
+    case Engine::MessageReceiverType::CHARACTER_STAGE_NEXT: {
+        if ( !characterInstance->character().stage().completed() ) {
+            return;
+        }
+
+        const int nextStageLevel = characterInstance->character().stage().stageLevel() + 1;
+        Domain::Stage* nextStage = _world->stageByLevel( nextStageLevel );
+        if ( !nextStage ) {
+            return;
+        }
+
+        stageInstance->handleMessage( characterInstance, type, payload );
+
+        characterInstance->handleMessage( type, payload );
+
+        moveCharacter( sessionId, characterInstance, stageInstance, nextStage );
+
         break;
+    }
 
     default:
         break;

@@ -17,6 +17,8 @@ public:
 
     void onTick() override;
 
+    void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
+
 private:
     Domain::CharacterStage& _characterStage;
 

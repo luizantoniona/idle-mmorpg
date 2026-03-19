@@ -19,6 +19,7 @@ public:
     bool hasCharacter( const int idCharacter );
     bool addCharacter( const std::string& sessionId, std::unique_ptr<CharacterInstance> characterInstance );
     void removeCharacter( const std::string& sessionId );
+    bool moveCharacter( const std::string& sessionId, CharacterInstance* characterInstance, StageInstance* currentStageInstance, Domain::Stage* nextStage );
 
     StageInstance* characterStageInstance( const std::string& sessionId );
 
