@@ -13,8 +13,8 @@
                 <app-button text="Connect" type="button" [disabled]="formServer.invalid || status === 'loading'"
                     (click)="handleServer()" />
 
-                @if(error){
-                <p style="color: red;">Error: {{ error }}</p>
+                @if(errorServer){
+                <p style="color: red;">Error: {{ errorServer }}</p>
                 }
             </div>
         </form>
@@ -40,8 +40,8 @@
                         (click)="handleRegister()" />
                 </div>
 
-                @if(error){
-                <p style="color: red;">Error: {{ error }}</p>
+                @if(errorLogin){
+                <p style="color: red;">Error: {{ errorLogin }}</p>
                 }
             </div>
         </form>

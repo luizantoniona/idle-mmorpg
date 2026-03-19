@@ -32,8 +32,10 @@ export class LoginPanel implements OnInit {
 
     formServer: FormGroup;
     formLogin: FormGroup;
+
     status: 'online' | 'offline' | 'loading' | 'error' | 'unknown' = 'offline';
-    error: string | null = null;
+    errorServer: string | null = null;
+    errorLogin: string | null = null;
 
     constructor() {
         const server = this.serverService.getServer();
@@ -71,7 +73,10 @@ export class LoginPanel implements OnInit {
         try {
             const cleanedIp = ip.replace(/^https?:\/\//, '');
             const response = await fetch(`http://${cleanedIp}:${port}/status`);
-            if (!response.ok) throw new Error();
+            if (!response.ok) {
+                throw new Error();
+            }
+
             this.status = 'online';
             return true;
         } catch {
@@ -81,14 +86,14 @@ export class LoginPanel implements OnInit {
     }
 
     async handleServer(): Promise<void> {
-        this.error = null;
+        this.errorServer = null;
         this.status = 'loading';
 
         const { ip, port } = this.formServer.value;
         const ok = await this.checkStatusWithParams(ip, port);
 
         if (!ok) {
-            this.error = 'Could not connect to the server.';
+            this.errorServer = 'Could not connect to the server.';
             return;
         }
 
@@ -99,7 +104,8 @@ export class LoginPanel implements OnInit {
         if (this.formLogin.invalid) {
             return;
         }
-        this.error = null;
+
+        this.errorLogin = null;
 
         const { username, password } = this.formLogin.value;
 
@@ -115,7 +121,7 @@ export class LoginPanel implements OnInit {
 
         } catch (err: any) {
             console.error('Login failed:', err);
-            this.error = err.message || 'Login failed.';
+            this.errorLogin = 'Login failed.';
         }
     }
 
@@ -124,7 +130,7 @@ export class LoginPanel implements OnInit {
             return;
         }
 
-        this.error = null;
+        this.errorLogin = null;
 
         const { username, password } = this.formLogin.value;
 
@@ -137,12 +143,11 @@ export class LoginPanel implements OnInit {
             }
 
             this.authService.login(registerResponse.userID, registerResponse.username, registerResponse.sessionID);
-
             this.router.navigate(['/account']);
 
         } catch (err: any) {
             console.error('Register failed:', err);
-            this.error = err.message || 'Register failed.';
+            this.errorLogin = 'Register failed.';
         }
     }
 }
