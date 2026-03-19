@@ -1,20 +1,7 @@
 # 📋 Idle MMORPG - Development Roadmap
 
-## 📦 Legacy System Mapping (OLD → NEW Controllers)
-
-The following systems existed in the OLD architecture and need to be fully implemented in the new CharacterInstance+EventBus architecture:
-
-### 1. Action System → CharacterActionsController ✅ (PARTIAL)
-**Old Location:** `Old/ActionSystem.cpp`
-**New Location:** [Engine/Instance/Character/Controller/CharacterActionsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterActionsController.cpp)
-
-**What OLD had:**
-- Action selection and validation (changeAction)
-- Action duration computation with skill-based modifiers
-- Gathering action effects (mining, woodcutting, fishing, herbalism)
-- Regenerative action effects (rest, meditate)
-- Action counter and completion logic
-- Experience distribution per action
+### Action System → CharacterActionsController ✅ (PARTIAL)
+**Location:** [Engine/Instance/Character/Controller/CharacterActionsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterActionsController.cpp)
 
 **Status & TODO:**
 - ✅ Basic action framework exists (executeCurrentAction, executeTraining)
@@ -26,17 +13,8 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Update to use CharacterEventBus for state changes - no events published
 - [ ] Ensure action events are published - missing event publishing
 
-### 4. Regeneration System → CharacterVitalsController ✅ (PARTIAL)
-**Old Location:** `Old/RegenerationSystem.cpp`
-**New Location:** [Engine/Instance/Character/Controller/CharacterVitalsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterVitalsController.cpp)
-
-**What OLD had:**
-- Health regeneration with vitality skill boost
-- Mana regeneration with meditation skill boost
-- Stamina regeneration with endurance skill boost
-- Regeneration ticks and counters
-- Spell cooldown tracking
-- Healing spell casting with cooldown reset
+### Regeneration System → CharacterVitalsController ✅ (PARTIAL)
+**Location:** [Engine/Instance/Character/Controller/CharacterVitalsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterVitalsController.cpp)
 
 **Status & TODO:**
 - ✅ Health regeneration framework exists (onTick method)
@@ -45,38 +23,24 @@ The following systems existed in the OLD architecture and need to be fully imple
 - ✅ Regeneration ticks and counters implemented
 - ✅ EventBus subscriptions for vital changes exist
 - ⚠️ **TODO:** Adjust regeneration formulas; current implementation uses fixed +1 increments rather than configuration values.
-- ⚠️ **TODO:** Implement spell cooldown tracking - not implemented
-- ⚠️ **TODO:** Implement healing spell casting - not implemented
 - [ ] Integrate skill-based regeneration bonuses - commented out code references vitality/endurance/meditation skills
-- [ ] Add regeneration events to CharacterEventBus - events are subscribed to but not published
 - [ ] See formula: `baseRegen + (skillLevel * VITAL_SKILL_REGENERATION_MULTIPLIER)`
 
-### 8. Spell System → CharacterSpellsController ✅ (PARTIAL)
-**Old Location:** `Old/SpellSystem.cpp`
-**New Location:** [Engine/Instance/Character/Controller/CharacterSpellsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterSpellsController.cpp)
-
-**What OLD had:**
-- Spell learning mechanism
-- Spell availability validation
+### Spell System → CharacterSpellsController ✅ (PARTIAL)
+**Location:** [Engine/Instance/Character/Controller/CharacterSpellsController.cpp](idle-mmorpg-server/Engine/Instance/Character/Controller/CharacterSpellsController.cpp)
 
 **Status & TODO:**
 - ✅ Basic spell controller exists
 - ⚠️ **TODO:** Implement spell learning pop-up when unlocking new spells
 - [ ] Implement spell cooldown management
 - [ ] Add spell learning events to CharacterEventBus
+- [ ] Implement spell cast validation (stamina/mana costs)
+- [ ] Implement elemental damage system
+- [ ] Add spell chain/combo mechanics
+- [ ] Create spell enchantment system
 
-### 9. Trade System → (MISSING - Needs NEW TradeController) ❌
-**Old Location:** `Old/TradeSystem.cpp` (DEPRECATED - Used Denizens)
-**New Location:** (Needs to be created: `Engine/Instance/Character/Controller/CharacterTradeController.cpp`)
-
-**What OLD had (DEPRECATED):**
-- Denizen-based trading (now removed)
-
-**What NEW needs:**
-- Stage-based NPC trading
-- Trade request/confirmation flow
-- Trade inventory management
-- Trade completion and item/coin exchange
+### Trade System → (MISSING - Needs NEW TradeController) ❌
+**Location:** (Needs to be created: `Engine/Instance/Character/Controller/CharacterTradeController.cpp`)
 
 **Status & TODO:**
 - ❌ **NEW:** Create CharacterTradeController
@@ -86,11 +50,8 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Add trade events to CharacterEventBus
 - [ ] Create WebSocket endpoints for trade
 
----
+### Chat System (PENDING DECISION)
 
-## 🏗️ Major System Refactors
-
-### 1. Chat System Architecture (PENDING DECISION)
 - **Status:** Needs architectural definition
 - **Questions to resolve:**
   - Should peer-to-peer (P2P) communication be used between players?
@@ -110,32 +71,11 @@ The following systems existed in the OLD architecture and need to be fully imple
   - [ ] Add chat event types to CharacterEventBus
   - [ ] Create WebSocket chat endpoints
 
-### 2. Trade System Refactoring (MAJOR)
-- **Current Status:** Trade system is OFFLINE - major refactoring in progress
-- **Changes from OLD system:**
-  - ❌ Denizens are NO LONGER USED
-  - ✅ Trades are NOW STAGE-BASED (tied to specific stages/locations)
-  - Each stage can have multiple NPCs with different trade inventories
-  - Trades should be part of stage progression mechanics
-- **Action Items:**
-  - [ ] Design stage-based NPC trading system
-  - [ ] Create TradeController within CharacterInstance
-  - [ ] Define available trades per stage in world configuration
-  - [ ] Implement trade request/confirmation/completion flow
-  - [ ] Add trade events to CharacterEventBus
-  - [ ] Create trade WebSocket endpoints
-  - [ ] Re-enable front-end trade UI components
-  - [ ] Add trade history/log to database
-
----
-
-## 🎮 Server Configuration & Balancing
-
-### Currently Incomplete Configuration
+### Server Configuration & Balancing
 - **File:** [idle-mmorpg-data/idle-mmorpg-configuration/configuration.json](idle-mmorpg-data/idle-mmorpg-configuration/configuration.json)
 - **Status:** Configuration system exists but needs extensive adjustment
 
-### Missing Configuration Values (to be added)
+**Missing Configuration Values (to be added)**
 - [ ] Health regeneration rate (currently hardcoded as 10)
 - [ ] Mana regeneration rate (currently hardcoded as 10)
 - [ ] Stamina regeneration rate (currently hardcoded as 10)
@@ -148,24 +88,9 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Cooldown durations for spells and abilities
 - [ ] Stamina cost per action
 - [ ] Resource costs for crafting/training
-
-### Action Items
-- [x] Create initial configuration framework
-- [ ] Extend configuration to support all game parameters
+**Important Items**
 - [ ] Create configuration UI in editor
 - [ ] Add hot-reload capability for configuration changes
-- [ ] Implement per-stage difficulty modifiers
-
----
-
-## 🛠️ Systems to Implement / Complete
-
-### Spell System
-- [ ] Implement spell cast validation (stamina/mana costs)
-- [ ] Create spell cooldown system
-- [ ] Implement elemental damage system
-- [ ] Add spell chain/combo mechanics
-- [ ] Create spell enchantment system
 
 ### Deployment & Infrastructure
 - **File:** [idle-mmorpg-server/main.cpp](idle-mmorpg-server/main.cpp#L14)
@@ -186,46 +111,37 @@ The following systems existed in the OLD architecture and need to be fully imple
 - [ ] Create data backup system
 - [ ] Add database versioning
 
----
-
 ## 🌟 Feature Ideas for Idle-MMORPG
 
-### 3. **Guild/Faction System**
+### **Guild/Faction System**
 - Create player guilds with shared treasury
 - Implement guild vs guild warfare/leaderboards
 - Add guild perks and technology trees
 - Create guild headquarters with upgradeable facilities
 - **Implementation Location:** New GuildManager + GuildController
 
-### 4. **Pet/Companion System**
+### **Pet/Companion System**
 - Allow players to catch/recruit creature companions
 - Implement companion battles alongside player
 - Add companion skill training and equipment
 - Create pet evolution/transformation mechanics
 - **Implementation Location:** New CompanionController + Domain/Companion
 
-### 5. **Crafting & Alchemy System**
+### **Crafting & Alchemy System**
 - Implement crafting recipes across multiple disciplines
 - Add gathering → crafting workflow
 - Create equipment enhancement/disenchanting
 - Implement alchemical potion brewing with effects
 - **Implementation Location:** New CraftingController + crafting configuration
 
-### 6. **Skill Trees**
-- Multiple skill paths (Warrior, Mage, Ranger, etc.)
-- Implement skill point allocation system
-- Create skill synergies and combo bonuses
-- Add respec mechanics with appropriate costs
-- **Implementation Location:** New SkillTreeController
-
-### 10. **Dynamic World Events**
+### **Dynamic World Events**
 - Server-wide events affecting all players
 - Invasions requiring collective defense
 - King-of-the-hill style PvP events
 - World boss encounters with multi-player cooperation
 - **Implementation Location:** New WorldEventManager
 
-### 11. **Leaderboard & Rankings**
+### **Leaderboard & Rankings**
 - Global damage leaderboard
 - Stage-completion speed rankings
 - Wealth rankings (coin accumulation)
@@ -233,7 +149,7 @@ The following systems existed in the OLD architecture and need to be fully imple
 - Achievement-based rankings
 - **Implementation Location:** New LeaderboardManager + database queries
 
-### 13. **PvP Arena System**
+### **PvP Arena System**
 - 1v1 ranked matches
 - Team battle modes (3v3, 5v5)
 - Battle royale mode
@@ -241,21 +157,21 @@ The following systems existed in the OLD architecture and need to be fully imple
 - PvP-exclusive items and cosmetics
 - **Implementation Location:** New ArenaController + AR endpoints
 
-### 14. **Dungeon/Raid System**
+### **Dungeon/Raid System**
 - Multi-floor dungeons with progressive difficulty
 - Instanced encounters
 - Raid bosses requiring party coordination
 - Dungeon weekly lockouts and reset mechanics
 - **Implementation Location:** New DungeonController + enhanced StageController
 
-### 16. **Cosmetics**
+### **Cosmetics && Outfit**
 - Implement cosmetic-only items (skins, pets skins, effects)
 - Create transmog system for equipment appearance
 - Add particle effect customization
 - Implement title/badge system
 - **Implementation Location:** New CosmeticsController
 
-### 18. **Market/Trade Post**
+### **Market/Trade Post**
 - Global player-to-player trading system
 - Listing management and price history
 - Trade tax mechanism
