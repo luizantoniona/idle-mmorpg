@@ -51,94 +51,6 @@ void CharacterItemController::handleMessage( MessageReceiverType type, const Jso
     }
 }
 
-void CharacterItemController::resolveInventory() {
-    for ( auto& item : _characterInventory.items() ) {
-        resolveItem( item );
-    }
-}
-
-void CharacterItemController::resolveItem( Domain::CharacterInventoryItem& item ) {
-    if ( item.id().empty() ) {
-        return;
-    }
-
-    const Domain::Item* itemPointer = _itemManager.itemById( item.id() );
-    if ( !itemPointer ) {
-        return;
-    }
-
-    item.setItem( itemPointer );
-}
-
-void CharacterItemController::resolveEquipment() {
-    resolveItem( _characterEquipment.helmet() );
-    resolveItem( _characterEquipment.armor() );
-    resolveItem( _characterEquipment.leg() );
-    resolveItem( _characterEquipment.boot() );
-    resolveItem( _characterEquipment.weapon() );
-    resolveItem( _characterEquipment.offhand() );
-    resolveItem( _characterEquipment.amulet() );
-    resolveItem( _characterEquipment.ring() );
-    resolveItem( _characterEquipment.pickaxe() );
-    resolveItem( _characterEquipment.woodaxe() );
-    resolveItem( _characterEquipment.fishingrod() );
-    resolveItem( _characterEquipment.sickle() );
-}
-
-void CharacterItemController::resolveItem( Domain::CharacterEquipmentItem& item ) {
-    if ( item.id().empty() ) {
-        return;
-    }
-
-    const Domain::Item* itemPointer = _itemManager.itemById( item.id() );
-    if ( !itemPointer ) {
-        return;
-    }
-
-    item.setItem( itemPointer );
-}
-
-Domain::CharacterEquipmentItem* CharacterItemController::resolveSlot( const std::string& slot ) {
-    if ( slot == "HELMET" ) {
-        return &_characterEquipment.helmet();
-    }
-    if ( slot == "ARMOR" ) {
-        return &_characterEquipment.armor();
-    }
-    if ( slot == "LEG" ) {
-        return &_characterEquipment.leg();
-    }
-    if ( slot == "BOOT" ) {
-        return &_characterEquipment.boot();
-    }
-    if ( slot == "WEAPON" ) {
-        return &_characterEquipment.weapon();
-    }
-    if ( slot == "OFFHAND" ) {
-        return &_characterEquipment.offhand();
-    }
-    if ( slot == "AMULET" ) {
-        return &_characterEquipment.amulet();
-    }
-    if ( slot == "RING" ) {
-        return &_characterEquipment.ring();
-    }
-    if ( slot == "PICKAXE" ) {
-        return &_characterEquipment.pickaxe();
-    }
-    if ( slot == "WOODAXE" ) {
-        return &_characterEquipment.woodaxe();
-    }
-    if ( slot == "FISHINGROD" ) {
-        return &_characterEquipment.fishingrod();
-    }
-    if ( slot == "SICKLE" ) {
-        return &_characterEquipment.sickle();
-    } 
-
-    return nullptr;
-}
-
 void CharacterItemController::handleEquip( const Json::Value& payload ) {
     std::string itemId = payload[ "item" ].asString();
     std::string slotId = payload[ "slot" ].asString();
@@ -266,6 +178,94 @@ void CharacterItemController::onItemGained( const CharacterEvent& event ) {
     }
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_INVENTORY, _characterInventory.toJson() );
+}
+
+void CharacterItemController::resolveInventory() {
+    for ( auto& item : _characterInventory.items() ) {
+        resolveItem( item );
+    }
+}
+
+void CharacterItemController::resolveItem( Domain::CharacterInventoryItem& item ) {
+    if ( item.id().empty() ) {
+        return;
+    }
+
+    const Domain::Item* itemPointer = _itemManager.itemById( item.id() );
+    if ( !itemPointer ) {
+        return;
+    }
+
+    item.setItem( itemPointer );
+}
+
+void CharacterItemController::resolveEquipment() {
+    resolveItem( _characterEquipment.helmet() );
+    resolveItem( _characterEquipment.armor() );
+    resolveItem( _characterEquipment.leg() );
+    resolveItem( _characterEquipment.boot() );
+    resolveItem( _characterEquipment.weapon() );
+    resolveItem( _characterEquipment.offhand() );
+    resolveItem( _characterEquipment.amulet() );
+    resolveItem( _characterEquipment.ring() );
+    resolveItem( _characterEquipment.pickaxe() );
+    resolveItem( _characterEquipment.woodaxe() );
+    resolveItem( _characterEquipment.fishingrod() );
+    resolveItem( _characterEquipment.sickle() );
+}
+
+void CharacterItemController::resolveItem( Domain::CharacterEquipmentItem& item ) {
+    if ( item.id().empty() ) {
+        return;
+    }
+
+    const Domain::Item* itemPointer = _itemManager.itemById( item.id() );
+    if ( !itemPointer ) {
+        return;
+    }
+
+    item.setItem( itemPointer );
+}
+
+Domain::CharacterEquipmentItem* CharacterItemController::resolveSlot( const std::string& slot ) {
+    if ( slot == "HELMET" ) {
+        return &_characterEquipment.helmet();
+    }
+    if ( slot == "ARMOR" ) {
+        return &_characterEquipment.armor();
+    }
+    if ( slot == "LEG" ) {
+        return &_characterEquipment.leg();
+    }
+    if ( slot == "BOOT" ) {
+        return &_characterEquipment.boot();
+    }
+    if ( slot == "WEAPON" ) {
+        return &_characterEquipment.weapon();
+    }
+    if ( slot == "OFFHAND" ) {
+        return &_characterEquipment.offhand();
+    }
+    if ( slot == "AMULET" ) {
+        return &_characterEquipment.amulet();
+    }
+    if ( slot == "RING" ) {
+        return &_characterEquipment.ring();
+    }
+    if ( slot == "PICKAXE" ) {
+        return &_characterEquipment.pickaxe();
+    }
+    if ( slot == "WOODAXE" ) {
+        return &_characterEquipment.woodaxe();
+    }
+    if ( slot == "FISHINGROD" ) {
+        return &_characterEquipment.fishingrod();
+    }
+    if ( slot == "SICKLE" ) {
+        return &_characterEquipment.sickle();
+    } 
+
+    return nullptr;
 }
 
 } // namespace Engine

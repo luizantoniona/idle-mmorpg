@@ -22,6 +22,13 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
+    // -- Message methods ---
+    void handleEquip( const Json::Value& payload );
+    void handleUseItem( const Json::Value& payload );
+
+    // --- EventBus methods ---
+    void onItemGained( const CharacterEvent& event );
+
     void resolveInventory();
     void resolveItem( Domain::CharacterInventoryItem& item );
 
@@ -29,12 +36,6 @@ private:
     void resolveItem( Domain::CharacterEquipmentItem& item );
 
     Domain::CharacterEquipmentItem* resolveSlot( const std::string& slot );
-
-    void handleEquip( const Json::Value& payload );
-    void handleUseItem( const Json::Value& payload );
-
-    // --- EventBus methods ---
-    void onItemGained( const CharacterEvent& event );
 
 private:
     Domain::CharacterEquipment& _characterEquipment;
