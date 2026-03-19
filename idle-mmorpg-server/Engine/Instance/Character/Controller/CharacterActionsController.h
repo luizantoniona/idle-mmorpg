@@ -22,15 +22,16 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
-    Domain::Character& _character;
-    Domain::CharacterActions& _characterActions;
-    Manager::ActionManager& _actionManager;
-
     void executeCurrentAction();
 
     void executeTraining( const Domain::CharacterActionOption& option );
 
     std::vector<Domain::SkillType> combatSkill( Domain::Character* character );
+
+private:
+    Domain::Character& _character;
+    Domain::CharacterActions& _characterActions;
+    Manager::ActionManager& _actionManager;
 };
 
 } // namespace Engine

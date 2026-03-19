@@ -20,12 +20,13 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
-    Domain::CharacterStage& _characterStage;
-
     void updateStageCompletion();
 
     // --- EventBus methods ---
     void onCreatureKilled( const CharacterEvent& event );
+
+private:
+    Domain::CharacterStage& _characterStage;
 };
 
 } // namespace Engine

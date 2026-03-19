@@ -20,10 +20,6 @@ public:
     void onTick() override;
 
 private:
-    Domain::Character& _character;
-    Domain::CharacterVitals& _characterVitals;
-    Manager::ServerConfigurationManager& _configurationManager;
-
     // --- EventBus methods ---
     void onVitalMaxHealthGained( const CharacterEvent& event );
     void onVitalMaxManaGained( const CharacterEvent& event );
@@ -31,6 +27,11 @@ private:
     void onVitalHealthChanged( const CharacterEvent& event );
     void onVitalManaChanged( const CharacterEvent& event );
     void onVitalStaminaChanged( const CharacterEvent& event );
+
+private:
+    Domain::Character& _character;
+    Domain::CharacterVitals& _characterVitals;
+    Manager::ServerConfigurationManager& _configurationManager;
 };
 
 } // namespace Engine
