@@ -17,6 +17,10 @@ public:
     void onTick() override;
 
     void handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload ) override;
+
+private:
+    // -- Message methods ---
+    void handleReward( CharacterInstance* characterInstance );
 };
 
 } // namespace Engine

@@ -32,10 +32,30 @@ void StageObjectiveController::onTick() {
 void StageObjectiveController::handleMessage( CharacterInstance* characterInstance, MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
     case MessageReceiverType::CHARACTER_STAGE_NEXT:
-        // TODO: Here we must give the character rewards;
+        handleReward( characterInstance );
         break;
     default:
         break;
+    }
+}
+
+void StageObjectiveController::handleReward( CharacterInstance* characterInstance ) {
+    auto rewards = _stage->rewards();
+
+    for ( const auto& reward : rewards ) {
+        int amount = reward.amount();
+        if ( amount <= 0 ) {
+            continue;
+        }
+
+        Json::Value payload;
+        // TODO: Change std::string to enum
+        if ( reward.type() == "ITEM" ) {
+            payload[ "item" ] = reward.id();
+            payload[ "amount" ] = amount;
+
+            characterInstance->publishEvent( CharacterEventType::ITEM_GAINED, payload );
+        }
     }
 }
 

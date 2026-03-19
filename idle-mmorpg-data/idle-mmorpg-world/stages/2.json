@@ -15,7 +15,7 @@
     ],
     "rewards": [
         {
-            "type": "item",
+            "type": "ITEM",
             "id": "coin_copper",
             "amount": 5
         }
