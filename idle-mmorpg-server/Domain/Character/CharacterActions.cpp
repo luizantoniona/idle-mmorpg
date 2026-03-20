@@ -44,6 +44,10 @@ void CharacterActions::addAction( const CharacterAction& action ) {
     _actions.push_back( action );
 }
 
+void CharacterActions::clearActions() {
+    _actions.clear();
+}
+
 int CharacterActions::duration() const {
     return _duration;
 }

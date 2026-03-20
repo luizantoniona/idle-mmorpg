@@ -21,6 +21,7 @@ public:
     std::vector<CharacterAction>& actions();
     void setActions( const std::vector<CharacterAction>& actions );
     void addAction( const CharacterAction& action );
+    void clearActions();
 
     int duration() const;
     void setDuration( int duration );

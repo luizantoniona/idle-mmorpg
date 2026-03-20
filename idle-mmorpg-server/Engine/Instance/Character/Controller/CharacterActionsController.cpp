@@ -14,6 +14,8 @@ CharacterActionsController::CharacterActionsController( CharacterEventBus& event
 }
 
 void CharacterActionsController::onEnterWorld() {
+    _characterActions.clearActions();
+
     const auto& allActions = _actionManager.actions();
 
     for ( const auto& [ type, actionPtr ] : allActions ) {
