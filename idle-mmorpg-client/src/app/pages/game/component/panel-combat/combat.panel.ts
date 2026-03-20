@@ -75,7 +75,7 @@ export class CombatPanel {
     onJoinClicked(id: string): void {
         this.sendMessage({
             type: 'COMBAT_ROOM_ENTER',
-            payload: { id: id },
+            payload: { roomId: id },
         });
     }
 
