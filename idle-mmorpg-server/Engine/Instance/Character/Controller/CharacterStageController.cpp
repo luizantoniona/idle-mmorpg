@@ -35,16 +35,12 @@ void CharacterStageController::handleMessage( MessageReceiverType type, const Js
 }
 
 void CharacterStageController::updateStageCompletion() {
-    bool completed = true;
-    for ( const auto& obj : _characterStage.objectives() ) {
-        if ( obj.currentAmount() < obj.stageAmount() ) {
-            completed = false;
-            break;
+    for ( const auto& objective : _characterStage.objectives() ) {
+        if ( objective.currentAmount() < objective.stageAmount() ) {
+            return;
         }
     }
-
-    _characterStage.setCompleted( completed );
-
+    _characterStage.setCompleted( true );
     _messageSender.sendMessage( MessageSenderType::CHARACTER_STAGE, _characterStage.toJson() );
 }
 
