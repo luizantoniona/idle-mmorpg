@@ -20,6 +20,8 @@ public:
     void onTick() override;
 
 private:
+    // -- Message methods ---
+
     // --- EventBus methods ---
     void onVitalMaxHealthGained( const CharacterEvent& event );
     void onVitalMaxManaGained( const CharacterEvent& event );

@@ -20,10 +20,13 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
-    void updateStageCompletion();
+    // -- Message methods ---
+    void handleNextStage();
 
     // --- EventBus methods ---
     void onCreatureKilled( const CharacterEvent& event );
+
+    void updateStageCompletion();
 
 private:
     Domain::CharacterStage& _characterStage;

@@ -104,7 +104,6 @@ bool WorldInstance::moveCharacter( const std::string& sessionId, CharacterInstan
 
     if ( nextStageInstance->addCharacter( sessionId, characterInstance ) ) {
         _characterToStage[ sessionId ] = nextStageInstance.get();
-        characterInstance->onEnterWorld();
         return true;
     }
 

@@ -23,12 +23,14 @@ public:
     void onTick() override;
 
 private:
-    void applyExperience( Domain::CharacterSkill* characterSkill, int xpGained );
-    void applyMilestone( Domain::CharacterSkill* characterSkill );
+    // -- Message methods ---
 
     // --- EventBus methods ---
     void onSkillExperienceGained( const CharacterEvent& event );
     void onItemEquipped( const CharacterEvent& event );
+
+    void applyExperience( Domain::CharacterSkill* characterSkill, int xpGained );
+    void applyMilestone( Domain::CharacterSkill* characterSkill );
 
 private:
     Domain::CharacterSkills& _characterSkills;

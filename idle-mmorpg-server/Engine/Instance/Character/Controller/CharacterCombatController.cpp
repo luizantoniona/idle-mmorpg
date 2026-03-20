@@ -33,11 +33,34 @@ void CharacterCombatController::onEnterWorld() {
     recomputeCombatAttributes();
 }
 
-void CharacterCombatController::onLeaveWorld() {}
+void CharacterCombatController::onLeaveWorld() {
+}
 
-void CharacterCombatController::onTick() {}
+void CharacterCombatController::onTick() {
+}
 
-void CharacterCombatController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {}
+void CharacterCombatController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
+}
+
+void CharacterCombatController::onCombatEnter( const CharacterEvent& event ) {
+    _characterCombat.setIsInCombat( true );
+    _characterCombat.setAttackCounter( 0 );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_COMBAT, _characterCombat.toJson() );
+}
+
+void CharacterCombatController::onCombatExit( const CharacterEvent& event ) {
+    _characterCombat.setIsInCombat( false );
+    _characterCombat.setAttackCounter( 0 );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_COMBAT, _characterCombat.toJson() );
+}
+
+void CharacterCombatController::onItemEquipped( const CharacterEvent& event ) {
+    recomputeCombatAttributes();
+}
+
+void CharacterCombatController::onSkillLeveledUp( const CharacterEvent& event ) {
+    recomputeCombatAttributes();
+}
 
 void CharacterCombatController::recomputeCombatAttributes() {
     auto& equipment = _character.equipment();
@@ -81,26 +104,6 @@ void CharacterCombatController::recomputeCombatAttributes() {
     _characterCombat.setAttack( attack );
     _characterCombat.setDefense( defense );
     _characterCombat.setAttackDuration( speed * _configurationManager.tickRate() );
-}
-
-void CharacterCombatController::onCombatEnter( const CharacterEvent& event ) {
-    _characterCombat.setIsInCombat( true );
-    _characterCombat.setAttackCounter( 0 );
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_COMBAT, _characterCombat.toJson() );
-}
-
-void CharacterCombatController::onCombatExit( const CharacterEvent& event ) {
-    _characterCombat.setIsInCombat( false );
-    _characterCombat.setAttackCounter( 0 );
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_COMBAT, _characterCombat.toJson() );
-}
-
-void CharacterCombatController::onItemEquipped( const CharacterEvent& event ) {
-    recomputeCombatAttributes();
-}
-
-void CharacterCombatController::onSkillLeveledUp( const CharacterEvent& event ) {
-    recomputeCombatAttributes();
 }
 
 } // namespace Engine

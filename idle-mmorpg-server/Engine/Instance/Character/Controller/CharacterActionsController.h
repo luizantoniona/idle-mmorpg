@@ -22,6 +22,12 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
+    // -- Message methods ---
+    void handleActionSet( const Json::Value& payload );
+
+    // --- EventBus methods ---
+    void onStageLevelChanged();
+
     void executeCurrentAction();
 
     void executeTraining( const Domain::CharacterActionOption& option );

@@ -11,9 +11,106 @@ CharacterActionsController::CharacterActionsController( CharacterEventBus& event
     _character( character ),
     _characterActions( character.actions() ),
     _actionManager( actionManager ) {
+
+    _eventBus.subscribe( CharacterEventType::STAGE_LEVEL_CHANGED, [ this ]( const CharacterEvent& ) {
+        onStageLevelChanged();
+    } );
 }
 
 void CharacterActionsController::onEnterWorld() {
+    onStageLevelChanged();
+}
+
+void CharacterActionsController::onLeaveWorld() {
+}
+
+void CharacterActionsController::onTick() {
+    const Domain::CharacterAction& currentAction = _characterActions.currentAction();
+
+    if ( currentAction.type() == Domain::ActionType::UNKNOWN || currentAction.type() == Domain::ActionType::IDLE ) {
+        return;
+    }
+
+    const Domain::CharacterActionOption option = currentAction.selectedOption();
+    if ( option.duration() <= 0 ) {
+        return;
+    }
+
+    _characterActions.setCounter( _characterActions.counter() + 1 );
+
+    if ( _characterActions.counter() < option.duration() ) {
+        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
+        return;
+    }
+
+    executeCurrentAction();
+
+    _characterActions.setCounter( 0 );
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
+}
+
+void CharacterActionsController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
+    switch ( type ) {
+    case MessageReceiverType::CHARACTER_ACTION_SET:
+        handleActionSet( payload );
+        break;
+    default:
+        break;
+    }
+}
+
+void CharacterActionsController::handleActionSet( const Json::Value& payload ) {
+    if ( !payload.isMember( "type" ) ) {
+        return;
+    }
+
+    const Domain::ActionType actionType = static_cast<Domain::ActionType>( payload[ "type" ].asInt() );
+    if ( actionType == Domain::ActionType::UNKNOWN ) {
+        return;
+    }
+
+    auto& available = _characterActions.actions();
+    auto it = std::find_if( available.begin(), available.end(), [ & ]( const Domain::CharacterAction& action ) {
+        return action.type() == actionType;
+    } );
+    if ( it == available.end() ) {
+        return;
+    }
+
+    const auto& options = it->options();
+    if ( options.empty() ) {
+        return;
+    }
+
+    if ( !payload.isMember( "optionStage" ) ) {
+        return;
+    }
+    int optionStage = payload[ "optionStage" ].asInt();
+
+    const Domain::CharacterActionOption* selectedOption = nullptr;
+    for ( const auto& option : options ) {
+        if ( option.stage() == optionStage ) {
+            selectedOption = &option;
+            break;
+        }
+    }
+
+    if ( !selectedOption ) {
+        return;
+    }
+
+    Domain::CharacterAction runtimeAction = *it;
+    runtimeAction.setSelectedOption( *selectedOption );
+
+    _characterActions.setCurrentAction( runtimeAction );
+    _characterActions.setDuration( selectedOption->duration() );
+    _characterActions.setCounter( 0 );
+
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
+}
+
+void CharacterActionsController::onStageLevelChanged() {
     _characterActions.clearActions();
 
     const auto& allActions = _actionManager.actions();
@@ -49,92 +146,6 @@ void CharacterActionsController::onEnterWorld() {
     }
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
-}
-
-void CharacterActionsController::onLeaveWorld() {
-}
-
-void CharacterActionsController::onTick() {
-    const Domain::CharacterAction& currentAction = _characterActions.currentAction();
-
-    if ( currentAction.type() == Domain::ActionType::UNKNOWN || currentAction.type() == Domain::ActionType::IDLE ) {
-        return;
-    }
-
-    const Domain::CharacterActionOption option = currentAction.selectedOption();
-    if ( option.duration() <= 0 ) {
-        return;
-    }
-
-    _characterActions.setCounter( _characterActions.counter() + 1 );
-
-    if ( _characterActions.counter() < option.duration() ) {
-        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
-        return;
-    }
-
-    executeCurrentAction();
-
-    _characterActions.setCounter( 0 );
-
-    _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
-}
-
-void CharacterActionsController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
-    switch ( type ) {
-    case MessageReceiverType::CHARACTER_ACTION_SET: {
-
-        if ( !payload.isMember( "type" ) ) {
-            return;
-        }
-
-        const Domain::ActionType actionType = static_cast<Domain::ActionType>( payload[ "type" ].asInt() );
-        if ( actionType == Domain::ActionType::UNKNOWN ) {
-            return;
-        }
-
-        auto& available = _characterActions.actions();
-        auto it = std::find_if( available.begin(), available.end(), [ & ]( const Domain::CharacterAction& action ) {
-            return action.type() == actionType;
-        } );
-        if ( it == available.end() ) {
-            return;
-        }
-
-        const auto& options = it->options();
-        if ( options.empty() ) {
-            return;
-        }
-
-        if ( !payload.isMember( "optionStage" ) ) {
-            return;
-        }
-        int optionStage = payload[ "optionStage" ].asInt();
-
-        const Domain::CharacterActionOption* selectedOption = nullptr;
-        for ( const auto& option : options ) {
-            if ( option.stage() == optionStage ) {
-                selectedOption = &option;
-                break;
-            }
-        }
-
-        if ( !selectedOption ) {
-            return;
-        }
-
-        Domain::CharacterAction runtimeAction = *it;
-        runtimeAction.setSelectedOption( *selectedOption );
-
-        _characterActions.setCurrentAction( runtimeAction );
-        _characterActions.setDuration( selectedOption->duration() );
-        _characterActions.setCounter( 0 );
-
-        _messageSender.sendMessage( MessageSenderType::CHARACTER_ACTIONS, _characterActions.toJson() );
-    }
-    default:
-        break;
-    }
 }
 
 void CharacterActionsController::executeCurrentAction() {

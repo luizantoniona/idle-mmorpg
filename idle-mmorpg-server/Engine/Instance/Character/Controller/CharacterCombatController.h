@@ -22,13 +22,15 @@ public:
     void handleMessage( MessageReceiverType type, const Json::Value& payload ) override;
 
 private:
-    void recomputeCombatAttributes();
+    // -- Message methods ---
 
     // --- EventBus methods ---
     void onCombatEnter( const CharacterEvent& event );
     void onCombatExit( const CharacterEvent& event );
     void onItemEquipped( const CharacterEvent& event );
     void onSkillLeveledUp( const CharacterEvent& event );
+
+    void recomputeCombatAttributes();
 
 private:
     Domain::Character& _character;

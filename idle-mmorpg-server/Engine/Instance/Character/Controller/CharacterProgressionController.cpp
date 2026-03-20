@@ -27,20 +27,6 @@ void CharacterProgressionController::onLeaveWorld() {
 void CharacterProgressionController::onTick() {
 }
 
-void CharacterProgressionController::applyLevelUp() {
-    Json::Value healthPayload;
-    healthPayload[ "value" ] = _configurationManager.vitalsRate().health;
-    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_HEALTH_GAINED, healthPayload ) );
-
-    Json::Value manaPayload;
-    manaPayload[ "value" ] = _configurationManager.vitalsRate().mana;
-    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_MANA_GAINED, manaPayload ) );
-
-    Json::Value staminaPayload;
-    staminaPayload[ "value" ] = _configurationManager.vitalsRate().stamina;
-    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_STAMINA_GAINED, staminaPayload ) );
-}
-
 void CharacterProgressionController::onProgressionExperienceGained( const CharacterEvent& event ) {
     const Json::Value& payload = event.payload();
     if ( !payload.isMember( "value" ) ) {
@@ -71,6 +57,20 @@ void CharacterProgressionController::onProgressionExperienceGained( const Charac
     _characterProgression.setExperience( newXp );
 
     _messageSender.sendMessage( MessageSenderType::CHARACTER_PROGRESSION, _characterProgression.toJson() );
+}
+
+void CharacterProgressionController::applyLevelUp() {
+    Json::Value healthPayload;
+    healthPayload[ "value" ] = _configurationManager.vitalsRate().health;
+    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_HEALTH_GAINED, healthPayload ) );
+
+    Json::Value manaPayload;
+    manaPayload[ "value" ] = _configurationManager.vitalsRate().mana;
+    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_MANA_GAINED, manaPayload ) );
+
+    Json::Value staminaPayload;
+    staminaPayload[ "value" ] = _configurationManager.vitalsRate().stamina;
+    _eventBus.publish( CharacterEvent( CharacterEventType::VITAL_MAX_STAMINA_GAINED, staminaPayload ) );
 }
 
 } // namespace Engine

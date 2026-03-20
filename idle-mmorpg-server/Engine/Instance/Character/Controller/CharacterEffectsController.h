@@ -22,6 +22,8 @@ public:
     void onTick() override;
 
 private:
+    // -- Message methods ---
+
     // --- EventBus methods ---
     void onApplyEffect( const CharacterEvent& event );
 

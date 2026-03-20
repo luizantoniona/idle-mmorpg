@@ -20,10 +20,12 @@ public:
     void onTick() override;
 
 private:
-    void applyLevelUp();
+    // -- Message methods ---
 
     // --- EventBus methods ---
     void onProgressionExperienceGained( const CharacterEvent& event );
+
+    void applyLevelUp();
 
 private:
     Domain::CharacterProgression& _characterProgression;

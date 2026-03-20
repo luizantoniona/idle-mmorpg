@@ -25,22 +25,19 @@ void CharacterStageController::onTick() {
 void CharacterStageController::handleMessage( MessageReceiverType type, const Json::Value& payload ) {
     switch ( type ) {
     case MessageReceiverType::CHARACTER_STAGE_NEXT:
-        _characterStage.setStageLevel( _characterStage.stageLevel() + 1 );
-        _characterStage.setCompleted( false );
-
-        _messageSender.sendMessage( MessageSenderType::CHARACTER_STAGE, _characterStage.toJson() );
+        handleNextStage();
+        break;
     default:
         break;
     }
 }
 
-void CharacterStageController::updateStageCompletion() {
-    for ( const auto& objective : _characterStage.objectives() ) {
-        if ( objective.currentAmount() < objective.stageAmount() ) {
-            return;
-        }
-    }
-    _characterStage.setCompleted( true );
+void CharacterStageController::handleNextStage() {
+    _characterStage.setStageLevel( _characterStage.stageLevel() + 1 );
+    _characterStage.setCompleted( false );
+
+    _eventBus.publish( CharacterEvent( CharacterEventType::STAGE_LEVEL_CHANGED, Json::Value{} ) );
+
     _messageSender.sendMessage( MessageSenderType::CHARACTER_STAGE, _characterStage.toJson() );
 }
 
@@ -80,6 +77,16 @@ void CharacterStageController::onCreatureKilled( const CharacterEvent& event ) {
     if ( updated ) {
         updateStageCompletion();
     }
+}
+
+void CharacterStageController::updateStageCompletion() {
+    for ( const auto& objective : _characterStage.objectives() ) {
+        if ( objective.currentAmount() < objective.stageAmount() ) {
+            return;
+        }
+    }
+    _characterStage.setCompleted( true );
+    _messageSender.sendMessage( MessageSenderType::CHARACTER_STAGE, _characterStage.toJson() );
 }
 
 } // namespace Engine
